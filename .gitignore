@@ -1,12 +1,7 @@
 *.iml
 .gradle
 /local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+.idea/
 .DS_Store
 /build
 /captures
@@ -14,12 +9,16 @@
 .cxx
 local.properties
 
-# Next.js / Web
-web/node_modules/
-web/.next/
-web/out/
-web/build/
-web/.env*.local
+# Node / Next.js (root stray + web)
+node_modules/
+.next/
+out/
+build/
+.env*.local
+
+# IDE
+desktop.ini
 
 # Artifacts
 .artifacts/
+.freebuff/

@@ -30,7 +30,7 @@ const tiers = [
 const Pricing = () => {
   // Not: İlerleyen aşamada buraya tarayıcı diline veya konuma göre bölge seçimi (TRY/EUR/USD) ekleyebilirsiniz.
   // Şimdilik varsayılan olarak Türkiye/TRY bazlı gösterim için currency sabitini ayarlayabilirsiniz.
-  const currency = "TRY"; // Örn: "TRY", "EUR", "USD"
+  const currency: string = "TRY"; // Örn: "TRY", "EUR", "USD"
 
   return (
     <section className="section-padding relative overflow-hidden">
