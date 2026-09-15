@@ -71,21 +71,64 @@ if (fs.existsSync(ENV_FILE)) {
 const { CodebuffClient } = require('@codebuff/sdk')
 
 // ---- Ekip tanımı (görev özetleri arayüz için) ----
+// Yetenek çipleri + üslup: ekip kart panelinde gösterilir.
 const TEAM = [
-  { id: 'merve', ad: 'Merve', rol: 'Orkestra Şefi', ikon: '🎼', renk: '#00F5D4', alanim: 'Genel asistan — görevi dağıtır, ekipti koordine eder, önemli kararlarda senden onay ister.', sifreli: false },
-  { id: 'atlas', ad: 'Atlas', rol: 'Kod & Mimari', ikon: '🏛️', renk: '#60A5FA', alanim: 'Yazılım, mimari kararlar, yayına alma hazırlığı; 5 ürün-uzmanını yönetir.', sifreli: false },
-  { id: 'argus', ad: 'Argus', rol: 'Güvenlik Uzmanı', ikon: '🛡️', renk: '#F87171', alanim: 'Salt-okunur denetçi — güvenlik açıkları, CVE, secrets hijyeni; kanıtlı rapor verir.', sifreli: true },
-  { id: 'iris', ad: 'Iris', rol: 'Görsel & Metin Üretimi', ikon: '🎨', renk: '#F472B6', alanim: 'Görsel, video, tasarım ve pazarlama metni üretir; teslimatı hep dosyaya yazar.', sifreli: true },
-  { id: 'vera', ad: 'Vera', rol: 'Satış & CRM', ikon: '💼', renk: '#FBBF24', alanim: 'Müşteri ilişkileri, satış teklifleri, Supabase waitlist CRM takibi.', sifreli: true },
-  { id: 'mentor', ad: 'Mentor', rol: 'Patron\u2019un Sıkı Sesi', ikon: '🧠', renk: '#A78BFA', alanim: 'Gelir önceliklendirme; acımasız dürüst — "30 günde nakit gelir üretir mi?" diye sorar.', sifreli: true },
-  { id: 'nova', ad: 'Nova', rol: 'Reklam & Büyüme', ikon: '🚀', renk: '#34D399', alanim: 'Funnel teşhisi, reklam kanal stratejisi; bütçe harcamaları onaya düşer.', sifreli: true },
-  { id: 'vega', ad: 'Vega', rol: 'Veri & Birim Ekonomi', ikon: '📊', renk: '#22D3EE', alanim: 'Rapor ve sayı — kaynaksız rakam kabul etmez, birim ekonomi hesaplar.', sifreli: true },
-  { id: 'firsat-avcisi', ad: 'Fırsat Avcısı', rol: 'GitHub Trend Analisti', ikon: '🎯', renk: '#F59E0B', alanim: 'GitHub trendlerini monetizasyon gözüyle tarar; gelir modeli + potansiyel + risk sınıflandırır. Günün fırsatı + 2 haftalık doğrulama planı.', sifreli: false },
-  { id: 'syncpass-zk-security', ad: 'SyncPass ZK', rol: 'Ürün Uzmanı — SyncPass', ikon: '🔐', renk: '#38BDF8', alanim: 'Zero-Knowledge şifreleme ve biyometrik denetimi; Android\u2192iOS güvenlik paritesi.', sifreli: false },
-  { id: 'diasync-health-vision', ad: 'DiaSync Sağlık', rol: 'Ürün Uzmanı — DiaSync', ikon: '🩺', renk: '#4ADE80', alanim: 'Gemini Vision besin analizi, glikoz trend doğruluğu, Wear OS senkronu.', sifreli: false },
-  { id: 'gps-telemetry-optimizer', ad: 'GPS Telemetri', rol: 'Ürün Uzmanı — GPS Takip', ikon: '📡', renk: '#FCD34D', alanim: 'Coroutines/Flow arka plan servisi optimizasyonu; kanıtsız iyileştirme kabul etmez.', sifreli: false },
-  { id: 'kmp-desktop-converter', ad: 'KMP Masaüstü', rol: 'Ürün Uzmanı — Masaüstü', ikon: '🖥️', renk: '#C4B5FD', alanim: 'Kotlin Multiplatform ile Windows/macOS uyarlaması; UI paritesi ve yerel API entegrasyonu.', sifreli: false },
-  { id: 'grasshopper-parametric', ad: 'Grasshopper', rol: 'Ürün Uzmanı — Cephe', ikon: '📐', renk: '#FDA4AF', alanim: 'Rhino/Grasshopper parametrik cephe; KPM üretim verisini repodaki ayrıştırıcıya karşı doğrular.', sifreli: false },
+  { id: 'merve', ad: 'Merve', rol: 'Orkestra Şefi', ikon: '🎼', renk: '#00F5D4',
+    alanim: 'Genel asistan — görevi dağıtır, ekipti koordine eder, önemli kararlarda senden onay ister.',
+    yetenekler: ['İşi doğru kişiye dağıtır', 'Sabah ve akşam raporu', 'Onay yönetimi', 'Hatırlatma kurar', 'Projeler arası hafıza'],
+    uslup: 'ORTAK (hepsinden önce gelir)', uslupTip: 'ortak' },
+  { id: 'atlas', ad: 'Atlas', rol: 'Kod & Mimari', ikon: '🏛️', renk: '#60A5FA',
+    alanim: 'Yazılım, mimari kararlar, yayına alma hazırlığı; 5 ürün-uzmanını yönetir.',
+    yetenekler: ['Kod yazar ve düzeltir', 'Mimari kurar', 'Testi çalıştırır', 'Yayına alır', 'Hata kökünü bulur'],
+    uslup: 'ORTAK (hepsinden önce gelir)', uslupTip: 'ortak' },
+  { id: 'argus', ad: 'Argus', rol: 'Güvenlik Uzmanı', ikon: '🛡️', renk: '#F87171',
+    alanim: 'Salt-okunur denetçi — güvenlik açıkları, CVE, secrets hijyeni; kanıtlı rapor verir.',
+    yetenekler: ['Güvenlik açığı tarar', 'CVE takibi yapar', 'Secrets hijyeni denetler', 'Kanıtlı rapor yazar'],
+    uslup: 'ORTAK (hepsinden önce gelir)', uslupTip: 'ortak' },
+  { id: 'iris', ad: 'Iris', rol: 'Görsel & Metin Üretimi', ikon: '🎨', renk: '#F472B6',
+    alanim: 'Görsel, video, tasarım ve pazarlama metni üretir; teslimatı hep dosyaya yazar.',
+    yetenekler: ['Reklam görseli üretir', 'Reels kurgusu çıkarır', 'Sayfa ve e-posta metni', 'Marka tutarlılığı', 'Tasarım ve içerik'],
+    uslup: 'ORTAK (hepsinden önce gelir)', uslupTip: 'ortak' },
+  { id: 'vera', ad: 'Vera', rol: 'Satış & CRM', ikon: '💼', renk: '#FBBF24',
+    alanim: 'Müşteri ilişkileri, satış teklifleri, Supabase waitlist CRM takibi.',
+    yetenekler: ['Gelen talebi karşılar', 'Teklif ve sözleşme', 'Randevu ve takip', 'Tahsilat takibi', 'CRM\u2019i düzenli tutar'],
+    uslup: 'ORTAK (hepsinden önce gelir)', uslupTip: 'ortak' },
+  { id: 'mentor', ad: 'Mentor', rol: 'Patron\u2019un Sıkı Sesi', ikon: '🧠', renk: '#A78BFA',
+    alanim: 'Gelir önceliklendirme; acımasız dürüst — "30 günde nakit gelir üretir mi?" diye sorar.',
+    yetenekler: ['Gelir darboğazını bulur', 'Önceliklendirme', 'İkinci görüş', 'Fiyat ve teklif kurgusu', 'Risk okuma'],
+    uslup: 'SERT KONUŞ. Bu senin işin…', uslupTip: 'sert' },
+  { id: 'nova', ad: 'Nova', rol: 'Reklam & Büyüme', ikon: '🚀', renk: '#34D399',
+    alanim: 'Funnel teşhisi, reklam kanal stratejisi; bütçe harcamaları onaya düşer.',
+    yetenekler: ['Reklam kurar ve yönetir', 'Funnel tasarlar', 'Bütçe önerir', 'Hedefleme yapar', 'Sonucu okur'],
+    uslup: 'ORTAK (hepsinden önce gelir)', uslupTip: 'ortak' },
+  { id: 'vega', ad: 'Vega', rol: 'Veri & Birim Ekonomi', ikon: '📊', renk: '#22D3EE',
+    alanim: 'Rapor ve sayı — kaynaksız rakam kabul etmez, birim ekonomi hesaplar.',
+    yetenekler: ['Veriyi toplar', 'Birim ekonomi çıkarır', 'Haftalık kârar raporu', 'Dönüşüm okuma', 'Nakit akışı'],
+    uslup: 'ORTAK (hepsinden önce gelir)', uslupTip: 'ortak' },
+  { id: 'firsat-avcisi', ad: 'Fırsat Avcısı', rol: 'GitHub Trend Analisti', ikon: '🎯', renk: '#F59E0B',
+    alanim: 'GitHub trendlerini monetizasyon gözüyle tarar; gelir modeli + potansiyel + risk sınıflandırır. Günün fırsatı + 2 haftalık doğrulama planı.',
+    yetenekler: ['GitHub trendi tarar', 'Monetizasyon analizi', 'Gelir modeli önerir', 'Risk sınıflandırır', 'Doğrulama planı yazar'],
+    uslup: 'ORTAK (hepsinden önce gelir)', uslupTip: 'ortak' },
+  { id: 'syncpass-zk-security', ad: 'SyncPass ZK', rol: 'Ürün Uzmanı — SyncPass', ikon: '🔐', renk: '#38BDF8',
+    alanim: 'Zero-Knowledge şifreleme ve biyometrik denetimi; Android\u2192iOS güvenlik paritesi.',
+    yetenekler: ['ZK şifreleme denetler', 'Biyometrik entegrasyon', 'Android→iOS parite', 'Güvenlik protokol testi'],
+    uslup: 'ORTAK (hepsinden önce gelir)', uslupTip: 'ortak' },
+  { id: 'diasync-health-vision', ad: 'DiaSync Sağlık', rol: 'Ürün Uzmanı — DiaSync', ikon: '🩺', renk: '#4ADE80',
+    alanim: 'Gemini Vision besin analizi, glikoz trend doğruluğu, Wear OS senkronu.',
+    yetenekler: ['Besin analizi doğrulama', 'Glikoz trend algoritması', 'Wear OS senkron testi', 'Vision prompt bakımı'],
+    uslup: 'ORTAK (hepsinden önce gelir)', uslupTip: 'ortak' },
+  { id: 'gps-telemetry-optimizer', ad: 'GPS Telemetri', rol: 'Ürün Uzmanı — GPS Takip', ikon: '📡', renk: '#FCD34D',
+    alanim: 'Coroutines/Flow arka plan servisi optimizasyonu; kanıtsız iyileştirme kabul etmez.',
+    yetenekler: ['Telemetri paketleme', 'Ağ gecikmesi iyileştirme', 'Pil tüketimi analizi', 'Flow akış testi'],
+    uslup: 'ORTAK (hepsinden önce gelir)', uslupTip: 'ortak' },
+  { id: 'kmp-desktop-converter', ad: 'KMP Masaüstü', rol: 'Ürün Uzmanı — Masaüstü', ikon: '🖥️', renk: '#C4B5FD',
+    alanim: 'Kotlin Multiplatform ile Windows/macOS uyarlaması; UI paritesi ve yerel API entegrasyonu.',
+    yetenekler: ['KMP mimari kurulum', 'UI/UX parite denetimi', 'Yerel API entegrasyon', 'Windows/macOS build'],
+    uslup: 'ORTAK (hepsinden önce gelir)', uslupTip: 'ortak' },
+  { id: 'grasshopper-parametric', ad: 'Grasshopper', rol: 'Ürün Uzmanı — Cephe', ikon: '📐', renk: '#FDA4AF',
+    alanim: 'Rhino/Grasshopper parametrik cephe; KPM üretim verisini repodaki ayrıştırıcıya karşı doğrular.',
+    yetenekler: ['Parametrik blok tanımı', 'Koordinat hesabı doğrulama', 'İmalat verisi dışa aktarım', 'KPM ayrıştırıcı testi'],
+    uslup: 'ORTAK (hepsinden önce gelir)', uslupTip: 'ortak' },
 ]
 
 // ---- .agents/ tanımlarını yükle (değişiklikte hot-reload) ----
@@ -186,6 +229,18 @@ const JSON_GONDER = (res, kod, obj) => {
 
 const TIMING = 5000
 
+// ---- Gerçek fotoğraf desteği: web/public/team/<ajanId>.jpg|.png|.webp ----
+const FOTO_DIR = path.join(PROJE_KOK, 'web', 'public', 'team')
+// Öncelik: gerçek foto (jpg/png/webp) önce, üretilmiş SVG portre gölgede kalır
+const FOTO_UZANTILAR = ['.jpg', '.jpeg', '.png', '.webp', '.svg']
+function fotoUzantisiBul(ajanId) {
+  for (const uz of FOTO_UZANTILAR) {
+    try { if (fs.existsSync(path.join(FOTO_DIR, ajanId + uz))) return uz } catch { /* noop */ }
+  }
+  return null
+}
+const FOTO_MIME = { '.svg': 'image/svg+xml', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp' }
+
 // ---- HTTP sunucusu ----
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://localhost:${PORT}`)
@@ -210,7 +265,22 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (req.method === 'GET' && rota === '/api/ekip') {
-      return JSON_GONDER(res, 200, TEAM)
+      return JSON_GONDER(res, 200, TEAM.map(a => ({ ...a, fotoVar: !!fotoUzantisiBul(a.id) })))
+    }
+
+    // Gerçek ajan fotoğrafları (web/public/team/<id>.jpg) — sadece varsa
+    // Hem /ekip-foto/<id> (uzantısız, ön yüz böyle ister) hem /ekip-foto/<id>.jpg çalışır
+    if (req.method === 'GET' && rota.startsWith('/ekip-foto/')) {
+      const istenen = path.basename(decodeURIComponent(rota.slice('/ekip-foto/'.length)))
+      const m = istenen.match(/^([\w-]+)\.(svg|jpg|jpeg|png|webp)$/i)
+      const ajanId = m ? m[1] : (/^[\w-]+$/.test(istenen) ? istenen : null)
+      const uz = ajanId ? fotoUzantisiBul(ajanId) : null
+      if (!uz) return JSON_GONDER(res, 404, { hata: 'foto yok' })
+      try {
+        const veri = fs.readFileSync(path.join(FOTO_DIR, ajanId + uz))
+        res.writeHead(200, { 'Content-Type': FOTO_MIME[uz], 'Cache-Control': 'no-store' })
+        return res.end(veri)
+      } catch { return JSON_GONDER(res, 404, { hata: 'foto okunamadı' }) }
     }
 
     if (req.method === 'GET' && rota === '/api/oturumlar') {

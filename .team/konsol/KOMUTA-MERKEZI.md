@@ -1,5 +1,10 @@
 # OSTLERTECH KOMUTA MERKEZİ — Jarvis
 
+> **Arayüz (2026-09-15 yenilendi):** ChatGPT/Open WebUI düzeni — kalıcı kenar çubuğu
+> (14 ajan avatarı + kayıtlı sohbetler hep görünür), slim üst bar (aktif ajan chip'i +
+> model rozeti), çok satırlı komposer (Enter gönder, Shift+Enter satır), hızlı emir
+> çipleri, paneller karşılıklı dışlamalı (Ekip ↔ Fırsat), mobilde hamburger menü.
+
 > **ŞİMDİLİK:** Jarvis (web arayüzü) bekletiliyor — Codebuff SDK kredi istediği
 > için (402) sohbet geçici olarak **terminalden** yürütülüyor: proje kökündeki
 > **`ekip.cmd`**'ye çift tıkla (ya da `node .team/konsol/node_modules/codebuff/index.js`).
@@ -26,6 +31,8 @@ Her gün 08:00'de (yerel saat) GitHub trendlerini tarayıp monetizasyon analizi 
 .team/konsol/
 ├── komuta-server.mjs   Komuta sunucusu (Node, port 4311)
 │     • .agents/*.ts tanımlarını sıcak yükler (15 sn'de bir tazeler)
+│     • /api/ekip → yetenek çipleri + üslup + fotoVar bilgisiyle ekip verisi
+│     • /ekip-foto/<id> → gerçek ajan fotoğrafı (web/public/team/<id>.jpg, varsa)
 │     • client.run({ agent, prompt, previousRun }) ile ajan çalıştırır
 │     • Oturum başına sohbet hafızası tutar (previousRun zinciri)
 │     • KALICI HAFIZA: her mesajdan sonra oturum .team/konsol/oturumlar/*.json
