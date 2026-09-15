@@ -22,3 +22,8 @@ desktop.ini
 # Artifacts
 .artifacts/
 .freebuff/
+
+# Ekip altyapisi (Komuta Merkezi) - calisma zamani dosyalari
+.team/konsol/.env
+.team/konsol/login-*.log
+.team/konsol/oturumlar/
