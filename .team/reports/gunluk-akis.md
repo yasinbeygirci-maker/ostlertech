@@ -69,3 +69,13 @@
 - Atlas: bulgu #1 (middleware) + #2 (OAuth callback) + #5 (security headers)
 - Patron: Argus'a Supabase erişimi verildiğinde RLS denetimi tamamlanacak (bulgu #4)
 - Not: audit'te kalan 3 açığın tamamı build-zinciri (postcss/js-yaml), runtime etkisi yok — izlemede
+
+## 2026-09-15 — GitHub Push Hazırlığı
+- Ekip altyapısı 3 commit'te repoya alındı (351a0285, ee5343ca, 90cac4f7) — .env ve çalışma zamanı dosyaları gitignore'da, secrets taraması temiz
+- /products sayfası commit'lendi (b0c191c7)
+- Remote doğrulandı (yasinbeygirci-maker/ostlertech), upstream tracking kuruldu, fetch yapıldı — **push YAPILMADI (Patron kararı bekliyor)**
+- **Kritik bulgu:** uzak geçmiş yerelle İLGİSİZ (ortak ata yok) + uzakta Google Play için yayınlanmış 3 yasal sayfa var (/gizlilik, /privacy, /diasync/delete-account)
+- Lokal /gizlilik-politikasi modern karşılığı var ama URL farklı; hesap silme sayfasının lokali YOK
+- Seçenek menüsü + önerilen sıra: .team/reports/github-hazirlik.md — yasal sayfalar portalanmadan force push önerilmez
+- ✅ 3 yasal sayfa portalanip commit'lendi (f422ca2e): /gizlilik, /privacy, /diasync/delete-account — birebir içerik + SEO metadata eklendi; tsc temiz, build 13 rota, canlı smoke: 3×200 + içerik kontrolü + middleware 307 doğrulandı
+- Sıra: Patron push kararı (A: force-with-lease / C: yeni dal) — ön koşul artık tamam
