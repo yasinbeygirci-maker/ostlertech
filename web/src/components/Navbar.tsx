@@ -19,7 +19,7 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-10 text-sm font-semibold tracking-wide uppercase text-white/50">
-          <a href="#" className="hover:text-primary transition-all duration-300">Ürünler</a>
+          <a href="/products" className="hover:text-primary transition-all duration-300">Ürünler</a>
           <a href="#" className="hover:text-primary transition-all duration-300">Teknoloji</a>
           <a href="#" className="hover:text-primary transition-all duration-300">Kurumsal</a>
         </div>
@@ -45,7 +45,7 @@ const Navbar = () => {
       {/* Mobile Menu Overlay */}
       <div className={`md:hidden absolute top-20 left-0 right-0 bg-background/95 backdrop-blur-2xl border-b border-white/[0.05] transition-all duration-500 ease-in-out overflow-hidden ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
         <div className="px-6 py-8 flex flex-col gap-6">
-          <a href="#" className="text-xl font-bold text-white/80 hover:text-primary transition-colors">Ürünler</a>
+          <a href="/products" className="text-xl font-bold text-white/80 hover:text-primary transition-colors">Ürünler</a>
           <a href="#" className="text-xl font-bold text-white/80 hover:text-primary transition-colors">Teknoloji</a>
           <a href="#" className="text-xl font-bold text-white/80 hover:text-primary transition-colors">Kurumsal</a>
           <div className="pt-6 border-t border-white/10 flex flex-col gap-4">
