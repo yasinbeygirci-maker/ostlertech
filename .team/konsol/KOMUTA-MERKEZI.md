@@ -10,6 +10,16 @@ Patron'un kendi "Jarvis"i: tarayıcıdan 13 kişilik ekiple sohbet edilen komuta
 Codebuff ajanlarını (`.agents/`) `@codebuff/sdk` üzerinden çalıştırır. Bu klasör
 **iç kullanımdır** — web sitesine (`web/`) ait değildir, yayına çıkmaz.
 
+## Fırsat Avcısı (14. ajan)
+
+Her gün 08:00'de (yerel saat) GitHub trendlerini tarayıp monetizasyon analizi yapar:
+- **Veri:** Search API (son 45 günde doğup 80+ star yapan repolar) + github.com/trending (bugünkü hareket)
+- **Analiz:** FIRSAT AVCISI ajanı (`.agents/firsat-avcisi.ts`) — gelir modeli, fiyat önerisi, potansiyel sınıfı, risk
+- **Rapor:** `.team/reports/github-firsatlari.md` — "GÜNÜN FIRSATI" + 2 haftalık doğrulama planı
+- **API:** `GET /api/firsat` (durum), `GET /api/firsat/rapor` (içerik), `POST /api/firsat/tara` (manuel tetik)
+- **Arayüz:** üst barda "🎯 Fırsatlar" butonu — panelden tarama başlatma + rapor okuma
+- Opsiyonel: `GITHUB_TOKEN` (.env) ile API limiti 60→5000 istek/saat
+
 ## Mimari
 
 ```

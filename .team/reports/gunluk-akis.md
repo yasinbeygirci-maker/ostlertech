@@ -3,7 +3,15 @@
 > Merve her iş seansının sonunda bu dosyayı günceller.
 > Elona'nın alanı: günlük akış, sözler, hatırlatmalar.
 
+## 2026-09-15 — GitHub Fırsat Taraması ve Mentör Önceliği ✅
+
+- **Fırsat Avcısı** raporu incelendi (`github-firsatlari.md`).
+- Mentor gözüyle değerlendirildi ve Patron'a tek net tavsiye hazırlandı: **`firecrawl/anydoc`** (veya kurumsal AI entegrasyonu olarak `deepseek-ai/deepseek-harness`).
+- Gerekçe ve 2 haftalık doğrulama adımları (Landing Page, Topluluk Validasyonu, MVP Ön Satış) netleştirildi.
+- Ekip görev panosu güncellendi, Patron'un onayı bekleniyor.
+
 ## 2026-09-15 — /products sayfası kuruldu (5 ürün) ✅
+...
 
 - Patron emriyle Atlas iki görevde tamamladı: `web/src/lib/urunler.ts` (5 ürün verisi, rapora sadık, indirme linki yok — ürünler henüz yayında değil) + `web/src/app/products/page.tsx` (koyu tema, framer-motion, grid 1/2/3 kolon, ikon-map, "Yakında" rozetleri).
 - Navbar'ın masaüstü + mobil menüsüne "Ürünler" bağlantısı eklendi (`/products`).
@@ -80,3 +88,6 @@
 - ✅ 3 yasal sayfa portalanip commit'lendi (f422ca2e): /gizlilik, /privacy, /diasync/delete-account — birebir içerik + SEO metadata eklendi; tsc temiz, build 13 rota, canlı smoke: 3×200 + içerik kontrolü + middleware 307 doğrulandı
 - Sıra: Patron push kararı (A: force-with-lease / C: yeni dal) — ön koşul artık tamam
 - ✅ **PUSH TAMAMLANDI (Seçenek A):** force-with-lease ile origin/main = fa7a884d. Yolda: tarihteki 176.8 MB node_modules blob'u GH001 reddi verdi → filter-branch ile 9 commit korunarak tarih temizlendi → repo 126.9 MiB → 13.2 MiB. Uzak doğrulama: yasal sayfalar + ekip altyapısı + Android app GitHub'da
+- ✅ **FIRSAT AVCISI kuruldu (14. ajan):** Patron'un monetizasyon radarı — her gün 08:00 GitHub trend taraması (Search API + trending HTML) → gelir modeli/potansiyel/risk analizi → github-firsatlari.md. İlk tarama: 20 repo, 6 YÜKSEK fırsat; halüsinasyon taraması temiz (anydoc + deepseek-harness gerçek, star'lar birebir). Panel "🎯 Fırsatlar" butonuyla konsolda
+- ✅ **Fırsat akışı ekibe bağlandı:** Merve delegasyon kuralı 10 (rapor → Vera satış + Nova kanal paralel, Mentor önceliklendirme, Patron'a tek tavsiye); Vera firsat-satis-notlari.md, Nova firsat-buyume-notlari.md yazacak; Vega'ya "DOĞRULANMADI" damga yetkisi verildi; TEAM.md'e Fırsat Akışı bölümü. Uçtan uca test: Merve raporu işleyip anydoc tavsiyesi verdi ✓
+- ✅ **MODEL_NAME=gemini-3.5-flash'e yükseltildi:** lite modelin uzun briflerde boğulma sorunu (MALFORMED_FUNCTION_CALL) çözüldü — aynı sınav brifi ilk seferde 166 sn'de temiz geçti; kota dolursa zincir lite'lara düşüp geri dönebiliyor

@@ -22,10 +22,41 @@ import { createRequire } from 'node:module'
 
 const require = createRequire(import.meta.url)
 import { ajanÇalıştır as cagriCalistir, saglayiciCoz } from './cagri.mjs'
+import { firsatTaramasiYap } from './firsat-tespiti.mjs'
 const KONSOL_DIR = path.dirname(new URL(import.meta.url).pathname.replace(/^\/(\w:)/, '$1'))
 const PROJE_KOK = path.resolve(KONSOL_DIR, '..', '..')
 const AGENTS_DIR = path.join(PROJE_KOK, '.agents')
 const PORT = Number(process.env.KOMUTA_PORT || 4311)
+
+// ---- Fırsat Avcısı zamanlayıcısı: her gün 08:00 (yerel saat) ----
+let firsatTaramada = false
+const FIRSAT_SONUC = new Map() // kaynak -> { zaman, özet }
+let firsatZamanlayici = null
+async function firsatTaramasiCalistir(kaynak) {
+  if (firsatTaramada) return { tamam: false, hata: 'tarama-zaten-çalışıyor' }
+  firsatTaramada = true
+  try {
+    console.log(`[firsat] tarama başladı (${kaynak})`)
+    const sonuc = await firsatTaramasiYap({})
+    FIRSAT_SONUC.set('son', { zaman: Date.now(), kaynak, ...sonuc })
+    console.log(`[firsat] bitti: ${sonuc.taranan} repo, ${sonuc.toplamFirsat} fırsat, ${(sonuc.süreMs / 1000).toFixed(0)} sn`)
+    return sonuc
+  } catch (err) {
+    console.error('[firsat] hata:', err.message)
+    return { tamam: false, hata: err.message }
+  } finally {
+    firsatTaramada = false
+  }
+}
+function firsatZamanlayiciKur() {
+  if (firsatZamanlayici) return
+  // 30 sn'de bir bak; saat 08:00'de (yerel) tetikle
+  firsatZamanlayici = setInterval(() => {
+    const simdi = new Date()
+    if (simdi.getHours() === 8 && simdi.getMinutes() === 0) firsatTaramasiCalistir('günlük-08:00')
+  }, 30 * 1000).unref()
+}
+firsatZamanlayiciKur()
 
 // ---- .env yükle (basit) ----
 const ENV_FILE = path.join(KONSOL_DIR, '.env')
@@ -49,6 +80,7 @@ const TEAM = [
   { id: 'mentor', ad: 'Mentor', rol: 'Patron\u2019un Sıkı Sesi', ikon: '🧠', renk: '#A78BFA', alanim: 'Gelir önceliklendirme; acımasız dürüst — "30 günde nakit gelir üretir mi?" diye sorar.', sifreli: true },
   { id: 'nova', ad: 'Nova', rol: 'Reklam & Büyüme', ikon: '🚀', renk: '#34D399', alanim: 'Funnel teşhisi, reklam kanal stratejisi; bütçe harcamaları onaya düşer.', sifreli: true },
   { id: 'vega', ad: 'Vega', rol: 'Veri & Birim Ekonomi', ikon: '📊', renk: '#22D3EE', alanim: 'Rapor ve sayı — kaynaksız rakam kabul etmez, birim ekonomi hesaplar.', sifreli: true },
+  { id: 'firsat-avcisi', ad: 'Fırsat Avcısı', rol: 'GitHub Trend Analisti', ikon: '🎯', renk: '#F59E0B', alanim: 'GitHub trendlerini monetizasyon gözüyle tarar; gelir modeli + potansiyel + risk sınıflandırır. Günün fırsatı + 2 haftalık doğrulama planı.', sifreli: false },
   { id: 'syncpass-zk-security', ad: 'SyncPass ZK', rol: 'Ürün Uzmanı — SyncPass', ikon: '🔐', renk: '#38BDF8', alanim: 'Zero-Knowledge şifreleme ve biyometrik denetimi; Android\u2192iOS güvenlik paritesi.', sifreli: false },
   { id: 'diasync-health-vision', ad: 'DiaSync Sağlık', rol: 'Ürün Uzmanı — DiaSync', ikon: '🩺', renk: '#4ADE80', alanim: 'Gemini Vision besin analizi, glikoz trend doğruluğu, Wear OS senkronu.', sifreli: false },
   { id: 'gps-telemetry-optimizer', ad: 'GPS Telemetri', rol: 'Ürün Uzmanı — GPS Takip', ikon: '📡', renk: '#FCD34D', alanim: 'Coroutines/Flow arka plan servisi optimizasyonu; kanıtsız iyileştirme kabul etmez.', sifreli: false },
@@ -290,6 +322,41 @@ const server = http.createServer(async (req, res) => {
           try { client.close?.() } catch { /* noop */ }
         }
       })
+      return
+    }
+
+    // ---- Fırsat Avcısı API ----
+    if (req.method === 'GET' && rota === '/api/firsat') {
+      const rapor = path.join(PROJE_KOK, '.team', 'reports', 'github-firsatlari.md')
+      let raporVar = false
+      let raporTarih = 0
+      try {
+        raporVar = fs.existsSync(rapor)
+        if (raporVar) raporTarih = fs.statSync(rapor).mtimeMs
+      } catch { /* noop */ }
+      const son = FIRSAT_SONUC.get('son') || null
+      return JSON_GONDER(res, 200, {
+        raporVar,
+        raporTarih,
+        sonTarama: son ? { zaman: son.zaman, kaynak: son.kaynak, taranan: son.taranan ?? null, toplamFirsat: son.toplamFirsat ?? null } : null,
+        suAnTaramada: firsatTaramada,
+      })
+    }
+
+    if (req.method === 'GET' && rota === '/api/firsat/rapor') {
+      const rapor = path.join(PROJE_KOK, '.team', 'reports', 'github-firsatlari.md')
+      try {
+        return JSON_GONDER(res, 200, { icerik: fs.readFileSync(rapor, 'utf8') })
+      } catch {
+        return JSON_GONDER(res, 404, { hata: 'rapor henüz yok — önce tarama başlat' })
+      }
+    }
+
+    if (req.method === 'POST' && rota === '/api/firsat/tara') {
+      if (firsatTaramada) return JSON_GONDER(res, 409, { hata: 'tarama zaten çalışıyor' })
+      JSON_GONDER(res, 200, { basladi: true })
+      // arka planda sürsün — tarayıcı hemen döner, panel /api/firsat ile poll eder
+      firsatTaramasiCalistir('manuel').catch(() => {})
       return
     }
 

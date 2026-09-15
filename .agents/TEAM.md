@@ -11,10 +11,10 @@ editor-best-of-n, researcher-web) öğrenilen prensiplerle yazıldı.
         günlük akış · sözler · hatırlatmalar
                         │
                 MERVE — orkestra şefi
-     ┌─────┬─────┼─────┼─────┬─────┬─────┐
-   IRIS  VERA ATLAS MENTOR NOVA VEGA ARGUS
-  üretim satış kod   sıkı  büyüme veri güvenlik
-              mimari ses
+     ┌─────┬─────┼─────┼─────┬─────┬─────┬──────┐
+   IRIS  VERA ATLAS MENTOR NOVA VEGA ARGUS FIRSAT
+  üretim satış kod   sıkı  büyüme veri güvenlik avcısı
+              mimari ses                    (GitHub trend)
 ```
 
 | Rol | Ajan | Alan | Doğrulama kanıtı |
@@ -27,6 +27,7 @@ editor-best-of-n, researcher-web) öğrenilen prensiplerle yazıldı.
 | Büyüme | `nova` | Reklam, funnel, kampanya planı | Kaynaklı benchmark + onay listesi |
 | Veri | `vega` | Rapor, birim ekonomi, doğrulama | Kaynaklı sayılar |
 | Güvenlik | `argus` | Auth/RLS/CVE/secrets denetimi, yayın öncesi kapı | Kanıtlı bulgu raporu + şiddet sınıfı |
+| Trend | `firsat-avcisi` | GitHub trend taraması → monetizasyon analizi | Rapor: .team/reports/github-firsatlari.md + Vega denetimi |
 
 ### Ürün-Uzmanı Kadro (Atlas komutasında)
 
@@ -60,6 +61,15 @@ editor-best-of-n, researcher-web) öğrenilen prensiplerle yazıldı.
 - Dosya veya veri silme, DB yazma sorguları
 - Fiyat değişikliği, indirim, kampanya başlatma
 - Mimari kararlar
+
+## Fırsat Akışı (GitHub trend → gelir)
+
+Her gün 08:00'de otomatik (Komuta Merkezi zamanlayıcısı) veya Patron'un "🎯 Fırsatlar" panelinden:
+1. **firsat-avcisi** tarar ve `github-firsatlari.md`'e yazar (gelir modeli + potansiyel + risk)
+2. **vega** sayıları denetler (star/fiyat gerçekliği; "DOĞRULANMADI" damgası yetkisi var)
+3. **mentor** gelir önceliklendirmesi yapar (ZK/KMP deneyimimizle kesişim analizi)
+4. **vera** satış açısını yazar (`firsat-satis-notlari.md`); **nova** kanal/funnel planını (`firsat-buyume-notlari.md`)
+5. **merve** tümünü birleştirip Patron'a tek tavsiyeyle sunar — karar Patron'un
 
 ## Rapor Dosyaları (Elona'nın alanını besler)
 

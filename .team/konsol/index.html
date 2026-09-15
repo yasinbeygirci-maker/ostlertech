@@ -94,6 +94,19 @@
   .g-baslik { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .g-meta { font-size: 10.5px; color: #64748b; margin-top: 3px; }
   .g-yok { color: #475569; font-size: 12px; text-align: center; padding: 6px 0 10px; }
+  /* fırsat paneli */
+  .firsat-panel {
+    display: none; flex-direction: column; border-bottom: 1px solid #1e293b; background: #0b1222;
+    max-height: 46vh; overflow: hidden;
+  }
+  .firsat-panel.acik { display: flex; }
+  .f-durum { font-size: 10.5px; color: #64748b; letter-spacing: .5px; }
+  .f-rapor {
+    margin: 0 12px 12px; overflow: auto; padding: 12px 14px;
+    background: #0f172a; border: 1px solid #1e293b; border-radius: 10px;
+    color: #cbd5e1; font: 12px/1.55 Consolas, 'Cascadia Mono', monospace;
+    white-space: pre-wrap; word-break: break-word;
+  }
   @media (max-width: 640px) { .msj { max-width: 92%; } h1 small { display: none; } }
 </style>
 </head>
@@ -103,6 +116,7 @@
   <h1>KOMUTA MERKEZİ<small>OSTLERTECH · ÇEKİRDEK</small></h1>
   <div class="durum"><span class="nokta" id="durumNokta"></span><span id="durumYazi">bağlanıyor…</span></div>
   <button class="yeni" id="btnGec" title="Geçmiş oturumlar">🕘 Geçmiş</button>
+  <button class="yeni" id="btnFir" title="GitHub fırsat avı">🎯 Fırsatlar</button>
 </header>
 
 <nav class="serit" id="serit"></nav>
@@ -110,6 +124,17 @@
 <div class="gecmis-panel" id="gPanel">
   <div class="g-ust"><span>KAYITLI OTURUMLAR</span><button class="g-kapat" id="gKapat">×</button></div>
   <div class="g-liste" id="gListe"></div>
+</div>
+
+<div class="firsat-panel" id="fPanel">
+  <div class="g-ust"><span>GITHUB FIRSAT AVI</span>
+    <span style="display:flex;gap:10px;align-items:center">
+      <span class="f-durum" id="fDurum"></span>
+      <button class="yeni" id="btnFirTara" title="Şimdi tara">⚡ Tara</button>
+      <button class="g-kapat" id="fKapat">×</button>
+    </span>
+  </div>
+  <pre class="f-rapor" id="fRapor">Rapor henüz yok — "⚡ Tara" ile ilk taramayı başlat.</pre>
 </div>
 
 <main class="sohbet" id="sohbet">
@@ -247,6 +272,45 @@ async function oturumAc(id) {
 
 btnGec.onclick = () => { gecmisAcik ? (gecmisAcik = false, gPanel.classList.remove('acik')) : gecmisAc(); };
 $('gKapat').onclick = () => { gecmisAcik = false; gPanel.classList.remove('acik'); };
+
+// ---- Fırsat Avcısı paneli ----
+let firsatAcik = false, firsatPoll = null;
+const fPanel = $('fPanel'), fDurum = $('fDurum');
+
+async function firsatYukle() {
+  try {
+    const d = await (await fetch(API + '/api/firsat')).json();
+    if (d.suAnTaramada) {
+      fDurum.textContent = '⚡ taranıyor…';
+      if (!firsatPoll) firsatPoll = setInterval(async () => {
+        try {
+          const s = await (await fetch(API + '/api/firsat')).json();
+          if (!s.suAnTaramada) { clearInterval(firsatPoll); firsatPoll = null; firsatYukle(); }
+        } catch { /* geçici */ }
+      }, 10000);
+    } else if (d.raporVar) {
+      fDurum.textContent = '· ' + new Date(d.raporTarih).toLocaleString('tr-TR', { dateStyle: 'short', timeStyle: 'short' });
+      const r = await (await fetch(API + '/api/firsat/rapor')).json();
+      $('fRapor').textContent = r.icerik || '';
+    } else {
+      fDurum.textContent = 'rapor yok';
+    }
+  } catch { fDurum.textContent = 'sunucu hatası'; }
+}
+
+$('btnFir').onclick = () => {
+  firsatAcik = !firsatAcik;
+  fPanel.classList.toggle('acik', firsatAcik);
+  if (firsatAcik) firsatYukle();
+};
+$('fKapat').onclick = () => { firsatAcik = false; fPanel.classList.remove('acik'); };
+$('btnFirTara').onclick = async () => {
+  try {
+    fDurum.textContent = '⚡ tarama başlatılıyor…';
+    await fetch(API + '/api/firsat/tara', { method: 'POST' });
+    firsatYukle();
+  } catch { fDurum.textContent = 'başlatılamadı'; }
+};
 
 (async function basla() {
   try {

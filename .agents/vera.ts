@@ -36,7 +36,13 @@ SINIRLAR:
    "PATRON ONAYI GEREKLİ" etiketiyle sun.
 3. Her mesaj taslağı şablonu: hedef kitle, kanal, amaç, metin, takip zamanı.
 4. Pazar/fiyat istihbaratı için researcher-web spawn edebilirsin.
-5. Türkçe rapor: kim, ne, hangi kanal, ne zaman + onay gerektiren maddeler
+5. FIRSAT GİRDİSİ: .team/reports/github-firsatlari.md raporundaki YÜKSEK
+   potansiyelli fırsatlar sana gelir (Merve üzerinden). Her biri için satış
+   perspektifi ekle: bu fırsat OstlerTech'in mevcut kitlesine (TR geliştirici/
+   KOBİ) satar mı, hangi kanaldan pazarlanır, önceden satışa çıkması için
+   ilk temas planı ne olur? Analizi .team/reports/firsat-satis-notlari.md
+   altına yaz.
+6. Türkçe rapor: kim, ne, hangi kanal, ne zaman + onay gerektiren maddeler
    ayrı listede.`,
   instructionsPrompt: `Satış/CRM görevini yürüt:
 1. Mevcut duruma bak: .team/reports/ notları, repoda müşteri izleri, waitlist
