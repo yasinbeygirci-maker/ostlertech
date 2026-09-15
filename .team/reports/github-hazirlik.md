@@ -1,7 +1,22 @@
 # GITHUB PUSH HAZIRLIK RAPORU
 
-> 2026-09-15 — Amaç: yerel `main`'i `origin/main`'e (github.com/yasinbeygirci-maker/ostlertech)
-> güvenle taşımak. **Push yapılmadı** — Patron kararı bekliyor.
+> 2026-09-15 — ✅ TAMAMLANDI: Seçenek A uygulandı. `git push --force-with-lease origin main`
+> başarılı — `origin/main` artık `fa7a884d` (yeni site + ekip altyapısı).
+
+## Push Sonrası Doğrulama
+- `ls-remote` → `fa7a884d` ✓ (lokal ile birebir)
+- Uzak ağaç: web/, .agents/, .team/, app/ (Android) ✓
+- Yasal sayfalar uzakta: /gizlilik, /privacy, /diasync/delete-account, /diasync/privacy, /gizlilik-politikasi ✓
+
+## Yolda Çözülen Engeller
+1. **İlk iki push denemesi takıldı** — sebep kimlik değil, 126.9 MiB'lik yükleme; kısa zaman aşımları süreci öldürüyordu
+2. **GH001 reddi:** tarihte 176.8 MB `node_modules/@next/swc-win32-x64-msvc/next-swc...node` varmış (temizlik commit'i takipten çıkarmış ama geçmişte kalmış)
+3. **Çözüm:** `git filter-branch --index-filter 'git rm -r --cached --ignore-unmatch -q node_modules' --prune-empty -- --all` → 9 commit korundu, mesajlar + tarihçeler aynı; dev blob gitti
+4. Sonra: refs/original temizliği + reflog expire + gc → **repo 126.9 MiB → 13.2 MiB**
+
+## Kalan Kontrol (Patron)
+- [ ] Play Console listelemelerinde gizlilik URL'leri hâlâ geçerli mi (domain dağıtımı değişmediği sürece evet)
+- [ ] Uzak domainde yeni site deploy edildiğinde 3 yasal URL'nin 200 döndüğünü kontrol et
 
 ## Mevcut Durum (doğrulanmış)
 

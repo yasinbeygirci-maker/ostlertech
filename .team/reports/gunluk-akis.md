@@ -79,3 +79,4 @@
 - Seçenek menüsü + önerilen sıra: .team/reports/github-hazirlik.md — yasal sayfalar portalanmadan force push önerilmez
 - ✅ 3 yasal sayfa portalanip commit'lendi (f422ca2e): /gizlilik, /privacy, /diasync/delete-account — birebir içerik + SEO metadata eklendi; tsc temiz, build 13 rota, canlı smoke: 3×200 + içerik kontrolü + middleware 307 doğrulandı
 - Sıra: Patron push kararı (A: force-with-lease / C: yeni dal) — ön koşul artık tamam
+- ✅ **PUSH TAMAMLANDI (Seçenek A):** force-with-lease ile origin/main = fa7a884d. Yolda: tarihteki 176.8 MB node_modules blob'u GH001 reddi verdi → filter-branch ile 9 commit korunarak tarih temizlendi → repo 126.9 MiB → 13.2 MiB. Uzak doğrulama: yasal sayfalar + ekip altyapısı + Android app GitHub'da
