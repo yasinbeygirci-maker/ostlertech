@@ -1,0 +1,5 @@
+- [x] 1. Adım planını oluştur (.team/reports/proje-inceleme.md ve mevcut bileşenlerin okunması)
+- [x] 2. `.team/reports/proje-inceleme.md` dosyasını oku ve ürün özetlerini al
+- [x] 3. `web/src/app/page.tsx`, `web/src/app/layout.tsx` ve `web/src/components` altındaki dosyaları okuarak tasarım dilini incele
+- [x] 4. `web/src/lib/urunler.ts` dosyasını oluştur (5 ürün: DiaSync, EsnafCep, Projex, SyncPass, SyncPassDesktop - rapor dışı bilgi eklemeden, durum: yakinda, url: null)
+- [x] 5. `npm run build` ile projeyi doğrula ve Türkçe kısa rapor sun

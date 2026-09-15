@@ -1,0 +1,11 @@
+{
+  "name": "ostlertech-komuta-merkezi",
+  "private": true,
+  "version": "1.0.0",
+  "description": "OstlerTech Komuta Merkezi — Codebuff ajan köprüsü (ic kullanim)",
+  "dependencies": {
+    "@codebuff/sdk": "^0.10.7",
+    "codebuff": "latest",
+    "tsx": "latest"
+  }
+}

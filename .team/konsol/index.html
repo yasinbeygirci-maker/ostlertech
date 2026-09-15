@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSTLERTECH — Komuta Merkezi</title>
+<style>
+  :root { color-scheme: dark; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #020617; color: #e2e8f0; height: 100vh; display: flex; flex-direction: column;
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif; overflow: hidden;
+  }
+  /* üst bar */
+  header {
+    display: flex; align-items: center; gap: 12px; padding: 12px 20px;
+    border-bottom: 1px solid #1e293b; background: #020617cc; backdrop-filter: blur(8px);
+  }
+  .logo { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center;
+    background: linear-gradient(135deg, #00F5D4, #0ea5e9); color: #020617; font-weight: 800; font-size: 15px; }
+  h1 { font-size: 15px; letter-spacing: 2px; color: #f8fafc; }
+  h1 small { display: block; font-size: 10px; letter-spacing: 3px; color: #00F5D4; font-weight: 600; }
+  .durum { margin-left: auto; font-size: 11px; display: flex; align-items: center; gap: 6px; color: #94a3b8; }
+  .nokta { width: 8px; height: 8px; border-radius: 50%; background: #64748b; }
+  .nokta.yesil { background: #22c55e; box-shadow: 0 0 8px #22c55e88; }
+  .nokta.kirmizi { background: #ef4444; box-shadow: 0 0 8px #ef444488; }
+  .nokta.sari { background: #eab308; box-shadow: 0 0 8px #eab30888; }
+  /* ajan şeridi */
+  .serit { display: flex; gap: 8px; padding: 10px 20px; overflow-x: auto; border-bottom: 1px solid #1e293b; scrollbar-width: thin; }
+  .serit::-webkit-scrollbar { height: 6px; }
+  .serit::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+  .cerez {
+    flex: 0 0 auto; display: flex; align-items: center; gap: 7px; padding: 7px 13px; cursor: pointer;
+    border: 1px solid #1e293b; border-radius: 999px; background: #0f172a; font-size: 12.5px; color: #94a3b8;
+    transition: all .15s ease; user-select: none;
+  }
+  .cerez:hover { border-color: #334155; color: #e2e8f0; }
+  .cerez.secili { border-color: var(--rc); color: #f8fafc; background: color-mix(in srgb, var(--rc) 12%, #0f172a);
+    box-shadow: 0 0 12px color-mix(in srgb, var(--rc) 25%, transparent); }
+  .cerez .ik { font-size: 15px; }
+  .cerez .r { font-size: 10px; color: #64748b; display: block; }
+  /* sohbet */
+  .sohbet { flex: 1; overflow-y: auto; padding: 24px 20px; display: flex; flex-direction: column; gap: 14px; }
+  .sohbet::-webkit-scrollbar { width: 8px; }
+  .sohbet::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+  .karsilama { text-align: center; margin-top: 8vh; }
+  .karsilama .buyuk { font-size: 42px; margin-bottom: 10px; }
+  .karsilama h2 { font-size: 20px; color: #f8fafc; margin-bottom: 8px; }
+  .karsilama p { color: #64748b; font-size: 13px; max-width: 480px; margin: 0 auto; line-height: 1.6; }
+  .msj { max-width: 78%; padding: 11px 15px; border-radius: 14px; line-height: 1.55; font-size: 13.5px; white-space: pre-wrap; word-break: break-word; }
+  .msj.patron { align-self: flex-end; background: linear-gradient(135deg, #0ea5e9, #00F5D4); color: #020617; font-weight: 500; border-bottom-right-radius: 4px; }
+  .msj.ajan { align-self: flex-start; background: #0f172a; border: 1px solid #1e293b; border-bottom-left-radius: 4px; }
+  .msj.ajan .kim { font-size: 10.5px; font-weight: 700; letter-spacing: 1px; margin-bottom: 5px; text-transform: uppercase; }
+  .msj.sistem { align-self: center; background: #1e293b66; color: #fca5a5; font-size: 12px; border-radius: 8px; }
+  .msj.hata { border-color: #7f1d1d; }
+  .yaziliyor { align-self: flex-start; display: none; gap: 4px; padding: 12px 16px; background: #0f172a; border: 1px solid #1e293b; border-radius: 14px; }
+  .yaziliyor.acik { display: flex; }
+  .yaziliyor i { width: 6px; height: 6px; border-radius: 50%; background: #00F5D4; animation: nl 1.2s infinite; }
+  .yaziliyor i:nth-child(2) { animation-delay: .2s; } .yaziliyor i:nth-child(3) { animation-delay: .4s; }
+  @keyframes nl { 0%, 60%, 100% { opacity: .25; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
+  /* komposer */
+  .komposer { display: flex; gap: 10px; padding: 14px 20px; border-top: 1px solid #1e293b; background: #020617; }
+  .komposer input {
+    flex: 1; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; border-radius: 12px;
+    padding: 13px 16px; font-size: 14px; outline: none; transition: border-color .15s;
+  }
+  .komposer input:focus { border-color: #00F5D4; box-shadow: 0 0 0 3px #00f5d41a; }
+  .komposer input:disabled { opacity: .5; }
+  .komposer button {
+    background: linear-gradient(135deg, #00F5D4, #0ea5e9); border: none; color: #020617; font-weight: 700;
+    border-radius: 12px; padding: 0 22px; cursor: pointer; font-size: 14px; transition: opacity .15s;
+  }
+  .komposer button:disabled { opacity: .45; cursor: wait; }
+  .yeni { background: #0f172a; border: 1px solid #1e293b; color: #94a3b8; border-radius: 12px; padding: 0 14px; cursor: pointer; font-size: 13px; }
+  .yeni:hover { color: #e2e8f0; border-color: #334155; }
+  /* geçmiş paneli */
+  .gecmis-panel {
+    display: none; flex-direction: column; border-bottom: 1px solid #1e293b; background: #0b1222;
+    max-height: 34vh; overflow: hidden;
+  }
+  .gecmis-panel.acik { display: flex; }
+  .g-ust { display: flex; align-items: center; justify-content: space-between; padding: 9px 20px; font-size: 11px; letter-spacing: 2px; color: #64748b; }
+  .g-kapat { background: none; border: none; color: #64748b; font-size: 16px; cursor: pointer; line-height: 1; }
+  .g-kapat:hover { color: #e2e8f0; }
+  .g-liste { overflow-y: auto; padding: 0 12px 12px; display: flex; flex-direction: column; gap: 6px; }
+  .g-liste::-webkit-scrollbar { width: 6px; }
+  .g-liste::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+  .g-item {
+    text-align: left; background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; padding: 9px 12px;
+    cursor: pointer; color: #e2e8f0; transition: border-color .15s;
+  }
+  .g-item:hover { border-color: #00F5D466; }
+  .g-item.secili { border-color: #00F5D4; box-shadow: 0 0 10px #00f5d422; }
+  .g-baslik { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .g-meta { font-size: 10.5px; color: #64748b; margin-top: 3px; }
+  .g-yok { color: #475569; font-size: 12px; text-align: center; padding: 6px 0 10px; }
+  @media (max-width: 640px) { .msj { max-width: 92%; } h1 small { display: none; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">OT</div>
+  <h1>KOMUTA MERKEZİ<small>OSTLERTECH · ÇEKİRDEK</small></h1>
+  <div class="durum"><span class="nokta" id="durumNokta"></span><span id="durumYazi">bağlanıyor…</span></div>
+  <button class="yeni" id="btnGec" title="Geçmiş oturumlar">🕘 Geçmiş</button>
+</header>
+
+<nav class="serit" id="serit"></nav>
+
+<div class="gecmis-panel" id="gPanel">
+  <div class="g-ust"><span>KAYITLI OTURUMLAR</span><button class="g-kapat" id="gKapat">×</button></div>
+  <div class="g-liste" id="gListe"></div>
+</div>
+
+<main class="sohbet" id="sohbet">
+  <div class="karsilama" id="karsilama">
+    <div class="buyuk">🎼</div>
+    <h2>Emrinizi bekliyorum Patron</h2>
+    <p>Aşağıdan bir ajan seçin ve doğrudan konuşun. Ya da yazın —
+    yönlendirme <strong>Merve</strong>'de: "Merve, Atlas'a güvenlik yamasını sor" gibi emirle
+    şef ekibi seferber eder.</p>
+  </div>
+</main>
+
+<div class="yaziliyor" id="yaziliyor"><i></i><i></i><i></i></div>
+<div class="komposer">
+  <button class="yeni" id="btnYeni" title="Yeni oturum">＋ Yeni</button>
+  <input id="girdi" placeholder="Emrinizi yazın…" autocomplete="off" disabled>
+  <button id="btnGonder" disabled>Gönder</button>
+</div>
+
+<script>
+const API = '';
+let ekip = [], aktifAjan = 'merve', oturumId = null, gonderiyor = false, gecmisAcik = false;
+
+const $ = id => document.getElementById(id);
+const sohbet = $('sohbet'), serit = $('serit'), girdi = $('girdi'),
+      btnG = $('btnGonder'), btnY = $('btnYeni'), yazi = $('yaziliyor'),
+      btnGec = $('btnGec'), gPanel = $('gPanel'), gListe = $('gListe');
+
+function durum(sinif, yazi_) {
+  $('durumNokta').className = 'nokta ' + sinif;
+  $('durumYazi').textContent = yazi_;
+}
+
+function seritCiz() {
+  serit.innerHTML = '';
+  for (const a of ekip) {
+    const el = document.createElement('div');
+    el.className = 'cerez' + (a.id === aktifAjan ? ' secili' : '');
+    el.style.setProperty('--rc', a.renk);
+    el.innerHTML = `<span class="ik">${a.ikon}</span><span>${a.ad}<span class="r">${a.rol}</span></span>`;
+    el.title = a.alanim;
+    el.onclick = () => { aktifAjan = a.id; oturumId = null; seritCiz(); karsilamaGoster(); };
+    serit.appendChild(el);
+  }
+}
+
+function karsilamaGoster() {
+  if (oturumId) return; // kalıcı oturum açıkken sohbeti silme
+  const a = ekip.find(x => x.id === aktifAjan);
+  sohbet.innerHTML = `<div class="karsilama">
+    <div class="buyuk">${a ? a.ikon : '🎼'}</div>
+    <h2>${a ? a.ad + ' — ' + a.rol : 'Emrinizi bekliyorum Patron'}</h2>
+    <p>${a ? a.alanim : ''}</p></div>`;
+}
+
+function msjEkle(m) {
+  const karsilama = $('karsilama');
+  if (karsilama) karsilama.remove();
+  const el = document.createElement('div');
+  if (m.rol === 'patron') { el.className = 'msj patron'; el.textContent = m.metin; }
+  else if (m.rol === 'sistem') { el.className = 'msj sistem' + (m.hata ? ' hata' : ''); el.textContent = m.metin; }
+  else {
+    el.className = 'msj ajan' + (m.hata ? ' hata' : '');
+    const kim = document.createElement('div'); kim.className = 'kim'; kim.textContent = m.ajan || 'Ajan';
+    const govde = document.createElement('div'); govde.textContent = m.metin;
+    el.append(kim, govde);
+  }
+  sohbet.appendChild(el);
+  sohbet.scrollTop = sohbet.scrollHeight;
+}
+
+function kilitli(k) { gonderiyor = k; girdi.disabled = k; btnG.disabled = k; yazi.classList.toggle('acik', k); }
+
+async function gonder() {
+  const metin = girdi.value.trim();
+  if (!metin || gonderiyor) return;
+  girdi.value = ''; msjEkle({ rol: 'patron', metin }); kilitli(true);
+  try {
+    const r = await fetch(API + '/api/mesaj', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ oturumId, mesaj: metin, ajan: aktifAjan }),
+    });
+    const d = await r.json();
+    if (d.oturumId) oturumId = d.oturumId;
+    sohbet.querySelectorAll('.msj.ajan,.msj.sistem').forEach(e => e.remove());
+    const simdi = d.mesajlar.filter(m => m.rol !== 'patron');
+    for (const m of simdi) msjEkle(m);
+  } catch (e) {
+    msjEkle({ rol: 'sistem', metin: 'Sunucuya ulaşılamadı: ' + e.message, hata: true });
+  } finally { kilitli(false); girdi.focus(); }
+}
+
+btnG.onclick = gonder;
+girdi.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); gonder(); } });
+btnY.onclick = () => { oturumId = null; karsilamaGoster(); gecmisYukle(); girdi.focus(); };
+
+// ---- Kalıcı oturum geçmişi ----
+function gTarih(ts) {
+  const d = new Date(ts || Date.now());
+  return d.toLocaleDateString('tr-TR') + ' ' + d.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+}
+
+async function gecmisYukle() {
+  if (!gecmisAcik) return;
+  try {
+    const liste = await (await fetch(API + '/api/oturumlar')).json();
+    gListe.innerHTML = '';
+    if (!liste.length) { gListe.innerHTML = '<div class="g-yok">Henüz kayıtlı oturum yok — konuşmaların otomatik kaydedilir.</div>'; return; }
+    for (const o of liste) {
+      const b = document.createElement('button');
+      b.className = 'g-item' + (o.id === oturumId ? ' secili' : '');
+      const ad = (ekip.find(x => x.id === o.ajan) || {}).ad || o.ajan;
+      b.innerHTML = `<div class="g-baslik"></div><div class="g-meta"></div>`;
+      b.querySelector('.g-baslik').textContent = o.baslik || 'Sohbet';
+      b.querySelector('.g-meta').textContent = `${ad} · ${o.mesajSayisi} mesaj · ${gTarih(o.guncelleme)}`;
+      b.onclick = () => oturumAc(o.id);
+      gListe.appendChild(b);
+    }
+  } catch { /* sessiz — liste geçici olarak alınamadı */ }
+}
+
+function gecmisAc() { gecmisAcik = true; gPanel.classList.add('acik'); gecmisYukle(); }
+
+async function oturumAc(id) {
+  try {
+    const o = await (await fetch(API + '/api/oturum?id=' + encodeURIComponent(id))).json();
+    oturumId = o.id; aktifAjan = o.ajan || aktifAjan;
+    seritCiz();
+    sohbet.innerHTML = '';
+    for (const m of o.mesajlar) msjEkle(m);
+    gecmisYukle();
+    girdi.focus();
+  } catch { msjEkle({ rol: 'sistem', metin: 'Geçmiş oturum yüklenemedi.', hata: true }); }
+}
+
+btnGec.onclick = () => { gecmisAcik ? (gecmisAcik = false, gPanel.classList.remove('acik')) : gecmisAc(); };
+$('gKapat').onclick = () => { gecmisAcik = false; gPanel.classList.remove('acik'); };
+
+(async function basla() {
+  try {
+    const saglik = await (await fetch(API + '/api/health')).json();
+    if (!saglik.kimlik) {
+      durum('sari', 'kimlik gerekli — .team/konsol/.env → CODEBUFF_API_KEY');
+    } else { durum('yesil', 'çekirdek çevrimiçi · ' + saglik.agents + ' ajan · kimlik: ' + saglik.kimlik); }
+    ekip = await (await fetch(API + '/api/ekip')).json();
+    seritCiz(); karsilamaGoster(); girdi.disabled = false; btnG.disabled = false; girdi.focus();
+    gecmisYukle();
+  } catch (e) {
+    durum('kirmizi', 'sunucu yanıt vermiyor');
+  }
+})();
+</script>
+</body>
+</html>

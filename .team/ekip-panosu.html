@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OstlerTech Ekip Panosu — İç Kullanım</title>
+<style>
+  :root { color-scheme: dark; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #020617; color: #f8fafc;
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    min-height: 100vh; overflow-x: hidden;
+  }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 48px 24px 80px; }
+  header { text-align: center; margin-bottom: 40px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 999px;
+    background: rgba(0,245,212,0.1); border: 1px solid rgba(0,245,212,0.2);
+    color: #00F5D4; font-size: 11px; font-weight: 900;
+    letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px;
+  }
+  h1 { font-size: clamp(40px, 6vw, 64px); font-weight: 900; letter-spacing: -0.03em; }
+  h1 span { color: #00F5D4; }
+  .sub { color: rgba(248,250,252,0.4); font-size: 17px; margin-top: 12px; max-width: 640px; margin-inline: auto; line-height: 1.6; }
+  /* Stil seçici */
+  .toggle-row { display: flex; justify-content: center; margin: 32px 0 48px; }
+  .toggle {
+    display: inline-flex; gap: 4px; padding: 6px; border-radius: 999px;
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+  }
+  .toggle button {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 22px; border-radius: 999px; border: none; cursor: pointer;
+    font-size: 14px; font-weight: 700; color: rgba(248,250,252,0.5);
+    background: transparent; transition: all .3s;
+  }
+  .toggle button:hover { color: #f8fafc; }
+  .toggle button.active { background: #00F5D4; color: #020617; box-shadow: 0 8px 24px rgba(0,245,212,0.2); }
+  .hint { text-align: center; color: rgba(248,250,252,0.3); font-size: 12px; margin: -28px 0 40px; display: none; }
+  .hint code { color: rgba(0,245,212,0.7); }
+  /* Grup başlıkları */
+  .group-title {
+    text-align: center; font-size: 11px; font-weight: 900;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(248,250,252,0.3); margin: 48px 0 24px;
+  }
+  .grid {
+    display: grid; gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+  .card {
+    position: relative; overflow: hidden;
+    background: linear-gradient(rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 24px;
+    padding: 28px 22px; text-align: center;
+    transition: transform .3s, background .3s;
+  }
+  .card:hover { transform: translateY(-6px); background: rgba(255,255,255,0.06); }
+  .glow {
+    position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
+    width: 160px; height: 160px; border-radius: 50%;
+    filter: blur(60px); opacity: .18; pointer-events: none;
+  }
+  .avatar-slot { width: 96px; height: 96px; margin: 0 auto 16px; border-radius: 50%; }
+  .avatar-slot img { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; }
+  .card h3 { font-size: 18px; font-weight: 900; letter-spacing: -0.02em; }
+  .role { font-size: 10px; font-weight: 900; letter-spacing: 0.15em; text-transform: uppercase; margin: 6px 0 12px; }
+  .desc { color: rgba(248,250,252,0.5); font-size: 13.5px; line-height: 1.65; }
+  .chain { text-align: center; color: rgba(248,250,252,0.25); font-size: 12px; margin-top: 56px; letter-spacing: 0.05em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="badge">● İç Kullanım — Yayınlama</div>
+    <h1>Ekip <span>Panosu</span></h1>
+    <p class="sub">8 iş ajanı + 5 ürün-uzmanı. Bu sayfa sadece bu makinede — bizim beynimizin kadro tablosu.</p>
+  </header>
+
+  <div class="toggle-row">
+    <div class="toggle">
+      <button id="btn-avatar" class="active" onclick="setMode('avatar')">🤖 Avatar</button>
+      <button id="btn-gercek" onclick="setMode('gercek')">👤 Gerçek</button>
+    </div>
+  </div>
+  <p class="hint" id="hint">Fotoğrafı olmayan ajan avatar ile gösterilir. Fotoğraf eklemek için dosyayı <code>.team/photos/</code> klasörüne <code>ajan-id.jpg</code> adıyla koy.</p>
+
+  <div id="board"></div>
+
+  <p class="chain">ELONA (Patron) → MERVE (Şef) → IRIS · VERA · ATLAS → 5 ÜRÜN-UZMANI · MENTOR (Patron'a direkt) · NOVA · VEGA — GÜVENLİK: ARGUS</p>
+</div>
+
+<script>
+const TEAM = [
+  { id:"elona", name:"Elona", role:"Patron", group:"Yönetim", accent:"#f8fafc",
+    desc:"Günlük akış, sözler ve hatırlatmalar. Ekibin hizmet verdiği tek karar mercii." },
+  { id:"merve", name:"Merve", role:"Genel Asistan ve Orkestra Şefi", group:"Yönetim", accent:"#00F5D4",
+    desc:"Tüm ekibi yönetir: planlar, doğru uzmana devreder, sonuçları kanıtla doğrular. Önemli kararlarda Patron'a danışır." },
+  { id:"mentor", name:"Mentor", role:"Mentorluk ve Gelir Önceliklendirme", group:"Yönetim", accent:"#f59e0b",
+    desc:"Patron'un kendi zihniyle konuşan sıkı sesi. '30 günde nakit gelir üretir mi?' sorusuyla her işi elemler." },
+
+  { id:"iris", name:"Iris", role:"Görsel, Video, Tasarım ve Metin", group:"İş Ekibi", accent:"#a855f7",
+    desc:"Üretim tasarımcısı: landing metinleri, sosyal medya görselleri, marka dili (koyu zemin + neon turkuaz) teslim eder." },
+  { id:"vera", name:"Vera", role:"Satış, Müşteri İlişkileri ve CRM", group:"İş Ekibi", accent:"#3b82f6",
+    desc:"Waitlist CRM'ini yönetir, satış mesajları taslaklar; teklif ve indirimler her zaman Patron onaylıdır." },
+  { id:"atlas", name:"Atlas", role:"Kod, Mimari ve Yayına Alma", group:"İş Ekibi", accent:"#22d3ee",
+    desc:"Kıdemli yazılım mimarı: Next.js sitesini geliştirir, editor-best-of-n ile kod yazar, build ile doğrular." },
+  { id:"argus", name:"Argus", role:"Güvenlik Uzmanı", group:"İş Ekibi", accent:"#ef4444",
+    desc:"Salt-okunur denetçi: auth akışları, RLS, CVE ve secrets'i kanıtlı bulgularla raporlar; yayın öncesi son kapı." },
+  { id:"nova", name:"Nova", role:"Reklam, Funnel ve Büyüme", group:"İş Ekibi", accent:"#ec4899",
+    desc:"Kanal stratejisi ve funnel teşhisi; kaynaklı benchmark verisiyle kampanya planı yazar, bütçe harcamaz." },
+  { id:"vega", name:"Vega", role:"Veri, Rapor ve Birim Ekonomi", group:"İş Ekibi", accent:"#10b981",
+    desc:"Kaynaksız sayı kabul etmez: CAC/LTV/MRR modelleri kurar, ekibin iddialarını gerçek veriyle test eder." },
+
+  { id:"syncpass-zk-security", name:"ZK Güvenlik", role:"SyncPass Sıfır Bilgi Güvenlik Ajanı", group:"Ürün Uzmanları", accent:"#00D1B5",
+    desc:"Zero-Knowledge şifreleme zincirini ve biyometrik entegrasyonları denetler; Android→iOS protokol paritesini korur." },
+  { id:"diasync-health-vision", name:"Sağlık & Vision", role:"DiaSync Sağlık ve Vision Ajanı", group:"Ürün Uzmanları", accent:"#34d399",
+    desc:"Gemini Vision besin analizini optimize eder; glikoz trend tahmin doğruluğunu ölçer, Wear OS senkronunu test eder." },
+  { id:"gps-telemetry-optimizer", name:"Telemetri", role:"GPS Telemetri Optimizasyon Ajanı", group:"Ürün Uzmanları", accent:"#60a5fa",
+    desc:"Coroutines/Flow arka plan servislerinde paketleme ve ağ gecikmesini optimize eder; kazancı ölçümle kanıtlar." },
+  { id:"kmp-desktop-converter", name:"KMP Dönüşüm", role:"Cross-Platform Masaüstü Dönüşüm Ajanı", group:"Ürün Uzmanları", accent:"#c084fc",
+    desc:"Mobil kod tabanlarını Kotlin Multiplatform ile Windows/macOS'a taşır; UI/UX paritesi ve yerel API entegrasyonu." },
+  { id:"grasshopper-parametric", name:"Parametrik Üretim", role:"Grasshopper Parametrik Üretim Ajanı", group:"Ürün Uzmanları", accent:"#fbbf24",
+    desc:"Rhino/Grasshopper'da cephe tasarımı ve KPM imalat verisini üretir; repodaki Android ayrıştırıcısıyla doğrular." },
+];
+
+let mode = "avatar";
+
+function hash(s){ let h=0; for(let i=0;i<s.length;i++){ h=(h*31+s.charCodeAt(i))>>>0; } return h; }
+
+function avatarSVG(m){
+  const h = hash(m.id), id = "av-"+h;
+  const accent = m.accent;
+  const eyeShape = h % 3, headShape = (h>>2) % 3, visor = ((h>>4)%2)===1;
+  const antenna = ((h>>5)%2)===1, mouth = (h>>6)%3;
+  const dash = ((h>>8)%4)+2+" "+(((h>>10)%5)+3);
+  let head="";
+  if(headShape===0) head = `<circle cx="48" cy="46" r="26" fill="url(#${id}g)"/>`;
+  else if(headShape===1) head = `<rect x="24" y="22" width="48" height="48" rx="12" fill="url(#${id}g)"/>`;
+  else head = `<polygon points="48,20 71,33 71,59 48,72 25,59 25,33" fill="url(#${id}g)"/>`;
+  let eyes="";
+  if(eyeShape===0) eyes = `<circle cx="39" cy="42" r="4.5" fill="#020617"/><circle cx="57" cy="42" r="4.5" fill="#020617"/>`;
+  else if(eyeShape===1) eyes = `<rect x="35" y="38" width="8" height="8" rx="2" fill="#020617"/><rect x="53" y="38" width="8" height="8" rx="2" fill="#020617"/>`;
+  else eyes = `<rect x="34" y="41" width="10" height="2.5" rx="1" fill="#020617"/><rect x="52" y="41" width="10" height="2.5" rx="1" fill="#020617"/>`;
+  let mouthEl="";
+  if(mouth===0) mouthEl = `<path d="M40 54 Q48 61 56 54" stroke="#020617" stroke-width="2.5" fill="none" stroke-linecap="round"/>`;
+  else if(mouth===1) mouthEl = `<rect x="41" y="54" width="14" height="2.5" rx="1.25" fill="#020617"/>`;
+  else mouthEl = `<rect x="40" y="53" width="2.5" height="5" fill="#020617"/><rect x="45" y="53" width="2.5" height="5" fill="#020617"/><rect x="50" y="53" width="2.5" height="5" fill="#020617"/><rect x="55" y="53" width="2.5" height="5" fill="#020617"/>`;
+  return `<svg width="96" height="96" viewBox="0 0 96 96" role="img" aria-label="${m.name} avatarı">
+    <defs>
+      <linearGradient id="${id}g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="${accent}"/><stop offset="100%" stop-color="${accent}" stop-opacity="0.55"/>
+      </linearGradient>
+      <filter id="${id}f" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    <circle cx="48" cy="48" r="44" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"/>
+    <circle cx="48" cy="48" r="44" fill="none" stroke="${accent}" stroke-opacity="0.25" stroke-width="1.5" stroke-dasharray="${dash}"/>
+    <g filter="url(#${id}f)">
+      ${antenna ? `<line x1="48" y1="20" x2="48" y2="12" stroke="${accent}" stroke-width="2" stroke-linecap="round"/><circle cx="48" cy="10" r="3" fill="${accent}"/>` : ""}
+      ${head}
+      ${visor ? `<rect x="32" y="36" width="32" height="12" rx="6" fill="#020617" opacity="0.92"/><rect x="41" y="54" width="14" height="2.5" rx="1.25" fill="#020617"/>` : eyes + mouthEl}
+    </g>
+  </svg>`;
+}
+
+function render(){
+  const board = document.getElementById("board");
+  const groups = [...new Set(TEAM.map(m=>m.group))];
+  board.innerHTML = groups.map(g => `
+    <div class="group-title">${g}</div>
+    <div class="grid">
+      ${TEAM.filter(m=>m.group===g).map(m => {
+        const hasPhoto = mode==="gercek";
+        return `
+        <div class="card">
+          <div class="glow" style="background:${m.accent}"></div>
+          <div class="avatar-slot" id="slot-${m.id}"></div>
+          <h3>${m.name}</h3>
+          <div class="role" style="color:${m.accent}">${m.role}</div>
+          <div class="desc">${m.desc}</div>
+        </div>`;
+      }).join("")}
+    </div>
+  `).join("");
+  // Avatarları / fotoğrafları doldur
+  TEAM.forEach(m => {
+    const slot = document.getElementById("slot-"+m.id);
+    const img = new Image();
+    img.src = "photos/"+m.id+".jpg";
+    img.alt = m.name+" fotoğrafı";
+    img.onload = () => { if(mode==="gercek") slot.innerHTML = img.outerHTML; else slot.innerHTML = avatarSVG(m); };
+    img.onerror = () => { slot.innerHTML = avatarSVG(m); };
+    // Dosya yoksa onload tetiklenmez; başlangıçta avatar koy, gerçek modda foto varsa üzerine yazar
+    if(mode==="gercek"){ /* yukarıdaki onload/onerror halleder */ } else { slot.innerHTML = avatarSVG(m); }
+  });
+}
+
+function setMode(next){
+  mode = next;
+  document.getElementById("btn-avatar").classList.toggle("active", next==="avatar");
+  document.getElementById("btn-gercek").classList.toggle("active", next==="gercek");
+  document.getElementById("hint").style.display = next==="gercek" ? "block" : "none";
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
