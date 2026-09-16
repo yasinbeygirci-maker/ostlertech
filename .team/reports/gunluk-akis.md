@@ -1,5 +1,12 @@
 # Merve'nin Günlük Akışı & İşlem Kaydı - 16 Eylül 2026
 
+## DEPLOY KRİZİ ÇÖZÜLDÜ — site yeniden yayında (16.09.2026, Buffy)
+- Bulgu: Vercel deploy'ları 6 committir kırıktı — canlı site eski build'de, /products + /anydoc + robots.txt 404
+- Kök neden (2 katman): (1) proje Root Directory=web iken CLI kökten bağlanıyordu → link düzeltildi; (2) **Vercel production env'leri 13 karakterlik placeholder'dı** → build `/auth/callback` modülünde "Invalid supabaseUrl" ile 7 sn'de düşüyordu
+- Çözüm: placeholder env'ler silinip gerçek değerlerle yeniden eklendi (CLI, production scope); `lib/supabase.ts` lazy client'a çevrildi (env eksikken build patlamasın — 4 dosyada `getSupabase()` geçişi, tsc temiz)
+- **Sonuç: prod deploy BAŞARILI (16/16 sayfa, 1 dk) — robots.txt 200 ✓, sitemap 200 ✓, /anydoc 200 ✓, /products 200 ✓, GPTBot/CCBot/ClaudeBot Disallow canlıda ✓, Age:0 = taze build ✓**
+- Kalan: güvenlik düzeltmeleri (lazy supabase + .vercel gitignore) commit'lenmeli; Vercel GitHub entegrasyonu artık sonraki push'larda otomatik deploy etmeli (izlenecek)
+
 ## AI bot politikası: robots.txt + sitemap kuruldu (16.09.2026, Buffy)
 - Tetik: Cloudflare bilgilendirme maili — AI bot kontrolleri hassaslaştı (arama indeksleme ≠ AI eğitim), hiç ayar değiştirilmemişse her şey "İzin Ver" kalıyor
 - Canlı kontrol: ostlertech.com yayında ✓ (200, SyncPass/DiaSync vitrini + fiyatlar), robots.txt YOKTU (404) — AI tarayıcılarına karşı savunmasız
@@ -53,3 +60,4 @@
 - **08:11**: Patron'un isteği üzerine Atlas'ın AnyDoc hâtakâtı teknik brif/planı hazırlandı.
 - **08:12**: `.team/reports/atlas-anydoc-plan.md` dosyasına sayfa bölümleri, Supabase veri modeli (RLS insert-only), teknik yığın uyumu ve risk/önlem analizleri eksiksiz yazıldı.
 - **11:15**: Bugünkü iş dağıtımı tamamlandı. Argus Faz 4 CI Secret-Scan taslağını hazırladı, Mentor Supabase RLS güvenlik notlarını paylaştı, Atlas Next.js 15 build sağlığını doğruladı. Merve ekibi koordine etti ve raporları tamamladı.
+\"17 Eyl�l 2026: AnyDoc projesi i�in bekleme listesi altyap�s� kuruldu, landing sayfas� geli�tirildi ve build ba�ar�yla tamamland�.\" 

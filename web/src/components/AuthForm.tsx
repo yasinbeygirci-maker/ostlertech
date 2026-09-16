@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabase';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Lock, Loader2, ArrowRight, ShieldCheck, Github, Chrome } from 'lucide-react';
 
@@ -19,11 +19,11 @@ export default function AuthForm() {
 
     try {
       if (isSignUp) {
-        const { error } = await supabase.auth.signUp({ email, password });
+        const { error } = await getSupabase().auth.signUp({ email, password });
         if (error) throw error;
         alert('Kayıt başarılı! Lütfen e-postanızı kontrol edin.');
       } else {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const { error } = await getSupabase().auth.signInWithPassword({ email, password });
         if (error) throw error;
         window.location.href = '/dashboard'; // Redirect on success
       }
@@ -36,7 +36,7 @@ export default function AuthForm() {
 
   const handleSocialLogin = async (provider: 'github' | 'google') => {
     try {
-      const { error } = await supabase.auth.signInWithOAuth({ provider });
+      const { error } = await getSupabase().auth.signInWithOAuth({ provider });
       if (error) throw error;
     } catch (err: any) {
       setError(err.message);

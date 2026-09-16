@@ -1031,7 +1031,21 @@ async function gonder() {
 }
 
 btnG.onclick = gonder;
-girdi.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); gonder(); } });
+// Enter ile gönderim — üç katmanlı: keydown (standart) + keyup + beforeinput yedeği.
+// Bazı otomasyon/sanal klavye akışları keydown'u yutup yalnızca keyup veya
+// insertLineBreak input event'i üretir; üçü de tek gonder()'e çıkar —
+// gonder() boş/yinelenen çağrıyı zaten emer (trim + gonderiyor kilidi).
+let enterBasili = false;
+girdi.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { enterBasili = true; e.preventDefault(); gonder(); }
+});
+girdi.addEventListener('keyup', e => {
+  if (e.key === 'Enter' && !e.shiftKey && !e.isComposing && !enterBasili) { e.preventDefault(); gonder(); }
+  if (e.key === 'Enter') enterBasili = false;
+});
+girdi.addEventListener('beforeinput', e => {
+  if (e.inputType === 'insertLineBreak') { e.preventDefault(); gonder(); }
+});
 girdi.addEventListener('input', otomatikBuyu);
 $('btnYeni').onclick = () => { oturumId = null; karsilamaGoster(); gecmisYukle(); kenarKapat(); girdi.focus(); };
 

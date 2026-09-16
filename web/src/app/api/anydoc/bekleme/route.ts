@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 
@@ -55,7 +55,7 @@ export async function POST(istek: Request) {
     );
   }
 
-  const { error } = await supabase
+  const { error } = await getSupabase()
     .from("anydoc_waitlist")
     .insert({ email, kaynak: "landing" });
 

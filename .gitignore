@@ -32,3 +32,6 @@ desktop.ini
 # Komuta Merkezi calisma zamani loglari
 .team/konsol/sunucu.log
 .team/konsol/sunucu-err.log
+
+# Vercel CLI baglanti klasoru
+.vercel/

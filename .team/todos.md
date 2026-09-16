@@ -1,8 +1,7 @@
-# Görev Listesi (Todos)
+# 2. Tur — AnyDoc Harekâtı Todo Listesi
 
-## 📌 Açık Kalan İşler (2026-09-16)
-
-- [ ] **Supabase Erişimi (Bulgu #4 - RLS):** Patron'a Supabase erişimi hatırlatması yapıldı/bekleniyor.
-- [ ] **Faz 4 CI Secret-Scan (Bulgu #6):** GitHub Actions veya CI pipeline üzerinde secret taraması otomasyonu kurulacak.
-- [x] **ostlertech.com /products Sayfası:** Canlıda.
-- [x] **Atlas AnyDoc Harekâtı Teknik Brif:** `.team/reports/atlas-anydoc-plan.md` dosyasına kaydedildi.
+- [x] **Aşama 1: Strateji ve Planlama Onayı** (Vera fiyatlandırma, Atlas teknik mimari ve bekleme listesi planını hazırladı).
+- [x] **Aşama 2: Veritabanı ve Supabase Hazırlığı** (Atlas: `anydoc_waitlist` tablosunun Supabase üzerinde oluşturulması ve RLS güvenlik kurallarının tanımlanması).
+- [x] **Aşama 3: Next.js Landing Sayfası Geliştirme** (`app/anydoc/page.tsx` geliştirilmesi: Hero, Benchmark, Fiyatlandırma, SSS ve Bekleme Listesi formu).
+- [x] **Aşama 4: Doğrulama ve Canlı Test** (Sayfanın yerel derlemesi, build testi ve form gönderim senaryolarının uçtan uca doğrulanması).
+- [ ] **Aşama 5: Günlük Akış ve Söz Defteri Güncellemesi** (Merve: Çalışma kayıtlarının işlenmesi).

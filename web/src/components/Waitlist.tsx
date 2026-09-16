@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabase';
 import { Send, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -29,7 +29,7 @@ export default function Waitlist({ productName = "OstlerTech", className }: Wait
     setStatus('loading');
 
     try {
-      const { error } = await supabase
+      const { error } = await getSupabase()
         .from('waitlist')
         .insert([{
           email,
