@@ -214,6 +214,39 @@
   .p-md h1, .p-md h2, .p-md h3 { color: #f8fafc; margin: 10px 0 6px; font-family: 'Segoe UI', sans-serif; }
   .p-md h1 { font-size: 16px; } .p-md h2 { font-size: 14.5px; } .p-md h3 { font-size: 13.5px; }
   .p-md .tamam { color: #22c55e; } .p-md .acik { color: #f59e0b; }
+  /* tıklanabilir görev maddeleri */
+  .gorev-item { display: flex; align-items: flex-start; gap: 10px; padding: 9px 12px; margin: 4px 0;
+    background: #0b1222; border: 1px solid #1e293b; border-radius: 10px; cursor: pointer;
+    transition: border-color .15s, background .15s; font: 12.5px/1.55 'Segoe UI', sans-serif; color: #cbd5e1; }
+  .gorev-item:hover { border-color: #00F5D455; background: #0f172a; }
+  .gorev-item.kilitli { opacity: .55; pointer-events: none; }
+  .gorev-kutu { flex: 0 0 auto; width: 17px; height: 17px; border-radius: 5px; border: 1.5px solid #475569;
+    display: grid; place-items: center; font-size: 11px; font-weight: 700; margin-top: 1px; }
+  .gorev-item.tamam .gorev-kutu { background: #22c55e; border-color: #22c55e; color: #052e16; }
+  .gorev-item.acik .gorev-kutu { color: transparent; }
+  .gorev-metin { flex: 1; min-width: 0; }
+  .gorev-item.tamam .gorev-metin { color: #64748b; text-decoration: line-through; }
+  .gorev-not { display: block; margin-top: 4px; font-size: 11px; color: #94a3b8; }
+  .gorev-not.onay-bekliyor { color: #f59e0b; } .gorev-not.onay-sonuc { color: #22c55e; }
+  .gorev-not.onay-hata { color: #f87171; }
+  .ipucu { font: 11px 'Segoe UI', sans-serif; color: #64748b; padding: 0 20px 6px; }
+  /* rapor filtre çubuğu */
+  .r-filtre { display: flex; flex-direction: column; gap: 8px; padding: 8px 20px 10px; border-bottom: 1px solid #1e293b; flex: 0 0 auto; }
+  .r-arama { position: relative; }
+  .r-arama input { width: 100%; background: #0f172a; border: 1px solid #1e293b; color: #f8fafc; border-radius: 9px;
+    padding: 8px 30px 8px 32px; font-size: 12.5px; outline: none; transition: border-color .15s; font-family: inherit; }
+  .r-arama input:focus { border-color: #00F5D4; box-shadow: 0 0 0 3px #00f5d41a; }
+  .r-arama input::placeholder { color: #475569; }
+  .r-arama .r-lupa { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 13px; opacity: .5; }
+  .r-arama .r-temizle { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: none; border: none;
+    color: #64748b; cursor: pointer; font-size: 13px; padding: 4px; display: none; }
+  .r-arama input:not(:placeholder-shown) ~ .r-temizle { display: block; }
+  .r-cipler { display: flex; gap: 5px; flex-wrap: wrap; }
+  .r-cip { background: #0f172a; border: 1px solid #1e293b; color: #94a3b8; border-radius: 999px; font-size: 10.5px;
+    padding: 3px 10px; cursor: pointer; transition: all .15s; font-family: inherit; }
+  .r-cip:hover { border-color: #334155; color: #e2e8f0; }
+  .r-cip.secili { border-color: var(--cip-renk, #00F5D4); color: var(--cip-renk, #00F5D4); background: #0f172a; }
+  .r-sayi { font-size: 10.5px; color: #475569; padding: 0 20px 4px; flex: 0 0 auto; }
   .p-rapor-liste { flex: 1; overflow-y: auto; padding: 6px 12px 12px; display: flex; flex-direction: column; gap: 5px; }
   .p-rapor-liste::-webkit-scrollbar { width: 6px; }
   .p-rapor-liste::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
@@ -222,6 +255,8 @@
   .p-rapor-item:hover { border-color: #00F5D466; }
   .p-rapor-item .r-ad { font-weight: 600; }
   .p-rapor-item .r-meta { font-size: 9.5px; color: #64748b; margin-top: 2px; }
+  .p-rapor-item .r-onizleme { font-size: 10.5px; color: #475569; margin-top: 4px; line-height: 1.45;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .p-geri { background: none; border: none; color: #00F5D4; font-size: 12px; cursor: pointer; padding: 6px 0; text-align: left; }
   .f-durum { font-size: 10.5px; color: #64748b; letter-spacing: .5px; }
   .f-rapor { margin: 0 12px 12px; overflow: auto; padding: 12px 14px; background: #0f172a;
@@ -312,9 +347,19 @@
       <iframe class="pano-iframe" id="panoIframe" src="/ekip-panosu.html" title="Ekip Panosu"></iframe>
     </div>
     <div class="p-govde" data-govde="todos">
+      <div class="ipucu">Maddeye tıkla: ✓ ters çevrilir → Merve onaylar, onaylanırsa todos.md'e yazılır.</div>
       <div class="p-md" id="todosMd">Yükleniyor…</div>
     </div>
     <div class="p-govde" data-govde="raporlar">
+      <div class="r-filtre">
+        <div class="r-arama">
+          <span class="r-lupa">🔍</span>
+          <input type="text" id="raporArama" placeholder="Rapor ara — başlık, ajan, içerik…" autocomplete="off">
+          <button class="r-temizle" id="raporAramaTemizle" title="Temizle">×</button>
+        </div>
+        <div class="r-cipler" id="raporAjanCipler"></div>
+      </div>
+      <div class="r-sayi" id="raporSayi"></div>
       <div class="p-rapor-liste" id="raporListe"></div>
     </div>
   </div>
@@ -573,35 +618,205 @@ function panoSekmeGoster(ad) {
   document.querySelectorAll('#panoPanel .p-govde').forEach(g => g.classList.toggle('secili', g.dataset.govde === ad));
 }
 
+// ---- Görevler: tıkla → toggle isteği → Merve onayı ----
+const gorevOnayDurum = {}; // satirNo -> { bekliyor, not }
+
+function gorevSatirlariniCoz(icerik) {
+  return icerik.split(/\r?\n/).map((satir, i) => ({ satir, no: i + 1 }))
+    .filter(s => /^\s*- \[[ xX]\]/.test(s.satir));
+}
+
+function gorevHTMLCoz(satir) {
+  const m = satir.match(/^(\s*)- \[([ xX])\]\s*(.*)$/);
+  if (!m) return null;
+  const tamam = m[2].toLowerCase() === 'x';
+  const govde = m[3];
+  const bold = govde.match(/^\*\*(.+?)\*\*[ :：]*(.*)$/);
+  return { tamam, baslik: bold ? bold[1] : govde.split(':')[0], kalan: bold ? bold[2] : govde.slice((bold ? 0 : govde.split(':')[0].length) + (govde.includes(':') && !bold ? 1 : 0)) };
+}
+
 async function panoTodosYukle() {
   try {
     const d = await (await fetch(API + '/api/pano/todos')).json();
-    $('todosMd').innerHTML = d.icerik ? panoMarkdownHTML(d.icerik) : '<span style="color:#475569">todos.md boş veya yok.</span>';
+    const kutu = $('todosMd');
+    kutu.innerHTML = '';
+    if (!d.icerik) { kutu.innerHTML = '<span style="color:#475569">todos.md boş veya yok.</span>'; return; }
+    // başlıklar (görev olmayan satırlar) aynen, görevler kart olarak
+    const satirlar = d.icerik.split(/\r?\n/);
+    const gorevler = gorevSatirlariniCoz(d.icerik);
+    let gi = 0;
+    for (const satir of satirlar) {
+      if (/^\s*- \[[ xX]\]/.test(satir)) {
+        const g = gorevler[gi++];
+        kutu.appendChild(gorevKartiYap(g, g.no));
+      } else if (satir.trim()) {
+        const h = document.createElement('div');
+        if (/^###\s/.test(satir)) { h.className = 'md-h3'; h.textContent = satir.replace(/^###\s*/, ''); }
+        else if (/^##\s/.test(satir)) { h.className = 'md-h2'; h.textContent = satir.replace(/^##\s*/, ''); }
+        else if (/^#\s/.test(satir)) { h.className = 'md-h1'; h.textContent = satir.replace(/^#\s*/, ''); }
+        else { h.textContent = satir; }
+        kutu.appendChild(h);
+      }
+    }
+    onayDurumlariniBas();
   } catch { $('todosMd').textContent = 'yüklenemedi'; }
 }
 
-async function panoRaporListesiYukle() {
-  const kutu = $('raporListe');
+function gorevKartiYap(g, satirNo) {
+  const p = gorevHTMLCoz(g.satir);
+  const kart = document.createElement('div');
+  kart.className = 'gorev-item ' + (p.tamam ? 'tamam' : 'acik');
+  kart.dataset.satir = satirNo;
+  const kutu = document.createElement('div'); kutu.className = 'gorev-kutu'; kutu.textContent = '✓';
+  const govde = document.createElement('div'); govde.className = 'gorev-metin';
+  const b = document.createElement('strong'); b.textContent = p.baslik;
+  govde.appendChild(b);
+  if (p.kalan && p.kalan.trim()) { const s = document.createElement('span'); s.textContent = ' — ' + p.kalan; govde.appendChild(s); }
+  kart.append(kutu, govde);
+  kart.onclick = () => gorevToggled(g, satirNo, kart);
+  return kart;
+}
+
+async function gorevToggled(g, satirNo, kart) {
+  if (gorevOnayDurum[satirNo]?.bekliyor) return;
+  const p = gorevHTMLCoz(g.satir);
+  const aciklama = prompt(
+    (p.tamam ? 'Görevi YENİDEN AÇIYORSUN:' : 'Görevi TAMAMLIYORSUN:') + '\n' + p.baslik +
+    '\n\nNot ekle (isteğe bağlı, Merve\'e iletilir):',
+    p.tamam ? '' : 'Patron onayıyla kapatıldı'
+  );
+  if (aciklama === null) return;
+  gorevOnayDurum[satirNo] = { bekliyor: true };
+  kart.classList.add('kilitli');
+  const not = document.createElement('span'); not.className = 'gorev-not onay-bekliyor';
+  not.textContent = '⏳ Merve\'e onaya gitti…';
+  kart.appendChild(not);
   try {
-    const liste = await (await fetch(API + '/api/pano/raporlar')).json();
-    kutu.innerHTML = '';
-    if (!liste.length) { kutu.innerHTML = '<div class="g-yok">Rapor yok.</div>'; return; }
-    for (const r of liste) {
-      const b = document.createElement('button');
-      b.className = 'p-rapor-item';
-      const ad = document.createElement('div'); ad.className = 'r-ad'; ad.textContent = r.ad;
-      const meta = document.createElement('div'); meta.className = 'r-meta';
-      meta.textContent = (r.boyut / 1024).toFixed(1) + ' KB · ' + new Date(r.zaman).toLocaleString('tr-TR', { dateStyle: 'short', timeStyle: 'short' });
-      b.append(ad, meta);
-      b.onclick = () => panoRaporAc(r.ad);
-      kutu.appendChild(b);
+    const r = await fetch(API + '/api/pano/todos-guncelle', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ satirNo, aciklama: aciklama || undefined }),
+    });
+    const d = await r.json();
+    if (!r.ok || !d.ok) throw new Error(d.hata || 'istek başarısız');
+    not.textContent = '🧠 Merve değerlendiriyor…';
+    onayBekle(d.onayId, kart, satirNo);
+  } catch (e) {
+    gorevOnayDurum[satirNo].bekliyor = false;
+    kart.classList.remove('kilitli');
+    not.className = 'gorev-not onay-hata'; not.textContent = '✗ ' + e.message;
+  }
+}
+
+async function onayBekle(onayId, kart, satirNo) {
+  for (let i = 0; i < 40; i++) {
+    await new Promise(c => setTimeout(c, 3000));
+    try {
+      const liste = await (await fetch(API + '/api/pano/onaylar')).json();
+      const o = liste.find(x => x.id === onayId);
+      if (o && o.durum !== 'bekliyor') {
+        const not = kart.querySelector('.gorev-not');
+        if (o.durum === 'onaylandi') {
+          not.className = 'gorev-not onay-sonuc'; not.textContent = '✓ Merve onayladı — todos.md güncellendi';
+          kart.classList.remove('kilitli');
+          setTimeout(() => panoTodosYukle(), 1200);
+        } else if (o.durum === 'reddedildi') {
+          not.className = 'gorev-not onay-hata'; not.textContent = '✗ Merve reddetti: ' + (o.cevap || '');
+          kart.classList.remove('kilitli'); gorevOnayDurum[satirNo].bekliyor = false;
+        } else {
+          not.className = 'gorev-not onay-hata'; not.textContent = '✗ hata: ' + (o.cevap || '');
+          kart.classList.remove('kilitli'); gorevOnayDurum[satirNo].bekliyor = false;
+        }
+        return;
+      }
+    } catch { /* geçici ağ hatası — denemeye devam */ }
+  }
+  const not = kart.querySelector('.gorev-not');
+  if (not) { not.className = 'gorev-not onay-hata'; not.textContent = '✗ onay zaman aşımı'; }
+  kart.classList.remove('kilitli'); gorevOnayDurum[satirNo].bekliyor = false;
+}
+
+// panel yeniden açılınca tamamlanan onayların notlarını taze kartlara bas
+async function onayDurumlariniBas() {
+  try {
+    const liste = await (await fetch(API + '/api/pano/onaylar')).json();
+    for (const o of liste) {
+      if (o.durum === 'onaylandi') {
+        const kart = document.querySelector(`.gorev-item[data-satir="${o.satirNo}"]`);
+        if (kart && !kart.querySelector('.gorev-not')) {
+          const not = document.createElement('span'); not.className = 'gorev-not onay-sonuc';
+          not.textContent = '✓ Merve onayladı';
+          kart.appendChild(not);
+        }
+      }
     }
-  } catch { kutu.innerHTML = '<div class="g-yok">liste alınamadı</div>'; }
+  } catch { /* noop */ }
+}
+
+// ---- Rapor filtreleri: arama + ajan çipleri (birleşik) ----
+let raporTumu = [];
+let raporAramaMetin = '';
+let raporAjanSecim = new Set();
+
+function raporCipleriCiz() {
+  const kutu = $('raporAjanCipler');
+  kutu.innerHTML = '';
+  // sadece raporlarda geçen ajanlar (sıra: TEAM sırası)
+  const kullanilan = new Set();
+  raporTumu.forEach(r => (r.ajanlar || []).forEach(id => kullanilan.add(id)));
+  for (const a of ekip.filter(x => kullanilan.has(x.id))) {
+    const c = document.createElement('button');
+    c.className = 'r-cip' + (raporAjanSecim.has(a.id) ? ' secili' : '');
+    c.style.setProperty('--cip-renk', a.renk || '#00F5D4');
+    c.textContent = (a.ikon ? a.ikon + ' ' : '') + a.ad;
+    c.onclick = () => { raporAjanSecim.has(a.id) ? raporAjanSecim.delete(a.id) : raporAjanSecim.add(a.id); raporCipleriCiz(); raporListeCiz(); };
+    kutu.appendChild(c);
+  }
+  if (raporAjanSecim.size) {
+    const t = document.createElement('button');
+    t.className = 'r-cip'; t.textContent = '✕ filtreleri sıfırla';
+    t.onclick = () => { raporAjanSecim.clear(); $('raporArama').value = ''; raporAramaMetin = ''; raporCipleriCiz(); raporListeCiz(); };
+    kutu.appendChild(t);
+  }
+}
+
+function raporListeCiz() {
+  const kutu = $('raporListe');
+  kutu.innerHTML = '';
+  const q = raporAramaMetin.trim().toLowerCase();
+  const gecen = raporTumu.filter(r => {
+    const ajanUyum = !raporAjanSecim.size || (r.ajanlar || []).some(id => raporAjanSecim.has(id));
+    if (!ajanUyum) return false;
+    if (!q) return true;
+    return (r.ad.toLowerCase().includes(q) || (r.arama || '').includes(q) || (r.onizleme || '').toLowerCase().includes(q));
+  });
+  $('raporSayi').textContent = q || raporAjanSecim.size ? `${gecen.length}/${raporTumu.length} rapor gösteriliyor` : '';
+  if (!raporTumu.length) { kutu.innerHTML = '<div class="g-yok">Rapor yok.</div>'; return; }
+  if (!gecen.length) { kutu.innerHTML = '<div class="g-yok">Filtreye uyan rapor yok.</div>'; return; }
+  for (const r of gecen) {
+    const b = document.createElement('button');
+    b.className = 'p-rapor-item';
+    const ad = document.createElement('div'); ad.className = 'r-ad'; ad.textContent = r.ad;
+    const meta = document.createElement('div'); meta.className = 'r-meta';
+    const ajanEtiket = (r.ajanlar || []).map(id => (ekip.find(x => x.id === id) || {}).ad || id).join(', ');
+    meta.textContent = (ajanEtiket ? ajanEtiket + ' · ' : '') + (r.boyut / 1024).toFixed(1) + ' KB · ' + new Date(r.zaman).toLocaleString('tr-TR', { dateStyle: 'short', timeStyle: 'short' });
+    const onz = document.createElement('div'); onz.className = 'r-onizleme'; onz.textContent = r.onizleme || '';
+    b.append(ad, meta, onz);
+    b.onclick = () => panoRaporAc(r.ad);
+    kutu.appendChild(b);
+  }
+}
+
+async function panoRaporListesiYukle() {
+  try {
+    raporTumu = await (await fetch(API + '/api/pano/raporlar')).json();
+    raporCipleriCiz(); raporListeCiz();
+  } catch { $('raporListe').innerHTML = '<div class="g-yok">liste alınamadı</div>'; }
 }
 
 async function panoRaporAc(ad) {
   const kutu = $('raporListe');
   kutu.innerHTML = '';
+  $('raporSayi').textContent = '';
   const geri = document.createElement('button');
   geri.className = 'p-geri'; geri.textContent = '← rapor listesine dön';
   geri.onclick = panoRaporListesiYukle;
@@ -615,6 +830,10 @@ async function panoRaporAc(ad) {
     icerik.innerHTML = d.icerik ? panoMarkdownHTML(d.icerik) : 'boş';
   } catch { icerik.textContent = 'okunamadı'; }
 }
+
+// rapor arama olayları
+$('raporArama').addEventListener('input', e => { raporAramaMetin = e.target.value; raporListeCiz(); });
+$('raporAramaTemizle').onclick = () => { $('raporArama').value = ''; raporAramaMetin = ''; raporListeCiz(); $('raporArama').focus(); };
 
 $('btnPano').onclick = () => {
   panoAcik = !panoAcik;

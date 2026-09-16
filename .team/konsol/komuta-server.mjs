@@ -131,6 +131,9 @@ const TEAM = [
     uslup: 'ORTAK (hepsinden önce gelir)', uslupTip: 'ortak' },
 ]
 
+// ÇAĞRI sistem mesajına gerçek ekip kadrosunu aktar (halüsinasyon önleme — isim uydurma yasağı)
+globalThis.__EKIP_KADROSU = TEAM
+
 // ---- .agents/ tanımlarını yükle (değişiklikte hot-reload) ----
 let agentTanimlari = []
 let agentsYuklendiMi = 0
@@ -241,6 +244,102 @@ function fotoUzantisiBul(ajanId) {
 }
 const FOTO_MIME = { '.svg': 'image/svg+xml', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp' }
 
+// ---- Rapor analizi: ajan etiketleri + önizleme + arama metni (mtime cache) ----
+const RAPOR_ANALIZ = new Map() // ad -> { mtimeMs, ajanlar, onizleme, arama }
+
+function kelimeVar(lcMetin, ad) {
+  // Türkçe harf duyarlı kelime sınırları (JS \b ASCII'dir, çğıöşü'yü kapsamaz)
+  const rx = new RegExp('(^|[^a-zçğıöşü0-9])' + ad.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '([^a-zçğıöşü0-9]|$)')
+  return rx.test(lcMetin)
+}
+
+function raporAnalizi(yol, ad) {
+  const st = fs.statSync(yol)
+  const onceki = RAPOR_ANALIZ.get(ad)
+  if (onceki && onceki.mtimeMs === st.mtimeMs) return onceki
+  try {
+    const icerik = fs.readFileSync(yol, 'utf8')
+    const lc = icerik.toLowerCase()
+    const analiz = {
+      mtimeMs: st.mtimeMs,
+      ajanlar: TEAM.filter(a => a.ad && kelimeVar(lc, a.ad.toLowerCase())).map(a => a.id),
+      onizleme: icerik.replace(/[#>*`\[\]_|-]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 150),
+      arama: lc.slice(0, 60000),
+    }
+    RAPOR_ANALIZ.set(ad, analiz)
+    return analiz
+  } catch {
+    return { mtimeMs: st.mtimeMs, ajanlar: [], onizleme: '', arama: '' }
+  }
+}
+
+// ---- Görev değişiklikleri: Merve onaylı yazım ----
+// Kural: yalnız tek satır checkbox ters çevirme + isteğe bağlı kısa açıklama eklenir.
+// Her değişiklik Merve'ye sunulur; onaylamazsa dosya dokunulmaz. Onay kayıtları diskte.
+const onaylar = new Map()
+
+async function merveOnayiCalistir(onayId) {
+  const kayit = onaylar.get(onayId)
+  if (!kayit) return
+  try {
+    const tanim = agentTanimlari.find(a => a.id === 'merve')
+    if (!tanim) throw new Error('merve tanımı yüklenemedi')
+    const aciklamaNotu = kayit.aciklama ? `\nİstenen açıklama güncellemesi: "${kayit.aciklama}"` : ''
+    const sonuc = await cagriCalistir(tanim,
+      `ONAY İSTEĞİ — .team/todos.md görev değişikliği\n` +
+      `Satır ${kayit.satirNo} mevcut: ${kayit.eski}\n` +
+      `Önerilen yeni hali: ${kayit.yeni}${aciklamaNotu}\n` +
+      `Sen YALNIZCA hakemsin: dosyayı KENDİN DÜZENLEME, araç kullanma — sunucu onayınla yazar.\n` +
+      `Değişiklik makulse cevabın "ONAYLIYORUM" ile başlasın (gerekçe ekleyebilirsin);\n` +
+      `makul değilse "RED" ile başla ve gerekçeni yaz.\n` +
+      `Karar kriterleri: Patron'un niyetiyle tutarlı mı, görev gerçekten tamamlandı mı/kapatılmalı mı, açıklama dürüst mü.`,
+      [])
+    const metin = String(sonuc.metin || '').trim()
+    // Türkçe-I güvenli sınıflandırma: model "ONAYLIYORUM" (dotted I) ya da "ONAYLIYORUM" (noktasız) yazabilir
+    const reddi = /^(red|reddediyorum|hayır|hayir)\b/i.test(metin)
+    const onayli = !reddi && /onayl[iıİI]yorum/i.test(metin.slice(0, 80))
+    kayit.cevap = metin.slice(0, 500)
+    if (onayli) {
+      const todosYolu = path.join(PROJE_KOK, '.team', 'todos.md')
+      const satirlar = fs.readFileSync(todosYolu, 'utf8').split(/\r?\n/)
+      const mevcut = satirlar[kayit.satirNo - 1]
+      let yeni = kayit.yeni
+      if (kayit.aciklama) yeni = yeni + ' — ' + kayit.aciklama
+      if (mevcut === yeni) {
+        kayit.durum = 'onaylandi' // zaten istenen halde — dokunma
+      } else if (mevcut !== undefined && /^\s*- \[[ xX]\]/.test(mevcut) && mevcut.replace(/^(\s*- \[) ?([xX ])(\])/, '$1x$3') === kayit.yeni) {
+        satirlar[kayit.satirNo - 1] = yeni
+        fs.writeFileSync(todosYolu, satirlar.join('\n'), 'utf8')
+        kayit.durum = 'onaylandi'
+      } else {
+        kayit.durum = 'hata'
+        kayit.cevap = 'dosya beklenmedik şekilde değişmiş — güvenli iptal, elle kontrol et'
+      }
+    } else {
+      kayit.durum = 'reddedildi'
+    }
+  } catch (e) {
+    kayit.durum = 'hata'
+    kayit.cevap = String(e.message || e).slice(0, 500)
+  }
+  onayKaydet()
+}
+
+function onayKaydet() {
+  try {
+    fs.writeFileSync(path.join(KONSOL_DIR, 'onaylar.json'),
+      JSON.stringify([...onaylar.values()].sort((a, b) => b.zaman - a.zaman).slice(0, 50), null, 2))
+  } catch { /* noop */ }
+}
+
+function onaylariYukle() {
+  try {
+    const liste = JSON.parse(fs.readFileSync(path.join(KONSOL_DIR, 'onaylar.json'), 'utf8'))
+    for (const k of Array.isArray(liste) ? liste : []) if (k?.id) onaylar.set(k.id, k)
+  } catch { /* ilk çalıştırma — dosya yok */ }
+}
+onaylariYukle()
+
 // ---- HTTP sunucusu ----
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://localhost:${PORT}`)
@@ -273,7 +372,7 @@ const server = http.createServer(async (req, res) => {
       })
     }
 
-    // ---- Pano API: görev listesi + rapor okuma (salt-okunur, traversal korumalı) ----
+    // ---- Pano API: görev listesi + rapor okuma + Merve onaylı görev yazımı ----
     if (req.method === 'GET' && rota === '/api/pano/todos') {
       try {
         return JSON_GONDER(res, 200, { icerik: fs.readFileSync(path.join(PROJE_KOK, '.team', 'todos.md'), 'utf8') })
@@ -286,8 +385,10 @@ const server = http.createServer(async (req, res) => {
         const liste = fs.readdirSync(raporDir)
           .filter(d => d.endsWith('.md'))
           .map(d => {
-            const st = fs.statSync(path.join(raporDir, d))
-            return { ad: d, boyut: st.size, zaman: st.mtimeMs }
+            const yol = path.join(raporDir, d)
+            const st = fs.statSync(yol)
+            const a = raporAnalizi(yol, d)
+            return { ad: d, boyut: st.size, zaman: st.mtimeMs, ajanlar: a.ajanlar, onizleme: a.onizleme, arama: a.arama }
           })
           .sort((a, b) => b.zaman - a.zaman)
         return JSON_GONDER(res, 200, liste)
@@ -301,6 +402,39 @@ const server = http.createServer(async (req, res) => {
       try {
         return JSON_GONDER(res, 200, { icerik: fs.readFileSync(path.join(PROJE_KOK, '.team', 'reports', ad), 'utf8') })
       } catch { return JSON_GONDER(res, 404, { hata: 'rapor bulunamadı' }) }
+    }
+
+    if (req.method === 'POST' && rota === '/api/pano/todos-guncelle') {
+      let data = ''
+      req.on('data', c => (data += c))
+      req.on('end', async () => {
+        let girdi
+        try { girdi = JSON.parse(data || '{}') } catch { girdi = {} }
+        const { satirNo, aciklama } = girdi
+        if (!Number.isInteger(satirNo) || satirNo < 1) return JSON_GONDER(res, 400, { hata: 'geçersiz satır' })
+        if (aciklama !== undefined && (typeof aciklama !== 'string' || aciklama.length > 400)) return JSON_GONDER(res, 400, { hata: 'açıklama en fazla 400 karakter' })
+        try {
+          const todosYolu = path.join(PROJE_KOK, '.team', 'todos.md')
+          const satirlar = fs.readFileSync(todosYolu, 'utf8').split(/\r?\n/)
+          const mevcut = satirlar[satirNo - 1]
+          if (mevcut === undefined || !/^\s*- \[[ xX]\]/.test(mevcut)) return JSON_GONDER(res, 400, { hata: 'bu satır görev maddesi değil' })
+          const acikMi = /^\s*- \[ \]/.test(mevcut)
+          const yeniSatir = mevcut.replace(/^(\s*- \[) ?([xX ])(\])/, acikMi ? '$1x$3' : '$1 $3')
+
+          const onayId = 'o' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6)
+          onaylar.set(onayId, { id: onayId, satirNo, eski: mevcut, yeni: yeniSatir, aciklama: aciklama || null, durum: 'bekliyor', zaman: Date.now() })
+          onayKaydet()
+          JSON_GONDER(res, 200, { ok: true, onayId, onayliyor: acikMi })
+          merveOnayiCalistir(onayId).catch(() => {}) // arka planda — gövde bekletilmez
+        } catch (e) {
+          JSON_GONDER(res, 500, { hata: e.message })
+        }
+      })
+      return
+    }
+
+    if (req.method === 'GET' && rota === '/api/pano/onaylar') {
+      return JSON_GONDER(res, 200, [...onaylar.values()].sort((a, b) => b.zaman - a.zaman).slice(0, 10))
     }
 
     if (req.method === 'GET' && rota === '/api/ekip') {

@@ -27,3 +27,4 @@ desktop.ini
 .team/konsol/.env
 .team/konsol/login-*.log
 .team/konsol/oturumlar/
+.team/konsol/onaylar.json

@@ -30,16 +30,31 @@ Her gün 08:00'de (yerel saat) GitHub trendlerini tarayıp monetizasyon analizi 
 - **Arayüz:** üst barda "🎯 Fırsatlar" butonu — panelden tarama başlatma + rapor okuma
 - Opsiyonel: `GITHUB_TOKEN` (.env) ile API limiti 60→5000 istek/saat
 
+## Gemini Protokolü (ÇAĞRI, 2026-09-16 düzeltmeleri)
+
+`MALFORMED_FUNCTION_CALL` + `400 thought_signature` tuzaklarının çözümü:
+- **Tool sonuçları gerçek protokolle:** `functionResponse` parçaları (fonksiyon ADI ile,
+  düz metin değil), modelin `functionCall` turunun hemen ardından gelen user turunda
+- **thoughtSignature korunur:** modelin ürettiği functionCall/text imzaları sonraki
+  istekte AYNEN geri gönderilir (Gemini 3.x zorunluluğu)
+- **Sıcaklık oynaması:** retry'larda temperature artar (aynı istek aynı bozuk
+  çıktıyı deterministik üretmesin)
+- **Zincir kaçışı:** bir model 4 denemede de bozuk tool-call üretirse sıradakine geçilir
+
 ## Mimari
 
 ```
 .team/konsol/
 ├── komuta-server.mjs   Komuta sunucusu (Node, port 4311)
 │     • .agents/*.ts tanımlarını sıcak yükler (15 sn'de bir tazeler)
+│     • ÇAĞRI sistem mesajına GERÇEK TARİH + GERÇEK EKİP KADROSU enjekte eder
+│       (halüsinasyon önleme: model tarih/isim uyduramaz — merve.ts kural 11)
 │     • /api/ekip → yetenek çipleri + üslup + fotoVar bilgisiyle ekip verisi
 │     • /ekip-foto/<id> → gerçek ajan fotoğrafı (web/public/team/<id>.jpg, varsa)
 │     • /ekip-panosu.html → görsel ekip panosu (pano panelinin iframe sekmcesi)
-│     • /api/pano/todos · /api/pano/raporlar · /api/pano/rapor?ad= → pano verisi (salt-okunur, traversal korumalı)
+│     • /api/pano/todos · /api/pano/raporlar (ajan etiketli + önizlemeli + arama metni) · /api/pano/rapor?ad= → pano verisi (salt-okunur, traversal korumalı)
+│     • POST /api/pano/todos-guncelle → görev toggle isteği (sunucu doğrular, Merve onayına gider)
+│     • GET /api/pano/onaylar → Merve onay kayıtları (onaylar.json — gitignore'da)
 │     • client.run({ agent, prompt, previousRun }) ile ajan çalıştırır
 │     • Oturum başına sohbet hafızası tutar (previousRun zinciri)
 │     • KALICI HAFIZA: her mesajdan sonra oturum .team/konsol/oturumlar/*.json

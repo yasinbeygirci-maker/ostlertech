@@ -134,9 +134,17 @@ const ARAÇ_ŞEMALARI = ARAÇLAR.map(a => ({
 
 // ---------- Mesaj dönüştürücüler ----------
 function sistemMesajı(tanim) {
+  // Gerçek zaman + gerçek kadro: model tarih/isim UYDURAMASIN — sistem eline
+  // gerçekleri verir (halüsinasyon önleme, 2026-09-16 gün sonu raporu dersi)
+  const simdi = new Date()
+  const tarihTR = simdi.toLocaleDateString('tr-TR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+  const saatTR = simdi.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })
+  const kadro = (globalThis.__EKIP_KADROSU || []).map(a => a.ad).filter(Boolean).join(', ')
   return [
     tanim.instructionsPrompt || '',
     tanim.displayName ? `Senin adın: ${tanim.displayName}.` : '',
+    `BUGÜN GERÇEK TARİH: ${tarihTR}, saat ${saatTR} (Türkiye). Raporlarında tarih gerekirse BUNU kullan; asla başka tarih yazma.`,
+    kadro ? `GERÇEK EKİP KADROSU (yalnız bu isimleri kullan, başka isim uydurma): ${kadro}. Patron, raporlarda sen (= ${tanim.displayName || 'ajan'}) de sayılır.` : '',
     'Tüm yanıtların Türkçe olacak (teknik terimler hariç).',
     'Dosya/terminal işlerinde verilen araçları kullan; araç çağrısı gerektiğinde kısa bir düşüns metni yaz.',
     'Önemli kararlarda (silme, dağıtım, ödeme, güvenlik) araç kullanmadan dur ve onay sor.',
@@ -154,7 +162,7 @@ async function sağlayıcıÇağır(sağ, model, mesajlar) {
   let sonHata
   for (let deneme = 0; deneme <= YENIDEN_DENE_BEKLEME_MS.length; deneme++) {
     try {
-      return await sağlayıcıÇağırTek(sağ, model, mesajlar)
+      return await sağlayıcıÇağırTek(sağ, model, mesajlar, deneme)
     } catch (err) {
       sonHata = err
       const metin = String(err?.message || err)
@@ -170,10 +178,10 @@ async function sağlayıcıÇağır(sağ, model, mesajlar) {
   throw sonHata
 }
 
-async function sağlayıcıÇağırTek(sağ, model, mesajlar) {
+async function sağlayıcıÇağırTek(sağ, model, mesajlar, deneme = 0) {
   // Tüm sağlayıcılar için OpenAI-uyumlu sohbet formatı kullanılır;
   // Gemini kendi REST'iyle konuşulur ve forma dönüştürülür.
-  if (sağ === 'gemini') return geminiÇağır(model, mesajlar)
+  if (sağ === 'gemini') return geminiÇağır(model, mesajlar, deneme)
   if (sağ === 'anthropic') return anthropicÇağır(model, mesajlar)
 
   const uçNokta = {
@@ -198,25 +206,60 @@ async function sağlayıcıÇağırTek(sağ, model, mesajlar) {
   return veri.choices[0].message
 }
 
-async function geminiÇağır(model, mesajlar) {
+async function geminiÇağır(model, mesajlar, deneme = 0) {
   const sistem = mesajlar.find(m => m.role === 'system')?.content || ''
-  const içerikler = mesajlar.filter(m => m.role !== 'system').map(m => {
-    if (m.role === 'tool') {
-      return { role: 'user', parts: [{ text: `[araç sonucu ${m.tool_call_id}] ${m.content}` }] }
-    }
+  // tool_call_id → fonksiyon adı haritası: Gemini functionResponse parçası
+  // fonksiyonun ADINI ister, id'yi değil.
+  const çağrıAdları = new Map()
+  for (const m of mesajlar) {
     if (m.role === 'assistant' && m.tool_calls?.length) {
-      return {
+      for (const t of m.tool_calls) çağrıAdları.set(t.id, t.function?.name || 'bilinmeyen_araç')
+    }
+  }
+  // Protokol: modelin functionCall'unun hemen ardından GELEN turda
+  // functionResponse parçaları döner (ardışık tool mesajları tek user turunda birleşir).
+  const içerikler = []
+  const bekleyenSonuçlar = []
+  const boşalt = () => { if (bekleyenSonuçlar.length) içerikler.push({ role: 'user', parts: bekleyenSonuçlar.splice(0) }) }
+  for (const m of mesajlar) {
+    if (m.role === 'system') continue
+    if (m.role === 'tool') {
+      bekleyenSonuçlar.push({
+        functionResponse: {
+          name: çağrıAdları.get(m.tool_call_id) || 'bilinmeyen_araç',
+          response: { sonuc: String(m.content ?? '') },
+        },
+      })
+      continue
+    }
+    boşalt()
+    if (m.role === 'assistant' && m.tool_calls?.length) {
+      içerikler.push({
         role: 'model',
         parts: [
-          ...(m.content ? [{ text: m.content }] : []),
-          ...m.tool_calls.map(t => ({
-            functionCall: { name: t.function.name, args: JSON.parse(t.function.arguments || '{}') },
-          })),
+          ...(m.content
+            ? [{ text: m.content, ...(m.thoughtSignature ? { thoughtSignature: m.thoughtSignature } : {}) }]
+            : []),
+          ...m.tool_calls.map(t => {
+            let args = {}
+            try { args = JSON.parse(t.function.arguments || '{}') } catch { args = {} }
+            return {
+              functionCall: { name: t.function.name, args },
+              // Gemini 3.x zorunluluğu: modelin ürettiği thoughtSignature
+              // sonraki istekte AYNEN geri gönderilmeli, yoksa 400.
+              ...(t.thoughtSignature ? { thoughtSignature: t.thoughtSignature } : {}),
+            }
+          }),
         ],
-      }
+      })
+      continue
     }
-    return { role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content || '' }] }
-  })
+    içerikler.push({
+      role: m.role === 'assistant' ? 'model' : 'user',
+      parts: [{ text: m.content || '', ...(m.role === 'assistant' && m.thoughtSignature ? { thoughtSignature: m.thoughtSignature } : {}) }],
+    })
+  }
+  boşalt()
 
   const gövde = {
     contents: içerikler,
@@ -226,6 +269,9 @@ async function geminiÇağır(model, mesajlar) {
       })),
     }],
     ...(sistem ? { systemInstruction: { parts: [{ text: sistem }] } } : {}),
+    // Bozuk tool-call'a karşı: yeniden denemelerde sıcaklığı oynat —
+    // aynı istek aynı örneklemeyi üretmesin (deterministik tuzak kırılır).
+    ...(deneme > 0 ? { generationConfig: { temperature: Math.min(1 + 0.35 * deneme, 2) } } : {}),
   }
 
   const cevap = await fetch(
@@ -236,16 +282,23 @@ async function geminiÇağır(model, mesajlar) {
   const veri = await cevap.json()
   const aday = veri.candidates?.[0]?.content?.parts || []
   const metin = aday.filter(p => p.text).map(p => p.text).join('')
+  const metinImza = aday.find(p => p.text && p.thoughtSignature)?.thoughtSignature
   const çağrılar = aday.filter(p => p.functionCall).map(p => ({
     id: 'g' + Math.random().toString(36).slice(2, 8),
     type: 'function',
     function: { name: p.functionCall.name, arguments: JSON.stringify(p.functionCall.args || {}) },
+    ...(p.thoughtSignature ? { thoughtSignature: p.thoughtSignature } : {}),
   }))
   if (!metin && !çağrılar.length) {
     const sebep = veri.candidates?.[0]?.finishReason || veri.promptFeedback?.blockReason || 'bilinmiyor'
     throw new Error(`gemini boş yanıt (finishReason=${sebep}): ${JSON.stringify(veri).slice(0, 220)}`)
   }
-  return { role: 'assistant', content: metin || null, ...(çağrılar.length ? { tool_calls: çağrılar } : {}) }
+  return {
+    role: 'assistant',
+    content: metin || null,
+    ...(metinImza ? { thoughtSignature: metinImza } : {}),
+    ...(çağrılar.length ? { tool_calls: çağrılar } : {}),
+  }
 }
 
 async function anthropicÇağır(model, mesajlar) {
@@ -313,11 +366,18 @@ async function sağlayıcıÇağırZincir(sağ, model, mesajlar) {
       return sonuc
     } catch (err) {
       const metin = String(err?.message || err)
-      if (/hatası 429/.test(metin)) { hatalar.push(m); continue } // kota dolu → sıradaki model
+      if (/hatası 429/.test(metin)) { hatalar.push(`${m}: kota`); continue } // kota dolu → sıradaki model
+      if (/MALFORMED_FUNCTION_CALL|boş yanıt/i.test(metin)) {
+        // Model bu konuşmada bozuk tool-call üretmekte ısrar etti (4 deneme)
+        // → sıradaki model farklı bir üretim yolu izler.
+        console.log(`[cagri] ${m} bozuk tool-call ısrarı — zincirde sıradakine geçiliyor`)
+        hatalar.push(`${m}: bozuk tool-call`)
+        continue
+      }
       throw err // başka hata — gerçek sorun
     }
   }
-  throw new Error(`gemini: tüm ücretsiz modellerin kotası dolu (${hatalar.join(', ')}) — yarın yenilenir ya da ücretli katmana geçilir`)
+  throw new Error(`gemini: zincirdeki tüm modeller başarısız (${hatalar.join(' · ')}) — kota yenilenmesini bekleyin ya da ücretli katmana geçin`)
 }
 
 // ---------- Ana döngü ----------
