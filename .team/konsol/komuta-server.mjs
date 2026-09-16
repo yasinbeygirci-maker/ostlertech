@@ -253,6 +253,15 @@ const server = http.createServer(async (req, res) => {
       return res.end(html)
     }
 
+    // Ekip panosu (görsel kart sayfası — pano panelinin iframe sekmcesinde gömülü)
+    if (req.method === 'GET' && rota === '/ekip-panosu.html') {
+      try {
+        const html = fs.readFileSync(path.join(PROJE_KOK, '.team', 'ekip-panosu.html'))
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' })
+        return res.end(html)
+      } catch { return JSON_GONDER(res, 404, { hata: 'pano dosyası yok' }) }
+    }
+
     if (req.method === 'GET' && rota === '/api/health') {
       const sag = await saglayiciCoz()
       return JSON_GONDER(res, 200, {
@@ -262,6 +271,36 @@ const server = http.createServer(async (req, res) => {
         mod: sag ? `cagri (${sag.saglayici} · ${sag.model})` : credentialsCoz() ? 'codebuff' : null,
         sdkSuroom: require('@codebuff/sdk/package.json').version,
       })
+    }
+
+    // ---- Pano API: görev listesi + rapor okuma (salt-okunur, traversal korumalı) ----
+    if (req.method === 'GET' && rota === '/api/pano/todos') {
+      try {
+        return JSON_GONDER(res, 200, { icerik: fs.readFileSync(path.join(PROJE_KOK, '.team', 'todos.md'), 'utf8') })
+      } catch { return JSON_GONDER(res, 200, { icerik: '' }) }
+    }
+
+    if (req.method === 'GET' && rota === '/api/pano/raporlar') {
+      try {
+        const raporDir = path.join(PROJE_KOK, '.team', 'reports')
+        const liste = fs.readdirSync(raporDir)
+          .filter(d => d.endsWith('.md'))
+          .map(d => {
+            const st = fs.statSync(path.join(raporDir, d))
+            return { ad: d, boyut: st.size, zaman: st.mtimeMs }
+          })
+          .sort((a, b) => b.zaman - a.zaman)
+        return JSON_GONDER(res, 200, liste)
+      } catch { return JSON_GONDER(res, 200, []) }
+    }
+
+    if (req.method === 'GET' && rota === '/api/pano/rapor') {
+      const ad = url.searchParams.get('ad') || ''
+      // traversal koruması: yalnız .team/reports içindeki .md dosyaları, ad bileşeni değil
+      if (!/^\w[\w.-]*\.md$/.test(ad) || ad.includes('..')) return JSON_GONDER(res, 400, { hata: 'geçersiz ad' })
+      try {
+        return JSON_GONDER(res, 200, { icerik: fs.readFileSync(path.join(PROJE_KOK, '.team', 'reports', ad), 'utf8') })
+      } catch { return JSON_GONDER(res, 404, { hata: 'rapor bulunamadı' }) }
     }
 
     if (req.method === 'GET' && rota === '/api/ekip') {
@@ -321,12 +360,18 @@ const server = http.createServer(async (req, res) => {
       req.on('end', async () => {
         let girdi
         try { girdi = JSON.parse(data || '{}') } catch { girdi = {} }
-        const { oturumId, mesaj, ajan: ajanGecis } = girdi
+        const { oturumId, mesaj, ajan: ajanGecis, otomatik } = girdi
         if (!mesaj || typeof mesaj !== 'string') return JSON_GONDER(res, 400, { hata: 'mesaj zorunlu' })
 
-        const oturum = (oturumId && oturumlar.get(oturumId)) || oturumOlustur(ajanGecis || 'merve')
-        if (ajanGecis && ajanGecis !== oturum.ajan) oturum.ajan = ajanGecis
-        oturum.mesajlar.push({ rol: 'patron', metin: mesaj, zaman: Date.now() })
+        // ---- Otomatik yönlendirme: ajan seçilmemişse emir Merve'nin dağıtım kuralıyla gider ----
+        const hedefAjan = (ajanGecis && ajanGecis !== 'otomatik') ? ajanGecis : 'merve'
+        const gonderilenMetin = otomatik && ajanGecis !== 'merve'
+          ? `MERVE, YONLENDIRME: Patron ajan secmeden bu emri yazdi — sen dağıt. Emir: ${mesaj}`
+          : mesaj
+
+        const oturum = (oturumId && oturumlar.get(oturumId)) || oturumOlustur(hedefAjan)
+        if (hedefAjan !== oturum.ajan) oturum.ajan = hedefAjan
+        oturum.mesajlar.push({ rol: 'patron', metin: mesaj, zaman: Date.now(), otomatik: !!otomatik })
 
         const tanim = agentTanimlari.find(a => a.id === oturum.ajan)
         if (!tanim) return JSON_GONDER(res, 400, { hata: `ajan bulunamadı: ${oturum.ajan}` })
@@ -344,8 +389,8 @@ const server = http.createServer(async (req, res) => {
           try {
             const sonRun = oturum.runs[oturum.runs.length - 1]
             const geçmiş = sonRun?.__cagriGeçmiş || []
-            const sonuc = await cagriCalistir(tanim, mesaj, geçmiş)
-            oturum.runs.push({ __cagriGeçmiş: [...geçmiş, { role: 'user', content: mesaj }, { role: 'assistant', content: sonuc.metin }] })
+            const sonuc = await cagriCalistir(tanim, gonderilenMetin, geçmiş)
+            oturum.runs.push({ __cagriGeçmiş: [...geçmiş, { role: 'user', content: gonderilenMetin }, { role: 'assistant', content: sonuc.metin }] })
             const iz = sonuc.adımlar.map(a => `🔧 ${a.arac} → ${String(a.sonuc).split('\n')[0].slice(0, 140)}`).join('\n')
             const metin = iz ? `${sonuc.metin}\n\n${iz}` : sonuc.metin
             oturum.mesajlar.push({ rol: 'ajan', ajan: tanim.displayName || tanim.id, metin, zaman: Date.now() })
@@ -364,7 +409,7 @@ const server = http.createServer(async (req, res) => {
         try {
           const run = await client.run({
             agent: tanim,
-            prompt: mesaj,
+            prompt: gonderilenMetin,
             previousRun: oncekiRun,
             agentDefinitions: agentTanimlari,
             handleEvent: (e) => {

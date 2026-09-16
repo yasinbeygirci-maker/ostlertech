@@ -38,6 +38,9 @@
   .k-ajan:hover { border-color: #334155; }
   .k-ajan.secili { border-color: var(--rc); background: color-mix(in srgb, var(--rc) 14%, #0f172a);
     box-shadow: 0 0 10px color-mix(in srgb, var(--rc) 30%, transparent); }
+  .k-ajan.otomatik { border-style: dashed; }
+  .k-ajan.otomatik .oto-ikon { font-size: 20px; }
+  .k-ajan.otomatik.secili { border-color: #00F5D4; background: #00f5d41a; box-shadow: 0 0 10px #00f5d433; }
   .k-araclar { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 0 2px; }
   .k-arac {
     background: #0f172a; border: 1px solid #1e293b; color: #94a3b8; border-radius: 9px;
@@ -105,6 +108,28 @@
   .msj.ajan .kim { font-size: 10.5px; font-weight: 700; letter-spacing: 1px; margin-bottom: 5px; text-transform: uppercase; }
   .msj.sistem { align-self: center; background: #1e293b66; color: #fca5a5; font-size: 12px; border-radius: 8px; }
   .msj.hata { border-color: #7f1d1d; }
+  /* markdown içeriği */
+  .msj .md p { margin: 0 0 8px; } .msj .md p:last-child { margin-bottom: 0; }
+  .msj .md h1, .msj .md h2, .msj .md h3, .msj .md h4 { margin: 12px 0 6px; line-height: 1.3; color: #f8fafc; }
+  .msj .md h1 { font-size: 16px; } .msj .md h2 { font-size: 15px; } .msj .md h3 { font-size: 14px; } .msj .md h4 { font-size: 13.5px; }
+  .msj .md ul, .msj .md ol { margin: 4px 0 8px; padding-left: 20px; }
+  .msj .md li { margin: 2px 0; }
+  .msj .md code { background: #020617; border: 1px solid #1e293b; border-radius: 5px; padding: 1px 5px;
+    font: 11.5px Consolas, 'Cascadia Mono', monospace; color: #7dd3fc; }
+  .msj .md pre { position: relative; background: #020617; border: 1px solid #1e293b; border-radius: 10px;
+    padding: 10px 12px; margin: 6px 0 10px; overflow-x: auto; }
+  .msj .md pre code { background: none; border: none; padding: 0; color: #cbd5e1; font-size: 11.5px; line-height: 1.5; white-space: pre; }
+  .md-kopyala { position: absolute; top: 6px; right: 6px; background: #0f172a; border: 1px solid #1e293b;
+    color: #64748b; border-radius: 6px; font-size: 9.5px; padding: 3px 8px; cursor: pointer; opacity: 0; transition: opacity .15s; }
+  .msj .md pre:hover .md-kopyala { opacity: 1; }
+  .md-kopyala:hover { color: #e2e8f0; border-color: #334155; }
+  .msj .md table { border-collapse: collapse; margin: 6px 0 10px; font-size: 12px; display: block; overflow-x: auto; max-width: 100%; }
+  .msj .md th { background: #020617; color: #f8fafc; font-weight: 700; text-align: left; }
+  .msj .md th, .msj .md td { border: 1px solid #1e293b; padding: 5px 10px; }
+  .msj .md tr:nth-child(even) td { background: #0f172a88; }
+  .msj .md blockquote { border-left: 3px solid #00F5D466; margin: 6px 0; padding: 2px 0 2px 12px; color: #94a3b8; }
+  .msj .md hr { border: none; border-top: 1px solid #1e293b; margin: 10px 0; }
+  .msj .md a { color: #38bdf8; }
   .yaziliyor { align-self: flex-start; display: none; gap: 4px; padding: 12px 16px; background: #0f172a;
     border: 1px solid #1e293b; border-radius: 14px; margin: 0 24px; }
   .yaziliyor.acik { display: flex; }
@@ -174,6 +199,30 @@
   .tk-uslup .deger { font-weight: 700; letter-spacing: .3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .tk-uslup .deger.ortak { color: #34d399; }
   .tk-uslup .deger.sert { color: #f59e0b; }
+  /* pano paneli */
+  .pano-panel { display: none; flex-direction: column; border-bottom: 1px solid #1e293b; background: #0b1222; height: 66vh; overflow: hidden; flex: 0 0 auto; }
+  .pano-panel.acik { display: flex; }
+  .p-sekmeler { display: flex; gap: 4px; padding: 8px 20px 0; }
+  .p-sekme { background: none; border: none; border-bottom: 2px solid transparent; color: #64748b;
+    font-size: 12px; font-weight: 700; padding: 6px 12px; cursor: pointer; transition: color .15s, border-color .15s; }
+  .p-sekme:hover { color: #e2e8f0; }
+  .p-sekme.secili { color: #00F5D4; border-bottom-color: #00F5D4; }
+  .p-govde { flex: 1; min-height: 0; overflow: hidden; display: none; flex-direction: column; }
+  .p-govde.secili { display: flex; }
+  .pano-iframe { flex: 1; border: none; width: 100%; background: #020617; }
+  .p-md { flex: 1; overflow: auto; padding: 12px 20px; color: #cbd5e1; font: 12.5px/1.6 Consolas, 'Cascadia Mono', monospace; white-space: pre-wrap; word-break: break-word; }
+  .p-md h1, .p-md h2, .p-md h3 { color: #f8fafc; margin: 10px 0 6px; font-family: 'Segoe UI', sans-serif; }
+  .p-md h1 { font-size: 16px; } .p-md h2 { font-size: 14.5px; } .p-md h3 { font-size: 13.5px; }
+  .p-md .tamam { color: #22c55e; } .p-md .acik { color: #f59e0b; }
+  .p-rapor-liste { flex: 1; overflow-y: auto; padding: 6px 12px 12px; display: flex; flex-direction: column; gap: 5px; }
+  .p-rapor-liste::-webkit-scrollbar { width: 6px; }
+  .p-rapor-liste::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+  .p-rapor-item { text-align: left; background: #0f172a; border: 1px solid #1e293b; border-radius: 8px;
+    padding: 7px 11px; cursor: pointer; color: #e2e8f0; font-size: 12px; width: 100%; transition: border-color .15s; }
+  .p-rapor-item:hover { border-color: #00F5D466; }
+  .p-rapor-item .r-ad { font-weight: 600; }
+  .p-rapor-item .r-meta { font-size: 9.5px; color: #64748b; margin-top: 2px; }
+  .p-geri { background: none; border: none; color: #00F5D4; font-size: 12px; cursor: pointer; padding: 6px 0; text-align: left; }
   .f-durum { font-size: 10.5px; color: #64748b; letter-spacing: .5px; }
   .f-rapor { margin: 0 12px 12px; overflow: auto; padding: 12px 14px; background: #0f172a;
     border: 1px solid #1e293b; border-radius: 10px; color: #cbd5e1;
@@ -207,6 +256,7 @@
   <div class="k-araclar">
     <button class="k-arac" id="btnEkip" title="Ekip kartları">👥 Ekip kartları</button>
     <button class="k-arac" id="btnFir" title="GitHub fırsat avı">🎯 Fırsatlar</button>
+    <button class="k-arac" id="btnPano" title="Ekip panosu, görevler, raporlar" style="grid-column: 1 / -1">📌 Pano</button>
   </div>
   <div class="k-sohbetler">
     <div class="k-etiket">SOHBETLER</div>
@@ -251,6 +301,24 @@
     <pre class="f-rapor" id="fRapor"></pre>
   </div>
 
+  <div class="pano-panel" id="panoPanel">
+    <div class="p-sekmeler">
+      <button class="p-sekme secili" data-pano="iframe">🖼️ Ekip Panosu</button>
+      <button class="p-sekme" data-pano="todos">✅ Görevler</button>
+      <button class="p-sekme" data-pano="raporlar">📁 Raporlar</button>
+      <button class="g-kapat" id="panoKapat" style="margin-left:auto;margin-bottom:4px">×</button>
+    </div>
+    <div class="p-govde secili" data-govde="iframe">
+      <iframe class="pano-iframe" id="panoIframe" src="/ekip-panosu.html" title="Ekip Panosu"></iframe>
+    </div>
+    <div class="p-govde" data-govde="todos">
+      <div class="p-md" id="todosMd">Yükleniyor…</div>
+    </div>
+    <div class="p-govde" data-govde="raporlar">
+      <div class="p-rapor-liste" id="raporListe"></div>
+    </div>
+  </div>
+
   <main class="sohbet" id="sohbet">
     <div class="karsilama" id="karsilama">
       <div class="buyuk">🎼</div>
@@ -275,7 +343,7 @@
 
 <script>
 const API = '';
-let ekip = [], aktifAjan = 'merve', oturumId = null, gonderiyor = false;
+let ekip = [], aktifAjan = 'otomatik', oturumId = null, gonderiyor = false;
 
 const $ = id => document.getElementById(id);
 const sohbet = $('sohbet'), girdi = $('girdi'), btnG = $('btnGonder'), yazi = $('yaziliyor');
@@ -307,6 +375,13 @@ function avatarSrc(a) {
 function kAjanlarCiz() {
   const kutu = $('kAjanlar');
   kutu.innerHTML = '';
+  // 🧭 Otomatik karo — en başta
+  const oto = document.createElement('button');
+  oto.className = 'k-ajan otomatik' + (aktifAjan === 'otomatik' ? ' secili' : '');
+  oto.title = 'Otomatik yönlendirme — emri yaz, Merve doğru ajana dağıtsın';
+  oto.innerHTML = '<span class="oto-ikon">🧭</span>';
+  oto.onclick = () => { ajanSec('otomatik'); kenarKapat(); };
+  kutu.appendChild(oto);
   for (const a of ekip) {
     const el = document.createElement('button');
     el.className = 'k-ajan' + (a.id === aktifAjan ? ' secili' : '');
@@ -325,12 +400,23 @@ function ajanSec(id) {
   aktifAjan = id; oturumId = null;
   kAjanlarCiz(); karsilamaGoster(); gecmisYukle();
   if (takimAcik) takimKartlariCiz();
+  girdi.placeholder = id === 'otomatik'
+    ? 'Emrini yaz — Merve doğru ajana dağıtsın…  (Enter: gönder)'
+    : 'Emrini yaz…  (Enter: gönder · Shift+Enter: satır)';
   girdi.focus();
 }
 
 function aktifChipCiz() {
-  const a = ekip.find(x => x.id === aktifAjan);
   const chip = $('aktifChip');
+  if (aktifAjan === 'otomatik') {
+    chip.innerHTML = '';
+    const ikon = document.createElement('span'); ikon.textContent = '🧭'; ikon.style.fontSize = '20px';
+    const ad = document.createElement('span'); ad.className = 'ad'; ad.textContent = 'Otomatik';
+    const rol = document.createElement('span'); rol.className = 'rol'; rol.textContent = 'Merve dağıtıyor';
+    chip.append(ikon, ad, rol);
+    return;
+  }
+  const a = ekip.find(x => x.id === aktifAjan);
   if (!a) return;
   chip.innerHTML = '';
   const img = document.createElement('img');
@@ -464,11 +550,111 @@ $('btnFirTara').onclick = async () => {
   } catch { $('fDurum').textContent = 'başlatılamadı'; }
 };
 
+// ---- Pano paneli (3 sekme: iframe / todos / raporlar) ----
+let panoAcik = false;
+let panoMdIslevleri = {
+  baslik: s => '<h1>' + s + '</h1>',
+  satir: s => s,
+};
+// todos/rapor için basit markdown → html (başlık + checkbox renkleri)
+function panoMarkdownHTML(metin) {
+  return metin.split(/\r?\n/).map(satir => {
+    if (/^###\s/.test(satir)) return '<h3>' + satir.slice(4) + '</h3>';
+    if (/^##\s/.test(satir)) return '<h2>' + satir.slice(3) + '</h2>';
+    if (/^#\s/.test(satir)) return '<h1>' + satir.slice(2) + '</h1>';
+    if (/^\s*- \[[ xX]\]/.test(satir)) return '<span class="tamam">' + satir + '</span>';
+    if (/^\s*- \[ \]/.test(satir)) return '<span class="acik">' + satir + '</span>';
+    return satir;
+  }).join('\n');
+}
+
+function panoSekmeGoster(ad) {
+  document.querySelectorAll('.p-sekme').forEach(b => b.classList.toggle('secili', b.dataset.pano === ad));
+  document.querySelectorAll('#panoPanel .p-govde').forEach(g => g.classList.toggle('secili', g.dataset.govde === ad));
+}
+
+async function panoTodosYukle() {
+  try {
+    const d = await (await fetch(API + '/api/pano/todos')).json();
+    $('todosMd').innerHTML = d.icerik ? panoMarkdownHTML(d.icerik) : '<span style="color:#475569">todos.md boş veya yok.</span>';
+  } catch { $('todosMd').textContent = 'yüklenemedi'; }
+}
+
+async function panoRaporListesiYukle() {
+  const kutu = $('raporListe');
+  try {
+    const liste = await (await fetch(API + '/api/pano/raporlar')).json();
+    kutu.innerHTML = '';
+    if (!liste.length) { kutu.innerHTML = '<div class="g-yok">Rapor yok.</div>'; return; }
+    for (const r of liste) {
+      const b = document.createElement('button');
+      b.className = 'p-rapor-item';
+      const ad = document.createElement('div'); ad.className = 'r-ad'; ad.textContent = r.ad;
+      const meta = document.createElement('div'); meta.className = 'r-meta';
+      meta.textContent = (r.boyut / 1024).toFixed(1) + ' KB · ' + new Date(r.zaman).toLocaleString('tr-TR', { dateStyle: 'short', timeStyle: 'short' });
+      b.append(ad, meta);
+      b.onclick = () => panoRaporAc(r.ad);
+      kutu.appendChild(b);
+    }
+  } catch { kutu.innerHTML = '<div class="g-yok">liste alınamadı</div>'; }
+}
+
+async function panoRaporAc(ad) {
+  const kutu = $('raporListe');
+  kutu.innerHTML = '';
+  const geri = document.createElement('button');
+  geri.className = 'p-geri'; geri.textContent = '← rapor listesine dön';
+  geri.onclick = panoRaporListesiYukle;
+  kutu.appendChild(geri);
+  const icerik = document.createElement('div');
+  icerik.className = 'p-md'; icerik.style.padding = '6px 0';
+  icerik.textContent = 'yükleniyor…';
+  kutu.appendChild(icerik);
+  try {
+    const d = await (await fetch(API + '/api/pano/rapor?ad=' + encodeURIComponent(ad))).json();
+    icerik.innerHTML = d.icerik ? panoMarkdownHTML(d.icerik) : 'boş';
+  } catch { icerik.textContent = 'okunamadı'; }
+}
+
+$('btnPano').onclick = () => {
+  panoAcik = !panoAcik;
+  $('panoPanel').classList.toggle('acik', panoAcik);
+  $('btnPano').classList.toggle('acik', panoAcik);
+  if (panoAcik) {
+    // diğer panelleri kapat (karşılıklı dışlama)
+    takimAcik = false; $('takimPanel').classList.remove('acik'); $('btnEkip').classList.remove('acik'); fotoPollDurdur();
+    firsatAcik = false; $('fPanel').classList.remove('acik'); $('btnFir').classList.remove('acik'); firsatPollDurdur();
+    panoTodosYukle(); panoRaporListesiYukle();
+  }
+};
+$('panoKapat').onclick = () => { panoAcik = false; $('panoPanel').classList.remove('acik'); $('btnPano').classList.remove('acik'); };
+document.querySelectorAll('.p-sekme').forEach(b => {
+  b.onclick = () => {
+    panoSekmeGoster(b.dataset.pano);
+    if (b.dataset.pano === 'todos') panoTodosYukle();
+    if (b.dataset.pano === 'raporlar') panoRaporListesiYukle();
+  };
+});
+
 // ---- Sohbet ----
 function karsilamaGoster() {
   if (oturumId) return;
-  const a = ekip.find(x => x.id === aktifAjan);
   aktifChipCiz();
+  if (aktifAjan === 'otomatik') {
+    sohbet.innerHTML = `<div class="karsilama">
+      <div class="buyuk">🧭</div>
+      <h2>Otomatik Yönlendirme</h2>
+      <p>Emrini ajan seçmeden yaz — <strong>Merve</strong> içeriğe bakıp doğru ajana dağıtır:
+      kod işi Atlas'a, güvenlik Argus'a, satış Vera'ya… Karar gerektiren işlerde sana döner.</p>
+      <div class="cipele">
+        <button data-doldur="Ekibe bugünkü işleri dağıt">📋 Ekibi bugünkü işlere dağıt</button>
+        <button data-doldur="Son fırsat raporunu oku, tek tavsiye ver">🎯 Fırsatı değerlendir</button>
+        <button data-doldur="Kısa durum raporu ver">📊 Kısa durum raporu</button>
+      </div></div>`;
+    cipeleBagla();
+    return;
+  }
+  const a = ekip.find(x => x.id === aktifAjan);
   sohbet.innerHTML = `<div class="karsilama">
     <div class="buyuk">${a ? a.ikon : '🎼'}</div>
     <h2>${a ? a.ad + ' — ' + a.rol : 'Emrinizi bekliyorum Patron'}</h2>
@@ -478,6 +664,10 @@ function karsilamaGoster() {
       <button data-doldur="Son fırsat raporunu özetle, tek tavsiye ver">🎯 Son fırsat raporunu özetle</button>
       <button data-doldur="Kısa durum raporu ver">📊 Kısa durum raporu</button>
     </div></div>`;
+  cipeleBagla();
+}
+
+function cipeleBagla() {
   sohbet.querySelectorAll('[data-doldur]').forEach(b => {
     b.onclick = () => { girdi.value = b.dataset.doldur; girdi.focus(); otomatikBuyu(); };
   });
@@ -492,13 +682,107 @@ function msjEkle(m) {
   else {
     el.className = 'msj ajan' + (m.hata ? ' hata' : '');
     const kim = document.createElement('div'); kim.className = 'kim'; kim.textContent = m.ajan || 'Ajan';
-    const govde = document.createElement('div'); govde.textContent = m.metin;
+    const govde = document.createElement('div'); govde.className = 'md'; govde.innerHTML = markdownHTML(String(m.metin || ''));
     el.append(kim, govde);
   }
   if (m.zaman) el.title = new Date(m.zaman).toLocaleString('tr-TR');
   sohbet.appendChild(el);
   sohbet.scrollTop = sohbet.scrollHeight;
 }
+
+// ---- Mini markdown renderer (kaçış-first — model çıktısına körü körüne güvenilmez) ----
+function mdKacis(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+function mdSatir(satir) {
+  // sıralama önemli: kod zaten kaçışlı ve Placeholder'lı — inline biçimler üstüne uygulanır
+  return mdInline(satir);
+}
+function mdInline(s) {
+  // s kaçışlı metin; `code` önce alınıp korunur
+  const kodlar = [];
+  s = s.replace(/`([^`]+)`/g, (_, icerik) => { kodlar.push('<code>' + icerik + '</code>'); return '\u0000' + (kodlar.length - 1) + '\u0000'; });
+  s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  s = s.replace(/(^|[^*])\*([^*\s][^*]*)\*/g, '$1<em>$2</em>');
+  s = s.replace(/~~([^~]+)~~/g, '<del>$1</del>');
+  s = s.replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+  return s.replace(/\u0000(\d+)\u0000/g, (_, i) => kodlar[+i]);
+}
+function markdownHTML(metin) {
+  // 1) kaçır (XSS kapıyı kapat)  2) blokları işle  3) inline döndür
+  const satirlar = mdKacis(metin).split(/\r?\n/);
+  const cikti = [];
+  let i = 0;
+  const hucreler = satir => satir.replace(/^\||/,'').replace(/\|$/,'').split('|').map(h => mdSatir(h.trim()));
+  while (i < satirlar.length) {
+    const satir = satirlar[i];
+    // fenced kod bloğu
+    if (/^```/.test(satir)) {
+      const dil = satir.slice(3).trim();
+      const kod = [];
+      i++;
+      while (i < satirlar.length && !/^```/.test(satirlar[i])) kod.push(satirlar[i++]);
+      i++; // kapanış
+      const kimlik = 'k' + Math.random().toString(36).slice(2, 8);
+      cikti.push('<pre><code id="' + kimlik + '">' + kod.join('\n') + '</code>' +
+        '<button class="md-kopyala" data-kopyala="' + kimlik + '">kopyala</button></pre>');
+      continue;
+    }
+    // başlık
+    const baslik = satir.match(/^(#{1,4})\s+(.*)$/);
+    if (baslik) { cikti.push('<h' + baslik[1].length + '>' + mdSatir(baslik[2]) + '</h' + baslik[1].length + '>'); i++; continue; }
+    // hr
+    if (/^\s*(---+|\*\*\*+)\s*$/.test(satir)) { cikti.push('<hr>'); i++; continue; }
+    // tablo: satır |...| ve sonraki ayraç |---|
+    if (/^\s*\|.*\|\s*$/.test(satir) && i + 1 < satirlar.length && /^\s*\|[\s:|-]+\|\s*$/.test(satirlar[i + 1])) {
+      const basliklar = hucreler(satir);
+      i += 2;
+      const govde = [];
+      while (i < satirlar.length && /^\s*\|.*\|\s*$/.test(satirlar[i])) govde.push(hucreler(satirlar[i++]));
+      cikti.push('<table><thead><tr>' + basliklar.map(h => '<th>' + h + '</th>').join('') + '</tr></thead><tbody>' +
+        govde.map(sat => '<tr>' + sat.map(h => '<td>' + h + '</td>').join('') + '</tr>').join('') + '</tbody></table>');
+      continue;
+    }
+    // blockquote
+    if (/^&gt;\s?/.test(satir)) {
+      const q = [];
+      while (i < satirlar.length && /^&gt;\s?/.test(satirlar[i])) q.push(satirlar[i++].replace(/^&gt;\s?/, ''));
+      cikti.push('<blockquote>' + q.map(mdSatir).join('<br>') + '</blockquote>');
+      continue;
+    }
+    // listeler
+    if (/^\s*[-*+]\s+/.test(satir) || /^\s*\d+[.)]\s+/.test(satir)) {
+      const sirali = /^\s*\d+[.)]\s+/.test(satir);
+      const ogeler = [];
+      while (i < satirlar.length && (/^\s*[-*+]\s+/.test(satirlar[i]) || /^\s*\d+[.)]\s+/.test(satirlar[i]))) {
+        ogeler.push(satirlar[i++].replace(/^\s*(?:[-*+]|\d+[.)])\s+/, ''));
+      }
+      cikti.push('<' + (sirali ? 'ol' : 'ul') + '>' + ogeler.map(o => '<li>' + mdSatir(o) + '</li>').join('') + '</' + (sirali ? 'ol' : 'ul') + '>');
+      continue;
+    }
+    // boş satır
+    if (!satir.trim()) { i++; continue; }
+    // paragraf (ardışık düz satırlar tek p'de)
+    const p = [satir];
+    i++;
+    while (i < satirlar.length && satirlar[i].trim() &&
+           !/^(```|#{1,4}\s|\s*[-*+]\s|\s*\d+[.)]\s|&gt;|\s*\|)/.test(satirlar[i])) p.push(satirlar[i++]);
+    cikti.push('<p>' + p.map(mdSatir).join('<br>') + '</p>');
+  }
+  return cikti.join('');
+}
+
+// kod bloğu kopyala düğmeleri (event delegation)
+sohbet.addEventListener('click', e => {
+  const btn = e.target.closest('.md-kopyala');
+  if (!btn) return;
+  const kod = document.getElementById(btn.dataset.kopyala);
+  if (!kod) return;
+  navigator.clipboard.writeText(kod.textContent).then(() => {
+    btn.textContent = 'kopyalandı ✓';
+    setTimeout(() => { btn.textContent = 'kopyala'; }, 1500);
+  }).catch(() => { btn.textContent = 'kopyalanamadı'; });
+});
 
 function kilitli(k) { gonderiyor = k; girdi.disabled = k; btnG.disabled = k; yazi.classList.toggle('acik', k); }
 
@@ -515,10 +799,11 @@ async function gonder() {
   try {
     const r = await fetch(API + '/api/mesaj', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ oturumId, mesaj: metin, ajan: aktifAjan }),
+      body: JSON.stringify({ oturumId, mesaj: metin, ajan: aktifAjan, otomatik: aktifAjan === 'otomatik' }),
     });
     const d = await r.json();
     if (d.oturumId) oturumId = d.oturumId;
+    kAjanlarCiz(); aktifChipCiz(); // sunucu gerçek hedef ajana çözdü (otomatik → merve)
     sohbet.querySelectorAll('.msj.ajan,.msj.sistem').forEach(e => e.remove());
     for (const m of d.mesajlar.filter(m => m.rol !== 'patron')) msjEkle(m);
   } catch (e) {
@@ -562,6 +847,9 @@ async function oturumAc(id) {
     const o = await (await fetch(API + '/api/oturum?id=' + encodeURIComponent(id))).json();
     oturumId = o.id; aktifAjan = o.ajan || aktifAjan;
     kAjanlarCiz(); aktifChipCiz();
+    girdi.placeholder = aktifAjan === 'otomatik'
+      ? 'Emrini yaz — Merve doğru ajana dağıtsın…  (Enter: gönder)'
+      : 'Emrini yaz…  (Enter: gönder · Shift+Enter: satır)';
     sohbet.innerHTML = '';
     for (const m of o.mesajlar) msjEkle(m);
     gecmisYukle();
@@ -587,6 +875,7 @@ $('engel').onclick = kenarKapat;
     ekip = await (await fetch(API + '/api/ekip')).json();
     sonFotoImza = fotoImzaHesapla();
     kAjanlarCiz(); karsilamaGoster(); gecmisYukle();
+    girdi.placeholder = 'Emrini yaz — Merve doğru ajana dağıtsın…  (Enter: gönder)';
     girdi.disabled = false; btnG.disabled = false; girdi.focus();
   } catch (e) {
     durum('kirmizi', 'sunucu yanıt vermiyor');
