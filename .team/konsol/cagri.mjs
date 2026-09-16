@@ -113,6 +113,40 @@ const ARAÇLAR = [
     },
   },
   {
+    ad: 'ajan_cagir',
+    açıklama: 'Bir ekip ajanını ÇAĞIRIR ve onun kendi araçlarıyla işini yapmasını sağlar. SADECE orkestra şefi (Merve) kullanabilir. Rapor, çağrılan ajanın kendi çıktısıdır — sen onun adına rapor yazamazsın.',
+    şema: {
+      type: 'object',
+      properties: {
+        ajan: { type: 'string', description: 'Ajan kimliği: argus, mentor, atlas, vera, vega, nova, iris, firsat-avcisi' },
+        emir: { type: 'string', description: 'Ajana verilecek kendine yeterli görev tanımı (hangi dosya, ne çıktısı, nereye yazacağı)' },
+      },
+      required: ['ajan', 'emir'],
+    },
+    çalıştır: async ({ ajan: ajanAdı, emir }) => {
+      const tanımlar = globalThis.__AJAN_TANIMLARI || []
+      const kimlik = String(ajanAdı || '').trim().toLowerCase()
+      const tanim = tanımlar.find(a => a.id === kimlik)
+      if (!tanim) {
+        const geçerli = tanımlar.map(a => a.id).join(', ')
+        throw new Error(`bilinmeyen ajan ya da tanımı (.agents/*.ts) yüklü değil: ${ajanAdı}. Geçerli: ${geçerli}`)
+      }
+      if (kimlik === 'merve') throw new Error('merve kendini çağıramaz')
+      // Derinlik koruması: yalnız şef (derinlik 0) çağırabilir — uzman uzman çağıramaz
+      if (AGAN_DERINLIK > 0) throw new Error('ajan_cagir yalnızca orkestra şefi tarafından kullanılabilir (uzmanlar alt ajan çağıramaz)')
+      if (String(emir || '').length < 10) throw new Error('emir çok kısa — ajana kendine yeterli görev tanımı ver')
+      const kadro = globalThis.__EKIP_KADROSU || []
+      const görünenAd = kadro.find(a => a.id === kimlik)?.ad || tanim.displayName || kimlik
+      AGAN_DERINLIK = 1
+      try {
+        const alt = await ajanÇalıştır(tanim, String(emir), [])
+        return `--- ${görünenAd} (${kimlik}) kendi çıktısı ---\n${alt.metin}\n--- araç izleri: ${alt.adımlar.map(a => a.arac).join(', ') || 'yok'} ---`
+      } finally {
+        AGAN_DERINLIK = 0
+      }
+    },
+  },
+  {
     ad: 'run_command', açıklama: 'Proje kökünde terminal komutu çalıştırır (30 sn sınır).',
     şema: { type: 'object', properties: { command: { type: 'string' } }, required: ['command'] },
     çalıştır: async ({ command }) => {
@@ -132,6 +166,13 @@ const ARAÇ_ŞEMALARI = ARAÇLAR.map(a => ({
   function: { name: a.ad, description: a.açıklama, parameters: a.şema },
 }))
 
+// Alt-ajan zinciri koruması: ajan_cagir çalışırken derinlik 1'e çıkar; o süre
+// boyunca uzmanlara ajan_cagir GÖSTERİLMEZ — uzman uzman çağıramaz,
+// sonsuz çağrı döngüsü imkânsızlaşır. (Şef = derinlik 0.)
+let AGAN_DERINLIK = 0
+const görünürAraçlar = () => (AGAN_DERINLIK > 0 ? ARAÇLAR.filter(a => a.ad !== 'ajan_cagir') : ARAÇLAR)
+const görünürŞemalar = () => (AGAN_DERINLIK > 0 ? ARAÇ_ŞEMALARI.filter(s => s.function.name !== 'ajan_cagir') : ARAÇ_ŞEMALARI)
+
 // ---------- Mesaj dönüştürücüler ----------
 function sistemMesajı(tanim) {
   // Gerçek zaman + gerçek kadro: model tarih/isim UYDURAMASIN — sistem eline
@@ -140,8 +181,13 @@ function sistemMesajı(tanim) {
   const tarihTR = simdi.toLocaleDateString('tr-TR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
   const saatTR = simdi.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })
   const kadro = (globalThis.__EKIP_KADROSU || []).map(a => a.ad).filter(Boolean).join(', ')
+  // Orkestra şefi mi? (ajan_cagir aracı + delege kuralı yalnız ona verilir)
+  const sef = tanim.id === 'merve'
   return [
     tanim.instructionsPrompt || '',
+    sef
+      ? 'KURAL 12 — RAPOR SAHİBİ, YAZAN KİŞİ AYNI OLMALI: Ekip ajanlarının (Argus, Mentor, Atlas, Vera, Vega, Nova, Iris, Fırsat Avcısı) adına rapor YAZMAK yasaktır — kendi bilginle onların işini özetleyemezsin. Bir ajanın işi gerekiyorsa ajan_cagir aracıyla O ajanı ÇAĞIR; raporu ajanın kendi çıktısı olur. Çağıramadığın durumda raporda "doğrulanmadı — ajan çağrılamadı" damgası kullan.'
+      : '',
     tanim.displayName ? `Senin adın: ${tanim.displayName}.` : '',
     `BUGÜN GERÇEK TARİH: ${tarihTR}, saat ${saatTR} (Türkiye). Raporlarında tarih gerekirse BUNU kullan; asla başka tarih yazma.`,
     kadro ? `GERÇEK EKİP KADROSU (yalnız bu isimleri kullan, başka isim uydurma): ${kadro}. Patron, raporlarda sen (= ${tanim.displayName || 'ajan'}) de sayılır.` : '',
@@ -199,7 +245,7 @@ async function sağlayıcıÇağırTek(sağ, model, mesajlar, deneme = 0) {
   const cevap = await fetch(uçNokta, {
     method: 'POST',
     headers: başlıklar,
-    body: JSON.stringify({ model, messages: mesajlar, tools: ARAÇ_ŞEMALARI }),
+    body: JSON.stringify({ model, messages: mesajlar, tools: görünürŞemalar() }),
   })
   if (!cevap.ok) throw new Error(`${sağ} hatası ${cevap.status}: ${(await cevap.text()).slice(0, 300)}`)
   const veri = await cevap.json()
@@ -261,10 +307,17 @@ async function geminiÇağır(model, mesajlar, deneme = 0) {
   }
   boşalt()
 
+  // Gemini katı kuralı: istek user turuyla BİTMEELİ. Mesaj dizisi bozulursa
+  // (model turu sona kalır) 400 döner — kalkan olarak bozuk kuyruğu burada
+  // onarıp logluyoruz; kök neden teşhisi için iz bırakılır.
+  if (içerikler.length && içerikler[içerikler.length - 1].role === 'model') {
+    console.log('[cagri] KALKAN: gemini istegi model turn ile bitiyordu — user nudge eklendi')
+    içerikler.push({ role: 'user', parts: [{ text: '(Devam et.)' }] })
+  }
   const gövde = {
     contents: içerikler,
     tools: [{
-      functionDeclarations: ARAÇLAR.map(a => ({
+      functionDeclarations: görünürAraçlar().map(a => ({
         name: a.ad, description: a.açıklama, parameters: a.şema,
       })),
     }],
@@ -303,7 +356,7 @@ async function geminiÇağır(model, mesajlar, deneme = 0) {
 
 async function anthropicÇağır(model, mesajlar) {
   const sistem = mesajlar.find(m => m.role === 'system')?.content || ''
-  const araçlar = ARAÇLAR.map(a => ({ name: a.ad, description: a.açıklama, input_schema: a.şema }))
+  const araçlar = görünürAraçlar().map(a => ({ name: a.ad, description: a.açıklama, input_schema: a.şema }))
   const mesajGövdesi = mesajlar.filter(m => m.role !== 'system').map(m => {
     if (m.role === 'tool') {
       return { role: 'user', content: [{ type: 'tool_result', tool_use_id: m.tool_call_id, content: m.content }] }
@@ -384,7 +437,28 @@ async function sağlayıcıÇağırZincir(sağ, model, mesajlar) {
 /**
  * Ajanı çalıştırır. Dönüş: { metin, adımlar: [{arac, giris, sonuc}] }
  */
-export async function ajanÇalıştır(tanim, patronMesajı, geçmiş = []) {
+// ---------- Acil durum: oturum bazlı araç kilidi ----------
+// MALFORMED_FUNCTION_CALL/bozuk tool-call ısrarında oturum düz metin moduna düşer:
+// model araç şemaları olmadan, yalnızca konuşma geçmişiyle çağrılır.
+const ARAÇ_KİLİTLİ = new Map() // oturumKimligi -> zaman damgası
+const KİLİT_SÜRESİ = 10 * 60_000 // 10 dk sonra araçlar sessizce geri döner
+
+export function araçKilidiKoy(oturumKimligi) {
+  ARAÇ_KİLİTLİ.set(String(oturumKimligi), Date.now())
+}
+
+export function araçKilidiAktif(oturumKimligi) {
+  const t = ARAÇ_KİLİTLİ.get(String(oturumKimligi))
+  if (!t) return false
+  if (Date.now() - t > KİLİT_SÜRESİ) {
+    ARAÇ_KİLİTLİ.delete(String(oturumKimligi))
+    return false
+  }
+  return true
+}
+
+export async function ajanÇalıştır(tanim, patronMesajı, geçmiş = [], seçenekler = {}) {
+  const { oturumKimligi = null, acilDurumMetni = null } = seçenekler
   const seçim = await saglayiciCoz()
   if (!seçim) {
     throw Object.assign(new Error(
@@ -392,6 +466,19 @@ export async function ajanÇalıştır(tanim, patronMesajı, geçmiş = []) {
     ), { kod: 'anahtar-yok' })
   }
   const { saglayici: sağ, model } = seçim
+
+  // ACİL DURUM MODU: bu oturumda araç kilidi aktifse araç şemaları hiç
+  // gönderilmez — model salt metinle cevap verir (tek tur, döngüsüz).
+  if (oturumKimligi && araçKilidiAktif(oturumKimligi)) {
+    const sistem = sistemMesajı(tanim)
+    const kilitliSistem = `${sistem}\n\nACİL DURUM MODU: Araçların şu anda devre dışı. Cevabını YALNIZCA mevcut konuşma bağlamına ve bilgine dayanarak ver; dosya okuyamaz, komut çalıştıramazsın. Eksik bilgi gerekiyorsa Patron'dan isteyeceğini açıkça yaz.`
+    const asistan = await sağlayıcıÇağır(sağ, model, [
+      { role: 'system', content: kilitliSistem },
+      ...geçmiş,
+      { role: 'user', content: acilDurumMetni || patronMesajı },
+    ])
+    return { metin: asistan.content || '(boş yanıt)', adımlar: [], acilDurum: true }
+  }
 
   const mesajlar = [
     { role: 'system', content: sistemMesajı(tanim) },
@@ -401,7 +488,25 @@ export async function ajanÇalıştır(tanim, patronMesajı, geçmiş = []) {
 
   const adımlar = []
   for (let adım = 0; adım < MAKS_ADIM; adım++) {
-    const asistan = await sağlayıcıÇağırZincir(sağ, model, mesajlar)
+    let asistan
+    try {
+      asistan = await sağlayıcıÇağırZincir(sağ, model, mesajlar)
+    } catch (err) {
+      const metin = String(err?.message || err)
+      // Bozuk tool-call ısrarı zinciri tükettiyse: oturumu kilitli moduna al
+      // ve aynı turu ARAÇSIZ tek çağrıyla kurtar — hata patrona sızmaz.
+      if (oturumKimligi && /MALFORMED_FUNCTION_CALL|bozuk tool-call|boş yanıt/i.test(metin)) {
+        araçKilidiKoy(oturumKimligi)
+        const kilitliSistem = `${sistemMesajı(tanim)}\n\nACİL DURUM MODU: Araçların şu anda devre dışı. Cevabını YALNIZCA mevcut konuşma bağlamına ve bilgine dayanarak ver; dosya okuyamaz, komut çalıştıramazsın. Eksik bilgi gerekiyorsa Patron'dan isteyeceğini açıkça yaz.`
+        const kurtar = await sağlayıcıÇağır(sağ, model, [
+          { role: 'system', content: kilitliSistem },
+          ...geçmiş,
+          { role: 'user', content: `${acilDurumMetni || patronMesajı}\n\n(Not: Araç erişimin geçici olarak kapalı — cevabını bu bilgiyle ver.)` },
+        ])
+        return { metin: kurtar.content || '(boş yanıt)', adımlar: [], acilDurum: true }
+      }
+      throw err
+    }
     mesajlar.push(asistan)
 
     if (!asistan.tool_calls?.length) {
@@ -423,4 +528,56 @@ export async function ajanÇalıştır(tanim, patronMesajı, geçmiş = []) {
     }
   }
   return { metin: '(adım sınırına ulaşıldı — kısmi sonuç)', adımlar }
+}
+
+// ---------- Açılış protokol testi ----------
+/**
+ * Sahte tool-call turu simüle eder: model çağrılır, functionCall üretmesi
+ * beklenir, sonuç functionResponse ile geri gidip nihai metin alınır.
+ * Hem functionResponse protokolünü hem thoughtSignature akışını uçtan uca
+ * doğrular — MALFORMED_FUNCTION_CALL/400 tuzağı açılışta yakalanır.
+ * Dönüş: { tamam, sure_ms, detay } — başarısızsa hata mesajı detay'da.
+ */
+export async function protokolTesti() {
+  const seçim = await saglayiciCoz()
+  if (!seçim) return { tamam: false, detay: 'model anahtarı yok' }
+  if (seçim.saglayici !== 'gemini') {
+    return { tamam: true, detay: `atlandı (${seçim.saglayici} — test yalnız gemini protokolü için)` }
+  }
+  const baş = Date.now()
+  try {
+    const mesajlar = [
+      { role: 'system', content: 'Protokol testi. Tek işin: test_araci aracını çağırmak.' },
+      { role: 'user', content: 'test_araci aracını argümansız çağır ve sonucu bekle.' },
+    ]
+    const asistan = await sağlayıcıÇağırZincir(seçim.saglayici, seçim.model, mesajlar)
+    if (!asistan.tool_calls?.length) {
+      return { tamam: false, sure_ms: Date.now() - baş, detay: 'model araç çağrısı üretmedi (metinle cevapladı)' }
+    }
+    const çağrı = asistan.tool_calls[0]
+    // Gerçek döngünün birebir aynısı: assistant + tool mesajı işlenir, dönüşümcü
+    // functionResponse'u kurar, imza akışı da sınanır. ÇOK TURLU: model 2-3 tur
+    // daha araç çağırsa bile sahte sonuçla beslenip nihai metne ulaşmalı —
+    // tek turluk varsayım testi kırıyordu (2026-09-16 "(boş)" arızası).
+    mesajlar.push(asistan)
+    let final = null
+    for (let tur = 0; tur < 3; tur++) {
+      final = await sağlayıcıÇağırZincir(seçim.saglayici, seçim.model, mesajlar)
+      if (!final.tool_calls?.length) break
+      // GÜVENLİK: test gerçek araç ÇALIŞTIRMAZ — her çağrıya sahte sonuç:
+      mesajlar.push(final)
+      for (const c of final.tool_calls) {
+        mesajlar.push({ role: 'tool', tool_call_id: c.id, content: 'TEST_OK: 2+2=4' })
+      }
+    }
+    if (!final || !final.content || !/2\s*\+?\s*2|4|dört/i.test(final.content)) {
+      const çıkarım = final?.tool_calls?.length
+        ? `model ${final.tool_calls.length} araç çağrısında takıldı (${final.tool_calls.map(c => c.function.name).join(', ')})`
+        : `nihai içerik: ${String(final?.content || '(boş)').slice(0, 80)}`
+      return { tamam: false, sure_ms: Date.now() - baş, detay: `araç sonucu işlenemedi: ${çıkarım}` }
+    }
+    return { tamam: true, sure_ms: Date.now() - baş, detay: `functionCall + functionResponse + imza akışı ✓ (${çağrı.function.name})` }
+  } catch (err) {
+    return { tamam: false, sure_ms: Date.now() - baş, detay: String(err?.message || err).slice(0, 160) }
+  }
 }

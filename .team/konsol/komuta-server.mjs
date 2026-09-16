@@ -21,7 +21,7 @@ import { pathToFileURL } from 'node:url'
 import { createRequire } from 'node:module'
 
 const require = createRequire(import.meta.url)
-import { ajanÇalıştır as cagriCalistir, saglayiciCoz } from './cagri.mjs'
+import { ajanÇalıştır as cagriCalistir, saglayiciCoz, protokolTesti, araçKilidiAktif } from './cagri.mjs'
 import { firsatTaramasiYap } from './firsat-tespiti.mjs'
 const KONSOL_DIR = path.dirname(new URL(import.meta.url).pathname.replace(/^\/(\w:)/, '$1'))
 const PROJE_KOK = path.resolve(KONSOL_DIR, '..', '..')
@@ -150,6 +150,8 @@ async function agentlariYukle() {
     }
   }
   agentTanimlari = tanimlar
+  // ÇAĞRI ajan_cagir köprüsü: Merve'nin araç kutusu gerçek .agents tanımlarını görür
+  globalThis.__AJAN_TANIMLARI = tanimlar
   agentsYuklendiMi = tanimlar.length
   console.log(`[agents] ${tanimlar.length} ajan tanımı yüklendi`)
 }
@@ -363,11 +365,24 @@ const server = http.createServer(async (req, res) => {
 
     if (req.method === 'GET' && rota === '/api/health') {
       const sag = await saglayiciCoz()
+      // Gemini protokol testi: 15 dk cache'li — her health çağrısında token yakılmaz
+      let protokol = null
+      if (sag?.saglayici === 'gemini') {
+        const simdi = Date.now()
+        if (!globalThis.__protokolTesti || simdi - globalThis.__protokolTesti.zaman > 15 * 60_000) {
+          const sonuc = await protokolTesti()
+          globalThis.__protokolTesti = { zaman: simdi, ...sonuc }
+        }
+        const p = globalThis.__protokolTesti
+        protokol = { tamam: p.tamam, sureMs: p.sure_ms ?? null, detay: p.detay }
+      }
       return JSON_GONDER(res, 200, {
         ok: true,
         agents: agentsYuklendiMi,
         kimlik: sag ? `ÇAĞRI · ${sag.saglayici}` : credentialsCoz()?.kaynak || null,
         mod: sag ? `cagri (${sag.saglayici} · ${sag.model})` : credentialsCoz() ? 'codebuff' : null,
+        protokol,
+        kilitliOturumlar: [...oturumlar.keys()].filter(id => araçKilidiAktif(id)).length,
         sdkSuroom: require('@codebuff/sdk/package.json').version,
       })
     }
@@ -523,8 +538,15 @@ const server = http.createServer(async (req, res) => {
           try {
             const sonRun = oturum.runs[oturum.runs.length - 1]
             const geçmiş = sonRun?.__cagriGeçmiş || []
-            const sonuc = await cagriCalistir(tanim, gonderilenMetin, geçmiş)
+            const sonuc = await cagriCalistir(tanim, gonderilenMetin, geçmiş, { oturumKimligi: oturum.id })
             oturum.runs.push({ __cagriGeçmiş: [...geçmiş, { role: 'user', content: gonderilenMetin }, { role: 'assistant', content: sonuc.metin }] })
+            if (sonuc.acilDurum) {
+              oturum.mesajlar.push({
+                rol: 'sistem',
+                metin: `⚠️ ${tanim.displayName || tanim.id} bu oturumda geçici olarak düz metin modunda (araç erişimi kapatıldı, 10 dk sonra otomatik döner). Cevab bağlam bilgisiyle verildi — güncel dosya/terminal verisi içermez.`,
+                zaman: Date.now(),
+              })
+            }
             const iz = sonuc.adımlar.map(a => `🔧 ${a.arac} → ${String(a.sonuc).split('\n')[0].slice(0, 140)}`).join('\n')
             const metin = iz ? `${sonuc.metin}\n\n${iz}` : sonuc.metin
             oturum.mesajlar.push({ rol: 'ajan', ajan: tanim.displayName || tanim.id, metin, zaman: Date.now() })

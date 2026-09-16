@@ -1,0 +1,57 @@
+# OstlerTech robots.txt — AI bot politikası (2026-09-16, Patron kararı)
+# Arama motorları: AÇIK (ürün sayfalarının bulunması gelir içindir)
+# AI eğitim tarayıcıları: KAPALI (içerik AI modellerine bedava veri olmasın)
+# AI ajan/kazıyıcılar: KAPALI (fiyat + ürün verisi kazınmasın)
+
+# --- Arama motorları: tam erişim ---
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# --- AI eğitim tarayıcıları: yasak ---
+User-agent: GPTBot
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+# --- Diğer herkes: standart kural ---
+User-agent: *
+Allow: /
+
+Sitemap: https://www.ostlertech.com/sitemap.xml

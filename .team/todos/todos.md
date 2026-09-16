@@ -1,4 +1,4 @@
-# Merve - Günlük Plan ve Görevler (github-firsatlari)
+# Merve - Günlük Plan ve Görevler (16 Eylül 2026)
 
-- [ ] GitHub fırsat raporu analizi ve mentor değerlendirmesinin patrona sunulması <!-- id: 0 -->
-- [ ] Patronun seçimi doğrultusunda 2 haftalık doğrulama planının (Landing Page, Topluluk Validasyonu, MVP Ön Satış) başlatılması <!-- id: 1 -->
+- [x] VERA: AnyDoc Fiyatlandırma Brifi ve Bekleme Listesi Metni hazırlanması (.team/reports/vera-anydoc-fiyat.md) <!-- id: 2 -->
+- [x] Günlük akış ve söz defterinin güncellenmesi <!-- id: 3 -->

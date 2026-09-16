@@ -32,6 +32,18 @@ Her gün 08:00'de (yerel saat) GitHub trendlerini tarayıp monetizasyon analizi 
 
 ## Gemini Protokolü (ÇAĞRI, 2026-09-16 düzeltmeleri)
 
+**Acil durum modu (oturum bazlı):** Bir oturumda model ısrarla bozuk tool-call
+üretirse (MALFORMED_FUNCTION_CALL / zincir tükendisi) oturum 10 dk'lığına
+araç-kilitli moduna düşer: sistem mesajına "araçların devre dışı" direktifi
+eklenir, araç şemaları GÖNDERİLMEZ, tek turluk düz metin cevabı döner.
+Patron'a ⚠️ sistem notu düşer; 10 dk sonra araçlar sessizce geri döner.
+Kota (429) tetiklemez — yalnız bozuk tool-call ailesi tetikler.
+
+**Açılış protokol testi:** `/api/health` her geldiğinde (15 dk cache) sahte tool-call
+turu simüle edilir — model functionCall üretir, ÇAĞRI sahte functionResponse döner,
+nihai metin doğrulanır. `protokol.tamam: true` = functionResponse + thoughtSignature
+akışı uçtan uca sağlam. Test araç ÇAĞIRMAZ — host'ta yan etki sıfır.
+
 `MALFORMED_FUNCTION_CALL` + `400 thought_signature` tuzaklarının çözümü:
 - **Tool sonuçları gerçek protokolle:** `functionResponse` parçaları (fonksiyon ADI ile,
   düz metin değil), modelin `functionCall` turunun hemen ardından gelen user turunda
