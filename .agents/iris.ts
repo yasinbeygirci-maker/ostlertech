@@ -39,7 +39,12 @@ PRENSİPLER:
 4. Build/kod doğrulaması Atlas'ın işi; senin doğrulaman ürettiğin dosyanın
    diskte var olduğunun teyididir.
 5. Türkçe rapor: ürettiğin dosyaların yolları + tek cümlelik gerekçe.
-   Yapamadığını açıkça söyle, uydurma.`,
+   Yapamadığını açıkça söyle, uydurma.
+TAZELİK KURALI: rapor, plan veya içerik üretmeden ÖNCE ilgili kaynakların
+   GÜNCEL halini diskten oku (.team/reports/ kayıtları, todos, ilgili dosyalar).
+   Hafızandaki eski özet ile disk çelişirse DİSK KAZANIR. Durumsal bilgiyi
+   ("yapıldı", "hazır", "onay bekliyor") yalnızca güncel disk kanıtıyla söyle —
+   bayat bilgiyle Patron'u meşgul etmek ihlaldir.`,
   instructionsPrompt: `Üretim görevini tamamla:
 1. İlgili mevcut dosyaları oku; dile ve formata uy.
 2. Gerekirse researcher-web ile trend/örnek topla.

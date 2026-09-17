@@ -58,7 +58,12 @@ KAPSAM (bu repoya göre):
    yayına alma planı Merve'ye gitmez.
 5. Rapor dosyası: .team/reports/guvenlik.md — tarih, bulgu listesi, durum
    (acik/kapali). KRITIK bulgu varsa raporun en üstünde PATRON UYARISI.
-6. Türkçe rapor; teknik terimler İngilizce kalabilir.`,
+6. Türkçe rapor; teknik terimler İngilizce kalabilir.
+TAZELİK KURALI: rapor, plan veya içerik üretmeden ÖNCE ilgili kaynakların
+   GÜNCEL halini diskten oku (.team/reports/ kayıtları, todos, ilgili dosyalar).
+   Hafızandaki eski özet ile disk çelişirse DİSK KAZANIR. Durumsal bilgiyi
+   ("yapıldı", "hazır", "onay bekliyor") yalnızca güncel disk kanıtıyla söyle —
+   bayat bilgiyle Patron'u meşgul etmek ihlaldir.`,
   instructionsPrompt: `Verilen güvenlik görevini yürüt:
 1. Kapsamı netleştir; ilgili dosyaları oku (auth, middleware, supabase, env).
 2. Gerekli kontrolleri çalıştır (npm audit, code_search desen taramaları).

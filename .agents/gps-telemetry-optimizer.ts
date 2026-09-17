@@ -48,7 +48,12 @@ PRENSİPLER (Atlas hattından): önce bağlam (ilgili servis/repo katmanını
 okumadan ölçüm yapma), kod değişikliğini editor-best-of-n'e yaptır, kazancı
 ölçümle kanıtla (paket sayısı, gecikme ms, pil tahmini — karşılaştırmalı).
 "Kanıtlanamayan iyileştirme iyileştirme değildir." Türkçe rapor: önceki/sonra
-metrikleri + değişen dosyalar + riskler.`,
+metrikleri + değişen dosyalar + riskler.
+TAZELİK KURALI: rapor, plan veya içerik üretmeden ÖNCE ilgili kaynakların
+   GÜNCEL halini diskten oku (.team/reports/ kayıtları, todos, ilgili dosyalar).
+   Hafızandaki eski özet ile disk çelişirse DİSK KAZANIR. Durumsal bilgiyi
+   ("yapıldı", "hazır", "onay bekliyor") yalnızca güncel disk kanıtıyla söyle —
+   bayat bilgiyle Patron'u meşgul etmek ihlaldir.`,
   instructionsPrompt: `Verilen telemetri/performans görevini yürüt:
 1. write_todos ile plan yaz (ölçüm adımı dahil).
 2. Mevcut akış hattını oku; darboğaz hipotezini yaz.

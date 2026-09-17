@@ -25,6 +25,23 @@ import { ajanÇalıştır as cagriCalistir, saglayiciCoz, protokolTesti, araçKi
 import { firsatTaramasiYap } from './firsat-tespiti.mjs'
 const KONSOL_DIR = path.dirname(new URL(import.meta.url).pathname.replace(/^\/(\w:)/, '$1'))
 const PROJE_KOK = path.resolve(KONSOL_DIR, '..', '..')
+
+// ---- Taze bağlam enjeksiyonu: Merve çağrılarına güncel repo durumu otomatik eklenir ----
+let tazeBaglamOnbellek = { veri: null, zaman: 0 }
+function tazeBaglamGetir() {
+  if (tazeBaglamOnbellek.veri && Date.now() - tazeBaglamOnbellek.zaman < 120_000) return tazeBaglamOnbellek.veri
+  try {
+    const { execSync } = require('node:child_process')
+    const gitLog = execSync('git log --oneline -3', { cwd: PROJE_KOK, encoding: 'utf8', timeout: 5000, windowsHide: true }).trim()
+    let akisUst = '(okunamadı)'
+    try {
+      akisUst = fs.readFileSync(path.join(PROJE_KOK, '.team', 'reports', 'gunluk-akis.md'), 'utf8')
+        .split('\n').filter(l => l.startsWith('## ')).slice(0, 3).join(' | ').slice(0, 500)
+    } catch {}
+    tazeBaglamOnbellek = { veri: { gitLog, akisUst }, zaman: Date.now() }
+    return tazeBaglamOnbellek.veri
+  } catch { return null }
+}
 const AGENTS_DIR = path.join(PROJE_KOK, '.agents')
 const PORT = Number(process.env.KOMUTA_PORT || 4311)
 
@@ -538,7 +555,12 @@ const server = http.createServer(async (req, res) => {
           try {
             const sonRun = oturum.runs[oturum.runs.length - 1]
             const geçmiş = sonRun?.__cagriGeçmiş || []
-            const sonuc = await cagriCalistir(tanim, gonderilenMetin, geçmiş, { oturumKimligi: oturum.id })
+            let cagriMetni = gonderilenMetin
+            {
+              const taze = tazeBaglamGetir()
+              if (taze) cagriMetni = `[SISTEM BAGLAMI — sunucu otomatik ekledi, şu anki gerçek durum]\nSon commitler:\n${taze.gitLog}\nGünlük akış son başlıkları: ${taze.akisUst}\nBu bağlam diskten taze okundu — rapor/plan/içerik üretirken bunu temel al, hafızandaki eski özete güvenme.\n\n---\nPATRON'UN EMRİ: ${gonderilenMetin}`
+            }
+            const sonuc = await cagriCalistir(tanim, cagriMetni, geçmiş, { oturumKimligi: oturum.id })
             oturum.runs.push({ __cagriGeçmiş: [...geçmiş, { role: 'user', content: gonderilenMetin }, { role: 'assistant', content: sonuc.metin }] })
             if (sonuc.acilDurum) {
               oturum.mesajlar.push({

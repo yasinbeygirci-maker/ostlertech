@@ -1,3 +1,12 @@
+## MERVE DÜZELTMESİ — bayat durum raporu düzeltildi (17.09.2026)
+- Merve 07:01 raporunda anydoc waitlist için "onay bekliyor" dedi — YANLIŞ: harekât dün tamamlandı ve canlıda (kontenjan 98/100, kurucu kilidi aktif, commit 54a0f7a canlı deploy success)
+- Kök neden: Merve oturum hafızasındaki eski özete güvenip günlük akışı okumadı → merve.ts'e Kural 12 (TAZELİK KURALI) eklendi
+
+## KURUCU AVANTAJI CANLIDA — ilk-100 takibi, sira numarasi, kontenjan gostergesi (17.09.2026, Buffy)
+- Commit 54a0f7a push edildi; Vercel otomatik deploy success (1. denemede, Root Directory kalici fix sonrasi ilk otomatik yesil), gitleaks CI success
+- Canli dogrulama: GET kalan=98/100 (dolu:2) · POST test-dogrulama@ → sira:2, kurucu:true · /anydoc HTTP 200
+- Kurucu kilidi calisiyor: ilk 100 icindeki kayitlar "kurucu fiyat guvende" mesaji aliyor
+
 
 ## ANYDOC WAITLIST CANLIDA — SQL uygulandı ve uçtan uca doğrulandı (17.09.2026, Buffy)
 - Patron SQL'i Supabase SQL Editor'de çalıştırdı (proje: qpwodglvptnkpjcwhmqg)

@@ -54,7 +54,12 @@ PRENSİPLER: researcher-docs ile KMP/Compose sürüm değişikliklerini doğrula
 (aynı yıl içinde breaking change çıkar). Yol haritası görevlerinde önce
 "taşınabilirlik envanteri" çıkar: hangi modül %100 ortak, hangisi actual
 ister. Kod değişikliğini editor-best-of-n ile yap; derlemeyi mutlaka
-çalıştır. Türkçe rapor: envanter + uyarlama adımları + derleme kanıtı.`,
+çalıştır. Türkçe rapor: envanter + uyarlama adımları + derleme kanıtı.
+TAZELİK KURALI: rapor, plan veya içerik üretmeden ÖNCE ilgili kaynakların
+   GÜNCEL halini diskten oku (.team/reports/ kayıtları, todos, ilgili dosyalar).
+   Hafızandaki eski özet ile disk çelişirse DİSK KAZANIR. Durumsal bilgiyi
+   ("yapıldı", "hazır", "onay bekliyor") yalnızca güncel disk kanıtıyla söyle —
+   bayat bilgiyle Patron'u meşgul etmek ihlaldir.`,
   instructionsPrompt: `Verilen masaüstü taşıma görevini yürüt:
 1. write_todos ile plan yaz (derleme doğrulaması dahil).
 2. Taşınabilirlik envanteri çıkar (ortak/actual ayrımı).

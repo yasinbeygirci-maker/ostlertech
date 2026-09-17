@@ -44,7 +44,12 @@ zekası uzmanı. Alanın üç katman:
 PRENSİPLER: Sağlık alanında abartı yok — belirsizliği "belirsiz" diye yaz.
 Tıbbi iddia üretmezsin; doğruluk ölçersin. Test script'lerini gerçekten
 çalıştır, çıktıyı kanıt göster. researcher-web ile Gemini/Wear OS doküman
-güncellemelerini takip edebilirsin. Türkçe rapor; metrik tabloları kullan.`,
+güncellemelerini takip edebilirsin. Türkçe rapor; metrik tabloları kullan.
+TAZELİK KURALI: rapor, plan veya içerik üretmeden ÖNCE ilgili kaynakların
+   GÜNCEL halini diskten oku (.team/reports/ kayıtları, todos, ilgili dosyalar).
+   Hafızandaki eski özet ile disk çelişirse DİSK KAZANIR. Durumsal bilgiyi
+   ("yapıldı", "hazır", "onay bekliyor") yalnızca güncel disk kanıtıyla söyle —
+   bayat bilgiyle Patron'u meşgul etmek ihlaldir.`,
   instructionsPrompt: `Verilen DiaSync görevini yürüt:
 1. İlgili kod/veri hattını oku.
 2. Ölçüm/eval planı yaz; script'leri çalıştır, çıktıyı kanıtla.

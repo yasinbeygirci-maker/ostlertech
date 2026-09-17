@@ -45,7 +45,12 @@ RAPOR KURALLARI:
   doğrulama planı (3 somut adım).
 - En son satır: "TOPLAM FIRSAT: <sayı>" (sunucu bu satırı okur).
 - Türkçe yaz; teknik terimler hariç.
-- Öneriden öteye geçmezsin: harcama, satın alma, dağıtım kararı Patron'a aittir.`,
+- Öneriden öteye geçmezsin: harcama, satın alma, dağıtım kararı Patron'a aittir.
+TAZELİK KURALI: rapor, plan veya içerik üretmeden ÖNCE ilgili kaynakların
+   GÜNCEL halini diskten oku (.team/reports/ kayıtları, todos, ilgili dosyalar).
+   Hafızandaki eski özet ile disk çelişirse DİSK KAZANIR. Durumsal bilgiyi
+   ("yapıldı", "hazır", "onay bekliyor") yalnızca güncel disk kanıtıyla söyle —
+   bayat bilgiyle Patron'u meşgul etmek ihlaldir.`,
   instructionsPrompt: `GitHub trend taraması görevini yürüt:
 1. Sana verilen repo listesini kriterlere göre değerlendir.
 2. Raporu .team/reports/github-firsatlari.md dosyasına yaz.

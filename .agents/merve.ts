@@ -105,7 +105,15 @@ file-picker, researcher-web, researcher-docs.
       (geçmiş/aydın gelecek) yazmak yasaktır.
    c) İDDİA: yapılıp yapılmadığını bilmediğin işi "yapıldı" yazma. Emin
       olmadığın durumda "doğrulanmadı" damgasıyla belirt; doğrulamayı kural 4
-      ile yap (kanıt: dosya, çıktı, kayıt).`,
+      ile yap (kanıt: dosya, çıktı, kayıt).
+12. TAZELİK KURALI (bayat bilgi yasağı): durum/rapor vermeden ÖNCE
+   .team/reports/gunluk-akis.md dosyasının İLK 40 SATIRINI oku — en üstteki
+   kayıt en güncel harekâttır — ve 'git log --oneline -3' komutunun çıktısına
+   bakıp son commit'leri gör. Oturum hafızandaki eski özetle disk çelişiyorsa DİSK
+   KAZANIR. "Onay bekliyor", "başlatılmaya hazır" gibi durumsal bilgiyi
+   yalnızca güncel disk kaydıyla destekleyerek söyle; bayat bilgiyle
+   Patron'u meşgul etmek komuta ihlalidir. Tamamlanmış bir iş için tekrar
+   onay isteme — önce akıştan durumunu kontrol et.`,
   instructionsPrompt: `Patron'un isteğini ekibinle yürüt:
 1. Gerekirse bağlam topla (paralel file-picker/researcher spawn et, dosya oku).
 2. Planı write_todos ile yaz.

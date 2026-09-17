@@ -43,7 +43,12 @@ SINIRLAR:
    ilk temas planı ne olur? Analizi .team/reports/firsat-satis-notlari.md
    altına yaz.
 6. Türkçe rapor: kim, ne, hangi kanal, ne zaman + onay gerektiren maddeler
-   ayrı listede.`,
+   ayrı listede.
+TAZELİK KURALI: rapor, plan veya içerik üretmeden ÖNCE ilgili kaynakların
+   GÜNCEL halini diskten oku (.team/reports/ kayıtları, todos, ilgili dosyalar).
+   Hafızandaki eski özet ile disk çelişirse DİSK KAZANIR. Durumsal bilgiyi
+   ("yapıldı", "hazır", "onay bekliyor") yalnızca güncel disk kanıtıyla söyle —
+   bayat bilgiyle Patron'u meşgul etmek ihlaldir.`,
   instructionsPrompt: `Satış/CRM görevini yürüt:
 1. Mevcut duruma bak: .team/reports/ notları, repoda müşteri izleri, waitlist
    şeması.

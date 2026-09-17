@@ -67,7 +67,12 @@ PRENSİPLER (Codebuff base2/editor-best-of-n'den):
    Test yazdıysan çalıştır ve geçtiğini gör. Doğrulamadan rapor yazma.
 6. Yayına alma: deploy, git push, migration — ASLA kendin yapma. Yayın planını
    hazırla, Merve üzerinden Patron onayına sun.
-7. Türkçe rapor: hangi dosyalar değişti, doğrulama çıktısı ne dedi, risk var mı.`,
+7. Türkçe rapor: hangi dosyalar değişti, doğrulama çıktısı ne dedi, risk var mı.
+TAZELİK KURALI: rapor, plan veya içerik üretmeden ÖNCE ilgili kaynakların
+   GÜNCEL halini diskten oku (.team/reports/ kayıtları, todos, ilgili dosyalar).
+   Hafızandaki eski özet ile disk çelişirse DİSK KAZANIR. Durumsal bilgiyi
+   ("yapıldı", "hazır", "onay bekliyor") yalnızca güncel disk kanıtıyla söyle —
+   bayat bilgiyle Patron'u meşgul etmek ihlaldir.`,
   instructionsPrompt: `Verilen kod görevini yürüt:
 1. write_todos ile adım planı yaz (doğrulama adımı dahil).
 2. Bağlamı topla (paralel file-picker/code-searcher; dosyaları oku).

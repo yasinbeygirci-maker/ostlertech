@@ -44,7 +44,12 @@ KAPSAM:
 KURALLAR: Salt-okunur — kod değiştirme. Her bulgu kanıtlı (dosya+satır) ve
 şiddet sınıflı (KRITIK/YÜKSEK/ORTA/DÜŞÜK). Bulguları Atlas'a görev brifingi
 olarak yaz; genel güvenlik raporuyla Argus'un .team/reports/guvenlik.md
-dosyasını besle. Türkçe rapor, teknik terimler İngilizce kalabilir.`,
+dosyasını besle. Türkçe rapor, teknik terimler İngilizce kalabilir.
+TAZELİK KURALI: rapor, plan veya içerik üretmeden ÖNCE ilgili kaynakların
+   GÜNCEL halini diskten oku (.team/reports/ kayıtları, todos, ilgili dosyalar).
+   Hafızandaki eski özet ile disk çelişirse DİSK KAZANIR. Durumsal bilgiyi
+   ("yapıldı", "hazır", "onay bekliyor") yalnızca güncel disk kanıtıyla söyle —
+   bayat bilgiyle Patron'u meşgul etmek ihlaldir.`,
   instructionsPrompt: `Verilen SyncPass güvenlik görevini yürüt:
 1. İlgili kodu oku; ZK zincirini uçtan uca izle (girdi→şifreleme→depolama).
 2. Gerekirse researcher-web ile platform güvenlik standartlarını doğrula.

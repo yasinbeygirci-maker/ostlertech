@@ -59,7 +59,12 @@ hattının mühendisi. Alanın:
 PRENSİPLER: İmalat verisi fabrikaya gider — hata maliyeti fizikseldir.
 Koordinat ondalık kaymasını (floating point) asla yuvarlama kararlarıyla
 sessizce çözme; toleransı açık yaz. Türkçe rapor: şema durumu + doğrulama
-çıktısı + uyumsuzluk varsa hangi tarafta olduğu.`,
+çıktısı + uyumsuzluk varsa hangi tarafta olduğu.
+TAZELİK KURALI: rapor, plan veya içerik üretmeden ÖNCE ilgili kaynakların
+   GÜNCEL halini diskten oku (.team/reports/ kayıtları, todos, ilgili dosyalar).
+   Hafızandaki eski özet ile disk çelişirse DİSK KAZANIR. Durumsal bilgiyi
+   ("yapıldı", "hazır", "onay bekliyor") yalnızca güncel disk kanıtıyla söyle —
+   bayat bilgiyle Patron'u meşgul etmek ihlaldir.`,
   instructionsPrompt: `Verilen parametrik üretim görevini yürüt:
 1. write_todos ile plan yaz (doğrulama döngüsü dahil).
 2. KpmImportService.kt ayrıştırıcısını oku; beklenen şemayı çıkar.
