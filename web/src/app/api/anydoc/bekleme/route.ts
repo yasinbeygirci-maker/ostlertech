@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { getSupabase } from "@/lib/supabase";
 import { kurucuMailiGonder } from "@/lib/kurucu-maili";
 
@@ -115,9 +115,11 @@ export async function POST(istek: Request) {
   const sira = await siraGetir(email);
   const kurucu = sira !== null && sira <= KONTENJAN;
 
-  // Otomatik karşılama maili — ateşle-unut: yanıt bekletmez, kayıt akışını bozmaz,
+  // Otomatik karşılama maili — after(): yanıt kullanıcıya gittikten SONRA çalışır
+  // ama Vercel fonksiyonunu dondurmadan işi garantiye alır (ç background task).
   // RESEND_API_KEY yoksa sessizce atlanır (zarif bozulma).
-  void kurucuMailiGonder(email, sira, kurucu).then((sonuc) => {
+  after(async () => {
+    const sonuc = await kurucuMailiGonder(email, sira, kurucu);
     if (!sonuc.gitti) {
       console.log(`[anydoc-bekleme] karşılama maili atlandı: ${sonuc.sebep}`);
     }
