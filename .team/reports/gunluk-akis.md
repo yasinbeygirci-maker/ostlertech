@@ -1,3 +1,9 @@
+## OTOMATIK KURUCU MAILI KURULDU — Resend hatti hazir (17.09)
+- Mimaride basitlestirme: webhook + trigger yerine tek-nokta gonderim (POST /api/anydoc/bekleme icinde, kayit dustugu an)
+- Yeni: web/src/lib/kurucu-maili.ts — Resend REST fetch (0 paket), fire-and-forget, anahtar yoksa zarif bosulma
+- route.ts: kayit sonrasi void kurucuMailiGonder(...) — yanit bekletmez, akis bozulmaz
+- Test (4313 lokal): tsc 0, build OK, yeni kayit 200 + "3. sira", dogrulama 400, honeypot OK, log: "karsilama maili atlandi: anahtar yok" (beklenen)
+- Canlida aktif olmasi icin: RESEND_API_KEY (Vercel prod env) + resend.dev dogrulamasi — Patron adimlari beklemede
 ## S1-1 KANITLI GONDERIM — zincir onaylandi (17.09)
 - Ikinci deneme basarili: mail Gönderilmişler'de dogrulandi (ilk deneme yarim kalmisti)
 - gonderim-takip.md S1-1: gonderildi (kanitli) — OZET 1/22

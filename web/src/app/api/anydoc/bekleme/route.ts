@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getSupabase } from "@/lib/supabase";
+import { kurucuMailiGonder } from "@/lib/kurucu-maili";
 
 export const runtime = "nodejs";
 
@@ -113,6 +114,14 @@ export async function POST(istek: Request) {
   // Kayıt başarılı — sıra numarasını sor (RPC yoksa null, mesaj genel kalır)
   const sira = await siraGetir(email);
   const kurucu = sira !== null && sira <= KONTENJAN;
+
+  // Otomatik karşılama maili — ateşle-unut: yanıt bekletmez, kayıt akışını bozmaz,
+  // RESEND_API_KEY yoksa sessizce atlanır (zarif bozulma).
+  void kurucuMailiGonder(email, sira, kurucu).then((sonuc) => {
+    if (!sonuc.gitti) {
+      console.log(`[anydoc-bekleme] karşılama maili atlandı: ${sonuc.sebep}`);
+    }
+  });
 
   return NextResponse.json({
     mesaj: kurucu
