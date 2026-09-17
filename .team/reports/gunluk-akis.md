@@ -1,3 +1,5 @@
+## CI SECRET-SCAN YESILENDI — 59508a1: gitleaks wrapper lisans istemeye basladi (b3f591f-ba9dd82-a277cb5 failurelari); CLI dogrudan kuruldu + .gitleaksignore ile 4 yanlis-pozitif (eski .next/.idea kalintilari + Groq model adi) beyaz listeye alindi; 59508a1 CI: success — gercek sizinti YOK
+
 ## OTOMATIK MAIL CANLI — ba9dd82: after() fix (serverless donmasi) + ekip@ostlertech.com gonderici; uretim testi: kayit 6. sira → [kurucu-maili] GONDERILDI (Vercel log kaniti) — ilk gercek musteride mail otomatik gidecek
 
 ## OTOMATIK MAIL HATTI CANLIDA DOGRULANDI — d86fed9 push → Vercel Ready (39sn) → uretim POST (4. sira) → Resend 403 (test kurali: sadece kendi adrese) — hattin tamami calisiyor, kalan tek adim ostlertech.com alan adi dogrulamasi
