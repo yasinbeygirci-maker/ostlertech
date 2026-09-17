@@ -12,9 +12,9 @@
 
 const RESEND_API = "https://api.resend.com/emails";
 
-// Varsayılan gönderici: alan adı doğrulanana kadar Resend test adresi.
-// Alan adı (ostlertech.com) Resend'de doğrulanınca RESEND_FROM ile değiştirilecek.
-const VARSAYILAN_FROM = "AnyDoc <onboarding@resend.dev>";
+// Gönderici: alan adı (ostlertech.com) Resend'de doğrulandı — kurumsal adresten gider.
+// Gerekirse RESEND_FROM env ile geçersiz kılınabilir.
+const VARSAYILAN_FROM = "AnyDoc <ekip@ostlertech.com>";
 
 const KONTENJAN = 100;
 
