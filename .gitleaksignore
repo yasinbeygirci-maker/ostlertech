@@ -1,0 +1,10 @@
+# Gitleaks yanlış-pozitif beyaz listesi (2026-09-17)
+# Format: <commit>:<dosya>:<kural>:<satir>
+# Kanıt: lokal tarama raporu (gitleaks v8.30.1, 25 commit, 4 bulgu — hiçbiri gerçek sızıntı değil)
+#
+# 1) cagri.mjs:48 — Groq MODEL ADI listesi ('GROQ_API_KEY' dizi anahtarı, gerçek anahtar değil)
+122e9f84f99ae1d58207244c0138b20dc70cbf44:.team/konsol/cagri.mjs:generic-api-key:48
+# 2-4) Eski commit'lerdeki derleme/IDE çıktıları — dosyalar repodan silindi,
+#      yalnızca git geçmişinde yaşıyor (değerler Next.js şablon yer tutucuları)
+2f10cdc2261f5213a917d2d63e90d14c27bd4295:.idea/planningMode.xml:generic-api-key:6
+2f10cdc2261f5213a917d2d63e90d14c27bd4295:.next/prerender-manifest.json:generic-api-key:1
