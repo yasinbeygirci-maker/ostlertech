@@ -1,4 +1,10 @@
-# Merve'nin Günlük Akışı & İşlem Kaydı - 16 Eylül 2026
+
+## ANYDOC WAITLIST CANLIDA — SQL uygulandı ve uçtan uca doğrulandı (17.09.2026, Buffy)
+- Patron SQL'i Supabase SQL Editor'de çalıştırdı (proje: qpwodglvptnkpjcwhmqg)
+- Canlı API 3 test: yeni kayıt ✓ 200 · aynı e-posta tekrar → 'zaten listede' ✓ (unique kısıt çalışıyor = tablo gerçek) · geçersiz e-posta → 400 ✓
+- Test kaydı: test-dogrulama@ostlertech.com (istek üzerine Patron silebilir)
+- AnyDoc harekâtı TAMAMLANDI: landing + form + DB + canlı doğrulama
+# Merve'nin Günlük Akışı & İşlem Kaydı - 17 Eylül 2026
 
 ## DEPLOY KRİZİ ÇÖZÜLDÜ — site yeniden yayında (16.09.2026, Buffy)
 - Bulgu: Vercel deploy'ları 6 committir kırıktı — canlı site eski build'de, /products + /anydoc + robots.txt 404
@@ -60,4 +66,4 @@
 - **08:11**: Patron'un isteği üzerine Atlas'ın AnyDoc hâtakâtı teknik brif/planı hazırlandı.
 - **08:12**: `.team/reports/atlas-anydoc-plan.md` dosyasına sayfa bölümleri, Supabase veri modeli (RLS insert-only), teknik yığın uyumu ve risk/önlem analizleri eksiksiz yazıldı.
 - **11:15**: Bugünkü iş dağıtımı tamamlandı. Argus Faz 4 CI Secret-Scan taslağını hazırladı, Mentor Supabase RLS güvenlik notlarını paylaştı, Atlas Next.js 15 build sağlığını doğruladı. Merve ekibi koordine etti ve raporları tamamladı.
-\"17 Eyl�l 2026: AnyDoc projesi i�in bekleme listesi altyap�s� kuruldu, landing sayfas� geli�tirildi ve build ba�ar�yla tamamland�.\" 
+\"17 Eyl�l 2026: AnyDoc projesi i�in bekleme listesi altyap�s� kuruldu, landing sayfas� geli�tirildi ve build ba�ar�yla tamamland�.\" 

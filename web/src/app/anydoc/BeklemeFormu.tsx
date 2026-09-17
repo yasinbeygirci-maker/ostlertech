@@ -9,6 +9,7 @@ export default function BeklemeFormu() {
   const [email, setEmail] = useState("");
   const [durum, setDurum] = useState<Durum>("bos");
   const [mesaj, setMesaj] = useState("");
+  const [sira, setSira] = useState<number | null>(null);
 
   async function gonder(e: React.FormEvent) {
     e.preventDefault();
@@ -27,6 +28,7 @@ export default function BeklemeFormu() {
       if (cevap.ok) {
         setDurum("basarili");
         setMesaj(veri.mesaj || "Listedesin!");
+        setSira(typeof veri.sira === "number" && veri.sira > 0 ? veri.sira : null);
       } else {
         setDurum("hata");
         setMesaj(veri.hata || "Bir şeyler ters gitti, tekrar dene.");
@@ -42,7 +44,9 @@ export default function BeklemeFormu() {
       <div className="max-w-md mx-auto flex items-center gap-3 px-6 py-5 rounded-2xl bg-primary/10 border border-primary/30 text-left">
         <PartyPopper size={22} className="text-primary shrink-0" />
         <div>
-          <div className="font-bold text-sm">Listedesin! 🎉</div>
+          <div className="font-bold text-sm">
+            {sira ? `${sira}. sıradasin! 🎉` : "Listedesin! 🎉"}
+          </div>
           <div className="text-xs text-white/60 mt-0.5">{mesaj}</div>
         </div>
       </div>

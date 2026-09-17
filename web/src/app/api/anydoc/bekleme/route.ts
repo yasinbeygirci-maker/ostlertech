@@ -24,6 +24,39 @@ function hizSiniriAsildi(ip: string): boolean {
 
 const EPOSTA_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+const KONTENJAN = 100;
+
+// GET: kalan kurucu kontenjanı (RPC yoksa kalan:null — arayüz göstergesini gizler)
+export async function GET() {
+  try {
+    const { data, error } = await getSupabase().rpc("anydoc_kalan_kontenjan");
+    if (error) throw error;
+    const kalan = Number(data);
+    if (!Number.isFinite(kalan)) throw new Error("geçersiz rpc yanıtı");
+    return NextResponse.json(
+      { kalan, kontenjan: KONTENJAN, dolu: Math.max(0, KONTENJAN - kalan) },
+      { headers: { "Cache-Control": "no-store" } },
+    );
+  } catch {
+    return NextResponse.json(
+      { kalan: null, kontenjan: KONTENJAN },
+      { headers: { "Cache-Control": "no-store" } },
+    );
+  }
+}
+
+async function siraGetir(email: string): Promise<number | null> {
+  try {
+    const { data, error } = await getSupabase()
+      .rpc("anydoc_sira_numarasi", { p_email: email });
+    if (error) throw error;
+    const sira = Number(data);
+    return Number.isFinite(sira) && sira > 0 ? sira : null;
+  } catch {
+    return null; // fonksiyon henüz kurulmadıysa sessizce boş
+  }
+}
+
 export async function POST(istek: Request) {
   let govde: { email?: string; website?: string };
   try {
@@ -57,13 +90,17 @@ export async function POST(istek: Request) {
 
   const { error } = await getSupabase()
     .from("anydoc_waitlist")
-    .insert({ email, kaynak: "landing" });
-
-  if (error) {
-    // Unique kısıt ihlali = zaten kayıtlı — kullanıcı dostu mesaj
+    .insert({ email, kaynak: "landing" });  if (error) {
+    // Unique kısıt ihlali = zaten kayıtlı — kullanıcı dostu mesaj + sıra bilgisi
     if (error.code === "23505") {
+      const sira = await siraGetir(email);
+      const kurucu = sira !== null && sira <= KONTENJAN;
       return NextResponse.json({
-        mesaj: "Bu e-posta zaten listede — erken erişim başlayınca haberin olacak.",
+        mesaj: kurucu
+          ? `Bu e-posta zaten listede — ${sira}. sıradasin, kurucu fiyatın güvende.`
+          : "Bu e-posta zaten listede — erken erişim başlayınca haberin olacak.",
+        sira,
+        kurucu,
       });
     }
     console.error("[anydoc-bekleme] supabase hatası:", error.message);
@@ -73,7 +110,15 @@ export async function POST(istek: Request) {
     );
   }
 
+  // Kayıt başarılı — sıra numarasını sor (RPC yoksa null, mesaj genel kalır)
+  const sira = await siraGetir(email);
+  const kurucu = sira !== null && sira <= KONTENJAN;
+
   return NextResponse.json({
-    mesaj: "Erken erişim başladığında ilk haber sen olacak — kurucu fiyatın güvende.",
+    mesaj: kurucu
+      ? `İlk 100'desin (${sira}. sıra) — ömür boyu %50 kurucu fiyatın güvende.`
+      : "Erken erişim başladığında ilk haber sen olacak — kurucu fiyatın güvende.",
+    sira,
+    kurucu,
   });
 }

@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { FileText, Zap, ArrowRight, Check, FileCode2, Gauge, Lock, Database, Mail, Rocket, ShieldCheck, HelpCircle } from "lucide-react";
 import BeklemeFormu from "./BeklemeFormu";
+import KontenjanGostergesi from "./KontenjanGostergesi";
 
 export const metadata: Metadata = {
   title: "AnyDoc — Belgelerinizi LLM Hazır Markdown'a Çevirin | OstlerTech",
@@ -113,6 +114,7 @@ export default function AnydocPage() {
           </p>
 
           <BeklemeFormu />
+          <KontenjanGostergesi />
 
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mt-10 text-xs text-white/50 font-medium">
             <span className="flex items-center gap-2"><Check size={14} className="text-primary" /> İlk ay 5.000 sayfa ücretsiz</span>
@@ -255,6 +257,7 @@ export default function AnydocPage() {
             sayfa ve ömür boyu %50 indirim.
           </p>
           <BeklemeFormu />
+          <KontenjanGostergesi />
         </div>
       </section>
 
