@@ -1,3 +1,47 @@
+## S1-1 KANITLI GONDERIM — zincir onaylandi (17.09)
+- Ikinci deneme basarili: mail Gönderilmişler'de dogrulandi (ilk deneme yarim kalmisti)
+- gonderim-takip.md S1-1: gonderildi (kanitli) — OZET 1/22
+- Zincir aktif: G+1 kontrol 18.09, G+3 hatirlatma 20.09, G+7 kapanis 24.09
+- Canli test sonucu: mail gorunumu Patron tarayicisinda acildi, metin panodan gitti
+## ILK GONDERIM YAPILDI — S1-1 kurucu kilidi maili (17.09)
+- Patron maili kendine gonderdi (yasinbeygirci@gmail.com) = canli gorunum testi gecti
+- gonderim-takip.md: S1-1 gonderildi, OZET 1/22; S1-2 gonderilmez kurali isledi
+- Takip zinciri kuruldu: .team/reports/s1-takip-zinciri.md — G+3 hatirlatma + G+7 kapanis metinleri hazir
+- Kural: gercek musteri gelince ayni paket + ayni zincir aynen isletilir
+## S1 ALICI NETLESTI — kayit Patron'un kendi testiymis (17.09)
+- Supabase goruntusu: 2 kayit — 1. sira yasinbeygirci@gmail.com (22:22), 2. sira test-dogrulama@ (22:24)
+- "Gercek ilk musteri" varsayimi YANLISTI — kayit Patron'un landing testi. Dis musteri: 0
+- Yeni plan: S1-1 maili Patron kendine gonderecek = mail gorunumunun canli testi
+- Paket guncellendi: README'ye alici yazildi (adres kopyalama adimi kalkti), eposta.html + eposta-metin.txt hazir
+- Ders: kota dogrulanmadan "gercek musteri" ilan edilmez — tazelik kurali bir kez daha isini yapti
+## SEGMENT 1 GONDERIM PAKETI HAZIR — 1. siradaki kurucu adayi icin eposta paketi kuruldu (17.09)
+- kurucu-kilidi-s1-gonderim-paketi/: eposta.html (A varyanti, sira=1, OstlerTech imzasi) + README (alici, konu satiri, 5 dakikalik gonderim adimlari)
+- Tek eksik: Patron Supabase Table Editor-den alici epostasini kopyalayacak (service-role anahtari lokalde yok, RLS anon okumayi engelliyor — beklenen davranis)
+
+## GONDERIM TAKIP SISTEMI KURULDU — 22 gonderim noktasi izlem altinda (17.09)
+- gonderim-takip.md: Segment 1 (2) + Kanal A (10) + B (6) + C (4), durum sozlugu, gunluk ozet tablosu
+- vera.ts madde 7 eklendi: Vera gonderim/cevap sonrasi defteri guncellememek zorunda — hot-reload 14 ajan ✓
+
+## KANAL B+C METINLERI HAZIR — Vera 10 hedef icin DM + kurumsal eposta metni yazdi (17.09)
+- vera-kanal-b-c-gonderim-metinleri.md (12 KB) — B: 6 DM, C: 4 eposta; imzalar tek tip OstlerTech Ekibi
+- Buffy eposta dogrulamasi: support@unstructured.io VE info@infiniflow.com canli teyitli; hi@khoj.dev uydurma cikti — kaldirildi, form/Discussions kanali yazildi
+
+## IMZA DUZELTMESI — Kanal A metinleri Vera imzasindan OstlerTech Ekibi imzasina cevrildi (17.09)
+- 10/10 metin artik Patron adina gonderime hazir; basliga hazirlayan/gonderen ayrimi notu eklendi
+
+## KANAL A METINLERI HAZIR — Vera 10 hedef icin kisisellestirilmis gonderim metni yazdi (17.09)
+- vera-kanal-a-gonderim-metinleri.md (10.6 KB) — 0 uydurma eposta, CTA+fiyat 12 kez tutarli, temizlenmis isimler kullanildi, checklist ekinde
+
+## SEGMENT 2 ONAYLANDI — Patron 20 kisilik listeye gonderim yetkisi verdi (17.09)
+- vera-segment2-hedef-liste.md basligina ONAYLANDI damgasi; sirada gonderim kanal plani
+
+## ISIM DOGRULAMA TAMAM — Segment 2 listedeki 3 supheli isim Contributors API ile temizlendi (17.09)
+- Firecrawl: nickscamara+mogery (ekip geneli) / Open-WebUI: Timothy Jaeryang Baek (tjbck) / FastAPI: tiangolo (topluluk kanali) — 3/3 kanitli duzeltme
+
+## SEGMENT 2 HEDEF LISTE — Vera 20 kisilik RAG/LLM cold-outreach listesi cikardi (17.09)
+- .team/reports/vera-segment2-hedef-liste.md — proje 20/20 gercel (GitHub API Buffy dogrulamasi)
+- Buffy duzeltme notu: 3 repo adresi bayat (marker/firecrawl/kotaemon tasindi) + 3 kisi adi supheli, gonderim oncesi Contributors sayfasindan teyit sart
+
 ## KURUCU KİLİDİ KAMPANYASI ONAYLANDI (17.09.2026)
 - Patron Vera'nın A+B varyantlarını onayladı → Iris'e HTML şablon görevi dağıtıldı, hedef liste çıkarma Vera işi
 

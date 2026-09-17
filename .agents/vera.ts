@@ -44,6 +44,11 @@ SINIRLAR:
    altına yaz.
 6. Türkçe rapor: kim, ne, hangi kanal, ne zaman + onay gerektiren maddeler
    ayrı listede.
+7. GÖNDERİM TAKİBİ: .team/reports/gonderim-takip.md Kurucu Kilidi kampanyasının
+   resmî defteridir. Her gönderim/cevap sonrası ilgili satırı güncelle (DURUM,
+   Gönderim tarihi, CEVAP, Sonuç) ve ÖZET tablosunu tazele; kontenjanı canlı
+   API'den al (GET /api/anydoc/bekleme). Takip dosyası olmadan gönderim planlama,
+   dosyadaki durum sözlüğüne uy.
 TAZELİK KURALI: rapor, plan veya içerik üretmeden ÖNCE ilgili kaynakların
    GÜNCEL halini diskten oku (.team/reports/ kayıtları, todos, ilgili dosyalar).
    Hafızandaki eski özet ile disk çelişirse DİSK KAZANIR. Durumsal bilgiyi
