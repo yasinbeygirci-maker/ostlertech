@@ -1,3 +1,6 @@
+## KURUCU KİLİDİ KAMPANYASI ONAYLANDI (17.09.2026)
+- Patron Vera'nın A+B varyantlarını onayladı → Iris'e HTML şablon görevi dağıtıldı, hedef liste çıkarma Vera işi
+
 ## MERVE DÜZELTMESİ — bayat durum raporu düzeltildi (17.09.2026)
 - Merve 07:01 raporunda anydoc waitlist için "onay bekliyor" dedi — YANLIŞ: harekât dün tamamlandı ve canlıda (kontenjan 98/100, kurucu kilidi aktif, commit 54a0f7a canlı deploy success)
 - Kök neden: Merve oturum hafızasındaki eski özete güvenip günlük akışı okumadı → merve.ts'e Kural 12 (TAZELİK KURALI) eklendi

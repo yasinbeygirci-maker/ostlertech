@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnyDoc — İlk 100 Kurucu Kilidi</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #020617; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #f8fafc;">
+  <!-- Dış sarmalayıcı tablo yerine div yapısı (tablo yok kuralı gereği) -->
+  <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px; background-color: #020617;">
+    
+    <!-- Header / Logo -->
+    <div style="text-align: center; margin-bottom: 32px;">
+      <span style="display: inline-block; background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); color: #ffffff; font-weight: 800; font-size: 20px; padding: 10px 20px; border-radius: 8px; letter-spacing: -0.5px;">OstlerTech AnyDoc</span>
+    </div>
+
+    <!-- Ana Kart / Container -->
+    <div style="background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 32px; margin-bottom: 24px;">
+      
+      <!-- Sekme Seçici Gösterge (A ve B varyantları için ana başlık) -->
+      <div style="margin-bottom: 24px; border-bottom: 1px solid #1e293b; padding-bottom: 16px;">
+        <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #38bdf8; font-weight: 700;">OstlerTech Kampanya Bülteni</span>
+        <h1 style="margin: 8px 0 0 0; font-size: 24px; line-height: 1.3; color: #f8fafc; font-weight: 700;">İlk 100 Kurucu Kilidi</h1>
+      </div>
+
+      <!-- VARYANT A BÖLÜMÜ -->
+      <div style="margin-bottom: 40px;">
+        <div style="display: inline-block; background-color: #1e3a8a; color: #93c5fd; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 4px; margin-bottom: 16px;">Varyant A: Bekleme Listesi (Sıcak)</div>
+        
+        <p style="margin: 0 0 16px 0; color: #cbd5e1; font-size: 15px; line-height: 1.6;">
+          Merhaba <strong style="color: #f8fafc;">{ad}</strong>,
+        </p>
+        <p style="margin: 0 0 16px 0; color: #cbd5e1; font-size: 15px; line-height: 1.6;">
+          AnyDoc erken erişim listesine kaydolduğunuz için teşekkürler — <strong style="color: #38bdf8;">{sira}. sıradasınız.</strong>
+        </p>
+        <p style="margin: 0 0 16px 0; color: #cbd5e1; font-size: 15px; line-height: 1.6;">
+          Hatırlatmak isterim: ilk 100 kişi arasında aboneliğe geçen herkes, aboneliği aktif kaldığı sürece <strong style="color: #f8fafc;">ömür boyu %50 indirimli kurucu fiyatına</strong> kilitleniyor. Yani $29 yerine <strong style="color: #38bdf8;">$14.50/ay</strong> — her ay, sonsuza dek. Üstelik ilk ay <strong style="color: #f8fafc;">5.000 sayfa ücretsiz</strong>, kredi kartı istemiyoruz.
+        </p>
+        <p style="margin: 0 0 20px 0; color: #cbd5e1; font-size: 15px; line-height: 1.6;">
+          Şu an kontenjanın <strong style="color: #38bdf8;">%98'i boş</strong> — ama lansman duyurusuyla birlikte dolmasını bekliyoruz. Sıranız sabit; fiyat avantajı ise "ilk 100'den aboneliğe geçenlere" ait.
+        </p>
+
+        <!-- CTA A -->
+        <div style="text-align: center; margin: 24px 0;">
+          <a href="https://www.ostlertech.com/anydoc" target="_blank" style="display: inline-block; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color: #ffffff; font-weight: 600; font-size: 16px; text-decoration: none; padding: 14px 28px; border-radius: 8px; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);">Bekleme Listesi / Yeri Kapat</a>
+        </div>
+        
+        <p style="margin: 16px 0 0 0; color: #94a3b8; font-size: 14px; line-height: 1.5;">
+          Sorularınız varsa bu maili cevaplayın — doğrudan bana geliyor.<br>
+          <strong style="color: #cbd5e1;">Vera — OstlerTech</strong>
+        </p>
+      </div>
+
+      <!-- Ayırıcı Çizgi -->
+      <div style="border-top: 1px dashed #334155; margin: 32px 0;"></div>
+
+      <!-- VARYANT B BÖLÜMÜ -->
+      <div>
+        <div style="display: inline-block; background-color: #065f46; color: #6ee7b7; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 4px; margin-bottom: 16px;">Varyant B: Soğuk Çıkış (RAG / LLM Ekipleri)</div>
+        
+        <p style="margin: 0 0 16px 0; color: #cbd5e1; font-size: 15px; line-height: 1.6;">
+          Merhaba <strong style="color: #f8fafc;">{ad}</strong>,
+        </p>
+        <p style="margin: 0 0 16px 0; color: #cbd5e1; font-size: 15px; line-height: 1.6;">
+          Ekiplerinizin LLM hattına belge basıyorsanız çoğu aracı kaybediyor: tablolar dağılıyor, başlıklar düz metne dönüşüyor, token israfı patlıyor. AnyDoc bunu çözmek için kuruldu: PDF/DOCX/XLSX/EPUB'u <strong style="color: #38bdf8;">yapıyı koruyan, token-verimli Markdown'a</strong> çeviren Rust motoru.
+        </p>
+        <p style="margin: 0 0 20px 0; color: #cbd5e1; font-size: 15px; line-height: 1.6;">
+          Lansman öncesi <strong style="color: #f8fafc;">ilk 100 kurucu</strong> arasına davet ediyorum: ömür boyu %50 indirim ($29 yerine $14.50/ay), ilk ay 5.000 sayfa ücretsiz, kredi kartı yok.
+        </p>
+
+        <!-- CTA B -->
+        <div style="text-align: center; margin: 24px 0;">
+          <a href="https://www.ostlertech.com/anydoc" target="_blank" style="display: inline-block; background: linear-gradient(135deg, #059669 0%, #047857 100%); color: #ffffff; font-weight: 600; font-size: 16px; text-decoration: none; padding: 14px 28px; border-radius: 8px; box-shadow: 0 4px 14px rgba(5, 150, 105, 0.4);">30 Saniyede Kurucu Ol</a>
+        </div>
+
+        <p style="margin: 16px 0 0 0; color: #94a3b8; font-size: 14px; line-height: 1.5;">
+          <strong style="color: #cbd5e1;">Vera — OstlerTech</strong>
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div style="text-align: center; color: #64748b; font-size: 12px; line-height: 1.5;">
+      <p style="margin: 0 0 8px 0;">OstlerTech © 2026 — Tüm hakları saklıdır.</p>
+      <p style="margin: 0;">Bu e-posta OstlerTech AnyDoc kurucu kampanyası kapsamında gönderilmiştir.</p>
+    </div>
+
+  </div>
+</body>
+</html>
