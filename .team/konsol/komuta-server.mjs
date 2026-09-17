@@ -530,12 +530,16 @@ const server = http.createServer(async (req, res) => {
         if (!mesaj || typeof mesaj !== 'string') return JSON_GONDER(res, 400, { hata: 'mesaj zorunlu' })
 
         // ---- Otomatik yönlendirme: ajan seçilmemişse emir Merve'nin dağıtım kuralıyla gider ----
-        const hedefAjan = (ajanGecis && ajanGecis !== 'otomatik') ? ajanGecis : 'merve'
+        // (mevcut oturuma ajan belirtilmemişse oturumun kendi ajanı KORUNUR — ezme yok)
+        const mevcutOturum = oturumId && oturumlar.get(oturumId)
+        const hedefAjan = (ajanGecis && ajanGecis !== 'otomatik')
+          ? ajanGecis
+          : (mevcutOturum ? mevcutOturum.ajan : 'merve')
         const gonderilenMetin = otomatik && ajanGecis !== 'merve'
           ? `MERVE, YONLENDIRME: Patron ajan secmeden bu emri yazdi — sen dağıt. Emir: ${mesaj}`
           : mesaj
 
-        const oturum = (oturumId && oturumlar.get(oturumId)) || oturumOlustur(hedefAjan)
+        const oturum = mevcutOturum || oturumOlustur(hedefAjan)
         if (hedefAjan !== oturum.ajan) oturum.ajan = hedefAjan
         oturum.mesajlar.push({ rol: 'patron', metin: mesaj, zaman: Date.now(), otomatik: !!otomatik })
 
