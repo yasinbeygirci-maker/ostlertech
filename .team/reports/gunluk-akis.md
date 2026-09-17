@@ -1,3 +1,7 @@
+## OTOMATIK MAIL CANLI — ba9dd82: after() fix (serverless donmasi) + ekip@ostlertech.com gonderici; uretim testi: kayit 6. sira → [kurucu-maili] GONDERILDI (Vercel log kaniti) — ilk gercek musteride mail otomatik gidecek
+
+## OTOMATIK MAIL HATTI CANLIDA DOGRULANDI — d86fed9 push → Vercel Ready (39sn) → uretim POST (4. sira) → Resend 403 (test kurali: sadece kendi adrese) — hattin tamami calisiyor, kalan tek adim ostlertech.com alan adi dogrulamasi
+
 ## OTOMATIK KURUCU MAILI KURULDU — Resend hatti hazir (17.09)
 - Mimaride basitlestirme: webhook + trigger yerine tek-nokta gonderim (POST /api/anydoc/bekleme icinde, kayit dustugu an)
 - Yeni: web/src/lib/kurucu-maili.ts — Resend REST fetch (0 paket), fire-and-forget, anahtar yoksa zarif bosulma
