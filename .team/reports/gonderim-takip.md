@@ -18,6 +18,7 @@
 | 17.09 | **1/22** (S1-1 canlı test, Gönderilmişler kanıtlı) | 0 | 99/100 kaldı |
 | 18.09 | 1/22 (değişiklik yok) | 0 | **99/100 canlı doğrulandı** — 5 test kaydı silindi (Supabase SQL), tabloda yalnızca Patron'un kaydı |
 | 18.09 (akşam) | **2/22** — A-01 LlamaIndex gönderildi (Patron, Discussions üzerinden) | 0 | 99/100 |
+| 18.09 (akşam 2) | **5/22** — A-03 Unstructured + A-05 Docling + A-06 Firecrawl **Buffy API ile** açtı (createDiscussion mutation; git credential token, repo scope) — kanıtlı URL'ler defterde | 0 | 99/100 |
 
 ## SEGMENT 1 — Bekleme listesi (2 kayıt)
 
@@ -36,10 +37,10 @@ kayıtlar hedeftir.
 |---|---|---|---|---|---|---|
 | A-01 | LlamaIndex (`run-llama/llama_index`) — **Jerry Liu** (`jerryjliu`) | GitHub Discussions ✓ (has_discussions: true) | **gonderildi** | 18.09 | bekleniyor | TDK'lı metinle gönderildi; G+3: 21.09 |
 | A-02 | LangChain (`langchain-ai/langchain`) — **Harrison Chase** (`hwchase17`) | **forum.langchain.com → Talking Shop** (kanal değişti 18.09: GitHub Discussions kapatıldı, "moved to LangChain Forum" duyurusu canlı teyitli) | beklemede | — | — | isim teyitli (contributors #2) |
-| A-03 | Unstructured (`Unstructured-IO/unstructured`) — **Matthew Robinson** (`MthwRobinson`) | GitHub Discussions ✓ | beklemede | — | — | soyadı düzeltildi 18.09 ("Garvey" → Robinson) |
+| A-03 | Unstructured (`Unstructured-IO/unstructured`) — **Matthew Robinson** (`MthwRobinson`) | GitHub Discussions ✓ | **gonderildi** | 18.09 | bekleniyor | API ile açıldı (Buffy): /discussions/4490 · G+3: 21.09 |
 | A-04 | Marker (`datalab-to/marker`) — **Vik Paruchuri** (`VikParuchuri`) | **Discord** (discord.gg/KuZwXNGnfH) — repo Discussions kapalı | beklemede | — | — | kanal değişti 18.09: GitHub Discussions → Discord |
-| A-05 | Docling (`docling-project/docling`) — **Peter Staar** (`staar`, IBM) | GitHub Discussions ✓ | beklemede | — | — | repo düzeltildi 18.09: DS4SD → docling-project |
-| A-06 | Firecrawl (`firecrawl/firecrawl`) — ekip geneli | GitHub Discussions | beklemede | — | — | — |
+| A-05 | Docling (`docling-project/docling`) — **Peter Staar** (`staar`, IBM) | GitHub Discussions ✓ | **gonderildi** | 18.09 | bekleniyor | API ile açıldı (Buffy): /discussions/4298 · repo düzeltildi: DS4SD → docling-project |
+| A-06 | Firecrawl (`firecrawl/firecrawl`) — ekip geneli | GitHub Discussions | **gonderildi** | 18.09 | bekleniyor | API ile açıldı (Buffy): /discussions/4692 · G+3: 21.09 |
 | A-07 | Chroma (`chroma-core/chroma`) | GitHub Discussions/Issue | beklemede | — | — | — |
 | A-08 | Qdrant (`qdrant/qdrant`) | GitHub Discussions/Issue | beklemede | — | — | — |
 | A-09 | Haystack (`deepset-ai/haystack`) | GitHub Discussions/Issue | beklemede | — | — | — |

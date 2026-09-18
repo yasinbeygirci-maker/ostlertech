@@ -1,3 +1,4 @@
+## GONDERIMLER OTOMATIKLESTI — Buffy API ile 3 discussion acti (18.09 aksam): A-03 Unstructured /4490, A-05 Docling /4298, A-06 Firecrawl /4692 — git credential token (repo scope) + GraphQL createDiscussion; Patron artik kopyala-yapistir yapmiyor, sadece karar veriyor; defter 5/22|
 ## DIL KURALI — giden mesajlar INGILIZCE (18.09): Patron dogru yakaladi — uluslararasi hedef kitlesine Turkce mesaj gidemezdi; EN metin dosyasi kuruldu (vera-kanal-metinleri-EN.md, 20 metin), TR TDK dosyalari ic referansta kaldı; A-02 LangChain icin foruma gidecek INGILIZCE metin hazir|
 ## KENDIMIZE UYGULAMA HAREKÂTI — DeepSeek Harness & dsh-enterprise-plugins İç Entegrasyonu (18.09.2026 Cuma): Patron emriyle önerilen mikro-ürün stratejisi önce kendi iç ekosistemimizde (kod inceleme, test otomasyonu, log analizi) konumlandırıldı ve doğrulanıyor.
 
