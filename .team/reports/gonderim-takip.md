@@ -6,8 +6,10 @@
 > **Durum sözlüğü:** `beklemede` → `gonderildi` → `cevap-tamam` / `cevap-yok` /
 > `izlem-değil` / `kapandi`
 >
-> **Kaynak dosyalar:** metinler `vera-kanal-a-gonderim-metinleri.md` +
-> `vera-kanal-b-c-gonderim-metinleri.md` · plan `vera-segment2-gonderim-kanal-plani.md`
+> **Kaynak dosyalar:** metinler **`vera-kanal-metinleri-EN.md` (GİDECEK OLAN — İngilizce)** ·
+> iç referans (Türkçe TDK): `vera-kanal-a-gonderim-metinleri.md` + `vera-kanal-b-c-gonderim-metinleri.md` ·
+> plan `vera-segment2-gonderim-kanal-plani.md`
+> **DİL KURALI (18.09):** hedef kitle uluslararası → giden mesajlar İNGİLİZCE; Türkçe metinler yalnız iç kullanım.
 
 ## ÖZET (günlük tazelenir)
 
@@ -33,7 +35,7 @@ kayıtlar hedeftir.
 | # | Hedef | Kanal | DURUM | Gönderim tarihi | CEVAP | Sonuç |
 |---|---|---|---|---|---|---|
 | A-01 | LlamaIndex (`run-llama/llama_index`) — **Jerry Liu** (`jerryjliu`) | GitHub Discussions ✓ (has_discussions: true) | **gonderildi** | 18.09 | bekleniyor | TDK'lı metinle gönderildi; G+3: 21.09 |
-| A-02 | LangChain (`langchain-ai/langchain`) — **Harrison Chase** (`hwchase17`) | GitHub Discussions ✓ | beklemede | — | — | isim teyitli (contributors #2) |
+| A-02 | LangChain (`langchain-ai/langchain`) — **Harrison Chase** (`hwchase17`) | **forum.langchain.com → Talking Shop** (kanal değişti 18.09: GitHub Discussions kapatıldı, "moved to LangChain Forum" duyurusu canlı teyitli) | beklemede | — | — | isim teyitli (contributors #2) |
 | A-03 | Unstructured (`Unstructured-IO/unstructured`) — **Matthew Robinson** (`MthwRobinson`) | GitHub Discussions ✓ | beklemede | — | — | soyadı düzeltildi 18.09 ("Garvey" → Robinson) |
 | A-04 | Marker (`datalab-to/marker`) — **Vik Paruchuri** (`VikParuchuri`) | **Discord** (discord.gg/KuZwXNGnfH) — repo Discussions kapalı | beklemede | — | — | kanal değişti 18.09: GitHub Discussions → Discord |
 | A-05 | Docling (`docling-project/docling`) — **Peter Staar** (`staar`, IBM) | GitHub Discussions ✓ | beklemede | — | — | repo düzeltildi 18.09: DS4SD → docling-project |

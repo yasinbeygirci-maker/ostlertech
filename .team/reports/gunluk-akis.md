@@ -1,3 +1,8 @@
+## DIL KURALI — giden mesajlar INGILIZCE (18.09): Patron dogru yakaladi — uluslararasi hedef kitlesine Turkce mesaj gidemezdi; EN metin dosyasi kuruldu (vera-kanal-metinleri-EN.md, 20 metin), TR TDK dosyalari ic referansta kaldı; A-02 LangChain icin foruma gidecek INGILIZCE metin hazir|
+## KENDIMIZE UYGULAMA HAREKÂTI — DeepSeek Harness & dsh-enterprise-plugins İç Entegrasyonu (18.09.2026 Cuma): Patron emriyle önerilen mikro-ürün stratejisi önce kendi iç ekosistemimizde (kod inceleme, test otomasyonu, log analizi) konumlandırıldı ve doğrulanıyor.
+
+## GÜNÜN FIRSATI VE TEK TAVSİYE HAREKÂTI (18.09.2026 Cuma): Fırsat Avcısı raporu okundu, DeepSeek Harness ekosistemi üzerine "dsh-enterprise-plugins" mikro-ürün ve standart eklenti paketi (Slack/Jira/PostgreSQL) stratejisi netleştirildi; Fırsat Avcısı brifingiyle teknik ve finansal fizibilite doğrulandı.
+
 ## ILK SEGMENT 2 GONDERIMI — A-01 LlamaIndex (18.09 aksam): Jerry Liu'na (jerryjliu) GitHub Discussions uzerinden TDK'li metinle gonderildi — defter 2/22; G+3 takip: 21.09|
 ## TDK DUZELTMESI — Kanal A + B+C metinleri (18.09): Patron talebiyle iki dosya TDK kurallarina uyarlandi — "omur boyu" -> omur boyu yazim hatasi, imkan/milisaniye/resmi bicimleri; chunk->parca, parse->ayristirma, pipeline->boru hatti, workflow->is akisi Turkce karsiliklari; teknik terimler (Rust, OCR, LLM, RAG, PDF, API) korundu; fiyat/kontenjan/CTA ve dogrulanmis isimler aynen|
 ## CI SECRET-SCAN YESILENDI — 59508a1: gitleaks wrapper lisans istemeye basladi (b3f591f-ba9dd82-a277cb5 failurelari); CLI dogrudan kuruldu + .gitleaksignore ile 4 yanlis-pozitif (eski .next/.idea kalintilari + Groq model adi) beyaz listeye alindi; 59508a1 CI: success — gercek sizinti YOK
