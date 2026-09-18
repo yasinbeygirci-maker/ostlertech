@@ -15,6 +15,7 @@
 |---|---|---|---|
 | 17.09 | **1/22** (S1-1 canlı test, Gönderilmişler kanıtlı) | 0 | 99/100 kaldı |
 | 18.09 | 1/22 (değişiklik yok) | 0 | **99/100 canlı doğrulandı** — 5 test kaydı silindi (Supabase SQL), tabloda yalnızca Patron'un kaydı |
+| 18.09 (akşam) | **2/22** — A-01 LlamaIndex gönderildi (Patron, Discussions üzerinden) | 0 | 99/100 |
 
 ## SEGMENT 1 — Bekleme listesi (2 kayıt)
 
@@ -31,11 +32,11 @@ kayıtlar hedeftir.
 
 | # | Hedef | Kanal | DURUM | Gönderim tarihi | CEVAP | Sonuç |
 |---|---|---|---|---|---|---|
-| A-01 | LlamaIndex (`run-llama/llama_index`) | GitHub Discussions/Issue | beklemede | — | — | — |
-| A-02 | LangChain (`langchain-ai/langchain`) | GitHub Discussions/Issue | beklemede | — | — | — |
-| A-03 | Unstructured (`Unstructured-IO/unstructured`) | GitHub Discussions/Issue | beklemede | — | — | — |
-| A-04 | Marker (`datalab-to/marker`) | GitHub Discussions | beklemede | — | — | — |
-| A-05 | Docling (`DS4SD/docling`) | GitHub Discussions/Issue | beklemede | — | — | — |
+| A-01 | LlamaIndex (`run-llama/llama_index`) — **Jerry Liu** (`jerryjliu`) | GitHub Discussions ✓ (has_discussions: true) | **gonderildi** | 18.09 | bekleniyor | TDK'lı metinle gönderildi; G+3: 21.09 |
+| A-02 | LangChain (`langchain-ai/langchain`) — **Harrison Chase** (`hwchase17`) | GitHub Discussions ✓ | beklemede | — | — | isim teyitli (contributors #2) |
+| A-03 | Unstructured (`Unstructured-IO/unstructured`) — **Matthew Robinson** (`MthwRobinson`) | GitHub Discussions ✓ | beklemede | — | — | soyadı düzeltildi 18.09 ("Garvey" → Robinson) |
+| A-04 | Marker (`datalab-to/marker`) — **Vik Paruchuri** (`VikParuchuri`) | **Discord** (discord.gg/KuZwXNGnfH) — repo Discussions kapalı | beklemede | — | — | kanal değişti 18.09: GitHub Discussions → Discord |
+| A-05 | Docling (`docling-project/docling`) — **Peter Staar** (`staar`, IBM) | GitHub Discussions ✓ | beklemede | — | — | repo düzeltildi 18.09: DS4SD → docling-project |
 | A-06 | Firecrawl (`firecrawl/firecrawl`) — ekip geneli | GitHub Discussions | beklemede | — | — | — |
 | A-07 | Chroma (`chroma-core/chroma`) | GitHub Discussions/Issue | beklemede | — | — | — |
 | A-08 | Qdrant (`qdrant/qdrant`) | GitHub Discussions/Issue | beklemede | — | — | — |
