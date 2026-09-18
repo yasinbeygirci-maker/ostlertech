@@ -13,7 +13,8 @@
 
 | Tarih | Gönderilen | Cevap | Kurucu kontenjanı (canlı API) |
 |---|---|---|---|
-| 17.09 | **1/22** (S1-1 canlı test, Gönderilmişler kanıtlı) | 0 | 98/100 kaldı |
+| 17.09 | **1/22** (S1-1 canlı test, Gönderilmişler kanıtlı) | 0 | 99/100 kaldı |
+| 18.09 | 1/22 (değişiklik yok) | 0 | **99/100 canlı doğrulandı** — 5 test kaydı silindi (Supabase SQL), tabloda yalnızca Patron'un kaydı |
 
 ## SEGMENT 1 — Bekleme listesi (2 kayıt)
 
