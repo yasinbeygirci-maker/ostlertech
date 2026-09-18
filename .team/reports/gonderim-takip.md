@@ -19,6 +19,7 @@
 | 18.09 | 1/22 (değişiklik yok) | 0 | **99/100 canlı doğrulandı** — 5 test kaydı silindi (Supabase SQL), tabloda yalnızca Patron'un kaydı |
 | 18.09 (akşam) | **2/22** — A-01 LlamaIndex gönderildi (Patron, Discussions üzerinden) | 0 | 99/100 |
 | 18.09 (akşam 2) | **5/22** — A-03 Unstructured + A-05 Docling + A-06 Firecrawl **Buffy API ile** açtı (createDiscussion mutation; git credential token, repo scope) — kanıtlı URL'ler defterde | 0 | 99/100 |
+| 18.09 (akşam 3) | **8/22** — A-08 Qdrant + A-09 Haystack + A-10 Milvus **API ile** açıldı; **A-07 Chroma atlandı** (Discussions kapalı → Discord kanalı, elle) | 0 | 99/100 |
 
 ## SEGMENT 1 — Bekleme listesi (2 kayıt)
 
@@ -41,10 +42,10 @@ kayıtlar hedeftir.
 | A-04 | Marker (`datalab-to/marker`) — **Vik Paruchuri** (`VikParuchuri`) | **Discord** (discord.gg/KuZwXNGnfH) — repo Discussions kapalı | beklemede | — | — | kanal değişti 18.09: GitHub Discussions → Discord |
 | A-05 | Docling (`docling-project/docling`) — **Peter Staar** (`staar`, IBM) | GitHub Discussions ✓ | **gonderildi** | 18.09 | bekleniyor | API ile açıldı (Buffy): /discussions/4298 · repo düzeltildi: DS4SD → docling-project |
 | A-06 | Firecrawl (`firecrawl/firecrawl`) — ekip geneli | GitHub Discussions | **gonderildi** | 18.09 | bekleniyor | API ile açıldı (Buffy): /discussions/4692 · G+3: 21.09 |
-| A-07 | Chroma (`chroma-core/chroma`) | GitHub Discussions/Issue | beklemede | — | — | — |
-| A-08 | Qdrant (`qdrant/qdrant`) | GitHub Discussions/Issue | beklemede | — | — | — |
-| A-09 | Haystack (`deepset-ai/haystack`) | GitHub Discussions/Issue | beklemede | — | — | — |
-| A-10 | Milvus (`milvus-io/milvus`) | GitHub Discussions/Issue | beklemede | — | — | — |
+| A-07 | Chroma (`chroma-core/chroma`) | GitHub Discussions | **atlandi** | — | — | Discussions KAPALI (API boş + sayfa 404, 18.09 teyitli) → Discord'a taşındı (discord.gg/MMeYNTmh3x), elle gönderilecek |
+| A-08 | Qdrant (`qdrant/qdrant`) | GitHub Discussions ✓ | **gonderildi** | 18.09 | bekleniyor | API (Buffy): orgs/qdrant/discussions/10694 · G+3: 21.09 |
+| A-09 | Haystack (`deepset-ai/haystack`) | GitHub Discussions ✓ | **gonderildi** | 18.09 | bekleniyor | API (Buffy): /discussions/12800 · G+3: 21.09 |
+| A-10 | Milvus (`milvus-io/milvus`) | GitHub Discussions ✓ | **gonderildi** | 18.09 | bekleniyor | API (Buffy): /discussions/53608 · G+3: 21.09 |
 
 ## SEGMENT 2 — Kanal B: X/Discord DM (6 hedef)
 
