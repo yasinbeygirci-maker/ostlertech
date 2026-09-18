@@ -1,4 +1,15 @@
-# KURUCU KİLİDİ GÖNDERİM TAKİBİ — Segment 1 + Segment 2 (20 hedef)
+# KURUCU KİLİDİ GÖNDERİM TAKİBİ — ❌ KAPANDI (Patron kararı, 18.09.2026)
+
+> **KARAR:** AnyDoc kampanyasından vazgeçildi. Gönderilen 8 mesaj (GitHub Discussion)
+> silinir — silinenler aşağıda kanıtlı. Tarama/rapor dosyaları arşiv olarak kalır,
+> tekrar başlatılmaz. Bekleme listesi altyapısı (Supabase + otomatik mail) askıda,
+> silinmez — başka bir ürün için tekrar kullanılabilir.
+>
+> **SİLME SONUCU (18.09):** Token yetkisi yetersiz — `deleteDiscussion` FORBIDDEN
+> (repo yetkili token discussion silemez; repo sahibi/moderatör hakkı gerekir).
+> A-08 Qdrant ID alınamadı (org reposu). **Kalan 6 gönderim yayında duruyor** —
+> silinecekse Patron elle silecek (her Discussion sayfası → ... menü → Delete) veya
+> "closed as not planned" bırakılır (daha az müdahale). Karar Patron'un.
 
 > **Sorumlu:** Vera · **Kural:** her gönderim/cevap sonrası ilgili satır güncellenir,
 > ÖZET bloğu her gün tazelenir. Takip dosyası olmadan gönderim YAPILMAZ.
@@ -10,6 +21,8 @@
 > iç referans (Türkçe TDK): `vera-kanal-a-gonderim-metinleri.md` + `vera-kanal-b-c-gonderim-metinleri.md` ·
 > plan `vera-segment2-gonderim-kanal-plani.md`
 > **DİL KURALI (18.09):** hedef kitle uluslararası → giden mesajlar İNGİLİZCE; Türkçe metinler yalnız iç kullanım.
+> **A-02 LANGCHAIN (Patron kararı 18.09):** forum.langchain.com gönderimini **Patron bizzat yapacak**
+> ("Y" hesabı girişli, Talking Shop kategorisi) — Buffy araya girmeyecek. Metin: `vera-kanal-metinleri-EN.md` §A-02.
 
 ## ÖZET (günlük tazelenir)
 
@@ -20,6 +33,7 @@
 | 18.09 (akşam) | **2/22** — A-01 LlamaIndex gönderildi (Patron, Discussions üzerinden) | 0 | 99/100 |
 | 18.09 (akşam 2) | **5/22** — A-03 Unstructured + A-05 Docling + A-06 Firecrawl **Buffy API ile** açtı (createDiscussion mutation; git credential token, repo scope) — kanıtlı URL'ler defterde | 0 | 99/100 |
 | 18.09 (akşam 3) | **8/22** — A-08 Qdrant + A-09 Haystack + A-10 Milvus **API ile** açıldı; **A-07 Chroma atlandı** (Discussions kapalı → Discord kanalı, elle) | 0 | 99/100 |
+| — | A-02 LangChain: **Patron bizzat gönderecek** (forum.langchain.com → Talking Shop) — deftere işlenmeli, gönderimde satır `gonderildi` olur | — | — |
 
 ## SEGMENT 1 — Bekleme listesi (2 kayıt)
 
