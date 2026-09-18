@@ -20,6 +20,7 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-10 text-sm font-semibold tracking-wide uppercase text-white/50">
           <a href="/products" className="hover:text-primary transition-all duration-300">Ürünler</a>
+          <a href="/anydoc" className="hover:text-primary transition-all duration-300 text-primary/90">AnyDoc</a>
           <a href="#" className="hover:text-primary transition-all duration-300">Teknoloji</a>
           <a href="#" className="hover:text-primary transition-all duration-300">Kurumsal</a>
         </div>
@@ -28,9 +29,9 @@ const Navbar = () => {
           <a href="/login" className="hidden sm:block text-sm font-bold text-white/70 hover:text-white transition-colors">
             Giriş
           </a>
-          <button className="hidden sm:block bg-white/90 hover:bg-white text-black px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 shadow-xl shadow-white/5">
-            SyncPass'i Al
-          </button>
+          <a href="/anydoc" className="hidden sm:block bg-white/90 hover:bg-white text-black px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 shadow-xl shadow-white/5">
+            AnyDoc'u Keşfet
+          </a>
 
           {/* Mobile Menu Toggle */}
           <button
@@ -46,15 +47,16 @@ const Navbar = () => {
       <div className={`md:hidden absolute top-20 left-0 right-0 bg-background/95 backdrop-blur-2xl border-b border-white/[0.05] transition-all duration-500 ease-in-out overflow-hidden ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
         <div className="px-6 py-8 flex flex-col gap-6">
           <a href="/products" className="text-xl font-bold text-white/80 hover:text-primary transition-colors">Ürünler</a>
+          <a href="/anydoc" className="text-xl font-bold text-primary hover:text-primary transition-colors">AnyDoc</a>
           <a href="#" className="text-xl font-bold text-white/80 hover:text-primary transition-colors">Teknoloji</a>
           <a href="#" className="text-xl font-bold text-white/80 hover:text-primary transition-colors">Kurumsal</a>
           <div className="pt-6 border-t border-white/10 flex flex-col gap-4">
             <button className="w-full py-4 text-center font-bold text-white/70 hover:text-white border border-white/10 rounded-2xl">
               Giriş Yap
             </button>
-            <button className="w-full py-4 bg-primary text-[#020617] font-black rounded-2xl shadow-lg shadow-primary/20">
-              SYNCPASS'I AL
-            </button>
+            <a href="/anydoc" className="w-full py-4 text-center bg-primary text-[#020617] font-black rounded-2xl shadow-lg shadow-primary/20">
+              ANYDOC'U KEŞFET
+            </a>
           </div>
         </div>
       </div>
