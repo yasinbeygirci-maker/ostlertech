@@ -5,6 +5,13 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true, // Statik görseller için Vercel'de kolaylık sağlar
   },
+  async redirects() {
+    return ["/privacy", "/gizlilik", "/gizlilik-politikasi"].map((source) => ({
+      source,
+      destination: "/syncpass/privacy",
+      permanent: true,
+    }));
+  },
   async headers() {
     return [
       {

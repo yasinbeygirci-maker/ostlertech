@@ -52,7 +52,7 @@ const Footer = () => {
           <div className="space-y-6">
             <h4 className="text-white text-xs font-black uppercase tracking-[0.2em]">Kurumsal</h4>
             <ul className="space-y-4">
-              <li><a href="/gizlilik-politikasi" className="text-white/40 hover:text-white text-sm font-semibold transition-colors flex items-center gap-2 group">
+              <li><a href="/syncpass/privacy" className="text-white/40 hover:text-white text-sm font-semibold transition-colors flex items-center gap-2 group">
                 <div className="w-1 h-1 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                 Gizlilik Politikası
               </a></li>
