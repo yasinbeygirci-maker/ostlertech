@@ -1,65 +1,77 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
+import { PLAY_URL } from "@/lib/site";
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const links = [
+  { href: "/#ozellikler", label: "Özellikler" },
+  { href: "/#masaustu", label: "Masaüstü" },
+  { href: "/#guvenlik", label: "Güvenlik" },
+  { href: "/#fiyat", label: "Fiyat" },
+  { href: "/products", label: "Ürünler" },
+];
+
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/40 backdrop-blur-xl border-b border-white/[0.05]">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <div className="flex items-center gap-3 group cursor-pointer">
-          <div className="relative">
-            <div className="absolute -inset-1 bg-primary/20 rounded-xl blur-sm group-hover:bg-primary/40 transition duration-500"></div>
-            <div className="relative w-10 h-10 bg-primary rounded-xl flex items-center justify-center font-black text-[#020617] text-lg shadow-lg">O</div>
-          </div>
-          <span className="text-2xl font-bold tracking-tight text-white">Ostler<span className="text-primary">Tech</span></span>
+    <nav
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        scrolled || open ? "bg-background/85 backdrop-blur-xl border-b border-line" : "border-b border-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
+        <a href="/" className="flex items-center gap-2.5" aria-label="OstlerTech ana sayfa">
+          <img src="/logo-ostlertech.png" alt="" width={30} height={30} className="rounded-full" />
+          <span className="text-lg font-bold tracking-tight text-white">
+            Ostler<span className="text-primary">Tech</span>
+          </span>
+        </a>
+
+        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-muted">
+          {links.map((l) => (
+            <a key={l.href} href={l.href} className="hover:text-white transition-colors">
+              {l.label}
+            </a>
+          ))}
         </div>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-10 text-sm font-semibold tracking-wide uppercase text-white/50">
-          <a href="/products" className="hover:text-primary transition-all duration-300">Ürünler</a>
-          <a href="#" className="hover:text-primary transition-all duration-300">Teknoloji</a>
-          <a href="#" className="hover:text-primary transition-all duration-300">Kurumsal</a>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <a href="/login" className="hidden sm:block text-sm font-bold text-white/70 hover:text-white transition-colors">
-            Giriş
+        <div className="flex items-center gap-3">
+          <a href={PLAY_URL} target="_blank" rel="noopener" className="hidden sm:inline-flex btn-primary !py-2 !px-4 text-sm">
+            Uygulamayı indir
           </a>
-          <a href="/products" className="hidden sm:block bg-white/90 hover:bg-white text-black px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 shadow-xl shadow-white/5">
-            Ürünlerimiz
-          </a>
-
-          {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden p-2 text-white/70 hover:text-white transition-colors"
-            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 text-muted hover:text-white"
+            onClick={() => setOpen(!open)}
+            aria-label={open ? "Menüyü kapat" : "Menüyü aç"}
+            aria-expanded={open}
           >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
+            {open ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
-      <div className={`md:hidden absolute top-20 left-0 right-0 bg-background/95 backdrop-blur-2xl border-b border-white/[0.05] transition-all duration-500 ease-in-out overflow-hidden ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-        <div className="px-6 py-8 flex flex-col gap-6">
-          <a href="/products" className="text-xl font-bold text-white/80 hover:text-primary transition-colors">Ürünler</a>
-          <a href="#" className="text-xl font-bold text-white/80 hover:text-primary transition-colors">Teknoloji</a>
-          <a href="#" className="text-xl font-bold text-white/80 hover:text-primary transition-colors">Kurumsal</a>
-          <div className="pt-6 border-t border-white/10 flex flex-col gap-4">
-            <button className="w-full py-4 text-center font-bold text-white/70 hover:text-white border border-white/10 rounded-2xl">
-              Giriş Yap
-            </button>
-            <a href="/products" className="w-full py-4 text-center bg-primary text-[#020617] font-black rounded-2xl shadow-lg shadow-primary/20">
-              ÜRÜNLERİMİZ
+      {open && (
+        <div className="md:hidden border-t border-line px-5 py-6 flex flex-col gap-5">
+          {links.map((l) => (
+            <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-lg font-semibold text-foreground">
+              {l.label}
             </a>
-          </div>
+          ))}
+          <a href={PLAY_URL} target="_blank" rel="noopener" className="btn-primary mt-2">
+            Google Play&apos;den indir
+          </a>
         </div>
-      </div>
+      )}
     </nav>
   );
-};
-
-export default Navbar;
+}

@@ -3,78 +3,100 @@
 @tailwind utilities;
 
 :root {
-  --background: #020617;
-  --foreground: #f8fafc;
-  --primary: #00F5D4;
+  --background: #0e121a;
+  --foreground: #e8edf5;
+  --primary: #4c8dff;
+  color-scheme: dark;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+::selection {
+  background: rgba(76, 141, 255, 0.35);
+}
+
 @layer components {
+  /* Eski sayfaların da kullandığı yüzey kartı */
   .glass-card {
-    @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-3xl shadow-2xl;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    @apply bg-card/80 backdrop-blur-xl border border-line rounded-3xl;
   }
 
   .btn-primary {
-    @apply bg-primary hover:bg-primary-dark text-[#020617] font-bold py-3 px-8 rounded-full transition-all duration-500 ease-out transform hover:scale-[1.02] active:scale-95 shadow-lg shadow-primary/20 hover:shadow-primary/40 relative overflow-hidden;
+    @apply inline-flex items-center justify-center gap-2 bg-primary-dark hover:bg-[#1D66E5] text-white font-semibold py-3 px-6 rounded-full transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
   }
 
   .btn-secondary {
-    @apply bg-white/5 hover:bg-white/10 text-white/90 border border-white/10 font-semibold py-3 px-8 rounded-full transition-all duration-300 backdrop-blur-sm;
+    @apply inline-flex items-center justify-center gap-2 bg-white/[0.04] hover:bg-white/[0.08] text-foreground border border-line font-semibold py-3 px-6 rounded-full transition-colors duration-200;
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-primary/50;
+    @apply bg-clip-text text-transparent bg-gradient-to-b from-white to-[#AFC3E6];
   }
 
   .section-padding {
-    @apply py-24 md:py-32 px-4;
+    @apply py-24 md:py-32 px-5;
   }
 
-  .perspective-1000 {
-    perspective: 1000px;
+  .eyebrow {
+    @apply text-primary font-semibold tracking-[0.18em] uppercase text-xs;
   }
 
-  .preserve-3d {
-    transform-style: preserve-3d;
+  /* Uygulama görüntüleri için cihaz çerçeveleri */
+  .device-phone {
+    @apply relative rounded-[2.4rem] border border-line bg-[#0B0F16] p-2 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.9)];
+  }
+  .device-phone > img {
+    @apply block w-full rounded-[1.9rem];
   }
 
-  .tilt-card {
-    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  .device-window {
+    @apply relative rounded-xl border border-line bg-surface overflow-hidden shadow-[0_40px_90px_-30px_rgba(0,0,0,0.9)];
+  }
+  .device-window > img {
+    @apply block w-full;
   }
 
-  .tilt-card:hover {
-    transform: rotateX(10deg) rotateY(10deg) scale(1.05);
+  .grid-bg {
+    background-image: linear-gradient(rgba(38, 48, 71, 0.35) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(38, 48, 71, 0.35) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at 50% 0%, black 20%, transparent 70%);
   }
 }
 
-/* Custom Scrollbar */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
-
 ::-webkit-scrollbar-track {
   background: var(--background);
 }
-
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #263047;
   border-radius: 10px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #33405c;
 }

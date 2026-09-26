@@ -2,7 +2,13 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { URUNLER, Urun } from "@/lib/urunler";
-import { HeartPulse, Store, Kanban, ShieldCheck, Monitor, Clock, Sparkles, Layers } from "lucide-react";
+import { HeartPulse, Store, Kanban, ShieldCheck, Monitor, Clock, Sparkles, Layers, ArrowRight } from "lucide-react";
+
+const DURUM: Record<string, { etiket: string; cls: string }> = {
+  yayinda: { etiket: "Yayında", cls: "bg-ok/10 border-ok/30 text-ok" },
+  test: { etiket: "Test aşamasında", cls: "bg-primary/10 border-primary/30 text-primary" },
+  yakinda: { etiket: "Yakında", cls: "bg-white/[0.04] border-line text-muted" },
+};
 
 export const metadata: Metadata = {
   title: "Ürünler | OstlerTech",
@@ -27,7 +33,7 @@ export default function ProductsPage() {
       <section className="relative pt-32 pb-20 px-6 overflow-hidden">
         {/* Background glow effects */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-primary/15 blur-[120px] rounded-full pointer-events-none" />
-        <div className="absolute top-20 right-10 w-72 h-72 bg-blue-500/10 blur-[100px] rounded-full pointer-events-none" />
+        <div className="absolute top-20 right-10 w-72 h-72 bg-primary/10 blur-[100px] rounded-full pointer-events-none" />
 
         <div className="max-w-7xl mx-auto text-center relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl mb-6 shadow-lg shadow-black/40">
@@ -36,11 +42,11 @@ export default function ProductsPage() {
           </div>
           
           <h1 className="text-4xl md:text-6xl font-black tracking-tight mb-6">
-            Geleceği Şekillendiren <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-teal-300 to-blue-500">Ürünlerimiz</span>
+            Geleceği Şekillendiren <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-light via-primary to-primary-dark">Ürünlerimiz</span>
           </h1>
           
           <p className="max-w-2xl mx-auto text-base md:text-lg text-white/60 font-normal leading-relaxed">
-            Sağlık takibinden küçük esnaf çözümlerine, yüksek performanslı proje yönetiminden gelişmiş şifre kasalarına kadar tüm yenilikçi ürünlerimizi keşfedin.
+            Şifre yönetiminden sağlık takibine, küçük işletmelerden proje yönetimine: yayında olan ve hazırlanan uygulamalarımız.
           </p>
         </div>
       </section>
@@ -74,9 +80,9 @@ export default function ProductsPage() {
                         <IconComponent size={28} />
                       </div>
 
-                      <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-xs font-semibold text-white/80 backdrop-blur-md">
-                        <Clock size={13} className="text-primary animate-spin" style={{ animationDuration: '6s' }} />
-                        <span className="capitalize">Yakında</span>
+                      <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold ${DURUM[urun.durum]?.cls ?? DURUM.yakinda.cls}`}>
+                        {urun.durum === "yakinda" && <Clock size={13} />}
+                        <span>{DURUM[urun.durum]?.etiket ?? DURUM.yakinda.etiket}</span>
                       </div>
                     </div>
 
@@ -107,11 +113,20 @@ export default function ProductsPage() {
                       </span>
                     </div>
 
-                    {/* Yakinda Pazarlama Vurgusu (url null oldugu icin indirme butonu yok) */}
-                    <div className="w-full py-3.5 px-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] text-center text-xs font-bold text-white/70 tracking-wider uppercase flex items-center justify-center gap-2 group-hover:bg-primary/10 group-hover:border-primary/30 group-hover:text-primary transition-all duration-300">
-                      <Sparkles size={14} className="text-primary" />
-                      <span>Çok Yakında Sizlerle</span>
-                    </div>
+                    {urun.url ? (
+                      <a
+                        href={urun.url}
+                        {...(urun.url.startsWith("http") ? { target: "_blank", rel: "noopener" } : {})}
+                        className={urun.durum === "yayinda" ? "btn-primary w-full" : "btn-secondary w-full"}
+                      >
+                        {urun.durum === "yayinda" ? "Google Play'den indir" : "Ayrıntılar"}
+                        <ArrowRight size={16} />
+                      </a>
+                    ) : (
+                      <div className="w-full py-3 px-4 rounded-full border border-line text-center text-sm font-semibold text-muted">
+                        Hazırlanıyor
+                      </div>
+                    )}
                   </div>
                 </div>
               );

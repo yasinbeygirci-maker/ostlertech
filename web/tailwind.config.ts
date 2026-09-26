@@ -1,5 +1,7 @@
 import type { Config } from "tailwindcss";
 
+// Palet SyncPass Android ve masaüstü uygulamalarıyla aynı: lacivert zemin, mavi vurgu.
+// Durum renkleri (ok/weak/bad) yalnızca bir durumu anlatırken kullanılır.
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,38 +10,49 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", "system-ui", "-apple-system", "Segoe UI", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "Consolas", "monospace"],
+      },
       colors: {
-        background: "#020617", // Çok koyu lacivert/siyah, daha premium bir derinlik
-        foreground: "#f8fafc",
+        background: "#0E121A",
+        foreground: "#E8EDF5",
+        surface: "#111722",
+        card: "#171E2B",
+        line: "#263047",
+        muted: "#8E9AB0",
         primary: {
-          DEFAULT: "#00F5D4",
-          dark: "#00D1B5",
-          light: "#70FFEE",
-          glow: "rgba(0, 245, 212, 0.15)",
+          DEFAULT: "#4C8DFF",
+          dark: "#0052D4",
+          light: "#8AB4FF",
+          glow: "rgba(76, 141, 255, 0.15)",
         },
         secondary: {
-          DEFAULT: "#0f172a",
-          lighter: "#1e293b",
+          DEFAULT: "#111722",
+          lighter: "#171E2B",
         },
         accent: {
-          blue: "#3b82f6",
-          purple: "#a855f7",
+          blue: "#4C8DFF",
+          purple: "#8B5CF6",
         },
-        border: "rgba(255, 255, 255, 0.08)",
-      },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "glass-gradient": "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01))",
+        ok: "#10B981",
+        weak: "#F5A524",
+        bad: "#FF4D6D",
+        border: "#263047",
       },
       animation: {
         "pulse-slow": "pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        "float": "float 6s ease-in-out infinite",
+        float: "float 7s ease-in-out infinite",
+        rise: "rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both",
       },
       keyframes: {
+        rise: {
+          from: { opacity: "0", transform: "translateY(16px)" },
+          to: { opacity: "1", transform: "none" },
+        },
         float: {
           "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-20px)" },
+          "50%": { transform: "translateY(-12px)" },
         },
       },
     },

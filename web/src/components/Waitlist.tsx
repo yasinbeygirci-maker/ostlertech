@@ -58,7 +58,7 @@ export default function Waitlist({ productName = "OstlerTech", className }: Wait
 
   return (
     <div className={cn("w-full max-w-md mx-auto", className)}>
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait" initial={false}>
         {status === 'success' ? (
           <motion.div
             key="success"
@@ -85,16 +85,16 @@ export default function Waitlist({ productName = "OstlerTech", className }: Wait
             onSubmit={handleSubmit}
             className="relative group"
           >
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/50 to-primary/10 rounded-[2rem] sm:rounded-full blur opacity-30 group-focus-within:opacity-100 group-hover:opacity-50 transition duration-500"></div>
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/40 to-primary/5 rounded-[2rem] sm:rounded-full blur opacity-0 group-focus-within:opacity-100 transition duration-500"></div>
 
-            <div className="relative flex flex-col sm:flex-row gap-2 p-1.5 rounded-[2rem] sm:rounded-full bg-secondary/50 backdrop-blur-2xl border border-white/10 group-focus-within:border-primary/50 transition-all duration-300">
+            <div className="relative flex flex-col sm:flex-row gap-2 p-1.5 rounded-[2rem] sm:rounded-full bg-background border border-line group-focus-within:border-primary/50 transition-all duration-300">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="E-posta adresinizi girin"
                 required
-                className="flex-1 bg-transparent px-6 py-4 sm:py-3 text-white placeholder:text-white/20 focus:outline-none min-w-0 text-base sm:text-sm"
+                className="flex-1 bg-transparent px-6 py-4 sm:py-3 text-white placeholder:text-muted focus:outline-none min-w-0 text-base sm:text-sm"
                 disabled={status === 'loading'}
               />
               <button
@@ -128,9 +128,6 @@ export default function Waitlist({ productName = "OstlerTech", className }: Wait
         )}
       </AnimatePresence>
 
-      <p className="mt-6 text-[10px] text-white/20 text-center uppercase tracking-[0.3em] font-black">
-        OstlerTech Global Security Infrastructure
-      </p>
     </div>
   );
 }
