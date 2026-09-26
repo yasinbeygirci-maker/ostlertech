@@ -10,7 +10,7 @@ const steps = [
 // "Cihazdan ne çıkar?" sorusunun eksiksiz cevabı. Uygulamaya yeni bir ağ çağrısı eklenirse buraya da eklenmeli.
 const leaves = [
   { icon: Cloud, title: "Drive yedeği (isteğe bağlı)", desc: "Açarsanız, zaten şifrelenmiş kasa dosyası kendi Google Drive hesabınıza yüklenir." },
-  { icon: Search, title: "Sızıntı kontrolü", desc: "Şifrenin SHA-1 özetinin yalnızca ilk 5 karakteri Have I Been Pwned'e sorulur (k-anonimlik). Ayrıca yalnızca uzunluk ve karakter türleri Gemini'ye sorulur; şifre gönderilmez." },
+  { icon: Search, title: "Sızıntı kontrolü", desc: "Şifrenin SHA-1 özetinin yalnızca ilk 5 karakteri Have I Been Pwned'e sorulur (k-anonimlik); şifrenin kendisi gönderilmez." },
   { icon: Bot, title: "Yardım asistanı", desc: "Asistana yazdığınız soru yanıtlanmak için Google Gemini'ye gider. Kasa içeriği gönderilmez." },
 ];
 
