@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { getSupabase } from '@/lib/supabase';
+import { CONTACT_EMAIL } from '@/lib/site';
 import { Send, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -127,6 +128,13 @@ export default function Waitlist({ productName = "OstlerTech", className }: Wait
           </motion.form>
         )}
       </AnimatePresence>
+
+      {status !== 'success' && (
+        <p className={cn("text-center text-xs text-muted leading-relaxed", status === 'error' ? "mt-10" : "mt-4")}>
+          E-postanızı yalnızca {productName} çıktığında size haber vermek için saklarız; başka amaçla kullanmaz,
+          kimseyle paylaşmayız. Listeden çıkmak için {CONTACT_EMAIL} adresine yazmanız yeterli.
+        </p>
+      )}
 
     </div>
   );

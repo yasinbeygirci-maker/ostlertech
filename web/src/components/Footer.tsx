@@ -1,4 +1,4 @@
-import { PLAY_URL, CONTACT_EMAIL } from "@/lib/site";
+import { PLAY_URL, CONTACT_EMAIL, INSTAGRAM_URL } from "@/lib/site";
 
 const columns = [
   {
@@ -15,6 +15,7 @@ const columns = [
     links: [
       { href: "/products", label: "Ürünler" },
       { href: "/#sss", label: "Sık sorulanlar" },
+      { href: INSTAGRAM_URL, label: "Instagram", external: true },
     ],
   },
   {

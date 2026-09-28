@@ -58,12 +58,12 @@ export const URUNLER: Urun[] = [
   {
     id: "projex",
     ad: "Projex",
-    slogan: "Yüksek Performanslı Proje ve Görev Yönetim Sistemi",
-    aciklama: "Proje ve görev yönetim sistemidir. Compose Multiplatform altyapısı sayesinde hem masaüstü (Projex.exe) hem de çapraz platformda yüksek performanslı bir çalışma alanı sunar.",
-    platform: "Compose Multiplatform",
+    slogan: "Şantiyenin günlük ilerlemesi, bürodan ve sahadan tek yerde",
+    aciklama: "Blok, kat ve mahal bazında plan ile gerçekleşeni izleyen şantiye takip programı. Sahadan günlük rapor (miktar, ekip, not, engel) girilir; masaüstü ve telefon internet gelince kendiliğinden eşitlenir.",
+    platform: "Windows + Android",
     ikon: "Kanban",
     renk: "#a855f7",
-    durum: "yakinda",
+    durum: "test",
     url: null,
   },
 ];

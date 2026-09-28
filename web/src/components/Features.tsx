@@ -59,7 +59,7 @@ export default function Features() {
             </div>
             <div className="md:w-1/2 relative min-h-[320px] bg-gradient-to-b from-primary/10 to-transparent">
               <div className="device-phone absolute left-1/2 -translate-x-1/2 top-8 w-[62%] max-w-[260px]">
-                <img src="/screens/phone-list.webp" alt="Alfabetik kasa listesi ve canlı 2FA kodu" loading="lazy" width={720} height={1157} />
+                <img src="/screens/phone-list.webp" alt="Alfabetik kasa listesi ve canlı 2FA kodu" loading="lazy" width={720} height={1170} />
               </div>
             </div>
           </article>
@@ -110,7 +110,7 @@ export default function Features() {
             </div>
             <div className="px-8 md:px-10">
               <div className="device-phone mx-auto w-[62%] max-w-[250px] translate-y-6">
-                <img src="/screens/phone-health.webp" alt="Sağlık ekranı: güvenlik puanı ve öneriler" loading="lazy" width={720} height={1141} />
+                <img src="/screens/phone-health.webp" alt="Sağlık ekranı: güvenlik puanı ve öneriler" loading="lazy" width={720} height={1170} />
               </div>
             </div>
           </article>

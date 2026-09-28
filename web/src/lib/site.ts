@@ -6,6 +6,8 @@ export const SITE_URL = "https://www.ostlertech.com";
 
 export const CONTACT_EMAIL = "destek@ostlertech.com";
 
+export const INSTAGRAM_URL = "https://www.instagram.com/ostlertech/";
+
 // Uygulamadaki sabitlerle aynı olmalı (MainVaultScreen.freeLimit, EncryptionManager.PBKDF2_ITERATIONS).
 export const FREE_ITEM_LIMIT = 15;
 export const PBKDF2_ITERATIONS = "600.000";

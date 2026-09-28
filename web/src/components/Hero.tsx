@@ -63,7 +63,7 @@ export default function Hero() {
           </div>
           <div className="absolute -bottom-2 sm:-bottom-10 left-0 w-[34%] max-w-[230px] animate-float">
             <div className="device-phone">
-              <img src="/screens/phone-vault.webp" alt="SyncPass Android: kasa, güvenlik puanı ve 2FA kodları" width={720} height={1133} />
+              <img src="/screens/phone-vault.webp" alt="SyncPass Android: kasa, güvenlik puanı ve 2FA kodları" width={720} height={1170} />
             </div>
           </div>
         </div>
