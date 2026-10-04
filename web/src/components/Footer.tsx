@@ -1,11 +1,11 @@
-import { PLAY_URL, CONTACT_EMAIL, INSTAGRAM_URL } from "@/lib/site";
+import { PLAY_URL, CONTACT_EMAIL, INSTAGRAM_URL, YOUTUBE_URL, COMPANY } from "@/lib/site";
 
 const columns = [
   {
     title: "SyncPass",
     links: [
       { href: "/#ozellikler", label: "Özellikler" },
-      { href: "/#masaustu", label: "Masaüstü" },
+      { href: "/syncpass-masaustu", label: "Masaüstü lisansı" },
       { href: "/#fiyat", label: "Fiyat" },
       { href: PLAY_URL, label: "Google Play", external: true },
     ],
@@ -13,17 +13,23 @@ const columns = [
   {
     title: "OstlerTech",
     links: [
+      { href: "/hakkimizda", label: "Hakkımızda" },
+      { href: "/iletisim", label: "İletişim" },
       { href: "/products", label: "Ürünler" },
+      { href: "/videolar", label: "Videolar" },
       { href: "/#sss", label: "Sık sorulanlar" },
+      { href: YOUTUBE_URL, label: "YouTube", external: true },
       { href: INSTAGRAM_URL, label: "Instagram", external: true },
     ],
   },
   {
     title: "Yasal",
     links: [
+      { href: "/gizlilik", label: "Gizlilik ve KVKK" },
+      { href: "/kullanim-sartlari", label: "Kullanım ve satış koşulları" },
+      { href: "/teslimat-ve-iade", label: "Teslimat ve iade" },
       { href: "/syncpass/privacy", label: "SyncPass gizlilik" },
       { href: "/diasync/privacy", label: "DiaSync gizlilik" },
-      { href: "/kullanim-sartlari", label: "Kullanım şartları" },
     ],
   },
 ];
@@ -65,7 +71,12 @@ export default function Footer() {
         ))}
       </div>
       <div className="border-t border-line">
-        <p className="max-w-7xl mx-auto px-5 py-6 text-xs text-muted">© {new Date().getFullYear()} OstlerTech</p>
+        <div className="max-w-7xl mx-auto px-5 py-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
+          <p className="text-xs text-muted">
+            © {new Date().getFullYear()} {COMPANY.legalName ? `${COMPANY.legalName} · ` : ""}OstlerTech
+          </p>
+          <p className="text-xs text-muted">Satışlar yetkili satıcımız Paddle.com üzerinden yapılır.</p>
+        </div>
       </div>
     </footer>
   );

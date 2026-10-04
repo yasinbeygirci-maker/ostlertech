@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Command, ClipboardX, Columns3, SunMoon } from "lucide-react";
 import Waitlist from "./Waitlist";
+import { DESKTOP_LICENSE } from "@/lib/site";
 
 const shots = {
   vault: { label: "Kasa", dark: "desktop-vault-dark", light: "desktop-vault-light" },
@@ -28,7 +29,7 @@ export default function Desktop() {
       <div className="absolute -z-10 left-1/2 top-40 -translate-x-1/2 h-[500px] w-[900px] rounded-full bg-primary/10 blur-[140px]" />
       <div className="max-w-7xl mx-auto">
         <div className="text-center max-w-2xl mx-auto space-y-4 mb-12">
-          <p className="eyebrow">SyncPass Masaüstü · Windows</p>
+          <p className="eyebrow">SyncPass Masaüstü · <span lang="en">Windows</span></p>
           <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">Bilgisayarda da aynı kasa.</h2>
           <p className="text-lg text-muted">
             Android ile aynı şifreleme ve kasa biçimi, aynı güvenlik puanı. Masaüstü sürümü son testlerinde; çıktığında
@@ -99,6 +100,10 @@ export default function Desktop() {
         <div className="mt-16 max-w-md mx-auto text-center space-y-4">
           <p className="text-sm font-semibold text-white">Windows sürümü çıkınca haber verelim</p>
           <Waitlist productName="SyncPass Desktop" />
+          <p className="pt-2 text-sm text-muted">
+            Ücretsiz sürüm ya da <span className="text-white font-semibold">Premium</span> (aylık, yıllık, ömür boyu), {DESKTOP_LICENSE.devices} bilgisayar ·{" "}
+            <a href="/satin-al" className="text-primary hover:text-primary-light">Planlar ve fiyatlar →</a>
+          </p>
         </div>
       </div>
     </section>

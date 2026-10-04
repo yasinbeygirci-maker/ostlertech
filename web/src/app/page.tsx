@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import WhatsNew from "@/components/WhatsNew";
+import VideoSection from "@/components/VideoSection";
 import Features from "@/components/Features";
 import Desktop from "@/components/Desktop";
 import Security from "@/components/Security";
@@ -27,6 +28,7 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
       <Hero />
+      <VideoSection />
       <WhatsNew />
       <Features />
       <Desktop />

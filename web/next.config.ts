@@ -6,11 +6,12 @@ const nextConfig: NextConfig = {
     unoptimized: true, // Statik görseller için Vercel'de kolaylık sağlar
   },
   async redirects() {
-    return ["/privacy", "/gizlilik", "/gizlilik-politikasi"].map((source) => ({
-      source,
-      destination: "/syncpass/privacy",
-      permanent: true,
-    }));
+    return [
+      { source: "/privacy", destination: "/syncpass/privacy", permanent: true },
+      // Satışları Paddle (Merchant of Record) yaptığı için bu iki belge Kullanım ve Satış Koşulları'na katıldı.
+      { source: "/mesafeli-satis-sozlesmesi", destination: "/kullanim-sartlari", permanent: true },
+      { source: "/on-bilgilendirme-formu", destination: "/kullanim-sartlari", permanent: true },
+    ];
   },
   async headers() {
     return [

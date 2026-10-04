@@ -9,8 +9,8 @@ export const metadata: Metadata = {
     "SyncPass (Android ve Masaüstü) gizlilik politikası: cihazda şifreleme, Google Drive yedeği ve üçüncü taraf hizmetler.",
 };
 
-const EFFECTIVE_TR = "18 Eylül 2026";
-const EFFECTIVE_EN = "18 September 2026";
+const EFFECTIVE_TR = "4 Ekim 2026";
+const EFFECTIVE_EN = "4 October 2026";
 const CONTACT_EMAIL = "yasin@ostlertech.com";
 
 function Section({ n, title, children }: { n: string; title: string; children: ReactNode }) {
@@ -148,8 +148,28 @@ export default function SyncPassPrivacyPolicy() {
             <Sub title="Satın almalar ve uygulama bütünlüğü (Android)">
               <p>Premium satın almalar Google Play Faturalandırma ile yapılır; biz ödeme bilgilerinizi değil, yalnızca satın alma durumunu görürüz. Uygulamanın gerçek bir cihazda çalıştığını doğrulamak için Google Play Integrity kullanılır.</p>
             </Sub>
+            <Sub title="Çökme raporları (Windows ve Android)">
+              <ul className={list}>
+                <li><strong className="text-white/80">Windows:</strong> SyncPass Masaüstü çökerse, Windows ayarlarınıza bağlı olarak Windows Hata Raporlama (Windows Error Reporting) çökmeyle ilgili teknik bilgileri Microsoft&apos;a gönderebilir. Microsoft bu bilgilerin bir kısmını Windows Desktop Application Program kapsamında bize sunar.</li>
+                <li><strong className="text-white/80">Android:</strong> Google Play, Android&apos;in topladığı çökme ve donma bilgilerini (cihaz modeli, Android sürümü, hata kaydı) bize gösterir.</li>
+              </ul>
+              <p>
+                Bu bilgileri yalnızca hataları bulmak ve düzeltmek için kullanırız; kimseyle paylaşmayız ve sizi tanımak için kullanmayız. Genellikle yalnızca hata
+                sayılarına, sürüme, hata koduna ve hatanın oluştuğu kod satırlarına bakarız. Bir hatayı çözmek için kişisel bilgi içerebilecek bir veriyi (ör. bellek
+                dökümü) incelememiz gerekirse onu en fazla 30 gün, şifreli ve yalnızca geliştiricinin erişebildiği bir yerde tutar, sonra sileriz. SyncPass Masaüstü,
+                kasa içeriğinin çökme dosyalarına girmemesi için bellek dökümü almaz ve kendi çökme kayıtlarını bilgisayarınızda en fazla 30 gün tutar.
+              </p>
+            </Sub>
             <Sub title="Tarayıcı entegrasyonu (Masaüstü)">
               <p>Etkinleştirildiğinde masaüstü tarayıcı köprüsü yalnızca aynı bilgisayardan (127.0.0.1) gelen bağlantıları kabul eder; ağdan erişilemez.</p>
+            </Sub>
+            <Sub title="Premium lisansı (Masaüstü)">
+              <p>
+                SyncPass Masaüstü Premium, ostlertech.com üzerinden yetkili satıcımız Paddle.com aracılığıyla satılır. Lisans kodu
+                girdiğinizde uygulama, lisansı doğrulamak için yaklaşık haftada bir sunucumuza yalnızca lisans kodunu, kendi
+                ürettiği rastgele bir cihaz numarasını ve uygulama sürümünü gönderir. Kasanızın içeriği gönderilmez. Ücretsiz
+                sürüm bu sunucuya hiç bağlanmaz. Lisans kayıtları lisans bitiminden sonra 1 yıl saklanır.
+              </p>
             </Sub>
           </Section>
 
@@ -167,6 +187,7 @@ export default function SyncPassPrivacyPolicy() {
 
           <Section n="07" title="Saklama ve silme">
             <p>Verileriniz, siz silene, uygulamayı sıfırlayana veya kaldırana kadar cihazınızda kalır. Bulut yedeği, 3. bölümde anlatıldığı şekilde silene kadar Google Drive&apos;ınızda kalır. Verilerinizi biz tutmadığımız için sizin adınıza silemez veya dışa aktaramayız; her ikisini de uygulama içinden kendiniz yapabilirsiniz.</p>
+            <p>Çökme raporlarından elimize geçebilecek kişisel bilgileri en fazla 30 gün tutar, sonra sileriz (4. bölüm).</p>
           </Section>
 
           <Section n="08" title="Güvenlik">
@@ -265,8 +286,28 @@ export default function SyncPassPrivacyPolicy() {
             <Sub title="Purchases and app integrity (Android)">
               <p>Premium purchases are handled by Google Play Billing; we receive the purchase status, not your payment details. Google Play Integrity is used to check that the app runs on a genuine device.</p>
             </Sub>
+            <Sub title="Crash reports (Windows and Android)">
+              <ul className={list}>
+                <li><strong className="text-white/80">Windows:</strong> if SyncPass for Windows crashes, Windows Error Reporting may send technical crash information to Microsoft, depending on your Windows settings. Microsoft makes part of this information available to us through the Windows Desktop Application Program.</li>
+                <li><strong className="text-white/80">Android:</strong> Google Play shows us crash and freeze information collected by Android (device model, Android version, error log).</li>
+              </ul>
+              <p>
+                We use this information only to find and fix bugs; we do not share it and do not use it to identify you. Usually we only look at error counts, version,
+                error code and the code lines where the error happened. If we need to examine data that may contain personal information (such as a memory dump) to fix
+                a bug, we keep it for at most 30 days, encrypted and accessible only to the developer, and then delete it. SyncPass for Windows does not write memory
+                dumps, so vault contents stay out of crash files, and keeps its own crash logs on your computer for at most 30 days.
+              </p>
+            </Sub>
             <Sub title="Browser integration (Desktop)">
               <p>When enabled, the desktop browser bridge accepts connections only from the same computer (127.0.0.1) and is not reachable from the network.</p>
+            </Sub>
+            <Sub title="Premium licence (Desktop)">
+              <p>
+                SyncPass for Windows Premium is sold on ostlertech.com through our reseller and Merchant of Record, Paddle.com.
+                Once you enter a licence key, the app contacts our server about once a week to check it, sending only the
+                licence key, a random device number it generated itself and the app version. Your vault contents are never sent.
+                The free version never contacts this server. Licence records are kept for 1 year after the licence ends.
+              </p>
             </Sub>
           </Section>
 
@@ -284,6 +325,7 @@ export default function SyncPassPrivacyPolicy() {
 
           <Section n="07" title="Retention and deletion">
             <p>Your data stays on your device until you delete it, reset the app or uninstall it. The cloud backup stays in your Google Drive until you delete it as described in section 3. Because we do not hold your data, we cannot delete or export it for you. You can do both yourself within the app.</p>
+            <p>Personal information that may reach us through crash reports is kept for at most 30 days and then deleted (section 4).</p>
           </Section>
 
           <Section n="08" title="Security">
