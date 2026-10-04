@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { initializePaddle, type Environments, type Paddle } from "@paddle/paddle-js";
 import { Check, Download } from "lucide-react";
 import { TIERS, type BillingCycle, type Tier } from "@/lib/paddle-tiers";
+import { DESKTOP_DOWNLOAD } from "@/lib/site";
 
 interface Props {
   environment: Environments;
@@ -131,7 +132,7 @@ export default function PaddlePricing({ environment, token, countryCode, custome
               </ul>
 
               {!priceId ? (
-                <a href="/syncpass-masaustu" className="btn-secondary mt-8 w-full !py-3">
+                <a href={DESKTOP_DOWNLOAD.url} className="btn-secondary mt-8 w-full !py-3">
                   <Download size={18} /> İndir
                 </a>
               ) : (

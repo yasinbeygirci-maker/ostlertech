@@ -37,6 +37,17 @@ export const DESKTOP_LICENSE = {
   refundDays: 14,
 };
 
+// Masaüstü kurulum dosyası: herkese açık sürüm deposunda. "latest" bağlantısı her yeni sürümde aynı kalır
+// (dosya her sürümde SyncPass.msi adıyla yüklenir). Store sayfası açılınca indirme oraya çevrilecek.
+export const DESKTOP_DOWNLOAD = {
+  url: "https://github.com/yasinbeygirci-maker/syncpass-releases/releases/latest/download/SyncPass.msi",
+  releasesUrl: "https://github.com/yasinbeygirci-maker/syncpass-releases/releases",
+  version: "1.3.0",
+  sizeLabel: "155 MB",
+  sha256: "66e9c1368185f7cd150b376ae2db0e8c716109efd86df5e9ad71ae7d0519c68c",
+  requirements: "Windows 10 (2004) veya Windows 11, 64 bit",
+};
+
 export const PADDLE_BUYER_TERMS_URL = "https://www.paddle.com/legal/checkout-buyer-terms";
 
 export const LEGAL_UPDATED = "4 Ekim 2026";

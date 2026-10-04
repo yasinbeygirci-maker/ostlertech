@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Check, Monitor } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { DESKTOP_LICENSE, SITE_URL } from "@/lib/site";
+import { DESKTOP_DOWNLOAD, DESKTOP_LICENSE, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "SyncPass Masaüstü",
@@ -41,6 +41,23 @@ export default function DesktopLicensePage() {
               SyncPass Masaüstü, Android uygulamasıyla aynı şifrelemeyi ve kasa biçimini kullanır. Kasanız
               bilgisayarınızda şifreli durur; hesap açmanız gerekmez.
             </p>
+            <div className="flex flex-wrap items-center gap-4">
+              <a href={DESKTOP_DOWNLOAD.url} className="btn-primary !py-3.5 text-base">Ücretsiz indir (Windows)</a>
+              <span className="text-sm text-muted">Sürüm {DESKTOP_DOWNLOAD.version} · {DESKTOP_DOWNLOAD.sizeLabel} · {DESKTOP_DOWNLOAD.requirements}</span>
+            </div>
+            <details className="rounded-2xl border border-line bg-card p-5 text-sm text-muted">
+              <summary className="cursor-pointer font-semibold text-foreground">Windows "tanınmayan uygulama" uyarısı gösterirse</summary>
+              <p className="mt-3">
+                Kurulum dosyası henüz Microsoft Store üzerinden dağıtılmadığı için Windows SmartScreen uyarı gösterebilir. Uyarıda
+                <strong className="text-foreground"> Ek bilgi → Yine de çalıştır</strong> seçeneğiyle kurulumu sürdürebilirsiniz.
+                Dosyanın bizden geldiğini SHA-256 özetiyle doğrulayabilirsiniz:
+              </p>
+              <code className="mt-2 block break-all font-mono text-xs text-foreground">{DESKTOP_DOWNLOAD.sha256}</code>
+              <p className="mt-2">
+                Tüm sürümler: <a href={DESKTOP_DOWNLOAD.releasesUrl} className="text-primary hover:text-primary-light">sürüm notları</a>.
+                Microsoft Store sürümü yakında.
+              </p>
+            </details>
             <div className="device-window">
               <img src="/screens/desktop-vault-dark.webp" alt="SyncPass Masaüstü: üç sütunlu kasa görünümü" width={1200} height={800} />
             </div>
