@@ -9,8 +9,8 @@ export const metadata: Metadata = {
     "SyncPass (Android ve Masaüstü) gizlilik politikası: cihazda şifreleme, Google Drive yedeği ve üçüncü taraf hizmetler.",
 };
 
-const EFFECTIVE_TR = "4 Ekim 2026";
-const EFFECTIVE_EN = "4 October 2026";
+const EFFECTIVE_TR = "5 Ekim 2026";
+const EFFECTIVE_EN = "5 October 2026";
 const CONTACT_EMAIL = "yasin@ostlertech.com";
 
 function Section({ n, title, children }: { n: string; title: string; children: ReactNode }) {
@@ -160,8 +160,19 @@ export default function SyncPassPrivacyPolicy() {
                 kasa içeriğinin çökme dosyalarına girmemesi için bellek dökümü almaz ve kendi çökme kayıtlarını bilgisayarınızda en fazla 30 gün tutar.
               </p>
             </Sub>
-            <Sub title="Tarayıcı entegrasyonu (Masaüstü)">
-              <p>Etkinleştirildiğinde masaüstü tarayıcı köprüsü yalnızca aynı bilgisayardan (127.0.0.1) gelen bağlantıları kabul eder; ağdan erişilemez.</p>
+            <Sub title="Tarayıcı eklentisi ve otomatik yazma (Masaüstü)">
+              <p>
+                SyncPass tarayıcı eklentisi (Chrome, Edge) kayıtlarınızı doğrudan bilgisayarınızdaki SyncPass Masaüstü
+                uygulamasından alır; bu bağlantı tarayıcının yerel ileti kanalıyla ve yalnızca aynı bilgisayarda (127.0.0.1)
+                kurulur, internete çıkmaz ve bize hiçbir veri gelmez. Eklenti, açık sayfanın adresini yalnızca o siteye ait
+                kayıtları bulmak için masaüstü uygulamasına iletir; şifre yalnızca o siteye ait bir kaydı seçtiğinizde ve
+                kasanız açıkken verilir. Kasa kilitliyken eklenti hiçbir bilgi alamaz. Eklenti tarama geçmişi toplamaz,
+                analiz ya da reklam amaçlı veri göndermez.
+              </p>
+              <p>
+                Otomatik yazma kısayolları, öndeki pencerenin başlığına bakarak uygun kaydı bulur ve klavyeden yazar gibi
+                doldurur; pano kullanılmaz, hiçbir bilgi bilgisayardan çıkmaz.
+              </p>
             </Sub>
             <Sub title="Premium lisansı (Masaüstü)">
               <p>
@@ -298,8 +309,19 @@ export default function SyncPassPrivacyPolicy() {
                 dumps, so vault contents stay out of crash files, and keeps its own crash logs on your computer for at most 30 days.
               </p>
             </Sub>
-            <Sub title="Browser integration (Desktop)">
-              <p>When enabled, the desktop browser bridge accepts connections only from the same computer (127.0.0.1) and is not reachable from the network.</p>
+            <Sub title="Browser extension and auto-type (Desktop)">
+              <p>
+                The SyncPass browser extension (Chrome, Edge) gets your logins directly from the SyncPass desktop app on your
+                computer, through the browser&apos;s native messaging channel and only on the same computer (127.0.0.1); nothing
+                goes over the internet and nothing reaches us. The extension passes the address of the open page to the desktop
+                app only to find the logins for that site; a password is given only when you choose a login for that site and
+                your vault is open. While the vault is locked the extension gets nothing. The extension does not collect browsing
+                history and sends no analytics or advertising data.
+              </p>
+              <p>
+                Auto-type shortcuts find the matching login from the title of the front window and type it as if from the
+                keyboard; the clipboard is not used and nothing leaves your computer.
+              </p>
             </Sub>
             <Sub title="Premium licence (Desktop)">
               <p>
