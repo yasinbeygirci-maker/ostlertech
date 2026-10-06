@@ -21,7 +21,7 @@ export default function SitePrivacyPage() {
 
       <H2>2. Hangi verileri, neden işliyoruz</H2>
       <List>
-        <li><strong className="text-foreground">Siteyi gezerken:</strong> çerez ya da analitik izleme kullanmıyoruz. Barındırma hizmetimiz (Vercel) güvenlik ve hata ayıklama için IP adresi ve tarayıcı bilgisini kısa süreli sunucu kayıtlarında tutar.</li>
+        <li><strong className="text-foreground">Siteyi gezerken:</strong> çerez kullanmıyoruz. Hangi sayfaların ne kadar ziyaret edildiğini görmek için Vercel Web Analytics kullanıyoruz; bu araç çerez kullanmaz, sizi tanımlamaz ve ziyaretleri her gün değişen anonim bir özetle sayar (sayfa adresi, ülke, cihaz ve tarayıcı türü gibi toplu bilgiler). Barındırma hizmetimiz (Vercel) ayrıca güvenlik ve hata ayıklama için IP adresi ve tarayıcı bilgisini kısa süreli sunucu kayıtlarında tutar.</li>
         <li><strong className="text-foreground">Bekleme listesi:</strong> e-posta adresiniz, yalnızca ürün çıktığında size haber vermek için.</li>
         <li><strong className="text-foreground">Satın alma:</strong> satışlarımızı yetkili satıcımız (Merchant of Record) Paddle.com yapar. Ödeme ve fatura bilgilerinizi Paddle toplar ve kendi gizlilik politikasına göre işler. Paddle bize yalnızca e-posta adresinizi, ülkenizi, satın aldığınız planı, işlem ve abonelik numaralarını ve ödeme durumunu iletir. Amaç: lisansın teslimi, abonelik durumunun izlenmesi, iade ve destek.</li>
         <li><strong className="text-foreground">Lisans:</strong> lisans kodu, etkinleştirildiği cihazlar için uygulamanın ürettiği rastgele cihaz numarası, uygulama sürümü ve son doğrulama tarihi. Amaç: lisansın geçerliliğini ve cihaz sınırını denetlemek. Kasanızın içeriği hiçbir zaman bize gelmez.</li>
@@ -41,7 +41,7 @@ export default function SitePrivacyPage() {
       <List>
         <li>Paddle.com Market Ltd (Birleşik Krallık): yetkili satıcı olarak ödemenin alınması, faturalandırma, vergiler, abonelik ve iadeler (<a href="https://www.paddle.com/legal/privacy" target="_blank" rel="noopener" className="text-primary hover:text-primary-light">Paddle gizlilik politikası</a>).</li>
         <li>Supabase: lisans ve bekleme listesi kayıtlarının saklanması (Avrupa Birliği'ndeki sunucular).</li>
-        <li>Vercel: sitenin ve lisans doğrulama hizmetinin barındırılması.</li>
+        <li>Vercel: sitenin ve lisans doğrulama hizmetinin barındırılması; anonim ziyaret istatistikleri (Web Analytics).</li>
         <li>Mali müşavir: yasal muhasebe kayıtları.</li>
         <li>YouTube: sitedeki bir videoda yalnızca siz oynat'a bastığınızda (youtube-nocookie.com üzerinden).</li>
         <li>Yetkili kamu kurumları: yalnızca kanunen zorunlu olduğunda.</li>
