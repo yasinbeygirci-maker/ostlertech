@@ -129,9 +129,9 @@ export default function SyncPassPrivacyPolicy() {
             <Sub title="IBAN algılama (Android)">
               <p>Kasanız açıkken SyncPass panonuzda bir IBAN olup olmadığını kontrol eder. Bu kontrol tamamen cihazınızda yapılır; pano içeriği hiçbir yere gönderilmez.</p>
             </Sub>
-            <Sub title="Google Gemini ile yapay zekâ özellikleri (Android)">
+            <Sub title="Google Gemini kullanan isteğe bağlı özellikler (yalnızca Android; SyncPass Masaüstü'nde yoktur)">
               <ul className={list}>
-                <li><strong className="text-white/80">Destek sohbeti:</strong> uygulama içi asistana yazdığınız mesajlar Google Gemini API&apos;sine gönderilir.</li>
+                <li><strong className="text-white/80">Yardım ekranı:</strong> uygulama içi yardım ekranına yazdığınız mesajlar Google Gemini API&apos;sine gönderilir.</li>
                 <li><strong className="text-white/80">Güvenlik analizi (premium):</strong> yalnızca şifre özellikleri (uzunluk ve hangi karakter türlerinin kullanıldığı) ile kasanız hakkındaki özet sayılar gönderilir. Şifreler, kullanıcı adları ve kayıt adları gönderilmez.</li>
               </ul>
               <p>
@@ -278,9 +278,9 @@ export default function SyncPassPrivacyPolicy() {
             <Sub title="IBAN detection (Android)">
               <p>While your vault is unlocked, SyncPass checks whether your clipboard contains an IBAN. This check runs entirely on your device; clipboard content is never sent anywhere.</p>
             </Sub>
-            <Sub title="AI features with Google Gemini (Android)">
+            <Sub title="Optional features using Google Gemini (Android app only; not in SyncPass Desktop)">
               <ul className={list}>
-                <li><strong className="text-white/80">Support chat:</strong> the messages you type in the in-app assistant are sent to the Google Gemini API.</li>
+                <li><strong className="text-white/80">Help screen:</strong> the messages you type in the in-app help screen are sent to the Google Gemini API.</li>
                 <li><strong className="text-white/80">Security analysis (premium):</strong> only password characteristics (length and which character types are used) and summary counts about your vault are sent. Passwords, usernames and item names are not sent.</li>
               </ul>
               <p>

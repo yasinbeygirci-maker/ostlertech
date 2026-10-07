@@ -1,7 +1,5 @@
-# OstlerTech robots.txt — AI bot politikası (2026-09-16, Patron kararı)
-# Arama motorları: AÇIK (ürün sayfalarının bulunması gelir içindir)
-# AI eğitim tarayıcıları: KAPALI (içerik AI modellerine bedava veri olmasın)
-# AI ajan/kazıyıcılar: KAPALI (fiyat + ürün verisi kazınmasın)
+# OstlerTech robots.txt (2026-10-07)
+# Arama motorları açık. İçeriği toplu toplayan tarayıcılar ve model eğitimi için veri toplayan tarayıcılar kapalı.
 
 # --- Arama motorları: tam erişim ---
 User-agent: Googlebot
@@ -16,7 +14,7 @@ Allow: /
 User-agent: DuckDuckBot
 Allow: /
 
-# --- AI eğitim tarayıcıları: yasak ---
+# --- Veri toplayan tarayıcılar: yasak ---
 User-agent: GPTBot
 Disallow: /
 

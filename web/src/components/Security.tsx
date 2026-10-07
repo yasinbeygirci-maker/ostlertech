@@ -1,4 +1,4 @@
-import { Lock, Smartphone, EyeOff, Cloud, Search, Bot } from "lucide-react";
+import { Lock, Smartphone, EyeOff, Cloud, Search, LifeBuoy } from "lucide-react";
 import { PBKDF2_ITERATIONS } from "@/lib/site";
 
 const steps = [
@@ -11,7 +11,7 @@ const steps = [
 const leaves = [
   { icon: Cloud, title: "Drive yedeği (isteğe bağlı)", desc: "Açarsanız, zaten şifrelenmiş kasa dosyası kendi Google Drive hesabınıza yüklenir." },
   { icon: Search, title: "Sızıntı kontrolü", desc: "Şifrenin SHA-1 özetinin yalnızca ilk 5 karakteri Have I Been Pwned'e sorulur (k-anonimlik); şifrenin kendisi gönderilmez." },
-  { icon: Bot, title: "Yardım asistanı", desc: "Asistana yazdığınız soru yanıtlanmak için Google Gemini'ye gider. Kasa içeriği gönderilmez." },
+  { icon: LifeBuoy, title: "Uygulama içi yardım (yalnızca Android)", desc: "Android uygulamasında yardım ekranına yazdığınız soru, yanıtlanması için Google'ın Gemini hizmetine gönderilir. Kasa içeriği gönderilmez. Masaüstü uygulaması bunu yapmaz." },
 ];
 
 export default function Security() {
