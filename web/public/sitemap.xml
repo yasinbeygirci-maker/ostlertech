@@ -13,4 +13,7 @@
   <url><loc>https://www.ostlertech.com/gizlilik</loc><priority>0.3</priority></url>
   <url><loc>https://www.ostlertech.com/satin-al</loc><priority>0.8</priority></url>
   <url><loc>https://www.ostlertech.com/teslimat-ve-iade</loc><priority>0.3</priority></url>
+  <url><loc>https://www.ostlertech.com/en/terms</loc><priority>0.3</priority></url>
+  <url><loc>https://www.ostlertech.com/en/privacy</loc><priority>0.3</priority></url>
+  <url><loc>https://www.ostlertech.com/en/refunds</loc><priority>0.3</priority></url>
 </urlset>

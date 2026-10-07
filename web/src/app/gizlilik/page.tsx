@@ -5,12 +5,12 @@ import { COMPANY } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Gizlilik Politikası ve KVKK Aydınlatma Metni",
   description: "ostlertech.com ve satın alma işlemlerinde kişisel verilerin işlenmesi; 6698 sayılı KVKK aydınlatma metni.",
-  alternates: { canonical: "/gizlilik" },
+  alternates: { canonical: "/gizlilik", languages: { tr: "/gizlilik", en: "/en/privacy" } },
 };
 
 export default function SitePrivacyPage() {
   return (
-    <LegalPage eyebrow="Yasal" title="Gizlilik Politikası ve KVKK Aydınlatma Metni">
+    <LegalPage eyebrow="Yasal" title="Gizlilik Politikası ve KVKK Aydınlatma Metni" altLink={{ href: "/en/privacy", label: "English version" }}>
       <p>
         Bu metin ostlertech.com web sitesini ve buradan yapılan satın almaları kapsar. Uygulamalarımızın kendi gizlilik
         politikaları ayrıdır: <a href="/syncpass/privacy" className="text-primary hover:text-primary-light">SyncPass gizlilik politikası</a>.

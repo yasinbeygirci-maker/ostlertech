@@ -5,14 +5,14 @@ import { COMPANY, DESKTOP_LICENSE, PADDLE_BUYER_TERMS_URL } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Kullanım ve Satış Koşulları",
   description: "OstlerTech uygulamalarının kullanım koşulları; SyncPass Masaüstü Premium lisansı, abonelik, iptal ve Paddle üzerinden satış.",
-  alternates: { canonical: "/kullanim-sartlari" },
+  alternates: { canonical: "/kullanim-sartlari", languages: { tr: "/kullanim-sartlari", en: "/en/terms" } },
 };
 
 const link = "text-primary hover:text-primary-light";
 
 export default function TermsPage() {
   return (
-    <LegalPage eyebrow="Yasal" title="Kullanım ve Satış Koşulları">
+    <LegalPage eyebrow="Yasal" title="Kullanım ve Satış Koşulları" altLink={{ href: "/en/terms", label: "English version" }}>
       <p>
         Bu koşullar {COMPANY.brand} uygulamalarının (SyncPass Android, SyncPass Masaüstü ve diğerleri) kullanımı ile
         ostlertech.com üzerinden satın alınan lisanslar için geçerlidir. Uygulamayı kullanarak ya da lisans satın alarak

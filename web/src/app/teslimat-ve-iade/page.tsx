@@ -5,14 +5,14 @@ import { COMPANY, DESKTOP_LICENSE, PADDLE_BUYER_TERMS_URL } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Teslimat ve İade Politikası",
   description: "SyncPass Masaüstü Premium: elektronik teslimat, abonelik iptali ve 14 gün içinde koşulsuz iade.",
-  alternates: { canonical: "/teslimat-ve-iade" },
+  alternates: { canonical: "/teslimat-ve-iade", languages: { tr: "/teslimat-ve-iade", en: "/en/refunds" } },
 };
 
 const link = "text-primary hover:text-primary-light";
 
 export default function DeliveryRefundPage() {
   return (
-    <LegalPage eyebrow="Yasal" title="Teslimat ve İade Politikası">
+    <LegalPage eyebrow="Yasal" title="Teslimat ve İade Politikası" altLink={{ href: "/en/refunds", label: "English version" }}>
       <p>
         Bu politika ostlertech.com üzerinden satın alınan {DESKTOP_LICENSE.name} lisansları için geçerlidir. Satışlarımızı
         yetkili satıcımız (<span lang="en">Merchant of Record</span>) Paddle.com yapar; ödeme ve iadeler Paddle tarafından

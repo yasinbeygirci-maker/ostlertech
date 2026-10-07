@@ -1,19 +1,30 @@
 import type { ReactNode } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import { COMPANY, LEGAL_UPDATED } from "@/lib/site";
+import { COMPANY, LEGAL_UPDATED, LEGAL_UPDATED_EN } from "@/lib/site";
 
 // Yasal ve kurumsal sayfaların ortak düzeni.
-export default function LegalPage({ eyebrow, title, children, updated = true }: {
+export default function LegalPage({ eyebrow, title, children, updated = true, lang = "tr", altLink }: {
   eyebrow: string; title: string; children: ReactNode; updated?: boolean;
+  // İngilizce sürümler (/en/...) için lang="en"; altLink diğer dildeki sayfaya bağlantı.
+  lang?: "tr" | "en"; altLink?: { href: string; label: string };
 }) {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <Navbar />
-      <article className="max-w-3xl mx-auto px-5 pt-36 pb-24">
+      <article lang={lang} className="max-w-3xl mx-auto px-5 pt-36 pb-24">
         <p className="eyebrow">{eyebrow}</p>
         <h1 className="mt-3 text-4xl md:text-5xl font-extrabold tracking-tight text-white">{title}</h1>
-        {updated && <p className="mt-3 text-sm text-muted">Son güncelleme: {LEGAL_UPDATED}</p>}
+        {updated && (
+          <p className="mt-3 text-sm text-muted">
+            {lang === "en" ? `Last updated: ${LEGAL_UPDATED_EN}` : `Son güncelleme: ${LEGAL_UPDATED}`}
+          </p>
+        )}
+        {altLink && (
+          <p className="mt-2 text-sm">
+            <a href={altLink.href} hrefLang={lang === "en" ? "tr" : "en"} className="text-primary hover:text-primary-light">{altLink.label}</a>
+          </p>
+        )}
         <div className="legal mt-10 space-y-6 text-[15px] leading-relaxed text-muted">{children}</div>
       </article>
       <Footer />
@@ -39,7 +50,18 @@ export function Field({ value, label }: { value: string; label: string }) {
 }
 
 /** Firma bilgi bloğu: kullanım koşulları, gizlilik ve iletişim sayfasında aynı. Boş isteğe bağlı alanlar gösterilmez. */
-export function SellerBlock() {
+export function SellerBlock({ lang = "tr" }: { lang?: "tr" | "en" }) {
+  if (lang === "en") return (
+    <dl className="grid sm:grid-cols-[12rem_1fr] gap-x-6 gap-y-2 rounded-2xl border border-line bg-surface p-6">
+      <dt>Business</dt><dd className="text-foreground">{COMPANY.legalName} · {COMPANY.tradeName} ({COMPANY.brand}), sole proprietorship</dd>
+      <dt>Tax office / no</dt><dd className="text-foreground">{COMPANY.taxOffice} · {COMPANY.taxNumber}</dd>
+      <dt>Trade registry</dt><dd className="text-foreground">Erzincan Registry of Tradesmen and Craftsmen, no. {COMPANY.registryNo}</dd>
+      <dt>Address</dt><dd className="text-foreground">{COMPANY.address}, Türkiye</dd>
+      <dt>Registered e-mail (KEP)</dt><dd className="text-foreground">{COMPANY.kep}</dd>
+      {COMPANY.phone && (<><dt>Phone</dt><dd className="text-foreground">{COMPANY.phone}</dd></>)}
+      <dt>E-mail</dt><dd><a href={`mailto:${COMPANY.email}`} className="text-primary hover:text-primary-light">{COMPANY.email}</a></dd>
+    </dl>
+  );
   return (
     <dl className="grid sm:grid-cols-[12rem_1fr] gap-x-6 gap-y-2 rounded-2xl border border-line bg-surface p-6">
       <dt>Firma</dt><dd><Field value={COMPANY.legalName} label="Unvan / Ad Soyad" /> · {COMPANY.tradeName} ({COMPANY.brand})</dd>
