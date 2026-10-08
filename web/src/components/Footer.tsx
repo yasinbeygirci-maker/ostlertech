@@ -49,6 +49,7 @@ export default function Footer() {
             Verisini kendisinde tutmak isteyen insanlar için güvenlik ve sağlık uygulamaları geliştiriyoruz.
           </p>
           <p className="text-sm text-muted">{CONTACT_EMAIL}</p>
+          {COMPANY.phone && <p className="text-sm text-muted">{COMPANY.phone}</p>}
         </div>
 
         {columns.map((c) => (

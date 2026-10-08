@@ -23,7 +23,7 @@ export const COMPANY = {
   registryNo: "25537",
   address: "Hancı Mah. Akasya_1 Sk. No: 7 İç Kapı No: 1, Merkez / Erzincan",
   kep: "yasin.beygirci@hs01.kep.tr",
-  phone: "",
+  phone: "+90 850 242 62 10", // Verimor sanal santral (0850)
   email: CONTACT_EMAIL,
   chamberName: "", // kayıtlı olunan esnaf odası
   chamberUrl: "",
