@@ -4,9 +4,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "SyncPass Gizlilik Politikası / Privacy Policy | OstlerTech",
+  title: "SyncPass Gizlilik Politikası / Privacy Policy",
   description:
     "SyncPass (Android ve Masaüstü) gizlilik politikası: cihazda şifreleme, Google Drive yedeği ve üçüncü taraf hizmetler.",
+  alternates: { canonical: "/syncpass/privacy" },
 };
 
 const EFFECTIVE_TR = "5 Ekim 2026";

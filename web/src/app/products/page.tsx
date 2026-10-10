@@ -13,6 +13,7 @@ const DURUM: Record<string, { etiket: string; cls: string }> = {
 export const metadata: Metadata = {
   title: "Ürünler",
   description: "OstlerTech ekosistemine ait yenilikçi sağlık, işletme, proje ve güvenlik çözümleri.",
+  alternates: { canonical: "/products" },
 };
 
 // İkon eşleme haritası

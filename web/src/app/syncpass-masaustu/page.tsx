@@ -19,12 +19,21 @@ const features = [
   "Açık ve koyu tema, 12 dil",
 ];
 
+// Sayfada görünen ve fiyatı belli olan tek teklif ücretsiz sürüm; Premium fiyatları ödeme sayfasında (sağlayıcıdan) gelir.
+// Bu yüzden işaretleme ücretsiz indirmeyi anlatır, Premium için fiyat uydurmaz.
 const productLd = {
   "@context": "https://schema.org",
   "@type": "Product",
-  name: DESKTOP_LICENSE.name,
+  name: "SyncPass Masaüstü",
+  description: "Windows için şifre yöneticisi: kasa bilgisayarda AES-256-GCM ile şifreli, hesap açmak gerekmez.",
   brand: { "@type": "Brand", name: "OstlerTech" },
-  offers: { "@type": "Offer", url: `${SITE_URL}/satin-al` },
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "TRY",
+    availability: "https://schema.org/InStock",
+    url: `${SITE_URL}/syncpass-masaustu`,
+  },
 };
 
 export default function DesktopLicensePage() {

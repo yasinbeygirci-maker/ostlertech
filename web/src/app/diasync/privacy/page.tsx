@@ -1,5 +1,13 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "DiaSync Gizlilik Politikası",
+  description:
+    "DiaSync gizlilik politikası: hangi verilerin toplandığı, nasıl kullanıldığı, cihazlar arası eşitleme ve veri silme hakkınız.",
+  alternates: { canonical: "/diasync/privacy" },
+};
 
 export default function PrivacyPolicy() {
   return (

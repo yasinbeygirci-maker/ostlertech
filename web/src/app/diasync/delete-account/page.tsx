@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "DiaSync - Hesap ve Veri Silme Talebi | OstlerTech",
+  title: "DiaSync - Hesap ve Veri Silme Talebi",
   description:
     "DiaSync hesabınızı ve kişisel verilerinizi kalıcı olarak silme yöntemleri, prosedür ve destek bilgileri.",
+  alternates: { canonical: "/diasync/delete-account" },
 };
 
 export default function DiaSyncDeleteAccount() {
