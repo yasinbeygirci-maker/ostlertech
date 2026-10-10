@@ -1,54 +1,11 @@
-# OstlerTech robots.txt (2026-10-07)
-# Arama motorları açık. İçeriği toplu toplayan tarayıcılar ve model eğitimi için veri toplayan tarayıcılar kapalı.
+# OstlerTech robots.txt (2026-10-10)
+# Sitede yalnızca tanıtım ve yasal metinler var; kullanıcı verisi yok. Tüm tarayıcılar açık, biri hariç.
 
-# --- Arama motorları: tam erişim ---
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Applebot
-Allow: /
-
-User-agent: DuckDuckBot
-Allow: /
-
-# --- Veri toplayan tarayıcılar: yasak ---
-User-agent: GPTBot
-Disallow: /
-
-User-agent: OAI-SearchBot
-Disallow: /
-
-User-agent: ChatGPT-User
-Disallow: /
-
-User-agent: CCBot
-Disallow: /
-
-User-agent: ClaudeBot
-Disallow: /
-
-User-agent: anthropic-ai
-Disallow: /
-
-User-agent: Google-Extended
-Disallow: /
-
-User-agent: Applebot-Extended
-Disallow: /
-
-User-agent: Meta-ExternalAgent
-Disallow: /
-
-User-agent: PerplexityBot
-Disallow: /
-
+# --- Kapalı ---
 User-agent: Bytespider
 Disallow: /
 
-# --- Diğer herkes: standart kural ---
+# --- Diğer herkes: tam erişim ---
 User-agent: *
 Allow: /
 
