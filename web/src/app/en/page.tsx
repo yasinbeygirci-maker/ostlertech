@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { EnHeader, EnFooter } from "@/components/EnShell";
 import { Check, Lock, KeyRound, Fingerprint, HardDrive, QrCode, Monitor, Cloud, Search, LifeBuoy } from "lucide-react";
 import {
   PLAY_URL, SITE_URL, FREE_ITEM_LIMIT, PBKDF2_ITERATIONS, LANGUAGE_COUNT, MIN_ANDROID, DESKTOP_DOWNLOAD, DESKTOP_LICENSE, CONTACT_EMAIL,
@@ -72,24 +73,7 @@ export default function EnglishHome() {
     <main lang="en" className="min-h-screen bg-background overflow-x-hidden">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
 
-      <header className="fixed top-0 inset-x-0 z-50 border-b border-line bg-background/80 backdrop-blur-xl" style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}>
-        <div className="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between gap-4">
-          <a href="/en" className="flex items-center gap-2.5">
-            <img src="/logo-ostlertech.png" alt="" width={28} height={28} className="rounded-full" />
-            <span className="text-lg font-bold tracking-tight text-white">Ostler<span className="text-primary">Tech</span></span>
-          </a>
-          <nav className="hidden md:flex items-center gap-8 text-sm text-muted">
-            <a href="#features" className="hover:text-white">Features</a>
-            <a href="#security" className="hover:text-white">Security</a>
-            <a href="#pricing" className="hover:text-white">Pricing</a>
-            <a href="#faq" className="hover:text-white">FAQ</a>
-          </nav>
-          <div className="flex items-center gap-3">
-            <a href="/" lang="tr" hrefLang="tr" className="text-sm text-muted hover:text-white">Türkçe</a>
-            <a href={PLAY_URL} className="btn-primary !py-2 !px-4 text-sm" rel="noopener">Get the app</a>
-          </div>
-        </div>
-      </header>
+      <EnHeader />
 
       <section className="section-padding !pt-36">
         <div className="max-w-4xl mx-auto text-center space-y-6">
@@ -206,17 +190,7 @@ export default function EnglishHome() {
         </div>
       </section>
 
-      <footer className="border-t border-line bg-surface">
-        <div className="max-w-7xl mx-auto px-5 py-10 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between text-sm text-muted">
-          <p>© {new Date().getFullYear()} OstlerTech · Privacy-first apps that keep your data with you.</p>
-          <nav className="flex flex-wrap gap-5">
-            <a href="/en/privacy" className="hover:text-white">Privacy</a>
-            <a href="/en/terms" className="hover:text-white">Terms</a>
-            <a href="/en/refunds" className="hover:text-white">Refunds</a>
-            <a href="/" lang="tr" hrefLang="tr" className="hover:text-white">Türkçe</a>
-          </nav>
-        </div>
-      </footer>
+      <EnFooter />
     </main>
   );
 }
