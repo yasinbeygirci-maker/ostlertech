@@ -9,6 +9,7 @@ const columns = [
       { href: "/#fiyat", label: "Fiyat" },
       { href: "/guvenli-sifre-olusturucu", label: "Şifre oluşturucu" },
       { href: "/sifre-yoneticisi", label: "Şifre yöneticisi rehberi" },
+      { href: "/passkey-nedir", label: "Passkey nedir?" },
       { href: PLAY_URL, label: "Google Play", external: true },
     ],
   },
