@@ -13,9 +13,9 @@ export const metadata: Metadata = {
 const features = [
   "Android ile aynı şifreleme ve kasa biçimi (AES-256-GCM)",
   "Kategoriler, liste ve ayrıntı yan yana: üç sütunlu düzen",
-  "Ctrl+Shift+P ile hızlı erişim, klavyeyle kopyalama",
+  "Her yerden Ctrl+Shift+Space ile hızlı arama; Ctrl+Alt+A/U/P ile kullanıcı adı ve şifreyi otomatik yazma",
   "Kopyalanan şifre Windows pano geçmişine ve bulut panosuna yazılmaz",
-  "Şifre sağlığı: zayıf, tekrar eden ve sızıntıda görülen şifreler",
+  "Şifre sağlığı: zayıf ve tekrar eden şifreler; sızıntı kontrolü ve 2FA kodları Premium",
   "Açık ve koyu tema, 12 dil",
 ];
 

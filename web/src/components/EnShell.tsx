@@ -26,6 +26,7 @@ export function EnHeader({ trHref = "/" }: { trHref?: string }) {
 
 const guides = [
   { href: "/en/offline-password-manager", label: "Offline password manager" },
+  { href: "/en/password-manager-with-authenticator", label: "Built-in authenticator" },
 ];
 
 export function EnFooter() {

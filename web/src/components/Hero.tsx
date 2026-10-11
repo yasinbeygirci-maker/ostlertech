@@ -1,4 +1,5 @@
 import { ArrowRight, Monitor } from "lucide-react";
+import ConstellationBackground from "@/components/ConstellationBackground";
 import { PLAY_URL, PBKDF2_ITERATIONS, LANGUAGE_COUNT, MIN_ANDROID, FREE_ITEM_LIMIT } from "@/lib/site";
 
 export function PlayIcon({ className = "" }: { className?: string }) {
@@ -18,8 +19,8 @@ const facts = [
 
 export default function Hero() {
   return (
-    <section className="relative pt-32 md:pt-40 pb-20 px-5 overflow-hidden">
-      <div className="absolute inset-0 -z-10 grid-bg" />
+    <section className="relative isolate pt-32 md:pt-40 pb-20 px-5 overflow-hidden">
+      <ConstellationBackground className="absolute inset-0 -z-10 h-full w-full [mask-image:radial-gradient(ellipse_at_50%_30%,black_35%,transparent_80%)]" />
       <div className="absolute -z-10 top-[-10%] right-[-10%] h-[700px] w-[700px] rounded-full bg-primary/10 blur-[140px]" />
 
       <div className="max-w-7xl mx-auto grid lg:grid-cols-[1fr_1.15fr] gap-14 lg:gap-10 items-center">

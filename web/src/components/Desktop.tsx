@@ -13,7 +13,7 @@ type ShotKey = keyof typeof shots;
 
 const points = [
   { icon: Columns3, title: "Üç sütun", desc: "Kategoriler, liste ve ayrıntı yan yana. Pencere daralınca ayrıntı listenin üstünde açılır." },
-  { icon: Command, title: "Klavyeyle hızlı", desc: "Ctrl+Shift+P hızlı erişim penceresini açar; Ctrl+C şifreyi, Ctrl+B kullanıcı adını kopyalar." },
+  { icon: Command, title: "Klavyeyle hızlı", desc: "Uygulamada Ctrl+Shift+P, her yerden Ctrl+Shift+Space hızlı erişim penceresini açar; Ctrl+C şifreyi, Ctrl+B kullanıcı adını kopyalar." },
   { icon: ClipboardX, title: "Pano geçmişine düşmez", desc: "Kopyalanan şifre Windows pano geçmişine ve bulut panosuna yazılmaz." },
   { icon: SunMoon, title: "Windows temasına uyar", desc: "Açık ve koyu tema sistemi izler; isterseniz ayarlardan sabitleyin." },
 ];
