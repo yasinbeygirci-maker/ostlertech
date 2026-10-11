@@ -8,6 +8,7 @@ const columns = [
       { href: "/syncpass-masaustu", label: "Masaüstü lisansı" },
       { href: "/#fiyat", label: "Fiyat" },
       { href: "/guvenli-sifre-olusturucu", label: "Şifre oluşturucu" },
+      { href: "/sifre-yoneticisi", label: "Şifre yöneticisi rehberi" },
       { href: PLAY_URL, label: "Google Play", external: true },
     ],
   },
