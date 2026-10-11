@@ -7,10 +7,16 @@ const columns = [
       { href: "/#ozellikler", label: "Özellikler" },
       { href: "/syncpass-masaustu", label: "Masaüstü lisansı" },
       { href: "/#fiyat", label: "Fiyat" },
-      { href: "/guvenli-sifre-olusturucu", label: "Şifre oluşturucu" },
-      { href: "/sifre-yoneticisi", label: "Şifre yöneticisi rehberi" },
-      { href: "/passkey-nedir", label: "Passkey nedir?" },
       { href: PLAY_URL, label: "Google Play", external: true },
+    ],
+  },
+  {
+    title: "Rehberler",
+    links: [
+      { href: "/guvenli-sifre-olusturucu", label: "Güvenli şifre oluşturucu" },
+      { href: "/sifre-yoneticisi", label: "Şifre yöneticisi nerede?" },
+      { href: "/passkey-nedir", label: "Passkey nedir?" },
+      { href: "/iki-adimli-dogrulama", label: "İki adımlı doğrulama (2FA)" },
     ],
   },
   {
@@ -40,7 +46,7 @@ const columns = [
 export default function Footer() {
   return (
     <footer className="border-t border-line bg-surface">
-      <div className="max-w-7xl mx-auto px-5 py-16 grid gap-12 md:grid-cols-[1.4fr_repeat(3,1fr)]">
+      <div className="max-w-7xl mx-auto px-5 py-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
         <div className="space-y-4">
           <a href="/" className="flex items-center gap-2.5">
             <img src="/logo-ostlertech.png" alt="" width={28} height={28} className="rounded-full" />
