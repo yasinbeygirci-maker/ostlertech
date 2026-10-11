@@ -8,7 +8,13 @@ import Security from "@/components/Security";
 import Pricing from "@/components/Pricing";
 import Faq from "@/components/Faq";
 import Footer from "@/components/Footer";
+import type { Metadata } from "next";
 import { PLAY_URL, SITE_URL } from "@/lib/site";
+
+// Türkçe ana sayfa ve İngilizce sürümü (/en) birbirini dil bağlantısıyla gösterir.
+export const metadata: Metadata = {
+  alternates: { canonical: "/", languages: { tr: "/", en: "/en", "x-default": "/" } },
+};
 
 const jsonLd = {
   "@context": "https://schema.org",

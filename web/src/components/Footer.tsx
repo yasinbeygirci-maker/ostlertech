@@ -8,6 +8,7 @@ const columns = [
       { href: "/syncpass-masaustu", label: "Masaüstü lisansı" },
       { href: "/#fiyat", label: "Fiyat" },
       { href: PLAY_URL, label: "Google Play", external: true },
+      { href: "/en", label: "English" },
     ],
   },
   {
