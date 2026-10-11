@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { PLAY_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Passkey (Geçiş Anahtarı) Nedir? Google, Microsoft, WhatsApp'ta Nasıl Oluşturulur?",
+  title: "Passkey (Geçiş Anahtarı) Nedir, Nasıl Oluşturulur?",
   description:
     "Passkey (geçiş anahtarı) nedir, şifreden neden daha güvenlidir? Google, Microsoft ve WhatsApp'ta passkey oluşturma adımları, nerede saklandığı ve telefonu kaybedince ne olacağı.",
   alternates: { canonical: "/passkey-nedir" },

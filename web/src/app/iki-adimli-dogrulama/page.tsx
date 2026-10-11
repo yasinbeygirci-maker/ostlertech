@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { PLAY_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "2FA Nedir? İki Adımlı Doğrulama Uygulaması Nasıl Kurulur?",
+  title: "2FA Nedir? İki Adımlı Doğrulama Nasıl Kurulur?",
   description:
     "İki adımlı doğrulama (2FA) nedir, hangi 2FA uygulaması kullanılır? Google ve Instagram'da kurulum, yedek kodlar, telefon değiştirince kodları taşıma ve sık yapılan hatalar.",
   alternates: { canonical: "/iki-adimli-dogrulama" },

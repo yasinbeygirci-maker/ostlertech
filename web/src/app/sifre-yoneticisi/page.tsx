@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { FREE_ITEM_LIMIT, PLAY_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Şifre Yöneticisi Nedir, Telefonda Nerede? Google, iPhone, Samsung, Xiaomi, Huawei",
+  title: "Şifre Yöneticisi Nedir, Telefonda Nerede?",
   description:
     "Kayıtlı şifreleriniz telefonunuzun neresinde? Google, Chrome, iPhone, Samsung, Xiaomi ve Huawei şifre kasasının yeri adım adım. Şifre yöneticisi nedir, ne işe yarar?",
   alternates: { canonical: "/sifre-yoneticisi" },

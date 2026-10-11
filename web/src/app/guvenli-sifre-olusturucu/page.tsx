@@ -6,7 +6,7 @@ import SifreOlusturucu from "@/components/SifreOlusturucu";
 import { FREE_ITEM_LIMIT, PLAY_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Güvenli Şifre Oluşturucu: Güçlü ve Rastgele Şifre Üret",
+  title: "Güvenli Şifre Oluşturucu: Rastgele Güçlü Şifre",
   description:
     "Ücretsiz güvenli şifre oluşturucu. Şifre tarayıcınızda üretilir, hiçbir yere gönderilmez. Güvenli şifre oluşturma kuralları ve örneklerle.",
   alternates: { canonical: "/guvenli-sifre-olusturucu" },
