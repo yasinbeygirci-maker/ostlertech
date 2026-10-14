@@ -42,9 +42,9 @@ export const DESKTOP_LICENSE = {
 export const DESKTOP_DOWNLOAD = {
   url: "https://github.com/yasinbeygirci-maker/syncpass-releases/releases/latest/download/SyncPass.msi",
   releasesUrl: "https://github.com/yasinbeygirci-maker/syncpass-releases/releases",
-  version: "1.4.7",
+  version: "1.4.8",
   sizeLabel: "141 MB",
-  sha256: "b25ec5bcbd1e3488e5807415a75c81d93b9b40481db7c8a8f8f6089997541d31",
+  sha256: "571055877091418287d4eb168bdc22ca1d827090c80d3d6c3dd9e33f7d5827fe",
   requirements: "Windows 10 (2004) veya Windows 11, 64 bit",
 };
 
