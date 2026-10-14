@@ -48,6 +48,11 @@ export const DESKTOP_DOWNLOAD = {
   requirements: "Windows 10 (2004) veya Windows 11, 64 bit",
 };
 
+// Tarayıcı eklentisi: kayıtları aynı bilgisayardaki SyncPass Masaüstü'nden doldurur (Edge incelemede).
+export const BROWSER_EXTENSION = {
+  chromeUrl: "https://chromewebstore.google.com/detail/bbighjeekihcenhofnmefgmcadddahbk",
+};
+
 export const PADDLE_BUYER_TERMS_URL = "https://www.paddle.com/legal/checkout-buyer-terms";
 
 export const LEGAL_UPDATED = "4 Ekim 2026";

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Command, ClipboardX, Columns3, SunMoon } from "lucide-react";
-import { DESKTOP_DOWNLOAD, DESKTOP_LICENSE } from "@/lib/site";
+import { BROWSER_EXTENSION, DESKTOP_DOWNLOAD, DESKTOP_LICENSE } from "@/lib/site";
 
 const shots = {
   vault: { label: "Kasa", dark: "desktop-vault-dark", light: "desktop-vault-light" },
@@ -99,6 +99,9 @@ export default function Desktop() {
         <div className="mt-16 max-w-md mx-auto text-center space-y-4">
           <a href={DESKTOP_DOWNLOAD.url} className="btn-primary inline-flex !py-3.5 text-base">Windows için ücretsiz indir</a>
           <p className="text-xs text-muted">Sürüm {DESKTOP_DOWNLOAD.version} · {DESKTOP_DOWNLOAD.requirements}</p>
+          <p className="text-sm text-muted">
+            <a href={BROWSER_EXTENSION.chromeUrl} className="text-primary hover:text-primary-light" target="_blank" rel="noopener">Chrome eklentisini ekle →</a>
+          </p>
           <p className="pt-2 text-sm text-muted">
             Ücretsiz sürüm ya da <span className="text-white font-semibold">Premium</span> (aylık, yıllık, ömür boyu), {DESKTOP_LICENSE.devices} bilgisayar ·{" "}
             <a href="/satin-al" className="text-primary hover:text-primary-light">Planlar ve fiyatlar →</a>

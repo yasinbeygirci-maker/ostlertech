@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Check, Monitor } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { DESKTOP_DOWNLOAD, DESKTOP_LICENSE, SITE_URL } from "@/lib/site";
+import { BROWSER_EXTENSION, DESKTOP_DOWNLOAD, DESKTOP_LICENSE, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "SyncPass Masaüstü",
@@ -14,6 +14,7 @@ const features = [
   "Android ile aynı şifreleme ve kasa biçimi (AES-256-GCM)",
   "Kategoriler, liste ve ayrıntı yan yana: üç sütunlu düzen",
   "Her yerden Ctrl+Shift+Space ile hızlı arama; Ctrl+Alt+A/U/P ile kullanıcı adı ve şifreyi otomatik yazma",
+  "Chrome eklentisi: giriş sayfasındaki SyncPass düğmesiyle kullanıcı adı ve şifre bu bilgisayardaki kasadan doldurulur",
   "Kopyalanan şifre Windows pano geçmişine ve bulut panosuna yazılmaz",
   "Şifre sağlığı: zayıf ve tekrar eden şifreler; sızıntı kontrolü ve 2FA kodları Premium",
   "Açık ve koyu tema, 12 dil",
@@ -54,6 +55,11 @@ export default function DesktopLicensePage() {
               <a href={DESKTOP_DOWNLOAD.url} className="btn-primary !py-3.5 text-base">Ücretsiz indir (Windows)</a>
               <span className="text-sm text-muted">Sürüm {DESKTOP_DOWNLOAD.version} · {DESKTOP_DOWNLOAD.sizeLabel} · {DESKTOP_DOWNLOAD.requirements}</span>
             </div>
+            <p className="text-sm text-muted">
+              Tarayıcıda doldurmak için:{" "}
+              <a href={BROWSER_EXTENSION.chromeUrl} className="font-semibold text-primary hover:text-primary-light" target="_blank" rel="noopener">Chrome&apos;a ekle →</a>{" "}
+              Eklenti şifre saklamaz; kayıtlar açık olan SyncPass Masaüstü&apos;nden, aynı bilgisayarda doldurulur.
+            </p>
             <details className="rounded-2xl border border-line bg-card p-5 text-sm text-muted">
               <summary className="cursor-pointer font-semibold text-foreground">Windows "tanınmayan uygulama" uyarısı gösterirse</summary>
               <p className="mt-3">
