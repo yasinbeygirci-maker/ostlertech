@@ -30,6 +30,11 @@ export default async function PricingPage() {
             <p className="eyebrow">SyncPass Masaüstü · <span lang="en">Windows</span></p>
             <h1 className="mt-3 text-3xl md:text-5xl font-extrabold tracking-tight text-white">Size uygun planı seçin</h1>
             <p className="mt-4 text-muted">Kasanız her planda bilgisayarınızda şifreli durur ve hiçbir sunucuya gönderilmez.</p>
+            <p className="mt-2 text-sm text-muted">
+              Bu sayfada satılan ürün yalnızca SyncPass Masaüstü (Windows) lisansıdır: çevrimdışı çalışan bir şifre
+              yöneticisi. Masaüstü uygulamasında yapay zekâ ya da sohbet botu özelliği yoktur.{" "}
+              <a href="/en/pricing" className="text-primary hover:text-primary-light" lang="en">English</a>
+            </p>
           </div>
           <div className="mt-12">
             <PaddlePricing environment={environment} token={token} countryCode={countryCode} />

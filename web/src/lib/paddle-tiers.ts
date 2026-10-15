@@ -9,6 +9,8 @@ export interface Tier {
   name: string;
   description: string;
   features: string[];
+  // /en/pricing için İngilizce karşılıklar (Türkçe değişince bunlar da aynı işte güncellenir).
+  en: { name: string; description: string; features: string[] };
   // Ücretsiz plan: fiyat yok. Abonelik: aylık + yıllık. Ömür boyu: tek seferlik.
   priceId: null | { month: string; year: string } | { once: string };
   highlighted?: boolean;
@@ -25,6 +27,16 @@ export const TIERS: Tier[] = [
       "Kopyalanan şifre Windows pano geçmişine yazılmaz",
       "Hesap açmak gerekmez",
     ],
+    en: {
+      name: "Free",
+      description: "To try it out and for a few items.",
+      features: [
+        "Up to 15 items",
+        "Same encryption as Android (AES-256-GCM)",
+        "Copied passwords are kept out of Windows clipboard history",
+        "No account needed",
+      ],
+    },
     priceId: null,
   },
   {
@@ -38,6 +50,17 @@ export const TIERS: Tier[] = [
       "Ctrl+Shift+P ile hızlı erişim",
       "İstediğiniz zaman iptal",
     ],
+    en: {
+      name: "Premium",
+      description: "For your whole vault, monthly or yearly.",
+      features: [
+        "Unlimited items",
+        "Sync with your phone through your own Google Drive",
+        "Password health: weak, reused and breached passwords",
+        "Quick access with Ctrl+Shift+P",
+        "Cancel any time",
+      ],
+    },
     priceId: { month: "pri_01m41q184hngxx8aqz3v0bt2wp", year: "pri_01m41q27m1hgdzxabaz96v07pf" },
     highlighted: true,
   },
@@ -46,6 +69,11 @@ export const TIERS: Tier[] = [
     name: "Ömür boyu",
     description: "Bir kez ödeyin, abonelik yok.",
     features: ["Premium'daki her şey", "Tek seferlik ödeme, yenileme yok", "Gelecek sürümler dahil"],
+    en: {
+      name: "Lifetime",
+      description: "Pay once, no subscription.",
+      features: ["Everything in Premium", "One-time payment, no renewals", "Future versions included"],
+    },
     priceId: { once: "pri_01m41q4dg3816kmsk2sd76npdy" },
   },
 ];

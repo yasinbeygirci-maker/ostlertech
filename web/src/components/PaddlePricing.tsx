@@ -13,14 +13,29 @@ interface Props {
   countryCode?: string;
   // Giriş yapmış kullanıcının e-postası; sitede henüz hesap yok, gelince ödeme formuna önceden yazılır.
   customerEmail?: string;
+  lang?: "tr" | "en";
 }
+
+const TEXT = {
+  tr: {
+    cycleLabel: "Ödeme dönemi", month: "Aylık", year: "Yıllık", once: "tek seferlik", perMonth: "/ ay", perYear: "/ yıl",
+    free: "Ücretsiz", download: "İndir", buy: "Satın al", subscribe: "Abone ol",
+    error: "Fiyatlar şu an yüklenemedi. Sayfayı yenileyin; sorun sürerse destek@ostlertech.com adresine yazın.",
+  },
+  en: {
+    cycleLabel: "Billing period", month: "Monthly", year: "Yearly", once: "one-time", perMonth: "/ month", perYear: "/ year",
+    free: "Free", download: "Download", buy: "Buy", subscribe: "Subscribe",
+    error: "Prices could not be loaded right now. Refresh the page; if it continues, write to destek@ostlertech.com.",
+  },
+} as const;
 
 const priceIdFor = (tier: Tier, cycle: BillingCycle): string | null => {
   if (!tier.priceId) return null;
   return "once" in tier.priceId ? tier.priceId.once : tier.priceId[cycle];
 };
 
-export default function PaddlePricing({ environment, token, countryCode, customerEmail }: Props) {
+export default function PaddlePricing({ environment, token, countryCode, customerEmail, lang = "tr" }: Props) {
+  const tx = TEXT[lang];
   const [paddle, setPaddle] = useState<Paddle>();
   const [cycle, setCycle] = useState<BillingCycle>("year");
   // priceId -> Paddle'ın biçimlendirdiği toplam ("₺899,99" gibi). Ön yüzde hiçbir hesap ya da biçimlendirme yapılmaz.
@@ -73,7 +88,7 @@ export default function PaddlePricing({ environment, token, countryCode, custome
       settings: {
         displayMode: "overlay",
         variant: "one-page",
-        locale: "tr",
+        locale: lang,
         successUrl: `${window.location.origin}/welcome`,
       },
     });
@@ -82,7 +97,7 @@ export default function PaddlePricing({ environment, token, countryCode, custome
   return (
     <div>
       <div className="flex justify-center">
-        <div role="radiogroup" aria-label="Ödeme dönemi" className="inline-flex rounded-full border border-line bg-card p-1 text-sm">
+        <div role="radiogroup" aria-label={tx.cycleLabel} className="inline-flex rounded-full border border-line bg-card p-1 text-sm">
           {(["month", "year"] as const).map((c) => (
             <button
               key={c}
@@ -91,7 +106,7 @@ export default function PaddlePricing({ environment, token, countryCode, custome
               onClick={() => setCycle(c)}
               className={`rounded-full px-5 py-2 font-semibold transition-colors ${cycle === c ? "bg-primary text-white" : "text-muted hover:text-foreground"}`}
             >
-              {c === "month" ? "Aylık" : "Yıllık"}
+              {c === "month" ? tx.month : tx.year}
             </button>
           ))}
         </div>
@@ -101,18 +116,19 @@ export default function PaddlePricing({ environment, token, countryCode, custome
         {TIERS.map((tier) => {
           const priceId = priceIdFor(tier, cycle);
           const total = priceId ? totals[priceId] : undefined;
-          const period = !tier.priceId ? "" : "once" in tier.priceId ? "tek seferlik" : cycle === "month" ? "/ ay" : "/ yıl";
+          const period = !tier.priceId ? "" : "once" in tier.priceId ? tx.once : cycle === "month" ? tx.perMonth : tx.perYear;
+          const copy = lang === "en" ? tier.en : tier;
           return (
             <div
               key={tier.id}
               className={`flex flex-col rounded-3xl border p-8 ${tier.highlighted ? "border-primary/40 bg-gradient-to-b from-primary/10 to-card" : "border-line bg-card"}`}
             >
-              <h2 className="text-xl font-bold text-white">{tier.name}</h2>
-              <p className="mt-1 text-sm text-muted">{tier.description}</p>
+              <h2 className="text-xl font-bold text-white">{copy.name}</h2>
+              <p className="mt-1 text-sm text-muted">{copy.description}</p>
 
               <div className="mt-6 flex min-h-[3.5rem] items-baseline gap-2">
                 {!tier.priceId ? (
-                  <span className="text-4xl font-extrabold text-white">Ücretsiz</span>
+                  <span className="text-4xl font-extrabold text-white">{tx.free}</span>
                 ) : total ? (
                   <>
                     <span className="text-4xl font-extrabold text-white">{total}</span>
@@ -124,7 +140,7 @@ export default function PaddlePricing({ environment, token, countryCode, custome
               </div>
 
               <ul className="mt-6 flex-1 space-y-3">
-                {tier.features.map((f) => (
+                {copy.features.map((f) => (
                   <li key={f} className="flex gap-3 text-sm text-foreground">
                     <Check size={18} className="mt-0.5 shrink-0 text-ok" /> {f}
                   </li>
@@ -133,7 +149,7 @@ export default function PaddlePricing({ environment, token, countryCode, custome
 
               {!priceId ? (
                 <a href={DESKTOP_DOWNLOAD.url} className="btn-secondary mt-8 w-full !py-3">
-                  <Download size={18} /> İndir
+                  <Download size={18} /> {tx.download}
                 </a>
               ) : (
                 <button
@@ -141,7 +157,7 @@ export default function PaddlePricing({ environment, token, countryCode, custome
                   disabled={!paddle || !total}
                   className="btn-primary mt-8 w-full !py-3 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  {tier.priceId && "once" in tier.priceId ? "Satın al" : "Abone ol"}
+                  {tier.priceId && "once" in tier.priceId ? tx.buy : tx.subscribe}
                 </button>
               )}
             </div>
@@ -151,13 +167,20 @@ export default function PaddlePricing({ environment, token, countryCode, custome
 
       {error && (
         <p className="mt-6 text-center text-sm text-weak">
-          Fiyatlar şu an yüklenemedi. Sayfayı yenileyin; sorun sürerse destek@ostlertech.com adresine yazın.
+          {tx.error}
         </p>
       )}
-      <p className="mt-8 text-center text-xs text-muted">
-        Fiyatlar bulunduğunuz ülkeye göre gösterilir ve vergiler dahildir. Siparişiniz yetkili satıcımız Paddle.com
-        (<span lang="en">Merchant of Record</span>) tarafından işlenir; kart bilgileriniz bize iletilmez.
-      </p>
+      {lang === "en" ? (
+        <p className="mt-8 text-center text-xs text-muted">
+          Prices are shown for your country and include taxes. Your order is processed by our reseller Paddle.com, the
+          Merchant of Record; your card details never reach us.
+        </p>
+      ) : (
+        <p className="mt-8 text-center text-xs text-muted">
+          Fiyatlar bulunduğunuz ülkeye göre gösterilir ve vergiler dahildir. Siparişiniz yetkili satıcımız Paddle.com
+          (<span lang="en">Merchant of Record</span>) tarafından işlenir; kart bilgileriniz bize iletilmez.
+        </p>
+      )}
     </div>
   );
 }
