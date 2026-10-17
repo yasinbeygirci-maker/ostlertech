@@ -100,8 +100,9 @@ export default function OtoparkPrivacyEnPage() {
 
       <H2>9. Children</H2>
       <p>
-        The Game is designed for users aged 13 and over, is not directed at children and is not part of Google Play&apos;s
-        Families program. We do not knowingly collect personal data from children under 13. If you believe a child under 13 is
+        The Game is designed for users aged 16 and over, is not directed at children and is not part of Google Play&apos;s
+        Families program. Ads shown in the Game are limited to content suitable for general audiences (PG). We do not
+        knowingly collect personal data from children under 16. If you believe a child under 16 is
         using the Game, write to {COMPANY.email}.
       </p>
 

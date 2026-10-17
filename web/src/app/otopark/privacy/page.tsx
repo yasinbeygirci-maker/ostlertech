@@ -106,8 +106,9 @@ export default function OtoparkPrivacyPage() {
 
       <H2>9. Çocuklar</H2>
       <p>
-        Oyun 13 yaş ve üzeri kullanıcılar için tasarlanmıştır; çocuklara yönelik değildir ve Google Play&apos;in Aileler
-        programında yer almaz. Bilerek 13 yaşından küçük çocuklardan kişisel veri toplamayız. 13 yaşından küçük bir çocuğun
+        Oyun 16 yaş ve üzeri kullanıcılar için tasarlanmıştır; çocuklara yönelik değildir ve Google Play&apos;in Aileler
+        programında yer almaz. Oyunda gösterilen reklamlar genel izleyiciye uygun (PG) içerikle sınırlıdır. Bilerek 16
+        yaşından küçük çocuklardan kişisel veri toplamayız. 16 yaşından küçük bir çocuğun
         oyunu kullandığını düşünüyorsanız {COMPANY.email} adresine yazın.
       </p>
 
