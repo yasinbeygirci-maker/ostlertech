@@ -1,3 +1,4 @@
+import { PLAY_URL } from "./site";
 export interface Urun {
   id: string;
   ad: string;
@@ -20,7 +21,7 @@ export const URUNLER: Urun[] = [
     ikon: "ShieldCheck",
     renk: "#4C8DFF",
     durum: "yayinda",
-    url: "https://play.google.com/store/apps/details?id=com.ostlertech.syncpass",
+    url: PLAY_URL,
   },
   {
     id: "syncpassdesktop",

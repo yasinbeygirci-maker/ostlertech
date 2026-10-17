@@ -1,6 +1,7 @@
 // Sitenin birden fazla yerde kullandığı sabit bilgiler. Bir değer değişirse yalnızca burası güncellenir.
+// referrer: Play Console'da "Play dışı" edinmelerin siteden geldiğini görmek için (Selin, 2026-10-17).
 export const PLAY_URL =
-  "https://play.google.com/store/apps/details?id=com.ostlertech.syncpass";
+  "https://play.google.com/store/apps/details?id=com.ostlertech.syncpass&referrer=utm_source%3Dostlertech.com%26utm_medium%3Dsite";
 
 export const SITE_URL = "https://www.ostlertech.com";
 
