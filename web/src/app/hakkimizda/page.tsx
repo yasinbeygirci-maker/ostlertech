@@ -25,7 +25,7 @@ export default function AboutPage() {
       <H2>Nasıl çalışıyoruz</H2>
       <List>
         <li>Verin senin: SyncPass kasanı hiçbir sunucuya göndermez, hesap açtırmaz.</li>
-        <li>Reklam ve izleme yok: uygulamalarımızda reklam ya da analitik izleme kütüphanesi bulunmaz.</li>
+        <li>SyncPass&apos;te reklam ve izleme yok: uygulamada reklam ya da analitik izleme kütüphanesi bulunmaz. Oyunlarımızdaki isteğe bağlı reklamlar her oyunun gizlilik politikasında anlatılır.</li>
         <li>Söylediğimizi yaparız: sitede ve mağazada yalnızca uygulamada gerçekten olan özellikleri anlatırız.</li>
       </List>
 
