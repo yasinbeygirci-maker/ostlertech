@@ -14,7 +14,7 @@ const link = "text-primary hover:text-primary-light";
 export default function OklarPrivacyPage() {
   return (
     <LegalPage eyebrow="Oklar" title="Oklar Gizlilik Politikası" updated={false} altLink={{ href: "/en/oklar/privacy", label: "English" }}>
-      <p>Son güncelleme: 15 Ekim 2026</p>
+      <p>Son güncelleme: 18 Ekim 2026</p>
       <p>
         Bu politika, Oklar mobil oyununu (&quot;Oyun&quot;) kullandığınızda hangi verilerin işlendiğini anlatır. 6698 sayılı
         Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında aydınlatma metni, AB Genel Veri Koruma Tüzüğü (GDPR) kapsamında
@@ -31,7 +31,7 @@ export default function OklarPrivacyPage() {
         <li>Oyunda hesap yoktur. Adınızı, e-postanızı ya da telefonunuzu sormayız.</li>
         <li>Oyun ilerlemeniz yalnız cihazınızda tutulur; bize gelmez.</li>
         <li>Oyunda isteğe bağlı ödüllü reklam vardır: ipucu ya da ek can için reklam izlemeyi siz seçersiniz. Reklamları Google AdMob gösterir.</li>
-        <li>Tek seferlik &quot;Reklamsız&quot; satın alma Google Play üzerinden yapılır; ödeme bilgileriniz bize gelmez.</li>
+        <li>Tek seferlik &quot;Reklamsız paket&quot; satın alma Google Play üzerinden yapılır; ödeme bilgileriniz bize gelmez.</li>
         <li>Analitik ya da izleme aracı kullanmıyoruz.</li>
       </List>
 
@@ -48,7 +48,7 @@ export default function OklarPrivacyPage() {
         önleyebilmek için Google Mobile Ads SDK cihazınızdan şu verileri toplar ve Google&apos;a gönderir:
       </p>
       <List>
-        <li><b>Cihaz kimlikleri:</b> Android reklam kimliği ve app set ID.</li>
+        <li><b>Cihaz kimlikleri:</b> Android reklam kimliği ve app set ID (varsa cihazda oturum açılmış hesaba ait kimlikler).</li>
         <li><b>IP adresi:</b> yaklaşık konumun (ülke, şehir düzeyi) tahmini için kullanılabilir.</li>
         <li><b>Etkileşim bilgileri:</b> uygulamanın açılması, dokunmalar, reklamın izlenmesi.</li>
         <li><b>Teşhis bilgileri:</b> uygulamanın ve SDK&apos;nın performansı.</li>
@@ -63,14 +63,14 @@ export default function OklarPrivacyPage() {
       <p>
         <b>Onay ve kişiselleştirilmemiş reklam.</b> Yasaların gerektirdiği yerlerde (Avrupa Ekonomik Alanı, Birleşik Krallık,
         İsviçre) oyunu ilk açtığınızda Google&apos;ın onay formu gösterilir. Kişiselleştirilmiş reklama onay vermezseniz reklamlar
-        kişiselleştirilmeden ya da sınırlı biçimde gösterilir. Tercihinizi oyunda <b>Bölümler &gt; Gizlilik seçenekleri</b>
-        bölümünden değiştirebilirsiniz. Reklam kimliğinizi Android ayarlarından sıfırlayabilir veya silebilirsiniz. Reklam
-        izlemek zorunlu değildir; &quot;Reklamsız&quot; satın alındığında oyun reklam sistemini hiç başlatmaz.
+        kişiselleştirilmeden ya da sınırlı biçimde gösterilir. Tercihinizi oyunda <b>Ayarlar &gt; Hakkında &gt; Gizlilik seçenekleri</b>
+        bölümünden değiştirebilirsiniz (onay formunun gösterilmediği bölgelerde bu düğme bu sayfayı açar). Reklam kimliğinizi Android ayarlarından sıfırlayabilir veya silebilirsiniz. Reklam
+        izlemek zorunlu değildir; &quot;Reklamsız paket&quot; satın alındığında oyun reklam sistemini hiç başlatmaz.
       </p>
 
       <H2>5. Satın almalar (Google Play)</H2>
       <p>
-        &quot;Reklamsız&quot; satın alma Google Play faturalandırma sistemiyle yapılır. Ödeme bilgileriniz ve satın alma kaydınız
+        &quot;Reklamsız paket&quot; satın alma Google Play faturalandırma sistemiyle yapılır. Ödeme bilgileriniz ve satın alma kaydınız
         Google tarafından işlenir. Oyun satın almayı yalnız cihazınızda Google Play üzerinden doğrular; adınız ya da ödeme
         bilginiz bize gelmez. İadeler Google Play&apos;in iade kurallarına tabidir.
       </p>

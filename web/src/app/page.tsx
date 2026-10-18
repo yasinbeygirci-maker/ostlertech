@@ -20,7 +20,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   name: "SyncPass",
-  operatingSystem: "Android",
+  operatingSystem: "Android, Windows",
   applicationCategory: "SecurityApplication",
   url: SITE_URL,
   downloadUrl: PLAY_URL,

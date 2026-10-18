@@ -14,7 +14,7 @@ const link = "text-primary hover:text-primary-light";
 export default function OklarPrivacyEnPage() {
   return (
     <LegalPage eyebrow="Oklar" title="Oklar Privacy Policy" lang="en" updated={false} altLink={{ href: "/oklar/privacy", label: "Türkçe sürüm" }}>
-      <p>Last updated: 15 October 2026</p>
+      <p>Last updated: 18 October 2026</p>
       <p>
         This policy explains which data is processed when you use the Oklar mobile game (the &quot;Game&quot;). It serves as the
         information notice under Turkey&apos;s Personal Data Protection Law (KVKK) and the EU General Data Protection Regulation (GDPR).
@@ -28,7 +28,7 @@ export default function OklarPrivacyEnPage() {
         <li>The Game has no account. We never ask for your name, e-mail or phone number.</li>
         <li>Your progress is stored only on your device and never reaches us.</li>
         <li>The Game has optional rewarded ads: you choose to watch an ad for a hint or an extra heart. Ads are served by Google AdMob.</li>
-        <li>The one-time &quot;Remove ads&quot; purchase is made through Google Play; your payment details never reach us.</li>
+        <li>The one-time &quot;Ad-free pack&quot; purchase is made through Google Play; your payment details never reach us.</li>
         <li>We use no analytics or tracking tools.</li>
       </List>
 
@@ -45,7 +45,7 @@ export default function OklarPrivacyEnPage() {
         the following from your device and sends it to Google:
       </p>
       <List>
-        <li><b>Device identifiers:</b> Android advertising ID and app set ID.</li>
+        <li><b>Device identifiers:</b> Android advertising ID and app set ID (and, where applicable, identifiers of an account signed in on the device).</li>
         <li><b>IP address:</b> may be used to estimate approximate location (country, city).</li>
         <li><b>Interactions:</b> app launches, taps, ad views.</li>
         <li><b>Diagnostics:</b> app and SDK performance.</li>
@@ -60,14 +60,14 @@ export default function OklarPrivacyEnPage() {
       <p>
         <b>Consent and non-personalized ads.</b> Where required by law (European Economic Area, United Kingdom, Switzerland), Google&apos;s
         consent form is shown when you first open the Game. If you do not consent to personalized ads, ads are shown
-        non-personalized or limited. You can change your choice in the Game under <b>Levels &gt; Privacy options</b>. You can reset or
-        delete your advertising ID in Android settings. Watching ads is optional; after &quot;Remove ads&quot; the Game does not start the
-        ad system at all.
+        non-personalized or limited. You can change your choice in the Game under <b>Settings &gt; About &gt; Privacy options</b> (where the consent form is not shown, this button opens this page). You can reset or
+        delete your advertising ID in Android settings. Watching ads is optional; once the &quot;Ad-free pack&quot; is purchased, the Game does
+        not start the ad system at all.
       </p>
 
       <H2>5. Purchases (Google Play)</H2>
       <p>
-        &quot;Remove ads&quot; is purchased through Google Play Billing. Your payment details and purchase record are processed by Google. The
+        &quot;Ad-free pack&quot; is purchased through Google Play Billing. Your payment details and purchase record are processed by Google. The
         Game verifies the purchase only on your device through Google Play; your name or payment details never reach us. Refunds
         follow Google Play&apos;s refund rules.
       </p>

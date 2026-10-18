@@ -42,7 +42,7 @@ export default function Hero() {
 
           <p className="max-w-xl mx-auto lg:mx-0 text-lg md:text-xl text-muted leading-relaxed">
             SyncPass; şifrelerinizi, kartlarınızı, 2FA kodlarınızı ve geçiş anahtarlarınızı telefonunuzda şifreli
-            tutar. Hesap açmanız gerekmez, ana parolanız hiçbir yere gönderilmez.
+            tutar. Hesap açmanız gerekmez, ana şifreniz hiçbir yere gönderilmez.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">

@@ -31,8 +31,8 @@ export default function Desktop() {
           <p className="eyebrow">SyncPass Masaüstü · <span lang="en">Windows</span></p>
           <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">Bilgisayarda da aynı kasa.</h2>
           <p className="text-lg text-muted">
-            Android ile aynı şifreleme ve kasa biçimi, aynı güvenlik puanı. Masaüstü sürümü son testlerinde; çıktığında
-            haber vermemizi isterseniz aşağıya e-postanızı bırakın.
+            Android ile aynı şifreleme ve kasa biçimi, aynı güvenlik puanı. Windows için ücretsiz indirin; Chrome
+            eklentisiyle giriş sayfalarını bu bilgisayardaki kasadan doldurun.
           </p>
         </div>
 
@@ -100,7 +100,7 @@ export default function Desktop() {
           <a href={DESKTOP_DOWNLOAD.url} className="btn-primary inline-flex !py-3.5 text-base">Windows için ücretsiz indir</a>
           <p className="text-xs text-muted">Sürüm {DESKTOP_DOWNLOAD.version} · {DESKTOP_DOWNLOAD.requirements}</p>
           <p className="text-sm text-muted">
-            <a href={BROWSER_EXTENSION.chromeUrl} className="text-primary hover:text-primary-light" target="_blank" rel="noopener">Chrome eklentisini ekle →</a>
+            <a href={BROWSER_EXTENSION.chromeUrl} className="text-primary hover:text-primary-light" target="_blank" rel="noopener">Chrome Web Mağazası'ndan eklentiyi ekle →</a>
           </p>
           <p className="pt-2 text-sm text-muted">
             Ücretsiz sürüm ya da <span className="text-white font-semibold">Premium</span> (aylık, yıllık, ömür boyu), {DESKTOP_LICENSE.devices} bilgisayar ·{" "}

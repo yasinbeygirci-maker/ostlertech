@@ -163,7 +163,7 @@ export default function SifreYoneticisi() {
         <div className="max-w-3xl mx-auto rounded-3xl border border-primary/30 bg-gradient-to-b from-primary/10 to-card p-8 md:p-10 space-y-5">
           <h2 className="text-3xl font-extrabold tracking-tight text-white">Hesaba bağlı olmayan bir kasa: SyncPass</h2>
           <p className="text-muted leading-relaxed">
-            SyncPass şifrelerinizi telefonunuzda AES-256 ile şifreli bir kasada tutar. Hesap açmanız gerekmez ve ana parolanızı
+            SyncPass şifrelerinizi telefonunuzda AES-256 ile şifreli bir kasada tutar. Hesap açmanız gerekmez ve ana şifrenizi
             bizimle paylaşmazsınız. Diğer şifre yöneticilerinden dışa aktardığınız dosyaları içe aktarabilirsiniz.
           </p>
           <ul className="space-y-2 text-sm text-muted">

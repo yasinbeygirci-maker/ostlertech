@@ -12,7 +12,7 @@ const DURUM: Record<string, { etiket: string; cls: string }> = {
 
 export const metadata: Metadata = {
   title: "Ürünler",
-  description: "OstlerTech ekosistemine ait yenilikçi sağlık, işletme, proje ve güvenlik çözümleri.",
+  description: "OstlerTech uygulamaları: SyncPass (Android ve Windows), Projex, Esnaf Cep ve DiaSync. Yayında olanlar ve hazırlananlar.",
   alternates: { canonical: "/products" },
 };
 
@@ -39,11 +39,11 @@ export default function ProductsPage() {
         <div className="max-w-7xl mx-auto text-center relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl mb-6 shadow-lg shadow-black/40">
             <Sparkles size={16} className="text-primary animate-pulse" />
-            <span className="text-xs font-bold uppercase tracking-widest text-white/80">OstlerTech Ekosistemi</span>
+            <span className="text-sm font-semibold text-white/80">OstlerTech</span>
           </div>
-          
+
           <h1 className="text-4xl md:text-6xl font-black tracking-tight mb-6">
-            Geleceği Şekillendiren <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-light via-primary to-primary-dark">Ürünlerimiz</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-light via-primary to-primary-dark">Ürünlerimiz</span>
           </h1>
           
           <p className="max-w-2xl mx-auto text-base md:text-lg text-white/60 font-normal leading-relaxed">
@@ -117,10 +117,10 @@ export default function ProductsPage() {
                     {urun.url ? (
                       <a
                         href={urun.url}
-                        {...(urun.url.startsWith("http") ? { target: "_blank", rel: "noopener" } : {})}
+                        {...(urun.url.startsWith("http") && !urun.url.endsWith(".msi") ? { target: "_blank", rel: "noopener" } : {})}
                         className={urun.durum === "yayinda" ? "btn-primary w-full" : "btn-secondary w-full"}
                       >
-                        {urun.durum === "yayinda" ? "Google Play'den indir" : "Ayrıntılar"}
+                        {urun.cta ?? "Ayrıntılar"}
                         <ArrowRight size={16} />
                       </a>
                     ) : (
@@ -128,6 +128,23 @@ export default function ProductsPage() {
                         Hazırlanıyor
                       </div>
                     )}
+
+                    {urun.ekler && (
+                      <div className="flex flex-col gap-1.5 text-sm">
+                        {urun.ekler.map((e) => (
+                          <a
+                            key={e.url}
+                            href={e.url}
+                            {...(e.url.startsWith("http") ? { target: "_blank", rel: "noopener" } : {})}
+                            className="text-primary hover:text-primary-light"
+                          >
+                            {e.etiket} →
+                          </a>
+                        ))}
+                      </div>
+                    )}
+
+                    {urun.not && <p className="text-xs text-white/50 leading-relaxed">{urun.not}</p>}
                   </div>
                 </div>
               );

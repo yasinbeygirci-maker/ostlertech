@@ -15,7 +15,7 @@ const small = [
   {
     icon: QrCode,
     title: "Kurtarma QR kodu",
-    desc: "Ana parolayı unutursanız kasayı açacak, çevrimdışı saklayacağınız bir kurtarma anahtarı.",
+    desc: "Ana şifreyi unutursanız kasayı açacak, çevrimdışı saklayacağınız bir kurtarma anahtarı.",
   },
   {
     icon: Wand2,

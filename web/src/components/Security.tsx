@@ -2,8 +2,8 @@ import { Lock, Smartphone, EyeOff, Cloud, Search, LifeBuoy } from "lucide-react"
 import { PBKDF2_ITERATIONS } from "@/lib/site";
 
 const steps = [
-  { k: "1", title: "Ana parola", desc: "Yalnızca sizin bildiğiniz parola. Hiçbir yerde saklanmaz, hiçbir yere gönderilmez." },
-  { k: "2", title: `PBKDF2 · ${PBKDF2_ITERATIONS} tur`, desc: "Parola, HMAC-SHA256 ile yavaşlatılarak şifreleme anahtarına dönüştürülür; tahmin denemeleri pahalılaşır." },
+  { k: "1", title: "Ana şifre", desc: "Yalnızca sizin bildiğiniz şifre. Hiçbir yerde saklanmaz, hiçbir yere gönderilmez." },
+  { k: "2", title: `PBKDF2 · ${PBKDF2_ITERATIONS} tur`, desc: "Ana şifre, HMAC-SHA256 ile yavaşlatılarak şifreleme anahtarına dönüştürülür; tahmin denemeleri pahalılaşır." },
   { k: "3", title: "AES-256-GCM + SQLCipher", desc: "Her alan ayrı şifrelenir, veritabanının tamamı da ayrıca şifreli tutulur." },
 ];
 
@@ -24,7 +24,7 @@ export default function Security() {
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">Anahtar sizde kalır.</h2>
             <p className="text-lg text-muted">
               SyncPass bir sunucuya bağlı değildir. Kasanız telefonunuzdaki şifreli bir veritabanıdır ve onu yalnızca
-              ana parolanız ya da parmak iziniz açar.
+              ana şifreniz ya da parmak iziniz açar.
             </p>
           </div>
 

@@ -2,8 +2,8 @@ import { CONTACT_EMAIL } from "@/lib/site";
 
 const faqs = [
   {
-    q: "Ana parolamı unutursam ne olur?",
-    a: "Ana parolanızı bilmediğimiz için sıfırlayamayız. Bu yüzden kasayı kurduktan sonra Ayarlar'dan bir kurtarma QR kodu oluşturup güvenli bir yerde saklamanızı öneririz; parolayı unutursanız kilit ekranından bu kodu taratarak kasayı açabilirsiniz.",
+    q: "Ana şifremi unutursam ne olur?",
+    a: "Ana şifrenizi bilmediğimiz için sıfırlayamayız. Bu yüzden kasayı kurduktan sonra Ayarlar'dan bir kurtarma QR kodu oluşturup güvenli bir yerde saklamanızı öneririz; şifreyi unutursanız kilit ekranından bu kodu taratarak kasayı açabilirsiniz.",
   },
   {
     q: "Verilerim bir sunucuda mı duruyor?",
@@ -19,7 +19,7 @@ const faqs = [
   },
   {
     q: "iPhone veya Mac sürümü var mı?",
-    a: "Şu an Android sürümü yayında, Windows sürümü son testlerinde. iOS ve macOS için bir tarih vermiyoruz.",
+    a: "Hayır. Android ve Windows sürümleri yayında. iOS ve macOS için bir tarih vermiyoruz.",
   },
 ];
 

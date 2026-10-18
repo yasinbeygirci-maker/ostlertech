@@ -70,7 +70,7 @@ export default function DesktopLicensePage() {
               <code className="mt-2 block break-all font-mono text-xs text-foreground">{DESKTOP_DOWNLOAD.sha256}</code>
               <p className="mt-2">
                 Tüm sürümler: <a href={DESKTOP_DOWNLOAD.releasesUrl} className="text-primary hover:text-primary-light">sürüm notları</a>.
-                Microsoft Store sürümü yakında.
+                Microsoft Store sürümü hazırlanıyor.
               </p>
             </details>
             <div className="device-window">

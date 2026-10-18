@@ -129,7 +129,7 @@ export default function GuvenliSifreOlusturucu() {
           <h2 className="text-3xl font-extrabold tracking-tight text-white">Şifrelerinizi nerede saklamalısınız?</h2>
           <p className="text-muted leading-relaxed">
             Her hesaba ayrı ve rastgele şifre kullanınca hepsini hatırlamak mümkün olmaz. Çözüm bir şifre yöneticisi.
-            SyncPass şifrelerinizi telefonunuzda AES-256 ile şifreli bir kasada tutar; hesap açmanız gerekmez ve ana parolanızı
+            SyncPass şifrelerinizi telefonunuzda AES-256 ile şifreli bir kasada tutar; hesap açmanız gerekmez ve ana şifrenizi
             bizimle paylaşmazsınız. İçindeki <strong className="text-white">Şifre Üret</strong> aracıyla yeni şifreyi doğrudan kasaya
             kaydedersiniz.
           </p>

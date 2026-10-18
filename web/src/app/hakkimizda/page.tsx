@@ -18,7 +18,7 @@ export default function AboutPage() {
 
       <H2>Ne yapıyoruz</H2>
       <List>
-        <li><strong className="text-foreground">SyncPass</strong>: şifreleri, kartları ve 2FA kodlarını cihazda şifreli tutan şifre yöneticisi (Android, yakında Windows).</li>
+        <li><strong className="text-foreground">SyncPass</strong>: şifreleri, kartları ve 2FA kodlarını cihazda şifreli tutan şifre yöneticisi (Android ve Windows; Windows için Chrome eklentisi).</li>
         <li><strong className="text-foreground">Projex</strong>: şantiyede günlük imalatı, plan ile gerçekleşeni büro ve saha arasında izleyen takip programı (test aşamasında).</li>
       </List>
 
