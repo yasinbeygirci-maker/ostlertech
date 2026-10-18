@@ -4,8 +4,10 @@ import Footer from "./Footer";
 import { COMPANY, LEGAL_UPDATED, LEGAL_UPDATED_EN } from "@/lib/site";
 
 // Yasal ve kurumsal sayfaların ortak düzeni.
-export default function LegalPage({ eyebrow, title, children, updated = true, lang = "tr", altLink }: {
+export default function LegalPage({ eyebrow, title, children, updated = true, updatedOn, lang = "tr", altLink }: {
   eyebrow: string; title: string; children: ReactNode; updated?: boolean;
+  // Yalnız bu sayfa değiştiyse kendi tarihi; verilmezse ortak LEGAL_UPDATED(_EN) gösterilir.
+  updatedOn?: string;
   // İngilizce sürümler (/en/...) için lang="en"; altLink diğer dildeki sayfaya bağlantı.
   lang?: "tr" | "en"; altLink?: { href: string; label: string };
 }) {
@@ -17,7 +19,7 @@ export default function LegalPage({ eyebrow, title, children, updated = true, la
         <h1 className="mt-3 text-4xl md:text-5xl font-extrabold tracking-tight text-white">{title}</h1>
         {updated && (
           <p className="mt-3 text-sm text-muted">
-            {lang === "en" ? `Last updated: ${LEGAL_UPDATED_EN}` : `Son güncelleme: ${LEGAL_UPDATED}`}
+            {lang === "en" ? `Last updated: ${updatedOn ?? LEGAL_UPDATED_EN}` : `Son güncelleme: ${updatedOn ?? LEGAL_UPDATED}`}
           </p>
         )}
         {altLink && (
