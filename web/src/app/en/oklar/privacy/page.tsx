@@ -28,6 +28,7 @@ export default function OklarPrivacyEnPage() {
         <li>The Game has no account. We never ask for your name, e-mail or phone number.</li>
         <li>Your progress is stored only on your device and never reaches us.</li>
         <li>The Game has optional rewarded ads: you choose to watch an ad for a hint or an extra heart. Ads are served by Google AdMob.</li>
+        <li>Ads are personalized only if you allow it; users under 18 always get non-personalized ads. You can withdraw your consent at any time.</li>
         <li>The one-time &quot;Ad-free pack&quot; purchase is made through Google Play; your payment details never reach us.</li>
         <li>We use no analytics or tracking tools.</li>
       </List>
@@ -58,11 +59,24 @@ export default function OklarPrivacyEnPage() {
         <a href="https://policies.google.com/technologies/ads" className={link}>Google advertising</a>.
       </p>
       <p>
-        <b>Consent and non-personalized ads.</b> Where required by law (European Economic Area, United Kingdom, Switzerland), Google&apos;s
-        consent form is shown when you first open the Game. If you do not consent to personalized ads, ads are shown
-        non-personalized or limited. You can change your choice in the Game under <b>Settings &gt; About &gt; Privacy options</b> (where the consent form is not shown, this button opens this page). You can reset or
-        delete your advertising ID in Android settings. Watching ads is optional; once the &quot;Ad-free pack&quot; is purchased, the Game does
-        not start the ad system at all.
+        <b>Consent and non-personalized ads.</b> In the European Economic Area, the United Kingdom and Switzerland, Google&apos;s
+        consent form is shown when you first open the Game, and no ad is requested before consent is obtained. In all other
+        countries, including Türkiye, you are first asked for your year of birth and then our own consent window is shown when
+        you first open the Game: if you allow personalized ads, Google chooses ads based on your interests; if you don&apos;t, or if
+        you are under 18, ads are shown without personalization. No ad is requested before these steps are completed. Even for
+        non-personalized ads, Google processes limited information to show and count ads and to prevent fraud. In certain US
+        states, Google&apos;s privacy options are also offered, where you can opt out of the sale or sharing of your personal
+        information for ads (&quot;Do Not Sell or Share My Personal Information&quot;). You can change your choice in the Game
+        under <b>Settings &gt; About &gt; Privacy options</b> (depending on where you are, this opens Google&apos;s form or our own
+        consent window; withdrawing is as easy as giving consent). You can reset or delete your advertising ID in Android
+        settings. Watching ads is optional; once the &quot;Ad-free pack&quot; is purchased, the Game does not start the ad system
+        at all.
+      </p>
+      <p>
+        <b>Where your choice is stored.</b> Your choice in the consent window, the date of the choice and the version of the text
+        you saw are stored only on your device and are not sent to us. From your answer to the year-of-birth question, only
+        whether you are 18 or over is kept on the device. This record is excluded from Android backup and device transfer. If
+        you uninstall the Game or clear its data, the window is shown again.
       </p>
 
       <H2>5. Purchases (Google Play)</H2>
@@ -75,7 +89,7 @@ export default function OklarPrivacyEnPage() {
       <H2>6. Purposes and legal bases</H2>
       <List>
         <li><b>On-device progress:</b> running the Game; not transferred to us.</li>
-        <li><b>Data collected by AdMob:</b> serving and measuring ads, fraud prevention. Personalized ads: your consent (GDPR Art. 6(1)(a), KVKK Art. 5(1)); non-personalized ads and fraud prevention: legitimate interest (GDPR Art. 6(1)(f), KVKK Art. 5(2)(f)).</li>
+        <li><b>Data collected by AdMob:</b> serving and measuring ads, fraud prevention. Personalized ads: your consent (GDPR Art. 6(1)(a), KVKK Art. 5(1)), collected through Google&apos;s consent form in the EEA, UK and Switzerland and through our in-game consent window elsewhere; you can withdraw it at any time. Non-personalized ads and fraud prevention: legitimate interest (GDPR Art. 6(1)(f), KVKK Art. 5(2)(f)). Withdrawing consent does not affect processing before withdrawal.</li>
         <li><b>Support e-mails:</b> answering your request; KVKK Art. 5(2)(c) and 5(2)(f).</li>
       </List>
 
@@ -95,7 +109,9 @@ export default function OklarPrivacyEnPage() {
       <H2>9. Children</H2>
       <p>
         The Game is designed for users aged 13 and over and is not directed at children. We do not knowingly collect personal data
-        from children under 13, and we limit ad content to the PG rating. If you believe a child under 13 is using the Game, write to{" "}
+        from children under 13, and we limit ad content to the PG rating. Users under 18 are not shown personalized ads, and our
+        consent window is never shown to them. The same applies if your year of birth does not show for certain that you are 18
+        or over. If you believe a child under 13 is using the Game, write to{" "}
         {COMPANY.email}.
       </p>
 

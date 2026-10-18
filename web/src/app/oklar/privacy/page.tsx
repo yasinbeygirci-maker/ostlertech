@@ -31,6 +31,7 @@ export default function OklarPrivacyPage() {
         <li>Oyunda hesap yoktur. Adınızı, e-postanızı ya da telefonunuzu sormayız.</li>
         <li>Oyun ilerlemeniz yalnız cihazınızda tutulur; bize gelmez.</li>
         <li>Oyunda isteğe bağlı ödüllü reklam vardır: ipucu ya da ek can için reklam izlemeyi siz seçersiniz. Reklamları Google AdMob gösterir.</li>
+        <li>Reklamlar yalnız izin verirseniz kişiselleştirilir; 18 yaşından küçüklere her zaman kişiselleştirilmemiş reklam gösterilir. İzninizi istediğiniz zaman geri alabilirsiniz.</li>
         <li>Tek seferlik &quot;Reklamsız paket&quot; satın alma Google Play üzerinden yapılır; ödeme bilgileriniz bize gelmez.</li>
         <li>Analitik ya da izleme aracı kullanmıyoruz.</li>
       </List>
@@ -61,11 +62,24 @@ export default function OklarPrivacyPage() {
         <a href="https://policies.google.com/technologies/ads" className={link}>Google reklamları</a>.
       </p>
       <p>
-        <b>Onay ve kişiselleştirilmemiş reklam.</b> Yasaların gerektirdiği yerlerde (Avrupa Ekonomik Alanı, Birleşik Krallık,
-        İsviçre) oyunu ilk açtığınızda Google&apos;ın onay formu gösterilir. Kişiselleştirilmiş reklama onay vermezseniz reklamlar
-        kişiselleştirilmeden ya da sınırlı biçimde gösterilir. Tercihinizi oyunda <b>Ayarlar &gt; Hakkında &gt; Gizlilik seçenekleri</b>
-        bölümünden değiştirebilirsiniz (onay formunun gösterilmediği bölgelerde bu düğme bu sayfayı açar). Reklam kimliğinizi Android ayarlarından sıfırlayabilir veya silebilirsiniz. Reklam
-        izlemek zorunlu değildir; &quot;Reklamsız paket&quot; satın alındığında oyun reklam sistemini hiç başlatmaz.
+        <b>Onay ve kişiselleştirilmemiş reklam.</b> Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre&apos;de oyunu ilk
+        açtığınızda Google&apos;ın onay formu gösterilir ve onay alınmadan reklam isteği yapılmaz. Türkiye dahil diğer ülkelerde
+        oyunu ilk açtığınızda önce doğum yılınız sorulur, ardından kendi onay penceremiz gösterilir: kişiselleştirilmiş reklama
+        izin verirseniz Google reklamları ilgi alanınıza göre seçer; izin vermezseniz ya da 18 yaşından küçükseniz reklamlar
+        kişiselleştirilmeden gösterilir. Bu adımlar tamamlanmadan reklam isteği yapılmaz. Kişiselleştirilmemiş reklamda da
+        Google reklamı göstermek, saymak ve sahtekârlığı önlemek için sınırlı bilgi işler. ABD&apos;nin bazı eyaletlerinde ayrıca
+        Google&apos;ın gizlilik seçenekleri sunulur; kişisel bilgilerinizin reklam için satılmasını veya paylaşılmasını oradan
+        reddedebilirsiniz (oyunda &quot;Google gizlilik seçenekleri (ABD)&quot; bağlantısı). Tercihinizi oyunda{" "}
+        <b>Ayarlar &gt; Hakkında &gt; Gizlilik seçenekleri</b> bölümünden değiştirebilirsiniz (bu bölüm, bulunduğunuz yere göre
+        Google&apos;ın formunu ya da kendi onay penceremizi açar; izninizi verdiğiniz kadar kolay geri alabilirsiniz). Reklam
+        kimliğinizi Android ayarlarından sıfırlayabilir veya silebilirsiniz. Reklam izlemek zorunlu değildir; &quot;Reklamsız
+        paket&quot; satın alındığında oyun reklam sistemini hiç başlatmaz.
+      </p>
+      <p>
+        <b>Tercihiniz nerede saklanır.</b> Onay penceresindeki seçiminiz, seçim tarihi ve gördüğünüz metnin sürümü yalnız
+        cihazınızda saklanır; bize gönderilmez. Doğum yılı sorusuna verdiğiniz cevaptan yalnız 18 yaş üstü olup olmadığınız
+        cihazda tutulur. Bu kayıt Android yedeğine ve yeni cihaza aktarıma alınmaz. Oyunu silerseniz ya da verilerini
+        temizlerseniz pencere yeniden gösterilir.
       </p>
 
       <H2>5. Satın almalar (Google Play)</H2>
@@ -78,7 +92,7 @@ export default function OklarPrivacyPage() {
       <H2>6. İşleme amaçları ve hukuki sebepler</H2>
       <List>
         <li><b>Cihazdaki ilerleme:</b> oyunun çalışması; bize aktarılmaz.</li>
-        <li><b>AdMob&apos;un topladığı veriler:</b> reklam gösterme ve ölçme, sahtekârlık önleme. Kişiselleştirilmiş reklam için açık rızanız (KVKK md. 5/1, GDPR md. 6/1-a); kişiselleştirilmemiş reklam ve sahtekârlık önleme için meşru menfaat (KVKK md. 5/2-f, GDPR md. 6/1-f).</li>
+        <li><b>AdMob&apos;un topladığı veriler:</b> reklam gösterme ve ölçme, sahtekârlık önleme. Kişiselleştirilmiş reklam için açık rızanız (KVKK md. 5/1, GDPR md. 6/1-a): AEA, Birleşik Krallık ve İsviçre&apos;de Google&apos;ın onay formuyla, diğer ülkelerde oyundaki onay penceremizle alınır ve istediğiniz zaman geri alınabilir. Kişiselleştirilmemiş reklam ve sahtekârlık önleme için meşru menfaat (KVKK md. 5/2-f, GDPR md. 6/1-f). Rızanızı geri almanız, geri almadan önceki işlemeyi etkilemez.</li>
         <li><b>Destek e-postaları:</b> sorunuza yanıt vermek; KVKK md. 5/2-c ve 5/2-f.</li>
       </List>
 
@@ -99,7 +113,9 @@ export default function OklarPrivacyPage() {
       <H2>9. Çocuklar</H2>
       <p>
         Oyun 13 yaş ve üzeri kullanıcılar için tasarlanmıştır; çocuklara yönelik değildir. Bilerek 13 yaşından küçük
-        çocuklardan kişisel veri toplamayız ve reklamlarda içerik sınırı (PG) uygularız. 13 yaşından küçük bir çocuğun oyunu
+        çocuklardan kişisel veri toplamayız ve reklamlarda içerik sınırı (PG) uygularız. 18 yaşından küçük kullanıcılara
+        kişiselleştirilmiş reklam gösterilmez; onay penceremiz onlara hiç sorulmaz. Doğum yılınızdan 18 yaşını doldurduğunuz
+        kesin anlaşılmıyorsa da böyle davranılır. 13 yaşından küçük bir çocuğun oyunu
         kullandığını düşünüyorsanız {COMPANY.email} adresine yazın.
       </p>
 
