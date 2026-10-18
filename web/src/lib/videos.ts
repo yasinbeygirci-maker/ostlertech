@@ -16,7 +16,7 @@ export const VIDEOS: Video[] = [
     title: "SyncPass'i 1 dakikada tanıyın",
     description:
       "Şifreler, kartlar ve 2FA kodları tek şifreli kasada. Hesap yok, sunucu yok; kasa telefonda AES-256 ile şifrelenir.",
-    poster: "/videos/syncpass-tanitim.webp",
+    poster: "/videos/syncpass-tanitim.webp?v=20261018", // kapak 2026-10-18: örnek kişi Deniz
     duration: "PT57S",
     durationLabel: "0:57",
     uploadDate: "2026-09-29",

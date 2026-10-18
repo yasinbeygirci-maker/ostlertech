@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Check, Monitor } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { BROWSER_EXTENSION, DESKTOP_DOWNLOAD, DESKTOP_LICENSE, SITE_URL } from "@/lib/site";
+import { BROWSER_EXTENSION, DESKTOP_DOWNLOAD, DESKTOP_LICENSE, SCREENS_VERSION, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "SyncPass Masaüstü",
@@ -74,7 +74,7 @@ export default function DesktopLicensePage() {
               </p>
             </details>
             <div className="device-window">
-              <img src="/screens/desktop-vault-dark.webp" alt="SyncPass Masaüstü: üç sütunlu kasa görünümü" width={1200} height={800} />
+              <img src={`/screens/desktop-vault-dark.webp?v=${SCREENS_VERSION}`} alt="SyncPass Masaüstü: üç sütunlu kasa görünümü" width={1200} height={800} />
             </div>
           </div>
 

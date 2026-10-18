@@ -54,6 +54,9 @@ export const BROWSER_EXTENSION = {
   chromeUrl: "https://chromewebstore.google.com/detail/bbighjeekihcenhofnmefgmcadddahbk",
 };
 
+// Ekran görüntüleri ve OG görseli aynı adla yenilenince bu değer artırılır (tarayıcı ve paylaşım önbelleği eskiyi göstermesin).
+export const SCREENS_VERSION = "20261018";
+
 export const PADDLE_BUYER_TERMS_URL = "https://www.paddle.com/legal/checkout-buyer-terms";
 
 export const LEGAL_UPDATED = "4 Ekim 2026";

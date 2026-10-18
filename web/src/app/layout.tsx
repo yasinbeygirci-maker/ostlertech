@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import { SITE_URL } from "@/lib/site";
+import { SCREENS_VERSION, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 // Masaüstü uygulamasıyla aynı yazı tipleri.
@@ -30,13 +30,13 @@ export const metadata: Metadata = {
     title: "SyncPass — Şifreleriniz sizin cihazınızda",
     description,
     siteName: "OstlerTech",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SyncPass Android ve masaüstü arayüzü" }],
+    images: [{ url: `/og-image.png?v=${SCREENS_VERSION}`, width: 1200, height: 630, alt: "SyncPass Android ve masaüstü arayüzü" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "SyncPass — Şifreleriniz sizin cihazınızda",
     description,
-    images: ["/og-image.png"],
+    images: [`/og-image.png?v=${SCREENS_VERSION}`],
   },
   robots: { index: true, follow: true },
 };

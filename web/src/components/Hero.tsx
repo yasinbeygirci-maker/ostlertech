@@ -1,6 +1,6 @@
 import { ArrowRight, Monitor } from "lucide-react";
 import ConstellationBackground from "@/components/ConstellationBackground";
-import { PLAY_URL, PBKDF2_ITERATIONS, LANGUAGE_COUNT, MIN_ANDROID, FREE_ITEM_LIMIT } from "@/lib/site";
+import { PLAY_URL, PBKDF2_ITERATIONS, LANGUAGE_COUNT, MIN_ANDROID, FREE_ITEM_LIMIT, SCREENS_VERSION } from "@/lib/site";
 
 export function PlayIcon({ className = "" }: { className?: string }) {
   return (
@@ -60,11 +60,11 @@ export default function Hero() {
 
         <div className="relative mx-auto w-full max-w-2xl lg:max-w-none pb-10 sm:pb-0 animate-rise [animation-delay:150ms]">
           <div className="device-window ml-auto w-[92%]">
-            <img src="/screens/desktop-vault-dark.webp" alt="SyncPass masaüstü: üç sütunlu kasa görünümü" width={1200} height={800} />
+            <img src={`/screens/desktop-vault-dark.webp?v=${SCREENS_VERSION}`} alt="SyncPass masaüstü: üç sütunlu kasa görünümü" width={1200} height={800} />
           </div>
           <div className="absolute -bottom-2 sm:-bottom-10 left-0 w-[34%] max-w-[230px] animate-float">
             <div className="device-phone">
-              <img src="/screens/phone-vault.webp" alt="SyncPass Android: kasa, güvenlik puanı ve 2FA kodları" width={720} height={1170} />
+              <img src={`/screens/phone-vault.webp?v=${SCREENS_VERSION}`} alt="SyncPass Android: kasa, güvenlik puanı ve 2FA kodları" width={720} height={1170} />
             </div>
           </div>
         </div>

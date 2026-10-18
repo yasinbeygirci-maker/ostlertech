@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Command, ClipboardX, Columns3, SunMoon } from "lucide-react";
-import { BROWSER_EXTENSION, DESKTOP_DOWNLOAD, DESKTOP_LICENSE } from "@/lib/site";
+import { BROWSER_EXTENSION, DESKTOP_DOWNLOAD, DESKTOP_LICENSE, SCREENS_VERSION } from "@/lib/site";
 
 const shots = {
   vault: { label: "Kasa", dark: "desktop-vault-dark", light: "desktop-vault-light" },
@@ -70,15 +70,10 @@ export default function Desktop() {
         </div>
 
         <div className="device-window max-w-5xl mx-auto">
-          <div className="flex items-center gap-2 border-b border-line px-4 py-2.5 bg-background">
-            <span className="h-2.5 w-2.5 rounded-full bg-line" />
-            <span className="h-2.5 w-2.5 rounded-full bg-line" />
-            <span className="h-2.5 w-2.5 rounded-full bg-line" />
-            <span className="ml-3 text-xs text-muted">SyncPass</span>
-          </div>
+          {/* The Windows title bar is part of the picture. */}
           <img
             key={`${shot}-${theme}`}
-            src={`/screens/${current[theme]}.webp`}
+            src={`/screens/${current[theme]}.webp?v=${SCREENS_VERSION}`}
             alt={`SyncPass masaüstü, ${current.label.toLowerCase()} ekranı, ${theme === "dark" ? "koyu" : "açık"} tema`}
             width={1200}
             height={800}
