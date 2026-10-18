@@ -9,7 +9,7 @@ const sans = Manrope({ subsets: ["latin", "latin-ext"], variable: "--font-sans",
 const mono = JetBrains_Mono({ subsets: ["latin", "latin-ext"], variable: "--font-mono", display: "swap" });
 
 const description =
-  "SyncPass, şifrelerinizi, kartlarınızı ve 2FA kodlarınızı cihazınızda şifreli tutan şifre yöneticisidir. Hesap açmanız gerekmez; ana şifrenizi bizimle paylaşmazsınız.";
+  "SyncPass, şifrelerinizi, kartlarınızı ve 2FA kodlarınızı (Premium) cihazınızda şifreli tutan şifre yöneticisidir. Hesap açmanız gerekmez; ana şifrenizi bizimle paylaşmazsınız.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

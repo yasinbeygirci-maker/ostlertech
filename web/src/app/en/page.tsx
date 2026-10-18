@@ -10,7 +10,7 @@ import {
 export const metadata: Metadata = {
   title: "SyncPass: Offline Password Manager for Android and Windows",
   description:
-    "SyncPass keeps passwords, cards, 2FA codes and passkeys encrypted on your device. No account needed, your master password never leaves your phone. Free for up to 15 items.",
+    "SyncPass keeps passwords, cards, passkeys and 2FA codes (Premium) encrypted on your device. No account needed, your master password never leaves your phone. Free for up to 15 items.",
   alternates: { canonical: "/en", languages: { tr: "/", en: "/en", "x-default": "/" } },
   openGraph: {
     title: "SyncPass: your vault stays on your device",
@@ -30,8 +30,8 @@ const features = [
 ];
 
 const leaves = [
-  { icon: Cloud, title: "Drive backup (optional)", desc: "If you turn it on, the already encrypted vault file is uploaded to your own Google Drive." },
-  { icon: Search, title: "Breach check", desc: "Only the first 5 characters of the password's SHA-1 hash are sent to Have I Been Pwned (k-anonymity); the password itself is never sent." },
+  { icon: Cloud, title: "Drive backup (optional, Premium)", desc: "If you turn it on, the already encrypted vault file is uploaded to your own Google Drive." },
+  { icon: Search, title: "Breach check (Premium)", desc: "Only the first 5 characters of the password's SHA-1 hash are sent to Have I Been Pwned (k-anonymity); the password itself is never sent." },
   { icon: LifeBuoy, title: "In-app help (Android only)", desc: "A question you type into the Android help screen is sent to Google's Gemini service to be answered. Vault contents are never sent. The Windows app does not do this." },
   { icon: KeyRound, title: "Windows license check (Premium only)", desc: "SyncPass for Windows Premium sends only your license code, a random device ID and the app version to activate the license. The free version never connects." },
 ];
