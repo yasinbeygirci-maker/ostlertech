@@ -80,7 +80,7 @@ export default function EnglishHome() {
           <p className="eyebrow">SyncPass · Android and Windows</p>
           <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight leading-[1.05] text-gradient">Your passwords stay on your device.</h1>
           <p className="max-w-2xl mx-auto text-lg md:text-xl text-muted leading-relaxed">
-            SyncPass keeps your passwords, cards, 2FA codes and passkeys encrypted on your phone. No account to create, and your
+            SyncPass keeps your passwords, cards, passkeys and 2FA codes (Premium) encrypted on your phone. No account to create, and your
             master password never leaves your device.
           </p>
           <div className="flex flex-wrap justify-center gap-3">

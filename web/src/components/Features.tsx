@@ -10,7 +10,7 @@ const small = [
   {
     icon: HardDriveDownload,
     title: "Yedekleme sizin elinizde",
-    desc: "Şifreli yedeği dosyaya alın ya da kendi Google Drive'ınıza koyun. Başka bir yöneticiden içe aktarma da var.",
+    desc: "Şifreli yedeği dosyaya alın ya da kendi Google Drive'ınıza koyun (Premium). Başka bir yöneticiden içe aktarma da var.",
   },
   {
     icon: QrCode,
@@ -67,7 +67,7 @@ export default function Features() {
           {/* 2FA */}
           <article className="lg:col-span-2 glass-card p-8 md:p-10 flex flex-col">
             <KeyRound className="text-primary" size={26} />
-            <h3 className="mt-4 text-2xl font-bold text-white">2FA kodları ana ekranda</h3>
+            <h3 className="mt-4 text-2xl font-bold text-white">2FA kodları ana ekranda (Premium)</h3>
             <p className="mt-3 text-muted leading-relaxed">
               Doğrulayıcı uygulamanıza gerek yok. TOTP kodları kasada saklanır, geri sayımla yenilenir; dokununca
               kopyalanır.
@@ -92,7 +92,7 @@ export default function Features() {
               <ShieldCheck className="text-ok" size={26} />
               <h3 className="text-2xl font-bold text-white">Dürüst bir güvenlik puanı</h3>
               <p className="text-muted leading-relaxed">
-                Zayıf, tekrar eden ve sızıntılarda görülmüş şifreler ayrı ayrı sayılır. Ana ekrandaki şerit ile sağlık
+                Zayıf, tekrar eden ve sızıntılarda görülmüş şifreler (sızıntı kontrolü Premium) ayrı ayrı sayılır. Ana ekrandaki şerit ile sağlık
                 ekranı aynı hesabı kullanır; &quot;Düzelt&quot; sizi ilgili kayda götürür, şifrenizi sizin yerinize
                 değiştirmez.
               </p>
