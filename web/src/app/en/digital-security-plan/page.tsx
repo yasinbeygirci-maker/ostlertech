@@ -26,21 +26,21 @@ const items: GuideItem[] = [
     heading: "Day 2 · Put every password in one place",
     lines: [
       "Move passwords out of your browser or notes into a password manager, then delete the export file (and empty the bin).",
-      "SyncPass: Settings → Import, CSV or JSON. The free version holds 15 items.",
+      "SyncPass: Settings → Import & Export, CSV or JSON. The free version holds 15 items.",
     ],
   },
   {
     heading: "Day 3 · Change the reused ones",
     lines: [
       "Start with your top 5: email, bank, mobile carrier, social, shopping.",
-      "Change it on the site first, then save it in the vault.",
+      "Change each one on the site first, then save it in the vault.",
       "SyncPass: the security score lists weak and reused passwords.",
     ],
   },
   {
     heading: "Day 4 · Two-step verification",
     lines: [
-      "Banking, social, shopping.",
+      "Turn it on for banking, social and shopping.",
       "Pick an app or a passkey over SMS when offered.",
       "Save recovery codes.",
       "SyncPass: passkeys; 2FA codes with live countdown are Premium.",

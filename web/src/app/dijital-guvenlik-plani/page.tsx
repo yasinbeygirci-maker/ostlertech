@@ -28,7 +28,7 @@ const items: GuideItem[] = [
     lines: [
       "Tarayıcında ya da not defterinde duran şifreleri bir şifre yöneticisine aktar.",
       "Aktardıktan sonra dışa aktarma dosyasını sil (çöp kutusundan da).",
-      "SyncPass'te: Ayarlar → İçe aktar, CSV ya da JSON dosyası. Ücretsiz sürüm 15 kayıt tutar.",
+      "SyncPass'te: Ayarlar → İçe ve Dışa Aktar, CSV ya da JSON dosyası. Ücretsiz sürüm 15 kayıt tutar.",
     ],
   },
   {
@@ -53,13 +53,13 @@ const items: GuideItem[] = [
     lines: [
       "E-posta ve önemli hesaplarda kurtarma telefonu ve e-postası güncel mi bak.",
       "Kurtarma e-postası, giriş yaptığın adresten farklı ve düzenli kullandığın bir adres olsun.",
-      "Ana parolanı unutma ihtimaline karşı SyncPass'in kurtarma QR kodunu oluştur, kâğıda basıp sakla.",
+      "Ana şifreni unutma ihtimaline karşı SyncPass'in kurtarma QR kodunu oluştur, kâğıda basıp sakla.",
     ],
   },
   {
     heading: "6. gün · Telefonun (10 dk)",
     lines: [
-      "Ekran kilidi: en az 6 haneli PIN ya da daha güçlüsü.",
+      "Ekran kilidi: tahmin edilmesi zor bir PIN ya da daha güçlüsü.",
       "Uzaktan bul, kilitle ve sil özelliğini aç; telefon kaybolmadan önce açık olmalı.",
       "Otomatik güncellemeleri aç.",
     ],
