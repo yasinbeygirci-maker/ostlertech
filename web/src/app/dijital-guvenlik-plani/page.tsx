@@ -26,9 +26,9 @@ const items: GuideItem[] = [
   {
     heading: "2. gün · Şifrelerini tek yere topla (10 dk)",
     lines: [
-      "Tarayıcında ya da not defterinde duran şifreleri bir şifre yöneticisine aktar.",
+      "Tarayıcında ya da önceki şifre yöneticinde duran şifreleri dışa aktar, sonra yeni kasana al. Not defterindekileri elle ekle.",
       "Aktardıktan sonra dışa aktarma dosyasını sil (çöp kutusundan da).",
-      "SyncPass'te: Ayarlar → İçe ve Dışa Aktar, CSV ya da JSON dosyası. Ücretsiz sürüm 15 kayıt tutar.",
+      "SyncPass'te: Ayarlar → İçe ve Dışa Aktar; tarayıcından ya da önceki şifre yöneticinden aldığın CSV/JSON dosyasını seç. Ücretsiz sürüm 15 kayıt tutar.",
     ],
   },
   {
@@ -87,7 +87,7 @@ export default function DijitalGuvenlikPlani() {
         items={items}
         numbered={false}
         after="Sonra: Ayda bir 5 dakika: güvenlik puanına bak, yeni hesapları kasaya ekle."
-        ctaLabel="SyncPass'i ücretsiz başlat"
+        ctaLabel="SyncPass'i indir"
         ctaHref={PLAY}
         disclaimer="Bu plan genel bilgilendirmedir. OstlerTech · ostlertech.com"
         related={{ href: "/guvenlik-kontrol-listesi", label: "10 maddelik güvenlik kontrol listesi" }}

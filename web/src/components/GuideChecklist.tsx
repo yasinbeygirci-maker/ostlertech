@@ -61,12 +61,18 @@ const SOURCES: Record<Lang, { key: SourceKey; name: string; url: string; note?: 
       name: "Android Yardım, Kaybedilen bir Android cihazı bulma, kilitleme veya silme",
       url: "https://support.google.com/android/answer/6160491?hl=tr",
     },
+    {
+      key: "Google",
+      name: "Google Hesabı Yardım, Yedek kodlarla oturum açma",
+      url: "https://support.google.com/accounts/answer/1187538?hl=tr",
+    },
   ],
   en: [
     { key: "NIST", name: "NIST SP 800-63B-4, Digital Identity Guidelines: Authentication", url: "https://pages.nist.gov/800-63-4/sp800-63b.html" },
     { key: "CISA", name: "CISA, Secure Our World", url: "https://www.cisa.gov/secure-our-world" },
     { key: "Google", name: "Google Account Help, Set up recovery options", url: "https://support.google.com/accounts/answer/183723?hl=en" },
     { key: "Google", name: "Android Help, Find, secure, or erase a lost Android device", url: "https://support.google.com/android/answer/6160491?hl=en" },
+    { key: "Google", name: "Google Account Help, Sign in with backup codes", url: "https://support.google.com/accounts/answer/1187538?hl=en" },
   ],
 };
 

@@ -25,8 +25,8 @@ const items: GuideItem[] = [
   {
     heading: "Day 2 · Put every password in one place",
     lines: [
-      "Move passwords out of your browser or notes into a password manager, then delete the export file (and empty the bin).",
-      "SyncPass: Settings → Import & Export, CSV or JSON. The free version holds 15 items.",
+      "Export the passwords from your browser or old password manager and bring them into your new vault. Add the ones in your notes by hand. Then delete the export file (and empty the bin).",
+      "SyncPass: Settings → Import & Export; pick the CSV/JSON file from your browser or old password manager. The free version holds 15 items.",
     ],
   },
   {
@@ -65,7 +65,7 @@ const items: GuideItem[] = [
     heading: "Day 7 · Breach check and old accounts",
     lines: [
       "Check your passwords against known breaches and change any that show up.",
-      "Close accounts you no longer use.",
+      "Close accounts you no longer use; if one can't be closed, change its password.",
       "SyncPass: breach check is Premium; only the first 5 characters of a hash leave your phone.",
     ],
   },
@@ -84,7 +84,7 @@ export default function DigitalSecurityPlan() {
         items={items}
         numbered={false}
         after="After: 5 minutes a month. Look at your security score, add new accounts."
-        ctaLabel="Start SyncPass free"
+        ctaLabel="Get SyncPass"
         ctaHref={PLAY}
         disclaimer="This plan is general information. OstlerTech · ostlertech.com"
         related={{ href: "/en/security-checklist", label: "The 10-point security checklist" }}

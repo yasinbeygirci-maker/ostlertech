@@ -17,10 +17,10 @@ const PLAY =
 const items: GuideItem[] = [
   { heading: "Her hesaba ayrı şifre", lines: ["Bir sızıntı tek hesapta kalsın. Akılda tutmayı şifre yöneticisine bırak."], sources: ["CISA"], syncpass: "Güvenlik puanı tekrar eden şifreleri gösterir" },
   { heading: "En az 15 karakter", lines: ["Uzunluk, karmaşık kurallardan daha çok işe yarar. Birkaç kelimelik bir cümle de olur."], sources: ["NIST"], syncpass: "Şifre üretici" },
-  { heading: "E-posta ve bankada iki adımlı doğrulama", lines: ["Şifre ele geçse bile ikinci adım girişi durdurur."], sources: ["CISA"], syncpass: "2FA kodları (Premium)" },
+  { heading: "E-posta ve bankada iki adımlı doğrulama", lines: ["Şifre ele geçse bile tek başına girişe yetmez."], sources: ["CISA"], syncpass: "2FA kodları (Premium)" },
   { heading: "Mümkünse SMS yerine uygulama ya da passkey", lines: ["NIST, SMS ile doğrulamayı “kısıtlı” yöntemler arasında sayar."], sources: ["NIST"], syncpass: "Passkey saklama; 2FA kodları (Premium)" },
-  { heading: "Kurtarma kodlarını güvenli yerde sakla", lines: ["Telefonu kaybedince hesaba dönüş yolun bunlar."], syncpass: "Güvenli not" },
-  { heading: "Kurtarma e-postası ve telefonu güncel", lines: ["Giriş e-postandan farklı, düzenli kullandığın bir adres seç. Telefon numarası değişikliği 7 güne kadar sürebilir."], sources: ["Google"] },
+  { heading: "Kurtarma kodlarını güvenli yerde sakla", lines: ["Telefonu kaybedince hesaba dönüş yolun bunlar. Yazdırıp güvenli yerde sakla."], sources: ["Google"], syncpass: "Güvenli not" },
+  { heading: "Kurtarma e-postası ve telefonu güncel", lines: ["Giriş e-postandan farklı, düzenli kullandığın bir adres seç. Yeni kurtarma numarasının geçerli olması 7 güne kadar sürebilir; bu yüzden şimdi güncelle."], sources: ["Google"] },
   { heading: "Ekran kilidi ve uzaktan bul/kilitle/sil açık", lines: ["Bu özellik telefon kaybolmadan önce açık olmalı."], sources: ["Google"], syncpass: "Uygulamadan çıkınca kasa kilitlenir" },
   { heading: "Güncellemeler otomatik", lines: ["Güvenlik açıkları güncellemeyle kapanır."], sources: ["CISA"] },
   { heading: "Şifren bir sızıntıda var mı?", lines: ["Sızmış şifreyi hemen değiştir. NIST de yeni şifrenin sızıntı listelerine karşı denetlenmesini ister."], sources: ["NIST"], syncpass: "Sızıntı kontrolü (Premium); şifre telefondan çıkmaz, yalnız özetin ilk 5 karakteri" },
@@ -35,10 +35,10 @@ export default function GuvenlikKontrolListesi() {
         lang="tr"
         label="Rehber"
         title="Telefonun çalınsa hesapların güvende mi? 10 kontrol"
-        sub="Her maddenin yanına işaret koy. Hepsi resmî kaynaklardan; kaynaklar sayfanın altında."
+        sub="Her maddenin yanına işaret koy. Kaynaklar sayfanın altında: NIST, CISA ve Google."
         pdfHref="/rehber/guvenlik-kontrol-listesi.pdf"
         items={items}
-        ctaLabel="SyncPass'i ücretsiz başlat"
+        ctaLabel="SyncPass'i indir"
         ctaHref={PLAY}
         disclaimer="Bu liste genel bilgilendirmedir. OstlerTech · ostlertech.com"
         related={{ href: "/dijital-guvenlik-plani", label: "Sıradaki adım: 7 günde dijital güvenlik planı" }}
