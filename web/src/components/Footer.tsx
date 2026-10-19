@@ -18,6 +18,8 @@ const columns = [
       { href: "/sifre-yoneticisi", label: "Şifre yöneticisi nerede?" },
       { href: "/passkey-nedir", label: "Passkey nedir?" },
       { href: "/iki-adimli-dogrulama", label: "İki adımlı doğrulama (2FA)" },
+      { href: "/guvenlik-kontrol-listesi", label: "Güvenlik kontrol listesi" },
+      { href: "/dijital-guvenlik-plani", label: "7 günde dijital güvenlik planı" },
     ],
   },
   {

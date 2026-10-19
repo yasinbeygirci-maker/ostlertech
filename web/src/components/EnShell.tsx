@@ -28,6 +28,8 @@ const guides = [
   { href: "/en/offline-password-manager", label: "Offline password manager" },
   { href: "/en/password-manager-with-authenticator", label: "Built-in authenticator" },
   { href: "/en/password-manager-comparison", label: "Comparison" },
+  { href: "/en/security-checklist", label: "Security checklist" },
+  { href: "/en/digital-security-plan", label: "7-day security plan" },
 ];
 
 export function EnFooter() {
