@@ -40,12 +40,13 @@ export const DESKTOP_LICENSE = {
 
 // Masaüstü kurulum dosyası: herkese açık sürüm deposunda. "latest" bağlantısı her yeni sürümde aynı kalır
 // (dosya her sürümde SyncPass.msi adıyla yüklenir). Store sayfası açılınca indirme oraya çevrilecek.
+// HER MSI YAYININDA version/sizeLabel/sha256 burada elle güncellenir (gh release view ile doğrula); yoksa site eski sürümü gösterir.
 export const DESKTOP_DOWNLOAD = {
   url: "https://github.com/yasinbeygirci-maker/syncpass-releases/releases/latest/download/SyncPass.msi",
   releasesUrl: "https://github.com/yasinbeygirci-maker/syncpass-releases/releases",
-  version: "1.4.8",
+  version: "1.4.15",
   sizeLabel: "141 MB",
-  sha256: "571055877091418287d4eb168bdc22ca1d827090c80d3d6c3dd9e33f7d5827fe",
+  sha256: "295a69095fb2b48c3687c286f7bcf517e8d55d915d3d904841a5bc80f8241423",
   requirements: "Windows 10 (2004) veya Windows 11, 64 bit",
 };
 
