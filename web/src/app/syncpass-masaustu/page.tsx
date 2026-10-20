@@ -27,6 +27,7 @@ const productLd = {
   "@type": "Product",
   name: "SyncPass Masaüstü",
   description: "Windows için şifre yöneticisi: kasa bilgisayarda AES-256-GCM ile şifreli, hesap açmak gerekmez.",
+  image: `${SITE_URL}/screens/desktop-vault-dark.webp`,
   brand: { "@type": "Brand", name: "OstlerTech" },
   offers: {
     "@type": "Offer",
@@ -34,6 +35,24 @@ const productLd = {
     priceCurrency: "TRY",
     availability: "https://schema.org/InStock",
     url: `${SITE_URL}/syncpass-masaustu`,
+    shippingDetails: {
+      "@type": "OfferShippingDetails",
+      shippingRate: { "@type": "MonetaryAmount", value: "0", currency: "TRY" },
+      shippingDestination: { "@type": "DefinedRegion", addressCountry: "TR" },
+      deliveryTime: {
+        "@type": "ShippingDeliveryTime",
+        handlingTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: 0, unitCode: "DAY" },
+        transitTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: 0, unitCode: "DAY" },
+      },
+    },
+    hasMerchantReturnPolicy: {
+      "@type": "MerchantReturnPolicy",
+      applicableCountry: "TR",
+      returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+      merchantReturnDays: 14,
+      returnMethod: "https://schema.org/ReturnByMail",
+      returnFees: "https://schema.org/FreeReturn",
+    },
   },
 };
 
