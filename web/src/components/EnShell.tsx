@@ -44,6 +44,7 @@ export function EnFooter() {
           <p>© {new Date().getFullYear()} OstlerTech · Privacy-first apps that keep your data with you.</p>
           <nav className="flex flex-wrap gap-5">
             <a href="/en/pricing" className="hover:text-white">Pricing</a>
+            <a href="/en/areapilot" className="hover:text-white">AreaPilot (beta)</a>
             <a href="/en/privacy" className="hover:text-white">Privacy</a>
             <a href="/en/terms" className="hover:text-white">Terms</a>
             <a href="/en/refunds" className="hover:text-white">Refunds</a>

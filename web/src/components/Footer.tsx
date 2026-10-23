@@ -28,6 +28,7 @@ const columns = [
       { href: "/hakkimizda", label: "Hakkımızda" },
       { href: "/iletisim", label: "İletişim" },
       { href: "/products", label: "Ürünler" },
+      { href: "/areapilot", label: "AreaPilot (açık beta)" },
       { href: "/videolar", label: "Videolar" },
       { href: "/#sss", label: "Sık sorulanlar" },
       { href: YOUTUBE_URL, label: "YouTube", external: true },
