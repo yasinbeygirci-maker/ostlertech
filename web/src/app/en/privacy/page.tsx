@@ -13,7 +13,7 @@ const link = "text-primary hover:text-primary-light";
 
 export default function PrivacyEnPage() {
   return (
-    <LegalPage eyebrow="Legal" title="Privacy Policy" lang="en" altLink={{ href: "/gizlilik", label: "Türkçe sürüm" }}>
+    <LegalPage eyebrow="Legal" title="Privacy Policy" lang="en" updatedOn="23 October 2026" altLink={{ href: "/gizlilik", label: "Türkçe sürüm" }}>
       <p>
         This notice covers the ostlertech.com website and purchases made through it. It is also our information notice
         under Türkiye's Personal Data Protection Law No. 6698 (KVKK). Our apps have their own privacy policies:{" "}
@@ -44,15 +44,16 @@ export default function PrivacyEnPage() {
       <p>We do not sell your data or share it for advertising. To provide the service it is shared only with these providers:</p>
       <List>
         <li>Paddle.com Market Ltd (United Kingdom): as Merchant of Record, taking payments, invoicing, taxes, subscriptions and refunds (<a href="https://www.paddle.com/legal/privacy" target="_blank" rel="noopener" className={link}>Paddle privacy policy</a>).</li>
-        <li>Supabase: storing licence and waiting-list records (servers in the European Union).</li>
+        <li>Supabase Pte. Ltd. (Singapore company; database servers in Ireland, EU): storing licence and waiting-list records.</li>
         <li>Vercel: hosting the site and the licence check service; anonymous visit statistics (Web Analytics).</li>
         <li>Our accountant: statutory accounting records.</li>
         <li>YouTube: only when you press play on a video on the site (via youtube-nocookie.com).</li>
         <li>Competent public authorities: only where required by law.</li>
       </List>
       <p>
-        Some of these providers have servers outside Türkiye; such transfers are made in accordance with Article 9 of
-        KVKK.
+        Vercel and Supabase servers are outside Türkiye; when you visit our site, join the waiting list or your desktop
+        licence is checked, your data is transferred to these providers. We are in the process of signing the standard
+        contracts announced by the Personal Data Protection Board under Article 9 of KVKK with them.
       </p>
 
       <H2>5. Retention</H2>

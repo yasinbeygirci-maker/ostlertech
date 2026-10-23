@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function SitePrivacyPage() {
   return (
-    <LegalPage eyebrow="Yasal" title="Gizlilik Politikası ve KVKK Aydınlatma Metni" altLink={{ href: "/en/privacy", label: "English version" }}>
+    <LegalPage eyebrow="Yasal" title="Gizlilik Politikası ve KVKK Aydınlatma Metni" updatedOn="23 Ekim 2026" altLink={{ href: "/en/privacy", label: "English version" }}>
       <p>
         Bu metin ostlertech.com web sitesini ve buradan yapılan satın almaları kapsar. Uygulamalarımızın kendi gizlilik
         politikaları ayrıdır: <a href="/syncpass/privacy" className="text-primary hover:text-primary-light">SyncPass gizlilik politikası</a>.
@@ -40,14 +40,16 @@ export default function SitePrivacyPage() {
       <p>Verilerinizi satmayız ve reklam amacıyla paylaşmayız. Hizmeti sunabilmek için yalnızca şu hizmet sağlayıcılarla paylaşılır:</p>
       <List>
         <li>Paddle.com Market Ltd (Birleşik Krallık): yetkili satıcı olarak ödemenin alınması, faturalandırma, vergiler, abonelik ve iadeler (<a href="https://www.paddle.com/legal/privacy" target="_blank" rel="noopener" className="text-primary hover:text-primary-light">Paddle gizlilik politikası</a>).</li>
-        <li>Supabase: lisans ve bekleme listesi kayıtlarının saklanması (Avrupa Birliği'ndeki sunucular).</li>
+        <li>Supabase Pte. Ltd. (Singapur şirketi; veritabanı sunucuları İrlanda, AB): lisans ve bekleme listesi kayıtlarının saklanması.</li>
         <li>Vercel: sitenin ve lisans doğrulama hizmetinin barındırılması; anonim ziyaret istatistikleri (Web Analytics).</li>
         <li>Mali müşavir: yasal muhasebe kayıtları.</li>
         <li>YouTube: sitedeki bir videoda yalnızca siz oynat'a bastığınızda (youtube-nocookie.com üzerinden).</li>
         <li>Yetkili kamu kurumları: yalnızca kanunen zorunlu olduğunda.</li>
       </List>
       <p>
-        Bu sağlayıcıların bir kısmının sunucuları yurt dışındadır; bu aktarımlar KVKK'nın 9. maddesine uygun olarak yapılır.
+        Vercel ve Supabase'in sunucuları yurt dışındadır; sitemizi ziyaret ettiğinizde, bekleme listesine yazıldığınızda ve
+        masaüstü lisansınız doğrulandığında verileriniz bu sağlayıcılara aktarılır. Bu sağlayıcılarla KVKK md. 9 uyarınca
+        Kurul'un ilan ettiği standart sözleşmeleri imzalama sürecini yürütüyoruz.
       </p>
 
       <H2>5. Saklama süresi</H2>
