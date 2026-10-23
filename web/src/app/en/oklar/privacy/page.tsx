@@ -14,7 +14,7 @@ const link = "text-primary hover:text-primary-light";
 export default function OklarPrivacyEnPage() {
   return (
     <LegalPage eyebrow="Oklar" title="Oklar Privacy Policy" lang="en" updated={false} altLink={{ href: "/oklar/privacy", label: "Türkçe sürüm" }}>
-      <p>Last updated: 18 October 2026</p>
+      <p>Last updated: 23 October 2026</p>
       <p>
         This policy explains which data is processed when you use the Oklar mobile game (the &quot;Game&quot;). It serves as the
         information notice under Turkey&apos;s Personal Data Protection Law (KVKK) and the EU General Data Protection Regulation (GDPR).
@@ -95,8 +95,13 @@ export default function OklarPrivacyEnPage() {
 
       <H2>7. International transfers</H2>
       <p>
-        AdMob and Google Play data is processed on servers of Google LLC and its affiliates outside Türkiye, including the United
-        States, under KVKK Art. 9. For EU users, Google relies on the EU Standard Contractual Clauses and the Data Privacy Framework.
+        AdMob and Google Play data is sent directly from your device to Google LLC and its affiliates through the game&apos;s
+        advertising and purchase components, and is processed on servers outside Türkiye, including the United States.
+        Google acts as a controller of this data under its own data protection terms. For users in the European Union,
+        Google&apos;s terms rely on the EU Standard Contractual Clauses and the Data Privacy Framework; they do not include the
+        standard contract announced by the Turkish Personal Data Protection Board for transfers from Türkiye. If you do not
+        allow personalised ads, the data sent to Google is limited to what is needed to show and count ads and prevent
+        fraud; if you buy the &quot;Ad-free pack&quot;, the game does not start the ad system at all.
       </p>
 
       <H2>8. Retention</H2>

@@ -14,7 +14,7 @@ const link = "text-primary hover:text-primary-light";
 export default function OklarPrivacyPage() {
   return (
     <LegalPage eyebrow="Oklar" title="Oklar Gizlilik Politikası" updated={false} altLink={{ href: "/en/oklar/privacy", label: "English" }}>
-      <p>Son güncelleme: 18 Ekim 2026</p>
+      <p>Son güncelleme: 23 Ekim 2026</p>
       <p>
         Bu politika, Oklar mobil oyununu (&quot;Oyun&quot;) kullandığınızda hangi verilerin işlendiğini anlatır. 6698 sayılı
         Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında aydınlatma metni, AB Genel Veri Koruma Tüzüğü (GDPR) kapsamında
@@ -98,9 +98,13 @@ export default function OklarPrivacyPage() {
 
       <H2>7. Yurt dışına aktarım</H2>
       <p>
-        AdMob ve Google Play verileri Google LLC ve bağlı şirketlerinin Türkiye dışındaki (ABD dahil) sunucularında işlenir.
-        Bu aktarım KVKK md. 9 kapsamında yapılır; AB&apos;deki kullanıcılar için Google, AB Standart Sözleşme Maddelerine ve Veri
-        Gizliliği Çerçevesine dayanır.
+        AdMob ve Google Play verileri, oyundaki reklam ve satın alma bileşenleri aracılığıyla cihazınızdan doğrudan Google
+        LLC ve bağlı şirketlerine gönderilir ve Türkiye dışındaki (ABD dahil) sunucularda işlenir. Google bu veriler için
+        kendi veri koruma şartlarına göre veri sorumlusu olarak hareket eder. Google&apos;ın şartları Avrupa Birliği&apos;ndeki
+        kullanıcılar için AB Standart Sözleşme Maddelerine ve Veri Gizliliği Çerçevesine dayanır; Türkiye&apos;den yapılan
+        aktarımlar için Kişisel Verileri Koruma Kurulu&apos;nun ilan ettiği standart sözleşmeye yer vermez. Kişiselleştirilmiş
+        reklama izin vermezseniz Google&apos;a giden veriler reklamı göstermek, saymak ve sahtekârlığı önlemek için gereken
+        sınırlı bilgiyle kalır; &quot;Reklamsız paket&quot; satın aldığınızda oyun reklam sistemini hiç başlatmaz.
       </p>
 
       <H2>8. Saklama süreleri</H2>

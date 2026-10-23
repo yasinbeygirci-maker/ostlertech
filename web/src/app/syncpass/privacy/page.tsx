@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/syncpass/privacy" },
 };
 
-const EFFECTIVE_TR = "5 Ekim 2026";
-const EFFECTIVE_EN = "5 October 2026";
+const EFFECTIVE_TR = "23 Ekim 2026";
+const EFFECTIVE_EN = "23 October 2026";
 const CONTACT_EMAIL = "yasin@ostlertech.com";
 
 function Section({ n, title, children }: { n: string; title: string; children: ReactNode }) {
@@ -122,7 +122,7 @@ export default function SyncPassPrivacyPolicy() {
               <p>SyncPass, bir şifrenin SHA-1 özetinin yalnızca ilk 5 karakterini <C>api.pwnedpasswords.com</C> adresine gönderir ve sonuçları cihazınızda karşılaştırır. Şifrenin kendisi asla gönderilmez.</p>
             </Sub>
             <Sub title="E-posta sızıntı kontrolü (Android, premium, isteğe bağlı)">
-              <p>Kendi Have I Been Pwned API anahtarınızı ekleyip bu kontrolü çalıştırırsanız, kasanızda kullanıcı adı olarak kayıtlı e-posta adresleri <C>haveibeenpwned.com</C> adresine gönderilir.</p>
+              <p>Kendi Have I Been Pwned API anahtarınızı ekleyip bu kontrolü çalıştırırsanız, kasanızda kullanıcı adı olarak kayıtlı e-posta adresleri <C>haveibeenpwned.com</C> adresine gönderilir. Anahtar kayıtlıyken ve kasanız açıkken bu kontrol haftada bir kendiliğinden de çalışır. Kasanızda başka kişilere ait e-posta adresleri varsa onlar da gönderilir. Kontrolü durdurmak için API anahtarını Kişisel Bilgiler ekranından silin.</p>
             </Sub>
             <Sub title="Web sitesi simgeleri">
               <p>Logolar cihazdaki marka kütüphanesinden veya sizin seçtiğiniz görsellerden gösterilir. Kasanızdaki alan adları hiçbir simge hizmetine gönderilmez.</p>
@@ -144,7 +144,7 @@ export default function SyncPassPrivacyPolicy() {
               <p>18 Eylül 2026&apos;dan önce yayımlanan Android sürümlerinde, kasadaki web sitelerinin alan adları logolar için Google&apos;ın <C>www.google.com</C> üzerindeki simge hizmetine gönderiliyordu. Panoda bir IBAN bulunduğunda pano metni ayrıştırılmak üzere Gemini&apos;ye gönderiliyordu. Bu tarihten sonra yayımlanan sürümlerde bunların hiçbiri yapılmaz; uygulamayı güncellemenizi öneririz.</p>
             </Sub>
             <Sub title="Belge ve QR tarama (Android)">
-              <p>Kart, kimlik ve QR kodu tarama, cihazınızda çalışan Google ML Kit ile yapılır; SyncPass bu görüntüleri yüklemez. ML Kit, Google&apos;a anonim tanılama ve kullanım bilgileri gönderebilir.</p>
+              <p>Kart, kimlik ve QR kodu tarama, cihazınızda çalışan Google ML Kit ile yapılır; SyncPass bu görüntüleri yüklemez. ML Kit, Google&apos;a kişiyi tanımlamayan tanılama ve kullanım bilgileri (kurulum başına bir kimlik dahil) gönderebilir.</p>
             </Sub>
             <Sub title="Satın almalar ve uygulama bütünlüğü (Android)">
               <p>Premium satın almalar Google Play Faturalandırma ile yapılır; biz ödeme bilgilerinizi değil, yalnızca satın alma durumunu görürüz. Uygulamanın gerçek bir cihazda çalıştığını doğrulamak için Google Play Integrity kullanılır.</p>
@@ -207,7 +207,7 @@ export default function SyncPassPrivacyPolicy() {
           </Section>
 
           <Section n="09" title="Çocuklar">
-            <p>SyncPass 13 yaşından küçük çocuklara yönelik değildir ve bilerek onların verilerini toplamayız.</p>
+            <p>SyncPass 18 yaşından küçük kişilere yönelik değildir ve bilerek onların verilerini toplamayız.</p>
           </Section>
 
           <Section n="10" title="Haklarınız">
@@ -271,7 +271,7 @@ export default function SyncPassPrivacyPolicy() {
               <p>SyncPass sends only the first 5 characters of the SHA-1 hash of a password to <C>api.pwnedpasswords.com</C> and compares the results on your device. The password itself is never sent.</p>
             </Sub>
             <Sub title="Email breach check (Android, premium, optional)">
-              <p>If you add your own Have I Been Pwned API key and run this check, email addresses saved as usernames in your vault are sent to <C>haveibeenpwned.com</C>.</p>
+              <p>If you add your own Have I Been Pwned API key and run this check, email addresses saved as usernames in your vault are sent to <C>haveibeenpwned.com</C>. While a key is saved and your vault is unlocked, this check also runs automatically once a week. If your vault contains other people&apos;s email addresses, those are sent too. To stop it, remove the API key on the Personal Info screen.</p>
             </Sub>
             <Sub title="Website icons">
               <p>Logos come from a brand library on your device or from images you pick. The domain names in your vault are never sent to an icon service.</p>
@@ -293,7 +293,7 @@ export default function SyncPassPrivacyPolicy() {
               <p>In Android versions released before 18 September 2026, the domain names of websites in your vault were sent to Google&apos;s favicon service at <C>www.google.com</C> to show logos, and clipboard text containing an IBAN was sent to Gemini to be parsed. Versions released after that date do neither; we recommend updating the app.</p>
             </Sub>
             <Sub title="Document and QR scanning (Android)">
-              <p>Card, ID and QR code scanning uses Google ML Kit on your device; SyncPass does not upload these images. ML Kit may send anonymous diagnostic and usage information to Google.</p>
+              <p>Card, ID and QR code scanning uses Google ML Kit on your device; SyncPass does not upload these images. ML Kit may send diagnostic and usage information that does not identify you (including a per-installation identifier) to Google.</p>
             </Sub>
             <Sub title="Purchases and app integrity (Android)">
               <p>Premium purchases are handled by Google Play Billing; we receive the purchase status, not your payment details. Google Play Integrity is used to check that the app runs on a genuine device.</p>
@@ -356,7 +356,7 @@ export default function SyncPassPrivacyPolicy() {
           </Section>
 
           <Section n="09" title="Children">
-            <p>SyncPass is not directed at children under 13 and we do not knowingly collect their data.</p>
+            <p>SyncPass is not directed at anyone under 18 and we do not knowingly collect their data.</p>
           </Section>
 
           <Section n="10" title="Your rights">
