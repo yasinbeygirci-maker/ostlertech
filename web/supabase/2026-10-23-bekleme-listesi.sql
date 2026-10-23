@@ -1,5 +1,5 @@
 -- Ürün bağımsız bekleme / beta listesi (ostlertech.com). İlk kullanım: AreaPilot açık beta (indirme bağlantısı e-posta bırakana
--- sayfada verilir; e-posta yalnız beta bildirimleri içindir, satış/tanıtım e-postası gönderilmez: İYS kaydı yok, hukuk 2026-10-23 A yolu). Proje: qpwodglvptnkpjcwhmqg. CANLIYA UYGULANMADI: Yasin onayıyla uygulanır.
+-- sayfada verilir; e-posta yalnız beta bildirimleri içindir, satış/tanıtım e-postası gönderilmez: İYS kaydı yok, hukuk 2026-10-23 A yolu). Proje: qpwodglvptnkpjcwhmqg. 2026-10-23'te Yasin onayıyla canlıya uygulandı (migration site_waitlist_bekleme_listesi).
 -- Tekrar çalıştırılabilir. 2026-10-23'te PGlite ile denendi (çift kayıt, hız sınırı, IP özetinin silinmesi, RLS).
 --
 -- Not: sitedeki eski components/Waitlist.tsx "waitlist" adlı, veritabanında OLMAYAN bir tabloya yazıyordu ve hiçbir sayfada
