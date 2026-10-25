@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { LANG_KEY, otherLangPath, pageLang, rememberLang, type SiteLang } from "@/lib/lang";
 
 const TEXT: Record<SiteLang, { q: string; go: string; stay: string }> = {
-  tr: { q: "Bu sayfa Türkçe de var.", go: "Türkçe'ye geç", stay: "İngilizce kalsın" },
+  tr: { q: "Bu sayfanın Türkçesi de var.", go: "Türkçe'ye geç", stay: "İngilizce kalsın" },
   en: { q: "This page is also available in English.", go: "Switch to English", stay: "Keep Türkçe" },
 };
 
