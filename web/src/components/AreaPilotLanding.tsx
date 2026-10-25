@@ -3,6 +3,8 @@ import BetaDownloadForm from "@/components/BetaDownloadForm";
 import { SellerBlock } from "@/components/LegalPage";
 import { AREAPILOT } from "@/lib/areapilot";
 import { AREAPILOT_COPY, type Lang } from "@/lib/areapilot-content";
+import YouTubeFacade from "@/components/YouTubeFacade";
+import { VIDEOS } from "@/lib/videos";
 
 // AreaPilot açık beta sayfasının gövdesi (TR ve EN aynı yapı). Üst çubuk/alt bilgi sayfa dosyasında.
 // Görseller (Deniz [GORSEL-1..5]) henüz yok: nötr örnek çizimden ekran görüntüsü gelince eklenir; yer tutucu gösterilmez.
@@ -55,6 +57,31 @@ export default function AreaPilotLanding({ lang }: { lang: Lang }) {
             ))}
           </div>
           <p className="text-sm text-muted">{c.languages}</p>
+        </div>
+      </section>
+
+      <section id="videolar" className="section-padding border-t border-line">
+        <div className="max-w-6xl mx-auto space-y-8">
+          <H2>{lang === "tr" ? "Videolar" : "Videos"}</H2>
+          <p className="text-sm text-muted">
+            {lang === "tr"
+              ? "Kısa tanıtım ve adım adım kullanım. Seslendirme ve altyazı Türkçe."
+              : "A short intro and a step-by-step walkthrough. Narration and subtitles are in Turkish; English versions are coming."}
+          </p>
+          <div className="grid gap-8 md:grid-cols-2">
+            {VIDEOS.filter((v) => v.product === "AreaPilot").map((v) => (
+              <article key={v.id} className="space-y-3">
+                <YouTubeFacade video={v} />
+                <h3 className="font-bold text-white">{v.title}</h3>
+                <p className="text-sm text-muted">{v.durationLabel}</p>
+              </article>
+            ))}
+          </div>
+          <p className="text-xs text-muted">
+            {lang === "tr"
+              ? "Oynat'a bastığınızda video YouTube'dan (youtube-nocookie.com) yüklenir."
+              : "When you press play, the video loads from YouTube (youtube-nocookie.com)."}
+          </p>
         </div>
       </section>
 
