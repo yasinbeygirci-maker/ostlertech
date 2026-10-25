@@ -213,7 +213,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     description:
       "Finds closed areas in your drawing, reads their codes from nearby text, totals m² and exports to Excel. AutoCAD 2013-2027, Windows. Open beta, 30 days.",
     badge: `Open beta · Version ${A.version}`,
-    h1: "How many m² of glass are on this façade?",
+    h1: "How many m² of glass are on this facade?",
     lead: "AreaPilot finds the closed areas in your AutoCAD drawing, reads their codes from the text next to them, totals the m² and exports it to Excel.",
     sub: "Glazing, curtain wall panels, rooms: no more measuring each area and adding it up on a calculator.",
     cta: "Get the download link",
@@ -247,7 +247,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     ],
     betaTitle: "About this beta, plainly",
     betaIntro:
-      "This is a beta. AreaPilot is used every day on real façade drawings, but that use is in AutoCAD 2021. The add-in is built for AutoCAD 2013-2027; versions other than 2021 have not been tested yet. If you use another version, telling us whether it works is the most useful thing you can do.",
+      "This is a beta. AreaPilot is used every day on real facade drawings, but that use is in AutoCAD 2021. The add-in is built for AutoCAD 2013-2027; versions other than 2021 have not been tested yet. If you use another version, telling us whether it works is the most useful thing you can do.",
     betaItems: [
       {
         h: "Trial:",
