@@ -16,6 +16,20 @@ export default function AreaPilotLanding({ lang }: { lang: Lang }) {
     "@type": "FAQPage",
     mainEntity: c.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
   };
+  const appLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "AreaPilot",
+    applicationCategory: "DesignApplication",
+    applicationSubCategory: "AutoCAD plugin",
+    operatingSystem: "Windows 10, Windows 11",
+    softwareVersion: AREAPILOT.version,
+    description: c.description,
+    inLanguage: lang,
+    url: `https://www.ostlertech.com${lang === "tr" ? AREAPILOT.path : AREAPILOT.enPath}`,
+    offers: { "@type": "Offer", price: "0", priceCurrency: "TRY", description: lang === "tr" ? "Açık beta, ilk açılıştan itibaren 30 gün ücretsiz deneme" : "Open beta, free trial for 30 days from first launch" },
+    publisher: { "@type": "Organization", name: "OstlerTech", url: "https://www.ostlertech.com" },
+  };
   const H2 = ({ children, id }: { children: React.ReactNode; id?: string }) => (
     <h2 id={id} className="scroll-mt-28 text-2xl md:text-3xl font-extrabold tracking-tight text-white">
       {children}
@@ -25,6 +39,7 @@ export default function AreaPilotLanding({ lang }: { lang: Lang }) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(appLd) }} />
       <section className="section-padding !pt-36">
         <div className="max-w-6xl mx-auto grid gap-12 lg:grid-cols-[1.2fr_1fr] items-start">
           <div className="space-y-6">

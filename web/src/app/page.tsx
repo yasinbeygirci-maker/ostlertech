@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import AreaPilotBanner from "@/components/AreaPilotBanner";
 import WhatsNew from "@/components/WhatsNew";
 import VideoSection from "@/components/VideoSection";
 import Features from "@/components/Features";
@@ -34,6 +35,7 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
       <Hero />
+      <AreaPilotBanner />
       <VideoSection />
       <WhatsNew />
       <Features />

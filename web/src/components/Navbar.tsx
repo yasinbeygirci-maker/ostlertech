@@ -10,6 +10,7 @@ const links = [
   { href: "/#guvenlik", label: "Güvenlik" },
   { href: "/#fiyat", label: "Fiyat" },
   { href: "/products", label: "Ürünler" },
+  { href: "/areapilot", label: "AreaPilot" },
   { href: "/iletisim", label: "İletişim" },
 ];
 

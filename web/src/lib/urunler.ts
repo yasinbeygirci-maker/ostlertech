@@ -1,4 +1,5 @@
 import { BROWSER_EXTENSION, DESKTOP_DOWNLOAD, PLAY_URL } from "./site";
+import { AREAPILOT } from "./areapilot";
 
 // Ürün kartı. "yayinda" yalnız indirilebilen ürüne verilir; mağazaya çıkmamış ürün "test" ya da "yakinda" kalır.
 export interface Urun {
@@ -48,6 +49,20 @@ export const URUNLER: Urun[] = [
       { etiket: "Chrome Web Mağazası'ndan eklenti", url: BROWSER_EXTENSION.chromeUrl },
     ],
     not: `Sürüm ${DESKTOP_DOWNLOAD.version}. Microsoft Store sürümü ve Edge eklentisi hazırlanıyor.`,
+  },
+  {
+    id: "areapilot",
+    ad: "AreaPilot",
+    slogan: "AutoCAD'de alan ve çevre metrajı",
+    aciklama: "AutoCAD çizimindeki kapalı alanları bulur, oda adını kod olarak okur, alan ve çevreyi toplar; çizime yazar, tablo ekler, Excel'e aktarır. Windows, AutoCAD 2013-2027.",
+    platform: "Windows (AutoCAD)",
+    ikon: "Layers",
+    renk: "#4C8DFF",
+    durum: "beta",
+    url: AREAPILOT.path,
+    cta: "Beta'yı dene (30 gün ücretsiz)",
+    ekler: [{ etiket: "Videolar", url: "/areapilot#videolar" }],
+    not: `Açık beta, sürüm ${AREAPILOT.version}. Satış henüz açılmadı.`,
   },
   {
     id: "diasync",

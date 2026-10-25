@@ -14,6 +14,7 @@ export function EnHeader({ trHref = "/" }: { trHref?: string }) {
           <a href="/en#security" className="hover:text-white">Security</a>
           <a href="/en#pricing" className="hover:text-white">Pricing</a>
           <a href="/en#faq" className="hover:text-white">FAQ</a>
+          <a href="/en/areapilot" className="hover:text-white">AreaPilot</a>
         </nav>
         <div className="flex items-center gap-3">
           <a href={trHref} lang="tr" hrefLang="tr" className="text-sm text-muted hover:text-white">Türkçe</a>

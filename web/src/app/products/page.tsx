@@ -7,6 +7,7 @@ import { HeartPulse, Store, Kanban, ShieldCheck, Monitor, Clock, Sparkles, Layer
 const DURUM: Record<string, { etiket: string; cls: string }> = {
   yayinda: { etiket: "Yayında", cls: "bg-ok/10 border-ok/30 text-ok" },
   test: { etiket: "Test aşamasında", cls: "bg-primary/10 border-primary/30 text-primary" },
+  beta: { etiket: "Açık beta", cls: "bg-primary/10 border-primary/30 text-primary" },
   yakinda: { etiket: "Yakında", cls: "bg-white/[0.04] border-line text-muted" },
 };
 
