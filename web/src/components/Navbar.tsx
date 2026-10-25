@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { PLAY_URL } from "@/lib/site";
+import LangSwitch from "./LangSwitch";
 
 const links = [
   { href: "/#ozellikler", label: "Özellikler" },
@@ -48,6 +49,7 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-3">
+          <LangSwitch />
           <a href={PLAY_URL} target="_blank" rel="noopener" className="hidden sm:inline-flex btn-primary !py-2 !px-4 text-sm">
             Uygulamayı indir
           </a>

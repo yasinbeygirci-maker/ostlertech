@@ -8,6 +8,7 @@ export interface Video {
   durationLabel: string;
   uploadDate: string;
   product: "SyncPass" | "Projex" | "OstlerTech" | "AreaPilot";
+  lang?: "tr" | "en"; // anlatım dili; yoksa Türkçe
 }
 
 export const VIDEOS: Video[] = [
@@ -43,5 +44,29 @@ export const VIDEOS: Video[] = [
     durationLabel: "2:45",
     uploadDate: "2026-10-25",
     product: "AreaPilot",
+  },
+  {
+    id: "rDErHEELats",
+    title: "AreaPilot: area and perimeter takeoff in AutoCAD, in seconds (open beta)",
+    description:
+      "On a typical hotel floor plan, AreaPilot adds up 76 areas by room name, writes them into the drawing, inserts the table and exports to Excel. Open beta, 30-day trial from first launch.",
+    poster: "/videos/areapilot-tanitim-en.jpg?v=20261025",
+    duration: "PT1M3S",
+    durationLabel: "1:03",
+    uploadDate: "2026-10-25",
+    product: "AreaPilot",
+    lang: "en",
+  },
+  {
+    id: "HxpTIv4bH9Y",
+    title: "AreaPilot walkthrough: area and perimeter takeoff of a hotel floor in AutoCAD, start to finish",
+    description:
+      "Command and drawing unit, Select by Layer, list and totals, clicking a row to light up rooms, code search, Click Inside, Code source, writing to the drawing, table, Excel and Outline.",
+    poster: "/videos/areapilot-kullanim-en.jpg?v=20261025",
+    duration: "PT3M5S",
+    durationLabel: "3:05",
+    uploadDate: "2026-10-25",
+    product: "AreaPilot",
+    lang: "en",
   },
 ];

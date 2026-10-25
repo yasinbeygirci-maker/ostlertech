@@ -86,7 +86,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       { h: "Kapalı olmayan çizgilerden sınır çıkarır", p: "Alanın içine tıkla, bir bölgedeki bütün alanları al ya da seçtiğin çizgilerin kapattığı bölgeleri sınır olarak çizime ekle. Dış kontur, köşelerindeki küçük boşlukları çizgileri köşede uzatarak (yayları kendi doğrultusunda) kapatır ve tek kapalı sınır çıkarır." },
       {
         h: "Sonucu çizime ve Excel'e yazar",
-        p: "Alan yazıları ve tablo çizime eklenir; liste ve toplamlar .xlsx dosyası olarak kaydedilir, istersen CSV, metin ya da panoya kopyalanır. İmalat sekmesinde panelleri imalat tarihine göre gruplayıp çizimde renklendirebilir, ayrı bir imalat listesi alabilirsin.",
+        p: "Alan yazıları ve tablo çizime eklenir; liste ve toplamlar .xlsx dosyası olarak kaydedilir, istersen CSV, metin ya da panoya kopyalanır. İmalat sekmesinde panelleri imalat tarihine göre gruplayıp çizimde renklendirebilir, alan ve çevreli ayrı bir imalat listesi alabilirsin.",
       },
     ],
     languages: "Arayüz 10 dilde: Türkçe, English, Deutsch, Français, Español, Italiano, Português, Русский, 日本語, 简体中文.",
@@ -227,7 +227,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       { h: "Builds boundaries from open lines", p: "Click inside an area, take every area in a region, or turn the regions closed by the lines you select into boundaries in the drawing. Outline closes small gaps at the corners by extending the lines (arcs along their own direction) and produces one closed boundary." },
       {
         h: "Writes results to the drawing and to Excel",
-        p: "Area labels and a table go into the drawing; the list and totals are saved as an .xlsx file, or copied as CSV, text or to the clipboard. On the Fabrication tab you can group panels by fabrication date, colour them in the drawing and export a separate fabrication list.",
+        p: "Area labels and a table go into the drawing; the list and totals are saved as an .xlsx file, or copied as CSV, text or to the clipboard. On the Fabrication tab you can group panels by fabrication date, colour them in the drawing and export a separate fabrication list with area and perimeter.",
       },
     ],
     languages: "The interface is available in 10 languages: English, Türkçe, Deutsch, Français, Español, Italiano, Português, Русский, 日本語, 简体中文.",

@@ -21,7 +21,7 @@ const jsonLd = VIDEOS.map((v) => ({
   duration: v.duration,
   embedUrl: `https://www.youtube-nocookie.com/embed/${v.id}`,
   contentUrl: `https://www.youtube.com/watch?v=${v.id}`,
-  inLanguage: "tr",
+  inLanguage: v.lang ?? "tr",
   publisher: { "@type": "Organization", name: "OstlerTech", url: SITE_URL },
 }));
 
@@ -50,6 +50,7 @@ export default function VideosPage() {
                 <YouTubeFacade video={v} priority={i === 0} />
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                   <span className="rounded-md bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary">{v.product}</span>
+                  <span className="rounded-md bg-surface px-2 py-0.5 text-[11px] font-semibold text-muted border border-line">{(v.lang ?? "tr") === "en" ? "English" : "Türkçe"}</span>
                   <h2 className="text-xl font-bold text-white">{v.title}</h2>
                   <span className="text-sm text-muted">{v.durationLabel}</span>
                 </div>

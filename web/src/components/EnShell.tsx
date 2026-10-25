@@ -1,7 +1,9 @@
 // İngilizce sayfaların üst çubuğu ve alt bilgisi (Türkçe Navbar/Footer yerine). Bağlantılar /en sayfasının bölümlerine gider.
 import { PLAY_URL } from "@/lib/site";
+import LangSwitch from "./LangSwitch";
 
-export function EnHeader({ trHref = "/" }: { trHref?: string }) {
+// trHref eski cagrilar icin kabul edilir; dil degistirici karsiligini yoldan kendisi bulur (lib/lang.ts).
+export function EnHeader(_props: { trHref?: string }) {
   return (
     <header className="fixed top-0 inset-x-0 z-50 border-b border-line bg-background/80 backdrop-blur-xl" style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}>
       <div className="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between gap-4">
@@ -17,7 +19,7 @@ export function EnHeader({ trHref = "/" }: { trHref?: string }) {
           <a href="/en/areapilot" className="hover:text-white">AreaPilot</a>
         </nav>
         <div className="flex items-center gap-3">
-          <a href={trHref} lang="tr" hrefLang="tr" className="text-sm text-muted hover:text-white">Türkçe</a>
+          <LangSwitch />
           <a href={PLAY_URL} className="btn-primary !py-2 !px-4 text-sm" rel="noopener">Get the app</a>
         </div>
       </div>

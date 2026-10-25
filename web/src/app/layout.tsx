@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Manrope, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SCREENS_VERSION, SITE_URL } from "@/lib/site";
+import LangPrompt from "@/components/LangPrompt";
 import "./globals.css";
 
 // Masaüstü uygulamasıyla aynı yazı tipleri.
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="tr" className={`${sans.variable} ${mono.variable}`}>
       <body className="font-sans antialiased">
         {children}
+        <LangPrompt />
         {/* Çerezsiz, anonim sayfa görüntüleme sayımı (gizlilik metninde belirtildi). */}
         <Analytics />
       </body>

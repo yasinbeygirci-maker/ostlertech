@@ -1,7 +1,7 @@
 // AreaPilot (AutoCAD eklentisi) açık beta: ad, sürüm ve indirme bağlantıları TEK YERDE.
 // HER YENİ PAKETTE: version + packageDate burada, public/areapilot/surum.json'da "surum" aynı değer; GitHub sürümüne
 // dosyalar SABİT adlarla yüklenir (aşağıdaki asset adları), böylece "latest/download" bağlantısı değişmez.
-// Kaynak: D:\Development\SpaceCalc (DEGISIKLIKLER.md, paket/rehber.html), 0.9.15 paketi 2026-10-25 (önceki: 0.9.7, 2026-10-23).
+// Kaynak: D:\Development\SpaceCalc (DEGISIKLIKLER.md, paket/rehber.html), 0.9.16 paketi 2026-10-25 (önceki: 0.9.15 aynı gün, 0.9.7 2026-10-23).
 
 const RELEASES = "https://github.com/yasinbeygirci-maker/areapilot-releases/releases";
 
@@ -9,7 +9,7 @@ export const AREAPILOT = {
   name: "AreaPilot",
   path: "/areapilot",
   enPath: "/en/areapilot",
-  version: "0.9.15",
+  version: "0.9.16",
   /** Deneme süresi kurulumdan itibaren bu kadar gün; paket tarihinden en çok 90 gün (DEGISIKLIKLER 0.9.6). */
   trialDays: 30,
   /** Bu paketin çalışacağı son gün: paketle.ps1 $sonSinir = paket günü (2026-10-25) + 90 - 1. Yeni pakette değişir. */

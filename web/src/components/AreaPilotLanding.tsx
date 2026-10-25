@@ -81,10 +81,10 @@ export default function AreaPilotLanding({ lang }: { lang: Lang }) {
           <p className="text-sm text-muted">
             {lang === "tr"
               ? "Kısa tanıtım ve adım adım kullanım. Seslendirme ve altyazı Türkçe."
-              : "A short intro and a step-by-step walkthrough. Narration and subtitles are in Turkish; English versions are coming."}
+              : "A short intro and a step-by-step walkthrough, narrated and subtitled in English."}
           </p>
           <div className="grid gap-8 md:grid-cols-2">
-            {VIDEOS.filter((v) => v.product === "AreaPilot").map((v) => (
+            {VIDEOS.filter((v) => v.product === "AreaPilot" && (v.lang ?? "tr") === lang).map((v) => (
               <article key={v.id} className="space-y-3">
                 <YouTubeFacade video={v} />
                 <h3 className="font-bold text-white">{v.title}</h3>

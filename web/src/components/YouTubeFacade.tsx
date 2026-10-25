@@ -5,7 +5,8 @@ import { Play } from "lucide-react";
 import type { Video } from "@/lib/videos";
 
 // Oynat'a basılana kadar yalnızca yerel kapak görünür; YouTube'a istek gitmez, çerez yazılmaz.
-// Basılınca çerezsiz alan adından (youtube-nocookie.com) oynatıcı yüklenir.
+// Basılınca çerezsiz alan adından (youtube-nocookie.com) oynatıcı yüklenir. Altyazı videonun içine gömülü: cc_load_policy=0 ile
+// YouTube altyazısı kendiliğinden açılmaz (üst üste binmesin); videolarda YouTube altyazı kaydı da bulunmaz.
 export default function YouTubeFacade({ video, priority = false }: { video: Video; priority?: boolean }) {
   const [playing, setPlaying] = useState(false);
 
@@ -13,7 +14,7 @@ export default function YouTubeFacade({ video, priority = false }: { video: Vide
     <div className="relative aspect-video overflow-hidden rounded-2xl border border-line bg-surface shadow-[0_40px_90px_-30px_rgba(0,0,0,0.9)]">
       {playing ? (
         <iframe
-          src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1&hl=tr&cc_lang_pref=tr`}
+          src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1&hl=${video.lang ?? "tr"}&cc_load_policy=0`}
           title={video.title}
           allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
           allowFullScreen
@@ -25,7 +26,7 @@ export default function YouTubeFacade({ video, priority = false }: { video: Vide
           type="button"
           onClick={() => setPlaying(true)}
           className="group absolute inset-0 h-full w-full"
-          aria-label={`Videoyu oynat: ${video.title}`}
+          aria-label={`${video.lang === "en" ? "Play video" : "Videoyu oynat"}: ${video.title}`}
         >
           <img
             src={video.poster}
