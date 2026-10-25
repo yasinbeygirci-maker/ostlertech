@@ -22,7 +22,13 @@ export const metadata: Metadata = {
   keywords: ["şifre yöneticisi", "parola yöneticisi", "2FA", "TOTP", "passkey", "syncpass", "ostlertech", "android şifre yöneticisi"],
   authors: [{ name: "OstlerTech" }],
   creator: "OstlerTech",
-  icons: { icon: "/icon.png", apple: "/logo-syncpass.png" },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "192x192" },
+    ],
+    apple: "/apple-icon.png",
+  },
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
