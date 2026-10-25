@@ -47,9 +47,6 @@ export default function AreaPilotLanding({ lang }: { lang: Lang }) {
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">{c.h1}</h1>
             <p className="text-lg text-foreground leading-relaxed font-semibold">{c.lead}</p>
             <p className="text-muted leading-relaxed">{c.sub}</p>
-            <a href="#indir" className="btn-primary inline-flex !py-3.5 text-base">
-              {c.cta}
-            </a>
             <p className="text-sm text-muted">{c.ctaNote}</p>
           </div>
           <aside id="indir" className="scroll-mt-28 rounded-3xl border border-primary/30 bg-gradient-to-b from-primary/10 to-card p-6 md:p-8">
