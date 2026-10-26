@@ -37,6 +37,7 @@ export default function CornerTabPrivacyPage() {
         <li>Uygulamada hesap ya da üyelik yoktur. Adınızı, e-postanızı ya da telefonunuzu bize vermezsiniz.</li>
         <li>Defteriniz (cariler, borç ve alacaklar, tahsilatlar, kasa, stok, ayarlar) yalnız telefonunuzda, şifreli bir veritabanında durur. Bize gelmez; kendi sunucumuz yoktur.</li>
         <li>Reklam, analitik ya da çökme raporu aracı kullanmıyoruz.</li>
+        <li>Uygulama ekranlarının görüntüsü ve kaydı alınamaz; son uygulamalar listesinde içerik gösterilmez.</li>
         <li>Yedeği siz alırsınız: dosya, sizin belirlediğiniz parolayla şifrelenip sizin seçtiğiniz yere kaydedilir.</li>
         <li>WhatsApp, SMS ya da paylaşma ile gönderilen mesajları siz başlatır ve siz gönderirsiniz.</li>
         <li>
@@ -51,23 +52,31 @@ export default function CornerTabPrivacyPage() {
         borç, alacak ve tahsilat kayıtları, kasa ve stok hareketleri ile ayarlarınız yalnız telefonunuzda saklanır. Veritabanı
         SQLCipher ile şifrelidir; şifreleme anahtarı telefonun güvenli anahtar deposunda (Android Keystore) korunur. Giriş
         şifreniz (PIN) açık olarak değil, geri çevrilemeyen bir özet olarak tutulur. Uygulamadan ayrılıp döndüğünüzde PIN’in ne
-        zaman isteneceğini Ayarlar’dan seçersiniz (varsayılan: 1 dakika sonra). Parmak izi ya da yüz tanımayı Android yapar;
-        Uygulama biyometrik verinizi görmez. Bu veriler Android’in Google hesabı yedeğine ve telefondan telefona aktarıma alınmaz.
+        zaman isteneceğini Ayarlar’dan seçersiniz (varsayılan: 1 dakika sonra). Uygulamadan WhatsApp’ı, paylaşma menüsünü, arama
+        ekranını ya da tarayıcıyı açtığınızda, geri dönebilmeniz için kilit seçtiğiniz süreden bağımsız olarak en çok 5 dakika
+        bekler. Parmak izi ya da yüz tanımayı Android yapar; Uygulama biyometrik verinizi görmez. Uygulama açıkken ekran görüntüsü
+        ve ekran kaydı alınamaz, son uygulamalar listesinde Uygulamanın içeriği görünmez. Bu veriler Android’in Google hesabı yedeğine ve telefondan telefona aktarıma alınmaz.
         Uygulamayı silerseniz, uygulama verilerini temizlerseniz ya da Uygulamadaki “Bu cihazdaki defteri sil” seçeneğini
         kullanırsanız telefondaki defter silinir.
       </p>
       <p>
         <b>Ülke ve para birimi önerisi.</b> İlk açılışta dükkânınızın para birimini ve telefon ülke kodunu önerebilmek için
-        Uygulama, telefonunuzdaki SIM kartın ve bağlı olunan şebekenin ülke kodunu (ör. “TR”), telefonun bölge ayarını ve seçili
-        dili okur. Telefon numaranız, operatör kimliğiniz ya da SIM seri numaranız okunmaz ve bunun için izin istenmez. Bu bilgiler
-        yalnız telefonunuzda öneri üretmek için kullanılır; kaydedilmez, günlüğe yazılmaz, bize ya da bir başkasına gönderilmez.
-        Saklanan tek şey sizin onayladığınız para birimi ve ülke kodudur.
+        Uygulama, seçili uygulama dilini, telefonunuzdaki SIM kartın ve bağlı olunan şebekenin ülke kodunu (ör. “TR”) ve telefonun
+        bölge ayarını okur. Uygulama dili Türkçe ise öneri Türk lirası ve +90’dır; diğer dillerde SIM, şebeke ve bölge sırasıyla
+        bakılır. Öneriyi aynı adımda değiştirebilirsiniz. Telefon numaranız, operatör kimliğiniz ya da SIM seri numaranız okunmaz
+        ve bunun için izin istenmez. Dil ve SIM bilgisi yalnız telefonunuzda öneri üretmek için kullanılır; kaydedilmez, günlüğe
+        yazılmaz, bize ya da bir başkasına gönderilmez. Saklanan tek şey sizin onayladığınız para birimi ve ülke kodudur.
       </p>
       <p>
-        <b>Cari kaldırma.</b> Hiç kaydı olmayan bir cari tamamen silinir. Kaydı olan bir cari kaldırıldığında ya da Ayarlar’daki
-        eski kayıt temizliğiyle gizlendiğinde listeden gizlenir ve gizlenirken adı, telefonu, IBAN’ı ve adresi telefondaki
-        kayıttan temizlenir; defterin tutarlı kalması için yalnız tutarlar ve tarihler kalır. Açık bakiyesi olan cari
-        kaldırılamaz.
+        <b>Cari kaldırma ve kayıt temizliği.</b> Hiç kaydı olmayan bir cari tamamen silinir. Açık bakiyesi olan cari kaldırılamaz.
+        Kaydı olan bir cari kaldırıldığında ya da Ayarlar’daki “Kayıtları temizle” ile gizlendiğinde listeden kalkar ve adı,
+        telefonu, IBAN’ı, adresi, vergi numarası ve notu telefondaki kayıttan silinir. Defterin ve raporların tutarlı kalması için
+        tutarlar, tarihler ve kayıtlara sizin yazdığınız açıklamalar kalır; açıklamaya bir kişinin adını yazdıysanız o yazı da
+        kalır. Raporlar bu carilerin tutarlarını ad göstermeden toplamlara katar. “Kayıtları temizle”, seçtiğiniz süredir işlem
+        görmeyen ve hesabı kapalı carileri kapsar; önce kaç carinin etkileneceğini ve neyin silineceğini gösterir, giriş şifresi
+        açıksa PIN’inizi ister. Bu silme Uygulamadan geri alınamaz. Daha önce aldığınız yedeklerde silinen bilgiler durur; böyle
+        bir yedeği geri yüklerseniz bu carilerin adları ve diğer bilgileri de geri gelir. Bilgilerin tamamen gitmesini
+        istiyorsanız eski yedek dosyalarını da silmeniz gerekir.
       </p>
 
       <H2>4. Yedekler</H2>
@@ -88,8 +97,15 @@ export default function CornerTabPrivacyPage() {
         işletme adınız) WhatsApp’ı (ya da WhatsApp Business’ı), SMS uygulamanızı ya da paylaşma menüsünü açar. Mesajı siz görür,
         isterseniz değiştirir ve gönderirsiniz; Uygulama kendiliğinden mesaj göndermez. Gönderilen mesaj, seçtiğiniz uygulamanın
         kendi şartlarına tabidir. Telefonunuzda WhatsApp yüklü değilse mesaj tarayıcıya gönderilmez; bunun yerine paylaşma menüsü
-        açılır ve mesajı hangi uygulamayla göndereceğinizi siz seçersiniz. “Ara” düğmesi yalnız telefonun arama ekranını açar. PDF
-        ekstre telefonunuzda üretilir ve seçtiğiniz yere kaydedilir.
+        açılır ve mesajı hangi uygulamayla göndereceğinizi siz seçersiniz. “Ara” düğmesi yalnız telefonun arama ekranını açar.
+      </p>
+      <p>
+        Hesap özeti (ekstre) PDF olarak telefonunuzda üretilir. “Dosya olarak kaydet” derseniz seçtiğiniz yere kaydedilir. “PDF
+        olarak gönder” derseniz dosya Uygulamanın yalnız kendisinin erişebildiği geçici klasörüne (önbellek) yazılır ve paylaşma
+        menüsü açılır; dosyayı yalnız sizin seçtiğiniz uygulama okuyabilir ve gönderimi o uygulamada siz yaparsınız. Dosyanın adında
+        ve içinde müşterinin adı ve hesap hareketleri bulunur. Bu geçici dosya bir sonraki “PDF olarak gönder”de silinir; o zamana
+        kadar telefonunuzda kalır (Android yer açmak için daha önce de silebilir). Gönderdiğiniz kopya, seçtiğiniz uygulamada ve
+        alıcıda o uygulamanın şartlarına göre kalır.
       </p>
 
       <H2>6. Pro satın alma (Google Play)</H2>
@@ -129,9 +145,10 @@ export default function CornerTabPrivacyPage() {
         Müşterilerinizin ve tedarikçilerinizin adı, telefonu, borç bilgisi gibi kayıtlar onların kişisel verisidir ve bu kayıtlar
         için KVKK’daki yükümlülükler (bilgilendirme, yalnız gerektiği kadar veri, güvenli saklama, talep halinde düzeltme ve silme)
         defteri tutan işletmeye aittir. Uygulama size şu araçları verir: kayıtlar telefonda şifreli durur; giriş şifresi
-        kullanılabilir; bir carinin bilgileri düzenlenebilir; bir cari kaldırıldığında kişisel bilgileri temizlenir (3. bölüm);
-        Ayarlar’dan bu telefondaki defter, giriş şifresi ve onayla tamamen silinebilir (daha önce aldığınız yedek dosyaları ve
-        PDF’ler seçtiğiniz yerde kalır, onları ayrıca silmeniz gerekir). Not alanına sağlık, din gibi özel nitelikli bilgileri
+        kullanılabilir; ekran görüntüsü alınamaz; bir carinin bilgileri düzenlenebilir; bir cari kaldırıldığında ya da kayıt
+        temizliğiyle gizlendiğinde adı, telefonu, IBAN’ı, adresi, vergi numarası ve notu silinir (3. bölüm; eski yedeklerde
+        durur); Ayarlar’dan bu telefondaki defter, giriş şifresi ve onayla tamamen silinebilir (daha önce aldığınız yedek
+        dosyaları, kaydettiğiniz ve gönderdiğiniz PDF’ler seçtiğiniz yerde ya da alıcıda kalır, onları ayrıca silmeniz gerekir). Not alanına sağlık, din gibi özel nitelikli bilgileri
         yazmayın. Hatırlatma mesajını göndermeden önce numaranın doğru olduğunu kontrol edin. Kendi yükümlülükleriniz hakkında bir
         hukukçuya danışabilirsiniz.
       </p>
@@ -140,6 +157,7 @@ export default function CornerTabPrivacyPage() {
       <List>
         <li>Telefondaki defter: Uygulamayı silene, verileri temizleyene ya da defteri Uygulamadan silene kadar.</li>
         <li>Elle alınan yedekler: siz silene kadar, seçtiğiniz yerde. Otomatik yedekler: ücretsiz sürümde son 1, Pro’da son 30 dosya (4. bölüm).</li>
+        <li>“PDF olarak gönder” ile oluşan geçici ekstre: bir sonraki gönderime, Uygulamanın verileri silinene ya da Android önbelleği temizleyene kadar (5. bölüm).</li>
         <li>
           Google Play satın alma ve teknik bilgiler:{" "}
           <a href="https://policies.google.com/technologies/retention" className={link}>Google’ın saklama politikasına</a> göre.

@@ -36,6 +36,7 @@ export default function CornerTabPrivacyEnPage() {
         <li>There is no account or sign-up. You do not give us your name, e-mail address or phone number.</li>
         <li>Your ledger (customers and suppliers, debts and receivables, payments, cash, stock, settings) stays on your phone in an encrypted database. It is not sent to us; we have no server of our own.</li>
         <li>We use no advertising, analytics or crash-reporting tools.</li>
+        <li>Screenshots and screen recordings of the App are blocked, and its content is hidden in the recent apps list.</li>
         <li>You make your own backups: the file is encrypted with a password you choose and saved to a location you choose.</li>
         <li>Messages sent through WhatsApp, SMS or sharing are started and sent by you.</li>
         <li>
@@ -51,22 +52,32 @@ export default function CornerTabPrivacyEnPage() {
         payment records, cash and stock movements, and your settings are stored only on your phone. The database is encrypted with
         SQLCipher; its key is protected by the phone’s secure key store (Android Keystore). Your PIN is stored as a one-way hash,
         not in plain form. In Settings you choose how soon the PIN is asked for again after you leave the App and come back (default:
-        after 1 minute). Fingerprint or face unlock is handled by Android; the App never sees your biometric data. This data is
+        after 1 minute). When the App opens WhatsApp, the share menu, the dialler or a browser for you, the lock waits at most 5
+        minutes for you to come back, whatever time you chose. Fingerprint or face unlock is handled by Android; the App never sees
+        your biometric data. While the App is open, screenshots and screen recordings are blocked and its content is not shown in
+        the recent apps list. This data is
         excluded from Android’s Google account backup and from phone-to-phone transfer. Uninstalling the App, clearing its data, or
         using “Delete the ledger on this device” in the App deletes the ledger on the phone.
       </p>
       <p>
         <b>Country and currency suggestion.</b> On first launch, so that it can suggest your shop’s currency and phone country code,
-        the App reads the country code of the SIM card and of the network your phone is connected to (e.g. “TR”), the phone’s region
-        setting and the selected language. Your phone number, operator identity and SIM serial number are not read, and no permission
-        is requested for this. This information is used only on your phone to produce the suggestion; it is not stored, not written
-        to logs, and not sent to us or anyone else. The only thing saved is the currency and country code you confirm.
+        the App reads the selected app language, the country code of the SIM card and of the network your phone is connected to (e.g.
+        “TR”) and the phone’s region setting. If the app language is Turkish, it suggests Turkish lira and +90; in other languages it
+        looks at the SIM, the network and the region, in that order. You can change the suggestion on the same step. Your phone
+        number, operator identity and SIM serial number are not read, and no permission is requested for this. The language and SIM
+        information is used only on your phone to produce the suggestion; it is not stored, not written to logs, and not sent to us
+        or anyone else. The only thing saved is the currency and country code you confirm.
       </p>
       <p>
-        <b>Removing a customer.</b> A customer with no entries at all is deleted completely. When a customer who has entries is
-        removed, or hidden by the old-records clean-up in Settings, it is hidden from the list and, as it is hidden, its name, phone
-        number, IBAN and address are cleared from the record on your phone; only amounts and dates remain so that the ledger stays
-        consistent. A customer with an open balance cannot be removed.
+        <b>Removing customers and clearing old records.</b> A customer with no entries at all is deleted completely. A customer with
+        an open balance cannot be removed. When a customer who has entries is removed, or hidden with “Clean Archive” in Settings, it
+        disappears from your lists and its name, phone number, IBAN, address, tax number and note are erased from the record on your
+        phone. So that the ledger and reports still add up, amounts, dates and the descriptions you wrote on entries remain; if you
+        wrote a person’s name in a description, that text remains too. Reports count these customers’ amounts in the totals without
+        showing a name. “Clean Archive” covers settled customers with no activity in the period you choose; it first shows how many
+        customers are affected and what will be erased, and asks for your PIN if the PIN lock is on. This cannot be undone in the
+        App. Backups you made earlier still contain the erased details; if you restore such a backup, these customers’ names and
+        other details come back. If you want the details gone completely, delete the old backup files as well.
       </p>
 
       <H2>4. Backups</H2>
@@ -88,8 +99,14 @@ export default function CornerTabPrivacyEnPage() {
         with the customer’s number and a prepared message (customer name, amount, your business name). You see the message, can change
         it, and send it yourself; the App never sends messages on its own. A sent message is subject to the terms of the app you
         chose. If WhatsApp is not installed, the message is never sent to a browser; the share menu opens instead and you choose which
-        app to send it with. The “Call” button only opens your phone’s dialler. PDF statements are created on your phone and saved
-        where you choose.
+        app to send it with. The “Call” button only opens your phone’s dialler.
+      </p>
+      <p>
+        Account statements are created as PDF files on your phone. “Save as a file” saves the PDF where you choose. “Send as PDF” writes
+        the file to a temporary folder that only the App can access (its cache) and opens the share menu; only the app you pick can
+        read the file, and you send it from that app. The file name and content include the customer’s name and account movements.
+        This temporary file is deleted the next time you use “Send as PDF”; until then it stays on your phone (Android may also delete
+        it earlier to free up space). The copy you send stays in the app you chose and with the recipient, under that app’s terms.
       </p>
 
       <H2>6. Pro purchase (Google Play)</H2>
@@ -128,9 +145,10 @@ export default function CornerTabPrivacyEnPage() {
         Your customers’ and suppliers’ names, phone numbers and balances are their personal data, and the duties for these records
         under data protection law (informing them, keeping only what is needed, keeping it secure, correcting and deleting on request)
         belong to the business keeping the ledger. The App gives you these tools: records stay encrypted on the phone; a PIN can be
-        set; a contact’s details can be edited; when a customer is removed its personal details are cleared (section 3); the whole
-        ledger on this phone can be deleted from Settings after confirming with your PIN (backup files and PDFs you saved earlier stay
-        where you put them; delete them separately). Do not write special-category information such as health or religion in the note
+        set; screenshots are blocked; a contact’s details can be edited; when a customer is removed or hidden by clearing old records,
+        its name, phone number, IBAN, address, tax number and note are erased (section 3; earlier backups still contain them); the
+        whole ledger on this phone can be deleted from Settings after confirming with your PIN (backup files, and PDFs you saved or
+        sent, stay where you put them or with the recipient; delete them separately). Do not write special-category information such as health or religion in the note
         field. Check the number before sending a reminder. You may want to ask a lawyer about your own obligations.
       </p>
 
@@ -138,6 +156,7 @@ export default function CornerTabPrivacyEnPage() {
       <List>
         <li>Ledger on the phone: until you uninstall the App, clear its data, or delete the ledger in the App.</li>
         <li>Manual backups: where you saved them, until you delete them. Automatic backups: the last 1 file (free) or 30 files (Pro) (section 4).</li>
+        <li>Temporary statement from “Send as PDF”: until the next send, until the App’s data is deleted, or until Android clears the cache (section 5).</li>
         <li>
           Google Play purchase and technical information: under{" "}
           <a href="https://policies.google.com/technologies/retention" className={link}>Google’s retention policy</a>.
