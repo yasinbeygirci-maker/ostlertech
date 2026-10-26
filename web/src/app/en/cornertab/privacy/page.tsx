@@ -53,7 +53,7 @@ export default function CornerTabPrivacyEnPage() {
         not in plain form. In Settings you choose how soon the PIN is asked for again after you leave the App and come back (default:
         after 1 minute). Fingerprint or face unlock is handled by Android; the App never sees your biometric data. This data is
         excluded from Android’s Google account backup and from phone-to-phone transfer. Uninstalling the App, clearing its data, or
-        using “Delete the ledger on this phone” in the App deletes the ledger on the phone.
+        using “Delete the ledger on this device” in the App deletes the ledger on the phone.
       </p>
       <p>
         <b>Country and currency suggestion.</b> On first launch, so that it can suggest your shop’s currency and phone country code,
