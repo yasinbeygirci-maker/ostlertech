@@ -69,4 +69,27 @@ export const VIDEOS: Video[] = [
     product: "AreaPilot",
     lang: "en",
   },
+  {
+    id: "AVBi7G3lB-s",
+    title: "AreaPilot: AutoCAD'de cam cephe metrajı, camları koda göre toplayın (açık beta)",
+    description:
+      "Örnek cam cephe setinde (6 görünüş, 1224 cam): vizyon camı GL, spandrel camı SP kodu alır; 21 kod, toplam 3199,32 m². Bir koda tıklayınca o camlar cephede yanar, kodlar ve alanlar cama yazılır, sonuç Excel'e aktarılır.",
+    poster: "/videos/areapilot-cephe-tr.jpg?v=20261026",
+    duration: "PT1M",
+    durationLabel: "1:00",
+    uploadDate: "2026-10-26",
+    product: "AreaPilot",
+  },
+  {
+    id: "rfVm9o9jh-U",
+    title: "AreaPilot: glass facade takeoff in AutoCAD, group panels by size code (open beta)",
+    description:
+      "On a sample glass facade set (6 elevations, 1224 panels): vision glass gets GL codes, spandrel glass SP codes; 21 codes, 3199.32 m² in total. Click a code and those panels light up on the facade, codes and areas are written on each panel, and the result exports to Excel.",
+    poster: "/videos/areapilot-cephe-en.jpg?v=20261026",
+    duration: "PT1M",
+    durationLabel: "1:00",
+    uploadDate: "2026-10-26",
+    product: "AreaPilot",
+    lang: "en",
+  },
 ];
