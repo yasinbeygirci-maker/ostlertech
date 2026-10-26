@@ -4,6 +4,6 @@ export const CORNERTAB = {
   name: "CornerTab",
   path: "/cornertab/privacy",
   enPath: "/en/cornertab/privacy",
-  updatedTr: "YAYIN_GUNU_TR", // örn. "12 Kasım 2026"
-  updatedEn: "YAYIN_GUNU_EN", // örn. "12 November 2026"
+  updatedTr: "26 Ekim 2026", // örn. "12 Kasım 2026"
+  updatedEn: "26 October 2026", // örn. "12 November 2026"
 } as const;
