@@ -53,7 +53,7 @@ export default function CornerTabPrivacyPage() {
         şifreniz (PIN) açık olarak değil, geri çevrilemeyen bir özet olarak tutulur. Uygulamadan ayrılıp döndüğünüzde PIN’in ne
         zaman isteneceğini Ayarlar’dan seçersiniz (varsayılan: 1 dakika sonra). Parmak izi ya da yüz tanımayı Android yapar;
         Uygulama biyometrik verinizi görmez. Bu veriler Android’in Google hesabı yedeğine ve telefondan telefona aktarıma alınmaz.
-        Uygulamayı silerseniz, uygulama verilerini temizlerseniz ya da Uygulamadaki “Bu telefondaki defteri sil” seçeneğini
+        Uygulamayı silerseniz, uygulama verilerini temizlerseniz ya da Uygulamadaki “Bu cihazdaki defteri sil” seçeneğini
         kullanırsanız telefondaki defter silinir.
       </p>
       <p>
