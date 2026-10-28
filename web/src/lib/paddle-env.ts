@@ -16,3 +16,9 @@ export function paddleConfig(): { environment: Environments; token: string } {
   }
   return { environment, token };
 }
+
+// Satış anahtarı: yalnızca sunucu ortam değişkeni PADDLE_SALES_OPEN=1 iken /satin-al ve /en/pricing ödeme düğmelerini gösterir.
+// Kapalıyken (varsayılan) yalnızca bilgi amaçlı PlansPreview görünür. Anahtar istek anında okunur; yeniden derleme gerekmez.
+export function salesOpen(): boolean {
+  return process.env.PADDLE_SALES_OPEN === "1";
+}
