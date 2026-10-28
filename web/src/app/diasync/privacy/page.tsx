@@ -3,9 +3,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "DiaSync Gizlilik Politikası",
+  title: "SyncDia Gizlilik Politikası",
   description:
-    "DiaSync gizlilik politikası: hangi verilerin toplandığı, nasıl kullanıldığı, cihazlar arası eşitleme ve veri silme hakkınız.",
+    "SyncDia gizlilik politikası: hangi verilerin toplandığı, nasıl kullanıldığı, cihazlar arası eşitleme ve veri silme hakkınız.",
   alternates: { canonical: "/diasync/privacy" },
 };
 
@@ -38,7 +38,7 @@ export default function PrivacyPolicy() {
         <div className="space-y-16 text-white/50 leading-relaxed font-medium">
           <section className="glass-card p-8 md:p-12 border-white/[0.05] animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
             <p className="text-lg md:text-xl text-white/70">
-              Ostler Tech olarak ("biz", "şirketimiz"), DiaSync mobil uygulamasını kullanımınız sırasında gizliliğinize en üst düzeyde saygı duyuyor ve verilerinizi askeri standartlarda koruyoruz.
+              Ostler Tech olarak ("biz", "şirketimiz"), SyncDia mobil uygulamasını kullanımınız sırasında gizliliğinize en üst düzeyde saygı duyuyor ve verilerinizi askeri standartlarda koruyoruz.
             </p>
           </section>
 
@@ -47,7 +47,7 @@ export default function PrivacyPolicy() {
               <span className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary text-sm">01</span>
               Toplanan Bilgiler
             </h2>
-            <p>DiaSync, aile içi takip, iletişim ve organizasyon süreçlerini koordine etmek amacıyla şu verileri uçtan uca şifreli olarak işleyebilir:</p>
+            <p>SyncDia, aile içi takip, iletişim ve organizasyon süreçlerini koordine etmek amacıyla şu verileri uçtan uca şifreli olarak işleyebilir:</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
               {[
                 { title: "Hesap Bilgileri", desc: "E-posta ve temel kimlik verileri." },

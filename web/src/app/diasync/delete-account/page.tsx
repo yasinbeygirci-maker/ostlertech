@@ -1,29 +1,29 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "DiaSync - Hesap ve Veri Silme Talebi",
+  title: "SyncDia - Hesap ve Veri Silme Talebi",
   description:
-    "DiaSync hesabınızı ve kişisel verilerinizi kalıcı olarak silme yöntemleri, prosedür ve destek bilgileri.",
+    "SyncDia hesabınızı ve kişisel verilerinizi kalıcı olarak silme yöntemleri, prosedür ve destek bilgileri.",
   alternates: { canonical: "/diasync/delete-account" },
 };
 
-export default function DiaSyncDeleteAccount() {
+export default function SyncDiaDeleteAccount() {
   return (
     <main className="min-h-screen bg-[#020617] text-slate-300 px-6 py-16 md:px-20 lg:px-32">
       <div className="max-w-3xl mx-auto space-y-8">
         <div>
           <a href="/" className="text-sm text-cyan-400 hover:underline mb-4 inline-block">&larr; OstlerTech Ana Sayfa</a>
-          <h1 className="text-3xl md:text-4xl font-bold text-white">DiaSync - Hesap ve Veri Silme Talebi</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-white">SyncDia - Hesap ve Veri Silme Talebi</h1>
           <p className="text-sm text-slate-400 mt-2">Son Güncelleme Tarihi: Ağustos 2026</p>
         </div>
 
         <section className="space-y-4 bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
           <h2 className="text-xl font-semibold text-white">Hesabınızı Nasıl Silebilirsiniz?</h2>
           <p>
-            DiaSync uygulamasındaki hesabınızı ve buna bağlı tüm kişisel verilerinizi (çocuk sağlık takipleri, günlük kayıtlar ve profil bilgileri) kalıcı olarak silmek istiyorsanız aşağıdaki yöntemleri kullanabilirsiniz:
+            SyncDia uygulamasındaki hesabınızı ve buna bağlı tüm kişisel verilerinizi (çocuk sağlık takipleri, günlük kayıtlar ve profil bilgileri) kalıcı olarak silmek istiyorsanız aşağıdaki yöntemleri kullanabilirsiniz:
           </p>
           <ol className="list-decimal list-inside space-y-2 text-slate-300">
-            <li><strong className="text-white">Uygulama Üzerinden:</strong> DiaSync uygulamasını açın, <span className="text-cyan-400">Ayarlar &gt; Hesabı Sil</span> menüsüne giderek işleminizi anında gerçekleştirebilirsiniz.</li>
+            <li><strong className="text-white">Uygulama Üzerinden:</strong> SyncDia uygulamasını açın, <span className="text-cyan-400">Ayarlar &gt; Hesabı Sil</span> menüsüne giderek işleminizi anında gerçekleştirebilirsiniz.</li>
             <li><strong className="text-white">Web Üzerinden Talep:</strong> Uygulamaya erişiminiz yoksa, aşağıda yer alan destek e-posta adresimize kayıtlı e-posta adresinizle birlikte hesap silme talebinizi iletebilirsiniz.</li>
           </ol>
         </section>

@@ -7,7 +7,7 @@ export interface Video {
   duration: string; // ISO 8601 (yapısal veri için)
   durationLabel: string;
   uploadDate: string;
-  product: "SyncPass" | "Projex" | "OstlerTech" | "AreaPilot";
+  product: "SyncPass" | "SyncSite" | "OstlerTech" | "AreaPilot";
 }
 
 export const VIDEOS: Video[] = [

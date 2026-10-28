@@ -42,7 +42,7 @@ const columns = [
       { href: "/kullanim-sartlari", label: "Kullanım ve satış koşulları" },
       { href: "/teslimat-ve-iade", label: "Teslimat ve iade" },
       { href: "/syncpass/privacy", label: "SyncPass gizlilik" },
-      { href: "/diasync/privacy", label: "DiaSync gizlilik" },
+      { href: "/diasync/privacy", label: "SyncDia gizlilik" },
     ],
   },
 ];

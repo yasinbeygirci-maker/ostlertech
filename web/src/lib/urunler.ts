@@ -66,7 +66,7 @@ export const URUNLER: Urun[] = [
   },
   {
     id: "diasync",
-    ad: "DiaSync",
+    ad: "SyncDia",
     slogan: "Sağlık ve Diyabet Takibinde Akıllı Senkronizasyon",
     aciklama: "Sağlık/Diyabet takibi odaklı bir senkronizasyon uygulamasıdır. Akıllı telefon uygulaması ile akıllı saat (Wear OS) arasında entegre çalışarak sağlık verilerinin anlık takibini ve güvenli senkronizasyonunu sağlar.",
     platform: "Android + Wear OS",
@@ -88,7 +88,7 @@ export const URUNLER: Urun[] = [
   },
   {
     id: "projex",
-    ad: "Projex",
+    ad: "SyncSite",
     slogan: "Şantiyenin günlük ilerlemesi, bürodan ve sahadan tek yerde",
     aciklama: "Blok, kat ve mahal bazında plan ile gerçekleşeni izleyen şantiye takip programı. Sahadan günlük rapor (miktar, ekip, not, engel) girilir; masaüstü ve telefon internet gelince kendiliğinden eşitlenir.",
     platform: "Windows + Android",

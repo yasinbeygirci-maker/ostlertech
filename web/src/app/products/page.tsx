@@ -13,7 +13,7 @@ const DURUM: Record<string, { etiket: string; cls: string }> = {
 
 export const metadata: Metadata = {
   title: "Ürünler",
-  description: "OstlerTech uygulamaları: SyncPass (Android ve Windows), Projex, Esnaf Cep ve DiaSync. Yayında olanlar ve hazırlananlar.",
+  description: "OstlerTech uygulamaları: SyncPass (Android ve Windows), SyncSite, Esnaf Cep ve SyncDia. Yayında olanlar ve hazırlananlar.",
   alternates: { canonical: "/products" },
 };
 
