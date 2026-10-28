@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   description:
     "SyncDia hesabınızı ve kişisel verilerinizi kalıcı olarak silme yöntemleri, prosedür ve destek bilgileri.",
   alternates: { canonical: "/diasync/delete-account" },
+  icons: { icon: [{ url: "/products/syncdia-favicon.svg", type: "image/svg+xml" }, { url: "/products/syncdia-favicon-32.png", sizes: "32x32", type: "image/png" }] },
 };
 
 export default function SyncDiaDeleteAccount() {

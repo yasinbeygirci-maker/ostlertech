@@ -13,7 +13,7 @@ const DURUM: Record<string, { etiket: string; cls: string }> = {
 
 export const metadata: Metadata = {
   title: "Ürünler",
-  description: "OstlerTech uygulamaları: SyncPass (Android ve Windows), SyncSite, Esnaf Cep ve SyncDia. Yayında olanlar ve hazırlananlar.",
+  description: "OstlerTech uygulamaları: SyncPass (Android ve Windows), SyncSite, CornerTab ve SyncDia. Yayında olanlar ve hazırlananlar.",
   alternates: { canonical: "/products" },
 };
 
@@ -79,7 +79,12 @@ export default function ProductsPage() {
                           boxShadow: `0 8px 25px -5px ${urun.renk}25`
                         }}
                       >
-                        <IconComponent size={28} />
+                        {urun.gorsel ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={urun.gorsel} alt={`${urun.ad} simgesi`} width={56} height={56} className="w-14 h-14 rounded-2xl" />
+                        ) : (
+                          <IconComponent size={28} />
+                        )}
                       </div>
 
                       <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold ${DURUM[urun.durum]?.cls ?? DURUM.yakinda.cls}`}>

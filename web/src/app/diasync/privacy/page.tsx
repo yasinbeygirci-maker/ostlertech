@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   description:
     "SyncDia gizlilik politikası: hangi verilerin toplandığı, nasıl kullanıldığı, cihazlar arası eşitleme ve veri silme hakkınız.",
   alternates: { canonical: "/diasync/privacy" },
+  icons: { icon: [{ url: "/products/syncdia-favicon.svg", type: "image/svg+xml" }, { url: "/products/syncdia-favicon-32.png", sizes: "32x32", type: "image/png" }] },
 };
 
 export default function PrivacyPolicy() {

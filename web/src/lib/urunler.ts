@@ -9,6 +9,8 @@ export interface Urun {
   aciklama: string;
   platform: string;
   ikon: string;
+  /** Varsa Lucide ikonu yerine bu görsel (public yolu) kullanılır. */
+  gorsel?: string;
   renk: string;
   durum: string;
   url: string | null;
@@ -69,17 +71,18 @@ export const URUNLER: Urun[] = [
     ad: "SyncDia",
     slogan: "Sağlık ve Diyabet Takibinde Akıllı Senkronizasyon",
     aciklama: "Sağlık/Diyabet takibi odaklı bir senkronizasyon uygulamasıdır. Akıllı telefon uygulaması ile akıllı saat (Wear OS) arasında entegre çalışarak sağlık verilerinin anlık takibini ve güvenli senkronizasyonunu sağlar.",
-    platform: "Android + Wear OS",
+    platform: "Android ve Wear OS (iOS ve macOS yakında)",
     ikon: "HeartPulse",
+    gorsel: "/products/syncdia.png",
     renk: "#00F5D4",
     durum: "yakinda",
     url: null,
   },
   {
-    id: "esnafcep",
-    ad: "EsnafCep",
-    slogan: "Küçük Esnaf ve KOBİ'ler İçin Pratik İşletme Yönetimi",
-    aciklama: "Küçük esnaf ve KOBİ'lerin dijitalleşmesini, stok, cari hesap, satış ve gelir-gider takibini cep telefonlarından kolayca yapabilmelerini sağlayan pratik bir işletme yönetim aracıdır.",
+    id: "cornertab",
+    ad: "CornerTab: Veresiye Defteri",
+    slogan: "Esnafın veresiye defteri, telefonda ve çevrimdışı",
+    aciklama: "Küçük esnafın müşteri veresiyesini, tahsilat ve ödemelerini internet olmadan telefonda tutmasını sağlayan defter uygulaması.",
     platform: "Android",
     ikon: "Store",
     renk: "#f59e0b",
@@ -91,7 +94,7 @@ export const URUNLER: Urun[] = [
     ad: "SyncSite",
     slogan: "Şantiyenin günlük ilerlemesi, bürodan ve sahadan tek yerde",
     aciklama: "Blok, kat ve mahal bazında plan ile gerçekleşeni izleyen şantiye takip programı. Sahadan günlük rapor (miktar, ekip, not, engel) girilir; masaüstü ve telefon internet gelince kendiliğinden eşitlenir.",
-    platform: "Windows + Android",
+    platform: "Windows ve Android (iOS ve macOS yakında)",
     ikon: "Kanban",
     renk: "#a855f7",
     durum: "test",
