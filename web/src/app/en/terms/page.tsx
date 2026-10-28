@@ -75,7 +75,8 @@ export default function TermsEnPage() {
       <H2>7. When the licence ends</H2>
       <p>
         When a subscription ends or a payment is refunded, the app switches to the free version. Your vault is never
-        locked: you can still view, copy, edit and export all your entries.
+        locked: you can still view, copy, edit and export all your entries. Because the app renews the licence about once a week, the switch usually happens
+        within 7 days after a cancellation or refund if the app is online, and within 30 days at the latest if it never connects.
       </p>
 
       <H2>8. Master password and your data</H2>

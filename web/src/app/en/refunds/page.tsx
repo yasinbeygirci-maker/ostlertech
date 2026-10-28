@@ -57,6 +57,12 @@ export default function RefundsEnPage() {
         When your licence ends or is refunded, the app switches to the free version. Your vault is not locked: you can
         still view, copy, edit and export your entries.
       </p>
+      <p>
+        So that it can check your licence without being online all the time, the app renews it with our server about
+        once a week. After a cancellation or refund the switch may therefore not be immediate: the app returns to the
+        free version at its next renewal, usually within 7 days if it is online, and within 30 days at the latest if it
+        never connects.
+      </p>
 
       <H2>5. Your statutory rights</H2>
       <p>

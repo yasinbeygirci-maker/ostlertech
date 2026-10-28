@@ -56,6 +56,11 @@ export default function DeliveryRefundPage() {
         Lisansınız sona erdiğinde ya da iade edildiğinde uygulama ücretsiz sürüme geçer. Kasanız kilitlenmez: kayıtlarınızı
         görmeye, kopyalamaya, düzenlemeye ve dışa aktarmaya devam edersiniz.
       </p>
+      <p>
+        Uygulama lisansı internet olmadan doğrulayabilmek için yaklaşık haftada bir kez sunucuyla yenilenir. Bu yüzden
+        iptal ya da iade sonrasında geçiş hemen olmayabilir; uygulama bir sonraki yenilemede ücretsiz sürüme döner:
+        internete bağlıysanız genellikle 7 gün içinde, uygulama hiç internete bağlanmazsa en geç 30 gün içinde.
+      </p>
 
       <H2>5. Yasal haklarınız</H2>
       <p>

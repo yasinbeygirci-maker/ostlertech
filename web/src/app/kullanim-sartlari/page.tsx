@@ -78,7 +78,8 @@ export default function TermsPage() {
       <H2>7. Lisans bitince</H2>
       <p>
         Abonelik sona erdiğinde ya da ödeme iade edildiğinde uygulama ücretsiz sürüme geçer. Kasanız hiçbir durumda
-        kilitlenmez: tüm kayıtlarınızı görmeye, kopyalamaya, düzenlemeye ve dışa aktarmaya devam edersiniz.
+        kilitlenmez: tüm kayıtlarınızı görmeye, kopyalamaya, düzenlemeye ve dışa aktarmaya devam edersiniz. Uygulama lisansı yaklaşık haftada bir yenilediği için geçiş, iptal ya da iadeden
+        sonra internete bağlıyken genellikle 7 gün içinde, hiç bağlanmazsa en geç 30 gün içinde gerçekleşir.
       </p>
 
       <H2>8. Ana şifre ve verileriniz</H2>
