@@ -28,6 +28,16 @@ export const COMPANY = {
   email: CONTACT_EMAIL,
   chamberName: "Erzincan Elektrikçiler Esnaf ve Sanatkarlar Odası", // oda kayıt belgesi 01.10.2026
   chamberUrl: "",
+  duns: "751177926", // Dun & Bradstreet, 21.10.2026 (kayıtlı ad: YASİN BEYGİRCİ)
+};
+
+// Hakkımızda / About sayfalarındaki kurucu bilgisi. Yalnız gerçek kişiler; yapay zekâ ajanları ekip olarak gösterilmez.
+export const FOUNDER = {
+  name: "Yasin Beygirci",
+  titleTr: "Kurucu",
+  titleEn: "Founder",
+  linkedin: "", // Yasin verince
+  photo: "/team/yasin-beygirci.webp", // yalnız yüz-omuz; ofis/çalışan görünen arka plan kırpıldı
 };
 
 
