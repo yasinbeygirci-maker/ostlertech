@@ -43,6 +43,7 @@ export function EnFooter() {
         <div className="flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} OstlerTech · Privacy-first apps that keep your data with you.</p>
           <nav className="flex flex-wrap gap-5">
+            <a href="/en/about" className="hover:text-white">About</a>
             <a href="/en/pricing" className="hover:text-white">Pricing</a>
             <a href="/en/privacy" className="hover:text-white">Privacy</a>
             <a href="/en/terms" className="hover:text-white">Terms</a>
