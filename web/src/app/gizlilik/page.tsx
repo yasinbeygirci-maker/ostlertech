@@ -13,7 +13,9 @@ export default function SitePrivacyPage() {
     <LegalPage eyebrow="Yasal" title="Gizlilik Politikası ve KVKK Aydınlatma Metni" updatedOn="23 Ekim 2026" altLink={{ href: "/en/privacy", label: "English version" }}>
       <p>
         Bu metin ostlertech.com web sitesini ve buradan yapılan satın almaları kapsar. Uygulamalarımızın kendi gizlilik
-        politikaları ayrıdır: <a href="/syncpass/privacy" className="text-primary hover:text-primary-light">SyncPass gizlilik politikası</a>.
+        politikaları ayrıdır: <a href="/syncpass/privacy" className="text-primary hover:text-primary-light">SyncPass gizlilik politikası</a>,
+        {" "}<a href="/syncsite/gizlilik" className="text-primary hover:text-primary-light">SyncSite gizlilik politikası</a>
+        (SyncSite hesap verileri yalnız o metinde anlatılır).
       </p>
 
       <H2>1. Veri sorumlusu</H2>
@@ -48,8 +50,11 @@ export default function SitePrivacyPage() {
       </List>
       <p>
         Vercel ve Supabase'in sunucuları yurt dışındadır; sitemizi ziyaret ettiğinizde, bekleme listesine yazıldığınızda ve
-        masaüstü lisansınız doğrulandığında verileriniz bu sağlayıcılara aktarılır. Bu sağlayıcılarla KVKK md. 9 uyarınca
-        Kurul'un ilan ettiği standart sözleşmeleri imzalama sürecini yürütüyoruz.
+        masaüstü lisansınız doğrulandığında verileriniz bu sağlayıcılara aktarılır. Bu aktarım bugün itibarıyla KVKK md. 9'da
+        sayılan uygun güvencelerden birine (Kurul'un yeterlilik kararı ya da Kurul'un ilan ettiği standart sözleşmenin
+        imzalanıp Kurum'a bildirilmesi) dayanmamaktadır. Supabase'e standart sözleşme imzalanması için 18.10.2026 tarihinde
+        talep ilettik; yanıt beklenmektedir. İmzalanırsa Kurum'a bildirir ve bu metni güncelleriz. Hesap tabanlı uygulamalarımızın
+        yurt dışı aktarımı kendi gizlilik politikalarında ayrıca anlatılır.
       </p>
 
       <H2>5. Saklama süresi</H2>

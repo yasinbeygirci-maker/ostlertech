@@ -17,7 +17,8 @@ export default function PrivacyEnPage() {
       <p>
         This notice covers the ostlertech.com website and purchases made through it. It is also our information notice
         under Türkiye's Personal Data Protection Law No. 6698 (KVKK). Our apps have their own privacy policies:{" "}
-        <a href="/syncpass/privacy" className={link}>SyncPass privacy policy</a>.
+        <a href="/syncpass/privacy" className={link}>SyncPass privacy policy</a>,{" "}
+        <a href="/en/syncsite/privacy" className={link}>SyncSite privacy policy</a> (SyncSite account data is described only there).
       </p>
 
       <H2>1. Data controller</H2>
@@ -52,8 +53,11 @@ export default function PrivacyEnPage() {
       </List>
       <p>
         Vercel and Supabase servers are outside Türkiye; when you visit our site, join the waiting list or your desktop
-        licence is checked, your data is transferred to these providers. We are in the process of signing the standard
-        contracts announced by the Personal Data Protection Board under Article 9 of KVKK with them.
+        licence is checked, your data is transferred to these providers. As of today this transfer does not rely on any of
+        the appropriate safeguards listed in Article 9 of KVKK (an adequacy decision by the Personal Data Protection Board,
+        or the Board's standard contract signed and notified to the Authority). We sent Supabase a request to sign the
+        standard contract on 18 October 2026; a reply is awaited. If it is signed we will notify the Authority and update this text.
+        Data transfers of our account-based apps are described separately in their own privacy policies.
       </p>
 
       <H2>5. Retention</H2>
