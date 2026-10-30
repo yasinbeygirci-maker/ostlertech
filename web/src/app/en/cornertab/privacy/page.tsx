@@ -50,7 +50,7 @@ export default function CornerTabPrivacyEnPage() {
       <p>
         Your business details, customer and supplier records (name, phone, address, tax number, IBAN, note), debt, receivable and
         payment records, cash and stock movements, and your settings are stored only on your phone. The database is encrypted with
-        SQLCipher; its key is protected by the phone’s secure key store (Android Keystore). Your PIN is stored as a one-way hash,
+        SQLCipher; its key is protected by the phone’s secure key store (Android Keystore). A PIN lock is optional; if you set a PIN, it is stored as a one-way hash,
         not in plain form. In Settings you choose how soon the PIN is asked for again after you leave the App and come back (default:
         after 1 minute). When the App opens WhatsApp, the share menu, the dialler or a browser for you, the lock waits at most 5
         minutes for you to come back, whatever time you chose. Fingerprint or face unlock is handled by Android; the App never sees

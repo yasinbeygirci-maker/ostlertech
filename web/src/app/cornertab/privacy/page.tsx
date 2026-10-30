@@ -51,7 +51,7 @@ export default function CornerTabPrivacyPage() {
         Uygulamaya yazdığınız işletme bilgileri, müşteri ve tedarikçi kayıtları (ad, telefon, adres, vergi numarası, IBAN, not),
         borç, alacak ve tahsilat kayıtları, kasa ve stok hareketleri ile ayarlarınız yalnız telefonunuzda saklanır. Veritabanı
         SQLCipher ile şifrelidir; şifreleme anahtarı telefonun güvenli anahtar deposunda (Android Keystore) korunur. Giriş
-        şifreniz (PIN) açık olarak değil, geri çevrilemeyen bir özet olarak tutulur. Uygulamadan ayrılıp döndüğünüzde PIN’in ne
+        şifreniz (PIN) isteğe bağlıdır; belirlerseniz açık olarak değil, geri çevrilemeyen bir özet olarak tutulur. Uygulamadan ayrılıp döndüğünüzde PIN’in ne
         zaman isteneceğini Ayarlar’dan seçersiniz (varsayılan: 1 dakika sonra). Uygulamadan WhatsApp’ı, paylaşma menüsünü, arama
         ekranını ya da tarayıcıyı açtığınızda, geri dönebilmeniz için kilit seçtiğiniz süreden bağımsız olarak en çok 5 dakika
         bekler. Parmak izi ya da yüz tanımayı Android yapar; Uygulama biyometrik verinizi görmez. Uygulama açıkken ekran görüntüsü

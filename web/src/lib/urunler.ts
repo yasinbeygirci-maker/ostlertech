@@ -1,5 +1,10 @@
 import { BROWSER_EXTENSION, DESKTOP_DOWNLOAD, PLAY_URL } from "./site";
 import { AREAPILOT } from "./areapilot";
+import { CORNERTAB } from "./cornertab";
+
+// CornerTab Play bağlantısı (UTM: Play Console'da sitenin getirdiği edinmeler görünsün).
+const CORNERTAB_PLAY_URL =
+  "https://play.google.com/store/apps/details?id=com.ostlertech.cornertab&referrer=utm_source%3Dsite%26utm_medium%3Durunler%26utm_campaign%3Dcornertab";
 
 // Ürün kartı. "yayinda" yalnız indirilebilen ürüne verilir; mağazaya çıkmamış ürün "test" ya da "yakinda" kalır.
 export interface Urun {
@@ -80,14 +85,16 @@ export const URUNLER: Urun[] = [
   },
   {
     id: "cornertab",
-    ad: "CornerTab: Veresiye Defteri",
-    slogan: "Esnafın veresiye defteri, telefonda ve çevrimdışı",
-    aciklama: "Küçük esnafın müşteri veresiyesini, tahsilat ve ödemelerini internet olmadan telefonda tutmasını sağlayan defter uygulaması.",
+    ad: "CornerTab",
+    slogan: "Veresiye defteriniz telefonunuzda",
+    aciklama: "Esnaf için veresiye defteri: müşteri ve tedarikçi hesaplarını, borç ve tahsilatları kaydeder, hesap ekstresini PDF olarak hazırlar. Defter cihazınızda şifreli saklanır; isteğe bağlı PIN ya da parmak izi kilidi ekleyebilir, şifreli yedek alabilirsiniz.",
     platform: "Android",
     ikon: "Store",
     renk: "#f59e0b",
-    durum: "yakinda",
-    url: null,
+    durum: "yayinda",
+    url: CORNERTAB_PLAY_URL,
+    cta: "Google Play'den indir",
+    ekler: [{ etiket: "Gizlilik politikası", url: CORNERTAB.path }],
   },
   {
     id: "projex",
