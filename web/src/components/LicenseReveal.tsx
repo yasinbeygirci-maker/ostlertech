@@ -37,19 +37,19 @@ export default function LicenseReveal() {
   }, []);
 
   if (state === "waiting") {
-    return <p className="text-sm text-muted animate-pulse">Lisans kodunuz hazırlanıyor…</p>;
+    return <p className="text-sm text-muted animate-pulse">Lisans kodun hazırlanıyor…</p>;
   }
   if (state === "missing" || !key) {
     return (
       <p className="text-sm text-weak">
-        Lisans kodunuz bu sayfada gösterilemedi. Satın alırken kullandığınız e-postayla destek adresimize yazın; kodunuzu hemen
+        Lisans kodun bu sayfada gösterilemedi. Satın alırken kullandığın e-postayla destek adresimize yaz; kodunu hemen
         iletelim.
       </p>
     );
   }
   return (
     <div className="rounded-2xl border border-primary/40 bg-primary/10 p-6 space-y-3">
-      <p className="text-sm text-muted">Lisans kodunuz. Lütfen bir yere kaydedin:</p>
+      <p className="text-sm text-muted">Lisans kodun. Lütfen bir yere kaydet:</p>
       <div className="flex items-center justify-center gap-3">
         <code className="font-mono text-lg md:text-xl font-bold text-white tracking-wider break-all">{key}</code>
         <button

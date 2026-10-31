@@ -15,7 +15,7 @@ export default function NotFound() {
         <p className="eyebrow">404</p>
         <h1 className="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight text-white">Bu sayfa burada değil.</h1>
         <p className="mt-4 max-w-md text-muted leading-relaxed">
-          Adres yanlış yazılmış ya da sayfa taşınmış olabilir. Ana sayfadan ya da ürünlerimizden devam edebilirsiniz.
+          Adres yanlış yazılmış ya da sayfa taşınmış olabilir. Ana sayfadan ya da ürünlerimizden devam edebilirsin.
         </p>
         <div className="mt-8 flex flex-col sm:flex-row gap-3">
           <a href="/" className="btn-primary">Ana sayfaya dön</a>

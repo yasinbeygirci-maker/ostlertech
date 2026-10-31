@@ -4,7 +4,7 @@ import { COMPANY } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Hakkımızda",
-  description: "OstlerTech: verisini kendisinde tutmak isteyen insanlar için güvenlik ve iş uygulamaları geliştiren bağımsız yazılım stüdyosu.",
+  description: "OstlerTech: verisini kendisinde tutmak isteyen herkes için güvenlik ve iş uygulamaları geliştiren bağımsız yazılım stüdyosu.",
   alternates: { canonical: "/hakkimizda" },
 };
 
@@ -12,7 +12,7 @@ export default function AboutPage() {
   return (
     <LegalPage eyebrow="Hakkımızda" title="OstlerTech" updated={false}>
       <p>
-        OstlerTech, Türkiye'de kurulu bağımsız bir yazılım stüdyosu. Verisini kendisinde tutmak isteyen insanlar ve küçük
+        OstlerTech, Türkiye'de kurulu bağımsız bir yazılım stüdyosu. Verisini kendisinde tutmak isteyen bireyler ve küçük
         işletmeler için sade, güvenli ve reklamsız uygulamalar geliştiriyoruz.
       </p>
 
@@ -24,16 +24,16 @@ export default function AboutPage() {
 
       <H2>Nasıl çalışıyoruz</H2>
       <List>
-        <li>Verin senin: SyncPass kasanı hiçbir sunucuya göndermez, hesap açtırmaz.</li>
+        <li>Verin senin: Kasanın kopyası sunucularımızda tutulmaz; SyncPass&apos;e kayıt olman ya da hesap açman gerekmez.</li>
         <li>SyncPass&apos;te reklam ve izleme yok: uygulamada reklam ya da analitik izleme kütüphanesi bulunmaz. Oyunlarımızdaki isteğe bağlı reklamlar her oyunun gizlilik politikasında anlatılır.</li>
         <li>Söylediğimizi yaparız: sitede ve mağazada yalnızca uygulamada gerçekten olan özellikleri anlatırız.</li>
       </List>
 
-      <H2>Bize ulaşın</H2>
+      <H2>Bize ulaş</H2>
       <p>
         Soru, öneri ve destek için <a href={`mailto:${COMPANY.email}`} className="text-primary hover:text-primary-light">{COMPANY.email}</a> adresine
         yazabilir ya da <a href="/iletisim" className="text-primary hover:text-primary-light">iletişim sayfasındaki</a> bilgileri
-        kullanabilirsiniz.
+        kullanabilirsin.
       </p>
     </LegalPage>
   );

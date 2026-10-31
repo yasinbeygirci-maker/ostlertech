@@ -5,7 +5,7 @@ import { SYNCSITE } from "@/lib/syncsite";
 // Supabase doğrulama e-postasındaki bağlantı buraya düşer. Adres Supabase Auth > URL Configuration'a girilir; değiştirme.
 export const metadata: Metadata = {
   title: `${SYNCSITE.name}: E-posta doğrulandı`,
-  description: `${SYNCSITE.name} hesabınızın e-postası doğrulandı; uygulamaya dönüp giriş yapabilirsiniz.`,
+  description: `${SYNCSITE.name} hesabının e-postası doğrulandı; uygulamaya dönüp giriş yapabilirsin.`,
   alternates: { canonical: "/syncsite", languages: { tr: "/syncsite", en: "/en/syncsite" } },
 };
 
@@ -15,12 +15,12 @@ export default function SyncSiteHomePage() {
   return (
     <LegalPage
       eyebrow={SYNCSITE.name}
-      title="E-postanız doğrulandı"
+      title="E-postan doğrulandı"
       updated={false}
       altLink={{ href: "/en/syncsite", label: "English version" }}
     >
       <p>
-        E-postanız doğrulandı. <strong className="text-foreground">{SYNCSITE.name}</strong> uygulamasına dönüp giriş yapın.
+        E-postan doğrulandı. <strong className="text-foreground">{SYNCSITE.name}</strong> uygulamasına dönüp giriş yap.
       </p>
       <p>
         <a href={SYNCSITE.privacyPath} className={link}>{SYNCSITE.name} gizlilik politikası</a>

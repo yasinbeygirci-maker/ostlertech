@@ -6,10 +6,10 @@ export function EnHeader({ trHref = "/" }: { trHref?: string }) {
     <header className="fixed top-0 inset-x-0 z-50 border-b border-line bg-background/80 backdrop-blur-xl" style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}>
       <div className="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between gap-4">
         <a href="/en" className="flex items-center gap-2.5">
-          <img src="/logo-ostlertech.png" alt="" width={28} height={28} className="rounded-full" />
+          <img src="/logo-ostlertech.png" alt="" width={28} height={28} className="rounded-full logo-tile" />
           <span className="text-lg font-bold tracking-tight text-white">Ostler<span className="text-primary">Tech</span></span>
         </a>
-        <nav className="hidden md:flex items-center gap-8 text-sm text-muted">
+        <nav className="hidden lg:flex items-center gap-8 text-sm text-muted">
           <a href="/en#features" className="hover:text-white">Features</a>
           <a href="/en#security" className="hover:text-white">Security</a>
           <a href="/en#pricing" className="hover:text-white">Pricing</a>
@@ -18,7 +18,7 @@ export function EnHeader({ trHref = "/" }: { trHref?: string }) {
         </nav>
         <div className="flex items-center gap-3">
           <a href={trHref} lang="tr" hrefLang="tr" className="text-sm text-muted hover:text-white">Türkçe</a>
-          <a href={PLAY_URL} className="btn-primary !py-2 !px-4 text-sm" rel="noopener">Get the app</a>
+          <a href={PLAY_URL} className="btn-primary !py-2 !px-4 text-sm whitespace-nowrap" rel="noopener">Get the app</a>
         </div>
       </div>
     </header>
@@ -26,11 +26,12 @@ export function EnHeader({ trHref = "/" }: { trHref?: string }) {
 }
 
 const guides = [
-  { href: "/en/offline-password-manager", label: "Offline password manager" },
+  { href: "/en/offline-password-manager", label: "On-device password manager" },
   { href: "/en/password-manager-with-authenticator", label: "Built-in authenticator" },
   { href: "/en/password-manager-comparison", label: "Comparison" },
   { href: "/en/security-checklist", label: "Security checklist" },
   { href: "/en/digital-security-plan", label: "7-day security plan" },
+  { href: "/en/security/whitepaper", label: "Security whitepaper" },
 ];
 
 export function EnFooter() {
@@ -49,6 +50,7 @@ export function EnFooter() {
             <a href="/en/privacy" className="hover:text-white">Privacy</a>
             <a href="/en/terms" className="hover:text-white">Terms</a>
             <a href="/en/refunds" className="hover:text-white">Refunds</a>
+            <a href="/en/report-vulnerability" className="hover:text-white">Report a vulnerability</a>
             <a href="/" lang="tr" hrefLang="tr" className="hover:text-white">Türkçe</a>
           </nav>
         </div>

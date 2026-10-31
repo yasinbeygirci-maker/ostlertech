@@ -1,0 +1,8 @@
+# OstlerTech security.txt (RFC 9116)
+# Adres degisirse Contact satiri ve src/lib/site.ts SECURITY_CONTACT_EMAIL birlikte degisir.
+Contact: mailto:guvenlik@ostlertech.com
+Expires: 2027-10-30T00:00:00.000Z
+Preferred-Languages: tr, en
+Canonical: https://www.ostlertech.com/.well-known/security.txt
+Policy: https://www.ostlertech.com/guvenlik-acigi-bildir
+Policy: https://www.ostlertech.com/en/report-vulnerability

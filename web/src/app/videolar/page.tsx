@@ -34,7 +34,7 @@ export default function VideosPage() {
         <div className="max-w-5xl mx-auto">
           <div className="space-y-3 mb-12">
             <p className="eyebrow">Videolar</p>
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">İzleyerek öğrenin</h1>
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">İzleyerek öğren</h1>
             <p className="text-muted max-w-2xl">
               Uygulamalarımızın kısa tanıtımları ve adım adım kullanım videoları. Yeni videolar{" "}
               <a href={YOUTUBE_URL} target="_blank" rel="noopener" className="text-primary hover:text-primary-light">
@@ -49,7 +49,7 @@ export default function VideosPage() {
               <article key={v.id} className="space-y-4">
                 <YouTubeFacade video={v} priority={i === 0} />
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <span className="rounded-md bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary">{v.product}</span>
+                  <span className="rounded-md bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary">{v.product}</span>
                   <h2 className="text-xl font-bold text-white">{v.title}</h2>
                   <span className="text-sm text-muted">{v.durationLabel}</span>
                 </div>

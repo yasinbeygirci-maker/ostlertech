@@ -7,7 +7,7 @@ import { FREE_ITEM_LIMIT, PLAY_URL } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Şifre Yöneticisi Nedir, Telefonda Nerede?",
   description:
-    "Kayıtlı şifreleriniz telefonunuzun neresinde? Google, Chrome, iPhone, Samsung, Xiaomi ve Huawei şifre kasasının yeri adım adım. Şifre yöneticisi nedir, ne işe yarar?",
+    "Kayıtlı şifrelerin telefonunun neresinde? Google, Chrome, iPhone, Samsung, Xiaomi ve Huawei şifre kasasının yeri adım adım. Şifre yöneticisi nedir, ne işe yarar?",
   alternates: { canonical: "/sifre-yoneticisi" },
 };
 
@@ -17,25 +17,25 @@ const cihazlar = [
     id: "google",
     ad: "Android telefonlar (Google Şifre Yöneticisi)",
     yollar: [
-      "Ayarlar uygulamasını açın, arama kutusuna “Şifre Yöneticisi” yazın ve açın.",
-      "Bilgisayardan ya da başka bir cihazdan: passwords.google.com adresine Google hesabınızla girin.",
+      "Ayarlar uygulamasını aç, arama kutusuna “Şifre Yöneticisi” yaz ve aç.",
+      "Bilgisayardan ya da başka bir cihazdan: passwords.google.com adresine Google hesabınla gir.",
     ],
-    not: "Chrome'da kaydettiğiniz şifreler de burada görünür; ikisi aynı kasadır.",
+    not: "Chrome'da kaydettiğin şifreler de burada görünür; ikisi aynı kasadır.",
   },
   {
     id: "chrome",
     ad: "Chrome tarayıcı",
     yollar: [
-      "Telefonda: Chrome'u açın, sağ üstteki üç nokta → Ayarlar → Otomatik doldurma ve şifreler → Google Şifre Yöneticisi.",
+      "Telefonda: Chrome'u aç, sağ üstteki üç nokta → Ayarlar → Otomatik doldurma ve şifreler → Google Şifre Yöneticisi.",
       "Bilgisayarda: sağ üstteki üç nokta → Şifreler ve otomatik doldurma → Google Şifre Yöneticisi.",
     ],
-    not: "Şifreyi görmek için cihazın ekran kilidini ya da bilgisayar parolasını girmeniz istenir.",
+    not: "Şifreyi görmek için cihazın ekran kilidini ya da bilgisayar parolasını girmen istenir.",
   },
   {
     id: "iphone",
     ad: "iPhone",
     yollar: [
-      "iOS 18 ve sonrası: ana ekrandaki Parolalar uygulamasını açın.",
+      "iOS 18 ve sonrası: ana ekrandaki Parolalar uygulamasını aç.",
       "iOS 17 ve öncesi: Ayarlar → Parolalar.",
     ],
     not: "Açmak için Face ID, Touch ID ya da telefon parolası istenir.",
@@ -47,14 +47,14 @@ const cihazlar = [
       "Ayarlar → Güvenlik ve gizlilik → Daha fazla güvenlik ayarı → Samsung Pass.",
       "Eski sürümlerde: Ayarlar → Biyometri ve güvenlik → Samsung Pass.",
     ],
-    not: "Samsung telefonlarda Google Şifre Yöneticisi de bulunur; şifreniz hangisine kaydedildiyse orada görünür.",
+    not: "Samsung telefonlarda Google Şifre Yöneticisi de bulunur; şifren hangisine kaydedildiyse orada görünür.",
   },
   {
     id: "xiaomi",
     ad: "Xiaomi, Redmi, POCO",
     yollar: [
       "Ayarlar → Google → Şifre Yöneticisi.",
-      "Yeni HyperOS sürümlerinde ayrıca bir şifre uygulaması bulunabilir: Ayarlar'daki arama kutusuna “şifre” yazın.",
+      "Yeni HyperOS sürümlerinde ayrıca bir şifre uygulaması bulunabilir: Ayarlar'daki arama kutusuna “şifre” yaz.",
     ],
     not: "Kayıtlı şifreleri görmek için telefonda ekran kilidi tanımlı olmalıdır.",
   },
@@ -69,19 +69,19 @@ const cihazlar = [
 const sss = [
   {
     q: "e-Devlet ya da Instagram şifremi telefonda nasıl bulurum?",
-    a: "Şifreyi giriş yaparken telefonunuza kaydettiyseniz yukarıdaki kasalardan birinde, sitenin ya da uygulamanın adıyla görünür. Kaydetmediyseniz telefon bu şifreyi bilmez; ilgili hizmetin “şifremi unuttum” adımıyla yenilemeniz gerekir.",
+    a: "Şifreyi giriş yaparken telefonuna kaydettiysen yukarıdaki kasalardan birinde, sitenin ya da uygulamanın adıyla görünür. Kaydetmediysen telefon bu şifreyi bilmez; ilgili hizmetin “şifremi unuttum” adımıyla yenilemen gerekir.",
   },
   {
     q: "Şifre yöneticisi güvenli mi?",
-    a: "İyi bir şifre yöneticisi kasayı ana parolanızla şifreler; şirket bile içindekileri okuyamaz. Asıl risk, her sitede aynı ya da zayıf şifre kullanmaktır. Şifre yöneticisi her hesaba ayrı ve güçlü şifre kullanmayı mümkün kılar.",
+    a: "İyi bir şifre yöneticisi kasayı ana parolanla şifreler; şirket bile içindekileri okuyamaz. Asıl risk, her sitede aynı ya da zayıf şifre kullanmaktır. Şifre yöneticisi her hesaba ayrı ve güçlü şifre kullanmayı mümkün kılar.",
   },
   {
     q: "Telefonumdaki hazır kasa yeterli mi?",
-    a: "Çoğu kişi için iyi bir başlangıçtır. Hazır kasalar bir hesaba (Google, Apple, Samsung) bağlıdır ve o markanın cihazlarında en iyi çalışır. Telefon markasını değiştirirken ya da bir hesaba bağlı olmayan, cihazınızda duran bir kasa istediğinizde ayrı bir şifre yöneticisi daha uygun olur.",
+    a: "Çoğu kişi için iyi bir başlangıçtır. Hazır kasalar bir hesaba (Google, Apple, Samsung) bağlıdır ve o markanın cihazlarında en iyi çalışır. Telefon markasını değiştirirken ya da bir hesaba bağlı olmayan, cihazında duran bir kasa istediğinde ayrı bir şifre yöneticisi daha uygun olur.",
   },
   {
     q: "Ana parolamı unutursam ne olur?",
-    a: "Bu, kullandığınız şifre yöneticisine göre değişir. Hesaba bağlı kasalarda hesap kurtarma adımları vardır. Ana parolayı şirketin bilmediği kasalarda ise kurtarma kodunu önceden saklamanız gerekir; SyncPass bunun için bir kurtarma QR kodu oluşturur.",
+    a: "Bu, kullandığın şifre yöneticisine göre değişir. Hesaba bağlı kasalarda hesap kurtarma adımları vardır. Ana parolayı şirketin bilmediği kasalarda ise kurtarma kodunu önceden saklaman gerekir; SyncPass bunun için bir kurtarma QR kodu oluşturur.",
   },
 ];
 
@@ -101,11 +101,11 @@ export default function SifreYoneticisi() {
         <div className="max-w-3xl mx-auto space-y-6">
           <p className="eyebrow">Rehber</p>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">
-            Şifre yöneticisi nedir, telefonunuzda nerede?
+            Şifre yöneticisi nedir, telefonunda nerede?
           </h1>
           <p className="text-lg text-muted leading-relaxed">
-            Telefonunuz ya da tarayıcınız “Şifreyi kaydet” dediğinde şifreniz bir şifre yöneticisine kaydedilir. Aşağıda,
-            kayıtlı şifrelerinizi hangi cihazda nerede bulacağınızı adım adım anlatıyoruz.
+            Telefonun ya da tarayıcın “Şifreyi kaydet” dediğinde şifren bir şifre yöneticisine kaydedilir. Aşağıda,
+            kayıtlı şifrelerini hangi cihazda nerede bulacağını adım adım anlatıyoruz.
           </p>
           <nav aria-label="Cihazlar" className="flex flex-wrap gap-2 pt-2">
             {cihazlar.map((c) => (
@@ -143,18 +143,18 @@ export default function SifreYoneticisi() {
         <div className="max-w-3xl mx-auto space-y-5">
           <h2 className="text-3xl font-extrabold tracking-tight text-white">Şifre yöneticisi nedir, ne işe yarar?</h2>
           <p className="text-muted leading-relaxed">
-            Şifre yöneticisi, bütün şifrelerinizi şifreli bir kasada saklayan uygulamadır. Kasayı tek bir ana parolayla (ya da
-            parmak izi, yüz tanıma ile) açarsınız; giriş yaparken şifreyi sizin yerinize doldurur. Böylece her hesaba ayrı ve
-            güçlü bir şifre kullanabilir, hiçbirini ezberlemek zorunda kalmazsınız.
+            Şifre yöneticisi, bütün şifrelerini şifreli bir kasada saklayan uygulamadır. Kasayı tek bir ana parolayla (ya da
+            parmak izi, yüz tanıma ile) açarsın; giriş yaparken şifreyi senin yerine doldurur. Böylece her hesaba ayrı ve
+            güçlü bir şifre kullanabilir, hiçbirini ezberlemek zorunda kalmazsın.
           </p>
           <p className="text-muted leading-relaxed">
             Telefonlardaki hazır kasalar (Google, Apple, Samsung) ücretsiz ve kullanışlıdır; bir hesaba bağlıdırlar ve o markanın
-            cihazlarında en iyi çalışırlar. Ayrı bir şifre yöneticisi ise markadan bağımsızdır: telefon değiştirdiğinizde ya da
-            bilgisayarda da aynı kasayı kullanmak istediğinizde işinizi kolaylaştırır.
+            cihazlarında en iyi çalışırlar. Ayrı bir şifre yöneticisi ise markadan bağımsızdır: telefon değiştirdiğinde ya da
+            bilgisayarda da aynı kasayı kullanmak istediğinde işini kolaylaştırır.
           </p>
           <p className="text-muted leading-relaxed">
-            Yeni bir şifreye mi ihtiyacınız var? <a href="/guvenli-sifre-olusturucu" className="text-primary hover:text-primary-light">Güvenli şifre oluşturucu</a> ile
-            tarayıcınızda rastgele ve güçlü bir şifre üretebilirsiniz.
+            Yeni bir şifreye mi ihtiyacın var? <a href="/guvenli-sifre-olusturucu" className="text-primary hover:text-primary-light">Güvenli şifre oluşturucu</a> ile
+            tarayıcında rastgele ve güçlü bir şifre üretebilirsin.
           </p>
         </div>
       </section>
@@ -163,8 +163,8 @@ export default function SifreYoneticisi() {
         <div className="max-w-3xl mx-auto rounded-3xl border border-primary/30 bg-gradient-to-b from-primary/10 to-card p-8 md:p-10 space-y-5">
           <h2 className="text-3xl font-extrabold tracking-tight text-white">Hesaba bağlı olmayan bir kasa: SyncPass</h2>
           <p className="text-muted leading-relaxed">
-            SyncPass şifrelerinizi telefonunuzda AES-256 ile şifreli bir kasada tutar. Hesap açmanız gerekmez ve ana şifrenizi
-            bizimle paylaşmazsınız. Diğer şifre yöneticilerinden dışa aktardığınız dosyaları içe aktarabilirsiniz.
+            SyncPass şifrelerini telefonunda AES-256 ile şifreli bir kasada tutar. Kasanın kopyası sunucularımızda tutulmaz ve ana şifreni
+            bizimle paylaşmazsın. Diğer şifre yöneticilerinden dışa aktardığın dosyaları içe aktarabilirsin.
           </p>
           <ul className="space-y-2 text-sm text-muted">
             <li className="flex gap-3"><Check size={16} className="mt-0.5 shrink-0 text-ok" /> {FREE_ITEM_LIMIT} kayda kadar ücretsiz</li>

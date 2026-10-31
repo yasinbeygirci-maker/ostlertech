@@ -10,12 +10,12 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <LegalPage eyebrow="İletişim" title="Bize ulaşın" updated={false}>
+    <LegalPage eyebrow="İletişim" title="Bize ulaş" updated={false}>
       <p>
         Destek, lisans ve iade konularında en hızlı yol e-posta. İş günlerinde genellikle aynı gün yanıt veriyoruz.
         Ödeme ve fatura soruları için satışlarımızı yapan Paddle'a da{" "}
         <a href="https://paddle.net" target="_blank" rel="noopener" className="text-primary hover:text-primary-light">paddle.net</a>{" "}
-        üzerinden ulaşabilirsiniz.
+        üzerinden ulaşabilirsin.
       </p>
       <p className="text-lg">
         <a href={`mailto:${COMPANY.email}`} className="font-semibold text-primary hover:text-primary-light">{COMPANY.email}</a>

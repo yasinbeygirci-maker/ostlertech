@@ -8,7 +8,7 @@ export default function PlansPreview({ lang = "tr" }: { lang?: "tr" | "en" }) {
   const tx =
     lang === "en"
       ? { download: "Download free (Windows)", soon: "Purchases open soon", note: "Premium purchases on ostlertech.com will open soon. Until then you can use the free version." }
-      : { download: "Ücretsiz indir (Windows)", soon: "Satın alma yakında açılacak", note: "Premium satın alma ostlertech.com'da yakında açılacak. O zamana kadar ücretsiz sürümü kullanabilirsiniz." };
+      : { download: "Ücretsiz indir (Windows)", soon: "Satın alma yakında açılacak", note: "Premium satın alma ostlertech.com'da yakında açılacak. O zamana kadar ücretsiz sürümü kullanabilirsin." };
   return (
     <div>
       <div className="grid gap-6 lg:grid-cols-3">

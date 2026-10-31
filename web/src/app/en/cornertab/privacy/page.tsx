@@ -33,7 +33,7 @@ export default function CornerTabPrivacyEnPage() {
 
       <H2>2. In short</H2>
       <List>
-        <li>There is no account or sign-up. You do not give us your name, e-mail address or phone number.</li>
+        <li>There is no account or sign-up. You do not give us your name, email address or phone number.</li>
         <li>Your ledger (customers and suppliers, debts and receivables, payments, cash, stock, settings) stays on your phone in an encrypted database. It is not sent to us; we have no server of our own.</li>
         <li>We use no advertising, analytics or crash-reporting tools.</li>
         <li>Screenshots and screen recordings of the App are blocked, and its content is hidden in the recent apps list.</li>
@@ -128,7 +128,7 @@ export default function CornerTabPrivacyEnPage() {
         <li>Ledger and settings on your phone: for the App to work; not transferred to us.</li>
         <li>Pro purchase: to provide the service you bought (KVKK Art. 5(2)(c), GDPR Art. 6(1)(b)). Payment and purchase records are Google’s responsibility. The data is collected automatically by the Google component on your phone.</li>
         <li>Technical information from Google Play’s purchase component: under Google’s own responsibility, for the service to work securely and correctly.</li>
-        <li>Support e-mails: to answer your question (KVKK Art. 5(2)(c) and 5(2)(f)). Method: e-mail.</li>
+        <li>Support emails: to answer your question (KVKK Art. 5(2)(c) and 5(2)(f)). Method: email.</li>
       </List>
 
       <H2>8. International transfers</H2>
@@ -137,7 +137,7 @@ export default function CornerTabPrivacyEnPage() {
         affiliates and may be processed on servers outside Türkiye, including the United States. OstlerTech does not make this
         transfer and has no access to this data; Google processes it under its own data protection terms. Your ledger records are not
         transferred abroad; only if you save a backup to a cloud folder hosted abroad does the encrypted file go there. For support
-        e-mails, your e-mail provider’s infrastructure applies.
+        emails, your email provider’s infrastructure applies.
       </p>
 
       <H2>9. For businesses: your customers’ details</H2>
@@ -161,7 +161,7 @@ export default function CornerTabPrivacyEnPage() {
           Google Play purchase and technical information: under{" "}
           <a href="https://policies.google.com/technologies/retention" className={link}>Google’s retention policy</a>.
         </li>
-        <li>Support e-mails: 1 year after the request is closed.</li>
+        <li>Support emails: 1 year after the request is closed.</li>
       </List>
 
       <H2>11. Children</H2>

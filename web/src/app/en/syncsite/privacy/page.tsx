@@ -51,11 +51,11 @@ export default function SyncSitePrivacyEnPage() {
       <H2>2. What data we process</H2>
       <p className="font-semibold text-foreground">If you create an account</p>
       <List>
-        <li><strong className="text-foreground">E-mail address and password.</strong> We never hold your password in readable form; our sign-in service stores it as a one-way hash.</li>
+        <li><strong className="text-foreground">Email address and password.</strong> We never hold your password in readable form; our sign-in service stores it as a one-way hash.</li>
         <li><strong className="text-foreground">Account ID and the date the account was created.</strong> This date is recorded as the start of the beta and of the trial period (section 4).</li>
         <li><strong className="text-foreground">The version and date of the beta terms you accepted.</strong></li>
         <li><strong className="text-foreground">Session data:</strong> a session key stored on your device to keep you signed in.</li>
-        <li><strong className="text-foreground">Project membership:</strong> your role in each project (owner, editor, viewer) and team. A project owner adds you by your e-mail address.</li>
+        <li><strong className="text-foreground">Project membership:</strong> your role in each project (owner, editor, viewer) and team. A project owner adds you by your email address.</li>
         <li><strong className="text-foreground">Who entered a record:</strong> stored with each daily record so the team can see who entered it.</li>
         <li><strong className="text-foreground">Server logs:</strong> technical logs kept by our hosting provider when you connect (IP address, time, request type), used only for security and troubleshooting.</li>
       </List>
@@ -81,13 +81,13 @@ export default function SyncSitePrivacyEnPage() {
         to your own Google account. That backup is between you and Google; we cannot access it.
       </p>
       <p className="font-semibold text-foreground">If you write to us</p>
-      <p>Your name, e-mail address and message in support or request e-mails.</p>
+      <p>Your name, email address and message in support or request emails.</p>
       <p className="font-semibold text-foreground">What we do not process</p>
       <p>GPS location, contacts, advertising ID, device identifiers, usage analytics, crash reports. Payment card data never reaches us (the beta is free).</p>
 
       <H2>3. How we collect it</H2>
       <p>
-        You type your e-mail and password on the sign-up screen; you or your team enter site records and photos in the app; the account creation date
+        You type your email and password on the sign-up screen; you or your team enter site records and photos in the app; the account creation date
         and technical logs are created automatically on the server while you use the service. Collection is electronic, through the app.
       </p>
 
@@ -105,10 +105,10 @@ export default function SyncSitePrivacyEnPage() {
       <p>
         <strong className="text-foreground">Beta and trial period.</strong> The date your account is created is recorded as the start of a 1-month trial
         period that may apply later. During the beta, no feature is restricted because of this period. The date is used only for this purpose and is
-        deleted with your account. After you delete your account we do not keep your e-mail address or a hash of it.
+        deleted with your account. After you delete your account we do not keep your email address or a hash of it.
       </p>
       <p>
-        We do not ask for explicit consent for these activities; this text is information, not a consent form. We send no marketing e-mails; if we ever
+        We do not ask for explicit consent for these activities; this text is information, not a consent form. We send no marketing emails; if we ever
         want to, we will ask for your permission separately, in a separate text.
       </p>
 
@@ -118,7 +118,7 @@ export default function SyncSitePrivacyEnPage() {
         the data controller</strong> for personal data in the site records (staff records, people in photos), and OstlerTech is a processor acting on its
         instructions. Informing its staff is the business’s responsibility. During the open beta we do not sign individual agreements with businesses;
         instead, standard data processing terms for businesses are prepared as an addition to the beta terms, and where a business has signed a written
-        pilot agreement earlier, that agreement applies. OstlerTech is the controller for account data (e-mail, sign-in) and support correspondence.
+        pilot agreement earlier, that agreement applies. OstlerTech is the controller for account data (email, sign-in) and support correspondence.
       </p>
 
       <H2>6. Recipients and transfers abroad</H2>
@@ -130,11 +130,11 @@ export default function SyncSitePrivacyEnPage() {
         </li>
         {BREVO_BAGLI ? (
           <li>
-            <strong className="text-foreground">Brevo</strong> (Sendinblue SAS, France): sending account e-mails (verification code, password reset).
+            <strong className="text-foreground">Brevo</strong> (Sendinblue SAS, France): sending account emails (verification code, password reset).
           </li>
         ) : (
           <li>
-            Account e-mails (verification code, password reset) are currently sent by Supabase’s own e-mail service. If we start using a separate e-mail
+            Account emails (verification code, password reset) are currently sent by Supabase’s own email service. If we start using a separate email
             provider, we will update this notice first.
           </li>
         )}
@@ -169,7 +169,7 @@ export default function SyncSitePrivacyEnPage() {
 
       <H2>7. Retention and deletion</H2>
       <List>
-        <li><strong className="text-foreground">Account</strong> (e-mail, sign-in data, account creation/trial start date, accepted terms version): while your account exists; deleted immediately when you delete it.</li>
+        <li><strong className="text-foreground">Account</strong> (email, sign-in data, account creation/trial start date, accepted terms version): while your account exists; deleted immediately when you delete it.</li>
         <li><strong className="text-foreground">Projects you own and their photos:</strong> until you delete them or your account.</li>
         <li>
           <strong className="text-foreground">Records you delete one by one:</strong> the row stays in the cloud with a “deleted” mark so other devices learn of
@@ -182,7 +182,7 @@ export default function SyncSitePrivacyEnPage() {
         <li><strong className="text-foreground">Server logs</strong> (IP address etc.): a short period set by the hosting plan (currently 1 day).</li>
         <li><strong className="text-foreground">Server backups:</strong> no automatic backups are kept at present; deleted data cannot be restored. Keep your own copies of important records using the app’s export.</li>
         <li><strong className="text-foreground">If the beta ends:</strong> we give you time after the notice to export your data; unless you move to a paid plan, beta data is then deleted from the live system (periods are in the beta terms).</li>
-        <li><strong className="text-foreground">Support e-mails:</strong> 1 year after the request is closed. <strong className="text-foreground">Invoices and accounting records</strong> (if any): the statutory period (10 years).</li>
+        <li><strong className="text-foreground">Support emails:</strong> 1 year after the request is closed. <strong className="text-foreground">Invoices and accounting records</strong> (if any): the statutory period (10 years).</li>
         <li><strong className="text-foreground">Logs or screenshots you send us:</strong> at most 30 days; deletion is recorded.</li>
         <li><strong className="text-foreground">Data on your device and exported files:</strong> until you delete them. Deleting your account also deletes the app’s local database; you delete exported files yourself.</li>
       </List>
@@ -205,7 +205,7 @@ export default function SyncSitePrivacyEnPage() {
         object to an adverse outcome resulting solely from automated analysis; and for compensation if you suffer damage from unlawful processing.
       </p>
       <p>
-        <strong className="text-foreground">How to apply:</strong> e-mail {COMPANY.email} from the address registered to your account; or in writing to{" "}
+        <strong className="text-foreground">How to apply:</strong> email {COMPANY.email} from the address registered to your account; or in writing to{" "}
         {COMPANY.address}, Türkiye, or via KEP to {COMPANY.kep}. State your name, contact details and request; we may ask for more information to verify
         your identity. We reply free of charge within <strong className="text-foreground">30 days</strong> at the latest. Requests about site records in a
         {" "}{N} used by a business should go to that business; if they reach us, we forward them and let you know. If you are not satisfied with our reply,
@@ -218,7 +218,7 @@ export default function SyncSitePrivacyEnPage() {
       <H2>11. Changes</H2>
       <p>
         We update this notice as the product changes; the date is shown at the top. For important changes (a new service provider, a change of server
-        location, a change in the status of the transfer abroad) we will notify you in the app or by e-mail.
+        location, a change in the status of the transfer abroad) we will notify you in the app or by email.
       </p>
 
       <p className="text-sm">Google Play™ and Android™ are trademarks of Google LLC.</p>

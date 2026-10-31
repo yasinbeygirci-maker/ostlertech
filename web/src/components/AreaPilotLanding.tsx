@@ -94,7 +94,7 @@ export default function AreaPilotLanding({ lang }: { lang: Lang }) {
           </div>
           <p className="text-xs text-muted">
             {lang === "tr"
-              ? "Oynat'a bastığınızda video YouTube'dan (youtube-nocookie.com) yüklenir."
+              ? "Oynat'a bastığında video YouTube'dan (youtube-nocookie.com) yüklenir."
               : "When you press play, the video loads from YouTube (youtube-nocookie.com)."}
           </p>
         </div>
@@ -187,7 +187,7 @@ export default function AreaPilotLanding({ lang }: { lang: Lang }) {
       </section>
 
       <section className="section-padding border-t border-line">
-        <div className="max-w-3xl mx-auto space-y-6 text-[15px] leading-relaxed text-muted">
+        <div className="max-w-3xl mx-auto space-y-6 text-sm leading-relaxed text-muted">
           <H2 id={lang === "tr" ? "gizlilik" : "app-privacy"}>{c.privacyTitle}</H2>
           <h3 className="text-lg font-bold text-white">{c.appPrivacyTitle}</h3>
           <ul className="list-disc space-y-2 pl-6 break-words">

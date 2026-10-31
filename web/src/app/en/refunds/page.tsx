@@ -15,15 +15,15 @@ export default function RefundsEnPage() {
   return (
     <LegalPage eyebrow="Legal" title="Delivery and Refund Policy" lang="en" altLink={{ href: "/teslimat-ve-iade", label: "Türkçe sürüm" }}>
       <p>
-        This policy applies to SyncPass Desktop Premium licences purchased through ostlertech.com. Our sales are made by
+        This policy applies to SyncPass Desktop Premium licenses purchased through ostlertech.com. Our sales are made by
         our Merchant of Record, Paddle.com; payments and refunds are handled by Paddle.
       </p>
 
       <H2>1. Delivery</H2>
       <List>
         <li>The product is digital; nothing is shipped.</li>
-        <li>When payment is complete, your licence key is shown immediately on the page that opens after checkout. Paddle e-mails you the receipt.</li>
-        <li>If the key does not appear or you lose it, write to {COMPANY.email} from the e-mail address you used for the purchase; we will send it within 24 hours.</li>
+        <li>When payment is complete, your license key is shown immediately on the page that opens after checkout. Paddle emails you the receipt.</li>
+        <li>If the key does not appear or you lose it, write to {COMPANY.email} from the email address you used for the purchase; we will send it within 24 hours.</li>
       </List>
 
       <H2>2. {DESKTOP_LICENSE.refundDays}-day no-questions-asked refund</H2>
@@ -34,12 +34,12 @@ export default function RefundsEnPage() {
       </p>
       <p>To request a refund, use one of these:</p>
       <List>
-        <li>the link in the receipt e-mail from Paddle, or <a href="https://paddle.net" target="_blank" rel="noopener" className={link}>paddle.net</a>;</li>
+        <li>the link in the receipt email from Paddle, or <a href="https://paddle.net" target="_blank" rel="noopener" className={link}>paddle.net</a>;</li>
         <li>or write to {COMPANY.email} with your order number and we will forward your request to Paddle.</li>
       </List>
       <p>
         Paddle refunds the payment to the method you paid with; how long it takes to appear depends on your bank. A
-        refunded licence is deactivated and the app switches to the free version.
+        refunded license is deactivated and the app switches to the free version.
       </p>
       <p>
         We also review and refund requests made after {DESKTOP_LICENSE.refundDays} days, for example if the app does not
@@ -52,13 +52,13 @@ export default function RefundsEnPage() {
         you have paid for; no payment is taken for the next period and you keep Premium until then.
       </p>
 
-      <H2>4. When the licence ends</H2>
+      <H2>4. When the license ends</H2>
       <p>
-        When your licence ends or is refunded, the app switches to the free version. Your vault is not locked: you can
+        When your license ends or is refunded, the app switches to the free version. Your vault is not locked: you can
         still view, copy, edit and export your entries.
       </p>
       <p>
-        So that it can check your licence without being online all the time, the app renews it with our server about
+        So that it can check your license without being online all the time, the app renews it with our server about
         once a week. After a cancellation or refund the switch may therefore not be immediate: the app returns to the
         free version at its next renewal, usually within 7 days if it is online, and within 30 days at the latest if it
         never connects.

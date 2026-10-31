@@ -14,7 +14,7 @@ export default function AreaPilotBanner() {
         </div>
         <div className="flex flex-wrap gap-3 shrink-0">
           <a href={AREAPILOT.path} className="btn-primary !py-2.5 !px-5 text-sm">Sayfaya git</a>
-          <a href={`${AREAPILOT.path}#videolar`} className="inline-flex items-center rounded-xl border border-line px-5 py-2.5 text-sm font-semibold text-white hover:border-primary/60">Videoyu izle</a>
+          <a href={`${AREAPILOT.path}#videolar`} className="inline-flex items-center rounded-xl border border-line px-5 py-2.5 text-sm font-semibold text-white hover:border-primary/60 press min-h-[44px]">Videoyu izle</a>
         </div>
       </div>
     </section>

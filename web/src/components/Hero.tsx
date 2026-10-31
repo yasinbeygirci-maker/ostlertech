@@ -14,7 +14,7 @@ const facts = [
   { value: "AES-256", label: "GCM ile şifreleme" },
   { value: PBKDF2_ITERATIONS, label: "tur PBKDF2 anahtar türetme" },
   { value: String(LANGUAGE_COUNT), label: "dilde arayüz" },
-  { value: "0", label: "hesap ya da sunucu zorunluluğu" },
+  { value: "0", label: "sunucumuzda tutulan kasa kopyası" },
 ];
 
 export default function Hero() {
@@ -27,22 +27,24 @@ export default function Hero() {
         <div className="space-y-8 text-center lg:text-left animate-rise">
           <a
             href="#yenilikler"
-            className="inline-flex items-center gap-2 rounded-full border border-line bg-card/60 px-3 py-1.5 text-xs font-medium text-muted hover:text-white transition-colors"
+            className="press inline-flex items-center gap-2 rounded-full material px-3 min-h-[40px] text-xs font-medium text-muted hover:text-white" style={{ boxShadow: "inset 0 1px 0 var(--material-edge), 0 0 0 1px rgb(var(--c-line) / 0.7)" }}
           >
             <span className="rounded-full bg-primary/15 px-2 py-0.5 text-primary font-semibold">Yeni</span>
             Yeniden tasarlanan kasa ve masaüstü uygulaması
             <ArrowRight size={14} />
           </a>
 
-          <h1 className="text-5xl sm:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.04] text-gradient">
-            Şifreleriniz
-            <br />
-            sizin cihazınızda.
+          <h1 className="text-5xl sm:text-6xl xl:text-[4.25rem] font-extrabold tracking-[-0.02em] leading-[1.15]">
+            <span className="text-gradient">
+              Şifrelerin
+              <br />
+              senin cihazında.
+            </span>
           </h1>
 
-          <p className="max-w-xl mx-auto lg:mx-0 text-lg md:text-xl text-muted leading-relaxed">
-            SyncPass; şifrelerinizi, kartlarınızı, geçiş anahtarlarınızı ve 2FA kodlarınızı (Premium) telefonunuzda şifreli
-            tutar. Hesap açmanız gerekmez, ana şifreniz hiçbir yere gönderilmez.
+          <p className="max-w-xl mx-auto lg:mx-0 text-lg md:text-xl text-muted leading-[1.5]">
+            SyncPass; şifrelerini, kartlarını, geçiş anahtarlarını ve 2FA kodlarını (Premium) telefonunda şifreli
+            tutar. Kasanın kopyası sunucularımızda tutulmaz, ana şifren hiçbir yere gönderilmez.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
@@ -62,7 +64,7 @@ export default function Hero() {
           <div className="device-window ml-auto w-[92%]">
             <img src={`/screens/desktop-vault-dark.webp?v=${SCREENS_VERSION}`} alt="SyncPass masaüstü: üç sütunlu kasa görünümü" width={1200} height={800} />
           </div>
-          <div className="absolute -bottom-2 sm:-bottom-10 left-0 w-[34%] max-w-[230px] animate-float">
+          <div className="absolute -bottom-2 sm:-bottom-10 left-0 w-[34%] max-w-[230px]">
             <div className="device-phone">
               <img src={`/screens/phone-vault.webp?v=${SCREENS_VERSION}`} alt="SyncPass Android: kasa, güvenlik puanı ve 2FA kodları" width={720} height={1170} />
             </div>
@@ -70,9 +72,9 @@ export default function Hero() {
         </div>
       </div>
 
-      <dl className="max-w-5xl mx-auto mt-24 md:mt-32 grid grid-cols-2 md:grid-cols-4 gap-px overflow-hidden rounded-2xl border border-line bg-line">
+      <dl className="max-w-5xl mx-auto mt-24 md:mt-32 grid grid-cols-2 md:grid-cols-4 gap-3">
         {facts.map((f) => (
-          <div key={f.label} className="bg-surface px-5 py-6 text-center">
+          <div key={f.label} className="card-soft rounded-2xl px-5 py-6 text-center">
             <dt className="sr-only">{f.label}</dt>
             <dd className="text-2xl md:text-3xl font-extrabold text-white font-mono tracking-tight">{f.value}</dd>
             <dd className="mt-1 text-xs md:text-sm text-muted">{f.label}</dd>

@@ -8,7 +8,7 @@ const N = SYNCSITE.name;
 
 export const metadata: Metadata = {
   title: `${N} Account and Data Deletion`,
-  description: `How to delete your ${N} (formerly ${SYNCSITE.formerName}) account in the app or by e-mail, when it is deleted and what remains.`,
+  description: `How to delete your ${N} (formerly ${SYNCSITE.formerName}) account in the app or by email, when it is deleted and what remains.`,
   alternates: { canonical: SYNCSITE.deleteEnPath, languages: { tr: SYNCSITE.deletePath, en: SYNCSITE.deleteEnPath } },
 };
 
@@ -40,18 +40,18 @@ export default function SyncSiteDeleteEnPage() {
         <li>After you confirm, your account and the projects you own are deleted from the cloud, then the {N} data on the device.</li>
       </List>
 
-      <H2>2. If you cannot use the app: delete by e-mail</H2>
-      <p>If you uninstalled the app or cannot access your phone or password, you can have your account deleted by e-mail:</p>
+      <H2>2. If you cannot use the app: delete by email</H2>
+      <p>If you uninstalled the app or cannot access your phone or password, you can have your account deleted by email:</p>
       <List>
         <li>
-          E-mail <a href={`mailto:${COMPANY.email}?subject=${encodeURIComponent(`${N} account deletion request`)}`} className={link}>{COMPANY.email}</a>{" "}
-          <strong className="text-foreground">from the e-mail address registered to your account</strong> and write “I want my {N} account deleted”. For a
+          Email <a href={`mailto:${COMPANY.email}?subject=${encodeURIComponent(`${N} account deletion request`)}`} className={link}>{COMPANY.email}</a>{" "}
+          <strong className="text-foreground">from the email address registered to your account</strong> and write “I want my {N} account deleted”. For a
           request from another address we ask for more information to verify your identity.
         </li>
         <li>Telling us which projects the account owns and whether other people are in them speeds things up.</li>
         <li>
           We confirm receipt and delete your account within <strong className="text-foreground">{SYNCSITE.deleteBusinessDays} business days</strong> at the
-          latest. When it is done we e-mail you.
+          latest. When it is done we email you.
         </li>
       </List>
       <p>
@@ -62,7 +62,7 @@ export default function SyncSiteDeleteEnPage() {
 
       <H2>3. What is deleted</H2>
       <List>
-        <li>Your account: e-mail address, password hash, account ID, the account creation (trial start) date and the accepted beta terms version.</li>
+        <li>Your account: email address, password hash, account ID, the account creation (trial start) date and the accepted beta terms version.</li>
         <li>Projects you own and everything under them: locations, work items, targets, daily records, teams, memberships and photos.</li>
         <li>All your project memberships.</li>
         <li>The {N} database on your device (if you delete from the app).</li>
@@ -83,7 +83,7 @@ export default function SyncSiteDeleteEnPage() {
         <li><strong className="text-foreground">Hosting provider server logs</strong> (IP address, time): at most 1 day, then deleted automatically.</li>
         <li><strong className="text-foreground">Backups:</strong> no automatic server backups are kept; deleted data cannot be restored. Before deleting, export important records with the app’s Excel/JSON export.</li>
         <li>
-          <strong className="text-foreground">Support e-mails you sent us</strong> (including your deletion request): 1 year after the request is closed. A record that the
+          <strong className="text-foreground">Support emails you sent us</strong> (including your deletion request): 1 year after the request is closed. A record that the
           deletion was done is kept without personal data (only the date and type of action).
         </li>
         <li><strong className="text-foreground">Invoices and accounting records</strong> (only if you buy a paid plan in the future): the statutory period (10 years).</li>
@@ -93,13 +93,13 @@ export default function SyncSiteDeleteEnPage() {
         </li>
       </List>
       <p>
-        After you delete your account we <strong className="text-foreground">do not keep</strong> your e-mail address or a hash of it; you can open a new account with the
+        After you delete your account we <strong className="text-foreground">do not keep</strong> your email address or a hash of it; you can open a new account with the
         same address.
       </p>
 
       <H2>5. Removing cloud data without deleting your account</H2>
       <p>
-        If you want to keep your account but remove your cloud data, you can delete the projects you own in the app, or e-mail{" "}
+        If you want to keep your account but remove your cloud data, you can delete the projects you own in the app, or email{" "}
         <a href={`mailto:${COMPANY.email}`} className={link}>{COMPANY.email}</a> saying which data you want deleted. If you switch to using {N} without an account,
         new data no longer goes to the cloud.
       </p>

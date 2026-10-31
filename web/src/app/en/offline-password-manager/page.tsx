@@ -6,9 +6,9 @@ import { PLAY_URL, SITE_URL, FREE_ITEM_LIMIT, DESKTOP_DOWNLOAD } from "@/lib/sit
 // Claims checked against the code (2026-10-11): the vault is a local encrypted database; phone and Windows sync is Premium and
 // goes through the user's own Google Drive hidden app folder (DRIVE_APPDATA scope), never through an OstlerTech server.
 export const metadata: Metadata = {
-  title: "Offline Password Manager for Android and Windows (No Account)",
+  title: "Password Manager That Keeps Your Vault on Your Device (Android and Windows)",
   description:
-    "An offline password manager that keeps your encrypted vault on your device, with no account and no vendor cloud. How SyncPass works on Android and Windows, how sync works without our servers, and who it is not for.",
+    "A password manager that keeps your encrypted vault on your device instead of a vendor's servers. How SyncPass works on Android and Windows, how sync works through your own Google Drive, and who it is not for.",
   alternates: { canonical: "/en/offline-password-manager" },
   openGraph: { locale: "en_US", url: `${SITE_URL}/en/offline-password-manager` },
 };
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 const approaches = [
   { name: "Cloud password managers", example: "Bitwarden, 1Password, NordPass", where: "Encrypted vault on the company's servers, cached on your devices", account: "Required", sync: "Automatic through the vendor" },
   { name: "Local vault files", example: "KeePass, KeePassXC", where: "An encrypted file on your computer", account: "None", sync: "You move or sync the file yourself" },
-  { name: "SyncPass", example: "Android and Windows", where: "An encrypted database on your phone or PC", account: "None", sync: "Optional, through your own Google Drive (Premium)" },
+  { name: "SyncPass", example: "Android and Windows", where: "An encrypted database on your phone or PC", account: "Your Google account for Play purchases and Drive", sync: "Optional, through your own Google Drive (Premium)" },
 ];
 
 const notFor = [
@@ -26,11 +26,11 @@ const notFor = [
 ];
 
 const faq = [
-  { q: "Does SyncPass work without an internet connection?", a: "Yes. Your vault is an encrypted database on your device, so opening it, searching, autofilling and generating passwords all work offline. Only optional features (Drive backup and sync, breach check, in-app help on Android) use the network." },
+  { q: "Does SyncPass need an internet connection?", a: "Not for the basics. Your vault is an encrypted database on your device, so unlocking it, searching, autofilling and generating passwords run on the device without an internet connection. Google Play purchase checks, passkey verification and optional features (Drive backup and sync, breach check, in-app help on Android) use the network. SyncPass for Windows Premium also contacts our license server from time to time to keep the license active." },
   { q: "Where exactly is my vault stored?", a: "On your phone (or your Windows PC) as an encrypted database. The master password is never stored or sent anywhere. OstlerTech does not run a server that holds vaults." },
   { q: "Can I sync between my phone and my computer without a cloud?", a: "Sync between Android and Windows uses your own Google Drive: the already encrypted vault goes into a hidden app folder only SyncPass can see. It is a Premium feature. Without it, each device keeps its own vault." },
   { q: "What happens if I lose my phone?", a: "Restore from your encrypted backup (a file you exported, or your Drive backup with Premium) and unlock it with your master password. Without a backup, a local vault cannot be recovered; that is the trade-off of not keeping a copy on our servers." },
-  { q: "Is it free?", a: `The free version stores up to ${FREE_ITEM_LIMIT} items, with no ads and no account. Premium adds unlimited items, 2FA codes, Drive backup and sync, and breach checks.` },
+  { q: "Is it free?", a: `The free version stores up to ${FREE_ITEM_LIMIT} items, with no ads. Premium adds unlimited items, 2FA codes, Drive backup and sync, and breach checks.` },
 ];
 
 const ld = {
@@ -49,11 +49,11 @@ export default function OfflinePasswordManager() {
       <section className="section-padding !pt-36">
         <div className="max-w-3xl mx-auto space-y-6">
           <p className="eyebrow">Guide</p>
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">Offline password manager for Android and Windows</h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">A password manager that keeps your vault on your device</h1>
           <p className="text-lg text-muted leading-relaxed">
-            “Offline” can mean three different things: the app works without internet, the vault is stored on your device instead
-            of a company's server, and you do not need an account. Many password managers do only the first. SyncPass does all
-            three by default.
+            A password manager can keep your encrypted vault on a company's servers or on your own device. SyncPass keeps it on
+            your phone or PC. Unlocking, searching, autofill and the password generator run on the device and do not need an
+            internet connection.
           </p>
           <div className="flex flex-wrap gap-3">
             <a href={PLAY_URL} className="btn-primary !py-3.5" rel="noopener">Get it free on Google Play</a>
@@ -105,12 +105,12 @@ export default function OfflinePasswordManager() {
             cannot read, and OstlerTech never receives it.
           </p>
           <p className="text-muted leading-relaxed">
-            Without Premium, each device keeps its own vault and nothing is uploaded anywhere. You can still export an encrypted
+            Without Premium, each device keeps its own vault and your vault is not uploaded anywhere. You can still export an encrypted
             backup file and keep it somewhere safe, such as a USB drive.
           </p>
           <ul className="space-y-2 text-sm text-muted">
-            <li className="flex gap-3"><Check size={16} className="mt-0.5 shrink-0 text-ok" /> Works without internet: unlock, search, autofill, generate</li>
-            <li className="flex gap-3"><Check size={16} className="mt-0.5 shrink-0 text-ok" /> No account, no email sign-up</li>
+            <li className="flex gap-3"><Check size={16} className="mt-0.5 shrink-0 text-ok" /> Unlock, search, autofill and generate on the device, without an internet connection</li>
+            <li className="flex gap-3"><Check size={16} className="mt-0.5 shrink-0 text-ok" /> Your vault is not stored on our servers</li>
             <li className="flex gap-3"><Check size={16} className="mt-0.5 shrink-0 text-ok" /> Passwords, cards, notes, Wi-Fi, 2FA codes and passkeys in one vault</li>
             <li className="flex gap-3"><Check size={16} className="mt-0.5 shrink-0 text-ok" /> Recovery QR code in case you forget your master password</li>
           </ul>

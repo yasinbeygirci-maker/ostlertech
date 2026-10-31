@@ -20,7 +20,7 @@ const TEXT = {
   tr: {
     cycleLabel: "Ödeme dönemi", month: "Aylık", year: "Yıllık", once: "tek seferlik", perMonth: "/ ay", perYear: "/ yıl",
     free: "Ücretsiz", download: "İndir", buy: "Satın al", subscribe: "Abone ol",
-    error: "Fiyatlar şu an yüklenemedi. Sayfayı yenileyin; sorun sürerse destek@ostlertech.com adresine yazın.",
+    error: "Fiyatlar şu an yüklenemedi. Sayfayı yenile; sorun sürerse destek@ostlertech.com adresine yaz.",
   },
   en: {
     cycleLabel: "Billing period", month: "Monthly", year: "Yearly", once: "one-time", perMonth: "/ month", perYear: "/ year",
@@ -177,8 +177,8 @@ export default function PaddlePricing({ environment, token, countryCode, custome
         </p>
       ) : (
         <p className="mt-8 text-center text-xs text-muted">
-          Fiyatlar bulunduğunuz ülkeye göre gösterilir ve vergiler dahildir. Siparişiniz yetkili satıcımız Paddle.com
-          (<span lang="en">Merchant of Record</span>) tarafından işlenir; kart bilgileriniz bize iletilmez.
+          Fiyatlar bulunduğun ülkeye göre gösterilir ve vergiler dahildir. Siparişin yetkili satıcımız Paddle.com
+          (<span lang="en">Merchant of Record</span>) tarafından işlenir; kart bilgilerin bize iletilmez.
         </p>
       )}
     </div>

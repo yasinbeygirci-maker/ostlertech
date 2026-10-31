@@ -21,7 +21,7 @@ const supports = [
   "Import every account at once from a Google Authenticator export QR code",
   "Attach a code to a login, so the password and the code are in the same entry",
   "Copy a code in one tap; the clipboard is marked sensitive and cleared automatically",
-  "Codes are generated on the device from its clock, so they work offline",
+  "Codes are generated on the device from its clock, so they do not need an internet connection",
 ];
 
 const steps = [
@@ -35,7 +35,7 @@ const faq = [
   { q: "Can I import my codes from Google Authenticator?", a: "Yes. Export your accounts as a QR code in Google Authenticator (Transfer accounts, then Export accounts) and scan it in SyncPass. All accounts in the QR code are imported." },
   { q: "Do the codes work without internet?", a: "Yes. Time-based codes are calculated on the device from the shared secret and the current time. Only the device clock needs to be correct." },
   { q: "Does SyncPass support push approvals or Steam Guard?", a: "No. SyncPass generates standard TOTP and HOTP codes, which is what most websites use. Push sign-in prompts (like Microsoft Authenticator approvals) and Steam Guard use their own systems and are not supported." },
-  { q: "Is the authenticator free?", a: `No. 2FA codes are part of Premium on Android and Windows, together with unlimited items, Drive backup and sync, and breach checks. The free version stores up to ${FREE_ITEM_LIMIT} items, with no ads and no account.` },
+  { q: "Is the authenticator free?", a: `No. 2FA codes are part of Premium on Android and Windows, together with unlimited items, Drive backup and sync, and breach checks. The free version stores up to ${FREE_ITEM_LIMIT} items, with no ads.` },
 ];
 
 const ld = {
@@ -125,7 +125,7 @@ export default function PasswordManagerWithAuthenticator() {
             ))}
           </div>
           <p className="mt-8 text-center text-sm text-muted">
-            Related: <a href="/en/offline-password-manager" className="text-primary hover:text-primary-light">offline password manager for Android and Windows</a>
+            Related: <a href="/en/offline-password-manager" className="text-primary hover:text-primary-light">on-device password manager for Android and Windows</a>
             {" · "}<a href="/en" className="text-primary hover:text-primary-light">SyncPass features and pricing</a>
           </p>
         </div>

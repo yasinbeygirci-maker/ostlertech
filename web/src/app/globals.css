@@ -2,10 +2,123 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Renk belirtecleri: bosluklu R G B uclulari (Tailwind opaklik eki `/50` icin).
+   VARSAYILAN ve SABIT = Apple KOYU paleti (sistem tercihine bakilmaz, prefers-color-scheme kullanilmaz).
+   Acik tema CSS'te duruyor ama yalniz onizlemede: html[data-tema="acik"] (?tema=acik). Uretimde onu acan betik yok.
+   Eski SyncPass paleti silinmedi: html[data-palet="mevcut"] ya da ?palet=mevcut. */
 :root {
+  /* Yazı ölçeği (rem tabanlı, ~1.2 oran, clamp ile akışkan; telefon → masaüstü).
+     Kurallar: hiçbir görünür metin 13px altında olmaz; gövde 16→17px; kart/ikincil 15→16px; eyebrow/rozet/etiket 13px. */
+  --text-caption: 0.8125rem;                                  /* 13px: rozet, etiket, dipnot (alt sınır) */
+  --text-eyebrow: 0.875rem;                                   /* 14px: üst başlık (büyük harf, harf aralıklı) */
+  --text-small: clamp(0.9375rem, 0.92rem + 0.1vw, 1rem);      /* 15→16px: kart gövdesi, ikincil metin, menü */
+  --text-body: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);      /* 16→17px: gövde */
+  --text-lead: clamp(1.125rem, 1.09rem + 0.2vw, 1.25rem);     /* 18→20px: giriş paragrafı */
+  --text-h4: clamp(1.25rem, 1.2rem + 0.3vw, 1.5rem);          /* 20→24px: kart başlığı */
+  --text-h3: clamp(1.5rem, 1.4rem + 0.5vw, 1.875rem);         /* 24→30px */
+  --text-h2: clamp(1.75rem, 1.55rem + 0.9vw, 2.25rem);        /* 28→36px */
+  --text-h2-lg: clamp(2rem, 1.75rem + 1.1vw, 2.75rem);        /* 32→44px */
+  --text-display: clamp(2.25rem, 1.9rem + 1.4vw, 3rem);       /* 36→48px: bölüm başlığı */
+  --text-hero: clamp(2.5rem, 1.9rem + 2.6vw, 3.75rem);        /* 40→60px: h1 */
+  --ease-spring: cubic-bezier(0.2, 0.9, 0.25, 1);
+  --press-in: 100ms;
+  --press-out: 320ms;
+  --c-background: 11 13 17;
+  --c-foreground: 245 245 247;
+  --c-surface: 18 21 26;
+  --c-card: 26 29 35;
+  --c-line: 42 46 54;
+  --c-muted: 161 165 175;
+  --c-primary: 98 160 240;
+  --c-primary-dark: 10 103 219;
+  --c-primary-light: 141 187 255;
+  --c-primary-hover: 125 178 250;
+  --c-ok: 52 210 123;
+  --c-weak: 255 166 43;
+  --c-bad: 255 107 107;
+  --c-purple: 167 139 250;
+  --c-white: 245 245 247;
+  --c-device: 8 10 13;
+  --edge-top: rgba(255, 255, 255, 0.05);
+  --grad-to: #a1a5af;
+  --node-a: 141, 187, 255;
+  --node-b: 98, 160, 240;
+  --nav-bg: rgba(18, 21, 26, 0.72);
+  --hairline: rgba(255, 255, 255, 0.08);
+  --selection: rgba(98, 160, 240, 0.35);
+  --material-bg: rgba(11, 13, 17, 0.72);
+  --material-edge: rgba(255, 255, 255, 0.08);
+  --background: #0b0d11;
+  --foreground: #f5f5f7;
+  color-scheme: dark;
+}
+
+html[data-tema="acik"] {
+  --c-background: 251 251 253;
+  --c-foreground: 29 29 31;
+  --c-surface: 242 242 245;
+  --c-card: 255 255 255;
+  --c-line: 210 210 215;
+  --c-muted: 94 96 102;
+  --c-primary: 10 95 208;
+  --c-primary-dark: 10 98 208;
+  --c-primary-light: 15 98 210;
+  --c-primary-hover: 8 78 176;
+  --c-ok: 23 112 47;
+  --c-weak: 154 82 0;
+  --c-bad: 200 32 47;
+  --c-purple: 91 58 224;
+  --c-white: 29 29 31;
+  --c-device: 29 29 31;
+  --edge-top: rgba(255, 255, 255, 0.9);
+  --grad-to: #4a4b52;
+  --node-a: 10, 95, 208;
+  --node-b: 10, 95, 208;
+  --shadow-device: 0 30px 60px -28px rgba(0, 0, 0, 0.35);
+  --shadow-window: 0 30px 70px -30px rgba(0, 0, 0, 0.3);
+  --nav-bg: rgba(251, 251, 253, 0.82);
+  --hairline: rgba(0, 0, 0, 0.08);
+  --selection: rgba(10, 95, 208, 0.22);
+  --material-bg: rgba(251, 251, 253, 0.72);
+  --material-edge: rgba(0, 0, 0, 0.08);
+  --background: #fbfbfd;
+  --foreground: #1d1d1f;
+  color-scheme: light;
+}
+
+/* Eski palet (geri donus): data-palet="mevcut" */
+html[data-palet="mevcut"] {
+  --c-background: 14 18 26;
+  --c-foreground: 232 237 245;
+  --c-surface: 17 23 34;
+  --c-card: 23 30 43;
+  --c-line: 38 48 71;
+  --c-muted: 142 154 176;
+  --c-primary: 76 141 255;
+  --c-primary-dark: 0 82 212;
+  --c-primary-light: 138 180 255;
+  --c-primary-hover: 138 180 255;
+  --c-ok: 16 185 129;
+  --c-weak: 245 165 36;
+  --c-bad: 255 77 109;
+  --c-purple: 139 92 246;
+  --c-white: 255 255 255;
+  --c-device: 11 15 22;
+  --edge-top: rgba(255, 255, 255, 0.06);
+  --grad-to: #afc3e6;
+  --node-a: 138, 180, 255;
+  --node-b: 76, 141, 255;
+  --shadow-device: 0 40px 80px -30px rgba(0, 0, 0, 0.9);
+  --shadow-window: 0 40px 90px -30px rgba(0, 0, 0, 0.9);
+  --nav-bg: rgba(17, 23, 34, 0.78);
+  --hairline: rgba(255, 255, 255, 0.06);
+  --selection: rgba(76, 141, 255, 0.35);
+  --material-bg: rgba(14, 18, 26, 0.62);
+  --material-edge: rgba(255, 255, 255, 0.07);
   --background: #0e121a;
   --foreground: #e8edf5;
   --primary: #4c8dff;
+  --muted: #8e9ab0;
   color-scheme: dark;
 }
 
@@ -15,32 +128,106 @@ html {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: rgb(var(--c-foreground));
+  background: rgb(var(--c-background));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: rgba(76, 141, 255, 0.35);
+  background: var(--selection);
+}
+
+@layer base {
+  /* Başlıkta sıkı, gövdede rahat: ~-0.02em / 1.05 ve 1.5 */
+  h1 { letter-spacing: -0.02em; line-height: 1.15; }
+  h2 { letter-spacing: -0.02em; line-height: 1.15; }
+  h3 { letter-spacing: -0.01em; line-height: 1.25; }
+  body { font-size: var(--text-body); line-height: 1.55; }
 }
 
 @layer components {
+  /* Basınca 100 ms ease-out ile 0.97; bırakınca yay gibi geri döner. Yalnız transform. */
+  .press {
+    transition: transform var(--press-out) var(--ease-spring);
+    touch-action: manipulation;
+  }
+  .press:active {
+    transform: scale(0.97);
+    transition: transform var(--press-in) ease-out;
+  }
+
+  /* Yarı saydam malzeme: bulanıklık + doygunluk + üstte ince ışık kenarı */
+  .material {
+    background: var(--material-bg);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: inset 0 1px 0 var(--material-edge);
+  }
+
+  /* Yumuşak kart: sert 1px ayraç yerine ince üst ışık ve silik kenar */
+  .card-soft {
+    background: linear-gradient(180deg, rgb(var(--c-card) / 0.85), rgb(var(--c-surface) / 0.85));
+    box-shadow: inset 0 1px 0 var(--edge-top), 0 0 0 1px rgb(var(--c-line) / 0.55);
+  }
+
+  /* Bölüm üstünde uçlara doğru sönen çizgi (sert ayraç yerine) */
+  .section-fade { position: relative; }
+  .section-fade::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgb(var(--c-line)) 20%, rgb(var(--c-line)) 80%, transparent);
+    pointer-events: none;
+  }
+
+  /* Yalnız açık önizleme: saydam zeminli yıldız logosu açık zeminde kaybolur, lacivert yuvarlak karo üstünde gösterilir */
+  html[data-tema="acik"] .logo-tile {
+    background: #0e121a;
+    padding: 3px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+
   /* Eski sayfaların da kullandığı yüzey kartı */
   .glass-card {
     @apply bg-card/80 backdrop-blur-xl border border-line rounded-3xl;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 bg-primary-dark hover:bg-[#1D66E5] text-white font-semibold py-3 px-6 rounded-full transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+    @apply press relative isolate overflow-hidden inline-flex items-center justify-center gap-2 bg-primary-dark text-[#fff] font-semibold py-3 px-6 min-h-[44px] rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
   }
+  /* Üzerine gelince renk değil, saydam bir kat opaklıkla belirir */
+  .btn-primary::after,
+  .btn-secondary::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(255, 255, 255, 0.14);
+    opacity: 0;
+    transition: opacity 160ms ease-out;
+  }
+  .btn-primary:hover::after,
+  .btn-secondary:hover::after { opacity: 1; }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 bg-white/[0.04] hover:bg-white/[0.08] text-foreground border border-line font-semibold py-3 px-6 rounded-full transition-colors duration-200;
+    @apply press relative isolate overflow-hidden inline-flex items-center justify-center gap-2 bg-white/[0.04] text-foreground border border-line font-semibold py-3 px-6 min-h-[44px] rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
   }
+  .btn-secondary::after { background: rgba(255, 255, 255, 0.06); }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-b from-white to-[#AFC3E6];
+    /* Satır içi öğe: arka plan satır yüksekliğine (1.05-1.1) değil yazı tipinin ascent+descent alanına boyanır,
+       böylece g/y/p/ş alt kuyrukları ve İ/Ü/Ö üst işaretleri kesilmez; yerleşim değişmez. Başlıkta iç <span> olarak kullanın. */
+    display: inline;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    background-image: linear-gradient(to bottom, rgb(var(--c-white)), var(--grad-to));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
   .section-padding {
@@ -48,55 +235,94 @@ body {
   }
 
   .eyebrow {
-    @apply text-primary font-semibold tracking-[0.18em] uppercase text-xs;
+    @apply text-primary font-semibold tracking-[0.16em] uppercase;
+    font-size: var(--text-eyebrow);
+    line-height: 1.4;
   }
 
   /* Uygulama görüntüleri için cihaz çerçeveleri */
   .device-phone {
-    @apply relative rounded-[2.4rem] border border-line bg-[#0B0F16] p-2 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.9)];
+    @apply relative rounded-[2.4rem] border border-line bg-device p-2 shadow-device;
   }
   .device-phone > img {
     @apply block w-full rounded-[1.9rem];
   }
 
   .device-window {
-    @apply relative rounded-xl border border-line bg-surface overflow-hidden shadow-[0_40px_90px_-30px_rgba(0,0,0,0.9)];
+    @apply relative rounded-xl border border-line bg-surface overflow-hidden shadow-window;
   }
   .device-window > img {
     @apply block w-full;
   }
 
   .grid-bg {
-    background-image: linear-gradient(rgba(38, 48, 71, 0.35) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(38, 48, 71, 0.35) 1px, transparent 1px);
+    background-image: linear-gradient(rgb(var(--c-line) / 0.35) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--c-line) / 0.35) 1px, transparent 1px);
     background-size: 56px 56px;
     mask-image: radial-gradient(ellipse at 50% 0%, black 20%, transparent 70%);
   }
 }
 
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Azaltılmış hareket: kayma ve ölçek yok, yalnız opaklık geçişi */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+  html { scroll-behavior: auto; }
+  .animate-rise { animation: fade-in 300ms ease-out both !important; animation-delay: 0ms !important; }
+  .press:active { transform: none; opacity: 0.8; transition: opacity 100ms ease-out; }
+  .press { transition: opacity 160ms ease-out; }
+  .menu-panel { transform: none !important; }
+}
+
+/* Saydamlık azaltılmışsa: düz, opak yüzeyler */
+@media (prefers-reduced-transparency: reduce) {
+  .material {
+    background: rgb(var(--c-surface)) !important;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+  .card-soft { background: rgb(var(--c-card)); }
+}
+
+/* Yüksek karşıtlık: opak yüzey, belirgin kenar, daha açık ikincil metin */
+@media (prefers-contrast: more) {
+  .material { -webkit-backdrop-filter: none; backdrop-filter: none; }
+  html[data-palet="mevcut"] { --muted: #c3cde0; --material-bg: #0e121a; --material-edge: #8e9ab0; }
+  html[data-palet="mevcut"] .text-muted { color: #c3cde0 !important; }
+  html[data-palet="mevcut"] .material { box-shadow: inset 0 0 0 1px #8e9ab0; }
+  html[data-palet="mevcut"] .card-soft { background: #171e2b; box-shadow: 0 0 0 1px #8e9ab0; }
+  html[data-palet="mevcut"] .section-fade::before { background: #8e9ab0; }
+  html[data-palet="mevcut"] .btn-secondary { border-color: #c3cde0; }
 }
 
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: rgb(var(--c-background));
 }
 ::-webkit-scrollbar-thumb {
-  background: #263047;
+  background: rgb(var(--c-line));
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #33405c;
+  background: rgb(var(--c-muted) / 0.5);
+}
+
+/* ===== Yuksek karsitlik ve bilesen duzeltmeleri ===== */
+/* Dugme/rozet zemini hep koyu mavi ya da koyu: ustundeki yazi iki temada da beyaz kalir */
+html:not([data-palet="mevcut"]) [class*="bg-primary-dark"][class*="text-white"],
+html:not([data-palet="mevcut"]) [class*="bg-black/75"][class*="text-white"] { color: #fff; }
+
+@media (prefers-contrast: more) {
+  html:not([data-palet="mevcut"]) { --c-muted: 201 205 214; --c-line: 110 116 128; --c-primary: 141 187 255; --material-bg: #0b0d11; }
+  html[data-tema="acik"] { --c-muted: 60 63 69; --c-line: 110 112 120; --c-primary: 8 72 168; --material-bg: #fbfbfd; }
+  html:not([data-palet="mevcut"]) .text-muted { color: rgb(var(--c-muted)) !important; }
+  html:not([data-palet="mevcut"]) .material { box-shadow: inset 0 0 0 1px rgb(var(--c-line)); }
+  html:not([data-palet="mevcut"]) .card-soft { background: rgb(var(--c-card)); box-shadow: 0 0 0 1px rgb(var(--c-line)); }
+  html:not([data-palet="mevcut"]) .section-fade::before { background: rgb(var(--c-line)); }
+  html:not([data-palet="mevcut"]) .btn-secondary { border-color: rgb(var(--c-muted)); }
 }

@@ -22,13 +22,13 @@ const premium = [
 
 export default function Pricing() {
   return (
-    <section id="fiyat" className="section-padding border-t border-line">
+    <section id="fiyat" className="section-padding section-fade">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-14 space-y-4">
           <p className="eyebrow">Fiyat</p>
-          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">Ücretsiz başlayın.</h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold tracking-[-0.02em] text-white">Ücretsiz başla.</h2>
           <p className="text-lg text-muted max-w-xl mx-auto">
-            Reklam yok, hesap yok. Kasanız büyüdüğünde Premium&apos;a geçin; aylık, yıllık ya da tek seferlik ömür boyu.
+            Reklam yok. Kasan büyüdüğünde Premium&apos;a geç; aylık, yıllık ya da tek seferlik ömür boyu.
           </p>
         </div>
 
@@ -36,10 +36,10 @@ export default function Pricing() {
           <div className="glass-card p-8 md:p-10 flex flex-col">
             <h3 className="text-lg font-bold text-white">Ücretsiz</h3>
             <p className="mt-2 text-4xl font-extrabold text-white">0 ₺</p>
-            <p className="mt-1 text-sm text-muted">Süre sınırı yok</p>
+            <p className="mt-1 text-sm text-muted">Kayıt sınırlı ücretsiz plan</p>
             <ul className="mt-8 space-y-3.5 flex-1">
               {free.map((f) => (
-                <li key={f} className="flex gap-3 text-[15px] text-foreground/90">
+                <li key={f} className="flex gap-3 text-sm text-foreground/90">
                   <Check size={18} className="mt-0.5 shrink-0 text-muted" />
                   {f}
                 </li>
@@ -56,10 +56,10 @@ export default function Pricing() {
             </span>
             <h3 className="text-lg font-bold text-white">Premium</h3>
             <p className="mt-2 text-2xl md:text-3xl font-extrabold text-white leading-tight">Aylık · Yıllık · Ömür boyu</p>
-            <p className="mt-1 text-sm text-muted">Güncel fiyat Google Play&apos;de, bölgenizin para biriminde gösterilir.</p>
+            <p className="mt-1 text-sm text-muted">Güncel fiyat Google Play&apos;de, bölgenin para biriminde gösterilir.</p>
             <ul className="mt-8 space-y-3.5 flex-1">
               {premium.map((f) => (
-                <li key={f} className="flex gap-3 text-[15px] text-foreground/90">
+                <li key={f} className="flex gap-3 text-sm text-foreground/90">
                   <Check size={18} className="mt-0.5 shrink-0 text-primary" />
                   {f}
                 </li>

@@ -9,7 +9,7 @@ import { paddleConfig, salesOpen } from "@/lib/paddle-env";
 // Satış kapalıyken (PADDLE_SALES_OPEN=1 değilse) yalnızca bilgi amaçlı PlansPreview gösterilir.
 export const metadata: Metadata = {
   title: "Pricing",
-  description: "SyncPass Desktop (Windows): free and Premium plans for an offline password manager.",
+  description: "SyncPass Desktop (Windows): free and Premium plans for a password manager that keeps your vault on your computer.",
   alternates: { canonical: "/en/pricing", languages: { tr: "/satin-al", en: "/en/pricing" } },
 };
 
@@ -32,10 +32,10 @@ export default async function PricingEnPage() {
           <div className="text-center">
             <p className="eyebrow">SyncPass Desktop · Windows</p>
             <h1 className="mt-3 text-3xl md:text-5xl font-extrabold tracking-tight text-white">{open ? "Choose your plan" : "Plans"}</h1>
-            <p className="mt-4 text-muted">On every plan your vault stays encrypted on your computer and is never sent to any server.</p>
+            <p className="mt-4 text-muted">On every plan your vault stays encrypted on your computer and is never sent to our servers; if you turn on Premium sync, the encrypted vault goes only to your own Google Drive.</p>
             <p className="mt-2 text-sm text-muted">
-              The only product sold on this page is a licence for SyncPass Desktop (Windows), an offline password
-              manager. The desktop app has no AI or chatbot features. Terms:{" "}
+              The only product sold on this page is a license for SyncPass Desktop (Windows), a password manager that
+              keeps your vault on your computer. The desktop app has no AI or chatbot features. Terms:{" "}
               <a href="/en/terms" className="text-primary hover:text-primary-light">Terms of Use</a> ·{" "}
               <a href="/en/refunds" className="text-primary hover:text-primary-light">Refund Policy</a> ·{" "}
               <a href="/en/privacy" className="text-primary hover:text-primary-light">Privacy</a>

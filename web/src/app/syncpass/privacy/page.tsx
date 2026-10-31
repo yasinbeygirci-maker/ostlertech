@@ -10,9 +10,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/syncpass/privacy" },
 };
 
-const EFFECTIVE_TR = "23 Ekim 2026";
-const EFFECTIVE_EN = "23 October 2026";
-const CONTACT_EMAIL = "yasin@ostlertech.com";
+const EFFECTIVE_TR = "30 Ekim 2026";
+const EFFECTIVE_EN = "30 October 2026";
+const CONTACT_EMAIL = "destek@ostlertech.com";
 
 function Section({ n, title, children }: { n: string; title: string; children: ReactNode }) {
   return (
@@ -66,18 +66,18 @@ export default function SyncPassPrivacyPolicy() {
 
       <div className="max-w-4xl mx-auto px-6 pt-40 pb-24">
         <div className="space-y-4 mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-widest">
-            Yasal Döküman · Legal
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-black uppercase tracking-widest">
+            <span lang="tr">Yasal Döküman</span><span aria-hidden="true">·</span><span lang="en">Legal</span>
           </div>
           <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white">
             SyncPass <span className="text-primary">Gizlilik Politikası</span>
           </h1>
-          <div className="flex flex-wrap items-center gap-4 text-white/30 text-xs font-bold uppercase tracking-widest pt-2">
+          <div className="flex flex-wrap items-center gap-4 text-muted text-xs font-bold uppercase tracking-widest pt-2">
             <span>Android · Masaüstü</span>
             <div className="w-1 h-1 rounded-full bg-white/20" />
             <span>Yürürlük: {EFFECTIVE_TR}</span>
             <div className="w-1 h-1 rounded-full bg-white/20" />
-            <a href="#en" className="text-primary hover:underline">English version</a>
+            <a href="#en" lang="en" hrefLang="en" className="text-primary hover:underline">English version</a>
           </div>
         </div>
 
@@ -94,7 +94,7 @@ export default function SyncPassPrivacyPolicy() {
             <ul className={list}>
               <li>Girdiğiniz kasa kayıtları: giriş bilgileri, şifreler, notlar, ödeme kartları, banka hesapları, kimlik belgeleri, adresler, Wi-Fi anahtarları, kripto cüzdanları, doğrulayıcı (TOTP) gizli anahtarları ve geçiş anahtarları (passkey).</li>
               <li>Bu kayıtlar, ana şifrenizden türetilen bir anahtarla (PBKDF2) AES-256-GCM kullanılarak şifrelenir. Android&apos;de veritabanı ayrıca SQLCipher ile şifrelenir.</li>
-              <li>Yerel bir güvenlik günlüğü (örneğin kilit açma denemeleri ve senkron sonuçları) ve uygulama ayarlarınız. Şifreli bir yedeğin parçası olmadıkça cihazınızdan çıkmaz.</li>
+              <li>Yerel bir güvenlik günlüğü (örneğin kilit açma denemeleri ve senkron sonuçları) ve uygulama ayarlarınız. Şifreli bir yedeğin ya da Android sistem yedeğinin (4. bölüm) parçası olmadıkça cihazınızdan çıkmaz.</li>
             </ul>
           </Section>
 
@@ -132,8 +132,8 @@ export default function SyncPassPrivacyPolicy() {
             </Sub>
             <Sub title="Google Gemini kullanan isteğe bağlı özellikler (yalnızca Android; SyncPass Masaüstü'nde yoktur)">
               <ul className={list}>
-                <li><strong className="text-white/80">Yardım ekranı:</strong> uygulama içi yardım ekranına yazdığınız mesajlar Google Gemini API&apos;sine gönderilir.</li>
-                <li><strong className="text-white/80">Güvenlik analizi (premium):</strong> yalnızca şifre özellikleri (uzunluk ve hangi karakter türlerinin kullanıldığı) ile kasanız hakkındaki özet sayılar gönderilir. Şifreler, kullanıcı adları ve kayıt adları gönderilmez.</li>
+                <li><strong className="text-white/80">Yardım ekranı:</strong> uygulama içi yardım ekranına yazdığınız serbest metin, hazır yanıtlarla karşılanmayan sorularda Google Gemini API&apos;sine gönderilir. Göndermeden önce kart numarası, e-posta adresi, IP adresi ve &quot;password: ...&quot; gibi ifadeler silinir; bu süzgeç her parolayı ya da kişisel bilgiyi yakalayamaz. Yardım ekranına parola veya kişisel bilgi yazmayın.</li>
+                <li><strong className="text-white/80">Kasa güvenlik raporu (premium):</strong> yalnızca sayılar ve evet/hayır bilgileri gönderilir: güvenlik puanı, kayıt sayısı, zayıf, tekrar kullanılan ve sızmış şifre sayısı, e-posta sızıntı sayısı ile biyometrik kilidin, bulut senkronunun ve acil durum erişiminin açık olup olmadığı. Şifreler, kullanıcı adları, kayıt adları ve e-posta adresleri gönderilmez.</li>
               </ul>
               <p>
                 Gemini&apos;ye gönderilen içerik, Google tarafından <A href="https://ai.google.dev/gemini-api/terms">Gemini API Ek Hizmet Şartları</A> kapsamında işlenir.
@@ -141,13 +141,23 @@ export default function SyncPassPrivacyPolicy() {
               </p>
             </Sub>
             <Sub title="Önceki sürümler (Android)">
-              <p>18 Eylül 2026&apos;dan önce yayımlanan Android sürümlerinde, kasadaki web sitelerinin alan adları logolar için Google&apos;ın <C>www.google.com</C> üzerindeki simge hizmetine gönderiliyordu. Panoda bir IBAN bulunduğunda pano metni ayrıştırılmak üzere Gemini&apos;ye gönderiliyordu. Bu tarihten sonra yayımlanan sürümlerde bunların hiçbiri yapılmaz; uygulamayı güncellemenizi öneririz.</p>
+              <p>18 Eylül 2026&apos;dan önce yayımlanan Android sürümlerinde, kasadaki web sitelerinin alan adları logolar için Google&apos;ın <C>www.google.com</C> üzerindeki simge hizmetine gönderiliyordu. Panoda bir IBAN bulunduğunda pano metni ayrıştırılmak üzere Gemini&apos;ye gönderiliyordu. Bu tarihten sonra yayımlanan sürümlerde bunların hiçbiri yapılmaz; uygulamayı güncellemenizi öneririz. Android&apos;in eski sürümlerinde bulunan kayıt paylaşım kodu özelliği uygulamadan kaldırılmıştır.</p>
             </Sub>
             <Sub title="Belge ve QR tarama (Android)">
               <p>Kart, kimlik ve QR kodu tarama, cihazınızda çalışan Google ML Kit ile yapılır; SyncPass bu görüntüleri yüklemez. ML Kit, Google&apos;a kişiyi tanımlamayan tanılama ve kullanım bilgileri (kurulum başına bir kimlik dahil) gönderebilir.</p>
             </Sub>
-            <Sub title="Satın almalar ve uygulama bütünlüğü (Android)">
-              <p>Premium satın almalar Google Play Faturalandırma ile yapılır; biz ödeme bilgilerinizi değil, yalnızca satın alma durumunu görürüz. Uygulamanın gerçek bir cihazda çalıştığını doğrulamak için Google Play Integrity kullanılır.</p>
+            <Sub title="Geçiş anahtarı (passkey) ve otomatik doldurma (Android)">
+              <p>SyncPass, Google&apos;ın tarayıcı listesini <C>www.gstatic.com</C> adresinden yaklaşık 7 günde bir kendiliğinden indirir; bu istekle bir bilgi gönderilmez. Bir uygulama bir site adına geçiş anahtarı isterse, SyncPass o sitenin herkese açık <C>/.well-known/assetlinks.json</C> dosyasını o siteden okur. Kasa içeriği gönderilmez.</p>
+            </Sub>
+            <Sub title="Android sistem yedeği (Android)">
+              <p>
+                Telefonunuzda Android&apos;in kendi otomatik yedeği açıksa Android, Google hesabınıza uygulama ayarlarınızı, ana şifrenizi doğrulamak için kullanılan tuz ve doğrulama değerini ve kurtarma anahtarı oluşturduysanız kurtarma anahtarıyla sarılmış kasa anahtarını yedekleyebilir.
+                Kasa veritabanı bu yedeğe girmez; ana şifreniz de girmez. Yedeği ele geçiren biri tuz ve doğrulama değeriyle ana şifre tahmini deneyebilir (her deneme 600.000 turluk anahtar türetme maliyetindedir); sarılı kasa anahtarı ise kurtarma QR kodunuz olmadan açılmaz.
+                Bu yedeği Android&apos;in yedekleme ayarlarından kapatabilirsiniz.
+              </p>
+            </Sub>
+            <Sub title="Satın almalar (Android)">
+              <p>Premium satın almalar Google Play Faturalandırma ile yapılır; biz ödeme bilgilerinizi değil, yalnızca satın alma durumunu görürüz.</p>
             </Sub>
             <Sub title="Çökme raporları (Windows ve Android)">
               <ul className={list}>
@@ -163,7 +173,7 @@ export default function SyncPassPrivacyPolicy() {
             </Sub>
             <Sub title="Tarayıcı eklentisi ve otomatik yazma (Masaüstü)">
               <p>
-                SyncPass tarayıcı eklentisi (Chrome, Edge) kayıtlarınızı doğrudan bilgisayarınızdaki SyncPass Masaüstü
+                SyncPass tarayıcı eklentisi (Chrome) kayıtlarınızı doğrudan bilgisayarınızdaki SyncPass Masaüstü
                 uygulamasından alır; bu bağlantı tarayıcının yerel ileti kanalıyla ve yalnızca aynı bilgisayarda (127.0.0.1)
                 kurulur, internete çıkmaz ve bize hiçbir veri gelmez. Eklenti, açık sayfanın adresini yalnızca o siteye ait
                 kayıtları bulmak için masaüstü uygulamasına iletir; şifre yalnızca o siteye ait bir kaydı seçtiğinizde ve
@@ -188,13 +198,13 @@ export default function SyncPassPrivacyPolicy() {
           <Section n="05" title="Yapmadıklarımız">
             <ul className={list}>
               <li>Reklam göstermeyiz; reklam veya analiz amaçlı izleme yazılımları kullanmayız.</li>
-              <li>Verilerinizi satmayız, kiralamayız veya paylaşmayız.</li>
-              <li>Kullanıcı hesabı işletmeyiz ve kasanızı sunucularımızda saklamayız.</li>
+              <li>Verilerinizi satmayız, kiralamayız; veriler yalnızca bu metinde sayılan hizmetlere gider.</li>
+              <li>SyncPass'i kullanmak için SyncPass'e kayıt olmanız gerekmez; kasanızın kopyası sunucularımızda tutulmaz.</li>
             </ul>
           </Section>
 
-          <Section n="06" title="Paylaşım ve acil durum erişimi">
-            <p>Bir kaydı paylaştığınızda veya acil durum erişimini kurduğunuzda veriler, cihazınızdan çıkmadan önce şifrelenir ve sizin seçtiğiniz bir kanalla iletilir. OstlerTech bu verileri almaz ve saklamaz.</p>
+          <Section n="06" title="Acil durum erişimi">
+            <p>Acil durum erişimi bu sürümde güvendiğiniz kişiye kasanıza erişim vermez ve bu özellik için cihazınızdan veri çıkmaz. Girdiğiniz acil durum kişisinin e-posta adresi yalnızca telefonunuzda, uygulamanın özel alanında saklanır.</p>
           </Section>
 
           <Section n="07" title="Saklama ve silme">
@@ -216,6 +226,7 @@ export default function SyncPassPrivacyPolicy() {
 
           <Section n="11" title="Değişiklikler">
             <p>Bu politikayı güncelleyebiliriz. Güncellemelerde yukarıdaki yürürlük tarihini değiştirir, önemli değişiklikleri uygulama içinde bildiririz.</p>
+            <p>30 Ekim 2026 güncellemesi: Android sistem yedeği ve geçiş anahtarı bağlantıları eklendi; kasa raporu ve yardım ekranının Gemini&apos;ye ne gönderdiği koda uygun olarak düzeltildi; Play Integrity ve kayıt paylaşım kodu anlatımları kaldırıldı; iletişim adresi güncellendi.</p>
           </Section>
 
           <Section n="12" title="İletişim">
@@ -229,7 +240,7 @@ export default function SyncPassPrivacyPolicy() {
             <h2 className="text-4xl md:text-5xl font-black tracking-tighter text-white">
               SyncPass <span className="text-primary">Privacy Policy</span>
             </h2>
-            <p className="text-white/30 text-xs font-bold uppercase tracking-widest">Android · Desktop · Effective {EFFECTIVE_EN}</p>
+            <p className="text-muted text-xs font-bold uppercase tracking-widest">Android · Desktop · Effective {EFFECTIVE_EN}</p>
           </div>
 
           <Section n="01" title="Summary">
@@ -243,7 +254,7 @@ export default function SyncPassPrivacyPolicy() {
             <ul className={list}>
               <li>Vault items you enter: logins, passwords, notes, payment cards, bank accounts, identity documents, addresses, Wi-Fi keys, crypto wallets, authenticator (TOTP) secrets and passkeys.</li>
               <li>These items are encrypted with AES-256-GCM using a key derived from your master password (PBKDF2). On Android the database is additionally encrypted with SQLCipher.</li>
-              <li>A local security log (for example unlock attempts and sync results) and your app settings. They never leave your device unless they are part of an encrypted backup.</li>
+              <li>A local security log (for example unlock attempts and sync results) and your app settings. They never leave your device unless they are part of an encrypted backup or the Android system backup (section 4).</li>
             </ul>
           </Section>
 
@@ -281,8 +292,8 @@ export default function SyncPassPrivacyPolicy() {
             </Sub>
             <Sub title="Optional features using Google Gemini (Android app only; not in SyncPass Desktop)">
               <ul className={list}>
-                <li><strong className="text-white/80">Help screen:</strong> the messages you type in the in-app help screen are sent to the Google Gemini API.</li>
-                <li><strong className="text-white/80">Security analysis (premium):</strong> only password characteristics (length and which character types are used) and summary counts about your vault are sent. Passwords, usernames and item names are not sent.</li>
+                <li><strong className="text-white/80">Help screen:</strong> the free text you type in the in-app help screen is sent to the Google Gemini API when a question is not answered by the built-in replies. Before sending, card numbers, email addresses, IP addresses and expressions such as &quot;password: ...&quot; are removed; this filter cannot catch every password or piece of personal information. Do not type passwords or personal information into the help screen.</li>
+                <li><strong className="text-white/80">Vault security report (premium):</strong> only numbers and yes/no values are sent: the security score, the number of items, the number of weak, reused and leaked passwords, the email breach count, and whether biometric unlock, cloud sync and emergency access are turned on. Passwords, usernames, item names and email addresses are not sent.</li>
               </ul>
               <p>
                 Content sent to Gemini is processed by Google under the <A href="https://ai.google.dev/gemini-api/terms">Gemini API Additional Terms of Service</A>,
@@ -290,13 +301,23 @@ export default function SyncPassPrivacyPolicy() {
               </p>
             </Sub>
             <Sub title="Earlier versions (Android)">
-              <p>In Android versions released before 18 September 2026, the domain names of websites in your vault were sent to Google&apos;s favicon service at <C>www.google.com</C> to show logos, and clipboard text containing an IBAN was sent to Gemini to be parsed. Versions released after that date do neither; we recommend updating the app.</p>
+              <p>In Android versions released before 18 September 2026, the domain names of websites in your vault were sent to Google&apos;s favicon service at <C>www.google.com</C> to show logos, and clipboard text containing an IBAN was sent to Gemini to be parsed. Versions released after that date do neither; we recommend updating the app. The record share-code feature of older Android versions has been removed from the app.</p>
             </Sub>
             <Sub title="Document and QR scanning (Android)">
               <p>Card, ID and QR code scanning uses Google ML Kit on your device; SyncPass does not upload these images. ML Kit may send diagnostic and usage information that does not identify you (including a per-installation identifier) to Google.</p>
             </Sub>
-            <Sub title="Purchases and app integrity (Android)">
-              <p>Premium purchases are handled by Google Play Billing; we receive the purchase status, not your payment details. Google Play Integrity is used to check that the app runs on a genuine device.</p>
+            <Sub title="Passkeys and autofill (Android)">
+              <p>SyncPass automatically downloads Google&apos;s browser list from <C>www.gstatic.com</C> about once every 7 days; nothing is sent with this request. If an app asks for a passkey for a website, SyncPass reads that site&apos;s public <C>/.well-known/assetlinks.json</C> file from the site. No vault content is sent.</p>
+            </Sub>
+            <Sub title="Android system backup (Android)">
+              <p>
+                If Android&apos;s own automatic backup is turned on on your phone, Android may back up to your Google account your app settings, the salt and verification value used to check your master password, and, if you created a recovery key, the vault key wrapped with that recovery key.
+                The vault database is not included in this backup, and neither is your master password. Someone who obtains the backup could try to guess the master password using the salt and verification value (each guess costs 600,000 rounds of key derivation); the wrapped vault key cannot be opened without your recovery QR code.
+                You can turn this backup off in Android&apos;s backup settings.
+              </p>
+            </Sub>
+            <Sub title="Purchases (Android)">
+              <p>Premium purchases are handled by Google Play Billing; we receive the purchase status, not your payment details.</p>
             </Sub>
             <Sub title="Crash reports (Windows and Android)">
               <ul className={list}>
@@ -312,7 +333,7 @@ export default function SyncPassPrivacyPolicy() {
             </Sub>
             <Sub title="Browser extension and auto-type (Desktop)">
               <p>
-                The SyncPass browser extension (Chrome, Edge) gets your logins directly from the SyncPass desktop app on your
+                The SyncPass browser extension (Chrome) gets your logins directly from the SyncPass desktop app on your
                 computer, through the browser&apos;s native messaging channel and only on the same computer (127.0.0.1); nothing
                 goes over the internet and nothing reaches us. The extension passes the address of the open page to the desktop
                 app only to find the logins for that site; a password is given only when you choose a login for that site and
@@ -324,12 +345,12 @@ export default function SyncPassPrivacyPolicy() {
                 keyboard; the clipboard is not used and nothing leaves your computer.
               </p>
             </Sub>
-            <Sub title="Premium licence (Desktop)">
+            <Sub title="Premium license (Desktop)">
               <p>
                 SyncPass for Windows Premium is sold on ostlertech.com through our reseller and Merchant of Record, Paddle.com.
-                Once you enter a licence key, the app contacts our server about once a week to check it, sending only the
-                licence key, a random device number it generated itself and the app version. Your vault contents are never sent.
-                The free version never contacts this server. Licence records are kept for 1 year after the licence ends.
+                Once you enter a license key, the app contacts our server about once a week to check it, sending only the
+                license key, a random device number it generated itself and the app version. Your vault contents are never sent.
+                The free version never contacts this server. License records are kept for 1 year after the license ends.
               </p>
             </Sub>
           </Section>
@@ -337,13 +358,13 @@ export default function SyncPassPrivacyPolicy() {
           <Section n="05" title="What we do not do">
             <ul className={list}>
               <li>We do not show ads and do not include advertising or analytics tracking SDKs.</li>
-              <li>We do not sell, rent or share your data.</li>
-              <li>We do not operate user accounts or store your vault on our servers.</li>
+              <li>We do not sell or rent your data; data goes only to the services listed in this policy.</li>
+              <li>You do not need to register with SyncPass to use it, and a copy of your vault is not kept on our servers.</li>
             </ul>
           </Section>
 
-          <Section n="06" title="Sharing and emergency access">
-            <p>When you share an item or set up emergency access, the data is encrypted on your device before it leaves it and is passed on through a channel you choose. OstlerTech does not receive or store it.</p>
+          <Section n="06" title="Emergency access">
+            <p>In this version, emergency access does not give the person you trust access to your vault, and no data leaves your device for this feature. The emergency contact email you enter is stored only on your phone, in the app&apos;s private storage.</p>
           </Section>
 
           <Section n="07" title="Retention and deletion">
@@ -365,6 +386,7 @@ export default function SyncPassPrivacyPolicy() {
 
           <Section n="11" title="Changes">
             <p>We may update this policy. We will change the effective date above and, for significant changes, notify you in the app.</p>
+            <p>Update of 30 October 2026: added the Android system backup and passkey connections; corrected what the vault report and help screen send to Gemini to match the code; removed the Play Integrity and record share-code descriptions; updated the contact address.</p>
           </Section>
 
           <Section n="12" title="Contact">

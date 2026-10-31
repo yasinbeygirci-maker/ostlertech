@@ -15,7 +15,7 @@ const points = [
   { icon: Columns3, title: "Üç sütun", desc: "Kategoriler, liste ve ayrıntı yan yana. Pencere daralınca ayrıntı listenin üstünde açılır." },
   { icon: Command, title: "Klavyeyle hızlı", desc: "Uygulamada Ctrl+Shift+P, her yerden Ctrl+Shift+Space hızlı erişim penceresini açar; Ctrl+C şifreyi, Ctrl+B kullanıcı adını kopyalar." },
   { icon: ClipboardX, title: "Pano geçmişine düşmez", desc: "Kopyalanan şifre Windows pano geçmişine ve bulut panosuna yazılmaz." },
-  { icon: SunMoon, title: "Windows temasına uyar", desc: "Açık ve koyu tema sistemi izler; isterseniz ayarlardan sabitleyin." },
+  { icon: SunMoon, title: "Windows temasına uyar", desc: "Açık ve koyu tema sistemi izler; istersen ayarlardan sabitle." },
 ];
 
 export default function Desktop() {
@@ -29,10 +29,10 @@ export default function Desktop() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center max-w-2xl mx-auto space-y-4 mb-12">
           <p className="eyebrow">SyncPass Masaüstü · <span lang="en">Windows</span></p>
-          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">Bilgisayarda da aynı kasa.</h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold tracking-[-0.02em] text-white">Bilgisayarda da aynı kasa.</h2>
           <p className="text-lg text-muted">
-            Android ile aynı şifreleme ve kasa biçimi, aynı güvenlik puanı. Windows için ücretsiz indirin; Chrome
-            eklentisiyle giriş sayfalarını bu bilgisayardaki kasadan doldurun.
+            Android ile aynı şifreleme ve kasa biçimi, aynı güvenlik puanı. Windows için ücretsiz indir; Chrome
+            eklentisiyle giriş sayfalarını bu bilgisayardaki kasadan doldur.
           </p>
         </div>
 
@@ -44,7 +44,7 @@ export default function Desktop() {
                 role="tab"
                 aria-selected={shot === k}
                 onClick={() => setShot(k)}
-                className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${
+                className={`rounded-full press px-4 min-h-[40px] text-sm font-semibold ${
                   shot === k ? "bg-card text-white" : "text-muted hover:text-white"
                 }`}
               >
@@ -59,7 +59,7 @@ export default function Desktop() {
                 role="tab"
                 aria-selected={theme === t}
                 onClick={() => setTheme(t)}
-                className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${
+                className={`rounded-full press px-4 min-h-[40px] text-sm font-semibold ${
                   theme === t ? "bg-card text-white" : "text-muted hover:text-white"
                 }`}
               >
@@ -86,7 +86,7 @@ export default function Desktop() {
             <div key={p.title} className="space-y-2">
               <p.icon className="text-primary" size={22} />
               <h3 className="font-bold text-white">{p.title}</h3>
-              <p className="text-sm text-muted leading-relaxed">{p.desc}</p>
+              <p className="text-sm text-muted leading-[1.5]">{p.desc}</p>
             </div>
           ))}
         </div>
@@ -95,11 +95,11 @@ export default function Desktop() {
           <a href={DESKTOP_DOWNLOAD.url} className="btn-primary inline-flex !py-3.5 text-base">Windows için ücretsiz indir</a>
           <p className="text-xs text-muted">Sürüm {DESKTOP_DOWNLOAD.version} · {DESKTOP_DOWNLOAD.requirements}</p>
           <p className="text-sm text-muted">
-            <a href={BROWSER_EXTENSION.chromeUrl} className="text-primary hover:text-primary-light" target="_blank" rel="noopener">Chrome Web Mağazası'ndan eklentiyi ekle →</a>
+            <a href={BROWSER_EXTENSION.chromeUrl} className="press inline-flex min-h-[44px] items-center text-primary hover:text-primary-light" target="_blank" rel="noopener">Chrome Web Mağazası'ndan eklentiyi ekle →</a>
           </p>
           <p className="pt-2 text-sm text-muted">
             Ücretsiz sürüm ya da <span className="text-white font-semibold">Premium</span> (aylık, yıllık, ömür boyu), {DESKTOP_LICENSE.devices} bilgisayar ·{" "}
-            <a href="/satin-al" className="text-primary hover:text-primary-light">Planlar ve fiyatlar →</a>
+            <a href="/satin-al" className="press inline-flex min-h-[44px] items-center text-primary hover:text-primary-light">Planlar ve fiyatlar →</a>
           </p>
         </div>
       </div>

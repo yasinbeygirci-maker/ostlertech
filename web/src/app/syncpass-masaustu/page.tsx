@@ -6,7 +6,7 @@ import { BROWSER_EXTENSION, DESKTOP_DOWNLOAD, DESKTOP_LICENSE, SCREENS_VERSION, 
 
 export const metadata: Metadata = {
   title: "SyncPass Masaüstü",
-  description: `SyncPass Masaüstü (Windows): ücretsiz sürüm ve Premium (aylık, yıllık ya da ömür boyu), ${DESKTOP_LICENSE.devices} bilgisayar, kasanız bilgisayarınızda şifreli.`,
+  description: `SyncPass Masaüstü (Windows): ücretsiz sürüm ve Premium (aylık, yıllık ya da ömür boyu), ${DESKTOP_LICENSE.devices} bilgisayar, kasan bilgisayarında şifreli.`,
   alternates: { canonical: "/syncpass-masaustu" },
 };
 
@@ -26,7 +26,7 @@ const productLd = {
   "@context": "https://schema.org",
   "@type": "Product",
   name: "SyncPass Masaüstü",
-  description: "Windows için şifre yöneticisi: kasa bilgisayarda AES-256-GCM ile şifreli, hesap açmak gerekmez.",
+  description: "Windows için şifre yöneticisi: kasa bilgisayarda AES-256-GCM ile şifreli, kopyası sunucularımızda tutulmaz.",
   image: `${SITE_URL}/screens/desktop-vault-dark.webp`,
   brand: { "@type": "Brand", name: "OstlerTech" },
   offers: {
@@ -67,8 +67,8 @@ export default function DesktopLicensePage() {
             <p className="eyebrow">SyncPass Masaüstü · <span lang="en">Windows</span></p>
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">Bilgisayarda da aynı kasa.</h1>
             <p className="text-lg text-muted leading-relaxed">
-              SyncPass Masaüstü, Android uygulamasıyla aynı şifrelemeyi ve kasa biçimini kullanır. Kasanız
-              bilgisayarınızda şifreli durur; hesap açmanız gerekmez.
+              SyncPass Masaüstü, Android uygulamasıyla aynı şifrelemeyi ve kasa biçimini kullanır. Kasan
+              bilgisayarında şifreli durur; kopyası sunucularımızda tutulmaz.
             </p>
             <div className="flex flex-wrap items-center gap-4">
               <a href={DESKTOP_DOWNLOAD.url} className="btn-primary !py-3.5 text-base">Ücretsiz indir (Windows)</a>
@@ -83,8 +83,8 @@ export default function DesktopLicensePage() {
               <summary className="cursor-pointer font-semibold text-foreground">Windows "tanınmayan uygulama" uyarısı gösterirse</summary>
               <p className="mt-3">
                 Kurulum dosyası henüz Microsoft Store üzerinden dağıtılmadığı için Windows SmartScreen uyarı gösterebilir. Uyarıda
-                <strong className="text-foreground"> Ek bilgi → Yine de çalıştır</strong> seçeneğiyle kurulumu sürdürebilirsiniz.
-                Dosyanın bizden geldiğini SHA-256 özetiyle doğrulayabilirsiniz:
+                <strong className="text-foreground"> Ek bilgi → Yine de çalıştır</strong> seçeneğiyle kurulumu sürdürebilirsin.
+                Dosyanın bizden geldiğini SHA-256 özetiyle doğrulayabilirsin:
               </p>
               <code className="mt-2 block break-all font-mono text-xs text-foreground">{DESKTOP_DOWNLOAD.sha256}</code>
               <p className="mt-2">
@@ -102,7 +102,7 @@ export default function DesktopLicensePage() {
               <Monitor size={22} className="text-primary" /> {DESKTOP_LICENSE.name}
             </div>
             <div className="text-sm text-muted">
-              Aylık, yıllık ya da ömür boyu · {DESKTOP_LICENSE.devices} bilgisayar · fiyatlar ülkenize göre, vergiler dahil
+              Aylık, yıllık ya da ömür boyu · {DESKTOP_LICENSE.devices} bilgisayar · fiyatlar ülkene göre, vergiler dahil
             </div>
             <ul className="space-y-3">
               {features.map((f) => (
@@ -114,8 +114,8 @@ export default function DesktopLicensePage() {
             <a href="/satin-al" className="btn-primary w-full !py-3.5 text-base">Planları ve fiyatları gör</a>
             <ul className="space-y-1.5 text-xs text-muted">
               <li>Lisans kodu ödemeden hemen sonra ekranda gösterilir.</li>
-              <li>{DESKTOP_LICENSE.refundDays} gün içinde koşulsuz iade; abonelik istediğiniz zaman iptal edilir.</li>
-              <li>Lisans bitince kasanız kilitlenmez; ücretsiz sürümle kullanmaya devam edersiniz.</li>
+              <li>{DESKTOP_LICENSE.refundDays} gün içinde koşulsuz iade; abonelik istediğin zaman iptal edilir.</li>
+              <li>Lisans bitince kasan kilitlenmez; ücretsiz sürümle kullanmaya devam edersin.</li>
             </ul>
             <p className="text-xs text-muted">Satışlar yetkili satıcımız Paddle.com üzerinden yapılır.</p>
           </aside>

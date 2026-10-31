@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { EnHeader, EnFooter } from "./EnShell";
 import { COMPANY, LEGAL_UPDATED, LEGAL_UPDATED_EN } from "@/lib/site";
 
 // Yasal ve kurumsal sayfaların ortak düzeni.
@@ -13,7 +14,7 @@ export default function LegalPage({ eyebrow, title, children, updated = true, up
 }) {
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <Navbar />
+      {lang === "en" ? <EnHeader trHref={altLink?.href ?? "/"} /> : <Navbar />}
       <article lang={lang} className="max-w-3xl mx-auto px-5 pt-36 pb-24">
         <p className="eyebrow">{eyebrow}</p>
         <h1 className="mt-3 text-4xl md:text-5xl font-extrabold tracking-tight text-white">{title}</h1>
@@ -27,9 +28,9 @@ export default function LegalPage({ eyebrow, title, children, updated = true, up
             <a href={altLink.href} hrefLang={lang === "en" ? "tr" : "en"} className="text-primary hover:text-primary-light">{altLink.label}</a>
           </p>
         )}
-        <div className="legal mt-10 space-y-6 text-[15px] leading-relaxed text-muted">{children}</div>
+        <div className="legal mt-10 space-y-6 text-sm leading-relaxed text-muted">{children}</div>
       </article>
-      <Footer />
+      {lang === "en" ? <EnFooter /> : <Footer />}
     </main>
   );
 }
@@ -60,9 +61,9 @@ export function SellerBlock({ lang = "tr" }: { lang?: "tr" | "en" }) {
       <dt>Trade registry</dt><dd className="text-foreground">Erzincan Registry of Tradesmen and Craftsmen, no. {COMPANY.registryNo}</dd>
       {COMPANY.chamberName && (<><dt>Chamber</dt><dd className="text-foreground">{COMPANY.chamberName} (Erzincan Chamber of Electricians, Tradesmen and Craftsmen)</dd></>)}
       <dt>Address</dt><dd className="text-foreground">{COMPANY.address}, Türkiye</dd>
-      <dt>Registered e-mail (KEP)</dt><dd className="text-foreground">{COMPANY.kep}</dd>
+      <dt>Registered email (KEP)</dt><dd className="text-foreground">{COMPANY.kep}</dd>
       {COMPANY.phone && (<><dt>Phone</dt><dd className="text-foreground">{COMPANY.phone}</dd></>)}
-      <dt>E-mail</dt><dd><a href={`mailto:${COMPANY.email}`} className="text-primary hover:text-primary-light">{COMPANY.email}</a></dd>
+      <dt>Email</dt><dd><a href={`mailto:${COMPANY.email}`} className="text-primary hover:text-primary-light">{COMPANY.email}</a></dd>
     </dl>
   );
   return (

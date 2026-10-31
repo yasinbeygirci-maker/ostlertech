@@ -8,17 +8,17 @@ import { FREE_ITEM_LIMIT, PLAY_URL } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Güvenli Şifre Oluşturucu: Rastgele Güçlü Şifre",
   description:
-    "Ücretsiz güvenli şifre oluşturucu. Şifre tarayıcınızda üretilir, hiçbir yere gönderilmez. Güvenli şifre oluşturma kuralları ve örneklerle.",
+    "Ücretsiz güvenli şifre oluşturucu. Şifre tarayıcında üretilir, hiçbir yere gönderilmez. Güvenli şifre oluşturma kuralları ve örneklerle.",
   alternates: { canonical: "/guvenli-sifre-olusturucu" },
 };
 
 const kurallar = [
-  { b: "Uzunluk her şeyden önemli.", m: "En az 16 karakter kullanın. Her ek karakter, tahmin edilmesi gereken olasılık sayısını katlayarak artırır." },
-  { b: "Her hesaba ayrı şifre.", m: "Bir sitede sızan şifre, aynı şifreyi kullandığınız bütün hesapları açar. Sızıntıların çoğu bu yolla zarar verir." },
-  { b: "Kişisel bilgi kullanmayın.", m: "Ad, doğum tarihi, tuttuğunuz takım, plaka ya da evcil hayvanınızın adı sosyal medyadan kolayca bulunur." },
+  { b: "Uzunluk her şeyden önemli.", m: "En az 16 karakter kullan. Her ek karakter, tahmin edilmesi gereken olasılık sayısını katlayarak artırır." },
+  { b: "Her hesaba ayrı şifre.", m: "Bir sitede sızan şifre, aynı şifreyi kullandığın bütün hesapları açar. Sızıntıların çoğu bu yolla zarar verir." },
+  { b: "Kişisel bilgi kullanma.", m: "Ad, doğum tarihi, tuttuğun takım, plaka ya da evcil hayvanının adı sosyal medyadan kolayca bulunur." },
   { b: "Tahmin edilebilir değişiklik işe yaramaz.", m: "Sona yıl eklemek ya da harfi rakamla değiştirmek (a yerine @) saldırı araçlarının ilk denediği şeylerdir." },
-  { b: "İki adımlı doğrulamayı açın.", m: "Şifre sızsa bile ikinci adım (telefondaki kod ya da passkey) hesabınızı korur." },
-  { b: "Şifreyi düz metin olarak saklamayın.", m: "Not defteri, mesajlaşma uygulaması ya da e-posta taslağı şifre saklamak için güvenli değildir." },
+  { b: "İki adımlı doğrulamayı aç.", m: "Şifre sızsa bile ikinci adım (telefondaki kod ya da passkey) hesabını korur." },
+  { b: "Şifreyi düz metin olarak saklama.", m: "Not defteri, mesajlaşma uygulaması ya da e-posta taslağı şifre saklamak için güvenli değildir." },
 ];
 
 const zayif = ["123456", "qwerty123", "Deniz1990", "Galatasaray1905", "Sifre2026!"];
@@ -26,7 +26,7 @@ const zayif = ["123456", "qwerty123", "Deniz1990", "Galatasaray1905", "Sifre2026
 const sss = [
   {
     q: "Bu sayfada oluşturulan şifre kaydediliyor mu?",
-    a: "Hayır. Şifre tarayıcınızda, cihazınızın güvenli rastgele sayı üreteciyle oluşturulur. Hiçbir sunucuya gönderilmez ve kaydedilmez; sayfayı kapattığınızda kaybolur.",
+    a: "Hayır. Şifre tarayıcında, cihazının güvenli rastgele sayı üreteciyle oluşturulur. Hiçbir sunucuya gönderilmez ve kaydedilmez; sayfayı kapattığında kaybolur.",
   },
   {
     q: "Kaç karakterli şifre güvenlidir?",
@@ -34,15 +34,15 @@ const sss = [
   },
   {
     q: "Sembol kullanmak şart mı?",
-    a: "Şart değil; uzunluk daha etkilidir. Bazı siteler sembolleri kabul etmez, o durumda sembol seçeneğini kapatıp uzunluğu artırın.",
+    a: "Şart değil; uzunluk daha etkilidir. Bazı siteler sembolleri kabul etmez, o durumda sembol seçeneğini kapatıp uzunluğu artır.",
   },
   {
     q: "Şifremi ne sıklıkla değiştirmeliyim?",
-    a: "Güçlü ve her hesapta farklı bir şifreniz varsa düzenli aralıklarla değiştirmeniz gerekmez. Bir sızıntıdan etkilendiğinizi öğrendiğinizde ya da şüphelendiğinizde hemen değiştirin.",
+    a: "Güçlü ve her hesapta farklı bir şifren varsa düzenli aralıklarla değiştirmen gerekmez. Bir sızıntıdan etkilendiğini öğrendiğinde ya da şüphelendiğinde hemen değiştir.",
   },
   {
     q: "Bu kadar farklı şifreyi nasıl hatırlarım?",
-    a: "Hatırlamanız gerekmez. Bir şifre yöneticisi bütün şifrelerinizi şifreli bir kasada saklar; siz yalnızca kasanın ana parolasını hatırlarsınız.",
+    a: "Hatırlaman gerekmez. Bir şifre yöneticisi bütün şifrelerini şifreli bir kasada saklar; sen yalnızca kasanın ana parolasını hatırlarsın.",
   },
 ];
 
@@ -64,7 +64,7 @@ export default function GuvenliSifreOlusturucu() {
             <p className="eyebrow">Ücretsiz araç</p>
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">Güvenli şifre oluşturucu</h1>
             <p className="text-lg text-muted leading-relaxed">
-              Tek tıkla güçlü ve rastgele bir şifre üretin. Şifre tarayıcınızda oluşturulur, hiçbir yere gönderilmez.
+              Tek tıkla güçlü ve rastgele bir şifre üret. Şifre tarayıcında oluşturulur, hiçbir yere gönderilmez.
             </p>
           </div>
           <SifreOlusturucu />
@@ -96,7 +96,7 @@ export default function GuvenliSifreOlusturucu() {
           <div className="space-y-4">
             <h2 className="text-3xl font-extrabold tracking-tight text-white">Güvenli şifre örnekleri</h2>
             <p className="text-muted leading-relaxed">
-              Burada yazan hiçbir şifreyi kullanmayın: yayımlanmış bir şifre artık güvenli değildir. Örnekler yalnızca farkı göstermek için.
+              Burada yazan hiçbir şifreyi kullanma: yayımlanmış bir şifre artık güvenli değildir. Örnekler yalnızca farkı göstermek için.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-4">
@@ -118,7 +118,7 @@ export default function GuvenliSifreOlusturucu() {
                   <li key={o} className="flex items-center gap-3"><Check size={16} className="shrink-0 text-ok" /> {o}</li>
                 ))}
               </ul>
-              <p className="text-xs text-muted">Bu özelliklere sahip bir şifreyi yukarıdaki oluşturucuyla saniyede üretebilirsiniz.</p>
+              <p className="text-xs text-muted">Bu özelliklere sahip bir şifreyi yukarıdaki oluşturucuyla saniyede üretebilirsin.</p>
             </div>
           </div>
         </div>
@@ -126,12 +126,12 @@ export default function GuvenliSifreOlusturucu() {
 
       <section className="section-padding border-t border-line">
         <div className="max-w-3xl mx-auto rounded-3xl border border-primary/30 bg-gradient-to-b from-primary/10 to-card p-8 md:p-10 space-y-5">
-          <h2 className="text-3xl font-extrabold tracking-tight text-white">Şifrelerinizi nerede saklamalısınız?</h2>
+          <h2 className="text-3xl font-extrabold tracking-tight text-white">Şifrelerini nerede saklamalısın?</h2>
           <p className="text-muted leading-relaxed">
             Her hesaba ayrı ve rastgele şifre kullanınca hepsini hatırlamak mümkün olmaz. Çözüm bir şifre yöneticisi.
-            SyncPass şifrelerinizi telefonunuzda AES-256 ile şifreli bir kasada tutar; hesap açmanız gerekmez ve ana şifrenizi
-            bizimle paylaşmazsınız. İçindeki <strong className="text-white">Şifre Üret</strong> aracıyla yeni şifreyi doğrudan kasaya
-            kaydedersiniz.
+            SyncPass şifrelerini telefonunda AES-256 ile şifreli bir kasada tutar; kasanın kopyası sunucularımızda tutulmaz ve ana şifreni
+            bizimle paylaşmazsın. İçindeki <strong className="text-white">Şifre Üret</strong> aracıyla yeni şifreyi doğrudan kasaya
+            kaydedersin.
           </p>
           <ul className="space-y-2 text-sm text-muted">
             <li className="flex gap-3"><Check size={16} className="mt-0.5 shrink-0 text-ok" /> {FREE_ITEM_LIMIT} kayda kadar ücretsiz</li>

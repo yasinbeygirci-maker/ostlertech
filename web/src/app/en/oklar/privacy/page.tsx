@@ -25,7 +25,7 @@ export default function OklarPrivacyEnPage() {
 
       <H2>2. In short</H2>
       <List>
-        <li>The Game has no account. We never ask for your name, e-mail or phone number.</li>
+        <li>The Game has no account. We never ask for your name, email or phone number.</li>
         <li>Your progress is stored only on your device and never reaches us.</li>
         <li>The Game has optional rewarded ads: you choose to watch an ad for a hint or an extra heart. Ads are served by Google AdMob.</li>
         <li>Ads are personalized only if you allow it; users under 18 always get non-personalized ads. You can withdraw your consent at any time.</li>
@@ -90,7 +90,7 @@ export default function OklarPrivacyEnPage() {
       <List>
         <li><b>On-device progress:</b> running the Game; not transferred to us.</li>
         <li><b>Data collected by AdMob:</b> serving and measuring ads, fraud prevention. Personalized ads: your consent (GDPR Art. 6(1)(a), KVKK Art. 5(1)), collected through Google&apos;s consent form in the EEA, UK and Switzerland and through our in-game consent window elsewhere; you can withdraw it at any time. Non-personalized ads and fraud prevention: legitimate interest (GDPR Art. 6(1)(f), KVKK Art. 5(2)(f)). Withdrawing consent does not affect processing before withdrawal.</li>
-        <li><b>Support e-mails:</b> answering your request; KVKK Art. 5(2)(c) and 5(2)(f).</li>
+        <li><b>Support emails:</b> answering your request; KVKK Art. 5(2)(c) and 5(2)(f).</li>
       </List>
 
       <H2>7. International transfers</H2>
@@ -108,7 +108,7 @@ export default function OklarPrivacyEnPage() {
       <List>
         <li>On-device progress: until you uninstall the Game or clear its data.</li>
         <li>AdMob data: per <a href="https://policies.google.com/technologies/retention" className={link}>Google&apos;s retention policy</a>.</li>
-        <li>Support e-mails: 1 year after the request is closed.</li>
+        <li>Support emails: 1 year after the request is closed.</li>
       </List>
 
       <H2>9. Children</H2>

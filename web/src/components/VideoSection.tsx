@@ -11,15 +11,15 @@ export default function VideoSection() {
       <div className="max-w-5xl mx-auto">
         <div className="text-center space-y-3 mb-10">
           <p className="eyebrow">Video</p>
-          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white">SyncPass'i 1 dakikada tanıyın</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white">SyncPass'i 1 dakikada tanı</h2>
           <p className="text-muted max-w-2xl mx-auto">
-            Kasa, arama, 2FA kodları, güvenlik puanı ve verinizin neden telefonunuzdan çıkmadığı.
+            Kasa, arama, 2FA kodları, güvenlik puanı ve verinin neden telefonundan çıkmadığı.
           </p>
         </div>
         <YouTubeFacade video={video} />
-        <p className="mt-4 text-center text-xs text-muted">
+        <p className="mt-4 text-center text-sm text-muted">
           {YOUTUBE_NOTE}{" "}
-          <a href="/videolar" className="text-primary hover:text-primary-light">Tüm videolar →</a>
+          <a href="/videolar" className="press inline-flex min-h-[44px] items-center text-primary hover:text-primary-light">Tüm videolar →</a>
         </p>
       </div>
     </section>

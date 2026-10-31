@@ -31,8 +31,8 @@ export const URUNLER: Urun[] = [
   {
     id: "syncpass",
     ad: "SyncPass",
-    slogan: "Şifreleriniz, kartlarınız ve 2FA kodlarınız cihazınızda",
-    aciklama: "Hesap ve sunucu gerektirmeyen şifre yöneticisi. Kasa AES-256-GCM ve SQLCipher ile telefonda şifreli tutulur; otomatik doldurma, geçiş anahtarı, 2FA kodları ve dürüst bir güvenlik puanı sunar.",
+    slogan: "Şifrelerin, kartların ve 2FA kodların cihazında",
+    aciklama: "Kasayı telefonda tutan şifre yöneticisi; kasanın kopyası sunucularımızda tutulmaz. Kasa AES-256-GCM ve SQLCipher ile şifrelenir; otomatik doldurma, geçiş anahtarı, 2FA kodları ve dürüst bir güvenlik puanı sunar.",
     platform: "Android",
     ikon: "ShieldCheck",
     renk: "#4C8DFF",
@@ -86,8 +86,8 @@ export const URUNLER: Urun[] = [
   {
     id: "cornertab",
     ad: "CornerTab",
-    slogan: "Veresiye defteriniz telefonunuzda",
-    aciklama: "Esnaf için veresiye defteri: müşteri ve tedarikçi hesaplarını, borç ve tahsilatları kaydeder, hesap ekstresini PDF olarak hazırlar. Defter cihazınızda şifreli saklanır; isteğe bağlı PIN ya da parmak izi kilidi ekleyebilir, şifreli yedek alabilirsiniz.",
+    slogan: "Veresiye defterin telefonunda",
+    aciklama: "Esnaf için veresiye defteri: müşteri ve tedarikçi hesaplarını, borç ve tahsilatları kaydeder, hesap ekstresini PDF olarak hazırlar. Defter cihazında şifreli saklanır; isteğe bağlı PIN ya da parmak izi kilidi ekleyebilir, şifreli yedek alabilirsin.",
     platform: "Android",
     ikon: "Store",
     renk: "#f59e0b",

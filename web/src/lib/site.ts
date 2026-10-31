@@ -7,6 +7,10 @@ export const SITE_URL = "https://www.ostlertech.com";
 
 export const CONTACT_EMAIL = "destek@ostlertech.com";
 
+// Güvenlik açığı bildirimleri. Cloudflare Email Routing'de guvenlik@ -> sahibin posta kutusu kuralı açık (2026-10-31).
+// Adres değişirse burası ve public/.well-known/security.txt içindeki "Contact" satırı birlikte değişir.
+export const SECURITY_CONTACT_EMAIL = "guvenlik@ostlertech.com";
+
 export const INSTAGRAM_URL = "https://www.instagram.com/ostlertech/";
 
 export const YOUTUBE_URL = "https://www.youtube.com/@OstlerTech";
@@ -56,7 +60,7 @@ export const BROWSER_EXTENSION = {
 };
 
 // Ekran görüntüleri ve OG görseli aynı adla yenilenince bu değer artırılır (tarayıcı ve paylaşım önbelleği eskiyi göstermesin).
-export const SCREENS_VERSION = "20261018";
+export const SCREENS_VERSION = "20261030";
 
 export const PADDLE_BUYER_TERMS_URL = "https://www.paddle.com/legal/checkout-buyer-terms";
 

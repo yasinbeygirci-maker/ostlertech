@@ -1,4 +1,4 @@
-// Fiyat sayfasındaki planlar. Metni ve fiyat kimliklerini yalnızca burada değiştirin.
+// Fiyat sayfasındaki planlar. Metni ve fiyat kimliklerini yalnızca burada değiştir.
 // Fiyat kimlikleri Paddle > Catalog > Products > SyncPass Desktop Premium altındadır (gizli değildir).
 // Tutarlar burada yazılmaz: sayfa her zaman Paddle'ın ziyaretçinin ülkesine göre döndürdüğü tutarı gösterir.
 
@@ -25,7 +25,7 @@ export const TIERS: Tier[] = [
       "15 kayda kadar",
       "Android ile aynı şifreleme (AES-256-GCM)",
       "Kopyalanan şifre Windows pano geçmişine yazılmaz",
-      "Hesap açmak gerekmez",
+      "Kasanın kopyası sunucularımızda tutulmaz",
     ],
     en: {
       name: "Free",
@@ -34,7 +34,7 @@ export const TIERS: Tier[] = [
         "Up to 15 items",
         "Same encryption as Android (AES-256-GCM)",
         "Copied passwords are kept out of Windows clipboard history",
-        "No account needed",
+        "We keep no copy of your vault on our servers",
       ],
     },
     priceId: null,
@@ -42,13 +42,13 @@ export const TIERS: Tier[] = [
   {
     id: "premium",
     name: "Premium",
-    description: "Tüm kasanız için, aylık ya da yıllık.",
+    description: "Tüm kasan için, aylık ya da yıllık.",
     features: [
       "Sınırsız kayıt",
       "Google Drive ile telefonla eşitleme",
       "Şifre sağlığı: zayıf, tekrar eden ve sızıntıda görülen şifreler",
       "Ctrl+Shift+P ile hızlı erişim",
-      "İstediğiniz zaman iptal",
+      "İstediğin zaman iptal",
     ],
     en: {
       name: "Premium",
@@ -67,12 +67,12 @@ export const TIERS: Tier[] = [
   {
     id: "lifetime",
     name: "Ömür boyu",
-    description: "Bir kez ödeyin, abonelik yok.",
-    features: ["Premium'daki her şey", "Tek seferlik ödeme, yenileme yok", "Gelecek sürümler dahil"],
+    description: "Bir kez öde, abonelik yok.",
+    features: ["Premium'daki her şey", "Tek seferlik ödeme, yenileme yok", "Lisans düzenli aralıklarla sunucumuzla doğrulanır (internet bağlantısı gerekir)"],
     en: {
       name: "Lifetime",
       description: "Pay once, no subscription.",
-      features: ["Everything in Premium", "One-time payment, no renewals", "Future versions included"],
+      features: ["Everything in Premium", "One-time payment, no renewals", "The license is checked with our server at regular intervals (needs an internet connection)"],
     },
     priceId: { once: "pri_01m41q4dg3816kmsk2sd76npdy" },
   },

@@ -12,14 +12,14 @@ export interface Video {
 
 export const VIDEOS: Video[] = [
   {
-    id: "LSGOdiPtpmM",
-    title: "SyncPass'i 1 dakikada tanıyın",
+    id: "T0E4S781Q0k",
+    title: "SyncPass'i 1 dakikada tanı",
     description:
-      "Şifreler, kartlar ve 2FA kodları tek şifreli kasada. Hesap yok, sunucu yok; kasa telefonda AES-256 ile şifrelenir.",
-    poster: "/videos/syncpass-tanitim.webp?v=20261018", // kapak 2026-10-18: örnek kişi Deniz
-    duration: "PT57S",
-    durationLabel: "0:57",
-    uploadDate: "2026-09-29",
+      "Şifreler, kartlar ve 2FA kodları tek şifreli kasada. Kasa telefonda AES-256 ile şifrelenir; kopyası sunucularımızda tutulmaz.",
+    poster: "/videos/syncpass-tanitim.webp?v=20261030", // kapak 2026-10-30: yeni logo, Deniz örnek verisi
+    duration: "PT59S",
+    durationLabel: "0:59",
+    uploadDate: "2026-10-30",
     product: "SyncPass",
   },
   {

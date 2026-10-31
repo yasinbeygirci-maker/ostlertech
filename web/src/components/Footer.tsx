@@ -4,9 +4,9 @@ const columns = [
   {
     title: "SyncPass",
     links: [
-      { href: "/#ozellikler", label: "Özellikler" },
+      { href: "/syncpass#ozellikler", label: "Özellikler" },
       { href: "/syncpass-masaustu", label: "Masaüstü lisansı" },
-      { href: "/#fiyat", label: "Fiyat" },
+      { href: "/syncpass#fiyat", label: "Fiyat" },
       { href: PLAY_URL, label: "Google Play", external: true },
       { href: "/en", label: "English" },
     ],
@@ -20,6 +20,8 @@ const columns = [
       { href: "/iki-adimli-dogrulama", label: "İki adımlı doğrulama (2FA)" },
       { href: "/guvenlik-kontrol-listesi", label: "Güvenlik kontrol listesi" },
       { href: "/dijital-guvenlik-plani", label: "7 günde dijital güvenlik planı" },
+      { href: "/sifre-yoneticisi-karsilastirma", label: "Şifre yöneticisi karşılaştırması" },
+      { href: "/guvenlik/sifreleme-belgesi", label: "Güvenlik ve şifreleme belgesi" },
     ],
   },
   {
@@ -30,7 +32,7 @@ const columns = [
       { href: "/products", label: "Ürünler" },
       { href: "/areapilot", label: "AreaPilot (açık beta)" },
       { href: "/videolar", label: "Videolar" },
-      { href: "/#sss", label: "Sık sorulanlar" },
+      { href: "/syncpass#sss", label: "Sık sorulanlar" },
       { href: YOUTUBE_URL, label: "YouTube", external: true },
       { href: INSTAGRAM_URL, label: "Instagram", external: true },
     ],
@@ -39,6 +41,7 @@ const columns = [
     title: "Yasal",
     links: [
       { href: "/gizlilik", label: "Gizlilik ve KVKK" },
+      { href: "/guvenlik-acigi-bildir", label: "Güvenlik açığı bildir" },
       { href: "/kullanim-sartlari", label: "Kullanım ve satış koşulları" },
       { href: "/teslimat-ve-iade", label: "Teslimat ve iade" },
       { href: "/syncpass/privacy", label: "SyncPass gizlilik" },
@@ -49,17 +52,17 @@ const columns = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-line bg-surface">
+    <footer className="section-fade bg-surface">
       <div className="max-w-7xl mx-auto px-5 py-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
         <div className="space-y-4">
-          <a href="/" className="flex items-center gap-2.5">
-            <img src="/logo-ostlertech.png" alt="" width={28} height={28} className="rounded-full" />
+          <a href="/" className="press flex items-center gap-2.5 min-h-[44px]" aria-label="OstlerTech ana sayfa">
+            <img src="/logo-ostlertech.png" alt="" width={28} height={28} className="rounded-full logo-tile" />
             <span className="text-lg font-bold tracking-tight text-white">
               Ostler<span className="text-primary">Tech</span>
             </span>
           </a>
           <p className="text-sm text-muted max-w-xs leading-relaxed">
-            Verisini kendisinde tutmak isteyen insanlar için güvenlik ve sağlık uygulamaları geliştiriyoruz.
+            Verisini kendisinde tutmak isteyen herkes için güvenlik ve sağlık uygulamaları geliştiriyoruz.
           </p>
           <p className="text-sm text-muted">{CONTACT_EMAIL}</p>
           {COMPANY.phone && <p className="text-sm text-muted">{COMPANY.phone}</p>}
@@ -68,13 +71,13 @@ export default function Footer() {
         {columns.map((c) => (
           <div key={c.title}>
             <h4 className="text-xs font-semibold uppercase tracking-[0.16em] text-foreground">{c.title}</h4>
-            <ul className="mt-4 space-y-3">
+            <ul className="mt-3 space-y-0">
               {c.links.map((l) => (
                 <li key={l.href}>
                   <a
                     href={l.href}
                     {...("external" in l && l.external ? { target: "_blank", rel: "noopener" } : {})}
-                    className="text-sm text-muted hover:text-white transition-colors"
+                    className="press inline-flex min-h-[44px] items-center text-sm text-muted hover:text-white"
                   >
                     {l.label}
                   </a>
@@ -84,12 +87,12 @@ export default function Footer() {
           </div>
         ))}
       </div>
-      <div className="border-t border-line">
+      <div className="section-fade">
         <div className="max-w-7xl mx-auto px-5 py-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
           <p className="text-xs text-muted">
             © {new Date().getFullYear()} {COMPANY.legalName ? `${COMPANY.legalName} · ` : ""}OstlerTech
           </p>
-          <p className="text-xs text-muted">Satışlar yetkili satıcımız Paddle.com üzerinden yapılır.</p>
+          <p className="text-xs text-muted">SyncPass Masaüstü lisans satışları yetkili satıcımız Paddle.com, Android satın almaları Google Play üzerinden yapılır.</p>
         </div>
       </div>
     </footer>

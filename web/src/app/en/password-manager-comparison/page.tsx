@@ -31,8 +31,8 @@ const rows: { label: string; values: [string, string, string, string] }[] = [
 const picks = [
   { who: "You want everything on every device with zero setup", pick: "Bitwarden", why: "Automatic sync, apps everywhere, open source and audited. You trust its servers with your encrypted vault and need an account." },
   { who: "You want free, open-source and fully under your control on a computer", pick: "KeePassXC", why: "A local file, no account, very mature. You handle sync and pick a separate mobile app yourself." },
-  { who: "You use iPhone or Mac and want a local vault with your own cloud", pick: "Enpass", why: "Offline-first with apps on every platform and sync through a cloud you already use." },
-  { who: "You use Android and Windows and want no account and no vendor cloud", pick: "SyncPass", why: "A local encrypted vault on the phone and PC, optional sync only through your own Google Drive, with 2FA codes and passkeys in the same app." },
+  { who: "You use iPhone or Mac and want a local vault with your own cloud", pick: "Enpass", why: "A local vault with apps on every platform and sync through a cloud you already use." },
+  { who: "You use Android and Windows and want your vault kept on your own devices", pick: "SyncPass", why: "A local encrypted vault on the phone and PC, optional sync only through your own Google Drive, with 2FA codes and passkeys in the same app." },
 ];
 
 const faq = [
@@ -132,7 +132,7 @@ export default function PasswordManagerComparison() {
             ))}
           </div>
           <p className="mt-8 text-center text-sm text-muted">
-            Related: <a href="/en/offline-password-manager" className="text-primary hover:text-primary-light">offline password manager</a>
+            Related: <a href="/en/offline-password-manager" className="text-primary hover:text-primary-light">on-device password manager</a>
             {" · "}<a href="/en/password-manager-with-authenticator" className="text-primary hover:text-primary-light">built-in authenticator</a>
           </p>
         </div>

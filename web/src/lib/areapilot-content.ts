@@ -281,7 +281,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       button: "Get the download link",
       sending: "Sending…",
       notice:
-        "We use your e-mail to give you the AreaPilot beta download link and to send important beta notices (critical fixes, end of beta); we do not send marketing. Details:",
+        "We use your email to give you the AreaPilot beta download link and to send important beta notices (critical fixes, end of beta); we do not send marketing. Details:",
       noticeLink: "AreaPilot beta privacy notice",
       successTitle: "Your download link is ready.",
       successNote: "The installer and guides download from our release page on GitHub. You will see two warnings during setup; what to do is explained below.",
@@ -323,7 +323,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     appPrivacy: [
       "Your drawings never leave your computer. AreaPilot measures areas inside AutoCAD on your computer. Excel exports are saved only to the folder you choose.",
       "Update check: the first time the AreaPilot window opens in each AutoCAD session, the app reads a version file on ostlertech.com. No drawing, user name or identifier is sent; the server hosting our site (Vercel, USA) keeps the requesting IP address in short-lived server logs. Without internet the check is skipped. If a new version exists you are asked; if you choose \"Yes\", the download page opens in your browser.",
-      "Error reports stay on your computer: if an unexpected error occurs, details are written to %LOCALAPPDATA%\\OstlerTech\\AreaPilot\\hatalar and reports older than 30 days are deleted. Nothing is sent automatically. The app offers to copy the report to the clipboard; if you want to send it to us, paste it into an e-mail. Drawing content is not written and your user folder path is hidden, but an error message may contain a file or layer name, so please look before sending.",
+      "Error reports stay on your computer: if an unexpected error occurs, details are written to %LOCALAPPDATA%\\OstlerTech\\AreaPilot\\hatalar and reports older than 30 days are deleted. Nothing is sent automatically. The app offers to copy the report to the clipboard; if you want to send it to us, paste it into an email. Drawing content is not written and your user folder path is hidden, but an error message may contain a file or layer name, so please look before sending.",
       "Settings and trial: language, theme and measurement settings are stored in the Windows registry (HKEY_CURRENT_USER\\Software\\OstlerTech\\SpaceCalc) and removed when you uninstall. The beta trial start date is stored in the HKEY_CURRENT_USER\\Software\\OstlerTech\\AreaPilot\\Deneme key and in %LOCALAPPDATA%\\OstlerTech\\AreaPilot\\deneme.txt; it is kept after uninstalling so the trial does not restart. You can delete that file and the HKEY_CURRENT_USER\\Software\\OstlerTech\\AreaPilot key by hand.",
       "No ads, analytics or usage tracking.",
     ],
@@ -331,12 +331,12 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     notice: [
       {
         h: "What and why:",
-        p: "the e-mail address you enter in the beta form, the AutoCAD version you optionally select and the date you signed up. Purpose: giving you the download link and sending important notices about the beta (critical fixes, end of the beta, changes to its terms). These notices contain no promotion. We do not send sales or marketing e-mails; when sales open, we announce it on our site and inside the app.",
+        p: "the email address you enter in the beta form, the AutoCAD version you optionally select and the date you signed up. Purpose: giving you the download link and sending important notices about the beta (critical fixes, end of the beta, changes to its terms). These notices contain no promotion. We do not send sales or marketing emails; when sales open, we announce it on our site and inside the app.",
       },
       { h: "Legal basis:", p: "establishing and performing the beta use relationship (KVKK Art. 5(2)(c)) and our legitimate interest in sending these notices (Art. 5(2)(f))." },
       {
         h: "Transfers:",
-        p: "your e-mail is stored on Supabase Pte. Ltd. (a Singapore company) servers in Ireland; the site runs on Vercel Inc. (USA), which receives your IP address when you submit the form. These servers are outside Türkiye; we are in the process of signing the standard contracts announced by the Turkish Personal Data Protection Board under Article 9 of KVKK with these providers. We do not sell your data or share it for advertising.",
+        p: "your email is stored on Supabase Pte. Ltd. (a Singapore company) servers in Ireland; the site runs on Vercel Inc. (USA), which receives your IP address when you submit the form. These servers are outside Türkiye; we are in the process of signing the standard contracts announced by the Turkish Personal Data Protection Board under Article 9 of KVKK with these providers. We do not sell your data or share it for advertising.",
       },
       { h: "Retention:", p: "deleted 6 months after the beta ends, or earlier if you ask; deletions are logged." },
       {

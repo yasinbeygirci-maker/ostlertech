@@ -47,13 +47,13 @@ export default function Waitlist({ productName = "OstlerTech", className }: Wait
         setStatus('error');
       } else {
         setStatus('success');
-        setMessage('Harika! Listeye başarıyla eklendiniz.');
+        setMessage('Harika! Listeye başarıyla eklendin.');
         setEmail('');
       }
     } catch (err) {
       console.error('Waitlist error:', err);
       setStatus('error');
-      setMessage('Bir hata oluştu. Lütfen tekrar deneyin.');
+      setMessage('Bir hata oluştu. Lütfen tekrar dene.');
     }
   };
 
@@ -93,7 +93,7 @@ export default function Waitlist({ productName = "OstlerTech", className }: Wait
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="E-posta adresinizi girin"
+                placeholder="E-posta adresini gir"
                 required
                 className="flex-1 bg-transparent px-6 py-4 sm:py-3 text-white placeholder:text-muted focus:outline-none min-w-0 text-base sm:text-sm"
                 disabled={status === 'loading'}
@@ -131,8 +131,8 @@ export default function Waitlist({ productName = "OstlerTech", className }: Wait
 
       {status !== 'success' && (
         <p className={cn("text-center text-xs text-muted leading-relaxed", status === 'error' ? "mt-10" : "mt-4")}>
-          E-postanızı yalnızca {productName} çıktığında size haber vermek için saklarız; başka amaçla kullanmaz,
-          kimseyle paylaşmayız. Listeden çıkmak için {CONTACT_EMAIL} adresine yazmanız yeterli.
+          E-postanı yalnızca {productName} çıktığında sana haber vermek için saklarız; başka amaçla kullanmaz,
+          kimseyle paylaşmayız. Listeden çıkmak için {CONTACT_EMAIL} adresine yazman yeterli.
         </p>
       )}
 

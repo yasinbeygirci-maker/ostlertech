@@ -5,8 +5,14 @@
 // Ekran dışındayken ve sekme gizliyken durur; "hareketi azalt" açıksa tek kare çizer, oynatmaz.
 import { useEffect, useRef } from "react";
 
-const NODE = "138, 180, 255"; // primary.light
-const LINK_RGB = "76, 141, 255"; // primary
+// Renkler CSS belirteclerinden okunur (--node-a = primary.light, --node-b = primary); varsayilan degerler eskisiyle ayni.
+function readNodeColors() {
+  const cs = getComputedStyle(document.documentElement);
+  return {
+    node: cs.getPropertyValue("--node-a").trim() || "138, 180, 255",
+    link: cs.getPropertyValue("--node-b").trim() || "76, 141, 255",
+  };
+}
 
 type Node = { x: number; y: number; vx: number; vy: number; r: number; phase: number };
 
@@ -54,6 +60,7 @@ export default function ConstellationBackground({ className = "" }: { className?
 
     function draw(t: number, move: boolean) {
       ctx!.clearRect(0, 0, width, height);
+      const { node: NODE, link: LINK_RGB } = readNodeColors();
       ctx!.lineWidth = 1;
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {

@@ -9,18 +9,18 @@ const small = [
   },
   {
     icon: HardDriveDownload,
-    title: "Yedekleme sizin elinizde",
-    desc: "Şifreli yedeği dosyaya alın ya da kendi Google Drive'ınıza koyun (Premium). Başka bir yöneticiden içe aktarma da var.",
+    title: "Yedekleme senin elinde",
+    desc: "Şifreli yedeği dosyaya al ya da kendi Google Drive'ına koy (Premium). Başka bir yöneticiden içe aktarma da var.",
   },
   {
     icon: QrCode,
     title: "Kurtarma QR kodu",
-    desc: "Ana şifreyi unutursanız kasayı açacak, çevrimdışı saklayacağınız bir kurtarma anahtarı.",
+    desc: "Ana şifreyi unutursan kasayı açacak bir kurtarma anahtarı. Yazdırıp ya da başka bir cihazda güvenli bir yerde saklarsın.",
   },
   {
     icon: Wand2,
     title: "Güçlü şifre üretici",
-    desc: "Uzunluğu ve karakter türlerini seçin, gücünü anında görün, kayda tek dokunuşla ekleyin.",
+    desc: "Uzunluğu ve karakter türlerini seç, gücünü anında gör, kayda tek dokunuşla ekle.",
   },
 ];
 
@@ -30,8 +30,8 @@ export default function Features() {
       <div className="max-w-7xl mx-auto">
         <div className="max-w-2xl mb-16 space-y-4">
           <p className="eyebrow">Android uygulaması</p>
-          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">
-            Aradığınızı bulun, kopyalayın, geçin.
+          <h2 className="text-4xl md:text-5xl font-extrabold tracking-[-0.02em] text-white">
+            Aradığını bul, kopyala, geç.
           </h2>
           <p className="text-lg text-muted">
             Kasa ekranı baştan tasarlandı: arama hep üstte, filtreler bir dokunuş uzakta, doğrulama kodları ana ekranda
@@ -45,9 +45,9 @@ export default function Features() {
             <div className="p-8 md:p-10 md:w-1/2 space-y-4">
               <Search className="text-primary" size={26} />
               <h3 className="text-2xl font-bold text-white">Tek listede her şey</h3>
-              <p className="text-muted leading-relaxed">
+              <p className="text-muted leading-[1.5]">
                 Girişler, kartlar, banka hesapları, Wi-Fi, notlar, 2FA ve geçiş anahtarları alfabetik tek listede.
-                Satırdaki düğmeyle kopyalayın; sağa kaydırınca kopyalar, sola kaydırınca favorilere ekler.
+                Satırdaki düğmeyle kopyala; sağa kaydırınca kopyalar, sola kaydırınca favorilere ekler.
               </p>
               <ul className="flex flex-wrap gap-2 pt-2">
                 {["Tümü", "Girişler", "Kartlar", "2FA", "Geçiş anahtarları", "Wi-Fi", "Favoriler"].map((c) => (
@@ -68,8 +68,8 @@ export default function Features() {
           <article className="lg:col-span-2 glass-card p-8 md:p-10 flex flex-col">
             <KeyRound className="text-primary" size={26} />
             <h3 className="mt-4 text-2xl font-bold text-white">2FA kodları ana ekranda (Premium)</h3>
-            <p className="mt-3 text-muted leading-relaxed">
-              Doğrulayıcı uygulamanıza gerek yok. TOTP kodları kasada saklanır, geri sayımla yenilenir; dokununca
+            <p className="mt-3 text-muted leading-[1.5]">
+              Doğrulayıcı uygulamana gerek yok. TOTP kodları kasada saklanır, geri sayımla yenilenir; dokununca
               kopyalanır.
             </p>
             <div className="mt-auto pt-8">
@@ -78,8 +78,8 @@ export default function Features() {
                 <div className="mt-1 flex items-center justify-between">
                   <span className="font-mono text-4xl font-bold tracking-wider text-white">640 252</span>
                   <svg viewBox="0 0 36 36" className="w-9 h-9 -rotate-90" aria-hidden>
-                    <circle cx="18" cy="18" r="15" fill="none" stroke="#263047" strokeWidth="4" />
-                    <circle cx="18" cy="18" r="15" fill="none" stroke="#8AB4FF" strokeWidth="4" strokeDasharray="94" strokeDashoffset="30" strokeLinecap="round" />
+                    <circle cx="18" cy="18" r="15" fill="none" style={{ stroke: "rgb(var(--c-line))" }} strokeWidth="4" />
+                    <circle cx="18" cy="18" r="15" fill="none" style={{ stroke: "rgb(var(--c-primary-light))" }} strokeWidth="4" strokeDasharray="94" strokeDashoffset="30" strokeLinecap="round" />
                   </svg>
                 </div>
               </div>
@@ -91,9 +91,9 @@ export default function Features() {
             <div className="p-8 md:p-10 space-y-4">
               <ShieldCheck className="text-ok" size={26} />
               <h3 className="text-2xl font-bold text-white">Dürüst bir güvenlik puanı</h3>
-              <p className="text-muted leading-relaxed">
+              <p className="text-muted leading-[1.5]">
                 Zayıf, tekrar eden ve sızıntılarda görülmüş şifreler (sızıntı kontrolü Premium) ayrı ayrı sayılır. Ana ekrandaki şerit ile sağlık
-                ekranı aynı hesabı kullanır; &quot;Düzelt&quot; sizi ilgili kayda götürür, şifrenizi sizin yerinize
+                ekranı aynı hesabı kullanır; &quot;Düzelt&quot; seni ilgili kayda götürür, şifreni senin yerine
                 değiştirmez.
               </p>
               <div className="flex gap-3 pt-2">
@@ -120,13 +120,13 @@ export default function Features() {
             <div className="p-8 md:p-10 space-y-4">
               <Tablet className="text-primary" size={26} />
               <h3 className="text-2xl font-bold text-white">Tablette de rahat</h3>
-              <p className="text-muted leading-relaxed">
+              <p className="text-muted leading-[1.5]">
                 Geniş ekranda alt çubuk yerini yan menüye bırakır, içerik ekrana yayılır. Yatay ve dikey kullanım
                 kilitlenmez.
               </p>
             </div>
             <div className="px-8 md:px-10">
-              <div className="rounded-t-[1.6rem] border border-b-0 border-line bg-[#0B0F16] p-2 pb-0 translate-y-2">
+              <div className="rounded-t-[1.6rem] border border-b-0 border-line bg-device p-2 pb-0 translate-y-2">
                 <img
                   src="/screens/tablet-vault.webp"
                   alt="SyncPass tablet görünümü"
@@ -146,7 +146,7 @@ export default function Features() {
               </div>
               <div>
                 <h3 className="text-lg font-bold text-white">{f.title}</h3>
-                <p className="mt-1.5 text-muted leading-relaxed text-[15px]">{f.desc}</p>
+                <p className="mt-1.5 text-muted leading-[1.5] text-sm">{f.desc}</p>
               </div>
             </article>
           ))}

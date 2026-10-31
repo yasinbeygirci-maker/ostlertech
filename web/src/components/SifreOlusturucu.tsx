@@ -168,15 +168,15 @@ export default function SifreOlusturucu() {
             className="w-full rounded-xl border border-line bg-surface px-4 py-3 font-mono text-base text-white tracking-widest focus:border-primary/60 focus:outline-none"
           />
           <p className="text-xs text-muted">
-            İstemediğiniz sembolü silin, eklemek istediğinizi yazın. Bazı siteler yalnızca belirli sembolleri kabul eder;
-            o sitenin izin verdiği sembolleri bırakın. Harf, rakam ve boşluk bu kutuya eklenmez.
+            İstemediğin sembolü sil, eklemek istediğini yaz. Bazı siteler yalnızca belirli sembolleri kabul eder;
+            o sitenin izin verdiği sembolleri bırak. Harf, rakam ve boşluk bu kutuya eklenmez.
           </p>
         </div>
       )}
 
       <p className="text-xs text-muted leading-relaxed">
-        Şifre bu sayfada, tarayıcınızın güvenli rastgele sayı üreteciyle oluşturulur. Hiçbir sunucuya gönderilmez ve kaydedilmez.
-        Sayfayı kapattığınızda kaybolur; kullanacağınız şifreyi bir şifre yöneticisine kaydedin.
+        Şifre bu sayfada, tarayıcının güvenli rastgele sayı üreteciyle oluşturulur. Hiçbir sunucuya gönderilmez ve kaydedilmez.
+        Sayfayı kapattığında kaybolur; kullanacağın şifreyi bir şifre yöneticisine kaydet.
       </p>
     </div>
   );
