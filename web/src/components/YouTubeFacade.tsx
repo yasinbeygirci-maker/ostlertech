@@ -6,7 +6,7 @@ import type { Video } from "@/lib/videos";
 
 // Oynat'a basılana kadar yalnızca yerel kapak görünür; YouTube'a istek gitmez, çerez yazılmaz.
 // Basılınca çerezsiz alan adından (youtube-nocookie.com) oynatıcı yüklenir.
-export default function YouTubeFacade({ video, priority = false, lang = "tr" }: { video: Video; priority?: boolean; lang?: "tr" | "en" }) {
+export default function YouTubeFacade({ video, priority = false, lang = "tr", playPosition = "center" }: { video: Video; priority?: boolean; lang?: "tr" | "en"; playPosition?: "center" | "left" }) {
   const [playing, setPlaying] = useState(false);
 
   return (
@@ -36,7 +36,7 @@ export default function YouTubeFacade({ video, priority = false, lang = "tr" }: 
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
           />
           <span className="absolute inset-0 bg-background/10 group-hover:opacity-0 transition-opacity" />
-          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-20 w-20 items-center justify-center rounded-full bg-primary-dark text-white shadow-[0_10px_40px_rgba(0,82,212,0.6)] press transition-transform group-hover:scale-110">
+          <span className={`absolute -translate-x-1/2 -translate-y-1/2 flex ${playPosition === "left" ? "h-10 w-10 left-[9%] top-[71%] sm:h-20 sm:w-20 sm:left-[17%] sm:top-[66%]" : "h-20 w-20 left-1/2 top-1/2"} items-center justify-center rounded-full bg-primary-dark text-white shadow-[0_10px_40px_rgba(0,82,212,0.6)] press transition-transform group-hover:scale-110`}>
             <Play size={34} className="ml-1" fill="currentColor" />
           </span>
           <span className="absolute bottom-3 right-3 rounded-md bg-black/75 px-2 py-0.5 font-mono text-xs text-white">

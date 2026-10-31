@@ -29,7 +29,7 @@ export default function Features() {
     <section id="ozellikler" className="section-padding !pt-12 md:!pt-16">
       <div className="max-w-7xl mx-auto">
         <div className="max-w-2xl mb-16 space-y-4">
-          <p className="eyebrow">Android uygulaması</p>
+          <p className="eyebrow"><span lang="en">Android</span> uygulaması</p>
           <h2 className="text-4xl md:text-5xl font-extrabold tracking-[-0.02em] text-white">
             Aradığını bul, kopyala, geç.
           </h2>

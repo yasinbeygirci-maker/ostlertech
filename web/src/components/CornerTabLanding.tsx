@@ -12,7 +12,7 @@ export const CORNERTAB_COPY = {
     title: "CornerTab: Veresiye defteri uygulaması",
     description:
       "CornerTab esnaf için veresiye defteridir: müşteri ve tedarikçi hesaplarını, borç ve tahsilatları kaydeder, hesap ekstresini PDF olarak hazırlar. Defter cihazında şifreli saklanır.",
-    badge: "Android · Google Play'de",
+    badge: "Google Play'de",
     h1: "CornerTab, veresiye defterin telefonunda",
     lead: "Müşteri ve tedarikçi hesaplarını, borç ve tahsilatları tek yerde tut; hesap ekstresini PDF olarak hazırla.",
     cta: "Google Play'den indir",
@@ -34,13 +34,13 @@ export const CORNERTAB_COPY = {
     title: "CornerTab: Credit ledger app for small shops",
     description:
       "CornerTab is a credit ledger for small businesses: it records customer and supplier accounts, debts and payments, and prepares account statements as PDF. The ledger is stored encrypted on your device.",
-    badge: "Android · On Google Play",
+    badge: "On Google Play",
     h1: "CornerTab, your credit ledger on your phone",
     lead: "Keep customer and supplier accounts, debts and payments in one place, and prepare account statements as PDF.",
     cta: "Download from Google Play",
     videoTitle: "How to use it",
-    videoSub: "Writing debts, taking payments, reminders, statements, end of day and backups, start to finish in 2 minutes 37 seconds. The video is in Turkish with Turkish subtitles; an English version is coming.",
-    videoNote: "When you press play, the video loads from YouTube (youtube-nocookie.com).",
+    videoSub: "Writing debts, taking payments, reminders, statements, end of day and backups, start to finish in 2 minutes 37 seconds.",
+    videoNote: "The video is in Turkish with Turkish subtitles; an English version is coming. When you press play, the video loads from YouTube (youtube-nocookie.com).",
     featuresTitle: "What it does",
     features: [
       { h: "Customer and supplier accounts", p: "Keeps each account separately and records debts and payments with their dates." },
@@ -86,7 +86,7 @@ export default function CornerTabLanding({ lang }: { lang: Lang }) {
       {videoLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(videoLd) }} />}
       <section className="section-padding !pt-36">
         <div className="max-w-5xl mx-auto space-y-6">
-          <p className="eyebrow">{c.badge}</p>
+          <p className="eyebrow"><span lang="en">Android</span> · {c.badge}</p>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">{c.h1}</h1>
           <p className="text-lg text-foreground leading-relaxed max-w-2xl">{c.lead}</p>
           <p>
@@ -94,7 +94,7 @@ export default function CornerTabLanding({ lang }: { lang: Lang }) {
               {c.cta}
             </a>
           </p>
-          <p className="text-muted">{c.playNote}</p>
+          <p className="text-[17px] text-muted">{c.playNote}</p>
         </div>
       </section>
 
@@ -103,8 +103,8 @@ export default function CornerTabLanding({ lang }: { lang: Lang }) {
           <div className="max-w-5xl mx-auto space-y-4">
             <h2 className="text-3xl font-extrabold tracking-[-0.02em] text-white">{c.videoTitle}</h2>
             <p className="text-muted max-w-2xl">{c.videoSub}</p>
-            <YouTubeFacade video={video} lang={lang} priority />
-            <p className="text-muted">{c.videoNote}</p>
+            <YouTubeFacade video={video} lang={lang} priority playPosition="left" />
+            <p className="text-[17px] text-muted">{c.videoNote}</p>
           </div>
         </section>
       )}

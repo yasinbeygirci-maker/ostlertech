@@ -73,7 +73,7 @@ export default function SyncPassPrivacyPolicy() {
             SyncPass <span className="text-primary">Gizlilik Politikası</span>
           </h1>
           <div className="flex flex-wrap items-center gap-4 text-muted text-xs font-bold uppercase tracking-widest pt-2">
-            <span>Android · Masaüstü</span>
+            <span><span lang="en">Android</span> · Masaüstü</span>
             <div className="w-1 h-1 rounded-full bg-white/20" />
             <span>Yürürlük: {EFFECTIVE_TR}</span>
             <div className="w-1 h-1 rounded-full bg-white/20" />
