@@ -6,14 +6,14 @@ import type { Video } from "@/lib/videos";
 
 // Oynat'a basılana kadar yalnızca yerel kapak görünür; YouTube'a istek gitmez, çerez yazılmaz.
 // Basılınca çerezsiz alan adından (youtube-nocookie.com) oynatıcı yüklenir.
-export default function YouTubeFacade({ video, priority = false }: { video: Video; priority?: boolean }) {
+export default function YouTubeFacade({ video, priority = false, lang = "tr" }: { video: Video; priority?: boolean; lang?: "tr" | "en" }) {
   const [playing, setPlaying] = useState(false);
 
   return (
     <div className="relative aspect-video overflow-hidden rounded-2xl border border-line bg-surface shadow-window">
       {playing ? (
         <iframe
-          src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1&hl=tr&cc_lang_pref=tr`}
+          src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1&hl=${lang}&cc_lang_pref=tr`}
           title={video.title}
           allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
           allowFullScreen
@@ -25,7 +25,7 @@ export default function YouTubeFacade({ video, priority = false }: { video: Vide
           type="button"
           onClick={() => setPlaying(true)}
           className="group absolute inset-0 h-full w-full"
-          aria-label={`Videoyu oynat: ${video.title}`}
+          aria-label={`${lang === "tr" ? "Videoyu oynat" : "Play video"}: ${video.title}`}
         >
           <img
             src={video.poster}

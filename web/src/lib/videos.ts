@@ -7,7 +7,7 @@ export interface Video {
   duration: string; // ISO 8601 (yapısal veri için)
   durationLabel: string;
   uploadDate: string;
-  product: "SyncPass" | "SyncSite" | "OstlerTech" | "AreaPilot";
+  product: "SyncPass" | "SyncSite" | "OstlerTech" | "AreaPilot" | "CornerTab";
 }
 
 export const VIDEOS: Video[] = [
@@ -43,5 +43,16 @@ export const VIDEOS: Video[] = [
     durationLabel: "2:45",
     uploadDate: "2026-10-25",
     product: "AreaPilot",
+  },
+  {
+    id: "A6AXJ7QkqEE",
+    title: "CornerTab Veresiye Defteri Nasıl Kullanılır? Baştan Sona Rehber",
+    description:
+      "CornerTab'ı baştan sona gör: borç yazma, tahsilat alma, hatırlatma, ekstre, gün sonu ve yedek alma. Seslendirme ve altyazı Türkçe.",
+    poster: "/videos/cornertab-kullanim.jpg?v=20261031",
+    duration: "PT2M37S",
+    durationLabel: "2:37",
+    uploadDate: "2026-10-31",
+    product: "CornerTab",
   },
 ];

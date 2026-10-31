@@ -24,8 +24,8 @@ const PALET = arg("palet", "");
 const WIDTHS = [1440, 1024, 768, 390];
 
 const ROTALAR_VARSAYILAN = [
-  "/", "/areapilot", "/cornertab/privacy", "/diasync/delete-account", "/diasync/privacy", "/dijital-guvenlik-plani",
-  "/en", "/en/areapilot", "/en/cornertab/privacy", "/en/digital-security-plan", "/en/offline-password-manager",
+  "/", "/areapilot", "/cornertab", "/cornertab/privacy", "/diasync/delete-account", "/diasync/privacy", "/dijital-guvenlik-plani",
+  "/en", "/en/areapilot", "/en/cornertab", "/en/cornertab/privacy", "/en/digital-security-plan", "/en/offline-password-manager",
   "/en/oklar/privacy", "/en/otopark/privacy", "/en/password-manager-comparison", "/en/password-manager-with-authenticator",
   "/en/pricing", "/en/privacy", "/en/refunds", "/en/security-checklist", "/en/syncsite", "/en/syncsite/delete-account",
   "/en/syncsite/privacy", "/en/terms", "/gizlilik", "/guvenli-sifre-olusturucu", "/guvenlik-kontrol-listesi", "/hakkimizda",

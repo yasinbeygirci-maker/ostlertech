@@ -3,8 +3,7 @@ import { AREAPILOT } from "./areapilot";
 import { CORNERTAB } from "./cornertab";
 
 // CornerTab Play bağlantısı (UTM: Play Console'da sitenin getirdiği edinmeler görünsün).
-const CORNERTAB_PLAY_URL =
-  "https://play.google.com/store/apps/details?id=com.ostlertech.cornertab&referrer=utm_source%3Dsite%26utm_medium%3Durunler%26utm_campaign%3Dcornertab";
+const CORNERTAB_PLAY_URL = CORNERTAB.playUrl;
 
 // Ürün kartı. "yayinda" yalnız indirilebilen ürüne verilir; mağazaya çıkmamış ürün "test" ya da "yakinda" kalır.
 export interface Urun {
@@ -94,7 +93,7 @@ export const URUNLER: Urun[] = [
     durum: "yayinda",
     url: CORNERTAB_PLAY_URL,
     cta: "Google Play'den indir",
-    ekler: [{ etiket: "Gizlilik politikası", url: CORNERTAB.path }],
+    ekler: [{ etiket: "Kullanım videosu", url: CORNERTAB.pagePath }, { etiket: "Gizlilik politikası", url: CORNERTAB.path }],
   },
   {
     id: "projex",
