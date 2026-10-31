@@ -1,7 +1,6 @@
 // AreaPilot açık beta sayfasının metni (TR + EN).
 // Kaynak: Deniz, pazarlama/2026-10-23-areapilot-beta-sayfa.md; hukuk düzeni Zeynep, hukuk/2026-10-23-areapilot-beta-gizlilik.md
-// (A yolu: formda yalnız e-posta + isteğe bağlı AutoCAD sürümü, bağlantı hemen sayfada, satış duyurusu kutusu YOK, aydınlatma
-// onay kutusu değil bilgi satırı). Sürüm ve son gün AREAPILOT sabitinden gelir. Hitap: sayfada "sen", yasal metinde "siz".
+// (Bağlantı hemen sayfada; 2026-10-31 T4-B: duyuru e-postası için AYRI, işaretsiz onay kutusu var, beta bağlantısı ona bağlı değil). Sürüm ve son gün AREAPILOT sabitinden gelir. Hitap: sayfada "sen", yasal metinde "siz".
 import { AREAPILOT } from "./areapilot";
 
 const A = AREAPILOT;
@@ -43,6 +42,7 @@ export interface AreaPilotCopy {
     sending: string;
     notice: string;
     noticeLink: string;
+    marketing: string;
     successTitle: string;
     successNote: string;
     installer: string;
@@ -140,8 +140,9 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       button: "İndirme bağlantısını al",
       sending: "Gönderiliyor…",
       notice:
-        "E-postanızı AreaPilot beta indirme bağlantısını vermek ve beta ile ilgili önemli bildirimler (kritik düzeltme, beta bitişi) için kullanırız; reklam göndermeyiz. Ayrıntılar:",
+        "E-postanızı AreaPilot beta indirme bağlantısını vermek ve beta ile ilgili önemli bildirimler (kritik düzeltme, beta bitişi) için kullanırız. Aşağıdaki kutuyu işaretlemediğiniz sürece reklam ya da duyuru göndermeyiz. Ayrıntılar:",
       noticeLink: "AreaPilot beta aydınlatma metni",
+      marketing: "OstlerTech'in yeni ürün ve kampanya duyurularını e-postayla almak istiyorum (dilediğin zaman e-postadaki bağlantıdan çıkabilirsin).",
       successTitle: "İndirme bağlantın hazır.",
       successNote: "Kurulum dosyası ve rehberler GitHub üzerindeki sürüm sayfamızdan iner. Kurulumda iki uyarı göreceksin; ne yapacağın aşağıda yazıyor.",
       installer: `AreaPilot ${A.version} kurulum dosyası (Windows)`,
@@ -193,9 +194,9 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     notice: [
       {
         h: "Hangi veri, neden:",
-        p: "Beta formuna yazdığınız e-posta adresi, isteğe bağlı olarak seçtiğiniz AutoCAD sürümü ve kaydın tarihi. Amaç: indirme bağlantısını vermek ve beta sürümüyle ilgili önemli bildirimleri (kritik hata düzeltmesi, beta süresinin bitişi, koşul değişikliği) göndermek. Bu bildirimler tanıtım içermez. Satış ya da kampanya duyurusu e-postayla gönderilmez; satış açıldığında bunu sitede ve uygulamanın içinde duyururuz.",
+        p: "Beta formuna yazdığınız e-posta adresi, isteğe bağlı olarak seçtiğiniz AutoCAD sürümü ve kaydın tarihi. Amaç: indirme bağlantısını vermek ve beta sürümüyle ilgili önemli bildirimleri (kritik hata düzeltmesi, beta süresinin bitişi, koşul değişikliği) göndermek. Bu bildirimler tanıtım içermez. Yeni ürün ya da kampanya duyurusunu yalnızca formdaki ayrı kutuyu işaretleyenlere e-postayla göndeririz; kutuyu işaretlemezseniz beta bağlantısını yine alırsınız ve duyuru e-postası almazsınız.",
       },
-      { h: "Hukuki sebep:", p: "Beta kullanımına ilişkin ilişkinin kurulması ve ifası (KVKK md. 5/2-c) ve bildirimlerin yapılmasındaki meşru menfaatimiz (md. 5/2-f)." },
+      { h: "Hukuki sebep:", p: "Beta bağlantısı ve beta bildirimleri için: beta kullanımına ilişkin ilişkinin kurulması ve ifası (KVKK md. 5/2-c) ve bildirimlerin yapılmasındaki meşru menfaatimiz (md. 5/2-f). Yeni ürün ve kampanya duyuruları için: yalnızca ayrı kutuyu işaretlemeniz halinde açık rızanız (md. 5/1); rızanızı dilediğiniz zaman e-postadaki bağlantıdan geri alabilirsiniz." },
       {
         h: "Aktarım:",
         p: "E-postanız Supabase Pte. Ltd.'nin (Singapur şirketi) İrlanda'daki sunucularında saklanır; site Vercel Inc. (ABD) üzerinde çalışır ve formu gönderdiğinizde IP adresiniz bu sağlayıcılara ulaşır. Bu sağlayıcıların sunucuları yurt dışındadır; onlarla KVKK md. 9 uyarınca Kurul'un ilan ettiği standart sözleşmeleri imzalama sürecini yürütüyoruz. Verinizi satmayız, reklam için paylaşmayız.",
@@ -281,8 +282,9 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       button: "Get the download link",
       sending: "Sending…",
       notice:
-        "We use your email to give you the AreaPilot beta download link and to send important beta notices (critical fixes, end of beta); we do not send marketing. Details:",
+        "We use your email to give you the AreaPilot beta download link and to send important beta notices (critical fixes, end of beta). We do not send marketing or announcements unless you tick the box below. Details:",
       noticeLink: "AreaPilot beta privacy notice",
+      marketing: "I would like to receive OstlerTech's new product and campaign announcements by email (you can unsubscribe at any time via the link in the email).",
       successTitle: "Your download link is ready.",
       successNote: "The installer and guides download from our release page on GitHub. You will see two warnings during setup; what to do is explained below.",
       installer: `AreaPilot ${A.version} installer (Windows)`,
@@ -331,9 +333,9 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     notice: [
       {
         h: "What and why:",
-        p: "the email address you enter in the beta form, the AutoCAD version you optionally select and the date you signed up. Purpose: giving you the download link and sending important notices about the beta (critical fixes, end of the beta, changes to its terms). These notices contain no promotion. We do not send sales or marketing emails; when sales open, we announce it on our site and inside the app.",
+        p: "the email address you enter in the beta form, the AutoCAD version you optionally select and the date you signed up. Purpose: giving you the download link and sending important notices about the beta (critical fixes, end of the beta, changes to its terms). These notices contain no promotion. We send new product or campaign announcements by email only to people who tick the separate box in the form; if you leave it unticked you still get the beta link and receive no announcement emails.",
       },
-      { h: "Legal basis:", p: "establishing and performing the beta use relationship (KVKK Art. 5(2)(c)) and our legitimate interest in sending these notices (Art. 5(2)(f))." },
+      { h: "Legal basis:", p: "for the beta link and beta notices: establishing and performing the beta use relationship (KVKK Art. 5(2)(c)) and our legitimate interest in sending these notices (Art. 5(2)(f)). For new product and campaign announcements: your explicit consent (Art. 5/1), only if you tick the separate box; you can withdraw it at any time via the link in the email." },
       {
         h: "Transfers:",
         p: "your email is stored on Supabase Pte. Ltd. (a Singapore company) servers in Ireland; the site runs on Vercel Inc. (USA), which receives your IP address when you submit the form. These servers are outside Türkiye; we are in the process of signing the standard contracts announced by the Turkish Personal Data Protection Board under Article 9 of KVKK with these providers. We do not sell your data or share it for advertising.",

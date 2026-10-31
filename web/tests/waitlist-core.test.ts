@@ -7,11 +7,20 @@ const now = 1_800_000_000_000;
 const ok = { product: "areapilot", email: " Deniz@Example.com ", lang: "en", t: now - WAITLIST_MIN_FILL_MS - 1 };
 
 test("geçerli istek: e-posta küçük harf ve kırpılmış, dil, isteğe bağlı AutoCAD sürümü", () => {
-  assert.deepEqual(checkWaitlistRequest({ ...ok, autocad: "2021" }, now), { kind: "ok", product: "areapilot", email: "deniz@example.com", lang: "en", autocadVersion: "2021" });
+  assert.deepEqual(checkWaitlistRequest({ ...ok, autocad: "2021" }, now), { kind: "ok", product: "areapilot", email: "deniz@example.com", lang: "en", autocadVersion: "2021", marketing: false });
   const r = checkWaitlistRequest({ ...ok, autocad: "2099" }, now);
   assert.ok(r.kind === "ok" && r.autocadVersion === null);
   const u = checkWaitlistRequest({ ...ok, autocad: "unknown", lang: "xx" }, now);
   assert.ok(u.kind === "ok" && u.autocadVersion === "unknown" && u.lang === "tr");
+});
+
+test("duyuru onayı: yalnız açıkça true ise onay sayılır; eksik, metin ya da sayı onay değildir", () => {
+  const m = (v: unknown) => {
+    const r = checkWaitlistRequest({ ...ok, marketing: v }, now);
+    return r.kind === "ok" && r.marketing;
+  };
+  assert.equal(m(true), true);
+  for (const v of [false, undefined, "true", 1, null, "on"]) assert.equal(m(v), false);
 });
 
 test("bot: bal küpü dolu, çok hızlı gönderim ya da zaman yok", () => {

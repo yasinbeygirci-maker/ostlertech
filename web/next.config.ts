@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Kök düzen TR/EN diye ayrıldığı için eşleşmeyen adreslerin 404'ü src/app/global-not-found.tsx'ten gelir.
+  experimental: { globalNotFound: true },
   images: {
     unoptimized: true, // Statik görseller için Vercel'de kolaylık sağlar
   },

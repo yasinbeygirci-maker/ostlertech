@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { KokDuzen } from "@/lib/kok-duzen";
+import "./globals.css";
+
+// Kök düzen yok (TR ve EN ayrı); eşleşmeyen her adres için Next bu dosyayı kendi <html> ile çizer.
 
 export const metadata: Metadata = {
   title: "Sayfa bulunamadı",
@@ -9,6 +13,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
+    <KokDuzen lang="tr">
     <main className="min-h-screen bg-background flex flex-col">
       <Navbar />
       <section className="flex-1 flex flex-col items-center justify-center text-center px-5 pt-40 pb-32">
@@ -24,5 +29,6 @@ export default function NotFound() {
       </section>
       <Footer />
     </main>
+    </KokDuzen>
   );
 }

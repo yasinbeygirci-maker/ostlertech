@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { CheckCircle2, Download, FileText, Loader2 } from "lucide-react";
 import type { AreaPilotCopy } from "@/lib/areapilot-content";
 
-// AreaPilot açık beta formu (hukuk 2026-10-23 A yolu): e-posta + isteğe bağlı AutoCAD sürümü; onay kutusu yok, form altı
-// bilgi satırı. Bağlantılar sayfa kaynağında yok, yalnız /api/bekleme yanıtında gelir. Bal küpü alanı ve doldurma süresi
+// AreaPilot açık beta formu: e-posta + isteğe bağlı AutoCAD sürümü + AYRI, işaretsiz duyuru onay kutusu (2026-10-31 T4-B;
+// beta bağlantısı kutuya bağlı değil), form altı bilgi satırı. Bağlantılar sayfa kaynağında yok, yalnız /api/bekleme yanıtında gelir. Bal küpü alanı ve doldurma süresi
 // bot ayıklamak içindir (sunucu ayrıca IP özeti başına saatte 5 kayıt sınırı uygular).
 type Downloads = { installer: string; guideTr: string; guideEn: string };
 
@@ -16,6 +16,7 @@ export default function BetaDownloadForm({ copy, lang, privacyHref }: { copy: Ar
   const [started, setStarted] = useState(0);
   const [email, setEmail] = useState("");
   const [acad, setAcad] = useState("");
+  const [marketing, setMarketing] = useState(false); // ayrı açık rıza: varsayılan İŞARETSİZ
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [links, setLinks] = useState<Downloads | null>(null);
@@ -36,7 +37,7 @@ export default function BetaDownloadForm({ copy, lang, privacyHref }: { copy: Ar
       const res = await fetch("/api/bekleme", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ product: "areapilot", email, autocad: acad || undefined, lang, website, t: started }),
+        body: JSON.stringify({ product: "areapilot", email, autocad: acad || undefined, lang, website, t: started, marketing }),
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.downloads) setLinks(data.downloads);
@@ -95,6 +96,10 @@ export default function BetaDownloadForm({ copy, lang, privacyHref }: { copy: Ar
           ))}
           <option value="unknown">{copy.acadUnknown}</option>
         </select>
+      </label>
+      <label className="flex items-start gap-3 text-base leading-relaxed text-muted">
+        <input type="checkbox" name="marketing" checked={marketing} onChange={(e) => setMarketing(e.target.checked)} className="mt-1 h-5 w-5 shrink-0 accent-primary" />
+        <span>{copy.marketing}</span>
       </label>
       {error && <p className="text-sm text-weak">✕ {error}</p>}
       <button type="submit" disabled={busy} className="btn-primary w-full !py-3 disabled:opacity-60">

@@ -2,7 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Manrope, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SCREENS_VERSION, SITE_URL } from "@/lib/site";
-import "./globals.css";
+
+// TR ve EN kök düzenlerinin ortak parçası: (tr)/layout.tsx ve (en)/layout.tsx yalnız dil değerini verir.
+// globals.css her kök düzende ayrıca içe aktarılır.
 
 // Masaüstü uygulamasıyla aynı yazı tipleri.
 const sans = Manrope({ subsets: ["latin", "latin-ext"], variable: "--font-sans", display: "swap" });
@@ -11,7 +13,7 @@ const mono = JetBrains_Mono({ subsets: ["latin", "latin-ext"], variable: "--font
 const description =
   "OstlerTech, verisini kendisinde tutmak isteyen bireyler ve küçük işletmeler için SyncPass, AreaPilot, CornerTab, SyncDia ve SyncSite uygulamalarını geliştiren bağımsız bir yazılım stüdyosudur.";
 
-export const metadata: Metadata = {
+export const temelMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: "OstlerTech: Verisini kendinde tutmak isteyenler için uygulamalar",
@@ -41,7 +43,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export const viewport: Viewport = {
+export const temelViewport: Viewport = {
   themeColor: "#0B0D11",
   colorScheme: "dark",
 };
@@ -51,9 +53,9 @@ export const viewport: Viewport = {
 const PALET_ONIZLEME = process.env.NODE_ENV !== "production" || process.env.PALET_ONIZLEME === "1";
 const paletBetigi = `(function(){try{var q=new URLSearchParams(location.search),h=document.documentElement,s=sessionStorage,p=q.get("palet"),t=q.get("tema");if(p==="mevcut")s.setItem("palet","mevcut");else if(p==="apple")s.removeItem("palet");if(t==="acik")s.setItem("tema","acik");else if(t==="koyu"||t==="sistem")s.removeItem("tema");if(s.getItem("palet")==="mevcut")h.setAttribute("data-palet","mevcut");var v=s.getItem("tema");if(v)h.setAttribute("data-tema",v)}catch(e){}})()`;
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export function KokDuzen({ lang, children }: Readonly<{ lang: "tr" | "en"; children: React.ReactNode }>) {
   return (
-    <html lang="tr" className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang={lang}className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
       {PALET_ONIZLEME && (
         <head>
           <script dangerouslySetInnerHTML={{ __html: paletBetigi }} />

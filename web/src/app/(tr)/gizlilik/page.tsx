@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function SitePrivacyPage() {
   return (
-    <LegalPage eyebrow="Yasal" title="Gizlilik Politikası ve KVKK Aydınlatma Metni" updatedOn="30 Ekim 2026" altLink={{ href: "/en/privacy", label: "English version" }}>
+    <LegalPage eyebrow="Yasal" title="Gizlilik Politikası ve KVKK Aydınlatma Metni" updatedOn="31 Ekim 2026" altLink={{ href: "/en/privacy", label: "English version" }}>
       <p>
         Bu metin ostlertech.com web sitesini ve buradan yapılan satın almaları kapsar. Uygulamalarımızın kendi gizlilik
         politikaları ayrıdır: <a href="/syncpass/privacy" className="text-primary hover:text-primary-light">SyncPass gizlilik politikası</a>,
@@ -23,8 +23,8 @@ export default function SitePrivacyPage() {
 
       <H2>2. Hangi verileri, neden işliyoruz</H2>
       <List>
-        <li><strong className="text-foreground">Siteyi gezerken:</strong> çerez kullanmıyoruz. Hangi sayfaların ne kadar ziyaret edildiğini görmek için Vercel Web Analytics kullanıyoruz; bu araç çerez kullanmaz, sizi tanımlamaz ve ziyaretleri her gün değişen anonim bir özetle sayar (sayfa adresi, ülke, cihaz ve tarayıcı türü gibi toplu bilgiler). Barındırma hizmetimiz (Vercel) ayrıca güvenlik ve hata ayıklama için IP adresi ve tarayıcı bilgisini kısa süreli sunucu kayıtlarında tutar.</li>
-        <li><strong className="text-foreground">Bekleme listesi:</strong> e-posta adresiniz, yalnızca ürün çıktığında size haber vermek için.</li>
+        <li><strong className="text-foreground">Siteyi gezerken:</strong> sitemizin kendisi çerez kullanmaz. Yalnız satın alma sayfasında (/satin-al) Paddle'ın ödeme bileşeni yüklenir; bu bileşen paddle.com alan adında kötüye kullanıma karşı koruma için kısa süreli bir güvenlik çerezi bırakır ve ödeme penceresini açarsanız kendi çerezlerini kullanabilir (Paddle gizlilik politikası). Ödemeyi tamamladığınızda lisans kodunuzu gösterebilmek için işlem numarası yalnız o sekmenin oturum belleğinde tutulur ve sekmeyi kapatınca silinir. Hangi sayfaların ne kadar ziyaret edildiğini görmek için Vercel Web Analytics kullanıyoruz; bu araç çerez kullanmaz, sizi tanımlamaz ve ziyaretleri her gün değişen anonim bir özetle sayar (sayfa adresi, ülke, cihaz ve tarayıcı türü gibi toplu bilgiler). Barındırma hizmetimiz (Vercel) ayrıca güvenlik ve hata ayıklama için IP adresi ve tarayıcı bilgisini kısa süreli sunucu kayıtlarında tutar.</li>
+        <li><strong className="text-foreground">Bekleme listesi:</strong> e-posta adresiniz. İki ayrı amaç vardır: (a) beta indirme bağlantısını size iletmek ve beta sürümüyle ilgili zorunlu bilgilendirme (güncelleme, son kullanım tarihi); (b) yeni ürün ve kampanya duyurularını e-postayla göndermek, bu yalnızca formdaki ayrı kutuyu işaretlemeniz halinde yapılır ve dilediğiniz zaman e-postadaki bağlantıdan çıkabilirsiniz. Kutuyu işaretlemezseniz (b) kapsamında e-posta almazsınız; (a) yine de uygulanır. Rızanızın tarihi ve gösterilen metnin sürümü kaydedilir.</li>
         <li><strong className="text-foreground">Satın alma:</strong> satışlarımızı yetkili satıcımız (Merchant of Record) Paddle.com yapar. Ödeme ve fatura bilgilerinizi Paddle toplar ve kendi gizlilik politikasına göre işler. Paddle bize yalnızca e-posta adresinizi, ülkenizi, satın aldığınız planı, işlem ve abonelik numaralarını ve ödeme durumunu iletir. Amaç: lisansın teslimi, abonelik durumunun izlenmesi, iade ve destek.</li>
         <li><strong className="text-foreground">Lisans:</strong> lisans kodu, etkinleştirildiği cihazlar için uygulamanın ürettiği rastgele cihaz numarası, uygulama sürümü ve son doğrulama tarihi. Amaç: lisansın geçerliliğini ve cihaz sınırını denetlemek. Kasanızın içeriği hiçbir zaman bize gelmez.</li>
         <li><strong className="text-foreground">Destek yazışmaları:</strong> size yanıt verebilmek için e-posta içeriği.</li>
@@ -37,13 +37,13 @@ export default function SitePrivacyPage() {
       <p>
         Verileriniz 6698 sayılı Kişisel Verilerin Korunması Kanunu'nun 5. maddesindeki şu sebeplere dayanarak işlenir:
         bir sözleşmenin kurulması veya ifası (lisans, destek), kanuni yükümlülüklerimiz, meşru menfaatimiz (site ve
-        lisans güvenliği, Instagram mesajlarınıza yanıt verilmesi) ve bekleme listesi için açık rızanız.
+        lisans güvenliği, Instagram mesajlarınıza yanıt verilmesi) ve açık rızanız. Açık rıza yalnızca yeni ürün ve kampanya duyurusu e-postaları için, bekleme listesi formundaki ayrı kutuyu işaretlemeniz halinde geçerlidir; beta indirme bağlantısı ve beta bildirimleri ise sözleşmenin kurulması ve ifasına (md. 5/2-c) dayanır.
       </p>
 
       <H2>4. Aktarım</H2>
       <p>Verilerinizi satmayız ve reklam amacıyla paylaşmayız. Hizmeti sunabilmek için yalnızca şu hizmet sağlayıcılarla paylaşılır:</p>
       <List>
-        <li>Paddle.com Market Ltd (Birleşik Krallık): yetkili satıcı olarak ödemenin alınması, faturalandırma, vergiler, abonelik ve iadeler (<a href="https://www.paddle.com/legal/privacy" target="_blank" rel="noopener" className="text-primary hover:text-primary-light">Paddle gizlilik politikası</a>).</li>
+        <li>Paddle.com Market Ltd (Birleşik Krallık): yetkili satıcı olarak ödemenin alınması, faturalandırma, vergiler, abonelik ve iadeler. /satin-al sayfasını açtığınızda, bir düğmeye basmanız beklenmeden, fiyatların gösterilmesi için Paddle'ın ödeme betiği (cdn.paddle.com) ve bu betiğin yüklediği, Paddle'a ait ProfitWell betiği (public.profitwell.com) yüklenir; bu sırada IP adresiniz, tarayıcı bilginiz ve ülke bilginiz Paddle'a iletilir (<a href="https://www.paddle.com/legal/privacy" target="_blank" rel="noopener" className="text-primary hover:text-primary-light">Paddle gizlilik politikası</a>).</li>
         <li>Supabase Pte. Ltd. (Singapur şirketi; veritabanı sunucuları İrlanda, AB): lisans ve bekleme listesi kayıtlarının saklanması.</li>
         <li>Vercel: sitenin ve lisans doğrulama hizmetinin barındırılması; anonim ziyaret istatistikleri (Web Analytics).</li>
         <li>ChatPlace, Inc. (ABD): Instagram mesajlaşma otomasyonu (otomatik yanıtlar ve yapay zekâ destekli asistan). ChatPlace, yapay zekâ yanıtları için mesaj içeriğini ABD'deki yapay zekâ hizmet sağlayıcılarına iletir.</li>
@@ -54,8 +54,8 @@ export default function SitePrivacyPage() {
         <li>Yetkili kamu kurumları: yalnızca kanunen zorunlu olduğunda.</li>
       </List>
       <p>
-        Vercel, Supabase, ChatPlace, Cloudflare ve Google'ın sunucuları yurt dışındadır; sitemizi ziyaret ettiğinizde, bekleme listesine
-        yazıldığınızda, masaüstü lisansınız doğrulandığında, bize Instagram'dan yazdığınızda ve bize e-posta gönderdiğinizde verileriniz bu sağlayıcılara aktarılır. Bu aktarım bugün itibarıyla KVKK md. 9'da
+        Paddle (Birleşik Krallık), Vercel, Supabase, ChatPlace, Cloudflare ve Google'ın sunucuları yurt dışındadır; sitemizi ziyaret ettiğinizde, bekleme listesine
+        yazıldığınızda, satın alma sayfasını açtığınızda, masaüstü lisansınız doğrulandığında, bize Instagram'dan yazdığınızda ve bize e-posta gönderdiğinizde verileriniz bu sağlayıcılara aktarılır. Bu aktarım bugün itibarıyla KVKK md. 9'da
         sayılan uygun güvencelerden birine (Kurul'un yeterlilik kararı ya da Kurul'un ilan ettiği standart sözleşmenin
         imzalanıp Kurum'a bildirilmesi) dayanmamaktadır. Supabase'e standart sözleşme imzalanması için 18.10.2026 tarihinde
         talep ilettik; yanıt beklenmektedir. ChatPlace ile de standart sözleşme henüz imzalanmamıştır. İmzalanırsa Kurum'a

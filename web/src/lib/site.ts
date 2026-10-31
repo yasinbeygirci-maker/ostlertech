@@ -64,8 +64,8 @@ export const SCREENS_VERSION = "20261030";
 
 export const PADDLE_BUYER_TERMS_URL = "https://www.paddle.com/legal/checkout-buyer-terms";
 
-export const LEGAL_UPDATED = "4 Ekim 2026";
-export const LEGAL_UPDATED_EN = "7 October 2026"; // İngilizce sürümlerin (/en/...) tarihi
+export const LEGAL_UPDATED = "31 Ekim 2026";
+export const LEGAL_UPDATED_EN = "31 October 2026"; // İngilizce sürümlerin (/en/...) tarihi
 
 // Uygulamadaki sabitlerle aynı olmalı (MainVaultScreen.freeLimit, EncryptionManager.PBKDF2_ITERATIONS).
 export const FREE_ITEM_LIMIT = 15;

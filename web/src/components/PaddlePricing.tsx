@@ -20,11 +20,15 @@ const TEXT = {
   tr: {
     cycleLabel: "Ödeme dönemi", month: "Aylık", year: "Yıllık", once: "tek seferlik", perMonth: "/ ay", perYear: "/ yıl",
     free: "Ücretsiz", download: "İndir", buy: "Satın al", subscribe: "Abone ol",
+    renews: "Seçtiğin dönemin sonunda otomatik yenilenir ve aynı ödeme yönteminden tahsil edilir. Yenilemeden önce istediğin zaman iptal edebilirsin. Ayrıntılar:",
+    terms: "Kullanım ve satış koşulları", termsHref: "/kullanim-sartlari",
     error: "Fiyatlar şu an yüklenemedi. Sayfayı yenile; sorun sürerse destek@ostlertech.com adresine yaz.",
   },
   en: {
     cycleLabel: "Billing period", month: "Monthly", year: "Yearly", once: "one-time", perMonth: "/ month", perYear: "/ year",
     free: "Free", download: "Download", buy: "Buy", subscribe: "Subscribe",
+    renews: "Renews automatically at the end of each period and is charged to the same payment method. Cancel any time before the next renewal. Details:",
+    terms: "Terms of use and sale", termsHref: "/en/terms",
     error: "Prices could not be loaded right now. Refresh the page; if it continues, write to destek@ostlertech.com.",
   },
 } as const;
@@ -146,6 +150,16 @@ export default function PaddlePricing({ environment, token, countryCode, custome
                   </li>
                 ))}
               </ul>
+
+              {tier.priceId && !("once" in tier.priceId) && (
+                <p className="mt-6 text-[15px] leading-relaxed text-foreground">
+                  {tx.renews}{" "}
+                  <a href={tx.termsHref} className="text-primary underline hover:text-primary-light">
+                    {tx.terms}
+                  </a>
+                  .
+                </p>
+              )}
 
               {!priceId ? (
                 <a href={DESKTOP_DOWNLOAD.url} className="btn-secondary mt-8 w-full !py-3">
