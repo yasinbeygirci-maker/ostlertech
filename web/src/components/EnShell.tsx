@@ -1,5 +1,6 @@
 // İngilizce sayfaların üst çubuğu ve alt bilgisi (Türkçe Navbar/Footer yerine). Bağlantılar /en sayfasının bölümlerine gider.
 import { PLAY_URL } from "@/lib/site";
+import SocialLinks from "@/components/SocialLinks";
 
 export function EnHeader({ trHref = "/" }: { trHref?: string }) {
   return (
@@ -42,6 +43,7 @@ export function EnFooter() {
           <span className="text-foreground font-semibold">Guides</span>
           {guides.map((g) => <a key={g.href} href={g.href} className="hover:text-white">{g.label}</a>)}
         </nav>
+        <SocialLinks lang="en" />
         <div className="flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} OstlerTech · Privacy-first apps that keep your data with you.</p>
           <nav className="flex flex-wrap gap-5">
