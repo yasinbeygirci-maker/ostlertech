@@ -10,7 +10,7 @@ const links = [
   { href: "/syncpass#guvenlik", label: "Güvenlik" },
   { href: "/syncpass#fiyat", label: "Fiyat" },
   { href: "/products", label: "Ürünler" },
-  { href: "/areapilot", label: "AreaPilot" },
+  { href: "/videolar", label: "Videolar" },
   { href: "/iletisim", label: "İletişim" },
 ];
 
