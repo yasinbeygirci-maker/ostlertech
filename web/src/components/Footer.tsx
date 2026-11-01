@@ -54,7 +54,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-5 py-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
         <div className="space-y-4">
           <a href="/" className="flex items-center gap-2.5">
-            <img src="/logo-ostlertech.png" alt="" width={28} height={28} className="rounded-full" />
+            <img src="/logo-ostlertech.svg" alt="" width={28} height={28} />
             <span className="text-lg font-bold tracking-tight text-white">
               Ostler<span className="text-primary">Tech</span>
             </span>

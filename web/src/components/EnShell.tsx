@@ -7,7 +7,7 @@ export function EnHeader({ trHref = "/" }: { trHref?: string }) {
     <header className="fixed top-0 inset-x-0 z-50 border-b border-line bg-background/80 backdrop-blur-xl" style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}>
       <div className="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between gap-4">
         <a href="/en" className="flex items-center gap-2.5">
-          <img src="/logo-ostlertech.png" alt="" width={28} height={28} className="rounded-full" />
+          <img src="/logo-ostlertech.svg" alt="" width={28} height={28} />
           <span className="text-lg font-bold tracking-tight text-white">Ostler<span className="text-primary">Tech</span></span>
         </a>
         <nav className="hidden md:flex items-center gap-8 text-sm text-muted">

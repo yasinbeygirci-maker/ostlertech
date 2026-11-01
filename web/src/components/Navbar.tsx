@@ -33,7 +33,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
         <a href="/" className="flex items-center gap-2.5" aria-label="OstlerTech ana sayfa">
-          <img src="/logo-ostlertech.png" alt="" width={30} height={30} className="rounded-full" />
+          <img src="/logo-ostlertech.svg" alt="" width={30} height={30} />
           <span className="text-lg font-bold tracking-tight text-white">
             Ostler<span className="text-primary">Tech</span>
           </span>
