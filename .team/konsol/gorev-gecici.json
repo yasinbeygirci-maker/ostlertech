@@ -1,0 +1,26 @@
+{
+  "aktif_gorevler": [
+    {
+      "id": "G1",
+      "baslik": "Kanal A ve Kanal B/C E-posta & DM Kampanyası Hazırlığı",
+      "sorumlu": "Vera",
+      "durum": "Bekliyor",
+      "aciklama": "Vera'nın hazırladığı A+B+C metinleri ve Segment 2 hedef listesi onaylandı. Gönderim operasyonu adımlarının gözden geçirilmesi ve takibi."
+    },
+    {
+      "id": "G2",
+      "baslik": "Supabase & Resend Canlı E-posta Entegrasyon Doğrulaması",
+      "sorumlu": "Atlas",
+      "durum": "Bekliyor",
+      "aciklama": "Resend API anahtarının Vercel üretim ortamında ve alan adı (ostlertech.com) yönlendirmelerinin son durumunun kontrolü."
+    },
+    {
+      "id": "G3",
+      "baslik": "Güvenlik & Secret Scan Süreklilik Denetimi",
+      "sorumlu": "Argus",
+      "durum": "Bekliyor",
+      "aciklama": "Gitleaks CI doğrulamasından sonra son commitlerin tarama durumunun incelenmesi ve olası yeni sızıntı risklerinin taranması."
+    }
+  ],
+  "tarih": "18 Eylül 2026 Cuma"
+}

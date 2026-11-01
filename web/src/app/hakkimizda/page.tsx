@@ -1,19 +1,28 @@
 import type { Metadata } from "next";
-import LegalPage, { H2, List } from "@/components/LegalPage";
+import LegalPage, { H2, List, SellerBlock } from "@/components/LegalPage";
+import { FounderCard, OrganizationLd } from "@/components/AboutTeam";
 import { COMPANY } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Hakkımızda",
-  description: "OstlerTech: verisini kendisinde tutmak isteyen insanlar için güvenlik ve iş uygulamaları geliştiren bağımsız yazılım stüdyosu.",
-  alternates: { canonical: "/hakkimizda" },
+  description: "OstlerTech: verisini kendisinde tutmak isteyen insanlar için kendi güvenlik ve iş uygulamalarını geliştiren bağımsız yazılım şirketi. Kurucu ve şirket bilgileri.",
+  alternates: { canonical: "/hakkimizda", languages: { tr: "/hakkimizda", en: "/en/about" } },
 };
 
 export default function AboutPage() {
   return (
-    <LegalPage eyebrow="Hakkımızda" title="OstlerTech" updated={false}>
+    <LegalPage eyebrow="Hakkımızda" title="OstlerTech" updated={false} altLink={{ href: "/en/about", label: "English version" }}>
+      <OrganizationLd />
       <p>
-        OstlerTech, Türkiye'de kurulu bağımsız bir yazılım stüdyosu. Verisini kendisinde tutmak isteyen insanlar ve küçük
-        işletmeler için sade, güvenli ve reklamsız uygulamalar geliştiriyoruz.
+        OstlerTech, Türkiye'de kurulu, kendi ürünlerini geliştiren bağımsız bir yazılım şirketi. Verisini kendisinde tutmak
+        isteyen insanlar ve küçük işletmeler için sade, güvenli ve reklamsız uygulamalar geliştiriyoruz.
+      </p>
+
+      <H2>Kurucu ve ekip</H2>
+      <FounderCard lang="tr" />
+      <p>
+        OstlerTech, kurucusu tarafından yönetilen küçük bir şirket. Ürün kararları, geliştirme ve destek doğrudan kurucudan
+        geçer; bu yüzden yazdığınız her e-postayı ürünü yapan kişi okur.
       </p>
 
       <H2>Ne yapıyoruz</H2>
@@ -28,6 +37,9 @@ export default function AboutPage() {
         <li>SyncPass&apos;te reklam ve izleme yok: uygulamada reklam ya da analitik izleme kütüphanesi bulunmaz. Oyunlarımızdaki isteğe bağlı reklamlar her oyunun gizlilik politikasında anlatılır.</li>
         <li>Söylediğimizi yaparız: sitede ve mağazada yalnızca uygulamada gerçekten olan özellikleri anlatırız.</li>
       </List>
+
+      <H2>Şirket bilgileri</H2>
+      <SellerBlock />
 
       <H2>Bize ulaşın</H2>
       <p>

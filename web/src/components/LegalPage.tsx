@@ -58,6 +58,7 @@ export function SellerBlock({ lang = "tr" }: { lang?: "tr" | "en" }) {
       <dt>Business</dt><dd className="text-foreground">{COMPANY.legalName} · {COMPANY.tradeName} ({COMPANY.brand}), sole proprietorship</dd>
       <dt>Tax office / no</dt><dd className="text-foreground">{COMPANY.taxOffice} · {COMPANY.taxNumber}</dd>
       <dt>Trade registry</dt><dd className="text-foreground">Erzincan Registry of Tradesmen and Craftsmen, no. {COMPANY.registryNo}</dd>
+      {COMPANY.duns && (<><dt>D-U-N-S number</dt><dd className="text-foreground">{COMPANY.duns}</dd></>)}
       {COMPANY.chamberName && (<><dt>Chamber</dt><dd className="text-foreground">{COMPANY.chamberName} (Erzincan Chamber of Electricians, Tradesmen and Craftsmen)</dd></>)}
       <dt>Address</dt><dd className="text-foreground">{COMPANY.address}, Türkiye</dd>
       <dt>Registered e-mail (KEP)</dt><dd className="text-foreground">{COMPANY.kep}</dd>
@@ -71,6 +72,7 @@ export function SellerBlock({ lang = "tr" }: { lang?: "tr" | "en" }) {
       <dt>Vergi dairesi / no</dt><dd><Field value={COMPANY.taxOffice} label="Vergi dairesi" /> · <Field value={COMPANY.taxNumber} label="Vergi no" /></dd>
       {COMPANY.mersis && (<><dt>MERSİS no</dt><dd className="text-foreground">{COMPANY.mersis}</dd></>)}
       <dt>Esnaf sicili</dt><dd className="text-foreground">{COMPANY.registry}, sicil no {COMPANY.registryNo}</dd>
+      {COMPANY.duns && (<><dt>D-U-N-S numarası</dt><dd className="text-foreground">{COMPANY.duns}</dd></>)}
       {COMPANY.chamberName && (<><dt>Meslek odası</dt><dd className="text-foreground">{COMPANY.chamberName}</dd></>)}
       <dt>Adres</dt><dd><Field value={COMPANY.address} label="Adres" /></dd>
       <dt>KEP adresi</dt><dd><Field value={COMPANY.kep} label="KEP adresi" /></dd>
