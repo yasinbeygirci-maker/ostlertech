@@ -1,3 +1,4 @@
+import SocialLinks from "@/components/SocialLinks";
 import { PLAY_URL, CONTACT_EMAIL, INSTAGRAM_URL, YOUTUBE_URL, COMPANY } from "@/lib/site";
 
 const columns = [
@@ -83,6 +84,9 @@ export default function Footer() {
             </ul>
           </div>
         ))}
+      </div>
+      <div className="max-w-7xl mx-auto px-5 pb-12">
+        <SocialLinks lang="tr" />
       </div>
       <div className="border-t border-line">
         <div className="max-w-7xl mx-auto px-5 py-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">

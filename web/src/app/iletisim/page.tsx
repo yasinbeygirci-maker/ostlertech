@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import LegalPage, { H2, SellerBlock } from "@/components/LegalPage";
+import { FACEBOOK_URL } from "@/components/SocialLinks";
 import { COMPANY, INSTAGRAM_URL, YOUTUBE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -42,6 +43,8 @@ export default function ContactPage() {
       <H2>Sosyal medya</H2>
       <p>
         <a href={INSTAGRAM_URL} target="_blank" rel="noopener" className="text-primary hover:text-primary-light">Instagram</a>
+        {" · "}
+        <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary-light">Facebook</a>
         {" · "}
         <a href={YOUTUBE_URL} target="_blank" rel="noopener" className="text-primary hover:text-primary-light">YouTube</a>
       </p>
