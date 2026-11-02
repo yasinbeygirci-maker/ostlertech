@@ -9,8 +9,8 @@ export const SYNCSITE = {
   privacyEnPath: "/en/syncsite/privacy",
   deletePath: "/syncsite/hesap-silme",
   deleteEnPath: "/en/syncsite/delete-account",
-  updatedTr: "29 Ekim 2026",
-  updatedEn: "29 October 2026",
+  updatedTr: "2 Kasım 2026",
+  updatedEn: "2 November 2026",
   // Hesap silme e-postayla istenirse silme süresi (iş günü). Yasin onaylar; değişirse iki sayfa birlikte değişir.
   deleteBusinessDays: 10,
 } as const;

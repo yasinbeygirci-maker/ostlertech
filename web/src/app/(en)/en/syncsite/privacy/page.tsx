@@ -8,7 +8,7 @@ const N = SYNCSITE.name;
 
 export const metadata: Metadata = {
   title: `${N} Privacy Policy and Notice`,
-  description: `${N} (formerly ${SYNCSITE.formerName}) construction-site tracking app: without an account your data stays on your device; with an account it is stored on servers in the EU (Ireland). The transfer abroad is explained openly.`,
+  description: `${N} (formerly ${SYNCSITE.formerName}) construction-site tracking app: without a ${N} account your data stays on your device; with an account it is stored on servers in the EU (Ireland). The transfer abroad is explained openly.`,
   alternates: { canonical: SYNCSITE.privacyEnPath, languages: { tr: SYNCSITE.privacyPath, en: SYNCSITE.privacyEnPath } },
 };
 
@@ -33,7 +33,7 @@ export default function SyncSitePrivacyEnPage() {
       <div className="rounded-2xl border border-line bg-surface p-6 space-y-3">
         <p className="font-semibold text-foreground">Short notice</p>
         <List>
-          <li>You can use {N} <strong className="text-foreground">without an account</strong>: your data stays on your device and nothing reaches us.</li>
+          <li>You can use the app <strong className="text-foreground">without a {N} account</strong>: your data stays on your device and nothing reaches us.</li>
           <li>If you create an account, your data is stored on servers in the European Union (Ireland). <strong className="text-foreground">This is a transfer abroad and today it does not rely on one of the safeguards in KVKK Art. 9</strong> (section 6).</li>
           <li>There is no advertising, analytics, crash-reporting or AI service. We do not sell your data or use it for marketing.</li>
           <li>The app asks for no location (GPS) permission; location data inside photos is removed before upload.</li>
@@ -53,9 +53,19 @@ export default function SyncSitePrivacyEnPage() {
       <List>
         <li><strong className="text-foreground">Email address and password.</strong> We never hold your password in readable form; our sign-in service stores it as a one-way hash.</li>
         <li><strong className="text-foreground">Account ID and the date the account was created.</strong> This date is recorded as the start of the beta and of the trial period (section 4).</li>
-        <li><strong className="text-foreground">The version and date of the beta terms you accepted.</strong></li>
         <li><strong className="text-foreground">Session data:</strong> a session key stored on your device to keep you signed in.</li>
-        <li><strong className="text-foreground">Project membership:</strong> your role in each project (owner, editor, viewer) and team. A project owner adds you by your email address.</li>
+        <li>
+          <strong className="text-foreground">Project membership:</strong> your role in each project (owner, editor, viewer) and team. A project owner{" "}
+          <strong className="text-foreground">invites</strong> you by your email address; you are not added to any project, and cannot see its records, until
+          you accept the invitation.
+        </li>
+        <li>
+          <strong className="text-foreground">Invitation record:</strong> the invited email address, the proposed role (editor or viewer), the account that
+          sent the invitation and the date. This record is kept even if the invited address has no account with us. We do not send the invited person an
+          email: the invitation appears in the app for the person who creates an account with that address, verifies the email and signs in; if they accept,
+          they become a member, and if they decline, the invitation is deleted. An invitation is valid for 14 days; an expired invitation gives no access.
+          The project owner who sent it cannot find out whether the address belongs to a registered account.
+        </li>
         <li><strong className="text-foreground">Who entered a record:</strong> stored with each daily record so the team can see who entered it.</li>
         <li><strong className="text-foreground">Server logs:</strong> technical logs kept by our hosting provider when you connect (IP address, time, request type), used only for security and troubleshooting.</li>
       </List>
@@ -71,8 +81,8 @@ export default function SyncSitePrivacyEnPage() {
       </p>
       <p className="font-semibold text-foreground">On your device</p>
       <p>
-        With or without an account, {N} keeps your data in a database and app folder on your device. Records entered offline sync when you are back
-        online. This local database is not separately encrypted; we recommend using a screen lock. Excel, PDF and JSON files you export stay on your
+        Whether or not you have a {N} account, {N} keeps your data in a database and app folder on your device. If you have an account and the
+        connection drops, records you enter wait on your device and sync once it is back. This local database is not separately encrypted; we recommend using a screen lock. Excel, PDF and JSON files you export stay on your
         device (Documents/Projex); sharing and deleting them is up to you.
       </p>
       <p>
@@ -83,7 +93,7 @@ export default function SyncSitePrivacyEnPage() {
       <p className="font-semibold text-foreground">If you write to us</p>
       <p>Your name, email address and message in support or request emails.</p>
       <p className="font-semibold text-foreground">What we do not process</p>
-      <p>GPS location, contacts, advertising ID, device identifiers, usage analytics, crash reports. Payment card data never reaches us (the beta is free).</p>
+      <p>GPS location, contacts, advertising ID, device identifiers, usage analytics, crash reports. Payment card data does not reach us.</p>
 
       <H2>3. How we collect it</H2>
       <p>
@@ -105,7 +115,7 @@ export default function SyncSitePrivacyEnPage() {
       <p>
         <strong className="text-foreground">Beta and trial period.</strong> The date your account is created is recorded as the start of a 1-month trial
         period that may apply later. During the beta, no feature is restricted because of this period. The date is used only for this purpose and is
-        deleted with your account. After you delete your account we do not keep your email address or a hash of it.
+        deleted with your account. After you delete your account, apart from the invitation record described in section 7, we do not keep your email address or a hash of it.
       </p>
       <p>
         We do not ask for explicit consent for these activities; this text is information, not a consent form. We send no marketing emails; if we ever
@@ -162,14 +172,19 @@ export default function SyncSitePrivacyEnPage() {
         </li>
       </List>
       <p>
-        If you do not want to accept this, use {N} <strong className="text-foreground">without an account</strong> (“Continue without an account”): your
-        data then never leaves your device. You can delete your account at any time (section 7). Apart from this, we disclose personal data only to
+        If you do not want to accept this, use {N} <strong className="text-foreground">without a {N} account</strong> (the option on the sign-in screen to continue without
+        creating one): your data then never leaves your device. You can delete your account at any time (section 7). Apart from this, we disclose personal data only to
         authorities and courts on a lawful request, and only to the minimum extent required.
       </p>
 
       <H2>7. Retention and deletion</H2>
       <List>
-        <li><strong className="text-foreground">Account</strong> (email, sign-in data, account creation/trial start date, accepted terms version): while your account exists; deleted immediately when you delete it.</li>
+        <li><strong className="text-foreground">Account</strong> (email, sign-in data, account creation/trial start date): while your account exists; deleted immediately when you delete it.</li>
+        <li>
+          <strong className="text-foreground">Project invitations:</strong> kept until the invitation is accepted or declined; deleted when it is accepted or
+          declined. An invitation not answered within 14 days becomes invalid and gives no access; such an invitation record is also deleted when the account
+          that sent it is deleted.
+        </li>
         <li><strong className="text-foreground">Projects you own and their photos:</strong> until you delete them or your account.</li>
         <li>
           <strong className="text-foreground">Records you delete one by one:</strong> the row stays in the cloud with a “deleted” mark so other devices learn of

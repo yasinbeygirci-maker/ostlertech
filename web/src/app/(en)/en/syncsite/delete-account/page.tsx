@@ -25,7 +25,7 @@ export default function SyncSiteDeleteEnPage() {
     >
       <p>
         This page explains how to delete the account you created in OstlerTech’s <strong className="text-foreground">{N}</strong> app (formerly{" "}
-        {SYNCSITE.formerName}) and your data in the cloud. If you use {N} without an account we hold no data about you in the cloud; uninstalling the
+        {SYNCSITE.formerName}) and your data in the cloud. If you use {N} without a {N} account we hold no data about you in the cloud; uninstalling the
         app or clearing its data is enough.
       </p>
 
@@ -62,7 +62,7 @@ export default function SyncSiteDeleteEnPage() {
 
       <H2>3. What is deleted</H2>
       <List>
-        <li>Your account: email address, password hash, account ID, the account creation (trial start) date and the accepted beta terms version.</li>
+        <li>Your account: email address, password hash, account ID, and the account creation (trial start) date.</li>
         <li>Projects you own and everything under them: locations, work items, targets, daily records, teams, memberships and photos.</li>
         <li>All your project memberships.</li>
         <li>The {N} database on your device (if you delete from the app).</li>
@@ -80,6 +80,11 @@ export default function SyncSiteDeleteEnPage() {
             ? "their content and photos are already erased; the rows disappear when the account is deleted."
             : "in versions 1.2.1 and later their content is already erased (older versions may have left content in the cloud); in a project you own they disappear completely with the account, in someone else’s project only the content-free “deleted” row remains."}
         </li>
+        <li>
+          <strong className="text-foreground">Unanswered project invitations sent to your address:</strong> the record of an invitation that someone sent you and
+          that you have not yet accepted or declined (your email address, role, date) may remain after you delete your account, until the invitation is accepted or
+          declined or the account that sent it is deleted; even if expired, it gives no access. If you want it deleted, write to the address above.
+        </li>
         <li><strong className="text-foreground">Hosting provider server logs</strong> (IP address, time): at most 1 day, then deleted automatically.</li>
         <li><strong className="text-foreground">Backups:</strong> no automatic server backups are kept; deleted data cannot be restored. Before deleting, export important records with the app’s Excel/JSON export.</li>
         <li>
@@ -93,14 +98,14 @@ export default function SyncSiteDeleteEnPage() {
         </li>
       </List>
       <p>
-        After you delete your account we <strong className="text-foreground">do not keep</strong> your email address or a hash of it; you can open a new account with the
-        same address.
+        After you delete your account, apart from the invitation record above, we <strong className="text-foreground">do not keep</strong> your email address or a
+        hash of it; you can open a new account with the same address.
       </p>
 
       <H2>5. Removing cloud data without deleting your account</H2>
       <p>
         If you want to keep your account but remove your cloud data, you can delete the projects you own in the app, or email{" "}
-        <a href={`mailto:${COMPANY.email}`} className={link}>{COMPANY.email}</a> saying which data you want deleted. If you switch to using {N} without an account,
+        <a href={`mailto:${COMPANY.email}`} className={link}>{COMPANY.email}</a> saying which data you want deleted. If you switch to using {N} without a {N} account,
         new data no longer goes to the cloud.
       </p>
 

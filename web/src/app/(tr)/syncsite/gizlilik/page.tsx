@@ -9,7 +9,7 @@ const N = SYNCSITE.name;
 
 export const metadata: Metadata = {
   title: `${N} Gizlilik Politikası ve Aydınlatma Metni`,
-  description: `${N} (eski adı ${SYNCSITE.formerName}) şantiye takip uygulaması: hesapsız kullanımda veri cihazda kalır; hesap açılırsa AB’deki (İrlanda) sunucuda tutulur. Yurt dışı aktarım durumu açıkça anlatılır.`,
+  description: `${N} (eski adı ${SYNCSITE.formerName}) şantiye takip uygulaması: ${N} hesabı olmadan kullanımda veri cihazda kalır; hesap açılırsa AB’deki (İrlanda) sunucuda tutulur. Yurt dışı aktarım durumu açıkça anlatılır.`,
   alternates: { canonical: SYNCSITE.privacyPath, languages: { tr: SYNCSITE.privacyPath, en: SYNCSITE.privacyEnPath } },
 };
 
@@ -33,7 +33,7 @@ export default function SyncSitePrivacyPage() {
       <div className="rounded-2xl border border-line bg-surface p-6 space-y-3">
         <p className="font-semibold text-foreground">Kısa bilgi</p>
         <List>
-          <li>{N}’ı <strong className="text-foreground">hesapsız</strong> kullanabilirsiniz: verileriniz yalnız cihazınızda kalır, bize hiçbir şey gelmez.</li>
+          <li>Uygulamayı <strong className="text-foreground">{N} hesabı olmadan</strong> da kullanabilirsiniz: verileriniz yalnız cihazınızda kalır, bize hiçbir şey gelmez.</li>
           <li>Hesap açarsanız verileriniz Avrupa Birliği’ndeki (İrlanda) sunucularda tutulur. <strong className="text-foreground">Bu bir yurt dışı aktarımdır ve bugün KVKK md. 9’daki güvencelerden birine dayanmamaktadır</strong> (6. bölüm).</li>
           <li>Reklam, analiz (istatistik), çökme raporu ve yapay zekâ servisi yoktur. Verilerinizi satmaz, pazarlamada kullanmayız.</li>
           <li>Konum (GPS) izni istenmez; fotoğraflardaki konum bilgisi buluta gitmeden silinir.</li>
@@ -53,9 +53,18 @@ export default function SyncSitePrivacyPage() {
       <List>
         <li><strong className="text-foreground">E-posta adresi ve şifre.</strong> Şifreniz bizde açık hâlde durmaz; giriş hizmetimiz onu tek yönlü özet (hash) olarak saklar.</li>
         <li><strong className="text-foreground">Hesap kimliği ve hesabın açıldığı tarih.</strong> Bu tarih beta ve deneme süresinin başlangıcı olarak kaydedilir (4. bölüm).</li>
-        <li><strong className="text-foreground">Kabul ettiğiniz beta şartlarının sürümü ve tarihi.</strong></li>
         <li><strong className="text-foreground">Oturum bilgisi:</strong> giriş yaptığınızı hatırlamak için cihazınızda saklanan oturum anahtarı.</li>
-        <li><strong className="text-foreground">Proje üyeliği:</strong> hangi projede hangi rolde (sahip, düzenleyen, görüntüleyen) ve hangi ekipte olduğunuz. Bir proje sahibi sizi projeye e-posta adresinizle ekler.</li>
+        <li>
+          <strong className="text-foreground">Proje üyeliği:</strong> hangi projede hangi rolde (sahip, düzenleyen, görüntüleyen) ve hangi ekipte olduğunuz.
+          Bir proje sahibi sizi e-posta adresinizle projeye <strong className="text-foreground">davet eder</strong>; siz daveti kabul etmeden hiçbir projeye
+          eklenmezsiniz ve projenin kayıtlarını görmezsiniz.
+        </li>
+        <li>
+          <strong className="text-foreground">Davet kaydı:</strong> davet edilen e-posta adresi, önerilen rol (düzenleyen ya da görüntüleyen), daveti bırakan
+          hesap ve davet tarihi. Bu kayıt, davet edilen adresin bizde hesabı olmasa da tutulur. Davet edilen kişiye bizden e-posta gönderilmez: davet, o adresle
+          hesap açıp e-postasını doğrulayan ve giriş yapan kişiye uygulamada görünür; kişi kabul ederse üye olur, reddederse davet silinir. Davet 14 gün
+          geçerlidir; süresi dolan davet erişim vermez. Daveti bırakan proje sahibi, adresin kayıtlı bir hesaba ait olup olmadığını öğrenemez.
+        </li>
         <li><strong className="text-foreground">Kaydı giren hesap:</strong> bir günlük kaydı kimin girdiği, ekibin denetimi için kayıtla birlikte tutulur.</li>
         <li><strong className="text-foreground">Sunucu kayıtları:</strong> sunucuya bağlandığınızda barındırma sağlayıcısının tuttuğu teknik kayıtlar (IP adresi, zaman, istek türü). Yalnız güvenlik ve hata giderme için kullanılır.</li>
       </List>
@@ -75,8 +84,8 @@ export default function SyncSitePrivacyPage() {
       </p>
       <p className="font-semibold text-foreground">Cihazınızda</p>
       <p>
-        Hesapsız da hesaplı da kullansanız, {N} verilerinizi cihazınızdaki bir veritabanında ve uygulama klasöründe tutar. Çevrimdışıyken
-        girilen kayıtlar internet gelince eşitlenir. Bu yerel veritabanı ayrıca şifrelenmez; cihazınızın ekran kilidini kullanmanızı
+        {N} hesabınız olsa da olmasa da {N} verilerinizi cihazınızdaki bir veritabanında ve uygulama klasöründe tutar. Hesabınız varsa
+        bağlantı kesildiğinde girdiğiniz kayıtlar cihazınızda bekler, bağlantı gelince eşitlenir. Bu yerel veritabanı ayrıca şifrelenmez; cihazınızın ekran kilidini kullanmanızı
         öneririz. Dışa aktardığınız Excel, PDF ve JSON dosyaları cihazınızda (Belgeler/Projex) kalır; onları paylaşmak ve silmek
         sizin elinizdedir.
       </p>
@@ -89,7 +98,7 @@ export default function SyncSitePrivacyPage() {
       <p className="font-semibold text-foreground">Bize yazarsanız</p>
       <p>Destek ya da başvuru için gönderdiğiniz e-postadaki adınız, e-posta adresiniz ve mesajınız.</p>
       <p className="font-semibold text-foreground">İşlemediklerimiz</p>
-      <p>GPS konumu, rehber, reklam kimliği, cihaz kimliği, kullanım istatistiği, çökme raporu. Ödeme kartı bilgisi bize hiç gelmez (beta ücretsizdir).</p>
+      <p>GPS konumu, rehber, reklam kimliği, cihaz kimliği, kullanım istatistiği, çökme raporu. Ödeme kartı bilgisi bize gelmez.</p>
 
       <H2>3. Verileri nasıl topluyoruz</H2>
       <p>
@@ -112,7 +121,7 @@ export default function SyncSitePrivacyPage() {
       <p>
         <strong className="text-foreground">Beta ve deneme süresi.</strong> Hesabınızın açıldığı tarih, ileride uygulanabilecek 1 aylık
         deneme süresinin başlangıcı olarak kaydedilir. Beta boyunca bu süre nedeniyle hiçbir özellik kısıtlanmaz. Bu tarih yalnız bu amaçla
-        kullanılır; hesabınızla birlikte silinir. Hesap sildikten sonra e-postanızı ya da özetini tutmayız.
+        kullanılır; hesabınızla birlikte silinir. Hesap sildikten sonra, 7. bölümdeki davet kaydı dışında, e-postanızı ya da özetini tutmayız.
       </p>
       <p>
         Bu işlemeler için açık rıza istemiyoruz; bu metin bir onay değil, bilgilendirmedir. Pazarlama e-postası göndermiyoruz; ileride
@@ -170,14 +179,18 @@ export default function SyncSitePrivacyPage() {
         </li>
       </List>
       <p>
-        Bunu kabul etmek istemezseniz {N}’ı <strong className="text-foreground">hesapsız</strong> kullanın (“Hesapsız devam et”): verileriniz
-        cihazınızdan çıkmaz. Hesabınızı istediğiniz an silebilirsiniz (7. bölüm). Bunların dışında kişisel verileri yalnız yetkili kurum ve
+        Bunu kabul etmek istemezseniz {N}’ı <strong className="text-foreground">{N} hesabı açmadan</strong> kullanın (giriş ekranındaki
+        hesap açmadan devam etme seçeneği): verileriniz cihazınızdan çıkmaz. Hesabınızı istediğiniz an silebilirsiniz (7. bölüm). Bunların dışında kişisel verileri yalnız yetkili kurum ve
         mahkemelerin hukuka uygun talebi üzerine, gereken en az ölçüde paylaşırız.
       </p>
 
       <H2>7. Ne kadar saklıyoruz ve nasıl silinir</H2>
       <List>
-        <li><strong className="text-foreground">Hesap</strong> (e-posta, giriş bilgisi, hesap açılış/deneme başlangıç tarihi, kabul edilen şart sürümü): hesabınız açık olduğu sürece; hesabı silince hemen silinir.</li>
+        <li><strong className="text-foreground">Hesap</strong> (e-posta, giriş bilgisi, hesap açılış/deneme başlangıç tarihi): hesabınız açık olduğu sürece; hesabı silince hemen silinir.</li>
+        <li>
+          <strong className="text-foreground">Proje davetleri:</strong> davet kabul ya da reddedilene kadar tutulur; kabul ya da ret ile silinir. 14 gün
+          içinde yanıtlanmayan davet geçersiz olur ve erişim vermez; bu tür davet kaydı, daveti bırakan hesap silindiğinde de silinir.
+        </li>
         <li><strong className="text-foreground">Sahibi olduğunuz projeler ve fotoğrafları:</strong> siz silene ya da hesabınızı silene kadar.</li>
         <li>
           <strong className="text-foreground">Tek tek sildiğiniz kayıtlar:</strong> diğer cihazlara “silindi” bilgisi ulaşsın diye satır, silindi işaretiyle bulutta kalır.{" "}
