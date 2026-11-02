@@ -9,7 +9,7 @@ const N = SYNCSITE.name;
 
 export const metadata: Metadata = {
   title: `${N} Gizlilik Politikası ve Aydınlatma Metni`,
-  description: `${N} (eski adı ${SYNCSITE.formerName}) şantiye takip uygulaması: ${N} hesabı olmadan kullanımda veri cihazda kalır; hesap açılırsa AB’deki (İrlanda) sunucuda tutulur. Yurt dışı aktarım durumu açıkça anlatılır.`,
+  description: `${N} (eski adı ${SYNCSITE.formerName}) şantiye takip uygulaması: hesap açmadan kullanıldığında veri cihazda kalır; hesap açılırsa AB’deki (İrlanda) sunucuda tutulur. Yurt dışı aktarım durumu açıkça anlatılır.`,
   alternates: { canonical: SYNCSITE.privacyPath, languages: { tr: SYNCSITE.privacyPath, en: SYNCSITE.privacyEnPath } },
 };
 
@@ -27,13 +27,13 @@ export default function SyncSitePrivacyPage() {
         Bu metin, OstlerTech’in şantiye takip uygulaması <strong className="text-foreground">{N}</strong>’ın ({SYNCSITE.formerName} adıyla
         yayınlanmış sürümleri dahil; Android ve Windows uygulamaları ve bulut eşitleme hizmeti) hangi kişisel verileri, neden ve nasıl
         işlediğini anlatır. 6698 sayılı Kişisel Verilerin Korunması Kanunu’nun (KVKK) 10. maddesi uyarınca hazırlanmış aydınlatma
-        metnidir. Aşağıdaki “Kısa bilgi” kutusu kayıt ekranında da gösterilir.
+        metnidir. Aşağıdaki “Kısa bilgi” kutusu giriş ekranında da gösterilir.
       </p>
 
       <div className="rounded-2xl border border-line bg-surface p-6 space-y-3">
         <p className="font-semibold text-foreground">Kısa bilgi</p>
         <List>
-          <li>Uygulamayı <strong className="text-foreground">{N} hesabı olmadan</strong> da kullanabilirsiniz: verileriniz yalnız cihazınızda kalır, bize hiçbir şey gelmez.</li>
+          <li>Uygulamayı <strong className="text-foreground">hesap açmadan</strong> da kullanabilirsiniz: uygulama sunucularımıza hiçbir veri göndermez; verileriniz cihazınızda kalır.</li>
           <li>Hesap açarsanız verileriniz Avrupa Birliği’ndeki (İrlanda) sunucularda tutulur. <strong className="text-foreground">Bu bir yurt dışı aktarımdır ve bugün KVKK md. 9’daki güvencelerden birine dayanmamaktadır</strong> (6. bölüm).</li>
           <li>Reklam, analiz (istatistik), çökme raporu ve yapay zekâ servisi yoktur. Verilerinizi satmaz, pazarlamada kullanmayız.</li>
           <li>Konum (GPS) izni istenmez; fotoğraflardaki konum bilgisi buluta gitmeden silinir.</li>
@@ -60,10 +60,11 @@ export default function SyncSitePrivacyPage() {
           eklenmezsiniz ve projenin kayıtlarını görmezsiniz.
         </li>
         <li>
-          <strong className="text-foreground">Davet kaydı:</strong> davet edilen e-posta adresi, önerilen rol (düzenleyen ya da görüntüleyen), daveti bırakan
+          <strong className="text-foreground">Davet kaydı:</strong> davet edilen e-posta adresi, önerilen rol (düzenleyen ya da görüntüleyen), daveti oluşturan
           hesap ve davet tarihi. Bu kayıt, davet edilen adresin bizde hesabı olmasa da tutulur. Davet edilen kişiye bizden e-posta gönderilmez: davet, o adresle
-          hesap açıp e-postasını doğrulayan ve giriş yapan kişiye uygulamada görünür; kişi kabul ederse üye olur, reddederse davet silinir. Davet 14 gün
-          geçerlidir; süresi dolan davet erişim vermez. Daveti bırakan proje sahibi, adresin kayıtlı bir hesaba ait olup olmadığını öğrenemez.
+          hesap açıp e-posta adresini doğrulayan ve giriş yapan kişiye uygulamada görünür; kişi davette proje adını ve daveti oluşturan kişinin e-posta adresini
+          görür. Kişi kabul ederse üye olur, reddederse davet silinir. Davet 14 gün geçerlidir; süresi dolan davet erişim vermez. Daveti oluşturan proje sahibi,
+          adresin kayıtlı bir hesaba ait olup olmadığını öğrenemez.
         </li>
         <li><strong className="text-foreground">Kaydı giren hesap:</strong> bir günlük kaydı kimin girdiği, ekibin denetimi için kayıtla birlikte tutulur.</li>
         <li><strong className="text-foreground">Sunucu kayıtları:</strong> sunucuya bağlandığınızda barındırma sağlayıcısının tuttuğu teknik kayıtlar (IP adresi, zaman, istek türü). Yalnız güvenlik ve hata giderme için kullanılır.</li>
@@ -84,8 +85,8 @@ export default function SyncSitePrivacyPage() {
       </p>
       <p className="font-semibold text-foreground">Cihazınızda</p>
       <p>
-        {N} hesabınız olsa da olmasa da {N} verilerinizi cihazınızdaki bir veritabanında ve uygulama klasöründe tutar. Hesabınız varsa
-        bağlantı kesildiğinde girdiğiniz kayıtlar cihazınızda bekler, bağlantı gelince eşitlenir. Bu yerel veritabanı ayrıca şifrelenmez; cihazınızın ekran kilidini kullanmanızı
+        Hesabınız olsun olmasın, {N} verilerinizi cihazınızdaki bir veritabanında ve uygulama klasöründe tutar. Hesabınız varsa
+        bağlantı kesildiğinde girdiğiniz kayıtlar cihazınızda bekler, bağlantı yeniden kurulunca eşitlenir. Bu yerel veritabanı ayrıca şifrelenmez; cihazınızın ekran kilidini kullanmanızı
         öneririz. Dışa aktardığınız Excel, PDF ve JSON dosyaları cihazınızda (Belgeler/Projex) kalır; onları paylaşmak ve silmek
         sizin elinizdedir.
       </p>
@@ -102,7 +103,7 @@ export default function SyncSitePrivacyPage() {
 
       <H2>3. Verileri nasıl topluyoruz</H2>
       <p>
-        E-postanızı ve şifrenizi kayıt ekranına siz yazarsınız; şantiye kayıtlarını ve fotoğrafları uygulamaya siz ya da ekibiniz girer;
+        E-postanızı ve şifrenizi giriş ekranına siz yazarsınız; şantiye kayıtlarını ve fotoğrafları uygulamaya siz ya da ekibiniz girer;
         hesap açılış tarihi ve teknik kayıtlar hizmet kullanılırken sunucuda kendiliğinden oluşur. Toplama elektronik ortamda,
         uygulama üzerinden yapılır.
       </p>
@@ -115,6 +116,10 @@ export default function SyncSitePrivacyPage() {
           <strong className="text-foreground"> sözleşmenin kurulması ve ifası</strong> (KVKK md. 5/2-c).
         </li>
         <li>Güvenlik, kötüye kullanımı önleme, hata giderme; kaydı kimin girdiğini ekibe göstermek: <strong className="text-foreground">meşru menfaat</strong> (md. 5/2-f).</li>
+        <li>
+          Proje davetini kaydetmek ve davet edilene göstermek: daveti oluşturan bakımından <strong className="text-foreground">sözleşmenin ifası</strong> (md. 5/2-c);
+          davet edilen bakımından <strong className="text-foreground">meşru menfaat</strong> (md. 5/2-f).
+        </li>
         <li>Destek ve başvuruları yanıtlamak: sözleşmenin ifası ve hukuki yükümlülük (md. 5/2-c, 5/2-ç, md. 13).</li>
         <li>Fatura ve muhasebe (ileride ücretli plan olursa): hukuki yükümlülük (md. 5/2-ç).</li>
       </List>
@@ -179,8 +184,8 @@ export default function SyncSitePrivacyPage() {
         </li>
       </List>
       <p>
-        Bunu kabul etmek istemezseniz {N}’ı <strong className="text-foreground">{N} hesabı açmadan</strong> kullanın (giriş ekranındaki
-        hesap açmadan devam etme seçeneği): verileriniz cihazınızdan çıkmaz. Hesabınızı istediğiniz an silebilirsiniz (7. bölüm). Bunların dışında kişisel verileri yalnız yetkili kurum ve
+        Bunu kabul etmek istemezseniz Uygulamayı <strong className="text-foreground">hesap açmadan</strong> kullanın (giriş ekranındaki
+        hesap açmadan devam etme düğmesi): verileriniz cihazınızdan çıkmaz. Hesabınızı istediğiniz an silebilirsiniz (7. bölüm). Bunların dışında kişisel verileri yalnız yetkili kurum ve
         mahkemelerin hukuka uygun talebi üzerine, gereken en az ölçüde paylaşırız.
       </p>
 
@@ -188,8 +193,10 @@ export default function SyncSitePrivacyPage() {
       <List>
         <li><strong className="text-foreground">Hesap</strong> (e-posta, giriş bilgisi, hesap açılış/deneme başlangıç tarihi): hesabınız açık olduğu sürece; hesabı silince hemen silinir.</li>
         <li>
-          <strong className="text-foreground">Proje davetleri:</strong> davet kabul ya da reddedilene kadar tutulur; kabul ya da ret ile silinir. 14 gün
-          içinde yanıtlanmayan davet geçersiz olur ve erişim vermez; bu tür davet kaydı, daveti bırakan hesap silindiğinde de silinir.
+          <strong className="text-foreground">Proje davetleri:</strong> davet, kabul ya da reddedilene kadar tutulur ve kabul ya da retle silinir. 14 gün
+          içinde yanıtlanmayan davet geçersiz olur ve erişim vermez, ancak kaydı kendiliğinden silinmez: süresi dolan davet yalnız aynı projeye yeni bir davet
+          bırakıldığında temizlenir. Davet kaydı ayrıca daveti oluşturan hesap silindiğinde ve proje kalıcı olarak silindiğinde (örneğin proje sahibinin hesabı
+          silindiğinde) silinir.
         </li>
         <li><strong className="text-foreground">Sahibi olduğunuz projeler ve fotoğrafları:</strong> siz silene ya da hesabınızı silene kadar.</li>
         <li>

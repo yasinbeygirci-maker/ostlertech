@@ -25,7 +25,7 @@ export default function SyncSiteDeletePage() {
     >
       <p>
         Bu sayfa, OstlerTech’in <strong className="text-foreground">{N}</strong> (eski adı {SYNCSITE.formerName}) uygulamasında açtığınız
-        hesabı ve buluttaki verilerinizi nasıl silebileceğinizi anlatır. {N} hesabı olmadan kullanıyorsanız bulutta verinizi tutmuyoruz;
+        hesabı ve buluttaki verilerinizi nasıl silebileceğinizi anlatır. Hesap açmadan kullanıyorsanız bulutta verinizi tutmuyoruz;
         uygulamayı silmeniz ya da uygulama verilerini temizlemeniz yeter.
       </p>
 
@@ -64,7 +64,7 @@ export default function SyncSiteDeletePage() {
 
       <H2>3. Ne silinir</H2>
       <List>
-        <li>Hesabınız: e-posta adresiniz, şifre özetiniz, hesap kimliğiniz, hesabın açıldığı (deneme başlangıcı) tarih.</li>
+        <li>Hesabınız: e-posta adresiniz, şifre özetiniz, hesap kimliğiniz ve hesabın açıldığı (deneme başlangıcı) tarih.</li>
         <li>Sahibi olduğunuz projeler ve altındaki her şey: konumlar, imalat kalemleri, hedefler, günlük kayıtlar, ekipler, üyelikler ve fotoğraflar.</li>
         <li>Proje üyeliklerinizin hepsi.</li>
         <li>Cihazınızdaki {N} veritabanı (uygulamadan silerseniz).</li>
@@ -83,9 +83,10 @@ export default function SyncSiteDeletePage() {
             : "1.2.1 ve sonrası sürümlerde içerikleri silinmiştir (daha eski sürümlerde içerik bulutta kalmış olabilir); sahibi olduğunuz bir projedeyse hesapla birlikte tamamen gider. Başkasının projesindeyse yalnız içeriksiz “silindi” satırı kalır."}
         </li>
         <li>
-          <strong className="text-foreground">Adresinize bırakılmış, yanıtlanmamış proje davetleri:</strong> başkasının sizi bir projeye davet ettiği ve sizin
-          henüz kabul ya da reddetmediğiniz davetin kaydı (e-posta adresiniz, rol, tarih), hesabınızı sildikten sonra da davet kabul ya da reddedilene ya da
-          daveti bırakan hesap silinene kadar kalabilir; süresi dolmuş olsa da erişim vermez. Silinmesini isterseniz yukarıdaki adrese yazın.
+          <strong className="text-foreground">Adresinize yapılmış, yanıtlanmamış proje davetleri:</strong> başkasının sizi bir projeye davet ettiği ve sizin
+          henüz kabul ya da reddetmediğiniz davetin kaydı (e-posta adresiniz, rol, tarih), hesabınızı sildikten sonra da, davet kabul ya da reddedilene veya
+          daveti oluşturan hesap silinene kadar kalabilir. Süresi dolan davet erişim vermez, ancak kaydı kendiliğinden silinmez; yalnız aynı projeye yeni bir
+          davet bırakıldığında ya da proje kalıcı olarak silindiğinde temizlenir. Silinmesini isterseniz yukarıdaki adrese yazın.
         </li>
         <li><strong className="text-foreground">Barındırma sağlayıcısının sunucu kayıtları</strong> (IP adresi, zaman): en fazla 1 gün, sonra kendiliğinden silinir.</li>
         <li><strong className="text-foreground">Yedekler:</strong> otomatik sunucu yedeği tutulmaz; silinen veri geri getirilemez. Silmeden önce önemli kayıtlarınızı uygulamadaki Excel/JSON dışa aktarma ile alın.</li>
@@ -108,7 +109,7 @@ export default function SyncSiteDeletePage() {
       <p>
         Hesabınızı korumak ama bulut verinizi kaldırmak isterseniz, sahibi olduğunuz projeleri uygulamadan silebilir ya da{" "}
         <a href={`mailto:${COMPANY.email}`} className={link}>{COMPANY.email}</a> adresine hangi verinin silinmesini istediğinizi yazabilirsiniz.
-        {N}’ı {N} hesabı olmadan kullanmaya dönerseniz yeni verileriniz buluta gitmez.
+        Uygulamayı hesap açmadan kullanmaya dönerseniz yeni verileriniz buluta gitmez.
       </p>
 
       <H2>6. İletişim</H2>

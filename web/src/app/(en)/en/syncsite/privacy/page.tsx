@@ -27,13 +27,13 @@ export default function SyncSitePrivacyEnPage() {
         This notice explains which personal data <strong className="text-foreground">{N}</strong> (published earlier as {SYNCSITE.formerName}),
         OstlerTech’s construction-site tracking app (Android and Windows apps and the cloud sync service), processes, why and how. It is our
         information notice under Article 10 of Türkiye’s Personal Data Protection Law No. 6698 (KVKK). The short notice below is also shown on the
-        sign-up screen. If the Turkish and English texts differ, the Turkish text prevails.
+        sign-in screen. If the Turkish and English texts differ, the Turkish text prevails.
       </p>
 
       <div className="rounded-2xl border border-line bg-surface p-6 space-y-3">
         <p className="font-semibold text-foreground">Short notice</p>
         <List>
-          <li>You can use the app <strong className="text-foreground">without a {N} account</strong>: your data stays on your device and nothing reaches us.</li>
+          <li>You can use the app <strong className="text-foreground">without a {N} account</strong>: the app sends no data to our servers; your data stays on your device.</li>
           <li>If you create an account, your data is stored on servers in the European Union (Ireland). <strong className="text-foreground">This is a transfer abroad and today it does not rely on one of the safeguards in KVKK Art. 9</strong> (section 6).</li>
           <li>There is no advertising, analytics, crash-reporting or AI service. We do not sell your data or use it for marketing.</li>
           <li>The app asks for no location (GPS) permission; location data inside photos is removed before upload.</li>
@@ -56,15 +56,16 @@ export default function SyncSitePrivacyEnPage() {
         <li><strong className="text-foreground">Session data:</strong> a session key stored on your device to keep you signed in.</li>
         <li>
           <strong className="text-foreground">Project membership:</strong> your role in each project (owner, editor, viewer) and team. A project owner{" "}
-          <strong className="text-foreground">invites</strong> you by your email address; you are not added to any project, and cannot see its records, until
+          <strong className="text-foreground">invites</strong> you using your email address; you are not added to any project, and cannot see its records, until
           you accept the invitation.
         </li>
         <li>
           <strong className="text-foreground">Invitation record:</strong> the invited email address, the proposed role (editor or viewer), the account that
-          sent the invitation and the date. This record is kept even if the invited address has no account with us. We do not send the invited person an
-          email: the invitation appears in the app for the person who creates an account with that address, verifies the email and signs in; if they accept,
-          they become a member, and if they decline, the invitation is deleted. An invitation is valid for 14 days; an expired invitation gives no access.
-          The project owner who sent it cannot find out whether the address belongs to a registered account.
+          created the invitation and the date. This record is kept even if the invited address has no account with us. We do not send the invited person an
+          email: the invitation appears in the app for the person who creates an account with that address, verifies the address and signs in. The invited
+          person sees the project name and the email address of the person who created the invitation. If they accept, they become a member, and if they
+          decline, the invitation is deleted. An invitation is valid for 14 days; an expired invitation gives no access. The project owner who created it
+          cannot find out whether the address belongs to a registered account.
         </li>
         <li><strong className="text-foreground">Who entered a record:</strong> stored with each daily record so the team can see who entered it.</li>
         <li><strong className="text-foreground">Server logs:</strong> technical logs kept by our hosting provider when you connect (IP address, time, request type), used only for security and troubleshooting.</li>
@@ -81,8 +82,8 @@ export default function SyncSitePrivacyEnPage() {
       </p>
       <p className="font-semibold text-foreground">On your device</p>
       <p>
-        Whether or not you have a {N} account, {N} keeps your data in a database and app folder on your device. If you have an account and the
-        connection drops, records you enter wait on your device and sync once it is back. This local database is not separately encrypted; we recommend using a screen lock. Excel, PDF and JSON files you export stay on your
+        Whether or not you have an account, the app keeps your data in a database and app folder on your device. If you have an account and the
+        connection drops, records you enter wait on your device and sync once the connection is back. This local database is not separately encrypted; we recommend using a screen lock. Excel, PDF and JSON files you export stay on your
         device (Documents/Projex); sharing and deleting them is up to you.
       </p>
       <p>
@@ -97,7 +98,7 @@ export default function SyncSitePrivacyEnPage() {
 
       <H2>3. How we collect it</H2>
       <p>
-        You type your email and password on the sign-up screen; you or your team enter site records and photos in the app; the account creation date
+        You type your email and password on the sign-in screen; you or your team enter site records and photos in the app; the account creation date
         and technical logs are created automatically on the server while you use the service. Collection is electronic, through the app.
       </p>
 
@@ -109,6 +110,11 @@ export default function SyncSitePrivacyEnPage() {
           <strong className="text-foreground"> performance of a contract</strong> (KVKK Art. 5(2)(c)).
         </li>
         <li>Security, abuse prevention and troubleshooting; showing your team who entered a record: <strong className="text-foreground">legitimate interest</strong> (Art. 5(2)(f)).</li>
+        <li>
+          Recording a project invitation and showing it to the invited person: for the person who created the invitation,
+          <strong className="text-foreground"> performance of a contract</strong> (Art. 5(2)(c)); for the invited person,
+          <strong className="text-foreground"> legitimate interest</strong> (Art. 5(2)(f)).
+        </li>
         <li>Answering support and data requests: performance of a contract and legal obligation (Art. 5(2)(c), 5(2)(ç), Art. 13).</li>
         <li>Invoicing and accounting (if paid plans are introduced later): legal obligation (Art. 5(2)(ç)).</li>
       </List>
@@ -172,8 +178,8 @@ export default function SyncSitePrivacyEnPage() {
         </li>
       </List>
       <p>
-        If you do not want to accept this, use {N} <strong className="text-foreground">without a {N} account</strong> (the option on the sign-in screen to continue without
-        creating one): your data then never leaves your device. You can delete your account at any time (section 7). Apart from this, we disclose personal data only to
+        If you do not want to accept this, use the app <strong className="text-foreground">without a {N} account</strong> (the button on the sign-in screen for continuing without
+        creating an account): your data then never leaves your device. You can delete your account at any time (section 7). Apart from this, we disclose personal data only to
         authorities and courts on a lawful request, and only to the minimum extent required.
       </p>
 
@@ -181,9 +187,10 @@ export default function SyncSitePrivacyEnPage() {
       <List>
         <li><strong className="text-foreground">Account</strong> (email, sign-in data, account creation/trial start date): while your account exists; deleted immediately when you delete it.</li>
         <li>
-          <strong className="text-foreground">Project invitations:</strong> kept until the invitation is accepted or declined; deleted when it is accepted or
-          declined. An invitation not answered within 14 days becomes invalid and gives no access; such an invitation record is also deleted when the account
-          that sent it is deleted.
+          <strong className="text-foreground">Project invitations:</strong> an invitation is kept until it is accepted or declined, and is deleted when it is
+          accepted or declined. An invitation not answered within 14 days becomes invalid and gives no access, but its record is not deleted automatically:
+          an expired invitation is cleared only when a new invitation is left in the same project. An invitation record is also deleted when the account that
+          created it is deleted and when the project is permanently deleted (for example when the project owner’s account is deleted).
         </li>
         <li><strong className="text-foreground">Projects you own and their photos:</strong> until you delete them or your account.</li>
         <li>

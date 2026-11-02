@@ -25,7 +25,7 @@ export default function SyncSiteDeleteEnPage() {
     >
       <p>
         This page explains how to delete the account you created in OstlerTech’s <strong className="text-foreground">{N}</strong> app (formerly{" "}
-        {SYNCSITE.formerName}) and your data in the cloud. If you use {N} without a {N} account we hold no data about you in the cloud; uninstalling the
+        {SYNCSITE.formerName}) and your data in the cloud. If you use the app without a SyncSite account, we hold no data about you in the cloud; uninstalling the
         app or clearing its data is enough.
       </p>
 
@@ -62,7 +62,7 @@ export default function SyncSiteDeleteEnPage() {
 
       <H2>3. What is deleted</H2>
       <List>
-        <li>Your account: email address, password hash, account ID, and the account creation (trial start) date.</li>
+        <li>Your account: email address, password hash, account ID and the date the account was created (trial start).</li>
         <li>Projects you own and everything under them: locations, work items, targets, daily records, teams, memberships and photos.</li>
         <li>All your project memberships.</li>
         <li>The {N} database on your device (if you delete from the app).</li>
@@ -82,8 +82,9 @@ export default function SyncSiteDeleteEnPage() {
         </li>
         <li>
           <strong className="text-foreground">Unanswered project invitations sent to your address:</strong> the record of an invitation that someone sent you and
-          that you have not yet accepted or declined (your email address, role, date) may remain after you delete your account, until the invitation is accepted or
-          declined or the account that sent it is deleted; even if expired, it gives no access. If you want it deleted, write to the address above.
+          that you have not yet accepted or declined (your email address, role, date) may remain after you delete your account, until it is accepted or declined, or until the account that sent it is deleted. An expired
+          invitation gives no access, but its record is not deleted automatically; it is cleared only when a new invitation is left in the same project or
+          when the project is permanently deleted. If you want it deleted, write to the address above.
         </li>
         <li><strong className="text-foreground">Hosting provider server logs</strong> (IP address, time): at most 1 day, then deleted automatically.</li>
         <li><strong className="text-foreground">Backups:</strong> no automatic server backups are kept; deleted data cannot be restored. Before deleting, export important records with the app’s Excel/JSON export.</li>
@@ -105,7 +106,7 @@ export default function SyncSiteDeleteEnPage() {
       <H2>5. Removing cloud data without deleting your account</H2>
       <p>
         If you want to keep your account but remove your cloud data, you can delete the projects you own in the app, or email{" "}
-        <a href={`mailto:${COMPANY.email}`} className={link}>{COMPANY.email}</a> saying which data you want deleted. If you switch to using {N} without a {N} account,
+        <a href={`mailto:${COMPANY.email}`} className={link}>{COMPANY.email}</a> saying which data you want deleted. If you go back to using the app without a SyncSite account,
         new data no longer goes to the cloud.
       </p>
 
