@@ -10,7 +10,7 @@ import { TR, EN, PLAY_TELEFON_CALINIRSA_INSTAGRAM, playHref, playOrganik, type C
 const kaynakYolu = path.join(process.cwd(), "src", "lib", "telefon-calinirsa.ts");
 
 function gorunenMetin(c: Content): string {
-  const parcalar: string[] = [c.title, c.description, c.h1, c.lead, c.calmNote, c.beforeTitle, c.beforeLead, c.helperTitle, c.helperText, c.ctaLabel, c.ctaNote, c.sourcesTitle, c.disclaimer];
+  const parcalar: string[] = [c.title, c.description, c.h1, c.lead, c.calmNote, c.beforeTitle, c.beforeLead, c.helperTitle, c.helperText, c.ctaLabel, c.ctaNote, c.sourcesTitle, c.disclaimer, c.trademarks];
   for (const s of c.steps) parcalar.push(s.heading, ...(s.lines ?? []), ...(s.platforms ?? []).flatMap((p) => [p.name, p.text]), s.note ?? "");
   for (const b of c.before) parcalar.push(b.text);
   for (const s of c.sources) parcalar.push(s.name);
@@ -26,6 +26,10 @@ const yasak = [
   /e-?devlet/i, /\b120\b/, /\bBTK\b/, /ihbar bildirimi/i,
   // Eski ad: Google'ın güncel adı
   /Cihazımı Bul/i, /Find My Device/i,
+  // Defne/Zeynep 2026-11-03: "hattı kapattır" hat iptali gibi okunur, doğrusu "askıya aldır"; "ilk 5 dakika" kaynaksız
+  /hattı(nı)? kapat/i, /(close|cancel|shut off) (the |your )?line/i, /ilk 5 dakika/i, /first 5 minutes/i,
+  // Kaynak listesinde CISA yok (Zeynep): metinde de geçmez
+  /\bCISA\b/,
 ];
 
 for (const [ad, c] of [["TR", TR], ["EN", EN]] as const) {
@@ -42,6 +46,22 @@ for (const [ad, c] of [["TR", TR], ["EN", EN]] as const) {
     for (const st of c.steps) assert.ok(st.sources.length > 0 || st.note, `${ad}: ${st.heading} kaynaksız`);
     const kullanilan = new Set(c.steps.flatMap((st) => st.sources).concat(c.before.flatMap((b) => b.sources)));
     for (const k of kullanilan) assert.ok(c.sources.some((x) => x.key === k), `${ad}: ${k} kaynak listesinde yok`);
+  });
+  test(`${ad}: meta başlık ≤60 (| OstlerTech ile), açıklama ≤155, başlık ile H1 aynı`, () => {
+    assert.ok(`${c.title} | OstlerTech`.length <= 60, `${ad}: başlık ${c.title.length + 13}`);
+    assert.ok(c.description.length <= 155, `${ad}: açıklama ${c.description.length}`);
+    assert.equal(c.title, c.h1);
+  });
+  test(`${ad}: Android™ ilk geçişte bir kez, başka simge yok; sahiplik satırı yalnız geçen adları anar`, () => {
+    assert.equal((s.match(/Android™/g) ?? []).length, 1);
+    assert.ok(!/[®©]/.test(s) && (s.match(/™/g) ?? []).length === 1);
+    assert.equal(s.indexOf("Android"), s.indexOf("Android™"), `${ad}: ilk Android geçişi ™'li değil`);
+    for (const ad2 of ["Google", "Android", "Apple", "iPhone"]) assert.ok(c.trademarks.includes(ad2), `${ad}: sahiplik satırında ${ad2} yok`);
+    assert.ok(!/Microsoft|Autodesk|NIST/.test(c.trademarks));
+  });
+  test(`${ad}: kaynaksız adımlar ve bilinmeyen kaynak notu açıkça yazılı (banka, IMEI)`, () => {
+    assert.match(c.lead, /IMEI/);
+    for (const i of [2, 4]) assert.ok(c.steps[i].note && /\.$/.test(c.steps[i].note ?? ""), `${ad}: ${i + 1}. adım notu yok`);
   });
   test(`${ad}: kaynak bağlantıları resmî alan adlarında`, () => {
     for (const x of c.sources) assert.match(x.url, /^https:\/\/(support\.google\.com|support\.apple\.com|pages\.nist\.gov)\//);

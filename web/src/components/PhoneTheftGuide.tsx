@@ -126,6 +126,7 @@ export default function PhoneTheftGuide({ lang }: { lang: Lang }) {
             ))}
           </ul>
           <p className="text-sm text-muted pt-4">{c.disclaimer}</p>
+          <p className="text-sm text-muted">{c.trademarks}</p>
           <ul className="text-sm text-muted space-y-1.5">
             {c.related.map((r) => (
               <li key={r.href}>
