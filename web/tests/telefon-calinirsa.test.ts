@@ -25,8 +25,12 @@ const yasak = [
   /daha güvenli/i, /en güvenli/i, /most secure/i, /kasan güvende/i, /your vault is safe/i,
   // Korku dili
   /her şeyini kaybed/i, /boşal/i, /you will lose everything/i,
-  // BTK / e-Devlet hizmet adı: resmî sayfadan doğrulanmadı (TODO-DOGRULA 1)
-  /e-?devlet/i, /\b120\b/, /\bBTK\b/, /ihbar bildirimi/i,
+  // Burak 2026-11-03: e-Devlet hizmet adı doğrulandı (yasaktan çıktı); "120" ve BİM numarası doğrulanamadı, yazılmaz
+  /\b120\b/, /\bBİM\b/, /\bBIM\b/, /\b0\s?312\b/,
+  // Polis IMEI'yi kapatmaz izlenimi veren eski ifade
+  /resmî kayıp\/çalıntı bildirim yoluyla/i, /official lost\/stolen reporting route/i,
+  // Konum takibi hakkında söz verme (Burak Ş1: oturum kapatmanın konumu durdurup durdurmadığı doğrulanamadı)
+  /konum(u)? (durur|durmaz|kapan)/i, /location (stops|will stop)/i,
   // Eski ad: Google'ın güncel adı
   /Cihazımı Bul/i, /Find My Device/i,
   // Defne/Zeynep 2026-11-03: "hattı kapattır" hat iptali gibi okunur, doğrusu "askıya aldır"; "ilk 5 dakika" kaynaksız
@@ -62,12 +66,41 @@ for (const [ad, c] of [["TR", TR], ["EN", EN]] as const) {
     for (const ad2 of ["Google", "Android", "Apple", "iPhone"]) assert.ok(c.trademarks.includes(ad2), `${ad}: sahiplik satırında ${ad2} yok`);
     assert.ok(!/Microsoft|Autodesk|NIST/.test(c.trademarks));
   });
-  test(`${ad}: kaynaksız adımlar ve bilinmeyen kaynak notu açıkça yazılı (banka, IMEI)`, () => {
-    assert.match(c.lead, /IMEI/);
-    for (const i of [2, 4]) assert.ok(c.steps[i].note && /\.$/.test(c.steps[i].note ?? ""), `${ad}: ${i + 1}. adım notu yok`);
+  test(`${ad}: kaynaksız banka adımı notla açıkça belirtilmiş; IMEI adımı artık kaynaklı`, () => {
+    assert.match(c.lead, /bank/i);
+    assert.ok(!/IMEI/.test(c.lead), `${ad}: lead IMEI'ye kaynak yok diyor`);
+    assert.equal(c.steps[2].sources.length, 0);
+    assert.ok(c.steps[2].note && /\.$/.test(c.steps[2].note ?? ""), `${ad}: 3. adım (banka) notu yok`);
+    assert.ok(c.steps[4].sources.includes("e-Devlet") && c.steps[4].sources.includes("Mevzuat"), `${ad}: 5. adım e-Devlet/Mevzuat kaynağı yok`);
   });
   test(`${ad}: kaynak bağlantıları resmî alan adlarında`, () => {
-    for (const x of c.sources) assert.match(x.url, /^https:\/\/(support\.google\.com|support\.apple\.com|pages\.nist\.gov)\//);
+    for (const x of c.sources) assert.match(x.url, /^https:\/\/(support\.google\.com|support\.apple\.com|pages\.nist\.gov|www\.turkiye\.gov\.tr|www\.mevzuat\.gov\.tr)\//);
+    for (const k of ["e-Devlet", "Mevzuat"] as const) assert.ok(c.sources.some((x) => x.key === k), `${ad}: ${k} kaynak listesinde yok`);
+  });
+  test(`${ad}: 4. adımda Google oturumunu kapatma satırı, konum sözü yok`, () => {
+    const adim = [c.steps[3].heading, ...(c.steps[3].lines ?? [])].join("\n");
+    assert.match(adim, ad === "TR" ? /Cihazlarınız[\s\S]*oturumu kapat/ : /Your devices[\s\S]*sign out/);
+    assert.ok(!/konum|location/i.test(adim), `${ad}: 4. adımda konum sözü`);
+  });
+  test(`${ad}: 5. adım IMEI'yi hat sahibi e-Devlet'ten kapattırır; çift hat, iptal, polis karışmaz`, () => {
+    const adim = [c.steps[4].heading, ...(c.steps[4].lines ?? []), c.steps[4].note ?? ""].join("\n");
+    assert.match(adim, /Kayıp\/Çalıntı İhbar Bildirimi/);
+    assert.match(adim, /Kayıp\/Çalıntı İhbar Sorgulama\/İptal/);
+    assert.match(adim, ad === "TR" ? /kendi adına kayıtlı/ : /registered in your name/);
+    assert.match(adim, ad === "TR" ? /iki IMEI/ : /two IMEIs|both IMEIs/);
+    assert.match(adim, ad === "TR" ? /ayrı işlem/ : /separate actions/);
+    assert.match(adim, /android\.com\/find/);
+  });
+  test(`${ad}: SIM PIN (PUK uyarısı) ve çift hat IMEI notu "çalınmadan önce" listesinde`, () => {
+    const once = c.before.map((b) => b.text).join("\n");
+    assert.match(once, /SIM PIN/);
+    assert.match(once, /PUK/);
+    assert.match(once, /\*#06#/);
+    assert.match(once, ad === "TR" ? /iki IMEI/ : /two IMEIs/);
+  });
+  test(`${ad}: ücretsiz kayıt sınırı sayıdan bağımsız yazılı (4.5.23'te 15 -> 25)`, () => {
+    assert.ok(!/\d/.test(c.ctaNote), `${ad}: ctaNote sayı içeriyor`);
+    assert.ok(!/\b15\b/.test(s.replace(/15[ -](karakter|haneli|characters|digit)/g, "").replace(/\((madde|articles) [^)]*\)/g, "")), `${ad}: sayfada kayıt sınırı olarak 15 geçiyor`);
   });
 }
 
@@ -130,8 +163,16 @@ test("TR/EN çapraz bağlantıları tutarlı", () => {
   assert.equal(EN.trPath, TR.path);
 });
 
-const todoVar = fs.readFileSync(kaynakYolu, "utf8").includes("TODO-DOGRULA (yayına çıkmaz");
+// Yayın kapısı: YAYIN_KAPISI=1 ile koşulur (birleştirme/yayın öncesi). İki şart:
+//  1. Kaynak dosyada TODO-DOGRULA işareti yok (Burak kapısı 2026-11-03 ile kapandı).
+//  2. tests/DEFNE-BEKLIYOR dosyası yok: Defne dil denetimini bitirip bulgularını işleyince dosya silinir.
+const todoVar = /TODO-DOGRULA/.test(fs.readFileSync(kaynakYolu, "utf8"));
+const defneBekliyor = fs.existsSync(path.join(process.cwd(), "tests", "DEFNE-BEKLIYOR.md"));
 
-test("yayın kapısı: TODO-DOGRULA kalmadı", { skip: process.env.YAYIN_KAPISI ? false : "açık TODO-DOGRULA var, Yasin onayı + resmî sayfa teyidi bekliyor" }, () => {
-  assert.ok(!todoVar, "kaynak dosyada TODO-DOGRULA bloğu duruyor: sayfa yayınlanmaz");
+test("yayın kapısı: TODO-DOGRULA kalmadı", { skip: process.env.YAYIN_KAPISI ? false : "kapı kapalı (YAYIN_KAPISI=1 ile koş)" }, () => {
+  assert.ok(!todoVar, "kaynak dosyada TODO-DOGRULA işareti duruyor: sayfa yayınlanmaz");
+});
+
+test("yayın kapısı: Defne dil denetimi bitti (tests/DEFNE-BEKLIYOR.md yok)", { skip: process.env.YAYIN_KAPISI ? false : "kapı kapalı (YAYIN_KAPISI=1 ile koş)" }, () => {
+  assert.ok(!defneBekliyor, "tests/DEFNE-BEKLIYOR.md duruyor: Defne bulgusu işlenmeden sayfa yayınlanmaz");
 });
