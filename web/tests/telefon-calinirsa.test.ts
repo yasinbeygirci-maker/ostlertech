@@ -5,7 +5,10 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
-import { TR, EN, PLAY_TELEFON_CALINIRSA_INSTAGRAM, playHref, playOrganik, type Content } from "../src/lib/telefon-calinirsa.ts";
+import { TR, EN, type Content } from "../src/lib/telefon-calinirsa.ts";
+import {
+  IG_TELEFON_CALINIRSA, PLAY_TELEFON_CALINIRSA_INSTAGRAM, playHrefFor, playHrefTelefon as playHref, playOrganikTelefon as playOrganik,
+} from "../src/lib/play-utm.ts";
 
 const kaynakYolu = path.join(process.cwd(), "src", "lib", "telefon-calinirsa.ts");
 
@@ -84,6 +87,42 @@ test("Play bağlantısı: organik açılışta site UTM'si", () => {
   }
   assert.equal(referrer(playOrganik("en")), "utm_source=ostlertech.com&utm_medium=site&utm_campaign=telefon-calinirsa&utm_content=sayfa_en");
   assert.equal(referrer(PLAY_TELEFON_CALINIRSA_INSTAGRAM), INSTAGRAM_UTM);
+});
+
+// Kontrol listesi sayfaları (TR /guvenlik-kontrol-listesi, EN /en/security-checklist) aynı mantığı kullanır (GuideChecklist -> PlayCta).
+const LISTE_ORGANIK = "https://play.google.com/store/apps/details?id=com.ostlertech.syncpass&referrer=utm_source%3Dostlertech.com%26utm_medium%3Dsite%26utm_campaign%3Dliste%26utm_content%3Dsayfa_tr";
+
+test("Kontrol listesi: organik açılışta mevcut site UTM'si aynen kalır", () => {
+  for (const s of ["", "?utm_source=google", "?k=x", "?utm_medium=dm"]) assert.equal(playHrefFor(s, LISTE_ORGANIK, IG_TELEFON_CALINIRSA), LISTE_ORGANIK, s);
+});
+
+test("Kontrol listesi: DM'deki 'Listeyi aç' bağlantısı (?utm_source=instagram&...) ya da ?k=ig Instagram UTM'li Play bağlantısı verir", () => {
+  const dm = "?utm_source=instagram&utm_medium=dm&utm_campaign=2026-11-guvenlik&utm_content=reels-telefon-calinirsa";
+  assert.equal(referrer(playHrefFor(dm, LISTE_ORGANIK, IG_TELEFON_CALINIRSA)), INSTAGRAM_UTM);
+  assert.equal(referrer(playHrefFor("?k=ig", LISTE_ORGANIK, IG_TELEFON_CALINIRSA)), INSTAGRAM_UTM);
+  // Başka otomasyonun kampanyası kendi adıyla kalır (LİSTE/PLAN eski akışları)
+  assert.equal(
+    referrer(playHrefFor("?utm_source=instagram&utm_medium=dm&utm_campaign=liste&utm_content=liste-tr", LISTE_ORGANIK)),
+    "utm_source=instagram&utm_medium=dm&utm_campaign=liste&utm_content=liste-tr",
+  );
+  // Varsayılan yoksa ve adreste de yoksa yalnız kaynak ve ortam
+  assert.equal(referrer(playHrefFor("?k=ig", LISTE_ORGANIK)), "utm_source=instagram&utm_medium=dm");
+});
+
+test("Play referrer: adresten gelen değer güvenli karakterlerle sınırlı (enjeksiyon yok)", () => {
+  const kotu = playHrefFor("?utm_source=instagram&utm_campaign=a%26utm_source%3Devil&utm_content=" + "x".repeat(80), LISTE_ORGANIK, IG_TELEFON_CALINIRSA);
+  assert.equal(referrer(kotu), INSTAGRAM_UTM);
+  assert.equal((referrer(kotu).match(/utm_source=/g) ?? []).length, 1);
+});
+
+test("Kontrol listesi sayfaları: PlayCta üzerinden, yeni sayfaya iç bağlantı TR+EN", () => {
+  const oku = (p: string) => fs.readFileSync(path.join(process.cwd(), p), "utf8");
+  const g = oku("src/components/GuideChecklist.tsx");
+  assert.ok(g.includes("<PlayCta") && !g.includes("<a href={ctaHref}"), "GuideChecklist ham Play bağlantısı kullanıyor");
+  const tr = oku("src/app/(tr)/guvenlik-kontrol-listesi/page.tsx");
+  const en = oku("src/app/(en)/en/security-checklist/page.tsx");
+  assert.ok(tr.includes("/telefon-calinirsa") && tr.includes("ig={IG_TELEFON_CALINIRSA}"));
+  assert.ok(en.includes("/en/if-your-phone-is-stolen") && en.includes("ig={IG_TELEFON_CALINIRSA}"));
 });
 
 test("TR/EN çapraz bağlantıları tutarlı", () => {

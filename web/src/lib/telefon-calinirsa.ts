@@ -7,7 +7,10 @@
 //     iki denemede açılamadı. e-Devlet hizmet adı ve 120 hattı yalnız ikincil kaynaklarda (Allianz 26.10.2026, CNN Türk 2017).
 //     Resmî sayfadan elle teyit edilince 5. adımın IMEI cümlesine hizmet adı + bağlantı eklenir, bu işaret silinir.
 //  2. 3. adım, banka: Türkiye Bankalar Birliği/BDDK'dan tek resmî kaynak bulunamadı; sayfada "genel öneri" notuyla duruyor.
-//  3. SyncPass kasası telefon çalınınca ne olur: Can doğrulayana kadar sayfada "kasan güvende" türü cümle YOK.
+//  3. SyncPass kasası telefon çalınınca ne olur: sayfada "kasan güvende" türü cümle YOK. "Kasan cihazında şifreli tutulur"
+//     cümlesi Android kaynağından DOĞRULANDI (Can, 2026-11-03: SQLCipher + alan başına AES-256-GCM, anahtar ana şifreden
+//     PBKDF2-HMAC-SHA256 600.000 tur; EncryptionManager.kt, AppDatabase.kt). Cümle kalır; bu madde Burak kapısı + Yasin onayıyla
+//     silinir (kaynak dosyalar ekip-gunlugu.md girişinde).
 //  4. Dil: Defne denetimi yapıldı, Must/Should düzeltmeleri uygulandı (2026-11-03); kalan Should/Nice listesi ekip-gunlugu.md girişinde.
 
 export type Lang = "tr" | "en";
@@ -52,21 +55,7 @@ export type Content = {
   backToTop?: string;
 };
 
-// Play bağlantısı. Reels/DM'den gelen ziyaretçi (sayfa adresinde utm_source=instagram ya da k=ig) pazarlama belgesi B4'teki
-// UTM'yi taşır; organik açılışta site UTM'si kullanılır. Sunucuda (statik derleme) varsayılan olarak organik bağlantı yazılır,
-// tarayıcıda PlayCta adres sorgusuna bakıp gerekirse değiştirir.
-const PLAY_BASE = "https://play.google.com/store/apps/details?id=com.ostlertech.syncpass&referrer=";
-export const PLAY_TELEFON_CALINIRSA_INSTAGRAM =
-  PLAY_BASE + "utm_source%3Dinstagram%26utm_medium%3Ddm%26utm_campaign%3D2026-11-guvenlik%26utm_content%3Dreels-telefon-calinirsa";
-export const playOrganik = (lang: Lang) =>
-  PLAY_BASE + `utm_source%3Dostlertech.com%26utm_medium%3Dsite%26utm_campaign%3Dtelefon-calinirsa%26utm_content%3Dsayfa_${lang}`;
-
-/** Sayfa adresinin sorgusuna (ör. "?utm_source=instagram&utm_medium=dm" ya da "?k=ig") göre Play bağlantısı. */
-export function playHref(search: string, lang: Lang): string {
-  const q = new URLSearchParams(search);
-  const instagram = (q.get("utm_source") ?? "").toLowerCase() === "instagram" || (q.get("k") ?? "").toLowerCase() === "ig";
-  return instagram ? PLAY_TELEFON_CALINIRSA_INSTAGRAM : playOrganik(lang);
-}
+// Play bağlantısının kaynağa göre UTM'si: src/lib/play-utm.ts (telefon sayfası + kontrol listesi sayfaları ortak kullanır).
 
 export const TR: Content = {
   path: "/telefon-calinirsa",

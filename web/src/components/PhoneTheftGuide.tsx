@@ -4,6 +4,7 @@
 import { Check } from "lucide-react";
 import { guideMetadata } from "@/components/GuideChecklist";
 import PlayCta from "@/components/PlayCta";
+import { IG_TELEFON_CALINIRSA, playOrganikTelefon } from "@/lib/play-utm";
 import { EN, TR, type Content, type Lang } from "@/lib/telefon-calinirsa";
 
 export function phoneTheftMetadata(lang: Lang) {
@@ -110,7 +111,7 @@ export default function PhoneTheftGuide({ lang }: { lang: Lang }) {
         <div className="max-w-3xl mx-auto rounded-3xl border border-primary/30 bg-gradient-to-b from-primary/10 to-card p-8 md:p-10 space-y-4 text-center">
           <h2 className="text-2xl font-extrabold tracking-tight text-white">{c.helperTitle}</h2>
           <p className="text-base text-muted leading-relaxed">{c.helperText}</p>
-          <PlayCta lang={lang}>{c.ctaLabel} →</PlayCta>
+          <PlayCta organicHref={playOrganikTelefon(lang)} ig={IG_TELEFON_CALINIRSA}>{c.ctaLabel} →</PlayCta>
           <p className="text-sm text-muted">{c.ctaNote}</p>
         </div>
       </section>

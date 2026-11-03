@@ -3,6 +3,8 @@
 // Metinler Deniz'in 2026-10-19 onaylı brifinden (pazarlama/2026-10-19-liste-plan-reels.md bölüm 3 ve 4).
 import type { Metadata } from "next";
 import { Download } from "lucide-react";
+import PlayCta from "@/components/PlayCta";
+import type { IgDefaults } from "@/lib/play-utm";
 import { SCREENS_VERSION, SITE_URL } from "@/lib/site";
 
 // Sayfa metaverisi: openGraph/twitter kök düzenden birleşmez, yazılınca görsel ve başlık da burada verilmeli
@@ -93,6 +95,8 @@ export default function GuideChecklist({
   ctaHref,
   disclaimer,
   related,
+  moreRelated,
+  ig,
   numbered = true,
 }: {
   lang: Lang;
@@ -106,6 +110,10 @@ export default function GuideChecklist({
   ctaHref: string;
   disclaimer: string;
   related: { href: string; label: string };
+  /** Ek iç bağlantılar ("ilgili" satırının altında). */
+  moreRelated?: { href: string; label: string }[];
+  /** Instagram'dan (?k=ig ya da utm_source=instagram) gelen ziyaretçide Play bağlantısına konacak varsayılan kampanya. */
+  ig?: IgDefaults;
   numbered?: boolean;
 }) {
   const ui = UI[lang];
@@ -162,7 +170,7 @@ export default function GuideChecklist({
 
       <section className="section-padding border-t border-line">
         <div className="max-w-3xl mx-auto rounded-3xl border border-primary/30 bg-gradient-to-b from-primary/10 to-card p-8 md:p-10 space-y-3 text-center">
-          <a href={ctaHref} className="btn-primary !py-3.5" rel="noopener">{ctaLabel} →</a>
+          <PlayCta organicHref={ctaHref} ig={ig}>{ctaLabel} →</PlayCta>
           <p className="text-sm text-muted">{ui.free}</p>
         </div>
       </section>
@@ -182,6 +190,11 @@ export default function GuideChecklist({
           <p className="text-sm text-muted">
             <a href={related.href} className="text-primary hover:text-primary-light">{related.label}</a>
           </p>
+          {moreRelated?.map((r) => (
+            <p key={r.href} className="text-sm text-muted">
+              <a href={r.href} className="text-primary hover:text-primary-light">{r.label}</a>
+            </p>
+          ))}
         </div>
       </section>
     </>

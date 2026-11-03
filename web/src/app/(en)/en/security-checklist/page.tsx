@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { EnHeader, EnFooter } from "@/components/EnShell";
 import GuideChecklist, { guideMetadata, type GuideItem } from "@/components/GuideChecklist";
+import { IG_TELEFON_CALINIRSA } from "@/lib/play-utm";
 
 // Page for the Instagram "LIST" comment magnet. Premium labels checked in code: VaultHealthScreen isPremium (ortak-beyin §16).
 const PATH = "/en/security-checklist";
@@ -41,6 +42,8 @@ export default function SecurityChecklist() {
         ctaHref={PLAY}
         disclaimer="This checklist is general information. OstlerTech · ostlertech.com"
         related={{ href: "/en/digital-security-plan", label: "Next step: your 7-day digital security plan" }}
+        moreRelated={[{ href: "/en/if-your-phone-is-stolen", label: "If your phone is stolen: the first 5 steps" }]}
+        ig={IG_TELEFON_CALINIRSA}
       />
       <EnFooter />
     </main>
