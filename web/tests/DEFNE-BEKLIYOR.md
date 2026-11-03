@@ -10,3 +10,7 @@ Denetlenecek yeni/değişen metin (tek kaynak: src/lib/telefon-calinirsa.ts, TR 
 - ctaNote (kayıt sınırı sayısız).
 - Kaynak listesindeki yeni adlar (Google 41078 ve 3067630, Apple 118228 ve 108037, e-Devlet, Mevzuat).
 - Kart ve Reels metni: pazarlama\gorsel\2026-11-03-telefon-calinirsa\kaynak\uret.py (IMEI_TR / IMEI_EN, 5. adım, src satırı).
+
+## Durum (3 Kas 2026, gece)
+Düzeltmeler işlendi (Defne 2. denetim: M1, S1-S9, S11-S14, N1, N4; S5 ve S10 bilerek yapılmadı), tekrar denetim bekliyor.
+Bu dosya Defne ikinci gözden geçirmeyi bitirene kadar SİLİNMEZ; duruyorsa YAYIN_KAPISI=1 npm test kırmızıdır.
