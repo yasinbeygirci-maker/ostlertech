@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GuideChecklist, { guideMetadata, type GuideItem } from "@/components/GuideChecklist";
+import { IG_TELEFON_CALINIRSA } from "@/lib/play-utm";
 
 // Instagram "LİSTE" yorum mıknatısının sayfası. Premium ibareleri koddan: VaultHealthScreen isPremium (ortak-beyin §16).
 const PATH = "/guvenlik-kontrol-listesi";
@@ -42,6 +43,8 @@ export default function GuvenlikKontrolListesi() {
         ctaHref={PLAY}
         disclaimer="Bu liste genel bilgilendirmedir. OstlerTech · ostlertech.com"
         related={{ href: "/dijital-guvenlik-plani", label: "Sıradaki adım: 7 günde dijital güvenlik planı" }}
+        moreRelated={[{ href: "/telefon-calinirsa", label: "Telefonun çalınırsa ilk 5 adım" }]}
+        ig={IG_TELEFON_CALINIRSA}
       />
       <Footer />
     </main>

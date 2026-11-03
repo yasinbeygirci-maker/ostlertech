@@ -32,6 +32,7 @@ const guides = [
   { href: "/en/password-manager-comparison", label: "Comparison" },
   { href: "/en/security-checklist", label: "Security checklist" },
   { href: "/en/digital-security-plan", label: "7-day security plan" },
+  { href: "/en/if-your-phone-is-stolen", label: "If your phone is stolen" },
   { href: "/en/security/whitepaper", label: "Security whitepaper" },
 ];
 
