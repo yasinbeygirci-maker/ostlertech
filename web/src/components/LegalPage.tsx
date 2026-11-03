@@ -6,7 +6,8 @@ import { COMPANY, LEGAL_UPDATED, LEGAL_UPDATED_EN } from "@/lib/site";
 
 // Yasal ve kurumsal sayfaların ortak düzeni.
 export default function LegalPage({ eyebrow, title, children, updated = true, updatedOn, lang = "tr", altLink }: {
-  eyebrow: string; title: string; children: ReactNode; updated?: boolean;
+  // eyebrow: marka adı büyük harfte Türkçe kuralıyla bozulmasın diye (Hozeni → HOZENİ) <span lang="en"> verilebilir.
+  eyebrow: ReactNode; title: string; children: ReactNode; updated?: boolean;
   // Yalnız bu sayfa değiştiyse kendi tarihi; verilmezse ortak LEGAL_UPDATED(_EN) gösterilir.
   updatedOn?: string;
   // İngilizce sürümler (/en/...) için lang="en"; altLink diğer dildeki sayfaya bağlantı.
