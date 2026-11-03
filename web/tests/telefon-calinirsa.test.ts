@@ -5,7 +5,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
-import { TR, EN, PLAY_TELEFON_CALINIRSA, type Content } from "../src/lib/telefon-calinirsa.ts";
+import { TR, EN, PLAY_TELEFON_CALINIRSA_INSTAGRAM, playHref, playOrganik, type Content } from "../src/lib/telefon-calinirsa.ts";
 
 const kaynakYolu = path.join(process.cwd(), "src", "lib", "telefon-calinirsa.ts");
 
@@ -48,9 +48,22 @@ for (const [ad, c] of [["TR", TR], ["EN", EN]] as const) {
   });
 }
 
-test("Play bağlantısı pazarlama belgesindeki UTM'yi taşır", () => {
-  const ref = decodeURIComponent(new URL(PLAY_TELEFON_CALINIRSA).searchParams.get("referrer") ?? "");
-  assert.equal(ref, "utm_source=instagram&utm_medium=dm&utm_campaign=2026-11-guvenlik&utm_content=reels-telefon-calinirsa");
+const referrer = (u: string) => decodeURIComponent(new URL(u).searchParams.get("referrer") ?? "");
+const INSTAGRAM_UTM = "utm_source=instagram&utm_medium=dm&utm_campaign=2026-11-guvenlik&utm_content=reels-telefon-calinirsa";
+
+test("Play bağlantısı: Reels/DM'den gelince pazarlama belgesindeki UTM", () => {
+  for (const s of ["?utm_source=instagram&utm_medium=dm&utm_campaign=2026-11-guvenlik&utm_content=reels-telefon-calinirsa", "?k=ig", "?k=IG", "?utm_source=Instagram"]) {
+    assert.equal(referrer(playHref(s, "tr")), INSTAGRAM_UTM, s);
+    assert.equal(referrer(playHref(s, "en")), INSTAGRAM_UTM, s);
+  }
+});
+
+test("Play bağlantısı: organik açılışta site UTM'si", () => {
+  for (const s of ["", "?", "?utm_source=google", "?k=x", "?utm_medium=dm"]) {
+    assert.equal(referrer(playHref(s, "tr")), "utm_source=ostlertech.com&utm_medium=site&utm_campaign=telefon-calinirsa&utm_content=sayfa_tr", s);
+  }
+  assert.equal(referrer(playOrganik("en")), "utm_source=ostlertech.com&utm_medium=site&utm_campaign=telefon-calinirsa&utm_content=sayfa_en");
+  assert.equal(referrer(PLAY_TELEFON_CALINIRSA_INSTAGRAM), INSTAGRAM_UTM);
 });
 
 test("TR/EN çapraz bağlantıları tutarlı", () => {

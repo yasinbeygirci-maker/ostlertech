@@ -51,9 +51,21 @@ export type Content = {
   backToTop?: string;
 };
 
-// Play bağlantısı: pazarlama belgesi B4 (utm_source=instagram&utm_medium=dm&utm_campaign=2026-11-guvenlik&utm_content=reels-telefon-calinirsa).
-export const PLAY_TELEFON_CALINIRSA =
-  "https://play.google.com/store/apps/details?id=com.ostlertech.syncpass&referrer=utm_source%3Dinstagram%26utm_medium%3Ddm%26utm_campaign%3D2026-11-guvenlik%26utm_content%3Dreels-telefon-calinirsa";
+// Play bağlantısı. Reels/DM'den gelen ziyaretçi (sayfa adresinde utm_source=instagram ya da k=ig) pazarlama belgesi B4'teki
+// UTM'yi taşır; organik açılışta site UTM'si kullanılır. Sunucuda (statik derleme) varsayılan olarak organik bağlantı yazılır,
+// tarayıcıda PlayCta adres sorgusuna bakıp gerekirse değiştirir.
+const PLAY_BASE = "https://play.google.com/store/apps/details?id=com.ostlertech.syncpass&referrer=";
+export const PLAY_TELEFON_CALINIRSA_INSTAGRAM =
+  PLAY_BASE + "utm_source%3Dinstagram%26utm_medium%3Ddm%26utm_campaign%3D2026-11-guvenlik%26utm_content%3Dreels-telefon-calinirsa";
+export const playOrganik = (lang: Lang) =>
+  PLAY_BASE + `utm_source%3Dostlertech.com%26utm_medium%3Dsite%26utm_campaign%3Dtelefon-calinirsa%26utm_content%3Dsayfa_${lang}`;
+
+/** Sayfa adresinin sorgusuna (ör. "?utm_source=instagram&utm_medium=dm" ya da "?k=ig") göre Play bağlantısı. */
+export function playHref(search: string, lang: Lang): string {
+  const q = new URLSearchParams(search);
+  const instagram = (q.get("utm_source") ?? "").toLowerCase() === "instagram" || (q.get("k") ?? "").toLowerCase() === "ig";
+  return instagram ? PLAY_TELEFON_CALINIRSA_INSTAGRAM : playOrganik(lang);
+}
 
 export const TR: Content = {
   path: "/telefon-calinirsa",
