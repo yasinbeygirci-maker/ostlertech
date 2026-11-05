@@ -5,7 +5,7 @@ import { COMPANY } from "@/lib/site";
 // Kaynak: OstlerTech/hukuk/oklar-gizlilik-politikasi.md (Zeynep taslağı). İngilizcesi /en/oklar/privacy; biri değişirse diğeri de.
 export const metadata: Metadata = {
   title: "Oklar Gizlilik Politikası",
-  description: "Oklar ok bulmaca oyunu: hesap yok, ilerleme cihazda, isteğe bağlı ödüllü reklam (Google AdMob).",
+  description: "Oklar ok bulmaca oyunu: üyelik yok, ilerleme cihazda, isteğe bağlı ödüllü reklam (Google AdMob).",
   alternates: { canonical: "/oklar/privacy", languages: { tr: "/oklar/privacy", en: "/en/oklar/privacy" } },
 };
 
@@ -14,7 +14,7 @@ const link = "text-primary hover:text-primary-light";
 export default function OklarPrivacyPage() {
   return (
     <LegalPage eyebrow="Oklar" title="Oklar Gizlilik Politikası" updated={false} altLink={{ href: "/en/oklar/privacy", label: "English" }}>
-      <p>Son güncelleme: 23 Ekim 2026</p>
+      <p>Son güncelleme: 5 Kasım 2026</p>
       <p>
         Bu politika, Oklar mobil oyununu (&quot;Oyun&quot;) kullandığınızda hangi verilerin işlendiğini anlatır. 6698 sayılı
         Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında aydınlatma metni, AB Genel Veri Koruma Tüzüğü (GDPR) kapsamında
@@ -28,12 +28,12 @@ export default function OklarPrivacyPage() {
 
       <H2>2. Kısaca</H2>
       <List>
-        <li>Oyunda hesap yoktur. Adınızı, e-postanızı ya da telefonunuzu sormayız.</li>
+        <li>Oyunda üyelik yoktur. Adınızı, e-postanızı ya da telefonunuzu sormayız.</li>
         <li>Oyun ilerlemeniz yalnız cihazınızda tutulur; bize gelmez.</li>
         <li>Oyunda isteğe bağlı ödüllü reklam vardır: ipucu ya da ek can için reklam izlemeyi siz seçersiniz. Reklamları Google AdMob gösterir.</li>
-        <li>Reklamlar yalnız izin verirseniz kişiselleştirilir; 18 yaşından küçüklere her zaman kişiselleştirilmemiş reklam gösterilir. İzninizi istediğiniz zaman geri alabilirsiniz.</li>
+        <li>Reklamlar yalnız izin verirseniz kişiselleştirilir. Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre dışında 18 yaşından küçüklere her zaman kişiselleştirilmemiş reklam gösterilir. İzninizi istediğiniz zaman geri alabilirsiniz.</li>
         <li>Tek seferlik &quot;Reklamsız paket&quot; satın alma Google Play üzerinden yapılır; ödeme bilgileriniz bize gelmez.</li>
-        <li>Analitik ya da izleme aracı kullanmıyoruz.</li>
+        <li>Kendi analitik aracımızı kullanmıyoruz ve oyun bize ait bir sunucuya veri göndermez. Reklam ve satın alma için oyun internete bağlanır.</li>
       </List>
 
       <H2>3. Cihazınızda kalan veriler</H2>
@@ -116,11 +116,7 @@ export default function OklarPrivacyPage() {
 
       <H2>9. Çocuklar</H2>
       <p>
-        Oyun 13 yaş ve üzeri kullanıcılar için tasarlanmıştır; çocuklara yönelik değildir. Bilerek 13 yaşından küçük
-        çocuklardan kişisel veri toplamayız ve reklamlarda içerik sınırı (PG) uygularız. 18 yaşından küçük kullanıcılara
-        kişiselleştirilmiş reklam gösterilmez; onay penceremiz onlara hiç sorulmaz. Doğum yılınızdan 18 yaşını doldurduğunuz
-        kesin anlaşılmıyorsa da böyle davranılır. 13 yaşından küçük bir çocuğun oyunu
-        kullandığını düşünüyorsanız {COMPANY.email} adresine yazın.
+        Oyun 13 yaş ve üzeri kullanıcılar için tasarlanmıştır; çocuklara yönelik değildir. Reklamlarda içerik sınırı (PG) uygularız. Yaşınızı doğrulamıyoruz. Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre dışında oyunu ilk açtığınızda doğum yılınızı sorarız: 18 yaşından küçükseniz ya da doğum yılınızdan 18 yaşını doldurduğunuz kesin anlaşılmıyorsa reklamlar her zaman kişiselleştirilmeden gösterilir ve onay penceremiz size gösterilmez; bu durumda da Google, 4. bölümde yazan sınırlı bilgiyi reklamı göstermek, saymak ve sahtekârlığı önlemek için işler. Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre&apos;de doğum yılı sorulmaz; reklamların kişiselleştirilip kişiselleştirilmeyeceği Google&apos;ın onay formundaki seçiminize göre belirlenir. 13 yaşından küçük bir çocuğun oyunu kullandığını düşünüyorsanız {COMPANY.email} adresine yazın; cihazdaki verileri silmek için oyunu kaldırmanız ya da verilerini temizlemeniz yeterlidir.
       </p>
 
       <H2>10. Haklarınız</H2>

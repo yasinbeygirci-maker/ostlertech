@@ -16,6 +16,26 @@ const yasak = [
   /daha güvenli/i, /en güvenli/i, /most secure/i, /nonaro/i, /nineko/i, /\[yay[ıi]n/i, /TODO|YASİN ONAYI/i,
 ];
 
+// Oklar ve Beepout (otopark) sayfaları: 16+ testi bunlara uymaz (Oklar 13+, Beepout sabit yol kullanır); yalnız yasak ifade taranır.
+// Zeynep 2026-11-05: ek desenler izleme/bilerek toplama iddialarını da kapsar.
+const ekYasak = [/izleme aracı/i, /tracking tool/i, /knowingly collect/i, /veri toplamayız/i];
+const digerSayfalar = ["oklar", "otopark"].flatMap((o) => [
+  { oyun: o, dil: "tr", yol: path.join(kok, "(tr)", o, "privacy", "page.tsx") },
+  { oyun: o, dil: "en", yol: path.join(kok, "(en)", "en", o, "privacy", "page.tsx") },
+]);
+
+for (const s of digerSayfalar) {
+  const metin = fs.readFileSync(s.yol, "utf8");
+  const ad = `${s.oyun}/${s.dil}`;
+  test(`${ad}: yasak ifade, izleme ve bilerek toplama iddiası yok`, () => {
+    for (const r of [...yasak, ...ekYasak]) assert.ok(!r.test(metin), `${ad}: ${r} bulundu`);
+  });
+  test(`${ad}: üyelik yok cümlesi ve AdMob var`, () => {
+    assert.ok(metin.includes("AdMob"));
+    assert.ok(s.dil === "tr" ? /üyelik yok/.test(metin) : /no sign-up/.test(metin));
+  });
+}
+
 for (const s of sayfalar) {
   const metin = fs.readFileSync(s.yol, "utf8");
   const ad = `${s.oyun}/${s.dil}`;

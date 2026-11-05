@@ -9,7 +9,7 @@ const N = OTOPARK.name;
 
 export const metadata: Metadata = {
   title: `${N} Gizlilik Politikası`,
-  description: `${N} araç park bulmacası: hesap yok, ilerleme cihazda, isteğe bağlı ödüllü reklam (Google AdMob).`,
+  description: `${N} araç park bulmacası: üyelik yok, ilerleme cihazda, isteğe bağlı ödüllü reklam (Google AdMob).`,
   alternates: { canonical: OTOPARK.path, languages: { tr: OTOPARK.path, en: OTOPARK.enPath } },
 };
 
@@ -32,12 +32,12 @@ export default function OtoparkPrivacyPage() {
 
       <H2>2. Kısaca</H2>
       <List>
-        <li>Oyunda hesap yoktur. Adınızı, e-postanızı ya da telefonunuzu sormayız.</li>
+        <li>Oyunda üyelik yoktur. Adınızı, e-postanızı ya da telefonunuzu sormayız.</li>
         <li>Bölüm ilerlemeniz, günlük bulmacalarınız, kupalarınız ve ayarlarınız yalnız cihazınızda tutulur; bize gelmez.</li>
         <li>Oyunda isteğe bağlı ödüllü reklam vardır: ek ipucu ya da ek can için reklam izlemeyi siz seçersiniz. Reklamları Google AdMob gösterir.</li>
-        <li>Reklamlar yalnız izin verirseniz kişiselleştirilir; 18 yaşından küçüklere her zaman kişiselleştirilmemiş reklam gösterilir. İzninizi istediğiniz zaman geri alabilirsiniz.</li>
+        <li>Reklamlar yalnız izin verirseniz kişiselleştirilir. Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre dışında 18 yaşından küçüklere her zaman kişiselleştirilmemiş reklam gösterilir. İzninizi istediğiniz zaman geri alabilirsiniz.</li>
         <li>Tek seferlik &quot;Reklamsız paket&quot; satın alma Google Play üzerinden yapılır; ödeme bilgileriniz bize gelmez.</li>
-        <li>Analitik ya da izleme aracı kullanmıyoruz; kendi sunucumuz yoktur.</li>
+        <li>Kendi analitik aracımızı kullanmıyoruz ve oyun bize ait bir sunucuya veri göndermez. Reklam ve satın alma için oyun internete bağlanır.</li>
       </List>
 
       <H2>3. Cihazınızda kalan veriler</H2>
@@ -122,12 +122,7 @@ export default function OtoparkPrivacyPage() {
 
       <H2>9. Çocuklar</H2>
       <p>
-        Oyun 16 yaş ve üzeri kullanıcılar için tasarlanmıştır; çocuklara yönelik değildir ve Google Play&apos;in Aileler
-        programında yer almaz. Oyunda gösterilen reklamlar genel izleyiciye uygun (PG) içerikle sınırlıdır. Bilerek 16
-        yaşından küçük çocuklardan kişisel veri toplamayız. 18 yaşından küçük kullanıcılara kişiselleştirilmiş reklam
-        gösterilmez; onay penceremiz onlara hiç sorulmaz. Doğum yılınızdan 18 yaşını doldurduğunuz kesin anlaşılmıyorsa da
-        böyle davranılır. 16 yaşından küçük bir çocuğun
-        oyunu kullandığını düşünüyorsanız {COMPANY.email} adresine yazın.
+        Oyun 16 yaş ve üzeri kullanıcılar için tasarlanmıştır; çocuklara yönelik değildir ve Google Play&apos;in Aileler programında yer almaz. Oyunda gösterilen reklamlar genel izleyiciye uygun (PG) içerikle sınırlıdır. Yaşınızı doğrulamıyoruz. Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre dışında oyunu ilk açtığınızda doğum yılınızı sorarız: 18 yaşından küçükseniz ya da doğum yılınızdan 18 yaşını doldurduğunuz kesin anlaşılmıyorsa reklamlar her zaman kişiselleştirilmeden gösterilir ve onay penceremiz size gösterilmez; bu durumda da Google, 4. bölümde yazan sınırlı bilgiyi reklamı göstermek, saymak ve sahtekârlığı önlemek için işler. Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre&apos;de doğum yılı sorulmaz; reklamların kişiselleştirilip kişiselleştirilmeyeceği Google&apos;ın onay formundaki seçiminize göre belirlenir. 16 yaşından küçük bir çocuğun oyunu kullandığını düşünüyorsanız {COMPANY.email} adresine yazın; cihazdaki verileri silmek için oyunu kaldırmanız ya da verilerini temizlemeniz yeterlidir.
       </p>
 
       <H2>10. Haklarınız</H2>

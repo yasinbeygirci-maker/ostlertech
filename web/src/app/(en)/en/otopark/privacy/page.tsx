@@ -8,7 +8,7 @@ const N = OTOPARK.name;
 
 export const metadata: Metadata = {
   title: `${N} Privacy Policy`,
-  description: `${N} car parking puzzle: no account, progress stays on the device, optional rewarded ads (Google AdMob).`,
+  description: `${N} car parking puzzle: no sign-up, progress stays on the device, optional rewarded ads (Google AdMob).`,
   alternates: { canonical: OTOPARK.enPath, languages: { tr: OTOPARK.path, en: OTOPARK.enPath } },
 };
 
@@ -29,12 +29,12 @@ export default function OtoparkPrivacyEnPage() {
 
       <H2>2. In short</H2>
       <List>
-        <li>The Game has no account. We never ask for your name, email or phone number.</li>
+        <li>The Game has no sign-up. We never ask for your name, email or phone number.</li>
         <li>Your level progress, daily puzzles, trophies and settings are stored only on your device and never reach us.</li>
         <li>The Game has optional rewarded ads: you choose to watch an ad for an extra hint or an extra life. Ads are served by Google AdMob.</li>
-        <li>Ads are personalized only if you allow it; users under 18 always get non-personalized ads. You can withdraw your consent at any time.</li>
+        <li>Ads are personalized only if you allow it. Outside the European Economic Area, the United Kingdom and Switzerland, users under 18 always get non-personalized ads. You can withdraw your consent at any time.</li>
         <li>The one-time &quot;Ad-free pack&quot; purchase is made through Google Play; your payment details never reach us.</li>
-        <li>We use no analytics or tracking tools and run no servers of our own.</li>
+        <li>We don&apos;t use our own analytics tools and the Game doesn&apos;t send data to any server of ours. The Game connects to the internet for ads and purchases.</li>
       </List>
 
       <H2>3. Data that stays on your device</H2>
@@ -118,12 +118,7 @@ export default function OtoparkPrivacyEnPage() {
 
       <H2>9. Children</H2>
       <p>
-        The Game is designed for users aged 16 and over, is not directed at children and is not part of Google Play&apos;s
-        Families program. Ads shown in the Game are limited to content suitable for general audiences (PG). We do not
-        knowingly collect personal data from children under 16. Users under 18 are not shown personalized ads, and our consent
-        window is never shown to them. The same applies if your year of birth does not show for certain that you are 18 or
-        over. If you believe a child under 16 is
-        using the Game, write to {COMPANY.email}.
+        The Game is designed for users aged 16 and over, is not directed at children and is not part of Google Play&apos;s Families program. Ads shown in the Game are limited to content suitable for general audiences (PG). We do not verify your age. Outside the European Economic Area, the United Kingdom and Switzerland, we ask for your year of birth when you first open the Game: if you are under 18, or if your year of birth does not show for certain that you are 18 or over, ads are always shown without personalization and our consent window is not shown to you; even then, Google processes the limited information described in section 4 to show and count ads and to prevent fraud. In the European Economic Area, the United Kingdom and Switzerland, your year of birth is not asked; whether ads are personalized depends on your choice in Google&apos;s consent form. If you believe a child under 16 is using the Game, write to {COMPANY.email}; uninstalling the Game or clearing its data is enough to delete the data on the device.
       </p>
 
       <H2>10. Your rights</H2>

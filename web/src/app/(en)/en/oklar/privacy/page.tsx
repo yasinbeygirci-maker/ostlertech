@@ -5,7 +5,7 @@ import { COMPANY } from "@/lib/site";
 // English version of /oklar/privacy. Keep both in sync.
 export const metadata: Metadata = {
   title: "Oklar Privacy Policy",
-  description: "Oklar arrow puzzle game: no account, progress stays on the device, optional rewarded ads (Google AdMob).",
+  description: "Oklar arrow puzzle game: no sign-up, progress stays on the device, optional rewarded ads (Google AdMob).",
   alternates: { canonical: "/en/oklar/privacy", languages: { tr: "/oklar/privacy", en: "/en/oklar/privacy" } },
 };
 
@@ -14,7 +14,7 @@ const link = "text-primary hover:text-primary-light";
 export default function OklarPrivacyEnPage() {
   return (
     <LegalPage eyebrow="Oklar" title="Oklar Privacy Policy" lang="en" updated={false} altLink={{ href: "/oklar/privacy", label: "Türkçe sürüm" }}>
-      <p>Last updated: 23 October 2026</p>
+      <p>Last updated: 5 November 2026</p>
       <p>
         This policy explains which data is processed when you use the Oklar mobile game (the &quot;Game&quot;). It serves as the
         information notice under Turkey&apos;s Personal Data Protection Law (KVKK) and the EU General Data Protection Regulation (GDPR).
@@ -25,12 +25,12 @@ export default function OklarPrivacyEnPage() {
 
       <H2>2. In short</H2>
       <List>
-        <li>The Game has no account. We never ask for your name, email or phone number.</li>
+        <li>The Game has no sign-up. We never ask for your name, email or phone number.</li>
         <li>Your progress is stored only on your device and never reaches us.</li>
         <li>The Game has optional rewarded ads: you choose to watch an ad for a hint or an extra heart. Ads are served by Google AdMob.</li>
-        <li>Ads are personalized only if you allow it; users under 18 always get non-personalized ads. You can withdraw your consent at any time.</li>
+        <li>Ads are personalized only if you allow it. Outside the European Economic Area, the United Kingdom and Switzerland, users under 18 always get non-personalized ads. You can withdraw your consent at any time.</li>
         <li>The one-time &quot;Ad-free pack&quot; purchase is made through Google Play; your payment details never reach us.</li>
-        <li>We use no analytics or tracking tools.</li>
+        <li>We don&apos;t use our own analytics tools and the Game doesn&apos;t send data to any server of ours. The Game connects to the internet for ads and purchases.</li>
       </List>
 
       <H2>3. Data that stays on your device</H2>
@@ -113,11 +113,7 @@ export default function OklarPrivacyEnPage() {
 
       <H2>9. Children</H2>
       <p>
-        The Game is designed for users aged 13 and over and is not directed at children. We do not knowingly collect personal data
-        from children under 13, and we limit ad content to the PG rating. Users under 18 are not shown personalized ads, and our
-        consent window is never shown to them. The same applies if your year of birth does not show for certain that you are 18
-        or over. If you believe a child under 13 is using the Game, write to{" "}
-        {COMPANY.email}.
+        The Game is designed for users aged 13 and over and is not directed at children. We limit ad content to the PG rating. We do not verify your age. Outside the European Economic Area, the United Kingdom and Switzerland, we ask for your year of birth when you first open the Game: if you are under 18, or if your year of birth does not show for certain that you are 18 or over, ads are always shown without personalization and our consent window is not shown to you; even then, Google processes the limited information described in section 4 to show and count ads and to prevent fraud. In the European Economic Area, the United Kingdom and Switzerland, your year of birth is not asked; whether ads are personalized depends on your choice in Google&apos;s consent form. If you believe a child under 13 is using the Game, write to {COMPANY.email}; uninstalling the Game or clearing its data is enough to delete the data on the device.
       </p>
 
       <H2>10. Your rights</H2>
