@@ -1,4 +1,4 @@
-import { BROWSER_EXTENSION, DESKTOP_DOWNLOAD, PLAY_URL } from "./site";
+import { BROWSER_EXTENSION, DESKTOP_DOWNLOAD, MS_STORE_URL, PLAY_URL } from "./site";
 import { AREAPILOT } from "./areapilot";
 import { CORNERTAB } from "./cornertab";
 
@@ -51,10 +51,11 @@ export const URUNLER: Urun[] = [
     url: DESKTOP_DOWNLOAD.url,
     cta: "Windows için ücretsiz indir",
     ekler: [
+      { etiket: "Microsoft Store'dan indir", url: MS_STORE_URL },
       { etiket: "Ayrıntılar ve fiyatlar", url: "/syncpass-masaustu" },
       { etiket: "Chrome Web Mağazası'ndan eklenti", url: BROWSER_EXTENSION.chromeUrl },
     ],
-    not: `Sürüm ${DESKTOP_DOWNLOAD.version}. Microsoft Store sürümü ve Edge eklentisi hazırlanıyor.`,
+    not: `Microsoft Store'da yayında. Bu sayfadaki doğrudan indirme sürümü ${DESKTOP_DOWNLOAD.version}. Edge eklentisi hazırlanıyor.`,
   },
   {
     id: "areapilot",

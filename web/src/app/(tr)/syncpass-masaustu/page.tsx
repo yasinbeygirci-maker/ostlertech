@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Check, Monitor } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { BROWSER_EXTENSION, DESKTOP_DOWNLOAD, DESKTOP_LICENSE, SCREENS_VERSION, SITE_URL } from "@/lib/site";
+import { BROWSER_EXTENSION, DESKTOP_DOWNLOAD, DESKTOP_LICENSE, MS_STORE_URL, SCREENS_VERSION, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "SyncPass Masaüstü",
@@ -71,7 +71,8 @@ export default function DesktopLicensePage() {
               bilgisayarında şifreli durur; kopyası sunucularımızda tutulmaz.
             </p>
             <div className="flex flex-wrap items-center gap-4">
-              <a href={DESKTOP_DOWNLOAD.url} className="btn-primary !py-3.5 text-base">Ücretsiz indir (Windows)</a>
+              <a href={MS_STORE_URL} className="btn-primary !py-3.5 text-base" target="_blank" rel="noopener">Microsoft Store&apos;dan indir</a>
+              <a href={DESKTOP_DOWNLOAD.url} className="text-base font-semibold text-primary hover:text-primary-light">Kurulum dosyasını indir (.msi)</a>
               <span className="text-sm text-muted">Sürüm {DESKTOP_DOWNLOAD.version} · {DESKTOP_DOWNLOAD.sizeLabel} · {DESKTOP_DOWNLOAD.requirements}</span>
             </div>
             <p className="text-sm text-muted">
@@ -82,14 +83,14 @@ export default function DesktopLicensePage() {
             <details className="rounded-2xl border border-line bg-card p-5 text-sm text-muted">
               <summary className="cursor-pointer font-semibold text-foreground">Windows "tanınmayan uygulama" uyarısı gösterirse</summary>
               <p className="mt-3">
-                Kurulum dosyası henüz Microsoft Store üzerinden dağıtılmadığı için Windows SmartScreen uyarı gösterebilir. Uyarıda
+                Kurulum dosyasını doğrudan bu siteden indirdiğin için Windows SmartScreen uyarı gösterebilir. Uyarıda
                 <strong className="text-foreground"> Ek bilgi → Yine de çalıştır</strong> seçeneğiyle kurulumu sürdürebilirsin.
                 Dosyanın bizden geldiğini SHA-256 özetiyle doğrulayabilirsin:
               </p>
               <code className="mt-2 block break-all font-mono text-xs text-foreground">{DESKTOP_DOWNLOAD.sha256}</code>
               <p className="mt-2">
                 Tüm sürümler: <a href={DESKTOP_DOWNLOAD.releasesUrl} className="text-primary hover:text-primary-light">sürüm notları</a>.
-                Microsoft Store sürümü hazırlanıyor.
+                SyncPass Masaüstü <a href={MS_STORE_URL} className="text-primary hover:text-primary-light" target="_blank" rel="noopener">Microsoft Store</a>&apos;da da yayında.
               </p>
             </details>
             <div className="device-window">

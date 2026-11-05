@@ -54,6 +54,9 @@ export const DESKTOP_DOWNLOAD = {
   requirements: "Windows 10 (2004) veya Windows 11, 64 bit",
 };
 
+// SyncPass'in Microsoft Store sayfası (2026-10-28'den beri yayında; HTTP 200 doğrulandı 2026-11-05).
+export const MS_STORE_URL = "https://apps.microsoft.com/detail/9PPS2SD0G399";
+
 // Tarayıcı eklentisi: kayıtları aynı bilgisayardaki SyncPass Masaüstü'nden doldurur (Edge incelemede).
 export const BROWSER_EXTENSION = {
   chromeUrl: "https://chromewebstore.google.com/detail/bbighjeekihcenhofnmefgmcadddahbk",
