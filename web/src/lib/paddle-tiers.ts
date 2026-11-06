@@ -120,6 +120,12 @@ export function buildPriceCatalog(areapilot: typeof AREAPILOT_PRICE_IDS = AREAPI
 
 export const PADDLE_PRICE_PLANS: Record<string, PriceInfo> = buildPriceCatalog();
 
+/** AreaPilot'un üç katmanının fiyat kimliği de eşlemede var mı (satış bayrağı bunu ister). */
+export function areapilotPricesReady(catalog: Record<string, PriceInfo> = PADDLE_PRICE_PLANS): boolean {
+  const devices = new Set(Object.values(catalog).filter((p) => p.product === "areapilot").map((p) => p.maxDevices));
+  return devices.has(1) && devices.has(5) && devices.has(20);
+}
+
 export function priceInfo(priceId: unknown, catalog: Record<string, PriceInfo> = PADDLE_PRICE_PLANS): PriceInfo | null {
   return typeof priceId === "string" && Object.hasOwn(catalog, priceId) ? catalog[priceId] : null;
 }

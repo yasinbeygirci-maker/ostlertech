@@ -25,6 +25,12 @@ export function salesOpen(): boolean {
 
 // Ürün başına satış anahtarı. SyncPass: PADDLE_SALES_OPEN (yukarıdaki salesOpen). AreaPilot: PADDLE_SALES_OPEN_AREAPILOT=1.
 // Kapalıyken (varsayılan) AreaPilot satış sayfası/ödeme düğmesi açılmaz. Webhook bu bayraktan ETKİLENMEZ: ödenmiş işlem her zaman işlenir.
-export function salesOpenFor(product: "syncpass_desktop" | "areapilot", env: Record<string, string | undefined> = process.env): boolean {
-  return product === "areapilot" ? env.PADDLE_SALES_OPEN_AREAPILOT === "1" : env.PADDLE_SALES_OPEN === "1";
+// AreaPilot ayrıca fiyat kimlikleri sunucu eşlemesinde tanımlı olmalıdır (areapilotPricesReady, paddle-tiers.ts): eşleme boşken
+// satış açılırsa müşteri öder ama webhook lisans üretmez. Bu bilgi verilmezse (varsayılan) AreaPilot satışı KAPALI kalır.
+export function salesOpenFor(
+  product: "syncpass_desktop" | "areapilot",
+  opts: { env?: Record<string, string | undefined>; areapilotPricesReady?: boolean } = {}
+): boolean {
+  const env = opts.env ?? process.env;
+  return product === "areapilot" ? env.PADDLE_SALES_OPEN_AREAPILOT === "1" && opts.areapilotPricesReady === true : env.PADDLE_SALES_OPEN === "1";
 }

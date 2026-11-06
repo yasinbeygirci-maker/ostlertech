@@ -34,11 +34,17 @@ export async function POST(req: Request) {
   try {
     await handle(event);
   } catch (e) {
-    console.error("paddle webhook", event.event_type, event.event_id, e);
+    // Tam hata nesnesi yazılmaz (Supabase hataları satır içeriği, e-posta gibi kişisel veri taşıyabilir): yalnız kod.
+    console.error("paddle webhook", event.event_type, event.event_id, (e as { code?: string } | null)?.code ?? "hata");
     // 5xx: Paddle bildirimi daha sonra yeniden dener.
     return NextResponse.json({ error: "processing_failed" }, { status: 500 });
   }
-  await db.from("sp_paddle_events").insert({ event_id: event.event_id, event_type: event.event_type });
+  const logged = await db.from("sp_paddle_events").insert({ event_id: event.event_id, event_type: event.event_type });
+  // 23505 = aynı bildirim eşzamanlı işlendi (zaten kayıtlı): sorun değil. Başka hata: 5xx, Paddle yeniden dener (işlem tekrar güvenlidir).
+  if (logged.error && logged.error.code !== "23505") {
+    console.error("paddle webhook olay kaydi", event.event_type, event.event_id, logged.error.code ?? "hata");
+    return NextResponse.json({ error: "processing_failed" }, { status: 500 });
+  }
   return NextResponse.json({ ok: true });
 }
 
@@ -121,6 +127,8 @@ async function handle({ event_type, data }: PaddleEvent) {
   if (event_type === "adjustment.created" || event_type === "adjustment.updated") {
     if (data.action !== "refund" && data.action !== "chargeback") return;
     if (data.status !== "approved") return;
+    // Kısmi iade lisansı düşürmez (yalnız tam iade/itiraz).
+    if (data.type !== "full") return;
     await must(db.from("sp_licenses").update({ status: "refunded", updated_at: now }).eq("paddle_transaction_id", data.transaction_id));
   }
 }

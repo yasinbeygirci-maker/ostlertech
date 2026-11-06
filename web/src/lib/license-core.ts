@@ -2,7 +2,7 @@
 // Saf dosya (birim testli: tests/license-core.test.ts): Next/server-only/Supabase yok, göreli içe aktarma yalnız `import type`.
 // Veritabanı erişimi LicenseStore ile dışarıdan verilir (sunucuda lib/server/license.ts Supabase uygulamasını bağlar).
 // Sözleşme: D:\Development\OstlerTech\yonetim\areapilot-lisans-sozlesmesi.md
-import { createPrivateKey, createPublicKey, randomBytes, sign, verify } from "node:crypto";
+import { createHash, createPrivateKey, createPublicKey, randomBytes, sign, verify } from "node:crypto";
 import type { LicensePlan, LicenseProduct } from "./paddle-tiers";
 
 export type Plan = LicensePlan;
@@ -17,6 +17,8 @@ export interface LicenseRow {
   status: LicenseStatus;
   current_period_end: string | null;
   max_devices: number;
+  /** Paddle'dan gelen alıcı e-postası (yalnız cihaz sıfırlama bağlantısı için okunur; yanıta ve günlüğe yazılmaz). */
+  email?: string | null;
 }
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -48,8 +50,14 @@ export const DEFAULT_PRODUCT: Product = "syncpass_desktop";
 const ALPHABET = "23456789ABCDEFGHJKMNPQRSTVWXYZ";
 
 export function newLicenseKey(product: Product = DEFAULT_PRODUCT): string {
-  const bytes = randomBytes(20);
-  const chars = Array.from(bytes, (b) => ALPHABET[b % ALPHABET.length]).join("");
+  // Reddetmeli örnekleme: 256 % 30 != 0 olduğundan 240 ve üzeri baytlar atılır, yoksa ilk harfler daha sık çıkar.
+  const limit = 256 - (256 % ALPHABET.length);
+  let chars = "";
+  while (chars.length < 20) {
+    for (const b of randomBytes(32)) {
+      if (b < limit && chars.length < 20) chars += ALPHABET[b % ALPHABET.length];
+    }
+  }
   return `${PRODUCTS[product].prefix}-${chars.slice(0, 5)}-${chars.slice(5, 10)}-${chars.slice(10, 15)}-${chars.slice(15, 20)}`;
 }
 
@@ -105,10 +113,24 @@ type Env = Record<string, string | undefined>;
 
 export class SigningNotConfigured extends Error {}
 
+/**
+ * Sözleşme belgesinde (yonetim/areapilot-lisans-sozlesmesi.md §6) ve istemci testlerinde dolaşan SAHTE test anahtar çiftinin
+ * genel anahtarları (SPKI, base64). Özel yarısı belgede açıktır; üretimde bu anahtarla imzalamak herkesin sahte belge
+ * üretebilmesi demektir, bu yüzden NODE_ENV=production iken reddedilir. Testler kendi anahtarını bu kümeye ekleyerek sınar.
+ */
+export const KNOWN_TEST_PUBLIC_KEYS: Set<string> = new Set([
+  "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAERRoh1lkW+t/CwVpEtub3sT0sl8Y2rcSTsiq9UKITzj1+RBqM8vBrcS+D2VrTNoF/gVhdovmtigIOZZp7s/zrsg==",
+]);
+
 function privateKeyFor(product: Product, env: Env) {
   const b64 = env[PRODUCTS[product].keyEnv];
   if (!b64) throw new SigningNotConfigured(`${PRODUCTS[product].keyEnv} tanımlı değil`);
-  return createPrivateKey({ key: Buffer.from(b64, "base64"), format: "der", type: "pkcs8" });
+  const key = createPrivateKey({ key: Buffer.from(b64, "base64"), format: "der", type: "pkcs8" });
+  if (env.NODE_ENV === "production") {
+    const spki = createPublicKey(key).export({ format: "der", type: "spki" }).toString("base64");
+    if (KNOWN_TEST_PUBLIC_KEYS.has(spki)) throw new SigningNotConfigured(`${PRODUCTS[product].keyEnv} bilinen bir TEST anahtarı; üretimde kullanılamaz`);
+  }
+  return key;
 }
 
 /**
@@ -168,12 +190,32 @@ export function areapilotPublicKey(privateKeyB64: string): { pointB64: string; x
 
 // ---- Etkinleştirme / yenileme / kaldırma ----
 
+/**
+ * Depo işlevleri veritabanı hatasında FIRLATIR (hata "kayıt yok" gibi görünmemeli: yoksa gerçek bir müşteriye 404 invalid_key
+ * denir). Çekirdek fırlatmayı 500 server_error'a çevirir.
+ */
 export interface LicenseStore {
+  /** Kayıt yoksa null; veritabanı hatasında fırlatır. */
   findLicense(key: string, product: Product): Promise<LicenseRow | null>;
-  listDevices(licenseId: string): Promise<string[]>;
-  /** Cihazı ekler ya da last_seen/sürümünü günceller; başarıyı döndürür. */
-  upsertDevice(licenseId: string, deviceId: string, appVersion: string | null, nowIso: string): Promise<boolean>;
-  removeDevice(licenseId: string, deviceId: string): Promise<void>;
+  /**
+   * Cihazı ATOMİK kaydeder: kilit altında "zaten kayıtlı mı / sayı sınırı dolu mu / ekle" tek adımda yapılır, böylece eşzamanlı
+   * istekler sınırı aşamaz. Kayıtlıysa yalnız last_seen/sürümü günceller. Sınır max_devices'a (lisans satırından, kilit altında) göre.
+   */
+  registerDevice(licenseId: string, deviceId: string, appVersion: string | null, nowIso: string): Promise<"ok" | "limit">;
+  /** Yalnız KAYITLI cihazın last_seen/sürümünü günceller; cihaz kayıtlı değilse false (yeni cihaz eklemez). */
+  touchDevice(licenseId: string, deviceId: string, appVersion: string | null, nowIso: string): Promise<boolean>;
+  /**
+   * Cihazı siler (kayıtsızsa da başarılı) ve kaldırmayı sayar; ATOMİK: lisans başına son DEACTIVATE_WINDOW_DAYS günde
+   * DEACTIVATE_LIMIT kaldırma yapıldıysa hiçbir şey silmeden "limit" döner. Hatada fırlatır.
+   */
+  removeDevice(licenseId: string, deviceId: string, nowIso: string): Promise<"ok" | "limit">;
+  /**
+   * E-postayla cihaz sıfırlama için tek kullanımlık belirteç kaydeder (YALNIZ SHA-256 özeti). Lisans için son `minIntervalMs`
+   * içinde belirteç üretildiyse hiçbir şey yazmaz ve false döner (saatte 1 e-posta). Atomik. Hatada fırlatır.
+   */
+  createResetToken(licenseId: string, tokenHash: string, expiresIso: string, nowIso: string, minIntervalMs: number): Promise<boolean>;
+  /** Belirteç geçerliyse (var, kullanılmamış, süresi dolmamış) tek adımda kullanılmış sayar ve lisansın TÜM cihazlarını siler; true döner. */
+  consumeResetToken(tokenHash: string, nowIso: string): Promise<boolean>;
 }
 
 export type LicenseOp = "activate" | "renew" | "deactivate";
@@ -183,6 +225,16 @@ export interface ApiResult {
 }
 
 const UUID = /^[0-9a-f-]{36}$/i;
+
+/** Kaldırma sınırı: lisans başına bu kadar gün içinde en çok bu kadar "bu bilgisayardan kaldır". */
+export const DEACTIVATE_LIMIT = 3;
+export const DEACTIVATE_WINDOW_DAYS = 30;
+
+function storeFailed(product: Product, e?: unknown): ApiResult {
+  // Ayrıntı (kod, anahtar, e-posta içerebilir) yazılmaz; yalnız hata sınıfı.
+  console.error("license store", product, e instanceof Error ? e.constructor.name : "error");
+  return { status: 500, body: { error: "server_error" } };
+}
 
 export async function handleLicenseRequest(
   op: LicenseOp,
@@ -203,26 +255,34 @@ export async function handleLicenseRequest(
   if (!deviceId) return { status: 400, body: { error: "bad_request" } };
   const appVersion = typeof body?.appVersion === "string" ? body.appVersion.slice(0, 32) : null;
 
-  const license = await store.findLicense(key, product);
-  if (!license) return { status: 404, body: { error: "invalid_key" } };
-
-  if (op === "deactivate") {
-    await store.removeDevice(license.id, deviceId);
-    return { status: 200, body: { ok: true } };
-  }
-
   const now = opts.now ?? Date.now();
-  const until = entitlementUntil(license, now);
-  if (!until) return { status: 403, body: { error: "inactive", status: license.status } };
+  let license: LicenseRow;
+  let until = 0;
+  try {
+    const found = await store.findLicense(key, product);
+    if (!found) return { status: 404, body: { error: "invalid_key" } };
+    license = found;
 
-  const devices = await store.listDevices(license.id);
-  const known = devices.includes(deviceId);
-  if (op === "renew" && !known) return { status: 404, body: { error: "device_unknown" } };
-  if (!known && devices.length >= license.max_devices) {
-    return { status: 409, body: { error: "device_limit", maxDevices: license.max_devices } };
-  }
-  if (!(await store.upsertDevice(license.id, deviceId, appVersion, new Date(now).toISOString()))) {
-    return { status: 500, body: { error: "server_error" } };
+    if (op === "deactivate") {
+      // Lisans başına kayan pencerede en çok DEACTIVATE_LIMIT kaldırma: kodu paylaşıp cihaz döndürmeyi (sınırı atlatmayı) kısıtlar.
+      if ((await store.removeDevice(license.id, deviceId, new Date(now).toISOString())) === "limit") {
+        return { status: 429, body: { error: "deactivate_limit", limit: DEACTIVATE_LIMIT, windowDays: DEACTIVATE_WINDOW_DAYS } };
+      }
+      return { status: 200, body: { ok: true } };
+    }
+
+    const entitled = entitlementUntil(license, now);
+    if (!entitled) return { status: 403, body: { error: "inactive", status: license.status } };
+    until = entitled;
+
+    const nowIso = new Date(now).toISOString();
+    if (op === "renew") {
+      if (!(await store.touchDevice(license.id, deviceId, appVersion, nowIso))) return { status: 404, body: { error: "device_unknown" } };
+    } else if ((await store.registerDevice(license.id, deviceId, appVersion, nowIso)) === "limit") {
+      return { status: 409, body: { error: "device_limit", maxDevices: license.max_devices } };
+    }
+  } catch (e) {
+    return storeFailed(product, e);
   }
 
   let token: string;
@@ -240,4 +300,83 @@ export async function handleLicenseRequest(
       ? { token, product, plan: license.plan, maxDevices: license.max_devices, expiresAt: until }
       : { token, plan: license.plan, expiresAt: until },
   };
+}
+
+// ---- E-postayla cihaz sıfırlama ----
+// Akış: (1) istemci/site kodu gönderir -> HER ZAMAN aynı yanıt (e-posta var mı, kod geçerli mi, sıklık sınırı dolu mu belli olmaz);
+// gerçek iş yanıttan sonra yapılır. (2) Lisansın kayıtlı e-postasına 30 dk geçerli tek kullanımlık bağlantı gider.
+// (3) Bağlantıdaki sayfada "Sıfırla" düğmesi POST eder (GET ile işlem yapılmaz: posta tarayıcıları bağlantıyı önceden açar).
+
+export const RESET_TOKEN_TTL_MS = 30 * 60 * 1000;
+export const RESET_MIN_INTERVAL_MS = 60 * 60 * 1000;
+export const RESET_TOKEN_PATTERN = /^[A-Za-z0-9_-]{43}$/;
+
+export type ResetLang = "tr" | "en";
+/** Bağlantıyı e-postayla gönderir. Başarısızlıkta fırlatabilir (çekirdek yutar). Adres/belirteç günlüğe yazılmaz. */
+export type ResetMailer = (to: string, token: string, lang: ResetLang) => Promise<void>;
+
+export function newResetToken(): string {
+  return randomBytes(32).toString("base64url"); // 43 karakter
+}
+
+export function hashResetToken(token: string): string {
+  return createHash("sha256").update(token).digest("hex");
+}
+
+export type ResetRequestParse = { ok: true; key: string; lang: ResetLang } | { ok: false; result: ApiResult };
+
+/** Eşzamanlı doğrulama: yalnız biçim (veritabanına bakmaz, bu yüzden varlık sızdırmaz). */
+export function parseResetRequest(rawBody: unknown, product: Product): ResetRequestParse {
+  const body = typeof rawBody === "object" && rawBody !== null ? (rawBody as Record<string, unknown>) : null;
+  const key = normalizeKey(body?.key, product);
+  if (!key) {
+    if (foreignKeyProduct(body?.key, product)) return { ok: false, result: { status: 404, body: { error: "wrong_product" } } };
+    return { ok: false, result: { status: 400, body: { error: "bad_request" } } };
+  }
+  const lang: ResetLang = body?.lang === "en" ? "en" : "tr";
+  return { ok: true, key, lang };
+}
+
+export const RESET_REQUEST_RESPONSE: ApiResult = { status: 200, body: { ok: true } };
+
+/** Yanıttan SONRA çalışan iş. Hiçbir koşulda fırlatmaz ve sonuç döndürmez. */
+export async function processDeviceReset(
+  product: Product,
+  key: string,
+  lang: ResetLang,
+  store: LicenseStore,
+  send: ResetMailer,
+  opts: { now?: number } = {}
+): Promise<"sent" | "skipped"> {
+  try {
+    const now = opts.now ?? Date.now();
+    const license = await store.findLicense(key, product);
+    if (!license || !license.email || !entitlementUntil(license, now)) return "skipped";
+    const token = newResetToken();
+    const created = await store.createResetToken(
+      license.id,
+      hashResetToken(token),
+      new Date(now + RESET_TOKEN_TTL_MS).toISOString(),
+      new Date(now).toISOString(),
+      RESET_MIN_INTERVAL_MS
+    );
+    if (!created) return "skipped";
+    await send(license.email, token, lang);
+    return "sent";
+  } catch (e) {
+    console.error("license reset", product, e instanceof Error ? e.constructor.name : "error");
+    return "skipped";
+  }
+}
+
+/** Bağlantıdaki belirteçle cihazları sıfırlar. 410: geçersiz/kullanılmış/süresi dolmuş. */
+export async function confirmDeviceReset(rawToken: unknown, store: LicenseStore, opts: { now?: number } = {}): Promise<ApiResult> {
+  if (typeof rawToken !== "string" || !RESET_TOKEN_PATTERN.test(rawToken)) return { status: 400, body: { error: "bad_request" } };
+  try {
+    const ok = await store.consumeResetToken(hashResetToken(rawToken), new Date(opts.now ?? Date.now()).toISOString());
+    return ok ? { status: 200, body: { ok: true } } : { status: 410, body: { error: "token_invalid" } };
+  } catch (e) {
+    console.error("license reset confirm", e instanceof Error ? e.constructor.name : "error");
+    return { status: 500, body: { error: "server_error" } };
+  }
 }
