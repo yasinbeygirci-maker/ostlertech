@@ -88,6 +88,8 @@ async function handle({ event_type, data }: PaddleEvent, deps: PaddleEventDeps, 
     if (!data.email) return;
     await must(db.from("sp_paddle_customers").upsert({ paddle_customer_id: data.id, email: data.email, updated_at: now }));
     await must(db.from("sp_licenses").update({ email: data.email, updated_at: now }).eq("paddle_customer_id", data.id));
+    // Adres işlemden sonra geldiyse: kodu henüz e-postalanmamış AreaPilot lisansları şimdi gönderilir (dil bilinmez: Türkçe).
+    await claimAndSend(deps, log, { customerId: data.id }, "tr", now);
     return;
   }
 
@@ -146,23 +148,18 @@ async function handle({ event_type, data }: PaddleEvent, deps: PaddleEventDeps, 
 
     // Lisans kodu e-postası: yalnız AreaPilot (SyncPass e-postası ayrı iş). Yanıttan SONRA gönderilir; hata webhook yanıtını (200) ve
     // lisansı etkilemez, günlüğe yalnız hata sınıfı yazılır (adres ve kod yazılmaz). Kod her halde /welcome sayfasında da görünür.
+    // Tek e-posta garantisi: gönderimden ÖNCE sp_licenses.key_email_sent_at atomik talep edilir (claimAndSend). Adres henüz yoksa
+    // (müşteri bildirimi işlemden sonra gelebilir) önce bir kez daha okunur; yine yoksa e-posta, müşteri bildirimi gelince gider.
     if (product === "areapilot") {
-      const transaction = data.id;
-      if (!deps.mailer) {
-        log.warn("paddle webhook: e-posta ayari yok, lisans kodu e-postasi gonderilmedi", { transaction });
-      } else if (!email) {
-        log.warn("paddle webhook: alici e-postasi henuz yok, lisans kodu e-postasi gonderilmedi", { transaction });
-      } else {
-        const mailer = deps.mailer;
-        const lang = mailLangFrom(data.custom_data);
-        deps.defer(async () => {
-          try {
-            await mailer.sendPurchaseKey(email, key, lang, maxDevices);
-          } catch (e) {
-            log.error("paddle webhook: lisans e-postasi gonderilemedi", { transaction, sinif: (e as { name?: string } | null)?.name ?? "hata" });
-          }
-        });
+      const lang = mailLangFrom(data.custom_data);
+      let known = email;
+      if (!known) {
+        const again = await db.from("sp_paddle_customers").select("email").eq("paddle_customer_id", data.customer_id).maybeSingle();
+        known = (again.data as { email?: string } | null)?.email ?? null;
+        if (known) await must(db.from("sp_licenses").update({ email: known, updated_at: now }).eq("paddle_transaction_id", data.id));
       }
+      if (known) await claimAndSend(deps, log, { transactionId: data.id }, lang, now);
+      else log.warn("paddle webhook: alici e-postasi henuz yok, musteri bildirimi gelince gonderilecek", { transaction: data.id });
     }
     return;
   }
@@ -184,6 +181,47 @@ async function handle({ event_type, data }: PaddleEvent, deps: PaddleEventDeps, 
     // Kısmi iade lisansı düşürmez (yalnız tam iade/itiraz).
     if (data.type !== "full") return;
     await must(db.from("sp_licenses").update({ status: "refunded", updated_at: now }).eq("paddle_transaction_id", data.transaction_id));
+  }
+}
+
+/**
+ * AreaPilot lisans kodu e-postası, TEK kez. Önce atomik talep: "key_email_sent_at is null" koşullu update, dönen satır sayısı kadar gönderilir;
+ * eşzamanlı ya da yinelenen olaylar satır alamaz ve göndermez. Gönderim başarısızsa talep geri alınır (sonraki müşteri olayı yeniden dener;
+ * döngü yok, her olay en çok bir deneme yapar). Hata webhook yanıtını bozmaz; günlüğe yalnız hata sınıfı (adres/kod yazılmaz).
+ */
+async function claimAndSend(
+  deps: PaddleEventDeps,
+  log: Logger,
+  scope: { transactionId?: string; customerId?: string },
+  lang: MailLang,
+  now: string
+) {
+  const mailer = deps.mailer;
+  if (!mailer) {
+    log.warn("paddle webhook: e-posta ayari yok, lisans kodu e-postasi gonderilmedi", {});
+    return;
+  }
+  let q = deps.db.from("sp_licenses").update({ key_email_sent_at: now }).eq("product", "areapilot").is("key_email_sent_at", null).not("email", "is", null);
+  q = scope.transactionId ? q.eq("paddle_transaction_id", scope.transactionId) : q.eq("paddle_customer_id", scope.customerId as string);
+  const claimed = await q.select("id, license_key, email, max_devices");
+  if (claimed.error) {
+    log.error("paddle webhook: e-posta talebi yazilamadi", { sinif: (claimed.error as { code?: string }).code ?? "hata" });
+    return;
+  }
+  for (const row of (claimed.data ?? []) as { id: string; license_key: string; email: string; max_devices: number }[]) {
+    deps.defer(async () => {
+      try {
+        await mailer.sendPurchaseKey(row.email, row.license_key, lang, row.max_devices);
+      } catch (e) {
+        log.error("paddle webhook: lisans e-postasi gonderilemedi", { sinif: (e as { name?: string } | null)?.name ?? "hata" });
+        try {
+          const back = await deps.db.from("sp_licenses").update({ key_email_sent_at: null }).eq("id", row.id);
+          if (back.error) log.error("paddle webhook: e-posta talebi geri alinamadi", { sinif: (back.error as { code?: string }).code ?? "hata" });
+        } catch (e2) {
+          log.error("paddle webhook: e-posta talebi geri alinamadi", { sinif: (e2 as { name?: string } | null)?.name ?? "hata" });
+        }
+      }
+    });
   }
 }
 

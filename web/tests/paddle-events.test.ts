@@ -18,9 +18,11 @@ function fakeDb(opts: { failEventInsert?: boolean; failLicenseInsert?: boolean }
   const unique: Record<string, string[]> = { sp_paddle_events: ["event_id"], sp_licenses: ["paddle_transaction_id", "license_key"] };
   function from(name: string) {
     const filters: [string, unknown][] = [];
+    const preds: ((r: Row) => boolean)[] = [];
+    let returning = false;
     let op: "select" | "insert" | "upsert" | "update" = "select";
     let payload: Row = {};
-    const matches = () => (tables[name] ?? []).filter((r) => filters.every(([c, v]) => r[c] === v));
+    const matches = () => (tables[name] ?? []).filter((r) => filters.every(([c, v]) => r[c] === v) && preds.every((f) => f(r)));
     const run = (single: boolean): { data: unknown; error: { code?: string } | null } => {
       if (op === "select") return { data: single ? (matches()[0] ?? null) : matches(), error: null };
       if (op === "insert") {
@@ -38,11 +40,14 @@ function fakeDb(opts: { failEventInsert?: boolean; failLicenseInsert?: boolean }
         else tables[name].push({ ...payload });
         return { data: null, error: null };
       }
-      for (const r of matches()) Object.assign(r, payload);
-      return { data: null, error: null };
+      const hit = matches();
+      for (const r of hit) Object.assign(r, payload);
+      return { data: returning ? hit.map((r) => ({ ...r })) : null, error: null };
     };
     const b = {
-      select: () => b,
+      select: () => ((returning = true), b),
+      is: (c: string, v: null) => (preds.push((r) => (r[c] ?? null) === v), b),
+      not: (c: string, _op: string, v: null) => (preds.push((r) => (r[c] ?? null) !== v), b),
       eq: (c: string, v: unknown) => (filters.push([c, v]), b),
       maybeSingle: () => Promise.resolve(run(true)),
       insert: (row: Row) => ((op = "insert"), (payload = row), b),
@@ -266,4 +271,115 @@ test("tam iade lisansı iade durumuna alır (mevcut davranış)", async () => {
   await h.post(txn(OFFICE));
   await h.post({ event_id: "evt_adj", event_type: "adjustment.created", data: { action: "refund", status: "approved", type: "full", transaction_id: "txn_01aaaaaaaaaaaaaaaaaaaaaaaa" } });
   assert.equal(h.store.tables.sp_licenses[0].status, "refunded");
+});
+
+// ---------------------------------------------------------------- e-posta TEK kez: olay sırası, yineleme, eşzamanlılık (migrasyon: key_email_sent_at)
+
+const TXN_ID = "txn_01aaaaaaaaaaaaaaaaaaaaaaaa";
+
+test("(a) önce işlem, sonra müşteri: e-posta müşteri gelince bir kez gider (dil Türkçe)", async () => {
+  const h = harness();
+  await h.post(txn(OFFICE, { custom_data: { lang: "en" } }));
+  assert.equal(h.sent.length, 0);
+  assert.equal(h.store.tables.sp_licenses[0].key_email_sent_at, undefined);
+  await h.post(customerEvent());
+  assert.equal(h.sent.length, 1);
+  assert.equal(h.sent[0].to, "alici@example.com");
+  assert.equal(h.sent[0].key, h.store.tables.sp_licenses[0].license_key);
+  assert.equal(h.sent[0].maxDevices, 5);
+  assert.ok(h.store.tables.sp_licenses[0].key_email_sent_at);
+  await h.post(customerEvent("ctm_1", "alici@example.com", "evt_c2")); // customer.updated yeniden
+  assert.equal(h.sent.length, 1);
+});
+
+test("(b) önce müşteri, sonra işlem: e-posta işlemde hemen, bir kez gider; sonraki müşteri olayı ikinci e-posta üretmez", async () => {
+  const h = harness();
+  await h.post(customerEvent());
+  await h.post(txn(OFFICE, { custom_data: { lang: "en" } }));
+  assert.equal(h.sent.length, 1);
+  assert.equal(h.sent[0].lang, "en");
+  await h.post(customerEvent("ctm_1", "alici@example.com", "evt_c2"));
+  assert.equal(h.sent.length, 1);
+});
+
+test("(c) aynı event_id tekrar: e-posta tekrar gitmez (iki sırada da)", async () => {
+  const h = harness();
+  const c = customerEvent();
+  const t = txn(OFFICE);
+  await h.post(t);
+  await h.post(c);
+  await h.post(c);
+  await h.post(t);
+  assert.equal(h.sent.length, 1);
+});
+
+test("(d) eşzamanlı işlem + müşteri olayı: tek e-posta", async () => {
+  for (const order of [0, 1]) {
+    const h = harness();
+    const evs = [txn(OFFICE), customerEvent()];
+    if (order) evs.reverse();
+    await Promise.all(evs.map((e) => h.post(e)));
+    assert.equal(h.store.tables.sp_licenses.length, 1);
+    assert.equal(h.sent.length, 1, `sıra ${order}`);
+  }
+  // iki müşteri olayı aynı anda (yinelenen customer.updated)
+  const h = harness();
+  await h.post(txn(OFFICE));
+  await Promise.all([h.post(customerEvent("ctm_1", "alici@example.com", "evt_x1")), h.post(customerEvent("ctm_1", "alici@example.com", "evt_x2"))]);
+  assert.equal(h.sent.length, 1);
+});
+
+test("(e) gönderim hatası talebi geri alır; sonraki olay yeniden dener ve tek e-posta gider; günlükte adres/kod yok", async () => {
+  let fail = true;
+  const sent: string[] = [];
+  const mailer: PurchaseMailer = {
+    async sendPurchaseKey(to, key) {
+      if (fail) throw Object.assign(new Error(`boom ${to} ${key}`), { name: "ResendError" });
+      sent.push(to);
+    },
+  };
+  const h = harness({ mailer });
+  await h.post(customerEvent());
+  const r = await h.post(txn(OFFICE));
+  assert.equal(r.status, 200);
+  assert.equal(h.store.tables.sp_licenses[0].key_email_sent_at, null, "talep geri alınmadı");
+  assert.match(JSON.stringify(h.logs), /ResendError/);
+  assert.doesNotMatch(JSON.stringify(h.logs), /alici@example.com|APL-KEY|boom/);
+  fail = false;
+  await h.post(customerEvent("ctm_1", "alici@example.com", "evt_c2"));
+  assert.deepEqual(sent, ["alici@example.com"]);
+  await h.post(customerEvent("ctm_1", "alici@example.com", "evt_c3"));
+  assert.equal(sent.length, 1, "başarıdan sonra tekrar gönderilmez");
+});
+
+test("(f) SyncPass ödemesi e-posta tetiklemez (müşteri olayı sonra da gelse)", async () => {
+  const h = harness();
+  await h.post(txn(SYNCPASS_LIFETIME));
+  await h.post(customerEvent());
+  await h.post(customerEvent("ctm_1", "alici@example.com", "evt_c2"));
+  assert.equal(h.sent.length, 0);
+  assert.equal(h.store.tables.sp_licenses[0].key_email_sent_at, undefined);
+});
+
+test("(g) adres hiç gelmezse: e-posta yok, hata yok (yalnız uyarı), 200", async () => {
+  const h = harness();
+  const r = await h.post(txn(OFFICE));
+  assert.equal(r.status, 200);
+  assert.equal(h.sent.length, 0);
+  assert.equal(h.logs.some((l) => l[0] === "error"), false);
+  const again = await h.post(txn(OFFICE, {}, "evt_t2"));
+  assert.equal(again.status, 200);
+  assert.equal(h.sent.length, 0);
+  void TXN_ID;
+});
+
+test("e-posta ayarı yoksa talep edilmez: ayar gelince sonraki müşteri olayı gönderir", async () => {
+  const store = fakeDb();
+  const off = harness({ db: store, mailer: null });
+  await off.post(customerEvent());
+  await off.post(txn(OFFICE));
+  assert.equal(store.tables.sp_licenses[0].key_email_sent_at, undefined);
+  const on = harness({ db: store });
+  await on.post(customerEvent("ctm_1", "alici@example.com", "evt_c2"));
+  assert.equal(on.sent.length, 1);
 });
