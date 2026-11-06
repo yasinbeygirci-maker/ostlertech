@@ -1,4 +1,4 @@
-import { BROWSER_EXTENSION, DESKTOP_DOWNLOAD, MS_STORE_URL, PLAY_URL } from "./site";
+import { BEEPOUT_URL, BROWSER_EXTENSION, DESKTOP_DOWNLOAD, HOZENI_URL, MS_STORE_URL, OKLAR_URL, PACKLE_URL, PLAY_URL } from "./site";
 import { AREAPILOT } from "./areapilot";
 import { CORNERTAB } from "./cornertab";
 
@@ -95,6 +95,59 @@ export const URUNLER: Urun[] = [
     url: CORNERTAB_PLAY_URL,
     cta: "Google Play'den indir",
     ekler: [{ etiket: "Kullanım videosu", url: CORNERTAB.pagePath }, { etiket: "Gizlilik politikası", url: CORNERTAB.path }],
+  },
+  // Oyunlar: kısa açıklamalar canlı Play girişleriyle birebir (2026-11-06). Reklam içerirler; metinde "reklamsız" iddiası yok.
+  {
+    id: "oklar",
+    ad: "Oklar",
+    slogan: "Sakin ok bulmacası",
+    aciklama: "Yolu açık oka dokun, kayarak çıksın. Sırayı bul, tahtayı boşalt. Zorunlu reklam yok: reklam yalnızca ipucu ya da ek can için video izlemeyi seçtiğinde oynar.",
+    platform: "Android · Reklam içerir",
+    ikon: "Gamepad2",
+    renk: "#34d399",
+    durum: "yayinda",
+    url: OKLAR_URL,
+    cta: "Google Play'den indir",
+    ekler: [{ etiket: "Gizlilik politikası", url: "/oklar/privacy" }],
+  },
+  {
+    id: "beepout",
+    ad: "Beepout",
+    slogan: "Otopark bulmacası",
+    aciklama: "Araca dokun, yolu açıksa otoparktan çıksın. Sırayı bul, otoparkı boşalt.",
+    platform: "Android · Reklam içerir",
+    ikon: "Gamepad2",
+    renk: "#fbbf24",
+    durum: "yayinda",
+    url: BEEPOUT_URL,
+    cta: "Google Play'den indir",
+    ekler: [{ etiket: "Gizlilik politikası", url: "/otopark/privacy" }],
+  },
+  {
+    id: "packle",
+    ad: "Packle",
+    slogan: "Blok bulmacası",
+    aciklama: "Parçaları 8×8 tahtaya yerleştir, dolan satır ve sütunları temizle.",
+    platform: "Android · Reklam içerir",
+    ikon: "Gamepad2",
+    renk: "#60a5fa",
+    durum: "yayinda",
+    url: PACKLE_URL,
+    cta: "Google Play'den indir",
+    ekler: [{ etiket: "Gizlilik politikası", url: "/packle/privacy" }],
+  },
+  {
+    id: "hozeni",
+    ad: "Hozeni",
+    slogan: "Günlük Sudoku",
+    aciklama: "Klasik 9×9 Sudoku: dört zorluk, günün bulmacası ve nedenini anlatan ipuçları.",
+    platform: "Android · Reklam içerir",
+    ikon: "Gamepad2",
+    renk: "#f472b6",
+    durum: "yayinda",
+    url: HOZENI_URL,
+    cta: "Google Play'den indir",
+    ekler: [{ etiket: "Gizlilik politikası", url: "/hozeni/privacy" }],
   },
   {
     id: "projex",

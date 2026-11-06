@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Command, ClipboardX, Columns3, SunMoon } from "lucide-react";
-import { BROWSER_EXTENSION, DESKTOP_DOWNLOAD, DESKTOP_LICENSE, SCREENS_VERSION } from "@/lib/site";
+import { BROWSER_EXTENSION, DESKTOP_DOWNLOAD, DESKTOP_LICENSE, MS_STORE_URL, SCREENS_VERSION } from "@/lib/site";
 
 const shots = {
   vault: { label: "Kasa", dark: "desktop-vault-dark", light: "desktop-vault-light" },
@@ -92,7 +92,8 @@ export default function Desktop() {
         </div>
 
         <div className="mt-16 max-w-md mx-auto text-center space-y-4">
-          <a href={DESKTOP_DOWNLOAD.url} className="btn-primary inline-flex !py-3.5 text-base">Windows için ücretsiz indir</a>
+          <a href={MS_STORE_URL} className="btn-primary inline-flex !py-3.5 text-base" target="_blank" rel="noopener">Microsoft Store&apos;dan indir</a>
+          <p className="text-sm"><a href={DESKTOP_DOWNLOAD.url} className="press inline-flex min-h-[44px] items-center text-primary hover:text-primary-light">Kurulum dosyasını indir (.msi)</a></p>
           <p className="text-xs text-muted">Sürüm {DESKTOP_DOWNLOAD.version} · {DESKTOP_DOWNLOAD.requirements}</p>
           <p className="text-sm text-muted">
             <a href={BROWSER_EXTENSION.chromeUrl} className="press inline-flex min-h-[44px] items-center text-primary hover:text-primary-light" target="_blank" rel="noopener">Chrome Web Mağazası'ndan eklentiyi ekle →</a>

@@ -1,5 +1,5 @@
 import SocialLinks from "@/components/SocialLinks";
-import { PLAY_URL, CONTACT_EMAIL, INSTAGRAM_URL, YOUTUBE_URL, COMPANY } from "@/lib/site";
+import { PLAY_URL, MS_STORE_URL, CONTACT_EMAIL, INSTAGRAM_URL, YOUTUBE_URL, COMPANY } from "@/lib/site";
 
 const columns = [
   {
@@ -9,6 +9,7 @@ const columns = [
       { href: "/syncpass-masaustu", label: "Masaüstü lisansı" },
       { href: "/syncpass#fiyat", label: "Fiyat" },
       { href: PLAY_URL, label: "Google Play", external: true },
+      { href: MS_STORE_URL, label: "Microsoft Store (Windows)", external: true },
       { href: "/en", label: "English" },
     ],
   },

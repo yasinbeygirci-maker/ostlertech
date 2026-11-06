@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { URUNLER, Urun } from "@/lib/urunler";
-import { HeartPulse, Store, Kanban, ShieldCheck, Monitor, Clock, Sparkles, Layers, ArrowRight } from "lucide-react";
+import { HeartPulse, Store, Kanban, ShieldCheck, Monitor, Clock, Sparkles, Layers, ArrowRight, Gamepad2 } from "lucide-react";
 
 const DURUM: Record<string, { etiket: string; cls: string }> = {
   yayinda: { etiket: "Yayında", cls: "bg-ok/10 border-ok/30 text-ok" },
@@ -13,7 +13,7 @@ const DURUM: Record<string, { etiket: string; cls: string }> = {
 
 export const metadata: Metadata = {
   title: "Ürünler",
-  description: "OstlerTech uygulamaları: SyncPass (Android ve Windows), SyncSite, CornerTab ve SyncDia. Yayında olanlar ve hazırlananlar.",
+  description: "OstlerTech uygulamaları: SyncPass (Android ve Windows), AreaPilot, CornerTab, oyunlar (Oklar, Beepout, Packle, Hozeni), SyncSite ve SyncDia. Yayında olanlar ve hazırlananlar.",
   alternates: { canonical: "/products" },
 };
 
@@ -24,6 +24,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string; size?: n
   Kanban,
   ShieldCheck,
   Monitor,
+  Gamepad2,
 };
 
 export default function ProductsPage() {

@@ -3,6 +3,13 @@
 export const PLAY_URL =
   "https://play.google.com/store/apps/details?id=com.ostlertech.syncpass&referrer=utm_source%3Dostlertech.com%26utm_medium%3Dsite";
 
+// Oyunların Play adresleri (2026-11-06: dördünde de Install düğmesi canlı doğrulandı). Beepout'un paket kimliği com.ostlertech.otopark.
+const PLAY_REF = "&referrer=utm_source%3Dostlertech.com%26utm_medium%3Dsite";
+export const OKLAR_URL = `https://play.google.com/store/apps/details?id=com.ostlertech.oklar${PLAY_REF}`;
+export const BEEPOUT_URL = `https://play.google.com/store/apps/details?id=com.ostlertech.otopark${PLAY_REF}`;
+export const PACKLE_URL = `https://play.google.com/store/apps/details?id=com.ostlertech.packle${PLAY_REF}`;
+export const HOZENI_URL = `https://play.google.com/store/apps/details?id=com.ostlertech.hozeni${PLAY_REF}`;
+
 export const SITE_URL = "https://www.ostlertech.com";
 
 export const CONTACT_EMAIL = "destek@ostlertech.com";

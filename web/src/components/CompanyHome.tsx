@@ -1,12 +1,15 @@
-import { ArrowRight, Clock, HeartPulse, Kanban, Layers, Lock, Mail, Monitor, ShieldCheck, Store, FileCheck2 } from "lucide-react";
+import { ArrowRight, Clock, Gamepad2, HeartPulse, Kanban, Layers, Lock, Mail, Monitor, ShieldCheck, Store, FileCheck2 } from "lucide-react";
 import { URUNLER, type Urun } from "@/lib/urunler";
 import { COMPANY } from "@/lib/site";
 
 // Şirket vitrini bölümleri. Metinler Hakkımızda, Güvenlik ve ürün verisinden (urunler.ts) alınır; yeni iddia yok.
 
 const ICONS: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
-  ShieldCheck, Monitor, Layers, HeartPulse, Store, Kanban,
+  ShieldCheck, Monitor, Layers, HeartPulse, Store, Kanban, Gamepad2,
 };
+
+// Google Play'den doğrudan inen oyunlar (urunler.ts): kart düğmesi Play girişine gider.
+const OYUNLAR = new Set(["oklar", "beepout", "packle", "hozeni"]);
 
 const DURUM: Record<string, { etiket: string; cls: string }> = {
   yayinda: { etiket: "Yayında", cls: "bg-ok/10 text-ok" },
@@ -49,9 +52,9 @@ function UrunKarti({ u }: { u: Urun }) {
   const Icon = ICONS[u.ikon] ?? Layers;
   const durum = DURUM[u.durum] ?? DURUM.yakinda;
   const syncpass = u.id === "syncpass";
-  const href = syncpass ? "/syncpass" : u.id === "syncpassdesktop" ? "/syncpass-masaustu" : u.id === "areapilot" ? u.url : u.id === "cornertab" ? u.url : null;
+  const href = syncpass ? "/syncpass" : u.id === "syncpassdesktop" ? "/syncpass-masaustu" : u.id === "areapilot" ? u.url : u.id === "cornertab" || OYUNLAR.has(u.id) ? u.url : null;
   const dis = href?.startsWith("http");
-  const etiket = syncpass ? "SyncPass'i tanı" : u.id === "syncpassdesktop" ? "Ayrıntılar ve fiyatlar" : u.id === "areapilot" ? "AreaPilot sayfası" : u.id === "cornertab" ? "Google Play'den indir" : null;
+  const etiket = syncpass ? "SyncPass'i tanı" : u.id === "syncpassdesktop" ? "Ayrıntılar ve fiyatlar" : u.id === "areapilot" ? "AreaPilot sayfası" : u.id === "cornertab" || OYUNLAR.has(u.id) ? "Google Play'den indir" : null;
 
   return (
     <article className="card-soft rounded-3xl p-6 md:p-7 flex flex-col">
