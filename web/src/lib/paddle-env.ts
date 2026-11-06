@@ -22,3 +22,9 @@ export function paddleConfig(): { environment: Environments; token: string } {
 export function salesOpen(): boolean {
   return process.env.PADDLE_SALES_OPEN === "1";
 }
+
+// Ürün başına satış anahtarı. SyncPass: PADDLE_SALES_OPEN (yukarıdaki salesOpen). AreaPilot: PADDLE_SALES_OPEN_AREAPILOT=1.
+// Kapalıyken (varsayılan) AreaPilot satış sayfası/ödeme düğmesi açılmaz. Webhook bu bayraktan ETKİLENMEZ: ödenmiş işlem her zaman işlenir.
+export function salesOpenFor(product: "syncpass_desktop" | "areapilot", env: Record<string, string | undefined> = process.env): boolean {
+  return product === "areapilot" ? env.PADDLE_SALES_OPEN_AREAPILOT === "1" : env.PADDLE_SALES_OPEN === "1";
+}

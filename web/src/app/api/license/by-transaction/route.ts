@@ -13,10 +13,10 @@ export async function GET(req: Request) {
   const since = new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString();
   const { data } = await supabaseAdmin()
     .from("sp_licenses")
-    .select("license_key, plan")
+    .select("license_key, plan, product")
     .eq("paddle_transaction_id", txn)
     .gte("created_at", since)
     .maybeSingle();
   if (!data) return NextResponse.json({ error: "not_found" }, { status: 404 });
-  return NextResponse.json({ key: data.license_key, plan: data.plan }, { headers: { "Cache-Control": "no-store" } });
+  return NextResponse.json({ key: data.license_key, plan: data.plan, product: data.product }, { headers: { "Cache-Control": "no-store" } });
 }

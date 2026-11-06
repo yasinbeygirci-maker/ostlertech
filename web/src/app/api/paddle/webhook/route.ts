@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/server/supabase-admin";
 import { verifyPaddleSignature } from "@/lib/server/paddle-webhook";
-import { newLicenseKey, planForPrice } from "@/lib/server/license";
+import { infoForPrice, newLicenseKey } from "@/lib/server/license";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -62,8 +62,19 @@ async function handle({ event_type, data }: PaddleEvent) {
   }
 
   if (event_type === "transaction.completed") {
-    const plan = (data.items ?? []).map((i: any) => planForPrice(i.price?.id)).find(Boolean);
-    if (!plan) return; // başka bir ürünün satışı
+    // Ürün, plan ve cihaz sınırı yalnız sunucudaki fiyat kimliği tablosundan gelir (custom_data istemciden gelir, güvenilmez).
+    const items: any[] = data.items ?? [];
+    const info = items.map((i) => infoForPrice(i.price?.id)).find(Boolean);
+    if (!info) {
+      // Bilinmeyen fiyat: lisans üretilmez ama iş akışı bozulmaz (200 döner, Paddle yeniden denemez). Müşteri ödediyse
+      // kod alamaz; bu satır günlükte aranır ve fiyat kimliği paddle-tiers.ts'e eklenir. Kişisel veri yazılmaz.
+      console.error("paddle webhook: bilinmeyen fiyat kimligi, lisans uretilmedi", {
+        transaction: data.id,
+        prices: items.map((i) => i.price?.id).filter(Boolean),
+      });
+      return;
+    }
+    const { plan, product, maxDevices } = info;
     const customer = await db.from("sp_paddle_customers").select("email").eq("paddle_customer_id", data.customer_id).maybeSingle();
     const email = customer.data?.email ?? null;
     const periodEnd = data.billing_period?.ends_at ?? null;
@@ -81,8 +92,10 @@ async function handle({ event_type, data }: PaddleEvent) {
     }
     await must(
       db.from("sp_licenses").insert({
-        license_key: newLicenseKey(),
+        license_key: newLicenseKey(product),
+        product,
         plan,
+        max_devices: maxDevices,
         status: "active",
         email,
         paddle_customer_id: data.customer_id,
