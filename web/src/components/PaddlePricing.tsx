@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { initializePaddle, type Environments, type Paddle } from "@paddle/paddle-js";
 import { Check, Download } from "lucide-react";
-import { TIERS, type BillingCycle, type Tier } from "@/lib/paddle-tiers";
+import { TIERS, type BillingCycle, type Tier } from "@/lib/syncpass-tiers";
 import { DESKTOP_DOWNLOAD } from "@/lib/site";
 
 interface Props {

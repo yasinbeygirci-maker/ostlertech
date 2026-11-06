@@ -1,5 +1,5 @@
 import { Check, Download } from "lucide-react";
-import { TIERS } from "@/lib/paddle-tiers";
+import { TIERS } from "@/lib/syncpass-tiers";
 import { DESKTOP_DOWNLOAD } from "@/lib/site";
 
 // Satış kapalıyken planların bilgi amaçlı gösterimi: ödeme düğmesi, ödeme kuruluşu betiği ya da fiyat sorgusu yok.
