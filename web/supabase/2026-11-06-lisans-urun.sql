@@ -52,9 +52,7 @@ end $$;
 -- ürüne göre rapor/sayım içindir.
 create index if not exists sp_licenses_product_status_idx on public.sp_licenses (product, status);
 
--- 2) Aynı Paddle işlemi iki lisans üretmesin (ön denetim yukarıda). Canlı şemada unique kısıt zaten varsa bu indeks yedektir.
-create unique index if not exists sp_licenses_paddle_transaction_uniq
-  on public.sp_licenses (paddle_transaction_id) where paddle_transaction_id is not null;
+-- 2) (paddle_transaction_id unique kisiti canli semada zaten var: sp_licenses_paddle_transaction_id_key; ek indeks gerekmedi)
 
 -- 3) Yeni tablolar (RLS açık, tarayıcı için politika YOK; yalnız service_role) ------------------------------------------------
 -- Cihaz kaldırma sayacı: AreaPilot'ta lisans başına 30 günde en çok 3 kaldırma (sp_remove_device uygular; SyncPass muaf).
