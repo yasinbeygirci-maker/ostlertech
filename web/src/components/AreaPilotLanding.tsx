@@ -1,5 +1,6 @@
 import { AlertTriangle, Check, Mail, ShieldCheck } from "lucide-react";
 import BetaDownloadForm from "@/components/BetaDownloadForm";
+import AreaPilotPricing from "@/components/AreaPilotPricing";
 import { SellerBlock } from "@/components/LegalPage";
 import { AREAPILOT } from "@/lib/areapilot";
 import { AREAPILOT_COPY, type Lang } from "@/lib/areapilot-content";
@@ -99,6 +100,9 @@ export default function AreaPilotLanding({ lang }: { lang: Lang }) {
           </p>
         </div>
       </section>
+
+      {/* Satın alma bölümü: satış bayrağı kapalıyken hiçbir şey çizmez (AreaPilotPricing). */}
+      <AreaPilotPricing lang={lang} />
 
       <section className="section-padding border-t border-line">
         <div className="max-w-6xl mx-auto grid gap-12 lg:grid-cols-2">

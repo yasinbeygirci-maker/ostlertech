@@ -140,3 +140,62 @@ export function newKeyMailCopy(lang: MailLang, key: string): { subject: string; 
     ].join("\n"),
   };
 }
+
+/**
+ * AreaPilot satın alma sonrası lisans kodu e-postası (işlem e-postası; pazarlama yok). Ürün adı, adımlar, cihaz sayısı ve notlar
+ * `licenseMailCopy("areapilot", ...)` ile aynı kaynaktan gelir; ürün sözcüğü SyncPass metnine karışmaz.
+ * [ZEYNEP] kapısı: iade/vergi cümlesi bu e-postada YOK (makbuz ve iade bağlantısı Paddle'ın kendi e-postasındadır); eklenecekse Zeynep onaylar.
+ */
+export function purchaseKeyMailCopy(lang: MailLang, key: string, maxDevices: number, downloadUrl: string): { subject: string; text: string } {
+  const c = licenseMailCopy("areapilot", lang, maxDevices);
+  if (lang === "en") {
+    return {
+      subject: c.subject,
+      text: [
+        "Thank you for buying AreaPilot.",
+        "",
+        "Your license key:",
+        key,
+        "",
+        "How to activate:",
+        ...c.steps.map((s, i) => `${i + 1}. ${s}`),
+        "",
+        c.devices,
+        c.planLine("lifetime"),
+        ...c.notes,
+        "",
+        `Not installed yet? Download AreaPilot: ${downloadUrl}`,
+        "",
+        "Do not share this key with anyone: whoever has it can activate it on their own computers and use up your slots. If you think it reached someone else, write to destek@ostlertech.com.",
+        "Your receipt from Paddle (our reseller) arrives in a separate email. Keep this email: the key is also shown on the page after checkout.",
+        "",
+        "Questions: destek@ostlertech.com",
+        "OstlerTech",
+      ].join("\n"),
+    };
+  }
+  return {
+    subject: c.subject,
+    text: [
+      "AreaPilot'u satın aldığın için teşekkürler.",
+      "",
+      "Lisans kodun:",
+      key,
+      "",
+      "Etkinleştirme:",
+      ...c.steps.map((s, i) => `${i + 1}. ${s}`),
+      "",
+      c.devices,
+      c.planLine("lifetime"),
+      ...c.notes,
+      "",
+      `Henüz kurmadıysan AreaPilot'u buradan indir: ${downloadUrl}`,
+      "",
+      "Kodu kimseyle paylaşma: kodu bilen onu kendi bilgisayarlarında etkinleştirip senin yerlerini doldurabilir. Kodun başkasına ulaştığını düşünüyorsan destek@ostlertech.com adresine yaz.",
+      "Makbuzun yetkili satıcımız Paddle'dan ayrı bir e-postayla gelir. Bu e-postayı sakla: kod ödeme sonrası açılan sayfada da görünür.",
+      "",
+      "Sorular: destek@ostlertech.com",
+      "OstlerTech",
+    ].join("\n"),
+  };
+}

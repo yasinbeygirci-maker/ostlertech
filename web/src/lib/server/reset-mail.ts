@@ -1,6 +1,7 @@
 import "server-only";
 import type { ResetLang, ResetMailer } from "@/lib/license-core";
-import { newKeyMailCopy, resetMailCopy } from "@/lib/license-mail-copy";
+import { newKeyMailCopy, purchaseKeyMailCopy, resetMailCopy } from "@/lib/license-mail-copy";
+import type { PurchaseMailer } from "@/lib/paddle-events";
 import { SITE_URL } from "@/lib/site";
 
 // Cihaz sıfırlama e-postaları. Sağlayıcı: Resend (resmi HTTP API, kütüphanesiz). RESEND_API_KEY + MAIL_FROM yoksa configured() false
@@ -35,3 +36,15 @@ export const resetMailer: ResetMailer = {
     await send(to, m.subject, m.text);
   },
 };
+
+// Satın alma sonrası lisans kodu e-postası (webhook çağırır). E-posta ayarı yoksa null: lisans yine üretilir, kod /welcome sayfasında görünür.
+export function purchaseMailer(): PurchaseMailer | null {
+  if (!config()) return null;
+  return {
+    async sendPurchaseKey(to, key, lang, maxDevices) {
+      const base = (process.env.SITE_URL ?? SITE_URL).replace(/\/+$/, "");
+      const m = purchaseKeyMailCopy(lang, key, maxDevices, `${base}/areapilot`);
+      await send(to, m.subject, m.text);
+    },
+  };
+}
