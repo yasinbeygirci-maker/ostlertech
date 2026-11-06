@@ -81,7 +81,7 @@ export default function DesktopLicensePage() {
               Eklenti şifre saklamaz; kayıtlar açık olan SyncPass Masaüstü&apos;nden, aynı bilgisayarda doldurulur.
             </p>
             <details className="rounded-2xl border border-line bg-card p-5 text-sm text-muted">
-              <summary className="cursor-pointer font-semibold text-foreground">Windows "tanınmayan uygulama" uyarısı gösterirse</summary>
+              <summary className="cursor-pointer font-semibold text-foreground">.msi dosyasıyla kurarken Windows "tanınmayan uygulama" uyarısı gösterirse</summary>
               <p className="mt-3">
                 Kurulum dosyasını doğrudan bu siteden indirdiğin için Windows SmartScreen uyarı gösterebilir. Uyarıda
                 <strong className="text-foreground"> Ek bilgi → Yine de çalıştır</strong> seçeneğiyle kurulumu sürdürebilirsin.

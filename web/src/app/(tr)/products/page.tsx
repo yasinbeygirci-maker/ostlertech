@@ -116,7 +116,7 @@ export default function ProductsPage() {
                         <span className="w-2 h-2 rounded-full" style={{ backgroundColor: urun.renk }} />
                         Platform
                       </span>
-                      <span className="text-white/80 font-semibold px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.05]">
+                      <span className="text-white/80 text-sm font-semibold px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.05]">
                         {urun.platform}
                       </span>
                     </div>
@@ -143,7 +143,7 @@ export default function ProductsPage() {
                             key={e.url}
                             href={e.url}
                             {...(e.url.startsWith("http") ? { target: "_blank", rel: "noopener" } : {})}
-                            className="text-primary hover:text-primary-light"
+                            className="inline-flex min-h-[44px] items-center text-primary hover:text-primary-light"
                           >
                             {e.etiket} →
                           </a>
