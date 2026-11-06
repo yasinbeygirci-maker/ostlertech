@@ -93,11 +93,11 @@ export interface PriceInfo {
 }
 
 // AreaPilot (tek seferlik lisans; katman = cihaz sayısı): Bireysel 1 / Ofis 5 / Firma 20.
-// Paddle panelinde fiyatlar açılınca kimlikleri buraya yaz (şimdilik null: panelde fiyat yok, eşleme boş kalır).
+// Paddle ürünü AreaPilot: pro_01m6s047558k87nenevzenkwe8 (2026-11-06). Fiyatlar tek seferlik, USD taban 39/159/399, TR geçersiz kılma ₺1.999/7.999/19.999.
 export const AREAPILOT_PRICE_IDS: { individual: string | null; office: string | null; firm: string | null } = {
-  individual: null,
-  office: null,
-  firm: null,
+  individual: "pri_01m6s0acnb2qjkpsr37meb9ffg",
+  office: "pri_01m6s0dj08k2spnb8kxpf9q42f",
+  firm: "pri_01m6s0e6wd5x6j2bt7xgsvh3th",
 };
 
 const AREAPILOT_DEVICES = { individual: 1, office: 5, firm: 20 } as const;

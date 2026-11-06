@@ -572,7 +572,11 @@ test("fiyat tablosu: SyncPass'in üç fiyatı eskisi gibi, 3 cihaz, ürün syncp
   assert.deepEqual(priceInfo("pri_01m41q184hngxx8aqz3v0bt2wp"), { product: "syncpass_desktop", plan: "month", maxDevices: 3 });
   assert.deepEqual(priceInfo("pri_01m41q27m1hgdzxabaz96v07pf"), { product: "syncpass_desktop", plan: "year", maxDevices: 3 });
   assert.deepEqual(priceInfo("pri_01m41q4dg3816kmsk2sd76npdy"), { product: "syncpass_desktop", plan: "lifetime", maxDevices: 3 });
-  assert.equal(Object.keys(PADDLE_PRICE_PLANS).length, 3, "AreaPilot fiyat kimlikleri panelde açılana kadar eşleme boş");
+  // 3 SyncPass + 3 AreaPilot (Paddle ürünü pro_01m6s047558k87nenevzenkwe8, 2026-11-06)
+  assert.equal(Object.keys(PADDLE_PRICE_PLANS).length, 6);
+  assert.deepEqual(priceInfo("pri_01m6s0acnb2qjkpsr37meb9ffg"), { product: "areapilot", plan: "lifetime", maxDevices: 1 });
+  assert.deepEqual(priceInfo("pri_01m6s0dj08k2spnb8kxpf9q42f"), { product: "areapilot", plan: "lifetime", maxDevices: 5 });
+  assert.deepEqual(priceInfo("pri_01m6s0e6wd5x6j2bt7xgsvh3th"), { product: "areapilot", plan: "lifetime", maxDevices: 20 });
 });
 
 test("fiyat tablosu: AreaPilot Bireysel 1 / Ofis 5 / Firma 20, hepsi tek seferlik; bilinmeyen null", () => {
@@ -604,8 +608,10 @@ test("satış bayrağı: AreaPilot yalnız bayrak=1 VE fiyat kimlikleri tanıml�
   assert.equal(salesOpenFor("syncpass_desktop", { env: { PADDLE_SALES_OPEN: "1" } }), true);
 });
 
-test("areapilotPricesReady: üç katman da tanımlıysa true; bugünkü gerçek eşlemede false", () => {
-  assert.equal(areapilotPricesReady(), false, "AreaPilot fiyat kimlikleri panelde açılana kadar satış kapalı kalır");
+test("areapilotPricesReady: üç katman da tanımlıysa true; gerçek eşlemede true (satışı yine bayrak kapalı tutar)", () => {
+  assert.equal(areapilotPricesReady(), true, "Üç AreaPilot fiyatı eşlemede; satışı PADDLE_SALES_OPEN_AREAPILOT bayrağı açar");
+  assert.equal(salesOpenFor("areapilot", { env: {}, areapilotPricesReady: areapilotPricesReady() }), false, "bayrak yokken satış kapalı");
+  assert.equal(areapilotPricesReady(buildPriceCatalog({ individual: null, office: null, firm: null })), false);
   assert.equal(areapilotPricesReady(buildPriceCatalog({ individual: "a", office: "b", firm: null })), false);
   assert.equal(areapilotPricesReady(buildPriceCatalog({ individual: "a", office: "b", firm: "c" })), true);
 });
