@@ -6,12 +6,15 @@ import { generateKeyPairSync, createPublicKey, verify } from "node:crypto";
 import {
   areapilotPublicKey,
   confirmDeviceReset,
-  DEACTIVATE_LIMIT,
   DEACTIVATE_WINDOW_DAYS,
   hashResetToken,
   KNOWN_TEST_PUBLIC_KEYS,
   parseResetRequest,
   processDeviceReset,
+  PRODUCTS,
+  RESET_LIMIT,
+  RESET_WINDOW_DAYS,
+  type ResetMailer,
   RESET_REQUEST_RESPONSE,
   entitlementUntil,
   foreignKeyProduct,
@@ -27,7 +30,7 @@ import {
 } from "../src/lib/license-core.ts";
 import { areapilotPricesReady, buildPriceCatalog, PADDLE_PRICE_PLANS, priceInfo } from "../src/lib/paddle-tiers.ts";
 import { salesOpenFor } from "../src/lib/paddle-env.ts";
-import { licenseMailCopy, resetMailCopy } from "../src/lib/license-mail-copy.ts";
+import { licenseMailCopy, newKeyMailCopy, resetMailCopy } from "../src/lib/license-mail-copy.ts";
 
 const DAY = 24 * 60 * 60 * 1000;
 const NOW = 1_800_000_000_000;
@@ -183,7 +186,8 @@ interface FakeOpts {
 function fakeStore(rows: LicenseRow[], opts: FakeOpts = {}) {
   const devices = new Map<string, Set<string>>();
   const removals = new Map<string, number[]>();
-  const resetTokens = new Map<string, { licenseId: string; expires: number; created: number; used: boolean }>();
+  const resets = new Map<string, number[]>();
+  const resetTokens = new Map<string, { licenseId: string; expires: number; created: number; used: boolean; lang: "tr" | "en" }>();
   const store: LicenseStore = {
     async findLicense(key: string, product: Product) {
       if (opts.failAt === "find") throw new Error("db");
@@ -204,31 +208,43 @@ function fakeStore(rows: LicenseRow[], opts: FakeOpts = {}) {
       if (opts.failAt === "touch") throw new Error("db");
       return devices.get(id)?.has(dev) ?? false;
     },
-    async removeDevice(id, dev, nowIso) {
+    async removeDevice(id, dev, nowIso, limit) {
       if (opts.failAt === "remove") throw new Error("db");
       if (!devices.get(id)?.has(dev)) return "ok";
       const now = Date.parse(nowIso);
-      const recent = (removals.get(id) ?? []).filter((t) => t > now - DEACTIVATE_WINDOW_DAYS * DAY);
-      if (recent.length >= DEACTIVATE_LIMIT) return "limit";
+      if (limit !== null) {
+        const recent = (removals.get(id) ?? []).filter((t) => t > now - DEACTIVATE_WINDOW_DAYS * DAY);
+        if (recent.length >= limit) return "limit";
+        removals.set(id, [...recent, now]);
+      }
       devices.get(id)!.delete(dev);
-      removals.set(id, [...recent, now]);
       return "ok";
     },
-    async createResetToken(id, hash, expiresIso, nowIso, minIntervalMs) {
+    async createResetToken(id, hash, expiresIso, nowIso, minIntervalMs, lang) {
       const now = Date.parse(nowIso);
       for (const t of resetTokens.values()) if (t.licenseId === id && t.created > now - minIntervalMs) return false;
-      resetTokens.set(hash, { licenseId: id, expires: Date.parse(expiresIso), created: now, used: false });
+      if ((resets.get(id) ?? []).filter((t) => t > now - RESET_WINDOW_DAYS * DAY).length >= RESET_LIMIT) return false;
+      resetTokens.set(hash, { licenseId: id, expires: Date.parse(expiresIso), created: now, used: false, lang });
       return true;
     },
-    async consumeResetToken(hash, nowIso) {
+    async deleteResetToken(hash) {
+      resetTokens.delete(hash);
+    },
+    async consumeResetToken(hash, nowIso, newKey) {
       const t = resetTokens.get(hash);
-      if (!t || t.used || t.expires <= Date.parse(nowIso)) return false;
+      const now = Date.parse(nowIso);
+      if (!t || t.used || t.expires <= now) return { result: "invalid" };
       t.used = true;
+      const recent = (resets.get(t.licenseId) ?? []).filter((x) => x > now - RESET_WINDOW_DAYS * DAY);
+      if (recent.length >= RESET_LIMIT) return { result: "limit" };
+      resets.set(t.licenseId, [...recent, now]);
+      const lic = rows.find((r) => r.id === t.licenseId)!;
+      lic.license_key = newKey; // eski kod artık bulunamaz
       devices.set(t.licenseId, new Set());
-      return true;
+      return { result: "ok", email: lic.email ?? null, lang: t.lang };
     },
   };
-  return { store, devices, resetTokens };
+  return { store, devices, resetTokens, resets };
 }
 
 const aplRow = row({ license_key: "APL-23456-789AB-CDEFG-HJKMN", max_devices: 1 });
@@ -385,14 +401,23 @@ test("kod üretimi: harfler eşit dağılır (modulo yanlılığı yok)", () => 
 
 // ---- e-postayla cihaz sıfırlama ----
 
-function mailbox() {
+function mailbox(opts: { configured?: boolean; failLink?: boolean; failKey?: boolean } = {}) {
   const sent: Array<{ to: string; token: string; lang: string }> = [];
-  const send = async (to: string, token: string, lang: "tr" | "en") => {
-    sent.push({ to, token, lang });
+  const keys: Array<{ to: string; key: string; lang: string }> = [];
+  const mailer: ResetMailer = {
+    configured: () => opts.configured !== false,
+    async sendLink(to, token, lang) {
+      if (opts.failLink) throw new Error("smtp");
+      sent.push({ to, token, lang });
+    },
+    async sendNewKey(to, key, lang) {
+      if (opts.failKey) throw new Error("smtp");
+      keys.push({ to, key, lang });
+    },
   };
-  return { sent, send };
+  return { sent, keys, mailer };
 }
-const mailed = row({ id: "77777777-2222-4333-8444-555555555555", license_key: "APL-77777-77777-77777-77777", max_devices: 5, email: "musteri@example.com" });
+const mailed = () => row({ id: "77777777-2222-4333-8444-555555555555", license_key: "APL-77777-77777-77777-77777", max_devices: 5, email: "musteri@example.com" });
 
 test("sıfırlama isteği: biçim hatası 400/404, geçerli biçim HER ZAMAN aynı 200 yanıtı", () => {
   assert.equal(parseResetRequest(null, "areapilot").ok, false);
@@ -402,12 +427,14 @@ test("sıfırlama isteği: biçim hatası 400/404, geçerli biçim HER ZAMAN ayn
   assert.deepEqual(RESET_REQUEST_RESPONSE, { status: 200, body: { ok: true } });
 });
 
-test("sıfırlama: bağlantı kayıtlı e-postaya gider, veritabanına yalnız özet yazılır, 30 dk geçerli, tek kullanımlık", async () => {
-  const { store, devices, resetTokens } = fakeStore([mailed]);
-  await call("activate", "areapilot", { key: mailed.license_key, deviceId: DEV_A }, store);
-  await call("activate", "areapilot", { key: mailed.license_key, deviceId: DEV_B }, store);
+test("sıfırlama: bağlantı kayıtlı e-postaya gider, veritabanına yalnız özet yazılır; onayda kod YENİLENİR, cihazlar silinir, eski kod geçersiz", async () => {
+  const lic = mailed();
+  const { store, devices, resetTokens } = fakeStore([lic]);
+  const oldKey = lic.license_key;
+  await call("activate", "areapilot", { key: oldKey, deviceId: DEV_A }, store);
+  await call("activate", "areapilot", { key: oldKey, deviceId: DEV_B }, store);
   const box = mailbox();
-  assert.equal(await processDeviceReset("areapilot", mailed.license_key, "tr", store, box.send, { now: NOW }), "sent");
+  assert.equal(await processDeviceReset("areapilot", oldKey, "tr", store, box.mailer, { now: NOW }), "sent");
   assert.equal(box.sent.length, 1);
   assert.equal(box.sent[0].to, "musteri@example.com");
   const token = box.sent[0].token;
@@ -415,48 +442,108 @@ test("sıfırlama: bağlantı kayıtlı e-postaya gider, veritabanına yalnız �
   assert.ok(!resetTokens.has(token), "düz belirteç saklanmaz");
   assert.ok(resetTokens.has(hashResetToken(token)), "SHA-256 özeti saklanır");
   assert.equal(resetTokens.get(hashResetToken(token))!.expires, NOW + 30 * 60 * 1000);
-  assert.equal(devices.get(mailed.id)?.size, 2);
+  assert.equal(devices.get(lic.id)?.size, 2);
 
-  const ok = await confirmDeviceReset(token, store, { now: NOW + 60_000 });
-  assert.deepEqual(ok, { status: 200, body: { ok: true } });
-  assert.equal(devices.get(mailed.id)?.size, 0, "cihazlar temizlendi");
-  assert.equal((await confirmDeviceReset(token, store, { now: NOW + 61_000 })).status, 410, "ikinci kullanım reddedilir");
-  // Sıfırlamadan sonra lisans yeniden etkinleştirilebilir.
-  assert.equal((await call("activate", "areapilot", { key: mailed.license_key, deviceId: DEV_B }, store)).status, 200);
+  const ok = await confirmDeviceReset(token, "areapilot", store, box.mailer, { now: NOW + 60_000 });
+  assert.equal(ok.status, 200);
+  const newKey = String(ok.body.key);
+  assert.match(newKey, /^APL-[2-9A-HJKMNP-TV-Z]{5}(-[2-9A-HJKMNP-TV-Z]{5}){3}$/);
+  assert.notEqual(newKey, oldKey);
+  assert.equal(devices.get(lic.id)?.size, 0, "cihazlar temizlendi");
+  assert.deepEqual(box.keys, [{ to: "musteri@example.com", key: newKey, lang: "tr" }], "yeni kod e-postayla da gitti");
+  assert.equal((await confirmDeviceReset(token, "areapilot", store, box.mailer, { now: NOW + 61_000 })).status, 410, "ikinci kullanım reddedilir");
+
+  // Eski kod artık hiçbir uçta çalışmaz; yeni kod çalışır.
+  for (const op of ["activate", "renew", "deactivate"] as const) {
+    assert.deepEqual((await call(op, "areapilot", { key: oldKey, deviceId: DEV_B }, store)).body, { error: "invalid_key" }, op);
+  }
+  assert.equal((await call("activate", "areapilot", { key: newKey, deviceId: DEV_B }, store)).status, 200);
 });
 
-test("sıfırlama: süresi dolan belirteç, bozuk belirteç ve bilinmeyen belirteç reddedilir", async () => {
-  const { store } = fakeStore([mailed]);
-  const box = mailbox();
-  await processDeviceReset("areapilot", mailed.license_key, "tr", store, box.send, { now: NOW });
-  assert.equal((await confirmDeviceReset(box.sent[0].token, store, { now: NOW + 31 * 60 * 1000 })).status, 410);
-  assert.equal((await confirmDeviceReset("kisa", store)).status, 400);
-  assert.equal((await confirmDeviceReset(undefined, store)).status, 400);
-  assert.equal((await confirmDeviceReset("A".repeat(43), store)).status, 410);
+test("sıfırlama: yeni kod e-postası gidemezse yanıtta kod yine görünür", async () => {
+  const { store } = fakeStore([mailed()]);
+  const box = mailbox({ failKey: true });
+  await processDeviceReset("areapilot", "APL-77777-77777-77777-77777", "en", store, box.mailer, { now: NOW });
+  const r = await confirmDeviceReset(box.sent[0].token, "areapilot", store, box.mailer, { now: NOW + 1000 });
+  assert.equal(r.status, 200);
+  assert.match(String(r.body.key), /^APL-/);
+  assert.equal(box.keys.length, 0);
+  assert.equal(box.sent[0].lang, "en");
 });
 
-test("sıfırlama: aynı lisansa saatte 1 e-posta; e-postası/kodu olmayan ya da pasif lisansa e-posta gitmez (dışarıdan ayırt edilmez)", async () => {
-  const { store } = fakeStore([mailed, row({ id: "n", license_key: "APL-88888-88888-88888-88888", email: null }), row({ id: "r", license_key: "APL-22222-22222-22222-22222", status: "refunded", email: "x@example.com" })]);
+test("sıfırlama: süresi dolan, bozuk ve bilinmeyen belirteç reddedilir", async () => {
+  const { store } = fakeStore([mailed()]);
   const box = mailbox();
-  assert.equal(await processDeviceReset("areapilot", mailed.license_key, "tr", store, box.send, { now: NOW }), "sent");
-  assert.equal(await processDeviceReset("areapilot", mailed.license_key, "tr", store, box.send, { now: NOW + 59 * 60 * 1000 }), "skipped");
-  assert.equal(await processDeviceReset("areapilot", mailed.license_key, "tr", store, box.send, { now: NOW + 61 * 60 * 1000 }), "sent");
-  assert.equal(await processDeviceReset("areapilot", "APL-88888-88888-88888-88888", "tr", store, box.send, { now: NOW }), "skipped");
-  assert.equal(await processDeviceReset("areapilot", "APL-22222-22222-22222-22222", "tr", store, box.send, { now: NOW }), "skipped");
-  assert.equal(await processDeviceReset("areapilot", "APL-99999-99999-99999-99999", "tr", store, box.send, { now: NOW }), "skipped");
+  await processDeviceReset("areapilot", "APL-77777-77777-77777-77777", "tr", store, box.mailer, { now: NOW });
+  assert.equal((await confirmDeviceReset(box.sent[0].token, "areapilot", store, box.mailer, { now: NOW + 31 * 60 * 1000 })).status, 410);
+  assert.equal((await confirmDeviceReset("kisa", "areapilot", store, box.mailer)).status, 400);
+  assert.equal((await confirmDeviceReset(undefined, "areapilot", store, box.mailer)).status, 400);
+  assert.equal((await confirmDeviceReset("A".repeat(43), "areapilot", store, box.mailer)).status, 410);
+});
+
+test("sıfırlama: saatte 1 e-posta; e-postasız ya da pasif lisansa e-posta gitmez (dışarıdan ayırt edilmez)", async () => {
+  const { store } = fakeStore([mailed(), row({ id: "n", license_key: "APL-88888-88888-88888-88888", email: null }), row({ id: "r", license_key: "APL-22222-22222-22222-22222", status: "refunded", email: "x@example.com" })]);
+  const box = mailbox();
+  const go = (key: string, now: number) => processDeviceReset("areapilot", key, "tr", store, box.mailer, { now });
+  assert.equal(await go("APL-77777-77777-77777-77777", NOW), "sent");
+  assert.equal(await go("APL-77777-77777-77777-77777", NOW + 59 * 60 * 1000), "skipped");
+  assert.equal(await go("APL-77777-77777-77777-77777", NOW + 61 * 60 * 1000), "sent");
+  assert.equal(await go("APL-88888-88888-88888-88888", NOW), "skipped");
+  assert.equal(await go("APL-22222-22222-22222-22222", NOW), "skipped");
+  assert.equal(await go("APL-99999-99999-99999-99999", NOW), "skipped");
   assert.equal(box.sent.length, 2);
 });
 
-test("sıfırlama: depo ya da e-posta hatası fırlatmaz (yanıt zaten gönderildi), depo hatasında confirm 500", async () => {
-  const failing = fakeStore([mailed], { failAt: "find" });
-  assert.equal(await processDeviceReset("areapilot", mailed.license_key, "tr", failing.store, async () => {}, { now: NOW }), "skipped");
-  const { store } = fakeStore([mailed]);
-  assert.equal(await processDeviceReset("areapilot", mailed.license_key, "tr", store, async () => { throw new Error("smtp"); }, { now: NOW }), "skipped");
-  const broken: LicenseStore = { ...store, consumeResetToken: async () => { throw new Error("db"); } };
-  assert.deepEqual(await confirmDeviceReset("A".repeat(43), broken), { status: 500, body: { error: "server_error" } });
+test("sıfırlama sınırı: 30 günde 2; üçüncüde token üretilmez (istek yine sessizce 200), onay sayfası 429 reset_limit; pencere geçince açılır", async () => {
+  const lic = mailed();
+  const { store } = fakeStore([lic]);
+  const box = mailbox();
+  const run = async (now: number) => {
+    const n = box.sent.length;
+    await processDeviceReset("areapilot", lic.license_key, "tr", store, box.mailer, { now });
+    return box.sent.length > n ? await confirmDeviceReset(box.sent[box.sent.length - 1].token, "areapilot", store, box.mailer, { now: now + 1000 }) : null;
+  };
+  assert.equal((await run(NOW))?.status, 200);
+  assert.equal((await run(NOW + 2 * 60 * 60 * 1000))?.status, 200);
+  assert.equal(await run(NOW + 4 * 60 * 60 * 1000), null, "üçüncüde e-posta/belirteç yok");
+  // Pencere dışına çıkınca yeniden açılır.
+  assert.equal((await run(NOW + 31 * DAY))?.status, 200);
+  // Onay anı da sınırı denetler: belirteç alındıktan sonra sayaç dolduysa (ör. başka bir yoldan) sıfırlama olmaz ve kod değişmez.
+  const other = mailed();
+  other.id = "88888888-2222-4333-8444-555555555555";
+  other.license_key = "APL-66666-66666-66666-66666";
+  const f = fakeStore([other]);
+  const b2 = mailbox();
+  await processDeviceReset("areapilot", other.license_key, "tr", f.store, b2.mailer, { now: NOW });
+  f.resets.set(other.id, [NOW - 1000, NOW - 2000]);
+  const blocked = await confirmDeviceReset(b2.sent[0].token, "areapilot", f.store, b2.mailer, { now: NOW + 1000 });
+  assert.deepEqual(blocked, { status: 429, body: { error: "reset_limit", limit: 2, windowDays: 30 } });
+  assert.equal(other.license_key, "APL-66666-66666-66666-66666", "kod değişmedi");
 });
 
-test("sıfırlama kaldırma sayacına yazılmaz: sınır dolsa bile e-posta yolu çalışır", async () => {
+test("sıfırlama: e-posta ayarı yoksa belirteç üretilmez ve uyarı yazılır; gönderim başarısızsa belirteç silinir, saatlik hak harcanmaz", async () => {
+  const lic = mailed();
+  const { store, resetTokens } = fakeStore([lic]);
+  const none = mailbox({ configured: false });
+  assert.equal(await processDeviceReset("areapilot", lic.license_key, "tr", store, none.mailer, { now: NOW }), "skipped");
+  assert.equal(resetTokens.size, 0, "ayar yokken belirteç üretilmedi");
+
+  const failing = mailbox({ failLink: true });
+  assert.equal(await processDeviceReset("areapilot", lic.license_key, "tr", store, failing.mailer, { now: NOW }), "skipped");
+  assert.equal(resetTokens.size, 0, "gönderim başarısız: belirteç silindi");
+  const ok = mailbox();
+  assert.equal(await processDeviceReset("areapilot", lic.license_key, "tr", store, ok.mailer, { now: NOW + 1000 }), "sent", "saatlik hak harcanmadı");
+});
+
+test("sıfırlama: depo ya da e-posta hatası fırlatmaz; depo hatasında confirm 500", async () => {
+  const failing = fakeStore([mailed()], { failAt: "find" });
+  assert.equal(await processDeviceReset("areapilot", "APL-77777-77777-77777-77777", "tr", failing.store, mailbox().mailer, { now: NOW }), "skipped");
+  const { store } = fakeStore([mailed()]);
+  const broken: LicenseStore = { ...store, consumeResetToken: async () => { throw new Error("db"); } };
+  assert.deepEqual(await confirmDeviceReset("A".repeat(43), "areapilot", broken, mailbox().mailer), { status: 500, body: { error: "server_error" } });
+});
+
+test("sıfırlama kaldırma sayacına yazılmaz: kaldırma sınırı dolsa bile e-posta yolu çalışır", async () => {
   const five = row({ license_key: "APL-55555-55555-55555-55555", id: "55555555-2222-4333-8444-555555555555", max_devices: 5, email: "a@example.com" });
   const { store, devices } = fakeStore([five]);
   const ids = [0, 1, 2, 3].map((i) => `00000000-0000-4000-8000-${String(i).padStart(12, "0")}`);
@@ -464,9 +551,19 @@ test("sıfırlama kaldırma sayacına yazılmaz: sınır dolsa bile e-posta yolu
   for (const deviceId of ids.slice(0, 3)) await call("deactivate", "areapilot", { key: five.license_key, deviceId }, store);
   assert.equal((await call("deactivate", "areapilot", { key: five.license_key, deviceId: ids[3] }, store)).status, 429);
   const box = mailbox();
-  await processDeviceReset("areapilot", five.license_key, "tr", store, box.send, { now: NOW });
-  assert.equal((await confirmDeviceReset(box.sent[0].token, store, { now: NOW + 1000 })).status, 200);
+  await processDeviceReset("areapilot", five.license_key, "tr", store, box.mailer, { now: NOW });
+  assert.equal((await confirmDeviceReset(box.sent[0].token, "areapilot", store, box.mailer, { now: NOW + 1000 })).status, 200);
   assert.equal(devices.get(five.id)?.size, 0);
+});
+
+test("SyncPass kaldırma sınırından MUAF: 3'ten fazla kaldırma 429 almaz; AreaPilot'ta alır", async () => {
+  const spd = row({ id: "44444444-2222-4333-8444-555555555555", license_key: "SPD-44444-44444-44444-44444", product: "syncpass_desktop", max_devices: 9 });
+  const { store } = fakeStore([spd]);
+  const ids = Array.from({ length: 6 }, (_, i) => `00000000-0000-4000-8000-${String(i).padStart(12, "0")}`);
+  for (const deviceId of ids) assert.equal((await call("activate", "syncpass_desktop", { key: spd.license_key, deviceId }, store)).status, 200);
+  for (const deviceId of ids) assert.deepEqual((await call("deactivate", "syncpass_desktop", { key: spd.license_key, deviceId }, store)).body, { ok: true });
+  assert.equal(PRODUCTS.syncpass_desktop.deactivateLimited, false);
+  assert.equal(PRODUCTS.areapilot.deactivateLimited, true);
 });
 
 // ---- fiyat kimliği tablosu ----
@@ -544,6 +641,15 @@ test("sıfırlama e-postası: bağlantı gövdede, 30 dakika uyarısı, iki dild
     const m = resetMailCopy(lang, "https://ostlertech.com/api/areapilot/license/reset?token=ABC");
     assert.ok(m.text.includes("https://ostlertech.com/api/areapilot/license/reset?token=ABC"));
     assert.match(m.text, /30/);
+    assert.doesNotMatch(m.text, /SyncPass|[Ll]icence/);
+  }
+});
+
+test("yeni kod e-postası: kodu içerir, eski kodun çalışmadığını söyler, iki dilde", () => {
+  for (const lang of ["tr", "en"] as const) {
+    const m = newKeyMailCopy(lang, "APL-23456-789AB-CDEFG-HJKMN");
+    assert.ok(m.text.includes("APL-23456-789AB-CDEFG-HJKMN"));
+    assert.match(m.subject, /AreaPilot/);
     assert.doesNotMatch(m.text, /SyncPass|[Ll]icence/);
   }
 });

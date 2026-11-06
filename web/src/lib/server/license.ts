@@ -2,8 +2,9 @@ import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { priceInfo } from "@/lib/paddle-tiers";
 import {
-  DEACTIVATE_LIMIT,
   DEACTIVATE_WINDOW_DAYS,
+  RESET_LIMIT,
+  RESET_WINDOW_DAYS,
   handleLicenseRequest,
   type ApiResult,
   type LicenseOp,
@@ -56,33 +57,49 @@ export function supabaseLicenseStore(db: SupabaseClient): LicenseStore {
       if (error) fail(error, "touchDevice");
       return (data?.length ?? 0) > 0;
     },
-    async removeDevice(licenseId, deviceId, nowIso) {
+    async removeDevice(licenseId, deviceId, nowIso, limit) {
       const { data, error } = await db.rpc("sp_remove_device", {
         p_license_id: licenseId,
         p_device_id: deviceId,
         p_now: nowIso,
-        p_limit: DEACTIVATE_LIMIT,
+        p_limit: limit,
         p_window_days: DEACTIVATE_WINDOW_DAYS,
       });
       if (error) fail(error, "removeDevice");
       if (data === "ok" || data === "limit") return data;
       throw new Error("removeDevice: beklenmeyen sonuc");
     },
-    async createResetToken(licenseId, tokenHash, expiresIso, nowIso, minIntervalMs) {
+    async createResetToken(licenseId, tokenHash, expiresIso, nowIso, minIntervalMs, lang) {
       const { data, error } = await db.rpc("sp_create_reset_token", {
         p_license_id: licenseId,
         p_token_hash: tokenHash,
         p_expires: expiresIso,
         p_now: nowIso,
         p_min_interval_seconds: Math.round(minIntervalMs / 1000),
+        p_lang: lang,
+        p_reset_limit: RESET_LIMIT,
+        p_reset_window_days: RESET_WINDOW_DAYS,
       });
       if (error) fail(error, "createResetToken");
       return data === true;
     },
-    async consumeResetToken(tokenHash, nowIso) {
-      const { data, error } = await db.rpc("sp_consume_reset_token", { p_token_hash: tokenHash, p_now: nowIso });
+    async deleteResetToken(tokenHash) {
+      const { error } = await db.from("sp_license_reset_tokens").delete().eq("token_hash", tokenHash);
+      if (error) fail(error, "deleteResetToken");
+    },
+    async consumeResetToken(tokenHash, nowIso, newKey) {
+      const { data, error } = await db.rpc("sp_consume_reset_token", {
+        p_token_hash: tokenHash,
+        p_now: nowIso,
+        p_new_key: newKey,
+        p_limit: RESET_LIMIT,
+        p_window_days: RESET_WINDOW_DAYS,
+      });
       if (error) fail(error, "consumeResetToken");
-      return data === true;
+      const r = data as { result?: string; email?: string | null; lang?: string } | null;
+      if (r?.result === "ok") return { result: "ok", email: r.email ?? null, lang: r.lang === "en" ? "en" : "tr" };
+      if (r?.result === "invalid" || r?.result === "limit") return { result: r.result };
+      throw new Error("consumeResetToken: beklenmeyen sonuc");
     },
   };
 }

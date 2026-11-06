@@ -1,7 +1,7 @@
 import { after, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/server/supabase-admin";
 import { supabaseLicenseStore } from "@/lib/server/license";
-import { sendResetMail } from "@/lib/server/reset-mail";
+import { resetMailer } from "@/lib/server/reset-mail";
 import { parseResetRequest, processDeviceReset, RESET_REQUEST_RESPONSE } from "@/lib/license-core";
 
 export const runtime = "nodejs";
@@ -14,6 +14,6 @@ export async function POST(req: Request) {
   const parsed = parseResetRequest(await req.json().catch(() => null), "areapilot");
   if (!parsed.ok) return NextResponse.json(parsed.result.body, { status: parsed.result.status });
   const store = supabaseLicenseStore(supabaseAdmin());
-  after(() => processDeviceReset("areapilot", parsed.key, parsed.lang, store, sendResetMail));
+  after(() => processDeviceReset("areapilot", parsed.key, parsed.lang, store, resetMailer));
   return NextResponse.json(RESET_REQUEST_RESPONSE.body, { status: RESET_REQUEST_RESPONSE.status, headers: { "Cache-Control": "no-store" } });
 }

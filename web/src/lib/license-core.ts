@@ -36,12 +36,16 @@ export interface ProductConfig {
   tokenLifetimeMs: number;
   /** Yanıtta ve belgede ürün + cihaz sayısı da yer alır mı (SyncPass'in biçimi değişmesin diye yalnız AreaPilot). */
   richPayload: boolean;
+  /**
+   * "Bu bilgisayardan kaldır" için 30 günde 3 sınırı uygulanır mı. SyncPass Masaüstü 429'u anlamaz (eski istemci), bu yüzden MUAF.
+   */
+  deactivateLimited: boolean;
 }
 
 export const PRODUCTS: Record<Product, ProductConfig> = {
-  syncpass_desktop: { prefix: "SPD", keyEnv: "LICENSE_SIGNING_KEY", alg: "ed25519", tokenLifetimeMs: 30 * DAY, richPayload: false },
+  syncpass_desktop: { prefix: "SPD", keyEnv: "LICENSE_SIGNING_KEY", alg: "ed25519", tokenLifetimeMs: 30 * DAY, richPayload: false, deactivateLimited: false },
   // Şantiye bilgisayarları günlerce çevrimdışı olabilir: 90 gün.
-  areapilot: { prefix: "APL", keyEnv: "LICENSE_SIGNING_KEY_AREAPILOT", alg: "es256", tokenLifetimeMs: 90 * DAY, richPayload: true },
+  areapilot: { prefix: "APL", keyEnv: "LICENSE_SIGNING_KEY_AREAPILOT", alg: "es256", tokenLifetimeMs: 90 * DAY, richPayload: true, deactivateLimited: true },
 };
 
 export const DEFAULT_PRODUCT: Product = "syncpass_desktop";
@@ -205,18 +209,28 @@ export interface LicenseStore {
   /** Yalnız KAYITLI cihazın last_seen/sürümünü günceller; cihaz kayıtlı değilse false (yeni cihaz eklemez). */
   touchDevice(licenseId: string, deviceId: string, appVersion: string | null, nowIso: string): Promise<boolean>;
   /**
-   * Cihazı siler (kayıtsızsa da başarılı) ve kaldırmayı sayar; ATOMİK: lisans başına son DEACTIVATE_WINDOW_DAYS günde
-   * DEACTIVATE_LIMIT kaldırma yapıldıysa hiçbir şey silmeden "limit" döner. Hatada fırlatır.
+   * Cihazı siler (kayıtsızsa da başarılı). `limit` verilirse (AreaPilot) kaldırmayı sayar ve ATOMİK uygular: lisans başına son
+   * DEACTIVATE_WINDOW_DAYS günde `limit` kaldırma yapıldıysa hiçbir şey silmeden "limit" döner. `limit` null ise (SyncPass) sınır
+   * ve sayaç yoktur. Hatada fırlatır.
    */
-  removeDevice(licenseId: string, deviceId: string, nowIso: string): Promise<"ok" | "limit">;
+  removeDevice(licenseId: string, deviceId: string, nowIso: string, limit: number | null): Promise<"ok" | "limit">;
   /**
-   * E-postayla cihaz sıfırlama için tek kullanımlık belirteç kaydeder (YALNIZ SHA-256 özeti). Lisans için son `minIntervalMs`
-   * içinde belirteç üretildiyse hiçbir şey yazmaz ve false döner (saatte 1 e-posta). Atomik. Hatada fırlatır.
+   * E-postayla cihaz sıfırlama için tek kullanımlık belirteç kaydeder (YALNIZ SHA-256 özeti, dil de saklanır). Hiçbir şey yazmadan
+   * false döner: (a) lisans için son `minIntervalMs` içinde belirteç üretildiyse (saatte 1), (b) son RESET_WINDOW_DAYS günde
+   * RESET_LIMIT sıfırlama yapıldıysa (e-posta numaralandırması sızmasın diye çağıran ikisini ayırt etmez). Atomik. Hatada fırlatır.
    */
-  createResetToken(licenseId: string, tokenHash: string, expiresIso: string, nowIso: string, minIntervalMs: number): Promise<boolean>;
-  /** Belirteç geçerliyse (var, kullanılmamış, süresi dolmamış) tek adımda kullanılmış sayar ve lisansın TÜM cihazlarını siler; true döner. */
-  consumeResetToken(tokenHash: string, nowIso: string): Promise<boolean>;
+  createResetToken(licenseId: string, tokenHash: string, expiresIso: string, nowIso: string, minIntervalMs: number, lang: ResetLang): Promise<boolean>;
+  /** Gönderim başarısızsa belirteci siler; böylece saatlik hak harcanmaz. */
+  deleteResetToken(tokenHash: string): Promise<void>;
+  /**
+   * Belirteç geçerliyse (var, kullanılmamış, süresi dolmamış) TEK ADIMDA: lisansın kodunu `newKey` ile DEĞİŞTİRİR (eski kod artık
+   * bulunamaz), TÜM cihazlarını siler, sıfırlamayı sayar ve belirteci kullanılmış yapar. Son RESET_WINDOW_DAYS günde RESET_LIMIT
+   * sıfırlama yapıldıysa hiçbir şey değiştirmeden "limit" döner (belirteç yakılır). Hatada fırlatır.
+   */
+  consumeResetToken(tokenHash: string, nowIso: string, newKey: string): Promise<ResetOutcome>;
 }
+
+export type ResetOutcome = { result: "invalid" } | { result: "limit" } | { result: "ok"; email: string | null; lang: ResetLang };
 
 export type LicenseOp = "activate" | "renew" | "deactivate";
 export interface ApiResult {
@@ -265,7 +279,8 @@ export async function handleLicenseRequest(
 
     if (op === "deactivate") {
       // Lisans başına kayan pencerede en çok DEACTIVATE_LIMIT kaldırma: kodu paylaşıp cihaz döndürmeyi (sınırı atlatmayı) kısıtlar.
-      if ((await store.removeDevice(license.id, deviceId, new Date(now).toISOString())) === "limit") {
+      const limit = PRODUCTS[product].deactivateLimited ? DEACTIVATE_LIMIT : null;
+      if ((await store.removeDevice(license.id, deviceId, new Date(now).toISOString(), limit)) === "limit") {
         return { status: 429, body: { error: "deactivate_limit", limit: DEACTIVATE_LIMIT, windowDays: DEACTIVATE_WINDOW_DAYS } };
       }
       return { status: 200, body: { ok: true } };
@@ -303,17 +318,27 @@ export async function handleLicenseRequest(
 }
 
 // ---- E-postayla cihaz sıfırlama ----
-// Akış: (1) istemci/site kodu gönderir -> HER ZAMAN aynı yanıt (e-posta var mı, kod geçerli mi, sıklık sınırı dolu mu belli olmaz);
-// gerçek iş yanıttan sonra yapılır. (2) Lisansın kayıtlı e-postasına 30 dk geçerli tek kullanımlık bağlantı gider.
-// (3) Bağlantıdaki sayfada "Sıfırla" düğmesi POST eder (GET ile işlem yapılmaz: posta tarayıcıları bağlantıyı önceden açar).
+// Akış: (1) kod gönderilir -> HER ZAMAN aynı yanıt (e-posta var mı, kod geçerli mi, saatlik/aylık sınır dolu mu belli olmaz);
+// gerçek iş yanıttan sonra yapılır. (2) Lisansın kayıtlı e-postasına 30 dk geçerli tek kullanımlık bağlantı gider (belirteç
+// bağlantının #fragment kısmındadır: sunucu günlüğüne ve Referer'a düşmez). (3) Sayfadaki düğme POST eder (GET işlem yapmaz:
+// posta tarayıcıları bağlantıyı önceden açar). (4) Onayda lisans kodu YENİLENİR (sızan kod işe yaramaz), cihazlar silinir, yeni
+// kod sayfada bir kez gösterilir ve e-postayla da gönderilir. Lisans başına 30 günde en çok 2 sıfırlama.
 
 export const RESET_TOKEN_TTL_MS = 30 * 60 * 1000;
 export const RESET_MIN_INTERVAL_MS = 60 * 60 * 1000;
+export const RESET_LIMIT = 2;
+export const RESET_WINDOW_DAYS = 30;
 export const RESET_TOKEN_PATTERN = /^[A-Za-z0-9_-]{43}$/;
 
 export type ResetLang = "tr" | "en";
-/** Bağlantıyı e-postayla gönderir. Başarısızlıkta fırlatabilir (çekirdek yutar). Adres/belirteç günlüğe yazılmaz. */
-export type ResetMailer = (to: string, token: string, lang: ResetLang) => Promise<void>;
+export interface ResetMailer {
+  /** RESEND_API_KEY + MAIL_FROM tanımlı mı. Değilse belirteç hiç üretilmez (kimseye ulaşamayacak bağlantı yakılmaz). */
+  configured(): boolean;
+  /** Sıfırlama bağlantısını gönderir; başarısızlıkta fırlatır. Adres/belirteç günlüğe yazılmaz. */
+  sendLink(to: string, token: string, lang: ResetLang): Promise<void>;
+  /** Yeni lisans kodunu gönderir; başarısızlıkta fırlatır (çağıran yutar: kod sayfada da görünür). */
+  sendNewKey(to: string, key: string, lang: ResetLang): Promise<void>;
+}
 
 export function newResetToken(): string {
   return randomBytes(32).toString("base64url"); // 43 karakter
@@ -339,29 +364,43 @@ export function parseResetRequest(rawBody: unknown, product: Product): ResetRequ
 
 export const RESET_REQUEST_RESPONSE: ApiResult = { status: 200, body: { ok: true } };
 
-/** Yanıttan SONRA çalışan iş. Hiçbir koşulda fırlatmaz ve sonuç döndürmez. */
+/** Yanıttan SONRA çalışan iş. Hiçbir koşulda fırlatmaz. */
 export async function processDeviceReset(
   product: Product,
   key: string,
   lang: ResetLang,
   store: LicenseStore,
-  send: ResetMailer,
+  mailer: ResetMailer,
   opts: { now?: number } = {}
 ): Promise<"sent" | "skipped"> {
   try {
+    if (!mailer.configured()) {
+      // E-posta ayarı yok: belirteç üretme (hakkı da harcama). Uyarı günlüğü, kod/adres içermez.
+      console.warn("license reset: e-posta ayari yok (RESEND_API_KEY/MAIL_FROM), belirtec uretilmedi");
+      return "skipped";
+    }
     const now = opts.now ?? Date.now();
     const license = await store.findLicense(key, product);
     if (!license || !license.email || !entitlementUntil(license, now)) return "skipped";
     const token = newResetToken();
+    const hash = hashResetToken(token);
     const created = await store.createResetToken(
       license.id,
-      hashResetToken(token),
+      hash,
       new Date(now + RESET_TOKEN_TTL_MS).toISOString(),
       new Date(now).toISOString(),
-      RESET_MIN_INTERVAL_MS
+      RESET_MIN_INTERVAL_MS,
+      lang
     );
     if (!created) return "skipped";
-    await send(license.email, token, lang);
+    try {
+      await mailer.sendLink(license.email, token, lang);
+    } catch (e) {
+      // Gönderilemedi: bağlantı kimseye ulaşmadı; belirteci sil ve saatlik hakkı harcama.
+      await store.deleteResetToken(hash).catch(() => undefined);
+      console.error("license reset mail", product, e instanceof Error ? e.constructor.name : "error");
+      return "skipped";
+    }
     return "sent";
   } catch (e) {
     console.error("license reset", product, e instanceof Error ? e.constructor.name : "error");
@@ -369,14 +408,36 @@ export async function processDeviceReset(
   }
 }
 
-/** Bağlantıdaki belirteçle cihazları sıfırlar. 410: geçersiz/kullanılmış/süresi dolmuş. */
-export async function confirmDeviceReset(rawToken: unknown, store: LicenseStore, opts: { now?: number } = {}): Promise<ApiResult> {
+/**
+ * Bağlantıdaki belirteçle sıfırlar: lisans kodu yenilenir, cihazlar silinir. 200 {ok, key} (yeni kod; sayfada bir kez gösterilir),
+ * 410 geçersiz/kullanılmış/süresi dolmuş, 429 reset_limit (30 günde 2 doldu: destekle iletişim).
+ * Eski kodla renew/activate bundan sonra 404 invalid_key alır (bilinçli: sızan kod işe yaramaz).
+ */
+export async function confirmDeviceReset(
+  rawToken: unknown,
+  product: Product,
+  store: LicenseStore,
+  mailer: ResetMailer,
+  opts: { now?: number } = {}
+): Promise<ApiResult> {
   if (typeof rawToken !== "string" || !RESET_TOKEN_PATTERN.test(rawToken)) return { status: 400, body: { error: "bad_request" } };
+  let outcome: ResetOutcome;
+  const newKey = newLicenseKey(product);
   try {
-    const ok = await store.consumeResetToken(hashResetToken(rawToken), new Date(opts.now ?? Date.now()).toISOString());
-    return ok ? { status: 200, body: { ok: true } } : { status: 410, body: { error: "token_invalid" } };
+    outcome = await store.consumeResetToken(hashResetToken(rawToken), new Date(opts.now ?? Date.now()).toISOString(), newKey);
   } catch (e) {
     console.error("license reset confirm", e instanceof Error ? e.constructor.name : "error");
     return { status: 500, body: { error: "server_error" } };
   }
+  if (outcome.result === "invalid") return { status: 410, body: { error: "token_invalid" } };
+  if (outcome.result === "limit") return { status: 429, body: { error: "reset_limit", limit: RESET_LIMIT, windowDays: RESET_WINDOW_DAYS } };
+  if (outcome.email && mailer.configured()) {
+    try {
+      await mailer.sendNewKey(outcome.email, newKey, outcome.lang);
+    } catch (e) {
+      // Gönderim başarısız: sayfadaki kod yine görünür.
+      console.error("license reset new key mail", e instanceof Error ? e.constructor.name : "error");
+    }
+  }
+  return { status: 200, body: { ok: true, key: newKey } };
 }

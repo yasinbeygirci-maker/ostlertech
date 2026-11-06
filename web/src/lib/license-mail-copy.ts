@@ -33,7 +33,7 @@ export function licenseMailCopy(product: MailProduct, lang: MailLang, maxDevices
           devices: n === 1 ? "This key works on 1 computer." : `You can use the same key on up to ${n} computers.`,
           notes: [
             "You only need to go online once every 90 days; AreaPilot renews your license quietly in the background.",
-            "When you change computers, open the License window on the old one and press Remove. The slot is freed for the new computer.",
+            "When you change computers, open the License window on the old one and press Remove. The slot is freed for the new computer. Remove works up to 3 times per 30 days.",
           ],
           planLine: () => "Plan: AreaPilot license, valid for all 1.x versions. One payment, no renewals.",
         }
@@ -44,7 +44,7 @@ export function licenseMailCopy(product: MailProduct, lang: MailLang, maxDevices
           devices: n === 1 ? "Bu kod 1 bilgisayarda kullanılabilir." : `Aynı kodu en fazla ${n} bilgisayarda kullanabilirsin.`,
           notes: [
             "90 günde bir internete bağlanman yeterli; AreaPilot lisansını arka planda sessizce yeniler.",
-            "Bilgisayar değiştirirken eski bilgisayarda Lisans penceresinden Kaldır'a bas; yer yeni bilgisayara açılır.",
+            "Bilgisayar değiştirirken eski bilgisayarda Lisans penceresinden Kaldır'a bas; yer yeni bilgisayara açılır. Kaldırma 30 günde en çok 3 kez yapılabilir.",
           ],
           planLine: () => "Plan: AreaPilot lisansı, tüm 1.x sürümlerinde geçerli. Tek ödeme, yenileme yok.",
         };
@@ -75,18 +75,18 @@ export function licenseMailCopy(product: MailProduct, lang: MailLang, maxDevices
   };
 }
 
-/** AreaPilot "bilgisayarları sıfırla" e-postası. Bağlantı 30 dakika geçerli ve tek kullanımlıktır. */
+/** AreaPilot "bilgisayarları sıfırla" bağlantı e-postası. Bağlantı 30 dakika geçerli ve tek kullanımlıktır. */
 export function resetMailCopy(lang: MailLang, link: string): { subject: string; text: string } {
   if (lang === "en") {
     return {
       subject: "Reset the computers on your AreaPilot license",
       text: [
-        "You (or someone with your license key) asked to reset the computers registered to your AreaPilot license.",
+        "Someone (you, or a person who has your license key) asked to reset the computers registered to your AreaPilot license.",
         "",
-        "To remove all registered computers, open this link and press Reset (valid for 30 minutes, works once):",
+        "To go ahead, open this link and press Reset (valid for 30 minutes, works once):",
         link,
         "",
-        "Afterwards you can activate the license again on any computer. Your drawings and files are not touched.",
+        "Resetting removes all registered computers AND replaces your license key with a new one: the old key stops working, the new key is shown once on the page and e-mailed to you. Your drawings and files are not touched. A license can be reset at most twice per 30 days.",
         "If you did not ask for this, ignore this e-mail; nothing changes.",
         "",
         "Questions: destek@ostlertech.com",
@@ -97,15 +97,45 @@ export function resetMailCopy(lang: MailLang, link: string): { subject: string; 
   return {
     subject: "AreaPilot lisansındaki bilgisayarları sıfırla",
     text: [
-      "Sen (ya da lisans kodunu bilen biri) AreaPilot lisansına kayıtlı bilgisayarların sıfırlanmasını istedi.",
+      "AreaPilot lisansına kayıtlı bilgisayarların sıfırlanması istendi (sen ya da lisans kodunu bilen biri istemiş olabilir).",
       "",
-      "Kayıtlı tüm bilgisayarları kaldırmak için bu bağlantıyı aç ve Sıfırla'ya bas (30 dakika geçerli, bir kez çalışır):",
+      "Devam etmek için bu bağlantıyı aç ve Sıfırla'ya bas (30 dakika geçerli, bir kez çalışır):",
       link,
       "",
-      "Sonra lisansı istediğin bilgisayarda yeniden etkinleştirebilirsin. Çizimlerin ve dosyaların etkilenmez.",
+      "Sıfırlama kayıtlı tüm bilgisayarları kaldırır VE lisans kodunu yenisiyle değiştirir: eski kod çalışmaz, yeni kod sayfada bir kez gösterilir ve sana e-postayla da gönderilir. Çizimlerin ve dosyaların etkilenmez. Bir lisans 30 günde en çok 2 kez sıfırlanabilir.",
       "Bunu sen istemediysen bu e-postayı yok say; hiçbir şey değişmez.",
       "",
       "Sorular: destek@ostlertech.com",
+      "OstlerTech",
+    ].join("\n"),
+  };
+}
+
+/** Sıfırlama onaylanınca gönderilen yeni lisans kodu e-postası. */
+export function newKeyMailCopy(lang: MailLang, key: string): { subject: string; text: string } {
+  if (lang === "en") {
+    return {
+      subject: "Your new AreaPilot license key",
+      text: [
+        "Your AreaPilot license was reset. Your new license key:",
+        key,
+        "",
+        "The old key no longer works. Open the AreaPilot License window on each computer you use and activate with the new key.",
+        "If you did not do this, write to destek@ostlertech.com right away.",
+        "",
+        "OstlerTech",
+      ].join("\n"),
+    };
+  }
+  return {
+    subject: "AreaPilot yeni lisans kodun",
+    text: [
+      "AreaPilot lisansın sıfırlandı. Yeni lisans kodun:",
+      key,
+      "",
+      "Eski kod artık çalışmaz. Kullandığın her bilgisayarda AreaPilot Lisans penceresini aç ve yeni kodla etkinleştir.",
+      "Bunu sen yapmadıysan hemen destek@ostlertech.com adresine yaz.",
+      "",
       "OstlerTech",
     ].join("\n"),
   };
