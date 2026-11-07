@@ -8,8 +8,8 @@
 --   (2) aynı lisansı ikinci kez sıfırla: iki satır, eski kodların özeti birbirinden farklı.
 -- KOD (durum sorgusu) bu migrasyondan ÖNCE dağıtılırsa sp_license_retired_keys yok hatası verir; yalnız "eski kod" yolu 500 döner
 -- (istemci 5xx'te düşmez). Yine de sıra: önce migrasyon, sonra kod.
--- Saklama: satır lisansa bağlıdır (on delete cascade); lisans silinince (sp_purge_ended_licenses) birlikte gider. Kişisel veri içermez,
--- yalnız kod özeti (tek yönlü) ve tarih tutulur. Geri alma: eski sp_consume_reset_token tanımını 2026-11-06-lisans-urun.sql'den yeniden
+-- Saklama: satır lisansa bağlıdır (on delete cascade); lisans silinince (sp_purge_ended_licenses) birlikte gider. Dolaylı kişisel veridir
+-- (lisans e-postaya bağlı): eski kodun tek yönlü özeti, lisans kimliği ve tarih tutulur; Gizlilik §4/§9 ve site ek maddesinde sayılır. Geri alma: eski sp_consume_reset_token tanımını 2026-11-06-lisans-urun.sql'den yeniden
 -- çalıştır; drop table public.sp_license_retired_keys;
 
 begin;

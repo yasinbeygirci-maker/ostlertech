@@ -27,7 +27,7 @@ import {
 } from "../src/lib/areapilot-legal.ts";
 import { areapilotPricesReady, AREAPILOT_PRICE_IDS, PADDLE_PRICE_PLANS } from "../src/lib/paddle-tiers.ts";
 import { paddleConfig, salesOpenFor } from "../src/lib/paddle-env.ts";
-import { purchaseKeyMailCopy } from "../src/lib/license-mail-copy.ts";
+import { newKeyMailCopy, purchaseKeyMailCopy } from "../src/lib/license-mail-copy.ts";
 import { revealDecision, REVEAL_WINDOW_MS } from "../src/lib/license-reveal.ts";
 
 const SRC = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "src");
@@ -388,4 +388,16 @@ test("satın alma e-postası: ürün adı AreaPilot, kod, indirme bağlantısı,
   assert.match(purchaseKeyMailCopy("tr", key, 1, url).text, /1 bilgisayarda/);
   assert.match(purchaseKeyMailCopy("en", key, 20, url).text, /up to 20 computers/);
   assert.match(purchaseKeyMailCopy("tr", key, 5, url).text, /\bsen|\bkodun|aç\./i);
+});
+
+// Zeynep yeniden okuma (2026-11-08) D2/D3/D7: kodun yazdığı her veri aydınlatmada, durum sorgusunun iki sorusu her tanımda
+test("yeniden okuma D2/D3/D7: eski kod özeti gizlilik ekinde, kayıt sorusu ön bilgide, sıfırlama e-postası düşmeyi söyler", () => {
+  assert.match(PRIVACY_ADDITIONS.tr.license, /değiştirilen eski kodun tek yönlü özeti/);
+  assert.match(PRIVACY_ADDITIONS.en.license, /one-way digest of a code replaced in a reset/);
+  for (const lang of ["tr", "en"] as const) {
+    const info = JSON.stringify(areapilotPreInfo(lang));
+    assert.match(info, lang === "tr" ? /ve bu bilgisayarın kayıtlı olup olmadığını sorar/ : /whether this computer is still registered/);
+  }
+  assert.match(newKeyMailCopy("tr", "APL-X").text, /ücretsiz moda geçer/);
+  assert.match(newKeyMailCopy("en", "APL-X").text, /switch to free mode/);
 });
