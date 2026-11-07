@@ -8,6 +8,7 @@ import { fileURLToPath } from "node:url";
 import {
   AREAPILOT_TIER_DEVICES,
   AREAPILOT_TIER_IDS,
+  AREAPILOT_TIER_PRICES,
   SALES_COPY,
   areapilotWelcomeCopy,
   checkoutRequest,
@@ -165,6 +166,22 @@ test("yasal satırlar: iade 14 gün, Paddle satıcı notu, Autodesk bağlantıs�
   assert.match(SALES_COPY.en.legal.paddle, /Paddle\.com/);
   assert.match(SALES_COPY.tr.legal.trademark, /Autodesk ile bağlantılı değildir/);
   assert.match(SALES_COPY.en.legal.trademark, /not affiliated with Autodesk/);
+});
+
+test("kart fiyatları koda SABİT ve KDV DAHİL (Yasin 2026-11-07); vergi hesabı ve Paddle önizlemesi yok", () => {
+  assert.equal(AREAPILOT_TIER_PRICES.individual.tr, "₺2.398,80");
+  assert.equal(AREAPILOT_TIER_PRICES.office.tr, "₺9.598,80");
+  assert.equal(AREAPILOT_TIER_PRICES.firm.tr, "₺23.998,80");
+  assert.equal(AREAPILOT_TIER_PRICES.individual.en, "₺2,398.80");
+  assert.equal(AREAPILOT_TIER_PRICES.office.en, "₺9,598.80");
+  assert.equal(AREAPILOT_TIER_PRICES.firm.en, "₺23,998.80");
+  assert.match(SALES_COPY.tr.taxIncluded, /KDV dahil/);
+  assert.match(SALES_COPY.tr.priceNote, /ödeme adımında/);
+  const comp = fs.readFileSync(path.join(SRC, "components", "AreaPilotPricingOpen.tsx"), "utf8");
+  assert.doesNotMatch(comp, /PricePreview|formattedTotals|subtotal|\* 1[.,]2|1\.2/, "kartta Paddle önizlemesi ya da vergi hesabı yok");
+  assert.match(comp, /AREAPILOT_TIER_PRICES\[tier\]/);
+  const lib = fs.readFileSync(path.join(SRC, "lib", "areapilot-sales.ts"), "utf8");
+  assert.doesNotMatch(lib, /PricePreview|formattedTotals/);
 });
 
 // ---------------------------------------------------------------- kaynak denetimi (istemci paketi)

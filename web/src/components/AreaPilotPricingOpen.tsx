@@ -3,14 +3,13 @@
 import { useEffect, useState } from "react";
 import { initializePaddle, type Paddle } from "@paddle/paddle-js";
 import { Check } from "lucide-react";
-import { AREAPILOT_TIER_IDS, SALES_COPY, checkoutRequest, type AreaPilotTierId, type SalesLang, type SalesPayload } from "@/lib/areapilot-sales";
+import { AREAPILOT_TIER_IDS, AREAPILOT_TIER_PRICES, AREAPILOT_TIER_PRICES_EXCL_TAX, SALES_COPY, checkoutRequest, type AreaPilotTierId, type SalesLang, type SalesPayload } from "@/lib/areapilot-sales";
 
-// Satış AÇIKKEN çizilen fiyat bölümü (AreaPilotPricing kapısı yükler). Tutarı Paddle ziyaretçinin ülkesine göre döndürür; burada hesap yok.
+// Satış AÇIKKEN çizilen fiyat bölümü (AreaPilotPricing kapısı yükler). Fiyatlar KDV dahil ve sabit (AREAPILOT_TIER_PRICES); vergi hesabı ya da Paddle önizlemesi yok.
 // Adet seçimi yoktur: her düğme quantity 1 ile ödeme açar. Ürün/plan/cihaz sayısını sunucu fiyat tablosu belirler.
 export default function AreaPilotPricingOpen({ lang, payload }: { lang: SalesLang; payload: Extract<SalesPayload, { open: true }> }) {
   const c = SALES_COPY[lang];
   const [paddle, setPaddle] = useState<Paddle>();
-  const [totals, setTotals] = useState<Record<string, string>>({});
   const [error, setError] = useState(false);
   const { environment, token, prices } = payload;
 
@@ -32,18 +31,6 @@ export default function AreaPilotPricingOpen({ lang, payload }: { lang: SalesLan
       .catch(() => setError(true));
   }, [environment, token]);
 
-  useEffect(() => {
-    if (!paddle) return;
-    paddle
-      .PricePreview({ items: AREAPILOT_TIER_IDS.map((t) => ({ priceId: prices[t], quantity: 1 })) })
-      .then((res) => {
-        const next: Record<string, string> = {};
-        for (const item of res.data.details.lineItems) next[item.price.id] = item.formattedTotals.total;
-        setTotals(next);
-      })
-      .catch(() => setError(true));
-  }, [paddle, prices]);
-
   const buy = (tier: AreaPilotTierId) => {
     paddle?.Checkout.open(checkoutRequest(prices[tier], lang, window.location.origin));
   };
@@ -59,7 +46,6 @@ export default function AreaPilotPricingOpen({ lang, payload }: { lang: SalesLan
         <div className="grid gap-6 lg:grid-cols-3">
           {AREAPILOT_TIER_IDS.map((tier) => {
             const copy = c.tiers[tier];
-            const total = totals[prices[tier]];
             const highlighted = tier === "office";
             return (
               <div
@@ -73,15 +59,13 @@ export default function AreaPilotPricingOpen({ lang, payload }: { lang: SalesLan
                 <h3 className="text-xl font-bold text-white">{copy.name}</h3>
                 <p className="mt-1 text-sm text-muted">{copy.devices}</p>
 
-                <div className="mt-6 flex min-h-[3.5rem] items-baseline gap-2">
-                  {total ? (
-                    <>
-                      <span className="text-4xl font-extrabold text-white">{total}</span>
-                      <span className="text-sm text-muted">{c.once}</span>
-                    </>
-                  ) : (
-                    <span role="status" aria-label={c.loadingPrice} className="h-10 w-32 animate-pulse rounded-lg bg-line" />
-                  )}
+                <div className="mt-6 min-h-[5rem]">
+                  <div className="flex flex-wrap items-baseline gap-x-2">
+                    <span className="text-4xl font-extrabold text-white">{AREAPILOT_TIER_PRICES[tier][lang]}</span>
+                    <span className="text-base font-semibold text-muted">{c.taxIncluded}</span>
+                    <span className="text-sm text-muted">{c.once}</span>
+                  </div>
+                  <p className="mt-1 text-sm text-muted">{AREAPILOT_TIER_PRICES_EXCL_TAX[tier][lang]}</p>
                 </div>
 
                 <ul className="mt-6 flex-1 space-y-3">
@@ -94,7 +78,7 @@ export default function AreaPilotPricingOpen({ lang, payload }: { lang: SalesLan
 
                 <button
                   onClick={() => buy(tier)}
-                  disabled={!paddle || !total}
+                  disabled={!paddle}
                   className="btn-primary mt-8 w-full !py-3 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {c.buy}
@@ -103,6 +87,8 @@ export default function AreaPilotPricingOpen({ lang, payload }: { lang: SalesLan
             );
           })}
         </div>
+
+        <p className="text-center text-base text-muted">{c.priceNote}</p>
 
         {error && <p className="text-center text-sm text-weak">{c.error}</p>}
 

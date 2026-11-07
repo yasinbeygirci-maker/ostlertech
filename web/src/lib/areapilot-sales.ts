@@ -1,12 +1,27 @@
 // AreaPilot satın alma bölümünün saf mantığı ve metni (TR + EN). İSTEMCİ DOSYALARI bunu içe aktarabilir: burada Paddle FİYAT KİMLİĞİ YOKTUR.
 // Fiyat kimlikleri yalnız sunucuda (paddle-tiers.ts) durur ve /api/areapilot/satis ile SADECE satış bayrağı açıkken tarayıcıya verilir.
-// Tutarlar da burada yazılmaz: kartlardaki fiyatı Paddle ziyaretçinin ülkesine göre döndürür (Burak O3, Zeynep/Defne kapıları için metin notları aşağıda).
+// Kart fiyatları aşağıda SABİT yazılır, Türkiye için KDV DAHİL toplam (Yasin 2026-11-07, son karar): burada vergi hesabı ve Paddle önizlemesi yoktur.
+// Ofis ve Firma toplamları Paddle ödeme penceresinde doğrulanmadı; ilk gerçek ödeme adımında kart ile pencere karşılaştırılır.
 export type SalesLang = "tr" | "en";
 export type AreaPilotTierId = "individual" | "office" | "firm";
 export const AREAPILOT_TIER_IDS: readonly AreaPilotTierId[] = ["individual", "office", "firm"];
 
 /** Katman başına bilgisayar sayısı. Gerçek sınır sunucu tablosundadır (paddle-tiers.ts); bu yalnız kart metni içindir. */
 export const AREAPILOT_TIER_DEVICES: Record<AreaPilotTierId, number> = { individual: 1, office: 5, firm: 20 };
+
+/** Kartta gösterilen KDV DAHİL toplamlar (sabit, hesaplanmaz). Ana fiyat budur; Paddle penceresindeki toplamla aynı olmalıdır. */
+export const AREAPILOT_TIER_PRICES: Record<AreaPilotTierId, Record<SalesLang, string>> = {
+  individual: { tr: "₺2.398,80", en: "₺2,398.80" },
+  office: { tr: "₺9.598,80", en: "₺9,598.80" },
+  firm: { tr: "₺23.998,80", en: "₺23,998.80" },
+};
+
+/** Küçük dipnot: KDV hariç liste fiyatı (sabit). */
+export const AREAPILOT_TIER_PRICES_EXCL_TAX: Record<AreaPilotTierId, Record<SalesLang, string>> = {
+  individual: { tr: "₺1.999 + KDV", en: "₺1,999 + VAT" },
+  office: { tr: "₺7.999 + KDV", en: "₺7,999 + VAT" },
+  firm: { tr: "₺19.999 + KDV", en: "₺19,999 + VAT" },
+};
 
 export type AreaPilotPriceIds = Record<AreaPilotTierId, string>;
 
@@ -77,8 +92,11 @@ export interface SalesCopy {
   title: string;
   lead: string;
   once: string;
+  /** Fiyatın yanındaki kısa vergi notu. */
+  taxIncluded: string;
+  /** Kartların altındaki tek satır. */
+  priceNote: string;
   buy: string;
-  loadingPrice: string;
   highlightedLabel: string;
   tiers: Record<AreaPilotTierId, TierCopy>;
   after: string[];
@@ -111,8 +129,9 @@ export const SALES_COPY: Record<SalesLang, SalesCopy> = {
     title: "Fiyatlar",
     lead: "AreaPilot tek seferlik lisanstır: bir kez öde, 1.x sürümlerinin hepsinde kullan. Kaç bilgisayarda kullanacağına göre katmanı seç.",
     once: "tek seferlik",
+    taxIncluded: "KDV dahil",
+    priceNote: "Gösterilen fiyatlar Türkiye için %20 KDV dahil toplamdır. Ödeyeceğin tutar ödeme adımında gösterilen toplamdır; vergi numarası girersen ya da başka bir ülkeden alırsan vergi tutarı değişebilir.",
     buy: "Satın al",
-    loadingPrice: "Fiyat yükleniyor",
     highlightedLabel: "Çoğu ekip için",
     tiers: {
       individual: { name: "Bireysel", devices: "1 bilgisayar", features: commonTr(1) },
@@ -125,7 +144,7 @@ export const SALES_COPY: Record<SalesLang, SalesCopy> = {
     ],
     legal: {
       paddle:
-        "Fiyatlar bulunduğun ülkeye göre gösterilir ve vergiler dahildir. Siparişin yetkili satıcımız Paddle.com (Merchant of Record) tarafından işlenir; kart bilgilerin bize iletilmez.",
+        "Siparişin yetkili satıcımız Paddle.com (Merchant of Record) tarafından işlenir; kart bilgilerin bize iletilmez.",
       refund: "Ödeme tarihinden itibaren 14 gün içinde gerekçe göstermeden ücretin tamamını iade ederiz.",
       trademark: "AutoCAD, Autodesk, Inc.'in tescilli markasıdır. AreaPilot, Autodesk ile bağlantılı değildir.",
       termsLabel: "Kullanım ve satış koşulları",
@@ -140,8 +159,9 @@ export const SALES_COPY: Record<SalesLang, SalesCopy> = {
     title: "Pricing",
     lead: "AreaPilot is a one-time license: pay once and use it on every 1.x version. Pick the tier by how many computers you will use it on.",
     once: "one-time",
+    taxIncluded: "incl. VAT",
+    priceNote: "The prices shown are totals including 20% VAT for Türkiye. You pay the total shown at checkout; if you enter a tax number or buy from another country, the tax may change.",
     buy: "Buy",
-    loadingPrice: "Loading price",
     highlightedLabel: "For most teams",
     tiers: {
       individual: { name: "Individual", devices: "1 computer", features: commonEn(1) },
@@ -154,7 +174,7 @@ export const SALES_COPY: Record<SalesLang, SalesCopy> = {
     ],
     legal: {
       paddle:
-        "Prices are shown for your country and include taxes. Your order is processed by our reseller Paddle.com, the Merchant of Record; your card details never reach us.",
+        "Your order is processed by our reseller Paddle.com, the Merchant of Record; your card details never reach us.",
       refund: "You can ask for a full refund within 14 days of payment, no questions asked.",
       trademark: "AutoCAD is a registered trademark of Autodesk, Inc. AreaPilot is not affiliated with Autodesk.",
       termsLabel: "Terms of use and sale",
