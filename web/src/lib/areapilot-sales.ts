@@ -129,7 +129,7 @@ export const SALES_COPY: Record<SalesLang, SalesCopy> = {
       firm: { name: "Firma", devices: "20 bilgisayar", features: commonTr(20) },
     },
     after: [
-      "Ödeme bitince lisans kodun açılan sayfada görünür ve e-postana da gönderilir. Kodu yalnız kendi işinde ya da firmanın bilgisayarlarında, lisanstaki bilgisayar sayısı kadar kullan; firmanın dışından kimseyle paylaşma: kodu bilen onu kendi bilgisayarında etkinleştirip bilgisayar hakkını tüketebilir.",
+      "Ödeme bitince lisans kodun açılan sayfada görünür ve e-postana da gönderilir (birkaç dakika içinde gelmezse Spam ya da Güncellemeler klasörüne bak). Kodu yalnız kendi işinde ya da firmanın bilgisayarlarında, lisanstaki bilgisayar sayısı kadar kullan; firmanın dışından kimseyle paylaşma: kodu bilen onu kendi bilgisayarında etkinleştirip bilgisayar hakkını tüketebilir.",
       "Kodu girmek için AutoCAD'de AREAPILOT_LISANS yaz; \"AreaPilot Lisansı\" penceresinde kodu yapıştırıp \"Etkinleştir\"e bas.",
       "Bilgisayar değiştirirken eski bilgisayarda \"Bu bilgisayardan kaldır\"a bas (internet gerekir, 30 günde en çok 3 kez); hak yeni bilgisayara geçer. Eski bilgisayara ulaşamıyorsan \"Cihazlarımı sıfırla (e-posta)\" ile bilgisayarlarını sıfırlayabilirsin (30 günde en çok 2 kez); sıfırlamada kodun yenisiyle değişir.",
     ],
@@ -150,7 +150,7 @@ export const SALES_COPY: Record<SalesLang, SalesCopy> = {
       firm: { name: "Firm", devices: "20 computers", features: commonEn(20) },
     },
     after: [
-      "When the payment completes, your license key appears on the page that opens and is also emailed to you. Use the key only for your own work or on your company's computers, up to the number of computers in the license, and do not share it outside your company: anyone who has it can activate it on their own computer and use up your computer limit.",
+      "When the payment completes, your license key appears on the page that opens and is also emailed to you (if it does not arrive within a few minutes, check your Spam or Updates folder). Use the key only for your own work or on your company's computers, up to the number of computers in the license, and do not share it outside your company: anyone who has it can activate it on their own computer and use up your computer limit.",
       "To enter the key, type AREAPILOT_LISANS in AutoCAD, paste the key in the \"AreaPilot License\" window and press \"Activate\".",
       "When you switch computers, press \"Remove from this computer\" on the old one (needs internet, up to 3 times in 30 days). If you can't reach the old computer, use \"Reset my devices (email)\" (up to 2 times in 30 days); a reset replaces your key with a new one.",
     ],
@@ -186,11 +186,11 @@ export function areapilotPreInfo(lang: SalesLang): PreInfoCopy {
       title: "Before you buy",
       items: [
         { label: "Product and compatibility", text: "AreaPilot 1.x; Windows 10 and 11 (64-bit), AutoCAD® 2013-2027 (64-bit). It does not run in AutoCAD LT. Before you buy, try it on your own version with the 7-day full trial; the versions it has been tested with are listed on this page." },
-        { label: "Price, taxes and seller", text: `The amounts on the cards are totals including 20% VAT for Türkiye: ${tierLine("en", { individual: "Individual", office: "Office", firm: "Company" })}. For other countries tax is calculated for your country. The amount you pay is the tax-inclusive total shown on the checkout page; if you enter a tax number, the tax may change. It is a one-time payment and does not renew. The seller, who takes your payment, is our reseller Paddle.com (Merchant of Record); Paddle sends your receipt, and your payment details do not reach us.` },
+        { label: "Price, taxes and seller", text: `The amounts on the cards are totals including 20% VAT for Türkiye: ${tierLine("en", { individual: "Individual", office: "Office", firm: "Firm" })}. For other countries tax is calculated for your country. The amount you pay is the tax-inclusive total shown on the checkout page; if you enter a tax number, the tax may change. It is a one-time payment and does not renew. The seller, who takes your payment, is our reseller Paddle.com (Merchant of Record); Paddle sends your receipt, and your payment details do not reach us.` },
         { label: "Delivery", text: "Your license key is shown on the page that opens right after payment and emailed to the address you paid with." },
         { label: "License and internet", text: "The license has no end date. An internet connection is needed only for activation, \"Remove from this computer\" and \"Reset my devices (email)\"; an activated license keeps working even if our server cannot be reached. While AreaPilot is running and online, about once a week it asks whether the license has been refunded or cancelled and whether this computer is still registered; a refunded license switches to free mode at that check. Activation sends the license key, a random device number and the version; the weekly check sends only the key and the device number. \"Remove from this computer\" can be used up to 3 times and \"Reset my devices (email)\" up to 2 times in 30 days; a reset replaces your key with a new one, and computers activated with the old key switch to free mode at their next check." },
         { label: "Versions", text: "The license is valid for all 1.x versions; 2.0 and later major versions are not included." },
-        { label: "Withdrawal and refunds", text: "Because the license key is digital content delivered right after payment, the statutory right of withdrawal does not apply to this purchase where your law allows this exception. We still refund the full price of Individual, Office and Company licenses if you ask within 14 days of payment, no reason needed; refunds are for the whole license. A refunded license is cancelled; on computers that are online it switches to free mode at the next license status check, and continuing to use a refunded license breaches the license agreement." },
+        { label: "Withdrawal and refunds", text: "Because the license key is digital content delivered right after payment, the statutory right of withdrawal does not apply to this purchase where your law allows this exception. We still refund the full price of Individual, Office and Firm licenses if you ask within 14 days of payment, no reason needed; refunds are for the whole license. A refunded license is cancelled; on computers that are online it switches to free mode at the next license status check, and continuing to use a refunded license breaches the license agreement." },
         { label: "Complaints", text: "destek@ostlertech.com. Consumers keep the rights and remedies of their local law." },
       ],
       links: [
@@ -253,7 +253,7 @@ export function areapilotWelcomeCopy(lang: SalesLang, maxDevices?: number): Welc
     ? {
         title: "Thank you, your payment was received",
         receipt: "Your receipt will arrive by email from Paddle.",
-        mailNote: "We also email the license key to the address you paid with.",
+        mailNote: "We also email the license key to the address you paid with. If it does not arrive within a few minutes, check your Spam or Updates folder.",
         steps: ["Install AreaPilot (download link below), then open AutoCAD and the AreaPilot License window.", "Paste the key and press Activate.", same(maxDevices)],
         support: "If you lose the key, write from the email you paid with to",
         back: "Back to AreaPilot",
@@ -264,7 +264,7 @@ export function areapilotWelcomeCopy(lang: SalesLang, maxDevices?: number): Welc
     : {
         title: "Teşekkürler, ödemen alındı",
         receipt: "Makbuzun Paddle'dan e-postana gelecek.",
-        mailNote: "Lisans kodunu ayrıca ödeme yaptığın e-posta adresine de gönderiyoruz.",
+        mailNote: "Lisans kodunu ayrıca ödeme yaptığın e-posta adresine de gönderiyoruz. Birkaç dakika içinde gelmezse Spam ya da Güncellemeler klasörüne bak.",
         steps: ["AreaPilot'u kur (indirme bağlantısı aşağıda), sonra AutoCAD'i ve AreaPilot Lisans penceresini aç.", "Kodu yapıştırıp Etkinleştir'e bas.", same(maxDevices)],
         support: "Kodu kaybedersen satın alırken kullandığın e-postayla şu adrese yaz:",
         back: "AreaPilot'a dön",

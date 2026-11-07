@@ -18,7 +18,7 @@ export default function TermsEnPage() {
   const live = areapilotLegalLive();
   const sh = live ? TERMS_SHIFT : 0;
   return (
-    <LegalPage eyebrow="Legal" title="Terms of Use and Sale" lang="en" updatedOn="18 October 2026" altLink={{ href: "/kullanim-sartlari", label: "Türkçe sürüm" }}>
+    <LegalPage eyebrow="Legal" title="Terms of Use and Sale" lang="en" updatedOn="7 November 2026" altLink={{ href: "/kullanim-sartlari", label: "Türkçe sürüm" }}>
       <p>
         These terms apply to the use of {COMPANY.brand} apps (SyncPass for Android, SyncPass Desktop and others) and to
         licenses purchased through ostlertech.com. By using an app or purchasing a license you accept these terms. If

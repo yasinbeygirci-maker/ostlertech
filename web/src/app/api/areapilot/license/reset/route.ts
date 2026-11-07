@@ -23,7 +23,7 @@ b.onclick=function(){b.disabled=true;
 fetch("/api/areapilot/license/reset",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:t})})
 .then(function(r){return r.json().then(function(j){return{s:r.status,j:j}})})
 .then(function(x){
-if(x.s===200){b.hidden=true;m.textContent="Tamam: bilgisayarlar sıfırlandı ve lisans kodun yenilendi. Yeni kodu şimdi kaydet; bu sayfada bir daha gösterilmez (e-postana da gönderildi). / Done. Your new license key is below; it is shown only once (also e-mailed).";k.textContent=x.j.key;k.hidden=false}
+if(x.s===200){b.hidden=true;m.textContent="Tamam: bilgisayarlar sıfırlandı ve lisans kodun yenilendi. Yeni kodu şimdi kaydet; bu sayfada bir daha gösterilmez (e-postana da göndermeyi denedik; gelmezse Spam ya da Güncellemeler klasörüne bak). / Done. Your new license key is below; it is shown only once (we also tried to e-mail it; if it does not arrive, check Spam or Updates).";k.textContent=x.j.key;k.hidden=false}
 else if(x.s===429){b.hidden=true;m.textContent="Bu lisansta 30 günde izin verilen sıfırlama sayısı doldu. Lütfen destek ile iletişime geç: destek@ostlertech.com / Reset limit reached; please contact support."}
 else if(x.s===410){b.hidden=true;m.textContent="Bağlantı geçersiz, kullanılmış ya da süresi dolmuş. Yeni bağlantı iste. / Link invalid or expired."}
 else{m.textContent="Bir hata oldu, sonra tekrar dene. / Something went wrong.";b.disabled=false}})

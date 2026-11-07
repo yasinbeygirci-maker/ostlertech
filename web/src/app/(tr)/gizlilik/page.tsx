@@ -14,7 +14,7 @@ export default function SitePrivacyPage() {
   const live = areapilotLegalLive();
   const add = PRIVACY_ADDITIONS.tr;
   return (
-    <LegalPage eyebrow="Yasal" title="Gizlilik Politikası ve KVKK Aydınlatma Metni" updatedOn="31 Ekim 2026" altLink={{ href: "/en/privacy", label: "English version" }}>
+    <LegalPage eyebrow="Yasal" title="Gizlilik Politikası ve KVKK Aydınlatma Metni" updatedOn="7 Kasım 2026" altLink={{ href: "/en/privacy", label: "English version" }}>
       <p>
         Bu metin ostlertech.com web sitesini ve buradan yapılan satın almaları kapsar. Uygulamalarımızın kendi gizlilik
         politikaları ayrıdır: <a href="/syncpass/privacy" className="text-primary hover:text-primary-light">SyncPass gizlilik politikası</a>,
@@ -27,7 +27,7 @@ export default function SitePrivacyPage() {
 
       <H2>2. Hangi verileri, neden işliyoruz</H2>
       <List>
-        <li><strong className="text-foreground">Siteyi gezerken:</strong> sitemizin kendisi çerez kullanmaz. Yalnız satın alma sayfasında (/satin-al) Paddle'ın ödeme bileşeni yüklenir; bu bileşen paddle.com alan adında kötüye kullanıma karşı koruma için kısa süreli bir güvenlik çerezi bırakır ve ödeme penceresini açarsanız kendi çerezlerini kullanabilir (Paddle gizlilik politikası). Ödemeyi tamamladığınızda lisans kodunuzu gösterebilmek için işlem numarası yalnız o sekmenin oturum belleğinde tutulur ve sekmeyi kapatınca silinir. Hangi sayfaların ne kadar ziyaret edildiğini görmek için Vercel Web Analytics kullanıyoruz; bu araç çerez kullanmaz, sizi tanımlamaz ve ziyaretleri her gün değişen anonim bir özetle sayar (sayfa adresi, ülke, cihaz ve tarayıcı türü gibi toplu bilgiler). Barındırma hizmetimiz (Vercel) ayrıca güvenlik ve hata ayıklama için IP adresi ve tarayıcı bilgisini kısa süreli sunucu kayıtlarında tutar.</li>
+        <li><strong className="text-foreground">Siteyi gezerken:</strong> sitemizin kendisi çerez kullanmaz. Yalnız satın alma sayfalarında (/satin-al ve AreaPilot satışı açıkken /areapilot) Paddle'ın ödeme bileşeni yüklenir; bu bileşen paddle.com alan adında kötüye kullanıma karşı koruma için kısa süreli bir güvenlik çerezi bırakır ve ödeme penceresini açarsanız kendi çerezlerini kullanabilir (Paddle gizlilik politikası). Ödemeyi tamamladığınızda lisans kodunuzu gösterebilmek için işlem numarası yalnız o sekmenin oturum belleğinde tutulur ve sekmeyi kapatınca silinir. Hangi sayfaların ne kadar ziyaret edildiğini görmek için Vercel Web Analytics kullanıyoruz; bu araç çerez kullanmaz, sizi tanımlamaz ve ziyaretleri her gün değişen anonim bir özetle sayar (sayfa adresi, ülke, cihaz ve tarayıcı türü gibi toplu bilgiler). Barındırma hizmetimiz (Vercel) ayrıca güvenlik ve hata ayıklama için IP adresi ve tarayıcı bilgisini kısa süreli sunucu kayıtlarında tutar.</li>
         <li><strong className="text-foreground">Bekleme listesi:</strong> e-posta adresiniz. İki ayrı amaç vardır: (a) beta indirme bağlantısını size iletmek ve beta sürümüyle ilgili zorunlu bilgilendirme (güncelleme, son kullanım tarihi); (b) yeni ürün ve kampanya duyurularını e-postayla göndermek, bu yalnızca formdaki ayrı kutuyu işaretlemeniz halinde yapılır ve dilediğiniz zaman e-postadaki bağlantıdan çıkabilirsiniz. Kutuyu işaretlemezseniz (b) kapsamında e-posta almazsınız; (a) yine de uygulanır. Rızanızın tarihi ve gösterilen metnin sürümü kaydedilir.</li>
         <li><strong className="text-foreground">Satın alma:</strong> satışlarımızı yetkili satıcımız (Merchant of Record) Paddle.com yapar. Ödeme ve fatura bilgilerinizi Paddle toplar ve kendi gizlilik politikasına göre işler. Paddle bize yalnızca e-posta adresinizi, ülkenizi, satın aldığınız planı, işlem ve abonelik numaralarını ve ödeme durumunu iletir. Amaç: lisansın teslimi, abonelik durumunun izlenmesi, iade ve destek.</li>
         {live ? (
@@ -52,7 +52,7 @@ export default function SitePrivacyPage() {
       <H2>4. Aktarım</H2>
       <p>Verilerinizi satmayız ve reklam amacıyla paylaşmayız. Hizmeti sunabilmek için yalnızca şu hizmet sağlayıcılarla paylaşılır:</p>
       <List>
-        <li>Paddle.com Market Ltd (Birleşik Krallık): yetkili satıcı olarak ödemenin alınması, faturalandırma, vergiler, abonelik ve iadeler. /satin-al sayfasını açtığınızda, bir düğmeye basmanız beklenmeden, fiyatların gösterilmesi için Paddle'ın ödeme betiği (cdn.paddle.com) ve bu betiğin yüklediği, Paddle'a ait ProfitWell betiği (public.profitwell.com) yüklenir; bu sırada IP adresiniz, tarayıcı bilginiz ve ülke bilginiz Paddle'a iletilir (<a href="https://www.paddle.com/legal/privacy" target="_blank" rel="noopener" className="text-primary hover:text-primary-light">Paddle gizlilik politikası</a>).</li>
+        <li>Paddle.com Market Ltd (Birleşik Krallık): yetkili satıcı olarak ödemenin alınması, faturalandırma, vergiler, abonelik ve iadeler. /satin-al sayfasını ya da AreaPilot satışı açıkken /areapilot sayfasını açtığınızda, bir düğmeye basmanız beklenmeden, fiyatların gösterilmesi için Paddle'ın ödeme betiği (cdn.paddle.com) ve bu betiğin yüklediği, Paddle'a ait ProfitWell betiği (public.profitwell.com) yüklenir; bu sırada IP adresiniz, tarayıcı bilginiz ve ülke bilginiz Paddle'a iletilir (<a href="https://www.paddle.com/legal/privacy" target="_blank" rel="noopener" className="text-primary hover:text-primary-light">Paddle gizlilik politikası</a>).</li>
         <li>Supabase Pte. Ltd. (Singapur şirketi; veritabanı sunucuları İrlanda, AB): lisans ve bekleme listesi kayıtlarının saklanması.</li>
         <li>Vercel: sitenin ve lisans doğrulama hizmetinin barındırılması; anonim ziyaret istatistikleri (Web Analytics).</li>
         {live && <li>{add.resendItem}</li>}
@@ -76,7 +76,7 @@ export default function SitePrivacyPage() {
       <H2>5. Saklama süresi</H2>
       <List>
         <li>Satışa ilişkin fatura kayıtları Paddle'da tutulur; bizdeki muhasebe kayıtları ilgili mevzuatın öngördüğü süre (10 yıl) saklanır.</li>
-        <li>Lisans kayıtları: lisans süresi boyunca ve bitiminden sonra 1 yıl.</li>
+        <li>AreaPilot lisans kayıtları: lisans geçerli olduğu sürece; lisans iade edilir, ödemesine itiraz edilir ya da sözleşmeye aykırılık nedeniyle iptal edilirse iade ya da iptal tarihinden 1 yıl sonra haftalık otomatik silmeyle silinir. Kaldırılan bilgisayarın kaydı kaldırıldığı anda silinir. Diğer lisans kayıtları: lisans süresi boyunca ve bitiminden sonra 1 yıl.</li>
         <li>Bekleme listesi: ürün çıktıktan 6 ay sonra ya da siz daha önce çıkmak isterseniz o gün silinir.</li>
         <li>Destek yazışmaları: konu kapandıktan sonra 1 yıl.</li>
         <li>Instagram sohbet kayıtları (ChatPlace): son yazışmadan 6 ay sonra silinir.</li>

@@ -17,7 +17,7 @@ export default function TermsPage() {
   const live = areapilotLegalLive();
   const sh = live ? TERMS_SHIFT : 0;
   return (
-    <LegalPage eyebrow="Yasal" title="Kullanım ve Satış Koşulları" updatedOn="18 Ekim 2026" altLink={{ href: "/en/terms", label: "English version" }}>
+    <LegalPage eyebrow="Yasal" title="Kullanım ve Satış Koşulları" updatedOn="7 Kasım 2026" altLink={{ href: "/en/terms", label: "English version" }}>
       <p>
         Bu koşullar {COMPANY.brand} uygulamalarının (SyncPass Android, SyncPass Masaüstü ve diğerleri) kullanımı ile
         ostlertech.com üzerinden satın alınan lisanslar için geçerlidir. Uygulamayı kullanarak ya da lisans satın alarak

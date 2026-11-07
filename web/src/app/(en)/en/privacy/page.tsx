@@ -17,7 +17,7 @@ export default function PrivacyEnPage() {
   const live = areapilotLegalLive();
   const add = PRIVACY_ADDITIONS.en;
   return (
-    <LegalPage eyebrow="Legal" title="Privacy Policy" lang="en" updatedOn="31 October 2026" altLink={{ href: "/gizlilik", label: "Türkçe sürüm" }}>
+    <LegalPage eyebrow="Legal" title="Privacy Policy" lang="en" updatedOn="7 November 2026" altLink={{ href: "/gizlilik", label: "Türkçe sürüm" }}>
       <p>
         This notice covers the ostlertech.com website and purchases made through it. It is also our information notice
         under Türkiye's Personal Data Protection Law No. 6698 (KVKK). Our apps have their own privacy policies:{" "}
@@ -30,7 +30,7 @@ export default function PrivacyEnPage() {
 
       <H2>2. What data we process and why</H2>
       <List>
-        <li><strong className="text-foreground">Browsing the site:</strong> our site itself does not use cookies. Only on the purchase page (/en/pricing) is Paddle's checkout component loaded; it sets a short-lived security cookie on the paddle.com domain to protect against abuse and may use its own cookies if you open the checkout (Paddle privacy policy). When you complete a payment, the transaction ID is kept only in that tab's session storage so that your license code can be shown, and it is deleted when you close the tab. To see how often pages are visited we use Vercel Web Analytics; it uses no cookies, does not identify you and counts visits through an anonymous summary that changes every day (aggregate information such as page address, country, device and browser type). Our host (Vercel) also keeps IP address and browser information in short-lived server logs for security and debugging.</li>
+        <li><strong className="text-foreground">Browsing the site:</strong> our site itself does not use cookies. Only on the purchase pages (/en/pricing and, while AreaPilot sales are open, /en/areapilot) is Paddle's checkout component loaded; it sets a short-lived security cookie on the paddle.com domain to protect against abuse and may use its own cookies if you open the checkout (Paddle privacy policy). When you complete a payment, the transaction ID is kept only in that tab's session storage so that your license code can be shown, and it is deleted when you close the tab. To see how often pages are visited we use Vercel Web Analytics; it uses no cookies, does not identify you and counts visits through an anonymous summary that changes every day (aggregate information such as page address, country, device and browser type). Our host (Vercel) also keeps IP address and browser information in short-lived server logs for security and debugging.</li>
         <li><strong className="text-foreground">Waiting list:</strong> your email address. There are two separate purposes: (a) sending you the beta download link and essential notices about the beta (updates, end date); (b) emailing new product and campaign announcements, which we do only if you tick the separate box in the form, and you can unsubscribe at any time via the link in the email. If you leave the box unticked you receive no emails under (b); (a) still applies. The date of your consent and the version of the text shown are recorded.</li>
         <li><strong className="text-foreground">Purchases:</strong> our sales are made by our Merchant of Record, Paddle.com. Paddle collects your payment and billing details and processes them under its own privacy policy. Paddle sends us only your email address, country, the plan you bought, transaction and subscription IDs and payment status. Purpose: delivering the license, tracking subscription status, refunds and support.</li>
         {live ? (
@@ -55,7 +55,7 @@ export default function PrivacyEnPage() {
       <H2>4. Sharing</H2>
       <p>We do not sell your data or share it for advertising. To provide the service it is shared only with these providers:</p>
       <List>
-        <li>Paddle.com Market Ltd (United Kingdom): as Merchant of Record, taking payments, invoicing, taxes, subscriptions and refunds. When you open the /en/pricing or purchase page, without waiting for you to press a button, Paddle's checkout script (cdn.paddle.com) and the Paddle-owned ProfitWell script it loads (public.profitwell.com) are loaded so that prices can be shown; your IP address, browser information and country are then sent to Paddle (<a href="https://www.paddle.com/legal/privacy" target="_blank" rel="noopener" className={link}>Paddle privacy policy</a>).</li>
+        <li>Paddle.com Market Ltd (United Kingdom): as Merchant of Record, taking payments, invoicing, taxes, subscriptions and refunds. When you open the /en/pricing or purchase page or, while AreaPilot sales are open, the AreaPilot page, without waiting for you to press a button, Paddle's checkout script (cdn.paddle.com) and the Paddle-owned ProfitWell script it loads (public.profitwell.com) are loaded so that prices can be shown; your IP address, browser information and country are then sent to Paddle (<a href="https://www.paddle.com/legal/privacy" target="_blank" rel="noopener" className={link}>Paddle privacy policy</a>).</li>
         <li>Supabase Pte. Ltd. (Singapore company; database servers in Ireland, EU): storing license and waiting-list records.</li>
         <li>Vercel: hosting the site and the license check service; anonymous visit statistics (Web Analytics).</li>
         {live && <li>{add.resendItem}</li>}
@@ -78,7 +78,7 @@ export default function PrivacyEnPage() {
       <H2>5. Retention</H2>
       <List>
         <li>Invoice records for sales are kept by Paddle; our accounting records are kept for the period required by law (10 years).</li>
-        <li>License records: for the life of the license and 1 year after it ends.</li>
+        <li>AreaPilot license records: for as long as the license is valid; if the license is refunded, the payment is disputed or it is cancelled for breach of contract, they are deleted by a weekly automatic deletion 1 year after the refund or cancellation date. The record of a removed computer is deleted the moment it is removed. Other license records: for the life of the license and 1 year after it ends.</li>
         <li>Waiting list: deleted 6 months after the product is released, or on the day you ask to leave it.</li>
         <li>Support emails: 1 year after the matter is closed.</li>
         <li>Instagram conversation records (ChatPlace): deleted 6 months after the last message.</li>
