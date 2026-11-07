@@ -1,4 +1,5 @@
 import "server-only";
+import { createHash } from "node:crypto";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { priceInfo } from "@/lib/paddle-tiers";
 import {
@@ -68,6 +69,19 @@ export function supabaseLicenseStore(db: SupabaseClient): LicenseStore {
       if (error) fail(error, "removeDevice");
       if (data === "ok" || data === "limit") return data;
       throw new Error("removeDevice: beklenmeyen sonuc");
+    },
+    async hasDevice(licenseId, deviceId) {
+      const { data, error } = await db.from("sp_license_devices").select("device_id").eq("license_id", licenseId).eq("device_id", deviceId).limit(1);
+      if (error) fail(error, "hasDevice");
+      return (data?.length ?? 0) > 0;
+    },
+    async findRetiredKeyOwner(key, product) {
+      const { data: retired, error } = await db.from("sp_license_retired_keys").select("license_id").eq("retired_key_hash", createHash("sha256").update(key, "utf8").digest("hex")).maybeSingle<{ license_id: string }>();
+      if (error) fail(error, "findRetiredKeyOwner");
+      if (!retired) return null;
+      const { data, error: err2 } = await db.from("sp_licenses").select(SELECT).eq("id", retired.license_id).eq("product", product).maybeSingle<LicenseRow>();
+      if (err2) fail(err2, "findRetiredKeyOwner");
+      return data ?? null;
     },
     async createResetToken(licenseId, tokenHash, expiresIso, nowIso, minIntervalMs, lang) {
       const { data, error } = await db.rpc("sp_create_reset_token", {

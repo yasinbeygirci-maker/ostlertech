@@ -223,6 +223,13 @@ export interface LicenseStore {
    * ve sayaç yoktur. Hatada fırlatır.
    */
   removeDevice(licenseId: string, deviceId: string, nowIso: string, limit: number | null): Promise<"ok" | "limit">;
+  /** Cihaz bu lisansta kayıtlı mı (salt okur; durum sorgusu için). Hatada fırlatır. */
+  hasDevice(licenseId: string, deviceId: string): Promise<boolean>;
+  /**
+   * Cihaz sıfırlamada DEĞİŞTİRİLMİŞ eski kodun sahibi lisans (yoksa null). Yalnız durum sorgusunda kullanılır: sıfırlanan kodla
+   * etkinleştirilmiş bilgisayar, kodu "bulunamadı" (404, düşme yok) yerine "bu cihaz kayıtlı değil" diye öğrensin. Hatada fırlatır.
+   */
+  findRetiredKeyOwner(key: string, product: Product): Promise<LicenseRow | null>;
   /**
    * E-postayla cihaz sıfırlama için tek kullanımlık belirteç kaydeder (YALNIZ SHA-256 özeti, dil de saklanır). Hiçbir şey yazmadan
    * false döner: (a) lisans için son `minIntervalMs` içinde belirteç üretildiyse (saatte 1), (b) son RESET_WINDOW_DAYS günde
@@ -283,7 +290,14 @@ export async function handleLicenseRequest(
   let until = 0;
   try {
     const found = await store.findLicense(key, product);
-    if (!found) return { status: 404, body: { error: "invalid_key" } };
+    if (!found) {
+      if (op === "status") {
+        // Sıfırlamada değiştirilmiş eski kod: lisans var ama bu kodla artık hiçbir cihaz kayıtlı değil (Yasin kararı K11 = a).
+        const owner = await store.findRetiredKeyOwner(key, product);
+        if (owner) return { status: 200, body: { status: owner.status, device_registered: false } };
+      }
+      return { status: 404, body: { error: "invalid_key" } };
+    }
     license = found;
 
     if (op === "deactivate") {
@@ -297,8 +311,9 @@ export async function handleLicenseRequest(
 
     if (op === "status") {
       // Salt okur durum sorgusu (AreaPilot süresiz belge; istemci 7 günde bir sorar). Belge üretmez, cihaz eklemez/güncellemez,
-      // süre uzatmaz. İstemci YALNIZ refunded/canceled/revoked yanıtında lisansı düşürür; başka her şeyde (ağ, 5xx, 404) çalışır.
-      return { status: 200, body: { status: license.status } };
+      // süre uzatmaz. İstemci YALNIZ refunded/canceled/revoked ya da device_registered=false yanıtında lisansı düşürür; başka her
+      // şeyde (ağ, 5xx, 404, bozuk yanıt) çalışır. device_registered eski istemcilerce yok sayılır (geriye uyumlu ek alan).
+      return { status: 200, body: { status: license.status, device_registered: await store.hasDevice(license.id, deviceId) } };
     }
 
     const entitled = entitlementUntil(license, now);

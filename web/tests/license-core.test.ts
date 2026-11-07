@@ -183,13 +183,14 @@ test("sözleşmedeki örnek belge (sahte genel anahtar) doğrulanır; süresi do
 // ---- uç nokta mantığı (sahte depo) ----
 
 interface FakeOpts {
-  failAt?: "find" | "register" | "touch" | "remove";
+  failAt?: "find" | "register" | "touch" | "remove" | "hasDevice" | "retired";
 }
 
 function fakeStore(rows: LicenseRow[], opts: FakeOpts = {}) {
   const devices = new Map<string, Set<string>>();
   const removals = new Map<string, number[]>();
   const resets = new Map<string, number[]>();
+  const retiredKeys = new Map<string, string>(); // eski kod -> lisans kimliği (sıfırlamada değiştirilen kodlar)
   const resetTokens = new Map<string, { licenseId: string; expires: number; created: number; used: boolean; lang: "tr" | "en" }>();
   const store: LicenseStore = {
     async findLicense(key: string, product: Product) {
@@ -223,6 +224,15 @@ function fakeStore(rows: LicenseRow[], opts: FakeOpts = {}) {
       devices.get(id)!.delete(dev);
       return "ok";
     },
+    async hasDevice(id, dev) {
+      if (opts.failAt === "hasDevice") throw new Error("db");
+      return devices.get(id)?.has(dev) ?? false;
+    },
+    async findRetiredKeyOwner(key, product) {
+      if (opts.failAt === "retired") throw new Error("db");
+      const id = retiredKeys.get(key);
+      return rows.find((r) => r.id === id && r.product === product) ?? null;
+    },
     async createResetToken(id, hash, expiresIso, nowIso, minIntervalMs, lang) {
       const now = Date.parse(nowIso);
       for (const t of resetTokens.values()) if (t.licenseId === id && t.created > now - minIntervalMs) return false;
@@ -242,12 +252,13 @@ function fakeStore(rows: LicenseRow[], opts: FakeOpts = {}) {
       if (recent.length >= RESET_LIMIT) return { result: "limit" };
       resets.set(t.licenseId, [...recent, now]);
       const lic = rows.find((r) => r.id === t.licenseId)!;
+      retiredKeys.set(lic.license_key, lic.id); // yalnız durum sorgusunda tanınır
       lic.license_key = newKey; // eski kod artık bulunamaz
       devices.set(t.licenseId, new Set());
       return { result: "ok", email: lic.email ?? null, lang: t.lang };
     },
   };
-  return { store, devices, resetTokens, resets };
+  return { store, devices, resetTokens, resets, retiredKeys };
 }
 
 const aplRow = row({ license_key: "APL-23456-789AB-CDEFG-HJKMN", max_devices: 1 });
@@ -288,15 +299,59 @@ test("durum sorgusu (salt okur): iade/iptal/askı durumunu açık söyler, belge
   const canceled = row({ license_key: "APL-44444-44444-44444-44444", id: "44444444-2222-4333-8444-555555555555", status: "canceled" });
   const revoked = row({ license_key: "APL-66666-66666-66666-66666", id: "66666666-2222-4333-8444-555555555555", status: "revoked" });
   const { store, devices } = fakeStore([aplRow, refunded, canceled, revoked]);
-  assert.deepEqual((await call("status", "areapilot", { key: aplRow.license_key, deviceId: DEV_A }, store)).body, { status: "active" });
+  // Cihaz bu lisansta kayıtlı değilken: status active ama device_registered=false (istemci bunu açık cevap sayıp düşer).
+  assert.deepEqual((await call("status", "areapilot", { key: aplRow.license_key, deviceId: DEV_A }, store)).body, { status: "active", device_registered: false });
   for (const r of [refunded, canceled, revoked]) {
     const res = await call("status", "areapilot", { key: r.license_key, deviceId: DEV_A }, store);
     assert.equal(res.status, 200);
-    assert.deepEqual(res.body, { status: r.status }, "belge/token yok, yalnız durum");
+    assert.deepEqual(res.body, { status: r.status, device_registered: false }, "belge/token yok, yalnız durum ve cihaz bilgisi");
   }
   assert.equal(devices.get(aplRow.id)?.size ?? 0, 0, "durum sorgusu cihaz kaydetmedi");
   assert.equal((await call("status", "areapilot", { key: "APL-33333-33333-33333-33333", deviceId: DEV_A }, store)).status, 404);
   assert.equal((await call("status", "areapilot", { key: aplRow.license_key }, store)).status, 400);
+});
+
+test("durum sorgusu: kayıtlı cihaz device_registered=true; kaldırılan cihaz false; sorgu cihaza dokunmaz", async () => {
+  const { store, devices } = fakeStore([aplRow]);
+  await call("activate", "areapilot", { key: aplRow.license_key, deviceId: DEV_A }, store);
+  const st = { key: aplRow.license_key, deviceId: DEV_A };
+  assert.deepEqual((await call("status", "areapilot", st, store)).body, { status: "active", device_registered: true });
+  assert.deepEqual((await call("status", "areapilot", { ...st, deviceId: DEV_B.toUpperCase() }, store)).body, { status: "active", device_registered: false }, "başka cihaz kayıtlı değil");
+  assert.equal(devices.get(aplRow.id)?.size, 1, "durum sorgusu cihaz eklemedi/silmedi");
+  await call("deactivate", "areapilot", st, store);
+  assert.deepEqual((await call("status", "areapilot", st, store)).body, { status: "active", device_registered: false }, "kaldırılan cihaz");
+});
+
+test("durum sorgusu (K11): sıfırlamada değiştirilen eski kod 404 değil {active, device_registered:false}; yeni kod kayıtsız cihazı false söyler; eski kod yalnız durumda tanınır", async () => {
+  const fresh = row({ id: "77777777-2222-4333-8444-555555555555", license_key: "APL-77777-77777-77777-77777", max_devices: 5, email: "x@example.com" });
+  const { store, resetTokens, retiredKeys } = fakeStore([fresh]);
+  const oldKey = fresh.license_key;
+  await call("activate", "areapilot", { key: oldKey, deviceId: DEV_A }, store);
+  assert.deepEqual((await call("status", "areapilot", { key: oldKey, deviceId: DEV_A }, store)).body, { status: "active", device_registered: true });
+  // Sıfırlama: kod değişir, cihazlar silinir (sahte depoda doğrudan).
+  const newKey = "APL-99999-99999-99999-99999";
+  resetTokens.set("h", { licenseId: fresh.id, expires: NOW + 60_000, created: NOW, used: false, lang: "tr" });
+  assert.equal((await store.consumeResetToken("h", new Date(NOW).toISOString(), newKey)).result, "ok");
+  assert.equal(retiredKeys.get(oldKey), fresh.id);
+  const old = await call("status", "areapilot", { key: oldKey, deviceId: DEV_A }, store);
+  assert.deepEqual(old, { status: 200, body: { status: "active", device_registered: false } });
+  assert.deepEqual((await call("status", "areapilot", { key: newKey, deviceId: DEV_A }, store)).body, { status: "active", device_registered: false }, "yeni kodla henüz etkinleştirilmemiş cihaz");
+  // Eski kod başka hiçbir işlemde tanınmaz.
+  for (const op of ["activate", "renew", "deactivate"] as const) {
+    assert.deepEqual(await call(op, "areapilot", { key: oldKey, deviceId: DEV_A }, store), { status: 404, body: { error: "invalid_key" } }, op);
+  }
+  // Bilinmeyen kod hâlâ 404 (istemci düşmez); başka ürünün ucunda eski AreaPilot kodu tanınmaz.
+  assert.equal((await call("status", "areapilot", { key: "APL-33333-33333-33333-33333", deviceId: DEV_A }, store)).status, 404);
+  assert.equal((await call("status", "syncpass_desktop", { key: oldKey, deviceId: DEV_A }, store)).status, 404);
+});
+
+test("durum sorgusu: depo hatasında 500 server_error (ne 200 ne 404; istemci 5xx'te düşmez)", async () => {
+  for (const failAt of ["hasDevice", "retired", "find"] as const) {
+    const { store } = fakeStore([aplRow], { failAt });
+    const key = failAt === "retired" ? "APL-33333-33333-33333-33333" : aplRow.license_key;
+    const r = await call("status", "areapilot", { key, deviceId: DEV_A }, store);
+    assert.deepEqual(r, { status: 500, body: { error: "server_error" } }, failAt);
+  }
 });
 
 test("etkinleştirme: SyncPass yanıt biçimi değişmedi ({token, plan, expiresAt})", async () => {
