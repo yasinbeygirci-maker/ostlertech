@@ -162,11 +162,11 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     faq: [
       {
         q: "AreaPilot ücretli mi?",
-        a: "Evet, tek seferlik lisanslı bir üründür. İndirdikten sonra ilk açılıştan itibaren 7 gün tüm özellikler ücretsiz açıktır; ödeme bilgisi istemeyiz. Deneme bitince AreaPilot kilitlenmez, ücretsiz modda her çalıştırmada en çok 15 alanı işler. Sınırsız kullanım için lisans satın alınır; fiyatlar ve koşullar satış açıkken bu sayfadaki satın alma bölümünde görünür.",
+        a: "Evet, tek seferlik lisanslı bir üründür. İndirdikten sonra ilk açılıştan itibaren 7 gün tüm özellikler ücretsiz açıktır; ödeme bilgisi istemeyiz. Deneme bitince AreaPilot kilitlenmez, ücretsiz modda her çalıştırmada en çok 15 alanı işler. Sınırsız kullanım için lisans satın alınır; fiyatlar ve koşullar bu sayfadaki Fiyatlar bölümünde.",
       },
       {
         q: "Çizimlerim nereye gidiyor?",
-        a: "Hiçbir yere. AreaPilot çizimini senin bilgisayarında işler, çizim bilgisayarından çıkmaz. İnternete yalnızca yeni sürüm var mı diye bakmak için çıkar: ostlertech.com'daki sürüm dosyasını okur; bu istekle kimlik, çizim ya da kişisel bilgi gönderilmez (her internet isteğinde olduğu gibi IP adresin sunucuya görünür). Bir hata olursa rapor bilgisayarına kaydedilir, otomatik gönderilmez ve 30 gün sonra silinir; raporu bize sen göndermeye karar verirsin. Raporda çiziminin içeriği yoktur.",
+        a: "Çizimin bilgisayarından çıkmaz. AreaPilot çizimini senin bilgisayarında işler; çizim, sonuçların ve kullanıcı adın bize gönderilmez, kullanım ölçümü ya da analitik yoktur. Yeni sürüm var mı diye bakmak için ostlertech.com'daki sürüm dosyasını okur; bu istekte çizim ya da lisans bilgisi yoktur. Lisans kodu girersen sunucumuza bağlanır: etkinleştirmede lisans kodu, rastgele cihaz numarası ve uygulama sürümü gider; ayrıca AreaPilot çalışırken bilgisayar internete bağlıysa yaklaşık haftada bir lisans durum sorgusu yapılır (yalnız lisans kodu ve cihaz numarası gider). Deneme ve ücretsiz modda lisans için internete çıkılmaz. Her internet isteğinde olduğu gibi IP adresin sunucuya görünür. Bir hata olursa rapor bilgisayarına kaydedilir, otomatik gönderilmez ve 30 gün sonra silinir; raporu bize sen göndermeye karar verirsin. Raporda çiziminin içeriği yoktur.",
       },
       {
         q: "Hangi AutoCAD sürümlerinde çalışır?",
@@ -191,7 +191,8 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     appPrivacyTitle: "AreaPilot ve verileriniz",
     appPrivacy: [
       "Çizimleriniz bilgisayarınızdan çıkmaz. AreaPilot alan ölçümünü AutoCAD içinde, bilgisayarınızda yapar. Excel çıktıları yalnız sizin seçtiğiniz klasöre kaydedilir.",
-      "Güncelleme kontrolü: AutoCAD'de AreaPilot penceresi her oturumda ilk açıldığında, uygulama ostlertech.com'daki sürüm dosyasını okur. Bu istekte çizim, kullanıcı adı ya da kimlik bilgisi gönderilmez; sitemizin barındırıldığı sunucu (Vercel, ABD) isteğin geldiği IP adresini kısa süreli sunucu kayıtlarında tutar. İnternet yoksa kontrol atlanır. Yeni sürüm varsa size sorulur; \"Evet\" derseniz tarayıcınızda indirme sayfası açılır.",
+      "Güncelleme kontrolü: AutoCAD'de AreaPilot penceresi her oturumda ilk açıldığında, uygulama ostlertech.com'daki sürüm dosyasını okur. Bu istekte çizim, kullanıcı adı ya da lisans bilgisi gönderilmez; sitemizin barındırıldığı sunucu (Vercel, ABD) isteğin geldiği IP adresini kısa süreli sunucu kayıtlarında tutar. İnternet yoksa kontrol atlanır. Yeni sürüm varsa size sorulur; \"Evet\" derseniz tarayıcınızda indirme sayfası açılır.",
+      "Lisans işlemleri: yalnız lisans kodu girdiyseniz AreaPilot ostlertech.com'a bağlanır; kodu etkinleştirdiğinizde (lisans kodu, rastgele cihaz numarası ve uygulama sürümü gider), \"Bu bilgisayardan kaldır\"a bastığınızda, \"Cihazlarımı sıfırla (e-posta)\" dediğinizde ve AreaPilot çalışırken bilgisayar internete bağlıysa yaklaşık 7 günde bir lisans durum sorgusu için (yalnız lisans kodu ve cihaz numarası gider). Çiziminiz, kullanıcı adınız ve bilgisayar adınız gönderilmez. Durum sorgusu yapılamazsa lisansınız çalışmaya devam eder. Deneme ve ücretsiz modda lisans için internete çıkılmaz.",
       "Hata raporları yalnız bilgisayarınızda: beklenmeyen bir hata olursa ayrıntısı %LOCALAPPDATA%\\OstlerTech\\AreaPilot\\hatalar klasörüne yazılır ve 30 günden eski raporlar silinir. Rapor hiçbir yere kendiliğinden gönderilmez. Uygulama size raporu panoya kopyalamayı önerir; bize göndermek isterseniz e-postaya yapıştırırsınız. Rapora çizim içeriği yazılmaz ve kullanıcı klasörünüzün yolu gizlenir. Ancak hata mesajı dosya ya da katman adı içeriyorsa raporda görünebilir; göndermeden önce göz atabilirsiniz.",
       "Ayarlar ve deneme süresi: dil, tema ve ölçüm ayarlarınız Windows kayıt defterinde (HKEY_CURRENT_USER\\Software\\OstlerTech\\SpaceCalc) tutulur ve kaldırınca silinir. Deneme süresinin başlangıç tarihi HKEY_CURRENT_USER\\Software\\OstlerTech\\AreaPilot\\Deneme anahtarında ve %LOCALAPPDATA%\\OstlerTech\\AreaPilot\\deneme.txt dosyasında tutulur; kaldırıp yeniden kurunca süre baştan başlamasın diye kaldırmada silinmez. Dilerseniz bu dosyayı ve HKEY_CURRENT_USER\\Software\\OstlerTech\\AreaPilot anahtarını elle silebilirsiniz.",
       "Reklam, analitik ya da kullanım ölçümü yoktur.",
@@ -234,7 +235,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       { h: "Builds boundaries from open lines", p: "Click inside an area, take every area in a region, or turn the regions closed by the lines you select into boundaries in the drawing. Outline closes small gaps at the corners by extending the lines (arcs along their own direction) and produces one closed boundary." },
       {
         h: "Writes results to the drawing and to Excel",
-        p: "Area labels and a table go into the drawing; the list and totals are saved as an .xlsx file, or copied as CSV, text or to the clipboard. On the Fabrication tab you can group panels by fabrication date, colour them in the drawing and export a separate fabrication list.",
+        p: "Area labels and a table go into the drawing; the list and totals are saved as an .xlsx file, or copied as CSV, text or to the clipboard. On the Fabrication tab you can group panels by fabrication date, color them in the drawing and export a separate fabrication list.",
       },
     ],
     languages: "The interface is available in 10 languages: English, Türkçe, Deutsch, Français, Español, Italiano, Português, Русский, 日本語, 简体中文.",
@@ -254,7 +255,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     ],
     betaTitle: "Before you try it, plainly",
     betaIntro:
-      "AreaPilot is used every day on real façade drawings, but that use is in AutoCAD 2021. The add-in is built for AutoCAD 2013-2027; versions other than 2021 have not been tested yet. If you use another version, try it first with the 7-day full trial; telling us whether it works is also very useful.",
+      "AreaPilot is used every day on real facade drawings, but that use is in AutoCAD 2021. The add-in is built for AutoCAD 2013-2027; versions other than 2021 have not been tested yet. If you use another version, try it first with the 7-day full trial; telling us whether it works is also very useful.",
     betaItems: [
       {
         h: "Trial:",
@@ -268,7 +269,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     warns: [
       {
         h: "1. Windows: \"Windows protected your PC\"",
-        p: "Windows stops the installer because it does not recognise the publisher. Click More info → Run anyway. Only download the file from the link we give you on this page; do not run a copy from anywhere else.",
+        p: "Windows stops the installer because it does not recognize the publisher. Click More info → Run anyway. Only download the file from the link we give you on this page; do not run a copy from anywhere else.",
       },
       {
         h: "2. AutoCAD: \"Security – Unsigned Executable File\"",
@@ -305,10 +306,10 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     },
     faqTitle: "FAQ",
     faq: [
-      { q: "Is AreaPilot paid?", a: "Yes, it is a one-time licensed product. After you download it, all features are free for 7 days from first launch and we do not ask for payment details. When the trial ends AreaPilot does not lock; in free mode it processes up to 15 areas per run. A license removes the limit; prices and terms appear in the purchase section on this page while sales are open." },
+      { q: "Is AreaPilot paid?", a: "Yes, it is a one-time licensed product. After you download it, all features are free for 7 days from first launch and we do not ask for payment details. When the trial ends AreaPilot does not lock; in free mode it processes up to 15 areas per run. A license removes the limit; prices and terms are in the Pricing section on this page." },
       {
         q: "Where do my drawings go?",
-        a: "Nowhere. AreaPilot processes your drawing on your computer; the drawing never leaves it. The only time it goes online is to check for a new version: it reads the version file on ostlertech.com, and no identity, drawing or personal information is sent with that request (as with any internet request, the server sees your IP address). If an error occurs, the report is saved on your computer, is never sent automatically and is deleted after 30 days; you decide whether to send it to us. The report does not contain your drawing.",
+        a: "Your drawing never leaves your computer. AreaPilot processes it on your computer; your drawing, your results and your user name are not sent to us, and there is no analytics or usage tracking. To check for a new version it reads the version file on ostlertech.com; no drawing or license information is sent with that request. If you enter a license key it connects to our server: activation sends the license key, a random device number and the application version; and while AreaPilot is running and the computer is online, about once a week it makes a license status check (only the license key and the device number are sent). In the trial and free mode nothing is sent for the license. As with any internet request, our server sees your IP address. If an error occurs, the report is saved on your computer, is never sent automatically and is deleted after 30 days; you decide whether to send it to us. The report does not contain your drawing.",
       },
       {
         q: "Which AutoCAD versions does it work with?",
@@ -333,7 +334,8 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     appPrivacyTitle: "AreaPilot and your data",
     appPrivacy: [
       "Your drawings never leave your computer. AreaPilot measures areas inside AutoCAD on your computer. Excel exports are saved only to the folder you choose.",
-      "Update check: the first time the AreaPilot window opens in each AutoCAD session, the app reads a version file on ostlertech.com. No drawing, user name or identifier is sent; the server hosting our site (Vercel, USA) keeps the requesting IP address in short-lived server logs. Without internet the check is skipped. If a new version exists you are asked; if you choose \"Yes\", the download page opens in your browser.",
+      "Update check: the first time the AreaPilot window opens in each AutoCAD session, the app reads a version file on ostlertech.com. No drawing, user name or license information is sent; the server hosting our site (Vercel, USA) keeps the requesting IP address in short-lived server logs. Without internet the check is skipped. If a new version exists you are asked; if you choose \"Yes\", the download page opens in your browser.",
+      "License operations: only if you entered a license key, AreaPilot connects to ostlertech.com when you activate it (the license key, a random device number and the application version are sent), when you press \"Remove from this computer\", when you choose \"Reset my devices (email)\" and, while AreaPilot is running and the computer is online, about every 7 days for a license status check (only the license key and the device number are sent). Your drawing, user name and computer name are not sent. If the status check cannot be made, your license keeps working. In the trial and free mode nothing is sent for the license.",
       "Error reports stay on your computer: if an unexpected error occurs, details are written to %LOCALAPPDATA%\\OstlerTech\\AreaPilot\\hatalar and reports older than 30 days are deleted. Nothing is sent automatically. The app offers to copy the report to the clipboard; if you want to send it to us, paste it into an email. Drawing content is not written and your user folder path is hidden, but an error message may contain a file or layer name, so please look before sending.",
       "Settings and trial: language, theme and measurement settings are stored in the Windows registry (HKEY_CURRENT_USER\\Software\\OstlerTech\\SpaceCalc) and removed when you uninstall. The trial start date is stored in the HKEY_CURRENT_USER\\Software\\OstlerTech\\AreaPilot\\Deneme key and in %LOCALAPPDATA%\\OstlerTech\\AreaPilot\\deneme.txt; it is kept after uninstalling so the trial does not restart. You can delete that file and the HKEY_CURRENT_USER\\Software\\OstlerTech\\AreaPilot key by hand.",
       "No ads, analytics or usage tracking.",
