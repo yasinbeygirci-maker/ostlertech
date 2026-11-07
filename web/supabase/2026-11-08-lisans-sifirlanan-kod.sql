@@ -3,7 +3,7 @@
 -- "lisans var ama bu cihaz kayıtlı değil" diye öğrensin ve ücretsiz moda geçsin. Eski kod yalnız durum sorgusunda tanınır;
 -- etkinleştirme, yenileme ve kaldırmada eskisi gibi 404 invalid_key kalır (eski kod işe yaramaz).
 -- UYGULANMADI. Yasin onayıyla Supabase SQL editöründe çalıştırılır. Önce 2026-11-06-lisans-urun.sql uygulanmış olmalı.
--- Yerel Postgres olmadığı için çalıştırılarak SINANMADI; uygulamadan önce hazırlık projesinde şu iki adım denenmeli:
+-- PGlite'ta sınandı (Burak 2026-11-07, ikinci tur); gerçek Supabase'te sınanmadı. Canlıda uyguladıktan sonra şu iki adım denenmeli:
 --   (1) sıfırlama sonrası: select count(*) from sp_license_retired_keys;  -> 1
 --   (2) aynı lisansı ikinci kez sıfırla: iki satır, eski kodların özeti birbirinden farklı.
 -- SIRA: (1) bu migrasyon, (2) site dağıtımı (durum ucu), (3) istemci 1.0. KOD bu migrasyondan ÖNCE dağıtılırsa sp_license_retired_keys
