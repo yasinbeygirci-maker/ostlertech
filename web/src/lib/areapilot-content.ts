@@ -1,4 +1,4 @@
-// AreaPilot açık beta sayfasının metni (TR + EN).
+// AreaPilot 1.0 sayfasının metni (TR + EN). Satış bölümü ayrı (AreaPilotPricing), bayrak açılınca kendiliğinden çizilir.
 // Kaynak: Deniz, pazarlama/2026-10-23-areapilot-beta-sayfa.md; hukuk düzeni Zeynep, hukuk/2026-10-23-areapilot-beta-gizlilik.md
 // (Bağlantı hemen sayfada; 2026-10-31 T4-B: duyuru e-postası için AYRI, işaretsiz onay kutusu var, beta bağlantısı ona bağlı değil). Sürüm ve son gün AREAPILOT sabitinden gelir. Hitap: sayfada "sen", yasal metinde "siz".
 import { AREAPILOT } from "./areapilot";
@@ -30,6 +30,9 @@ export interface AreaPilotCopy {
   warnIntro: string;
   warns: { h: string; p: string }[];
   disclaimer: string;
+  shaTitle: string;
+  shaNote: string;
+  shaHead: [string, string, string];
   form: {
     title: string;
     sub: string;
@@ -68,10 +71,10 @@ export interface AreaPilotCopy {
 
 export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
   tr: {
-    title: "AreaPilot: AutoCAD için alan ve metraj eklentisi (açık beta)",
+    title: "AreaPilot: AutoCAD için alan ve metraj eklentisi",
     description:
-      "Çizimdeki kapalı alanları bulur, kodlarını yanındaki yazıdan okur, alan ve çevreyi toplar ve Excel'e aktarır. AutoCAD 2013-2027, Windows. Açık beta, 30 gün.",
-    badge: `Açık beta · Sürüm ${A.version}`,
+      "Çizimdeki kapalı alanları bulur, kodlarını yanındaki yazıdan okur, alan ve çevreyi toplar ve Excel'e aktarır. AutoCAD 2013-2027, Windows. 7 gün ücretsiz deneme, ardından ücretsiz modda 15 alana kadar.",
+    badge: `Sürüm ${A.version}`,
     h1: "Bu cephede kaç m² cam var?",
     lead: "AreaPilot, AutoCAD çizimindeki kapalı alanları bulur, kodlarını yanındaki yazıdan okur, alan ve çevreyi toplar ve Excel'e aktarır.",
     sub: "Cam, cephe paneli, oda: alanları tek tek ölçüp hesap makinesinde toplaman gerekmez.",
@@ -104,13 +107,13 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       "AutoCAD LT ile çalışmaz.",
       "Excel'in kurulu olması gerekmez; dosyayı AreaPilot kendisi oluşturur.",
     ],
-    betaTitle: "Beta hakkında, açıkça",
+    betaTitle: "Denemeden önce, açıkça",
     betaIntro:
-      "Bu bir beta sürümü. AreaPilot her gün gerçek cephe çizimlerinde kullanılıyor, ama bu kullanım AutoCAD 2021'de. Eklenti AutoCAD 2013-2027 için derlendi; 2021 dışındaki sürümlerde henüz denenmedi. Başka bir sürüm kullanıyorsan çalışıp çalışmadığını bize yazman en büyük yardım olur.",
+      "AreaPilot her gün gerçek cephe çizimlerinde kullanılıyor, ama bu kullanım AutoCAD 2021'de. Eklenti AutoCAD 2013-2027 için derlendi; 2021 dışındaki sürümlerde henüz denenmedi. Başka bir sürüm kullanıyorsan önce 7 günlük tam denemeyle kendi sürümünde dene; çalışıp çalışmadığını bize yazman da büyük yardım olur.",
     betaItems: [
       {
         h: "Deneme süresi:",
-        p: `ilk açılıştan itibaren ${A.trialDays} gün. Bu sürüm en geç ${A.trialHardEndTr} tarihine kadar çalışır. Kalan gün pencerenin üst bandında görünür. Süre bitince komutlar çalışmaz; yeni sürüm çıktığında AreaPilot pencereyi açtığında haber verir.`,
+        p: `ilk açılıştan itibaren ${A.trialDays} gün, tüm özellikler açık. Kalan gün pencerenin üst bandında görünür. Süre bitince komutlar kapanmaz, AreaPilot ücretsiz moda geçer: her çalıştırmada en çok ${A.freeLimit} alan işlenir. Lisans kodu girince bu sınır kalkar.`,
       },
       { h: "Çizimin kopyasında dene.", p: "\"Kopyaları sil (OVERKILL)\" ve \"Kullanılmayanları temizle (PURGE)\" çizimi değiştirir. İkisi de _U ile geri alınır, ama yine de kopya üzerinde çalış." },
       { h: "Bir hata olursa", p: "AutoCAD çalışmaya devam eder, hata raporu bilgisayarına kaydedilir. Raporu sen göndermedikçe bize hiçbir şey gelmez." },
@@ -127,11 +130,14 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
         p: "AREAPILOT komutunu ilk yazdığında AutoCAD bu pencereyi açar (İngilizce AutoCAD'de: Security – Unsigned Executable File). Her zaman yükle (Always Load) seç. AutoCAD bir daha sormaz.",
       },
     ],
+    shaTitle: "İndirdiğin dosyayı doğrula",
+    shaNote: "İndirdiğin kurulum dosyasının karması aşağıdakiyle aynı olmalı. PowerShell'de: Get-FileHash \"AreaPilot-Kurulum.exe\" -Algorithm SHA256",
+    shaHead: ["Sürüm", "Yayın tarihi", "SHA-256"],
     disclaimer:
-      "AreaPilot beta sürümüdür ve ücretsiz, \"olduğu gibi\" sunulur. Hesaplanan alan ve miktarları kullanmadan önce kendi çiziminizle kontrol edin; beta sürecinde hatalar olabilir. Kanunen sınırlandırılamayan sorumluluklar saklıdır.",
+      "AreaPilot \"olduğu gibi\" sunulur. Hesaplanan alan ve miktarları kullanmadan önce kendi çiziminizle kontrol edin; hatalar olabilir. Kanunen sınırlandırılamayan sorumluluklar saklıdır.",
     form: {
-      title: "Beta'yı indir",
-      sub: "E-posta adresini bırak, indirme bağlantısı hemen burada açılsın.",
+      title: "AreaPilot'u indir ve dene",
+      sub: "E-posta adresini bırak, indirme bağlantısı hemen burada açılsın. İlk açılıştan itibaren 7 gün tüm özellikler açık.",
       email: "E-posta adresin",
       emailPh: "ad@firma.com",
       acad: "Hangi AutoCAD'i kullanıyorsun? (isteğe bağlı)",
@@ -140,8 +146,8 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       button: "İndirme bağlantısını al",
       sending: "Gönderiliyor…",
       notice:
-        "E-postanızı AreaPilot beta indirme bağlantısını vermek ve beta ile ilgili önemli bildirimler (kritik düzeltme, beta bitişi) için kullanırız. Aşağıdaki kutuyu işaretlemediğiniz sürece reklam ya da duyuru göndermeyiz. Ayrıntılar:",
-      noticeLink: "AreaPilot beta aydınlatma metni",
+        "E-postanızı AreaPilot indirme bağlantısını vermek ve deneme sürümüyle ilgili önemli bildirimler (kritik düzeltme, deneme süresinin bitişi) için kullanırız. Aşağıdaki kutuyu işaretlemediğiniz sürece reklam ya da duyuru göndermeyiz. Ayrıntılar:",
+      noticeLink: "AreaPilot aydınlatma metni",
       marketing: "OstlerTech'in yeni ürün ve kampanya duyurularını e-postayla almak istiyorum (dilediğin zaman e-postadaki bağlantıdan çıkabilirsin).",
       successTitle: "İndirme bağlantın hazır.",
       successNote: "Kurulum dosyası ve rehberler GitHub üzerindeki sürüm sayfamızdan iner. Kurulumda iki uyarı göreceksin; ne yapacağın aşağıda yazıyor.",
@@ -156,7 +162,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     faq: [
       {
         q: "AreaPilot ücretli mi?",
-        a: "Beta ücretsiz; ödeme bilgisi istemiyoruz. Satış henüz açılmadı. Satış açıldığında bunu sitede ve uygulamanın içinde duyururuz.",
+        a: "Evet, tek seferlik lisanslı bir üründür. İndirdikten sonra ilk açılıştan itibaren 7 gün tüm özellikler ücretsiz açıktır; ödeme bilgisi istemeyiz. Deneme bitince AreaPilot kilitlenmez, ücretsiz modda her çalıştırmada en çok 15 alanı işler. Sınırsız kullanım için lisans satın alınır; fiyatlar ve koşullar satış açıkken bu sayfadaki satın alma bölümünde görünür.",
       },
       {
         q: "Çizimlerim nereye gidiyor?",
@@ -164,7 +170,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       },
       {
         q: "Hangi AutoCAD sürümlerinde çalışır?",
-        a: "AutoCAD 2013-2027 (64 bit) için hazırlandı. Günlük kullanımda denendiği sürüm AutoCAD 2021; diğer sürümler beta kapsamında, henüz denenmedi. Senin sürümünde nasıl çalıştığını yazarsan listeyi buna göre güncelleriz.",
+        a: "AutoCAD 2013-2027 (64 bit) için hazırlandı. Günlük kullanımda denendiği sürüm AutoCAD 2021; diğer sürümlerde henüz denenmedi. Satın almadan önce 7 günlük tam denemeyle kendi sürümünde dene; nasıl çalıştığını yazarsan listeyi buna göre güncelleriz.",
       },
       { q: "AutoCAD LT'de çalışır mı?", a: "Hayır. AreaPilot, AutoCAD'in .NET eklenti altyapısını kullanır; AutoCAD LT bu tür eklentileri yüklemez." },
       {
@@ -187,21 +193,21 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       "Çizimleriniz bilgisayarınızdan çıkmaz. AreaPilot alan ölçümünü AutoCAD içinde, bilgisayarınızda yapar. Excel çıktıları yalnız sizin seçtiğiniz klasöre kaydedilir.",
       "Güncelleme kontrolü: AutoCAD'de AreaPilot penceresi her oturumda ilk açıldığında, uygulama ostlertech.com'daki sürüm dosyasını okur. Bu istekte çizim, kullanıcı adı ya da kimlik bilgisi gönderilmez; sitemizin barındırıldığı sunucu (Vercel, ABD) isteğin geldiği IP adresini kısa süreli sunucu kayıtlarında tutar. İnternet yoksa kontrol atlanır. Yeni sürüm varsa size sorulur; \"Evet\" derseniz tarayıcınızda indirme sayfası açılır.",
       "Hata raporları yalnız bilgisayarınızda: beklenmeyen bir hata olursa ayrıntısı %LOCALAPPDATA%\\OstlerTech\\AreaPilot\\hatalar klasörüne yazılır ve 30 günden eski raporlar silinir. Rapor hiçbir yere kendiliğinden gönderilmez. Uygulama size raporu panoya kopyalamayı önerir; bize göndermek isterseniz e-postaya yapıştırırsınız. Rapora çizim içeriği yazılmaz ve kullanıcı klasörünüzün yolu gizlenir. Ancak hata mesajı dosya ya da katman adı içeriyorsa raporda görünebilir; göndermeden önce göz atabilirsiniz.",
-      "Ayarlar ve deneme süresi: dil, tema ve ölçüm ayarlarınız Windows kayıt defterinde (HKEY_CURRENT_USER\\Software\\OstlerTech\\SpaceCalc) tutulur ve kaldırınca silinir. Beta deneme süresinin başlangıç tarihi HKEY_CURRENT_USER\\Software\\OstlerTech\\AreaPilot\\Deneme anahtarında ve %LOCALAPPDATA%\\OstlerTech\\AreaPilot\\deneme.txt dosyasında tutulur; kaldırıp yeniden kurunca süre baştan başlamasın diye kaldırmada silinmez. Dilerseniz bu dosyayı ve HKEY_CURRENT_USER\\Software\\OstlerTech\\AreaPilot anahtarını elle silebilirsiniz.",
+      "Ayarlar ve deneme süresi: dil, tema ve ölçüm ayarlarınız Windows kayıt defterinde (HKEY_CURRENT_USER\\Software\\OstlerTech\\SpaceCalc) tutulur ve kaldırınca silinir. Deneme süresinin başlangıç tarihi HKEY_CURRENT_USER\\Software\\OstlerTech\\AreaPilot\\Deneme anahtarında ve %LOCALAPPDATA%\\OstlerTech\\AreaPilot\\deneme.txt dosyasında tutulur; kaldırıp yeniden kurunca süre baştan başlamasın diye kaldırmada silinmez. Dilerseniz bu dosyayı ve HKEY_CURRENT_USER\\Software\\OstlerTech\\AreaPilot anahtarını elle silebilirsiniz.",
       "Reklam, analitik ya da kullanım ölçümü yoktur.",
     ],
-    noticeTitle: "AreaPilot açık beta: kişisel verilerin işlenmesi",
+    noticeTitle: "AreaPilot indirme ve deneme: kişisel verilerin işlenmesi",
     notice: [
       {
         h: "Hangi veri, neden:",
-        p: "Beta formuna yazdığınız e-posta adresi, isteğe bağlı olarak seçtiğiniz AutoCAD sürümü ve kaydın tarihi. Amaç: indirme bağlantısını vermek ve beta sürümüyle ilgili önemli bildirimleri (kritik hata düzeltmesi, beta süresinin bitişi, koşul değişikliği) göndermek. Bu bildirimler tanıtım içermez. Yeni ürün ya da kampanya duyurusunu yalnızca formdaki ayrı kutuyu işaretleyenlere e-postayla göndeririz; kutuyu işaretlemezseniz beta bağlantısını yine alırsınız ve duyuru e-postası almazsınız.",
+        p: "İndirme formuna yazdığınız e-posta adresi, isteğe bağlı olarak seçtiğiniz AutoCAD sürümü ve kaydın tarihi. Amaç: indirme bağlantısını vermek ve deneme sürümüyle ilgili önemli bildirimleri (kritik hata düzeltmesi, deneme süresinin bitişi, koşul değişikliği) göndermek. Bu bildirimler tanıtım içermez. Yeni ürün ya da kampanya duyurusunu yalnızca formdaki ayrı kutuyu işaretleyenlere e-postayla göndeririz; kutuyu işaretlemezseniz indirme bağlantısını yine alırsınız ve duyuru e-postası almazsınız.",
       },
-      { h: "Hukuki sebep:", p: "Beta bağlantısı ve beta bildirimleri için: beta kullanımına ilişkin ilişkinin kurulması ve ifası (KVKK md. 5/2-c) ve bildirimlerin yapılmasındaki meşru menfaatimiz (md. 5/2-f). Yeni ürün ve kampanya duyuruları için: yalnızca ayrı kutuyu işaretlemeniz halinde açık rızanız (md. 5/1); rızanızı dilediğiniz zaman e-postadaki bağlantıdan geri alabilirsiniz." },
+      { h: "Hukuki sebep:", p: "İndirme bağlantısı ve deneme bildirimleri için: deneme kullanımına ilişkin ilişkinin kurulması ve ifası (KVKK md. 5/2-c) ve bildirimlerin yapılmasındaki meşru menfaatimiz (md. 5/2-f). Yeni ürün ve kampanya duyuruları için: yalnızca ayrı kutuyu işaretlemeniz halinde açık rızanız (md. 5/1); rızanızı dilediğiniz zaman e-postadaki bağlantıdan geri alabilirsiniz." },
       {
         h: "Aktarım:",
         p: "E-postanız Supabase Pte. Ltd.'nin (Singapur şirketi) İrlanda'daki sunucularında saklanır; site Vercel Inc. (ABD) üzerinde çalışır ve formu gönderdiğinizde IP adresiniz bu sağlayıcılara ulaşır. Bu sağlayıcıların sunucuları yurt dışındadır; onlarla KVKK md. 9 uyarınca Kurul'un ilan ettiği standart sözleşmeleri imzalama sürecini yürütüyoruz. Verinizi satmayız, reklam için paylaşmayız.",
       },
-      { h: "Saklama:", p: "Beta sona erdikten 6 ay sonra ya da siz daha önce isterseniz silinir; silme kaydı tutulur." },
+      { h: "Saklama:", p: "Deneme süresinin bitişinden 6 ay sonra ya da siz daha önce isterseniz silinir; silme kaydı tutulur." },
       {
         h: "Haklarınız (KVKK md. 11):",
         p: "verinizin işlenip işlenmediğini öğrenme, bilgi isteme, düzeltme, silme, itiraz ve zararın giderilmesini isteme. Başvuru: destek@ostlertech.com ya da KEP; en geç 30 gün içinde yanıt. Kişisel Verileri Koruma Kurulu'na şikâyet hakkınız saklıdır.",
@@ -210,10 +216,10 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     trademark: "AutoCAD, Autodesk, Inc.'in tescilli markasıdır. AreaPilot, Autodesk ile bağlantılı değildir.",
   },
   en: {
-    title: "AreaPilot: area takeoff add-in for AutoCAD (open beta)",
+    title: "AreaPilot: area takeoff add-in for AutoCAD",
     description:
-      "Finds closed areas in your drawing, reads their codes from nearby text, totals m² and exports to Excel. AutoCAD 2013-2027, Windows. Open beta, 30 days.",
-    badge: `Open beta · Version ${A.version}`,
+      "Finds closed areas in your drawing, reads their codes from nearby text, totals m² and exports to Excel. AutoCAD 2013-2027, Windows. 7-day free trial, then free mode with up to 15 areas per run.",
+    badge: `Version ${A.version}`,
     h1: "How many m² of glass are on this façade?",
     lead: "AreaPilot finds the closed areas in your AutoCAD drawing, reads their codes from the text next to them, totals the m² and exports it to Excel.",
     sub: "Glazing, curtain wall panels, rooms: no more measuring each area and adding it up on a calculator.",
@@ -246,13 +252,13 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       "Does not work with AutoCAD LT.",
       "Excel does not need to be installed; AreaPilot creates the file itself.",
     ],
-    betaTitle: "About this beta, plainly",
+    betaTitle: "Before you try it, plainly",
     betaIntro:
-      "This is a beta. AreaPilot is used every day on real façade drawings, but that use is in AutoCAD 2021. The add-in is built for AutoCAD 2013-2027; versions other than 2021 have not been tested yet. If you use another version, telling us whether it works is the most useful thing you can do.",
+      "AreaPilot is used every day on real façade drawings, but that use is in AutoCAD 2021. The add-in is built for AutoCAD 2013-2027; versions other than 2021 have not been tested yet. If you use another version, try it first with the 7-day full trial; telling us whether it works is also very useful.",
     betaItems: [
       {
         h: "Trial:",
-        p: `${A.trialDays} days from first launch. This build runs until ${A.trialHardEndEn} at the latest. The days left are shown in the top band of the window. When the trial ends the commands stop working; when a new version is out, AreaPilot tells you when you open its window.`,
+        p: `${A.trialDays} days from first launch, all features unlocked. The days left are shown in the top band of the window. When the trial ends the commands stay available and AreaPilot switches to free mode: up to ${A.freeLimit} areas are processed per run. Entering a license code removes that limit.`,
       },
       { h: "Work on a copy of your drawing.", p: "\"Delete duplicates (OVERKILL)\" and \"Purge unused (PURGE)\" change the drawing. Both can be undone with _U, but use a copy anyway." },
       { h: "If something goes wrong,", p: "AutoCAD keeps running and an error report is saved on your computer. Nothing reaches us unless you send it." },
@@ -269,11 +275,14 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
         p: "The first time you type AREAPILOT, AutoCAD shows this window. Choose Always Load. AutoCAD will not ask again.",
       },
     ],
+    shaTitle: "Verify your download",
+    shaNote: "The hash of the installer you downloaded must match the one below. In PowerShell: Get-FileHash \"AreaPilot-Kurulum.exe\" -Algorithm SHA256",
+    shaHead: ["Version", "Release date", "SHA-256"],
     disclaimer:
-      "AreaPilot is a beta, provided free of charge and \"as is\". Check the calculated areas and quantities against your own drawing before you use them; errors may occur during the beta. Liability that cannot be limited by law is unaffected.",
+      "AreaPilot is provided \"as is\". Check the calculated areas and quantities against your own drawing before you use them; errors may occur. Liability that cannot be limited by law is unaffected.",
     form: {
-      title: "Download the beta",
-      sub: "Leave your email and the download link opens right here.",
+      title: "Download and try AreaPilot",
+      sub: "Leave your email and the download link opens right here. All features are unlocked for 7 days from first launch.",
       email: "Your email",
       emailPh: "name@company.com",
       acad: "Which AutoCAD do you use? (optional)",
@@ -282,8 +291,8 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       button: "Get the download link",
       sending: "Sending…",
       notice:
-        "We use your email to give you the AreaPilot beta download link and to send important beta notices (critical fixes, end of beta). We do not send marketing or announcements unless you tick the box below. Details:",
-      noticeLink: "AreaPilot beta privacy notice",
+        "We use your email to give you the AreaPilot download link and to send important notices about the trial (critical fixes, end of the trial). We do not send marketing or announcements unless you tick the box below. Details:",
+      noticeLink: "AreaPilot privacy notice",
       marketing: "I would like to receive OstlerTech's new product and campaign announcements by email (you can unsubscribe at any time via the link in the email).",
       successTitle: "Your download link is ready.",
       successNote: "The installer and guides download from our release page on GitHub. You will see two warnings during setup; what to do is explained below.",
@@ -296,14 +305,14 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     },
     faqTitle: "FAQ",
     faq: [
-      { q: "Is AreaPilot paid?", a: "The beta is free and we do not ask for payment details. Sales have not opened yet. When they do, we will announce it on our site and inside the app." },
+      { q: "Is AreaPilot paid?", a: "Yes, it is a one-time licensed product. After you download it, all features are free for 7 days from first launch and we do not ask for payment details. When the trial ends AreaPilot does not lock; in free mode it processes up to 15 areas per run. A license removes the limit; prices and terms appear in the purchase section on this page while sales are open." },
       {
         q: "Where do my drawings go?",
         a: "Nowhere. AreaPilot processes your drawing on your computer; the drawing never leaves it. The only time it goes online is to check for a new version: it reads the version file on ostlertech.com, and no identity, drawing or personal information is sent with that request (as with any internet request, the server sees your IP address). If an error occurs, the report is saved on your computer, is never sent automatically and is deleted after 30 days; you decide whether to send it to us. The report does not contain your drawing.",
       },
       {
         q: "Which AutoCAD versions does it work with?",
-        a: "It is built for AutoCAD 2013-2027 (64-bit). The version it is used and tested in every day is AutoCAD 2021; the others are part of the beta and have not been tested yet. Tell us how it runs on yours and we will update the list.",
+        a: "It is built for AutoCAD 2013-2027 (64-bit). The version it is used and tested in every day is AutoCAD 2021; the others have not been tested yet. Try it on yours with the 7-day full trial before you buy; tell us how it runs and we will update the list.",
       },
       { q: "Does it work in AutoCAD LT?", a: "No. AreaPilot uses AutoCAD's .NET add-in platform, and AutoCAD LT does not load this kind of add-in." },
       {
@@ -326,21 +335,21 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       "Your drawings never leave your computer. AreaPilot measures areas inside AutoCAD on your computer. Excel exports are saved only to the folder you choose.",
       "Update check: the first time the AreaPilot window opens in each AutoCAD session, the app reads a version file on ostlertech.com. No drawing, user name or identifier is sent; the server hosting our site (Vercel, USA) keeps the requesting IP address in short-lived server logs. Without internet the check is skipped. If a new version exists you are asked; if you choose \"Yes\", the download page opens in your browser.",
       "Error reports stay on your computer: if an unexpected error occurs, details are written to %LOCALAPPDATA%\\OstlerTech\\AreaPilot\\hatalar and reports older than 30 days are deleted. Nothing is sent automatically. The app offers to copy the report to the clipboard; if you want to send it to us, paste it into an email. Drawing content is not written and your user folder path is hidden, but an error message may contain a file or layer name, so please look before sending.",
-      "Settings and trial: language, theme and measurement settings are stored in the Windows registry (HKEY_CURRENT_USER\\Software\\OstlerTech\\SpaceCalc) and removed when you uninstall. The beta trial start date is stored in the HKEY_CURRENT_USER\\Software\\OstlerTech\\AreaPilot\\Deneme key and in %LOCALAPPDATA%\\OstlerTech\\AreaPilot\\deneme.txt; it is kept after uninstalling so the trial does not restart. You can delete that file and the HKEY_CURRENT_USER\\Software\\OstlerTech\\AreaPilot key by hand.",
+      "Settings and trial: language, theme and measurement settings are stored in the Windows registry (HKEY_CURRENT_USER\\Software\\OstlerTech\\SpaceCalc) and removed when you uninstall. The trial start date is stored in the HKEY_CURRENT_USER\\Software\\OstlerTech\\AreaPilot\\Deneme key and in %LOCALAPPDATA%\\OstlerTech\\AreaPilot\\deneme.txt; it is kept after uninstalling so the trial does not restart. You can delete that file and the HKEY_CURRENT_USER\\Software\\OstlerTech\\AreaPilot key by hand.",
       "No ads, analytics or usage tracking.",
     ],
-    noticeTitle: "AreaPilot open beta: how we process your data",
+    noticeTitle: "AreaPilot download and trial: how we process your data",
     notice: [
       {
         h: "What and why:",
-        p: "the email address you enter in the beta form, the AutoCAD version you optionally select and the date you signed up. Purpose: giving you the download link and sending important notices about the beta (critical fixes, end of the beta, changes to its terms). These notices contain no promotion. We send new product or campaign announcements by email only to people who tick the separate box in the form; if you leave it unticked you still get the beta link and receive no announcement emails.",
+        p: "the email address you enter in the download form, the AutoCAD version you optionally select and the date you signed up. Purpose: giving you the download link and sending important notices about the trial (critical fixes, end of the trial, changes to its terms). These notices contain no promotion. We send new product or campaign announcements by email only to people who tick the separate box in the form; if you leave it unticked you still get the download link and receive no announcement emails.",
       },
-      { h: "Legal basis:", p: "for the beta link and beta notices: establishing and performing the beta use relationship (KVKK Art. 5(2)(c)) and our legitimate interest in sending these notices (Art. 5(2)(f)). For new product and campaign announcements: your explicit consent (Art. 5/1), only if you tick the separate box; you can withdraw it at any time via the link in the email." },
+      { h: "Legal basis:", p: "for the download link and trial notices: establishing and performing the trial use relationship (KVKK Art. 5(2)(c)) and our legitimate interest in sending these notices (Art. 5(2)(f)). For new product and campaign announcements: your explicit consent (Art. 5/1), only if you tick the separate box; you can withdraw it at any time via the link in the email." },
       {
         h: "Transfers:",
         p: "your email is stored on Supabase Pte. Ltd. (a Singapore company) servers in Ireland; the site runs on Vercel Inc. (USA), which receives your IP address when you submit the form. These servers are outside Türkiye; we are in the process of signing the standard contracts announced by the Turkish Personal Data Protection Board under Article 9 of KVKK with these providers. We do not sell your data or share it for advertising.",
       },
-      { h: "Retention:", p: "deleted 6 months after the beta ends, or earlier if you ask; deletions are logged." },
+      { h: "Retention:", p: "deleted 6 months after your trial period ends, or earlier if you ask; deletions are logged." },
       {
         h: "Your rights (KVKK Art. 11):",
         p: "to learn whether your data is processed, request information, correction or deletion, object, and claim compensation. Write to destek@ostlertech.com or our KEP address; we reply within 30 days. You may also complain to the Personal Data Protection Board.",

@@ -103,7 +103,7 @@ export function UrunBolumu() {
         <div className="text-center space-y-3 mb-12">
           <p className="eyebrow">Uygulamalarımız</p>
           <h2 className="text-3xl md:text-5xl font-extrabold tracking-[-0.02em] text-white">Yayında olanlar ve hazırlananlar</h2>
-          <p className="text-muted max-w-2xl mx-auto">Her kartta uygulamanın durumu yazılıdır: yayında, açık beta, test aşamasında ya da yakında.</p>
+          <p className="text-muted max-w-2xl mx-auto">Her kartta uygulamanın durumu yazılıdır: yayında, test aşamasında ya da yakında.</p>
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {URUNLER.map((u) => (

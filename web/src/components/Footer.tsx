@@ -33,7 +33,7 @@ const columns = [
       { href: "/hakkimizda", label: "Hakkımızda" },
       { href: "/iletisim", label: "İletişim" },
       { href: "/products", label: "Ürünler" },
-      { href: "/areapilot", label: "AreaPilot (açık beta)" },
+      { href: "/areapilot", label: "AreaPilot" },
       { href: "/videolar", label: "Videolar" },
       { href: "/syncpass#sss", label: "Sık sorulanlar" },
       { href: YOUTUBE_URL, label: "YouTube", external: true },

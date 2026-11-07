@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   alternates: { canonical: AREAPILOT.path, languages: { tr: AREAPILOT.path, en: AREAPILOT.enPath, "x-default": AREAPILOT.enPath } },
 };
 
-// AreaPilot açık beta (TR). Sürüm denetimi aynı yolun altındaki public/areapilot/surum.json'u okur.
+// AreaPilot 1.0 (TR). Sürüm denetimi aynı yolun altındaki public/areapilot/surum.json'u okur.
 export default function AreaPilotPage() {
   return (
     <main className="min-h-screen bg-background">

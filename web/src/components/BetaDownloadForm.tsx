@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { CheckCircle2, Download, FileText, Loader2 } from "lucide-react";
 import type { AreaPilotCopy } from "@/lib/areapilot-content";
 
-// AreaPilot açık beta formu: e-posta + isteğe bağlı AutoCAD sürümü + AYRI, işaretsiz duyuru onay kutusu (2026-10-31 T4-B;
-// beta bağlantısı kutuya bağlı değil), form altı bilgi satırı. Bağlantılar sayfa kaynağında yok, yalnız /api/bekleme yanıtında gelir. Bal küpü alanı ve doldurma süresi
+// AreaPilot indirme formu (eski adı beta formu): e-posta + isteğe bağlı AutoCAD sürümü + AYRI, işaretsiz duyuru onay kutusu (2026-10-31 T4-B;
+// indirme bağlantısı kutuya bağlı değil), form altı bilgi satırı. Bağlantılar sayfa kaynağında yok, yalnız /api/bekleme yanıtında gelir. Bal küpü alanı ve doldurma süresi
 // bot ayıklamak içindir (sunucu ayrıca IP özeti başına saatte 5 kayıt sınırı uygular).
 type Downloads = { installer: string; guideTr: string; guideEn: string };
 

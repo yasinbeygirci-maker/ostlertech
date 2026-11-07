@@ -7,7 +7,7 @@ import { AREAPILOT_COPY, type Lang } from "@/lib/areapilot-content";
 import YouTubeFacade from "@/components/YouTubeFacade";
 import { VIDEOS } from "@/lib/videos";
 
-// AreaPilot açık beta sayfasının gövdesi (TR ve EN aynı yapı). Üst çubuk/alt bilgi sayfa dosyasında.
+// AreaPilot 1.0 sayfasının gövdesi (TR ve EN aynı yapı). Üst çubuk/alt bilgi sayfa dosyasında.
 // Görseller (Deniz [GORSEL-1..5]) henüz yok: nötr örnek çizimden ekran görüntüsü gelince eklenir; yer tutucu gösterilmez.
 export default function AreaPilotLanding({ lang }: { lang: Lang }) {
   const c = AREAPILOT_COPY[lang];
@@ -28,7 +28,18 @@ export default function AreaPilotLanding({ lang }: { lang: Lang }) {
     description: c.description,
     inLanguage: lang,
     url: `https://www.ostlertech.com${lang === "tr" ? AREAPILOT.path : AREAPILOT.enPath}`,
-    offers: { "@type": "Offer", price: "0", priceCurrency: "TRY", description: lang === "tr" ? "Açık beta, ilk açılıştan itibaren 30 gün ücretsiz deneme" : "Open beta, free trial for 30 days from first launch" },
+    // Fiyat: KDV dahil sabit liste (Bireysel / Ofis / Firma, tek seferlik lisans); sayfa satış bayrağından bağımsız statik olduğu için aralık verilir.
+    offers: {
+      "@type": "AggregateOffer",
+      priceCurrency: "TRY",
+      lowPrice: "2398.80",
+      highPrice: "23998.80",
+      offerCount: 3,
+      description:
+        lang === "tr"
+          ? "Tek seferlik lisans (Bireysel, Ofis, Firma), fiyatlar KDV dahil. İlk açılıştan itibaren 7 gün ücretsiz deneme."
+          : "One-time license (Individual, Office, Company), prices include VAT. 7-day free trial from first launch.",
+    },
     publisher: { "@type": "Organization", name: "OstlerTech", url: "https://www.ostlertech.com" },
   };
   const H2 = ({ children, id }: { children: React.ReactNode; id?: string }) => (
@@ -155,6 +166,28 @@ export default function AreaPilotLanding({ lang }: { lang: Lang }) {
                 <p className="mt-1 text-sm text-muted leading-relaxed">{w.p}</p>
               </div>
             ))}
+          </div>
+          <div className="rounded-2xl border border-line bg-card p-6 space-y-3">
+            <h3 className="text-lg font-bold text-white">{c.shaTitle}</h3>
+            <p className="text-sm text-muted">{c.shaNote}</p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm">
+                <thead className="text-muted">
+                  <tr>
+                    {c.shaHead.map((h) => (
+                      <th key={h} className="pr-4 py-1 font-semibold">{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="text-foreground align-top">
+                    <td className="pr-4 py-1">{AREAPILOT.version}</td>
+                    <td className="pr-4 py-1">{lang === "tr" ? AREAPILOT.releaseDateTr : AREAPILOT.releaseDateEn}</td>
+                    <td className="py-1 font-mono text-xs break-all">{AREAPILOT.installerSha256}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
           <p className="text-sm text-muted leading-relaxed">{c.disclaimer}</p>
         </div>
