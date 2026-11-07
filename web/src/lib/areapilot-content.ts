@@ -78,7 +78,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     h1: "Bu cephede kaç m² cam var?",
     lead: "AreaPilot, AutoCAD çizimindeki kapalı alanları bulur, kodlarını yanındaki yazıdan okur, alan ve çevreyi toplar ve Excel'e aktarır.",
     sub: "Cam, cephe paneli, oda: alanları tek tek ölçüp hesap makinesinde toplaman gerekmez.",
-    cta: "İndirme bağlantısını al",
+    cta: "7 gün ücretsiz dene",
     ctaNote: `Windows · AutoCAD 2013-2027 · ilk açılıştan itibaren ${A.trialDays} gün ücretsiz deneme`,
     featuresTitle: "Ne yapar",
     features: [
@@ -223,7 +223,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     h1: "How many m² of glass are on this façade?",
     lead: "AreaPilot finds the closed areas in your AutoCAD drawing, reads their codes from the text next to them, totals the m² and exports it to Excel.",
     sub: "Glazing, curtain wall panels, rooms: no more measuring each area and adding it up on a calculator.",
-    cta: "Get the download link",
+    cta: "Try free for 7 days",
     ctaNote: `Windows · AutoCAD 2013-2027 · ${A.trialDays}-day free trial from first launch`,
     featuresTitle: "What it does",
     features: [
