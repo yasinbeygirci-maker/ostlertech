@@ -217,9 +217,9 @@ test("kart fiyat cümlesi ile ön bilgi çelişmez: kart ana fiyatı KDV dahil t
   }
 });
 
-test("AreaPilot yasal sayfa ekleri: onay beklerken KAPALI, metinde yasak ifade ve işaret yok, TR/EN aynı bölüm sayısı", () => {
-  assert.equal(AREAPILOT_LEGAL_ONAY_BEKLIYOR, true, "Zeynep + Yasin onayı olmadan yayına açılmaz");
-  assert.equal(areapilotLegalLive(), false);
+test("AreaPilot yasal sayfa ekleri: Yasin'in onayıyla AÇIK (2026-11-07), metinde yasak ifade ve işaret yok, TR/EN aynı bölüm sayısı", () => {
+  assert.equal(AREAPILOT_LEGAL_ONAY_BEKLIYOR, false, "Yasin 2026-11-07'de satışa çıkış kararını verdi; bayrak yalnız onunla kapatılır");
+  assert.equal(areapilotLegalLive(), true);
   assert.equal(TERMS_SECTIONS.tr.length, TERMS_SHIFT);
   assert.equal(TERMS_SECTIONS.en.length, TERMS_SHIFT);
   const all = [

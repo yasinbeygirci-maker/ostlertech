@@ -6,7 +6,7 @@
 // Bu dosya ISTEMCİ ya da sunucu ortam değişkeni okumaz; saf metindir. "{EMAIL}" çizimde destek adresiyle değişir.
 //
 // Hitap: yasal metin, "siz". Yasak ifade: "internetsiz", "çevrimdışı", "vergileri içerir" (fiyat kartı KDV dahil toplamı gösterir, bkz. areapilot-sales.ts).
-export const AREAPILOT_LEGAL_ONAY_BEKLIYOR = true;
+export const AREAPILOT_LEGAL_ONAY_BEKLIYOR = false;
 
 export type LegalLang = "tr" | "en";
 
