@@ -371,6 +371,9 @@ test("durum yanıtı imzası (R6): yalnız düşürme yanıtları imzalı; activ
   assert.deepEqual(ok.body, { status: "active", device_registered: true }, "active + true: imzasız");
   const ref = await call("status", "areapilot", { key: refunded.license_key, deviceId: DEV_A }, store);
   assert.equal(ref.body.sig, hmac(refunded.license_key, ["areapilot-status-v1", "refunded", "-", DEV_A].join(String.fromCharCode(10))));
+  // İstemci (LisansTest, C#) ile ORTAK sabit vektörler
+  assert.equal(statusSignature("APL-23456-789AB-CDEFG-HJKMN", "refunded", undefined, DEV_A), "a4ec7ee88821a84b165981ea84b554b6ac6badb4e296f9fc8395cd66c9254161");
+  assert.equal(statusSignature("APL-23456-789AB-CDEFG-HJKMN", "active", false, DEV_A), "39478b68166c873de940fdc9ca2e36acde0b68aebb7585217ae5f5a05dce0dc5");
   assert.notEqual(ref.body.sig, statusSignature(refunded.license_key, "refunded", undefined, DEV_B), "cihaz no imzaya girer");
   assert.notEqual(ref.body.sig, statusSignature(aplRow.license_key, "refunded", undefined, DEV_A), "lisans kodu imzaya girer");
   assert.notEqual(ref.body.sig, statusSignature(refunded.license_key, "canceled", undefined, DEV_A), "durum imzaya girer");
