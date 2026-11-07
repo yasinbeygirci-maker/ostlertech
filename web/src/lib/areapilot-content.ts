@@ -75,7 +75,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     description:
       "Çizimdeki kapalı alanları bulur, kodlarını yanındaki yazıdan okur, alan ve çevreyi toplar ve Excel'e aktarır. AutoCAD 2013-2027, Windows. 7 gün ücretsiz deneme, ardından ücretsiz modda 15 alana kadar.",
     badge: `Sürüm ${A.version}`,
-    h1: "Bu otelde kaç m² kaplama var?",
+    h1: "Bu alanda kaç m² kaplama var?",
     lead: "AreaPilot, AutoCAD çizimindeki kapalı alanları bulur, kodlarını yanındaki yazıdan okur, alan ve çevreyi toplar ve Excel'e aktarır.",
     sub: "Cephe, zemin ve duvar kaplamaları, paneller: alanları tek tek ölçüp hesap makinesinde toplaman gerekmez.",
     cta: "7 gün ücretsiz dene",
@@ -220,7 +220,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     description:
       "Finds closed areas in your drawing, reads their codes from nearby text, totals m² and exports to Excel. AutoCAD 2013-2027, Windows. 7-day free trial, then free mode with up to 15 areas per run.",
     badge: `Version ${A.version}`,
-    h1: "How many m² of cladding are in this hotel?",
+    h1: "How many m² of cladding are in this area?",
     lead: "AreaPilot finds the closed areas in your AutoCAD drawing, reads their codes from the text next to them, totals the m² and exports it to Excel.",
     sub: "Façade, floor and wall coverings, panels: no more measuring each area and adding it up on a calculator.",
     cta: "Try free for 7 days",
