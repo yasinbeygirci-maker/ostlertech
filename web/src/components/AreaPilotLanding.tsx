@@ -38,7 +38,7 @@ export default function AreaPilotLanding({ lang }: { lang: Lang }) {
       description:
         lang === "tr"
           ? "Tek seferlik lisans (Bireysel, Ofis, Firma), fiyatlar KDV dahil. İlk açılıştan itibaren 7 gün ücretsiz deneme."
-          : "One-time license (Individual, Office, Company), prices include VAT. 7-day free trial from first launch.",
+          : "One-time license (Individual, Office, Firm), prices include VAT. 7-day free trial from first launch.",
     },
     publisher: { "@type": "Organization", name: "OstlerTech", url: "https://www.ostlertech.com" },
   };

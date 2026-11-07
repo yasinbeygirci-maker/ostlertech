@@ -98,7 +98,7 @@ export default function Footer() {
           <p className="text-xs text-muted">
             © {new Date().getFullYear()} {COMPANY.legalName ? `${COMPANY.legalName} · ` : ""}OstlerTech
           </p>
-          <p className="text-xs text-muted">SyncPass Masaüstü lisans satışları yetkili satıcımız Paddle.com, Android satın almaları Google Play üzerinden yapılır.</p>
+          <p className="text-xs text-muted">SyncPass Masaüstü ve AreaPilot lisans satışları yetkili satıcımız Paddle.com üzerinden, SyncPass Android satın almaları Google Play üzerinden yapılır.</p>
         </div>
       </div>
     </footer>

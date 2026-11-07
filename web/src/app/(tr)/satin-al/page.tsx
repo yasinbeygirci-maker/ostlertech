@@ -7,7 +7,7 @@ import PaddlePricing from "@/components/PaddlePricing";
 import { paddleConfig, salesOpen } from "@/lib/paddle-env";
 
 export const metadata: Metadata = {
-  title: "Planlar",
+  title: "SyncPass Masaüstü planları",
   description: "SyncPass Masaüstü (Windows): ücretsiz sürüm ve Premium planları.",
   alternates: { canonical: "/satin-al" },
 };
