@@ -24,6 +24,8 @@ export interface LicenseRow {
 const DAY = 24 * 60 * 60 * 1000;
 // Abonelik yenilemesi gecikirse (kart reddi vb.) kullanıcı hemen düşmesin.
 const RENEWAL_GRACE = 7 * DAY;
+/** Süresiz belgenin exp değeri: 2100-01-01 00:00 UTC (epoch ms). İstemci süreye bakmaz; alan biçim uyumu için durur. */
+export const PERPETUAL_EXP = 4102444800000;
 
 export interface ProductConfig {
   /** Lisans kodu ön eki: SPD-XXXXX-... */
@@ -32,8 +34,13 @@ export interface ProductConfig {
   keyEnv: string;
   /** Belge imza algoritması. */
   alg: "ed25519" | "es256";
-  /** İmzalı belgenin ömrü; uygulama ~7 günde yeniler, sunucuya ulaşamazsa belge bu süre geçerli kalır. */
+  /** İmzalı belgenin ömrü; uygulama ~7 günde yeniler, sunucuya ulaşamazsa belge bu süre geçerli kalır. `perpetual` ise yok sayılır. */
   tokenLifetimeMs: number;
+  /**
+   * Belge SÜRESİZ mi (yalnız AreaPilot, tek seferlik lisans; Yasin kararı 2026-11-07). Etkinleştirmede bir kez verilir,
+   * `PERPETUAL_EXP` sabit uzak tarihli exp taşır, istemci yenilemez. Sunucuya yalnız etkinleştirme ve kaldırma/sıfırlamada gidilir.
+   */
+  perpetual: boolean;
   /** Yanıtta ve belgede ürün + cihaz sayısı da yer alır mı (SyncPass'in biçimi değişmesin diye yalnız AreaPilot). */
   richPayload: boolean;
   /**
@@ -43,9 +50,9 @@ export interface ProductConfig {
 }
 
 export const PRODUCTS: Record<Product, ProductConfig> = {
-  syncpass_desktop: { prefix: "SPD", keyEnv: "LICENSE_SIGNING_KEY", alg: "ed25519", tokenLifetimeMs: 30 * DAY, richPayload: false, deactivateLimited: false },
-  // Şantiye bilgisayarları günlerce çevrimdışı olabilir: 90 gün.
-  areapilot: { prefix: "APL", keyEnv: "LICENSE_SIGNING_KEY_AREAPILOT", alg: "es256", tokenLifetimeMs: 90 * DAY, richPayload: true, deactivateLimited: true },
+  syncpass_desktop: { prefix: "SPD", keyEnv: "LICENSE_SIGNING_KEY", alg: "ed25519", tokenLifetimeMs: 30 * DAY, perpetual: false, richPayload: false, deactivateLimited: false },
+  // Tek seferlik lisans: belge süresiz (PERPETUAL_EXP), yenileme yok. tokenLifetimeMs yalnız perpetual=false için anlamlıdır.
+  areapilot: { prefix: "APL", keyEnv: "LICENSE_SIGNING_KEY_AREAPILOT", alg: "es256", tokenLifetimeMs: 90 * DAY, perpetual: true, richPayload: true, deactivateLimited: true },
 };
 
 export const DEFAULT_PRODUCT: Product = "syncpass_desktop";
@@ -93,7 +100,9 @@ export function foreignKeyProduct(input: unknown, product: Product): Product | n
 /** Lisans şu an hak veriyor mu; veriyorsa imzalı belgenin bitiş anı (epoch ms). */
 export function entitlementUntil(row: LicenseRow, now = Date.now()): number | null {
   if (row.status === "refunded" || row.status === "revoked" || row.status === "paused") return null;
-  const lifetime = PRODUCTS[row.product ?? DEFAULT_PRODUCT].tokenLifetimeMs;
+  const cfg = PRODUCTS[row.product ?? DEFAULT_PRODUCT];
+  if (cfg.perpetual) return row.plan === "lifetime" && row.status === "active" ? PERPETUAL_EXP : null;
+  const lifetime = cfg.tokenLifetimeMs;
   if (row.plan === "lifetime") return row.status === "active" ? now + lifetime : null;
   const periodEnd = row.current_period_end ? Date.parse(row.current_period_end) : NaN;
   if (Number.isNaN(periodEnd)) return null;
@@ -232,7 +241,7 @@ export interface LicenseStore {
 
 export type ResetOutcome = { result: "invalid" } | { result: "limit" } | { result: "ok"; email: string | null; lang: ResetLang };
 
-export type LicenseOp = "activate" | "renew" | "deactivate";
+export type LicenseOp = "activate" | "renew" | "deactivate" | "status";
 export interface ApiResult {
   status: number;
   body: Record<string, unknown>;
@@ -284,6 +293,12 @@ export async function handleLicenseRequest(
         return { status: 429, body: { error: "deactivate_limit", limit: DEACTIVATE_LIMIT, windowDays: DEACTIVATE_WINDOW_DAYS } };
       }
       return { status: 200, body: { ok: true } };
+    }
+
+    if (op === "status") {
+      // Salt okur durum sorgusu (AreaPilot süresiz belge; istemci 7 günde bir sorar). Belge üretmez, cihaz eklemez/güncellemez,
+      // süre uzatmaz. İstemci YALNIZ refunded/canceled/revoked yanıtında lisansı düşürür; başka her şeyde (ağ, 5xx, 404) çalışır.
+      return { status: 200, body: { status: license.status } };
     }
 
     const entitled = entitlementUntil(license, now);

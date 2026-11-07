@@ -32,7 +32,7 @@ export function licenseMailCopy(product: MailProduct, lang: MailLang, maxDevices
           steps: ["Open AutoCAD and the AreaPilot license window.", "Paste the key and press Activate."],
           devices: n === 1 ? "This key works on 1 computer." : `You can use the same key on up to ${n} computers.`,
           notes: [
-            "You only need to go online once every 90 days; AreaPilot renews your license quietly in the background.",
+            "You go online to activate, to remove a computer and to reset your devices. After activation your license has no expiry and AreaPilot never asks you to renew; it only checks quietly now and then whether the license was refunded. If it cannot reach the server, nothing changes and AreaPilot keeps working.",
             "When you change computers, open the License window on the old one and press Remove. The slot is freed for the new computer. Remove works up to 3 times per 30 days.",
           ],
           planLine: () => "Plan: AreaPilot license, valid for all 1.x versions. One payment, no renewals.",
@@ -43,7 +43,7 @@ export function licenseMailCopy(product: MailProduct, lang: MailLang, maxDevices
           steps: ["AutoCAD'i ve AreaPilot lisans penceresini aç.", "Kodu yapıştırıp Etkinleştir'e bas."],
           devices: n === 1 ? "Bu kod 1 bilgisayarda kullanılabilir." : `Aynı kodu en fazla ${n} bilgisayarda kullanabilirsin.`,
           notes: [
-            "90 günde bir internete bağlanman yeterli; AreaPilot lisansını arka planda sessizce yeniler.",
+            "İnternete etkinleştirirken, bilgisayarı kaldırırken ve cihazları sıfırlarken bağlanırsın. Etkinleştirdikten sonra lisansın süresizdir, yenileme istenmez; AreaPilot arada bir, sadece lisansın iade edilip edilmediğine sessizce bakar. Sunucuya ulaşamazsa hiçbir şey değişmez, çalışmaya devam eder.",
             "Bilgisayar değiştirirken eski bilgisayarda Lisans penceresinden Kaldır'a bas; yer yeni bilgisayara açılır. Kaldırma 30 günde en çok 3 kez yapılabilir.",
           ],
           planLine: () => "Plan: AreaPilot lisansı, tüm 1.x sürümlerinde geçerli. Tek ödeme, yenileme yok.",

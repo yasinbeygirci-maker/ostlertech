@@ -5,6 +5,7 @@ import assert from "node:assert/strict";
 import { generateKeyPairSync, createPublicKey, verify } from "node:crypto";
 import {
   areapilotPublicKey,
+  PERPETUAL_EXP,
   confirmDeviceReset,
   DEACTIVATE_WINDOW_DAYS,
   hashResetToken,
@@ -88,8 +89,10 @@ test("kod: küçük harf, boşluk, tire ve ön eksiz yazım kabul edilir; bozuk 
 
 // ---- hak süresi ----
 
-test("hak süresi: AreaPilot tek seferlik 90 gün, SyncPass 30 gün; iade/askı/iptal düşürür", () => {
-  assert.equal(entitlementUntil(row(), NOW), NOW + 90 * DAY);
+test("hak süresi: AreaPilot tek seferlik SÜRESİZ (sabit uzak exp, zamandan bağımsız), SyncPass 30 gün; iade/askı/iptal düşürür", () => {
+  assert.equal(entitlementUntil(row(), NOW), PERPETUAL_EXP);
+  assert.equal(entitlementUntil(row(), NOW + 3000 * DAY), PERPETUAL_EXP, "süre geçse de aynı");
+  assert.equal(PERPETUAL_EXP, Date.UTC(2100, 0, 1));
   assert.equal(entitlementUntil(row({ product: "syncpass_desktop" }), NOW), NOW + 30 * DAY);
   for (const status of ["refunded", "revoked", "paused", "canceled", "past_due"] as const) {
     assert.equal(entitlementUntil(row({ status }), NOW), null, status);
@@ -109,9 +112,9 @@ test("hak süresi: SyncPass aboneliği eskisi gibi (dönem sonu + 7 gün pay, en
 // ---- belge imzası ----
 
 test("AreaPilot belgesi: ECDSA P-256 / SHA-256, IEEE P1363 (64 bayt), gövde alanları sözleşmedeki gibi", () => {
-  const token = signLicenseToken("areapilot", { lid: "L1", plan: "lifetime", dev: DEV_A, exp: NOW + 90 * DAY, maxDevices: 5 }, { env: ENV, now: NOW });
+  const token = signLicenseToken("areapilot", { lid: "L1", plan: "lifetime", dev: DEV_A, exp: PERPETUAL_EXP, maxDevices: 5 }, { env: ENV, now: NOW });
   const [body, sig] = token.split(".");
-  assert.deepEqual(b64urlJson(body), { v: 1, lid: "L1", product: "areapilot", plan: "lifetime", dev: DEV_A, exp: NOW + 90 * DAY, maxDevices: 5, iat: NOW });
+  assert.deepEqual(b64urlJson(body), { v: 1, lid: "L1", product: "areapilot", plan: "lifetime", dev: DEV_A, exp: PERPETUAL_EXP, maxDevices: 5, iat: NOW });
   assert.equal(Buffer.from(sig, "base64url").length, 64);
   assert.doesNotMatch(token, /[=+/]/, "dolgu ve standart base64 karakteri yok");
   // Bağımsız doğrulama (kendi kodumuz değil, doğrudan node:crypto): imza gövdenin base64url metni üzerinde.
@@ -249,7 +252,7 @@ function fakeStore(rows: LicenseRow[], opts: FakeOpts = {}) {
 
 const aplRow = row({ license_key: "APL-23456-789AB-CDEFG-HJKMN", max_devices: 1 });
 const spdRow = row({ id: "99999999-2222-4333-8444-555555555555", license_key: "SPD-23456-789AB-CDEFG-HJKMN", product: "syncpass_desktop", max_devices: 3 });
-const call = (op: "activate" | "renew" | "deactivate", product: Product, body: unknown, store: LicenseStore, now = NOW) =>
+const call = (op: "activate" | "renew" | "deactivate" | "status", product: Product, body: unknown, store: LicenseStore, now = NOW) =>
   handleLicenseRequest(op, product, body, store, { env: ENV, now });
 
 test("etkinleştirme: AreaPilot yanıtı ürün + cihaz sayısı taşır, belge doğrulanır", async () => {
@@ -259,11 +262,41 @@ test("etkinleştirme: AreaPilot yanıtı ürün + cihaz sayısı taşır, belge 
   assert.equal(r.body.product, "areapilot");
   assert.equal(r.body.plan, "lifetime");
   assert.equal(r.body.maxDevices, 1);
-  assert.equal(r.body.expiresAt, NOW + 90 * DAY);
+  assert.equal(r.body.expiresAt, PERPETUAL_EXP);
   const payload = verifyAreapilotToken(String(r.body.token), areapilotPublicKey(ecPriv).spkiB64);
   assert.ok(payload);
   assert.equal(payload.dev, DEV_A, "cihaz kimliği küçük harfe çevrilir");
-  assert.equal(payload.exp, NOW + 90 * DAY);
+  assert.equal(payload.exp, PERPETUAL_EXP);
+});
+
+test("AreaPilot süresiz belge: yenileme gerekmez; renew ucu uyumluluk için açık ama aynı exp'i verir, SyncPass 30 gün kalır", async () => {
+  const { store } = fakeStore([aplRow, spdRow]);
+  const act = await call("activate", "areapilot", { key: aplRow.license_key, deviceId: DEV_A }, store);
+  const spki = areapilotPublicKey(ecPriv).spkiB64;
+  assert.equal(verifyAreapilotToken(String(act.body.token), spki)?.exp, PERPETUAL_EXP);
+  // Yıllar sonra bile yeni belge istemek gerekmez; yine de çağrılırsa süresiz exp döner (belge ömrü zamana bağlı değil).
+  const later = await call("renew", "areapilot", { key: aplRow.license_key, deviceId: DEV_A }, store, NOW + 2000 * DAY);
+  assert.equal(later.status, 200);
+  assert.equal(later.body.expiresAt, PERPETUAL_EXP);
+  assert.equal(verifyAreapilotToken(String(later.body.token), spki)?.exp, PERPETUAL_EXP);
+  const spd = await call("activate", "syncpass_desktop", { key: spdRow.license_key, deviceId: DEV_A }, store);
+  assert.equal(spd.body.expiresAt, NOW + 30 * DAY, "SyncPass belge ömrü değişmedi");
+});
+
+test("durum sorgusu (salt okur): iade/iptal/askı durumunu açık söyler, belge üretmez, cihaz eklemez/güncellemez; bilinmeyen kod 404", async () => {
+  const refunded = row({ license_key: "APL-22222-22222-22222-22222", id: "22222222-2222-4333-8444-555555555555", status: "refunded" });
+  const canceled = row({ license_key: "APL-44444-44444-44444-44444", id: "44444444-2222-4333-8444-555555555555", status: "canceled" });
+  const revoked = row({ license_key: "APL-66666-66666-66666-66666", id: "66666666-2222-4333-8444-555555555555", status: "revoked" });
+  const { store, devices } = fakeStore([aplRow, refunded, canceled, revoked]);
+  assert.deepEqual((await call("status", "areapilot", { key: aplRow.license_key, deviceId: DEV_A }, store)).body, { status: "active" });
+  for (const r of [refunded, canceled, revoked]) {
+    const res = await call("status", "areapilot", { key: r.license_key, deviceId: DEV_A }, store);
+    assert.equal(res.status, 200);
+    assert.deepEqual(res.body, { status: r.status }, "belge/token yok, yalnız durum");
+  }
+  assert.equal(devices.get(aplRow.id)?.size ?? 0, 0, "durum sorgusu cihaz kaydetmedi");
+  assert.equal((await call("status", "areapilot", { key: "APL-33333-33333-33333-33333", deviceId: DEV_A }, store)).status, 404);
+  assert.equal((await call("status", "areapilot", { key: aplRow.license_key }, store)).status, 400);
 });
 
 test("etkinleştirme: SyncPass yanıt biçimi değişmedi ({token, plan, expiresAt})", async () => {
@@ -618,12 +651,14 @@ test("areapilotPricesReady: üç katman da tanımlıysa true; gerçek eşlemede 
 
 // ---- e-posta sözcükleri ----
 
-test("e-posta sözcükleri: ürün adı ve cihaz sayısı lisanstan; AreaPilot'ta sen hitabı, license, 90 gün ve Kaldır satırları", () => {
+test("e-posta sözcükleri: ürün adı ve cihaz sayısı lisanstan; AreaPilot'ta sen hitabı, license, ağ yalnız etkinleştirme/kaldırmada ve Kaldır satırları", () => {
   const a = licenseMailCopy("areapilot", "tr", 5);
   assert.equal(a.productName, "AreaPilot");
   assert.match(a.devices, /5 bilgisayar/);
   assert.match(a.planLine("lifetime"), /Tek ödeme/);
-  assert.ok(a.notes.some((n) => n.includes("90 günde bir internete bağlanman yeterli")));
+  assert.ok(a.notes.some((n) => n.includes("İnternete etkinleştirirken, bilgisayarı kaldırırken ve cihazları sıfırlarken")));
+  assert.doesNotMatch(JSON.stringify(a), /90 gün/, "yenileme/90 gün cümlesi kalmadı");
+  assert.match(a.notes.join(" "), /iade edilip edilmediğine/);
   assert.ok(a.notes.some((n) => n.includes("bilgisayar değiştirirken") || n.includes("Bilgisayar değiştirirken")) && a.notes.join(" ").includes("Lisans penceresinden Kaldır"));
   const en = licenseMailCopy("areapilot", "en", 1);
   assert.match(en.devices, /1 computer\./);
