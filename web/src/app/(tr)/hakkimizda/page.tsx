@@ -13,12 +13,13 @@ export default function AboutPage() {
     <LegalPage eyebrow="Hakkımızda" title="OstlerTech" updated={false}>
       <p>
         OstlerTech, Türkiye'de kurulu bağımsız bir yazılım stüdyosu. Verisini kendisinde tutmak isteyen bireyler ve küçük
-        işletmeler için sade, güvenli ve reklamsız uygulamalar geliştiriyoruz.
+        işletmeler için sade ve güvenli uygulamalar geliştiriyoruz.
       </p>
 
       <H2>Ne yapıyoruz</H2>
       <List>
         <li><strong className="text-foreground">SyncPass</strong>: şifreleri, kartları ve 2FA kodlarını cihazda şifreli tutan şifre yöneticisi (Android ve Windows; Windows için Chrome eklentisi).</li>
+        <li><strong className="text-foreground">AreaPilot</strong>: AutoCAD için alan ve metraj eklentisi (Windows; 7 gün ücretsiz deneme).</li>
         <li><strong className="text-foreground">SyncSite</strong>: şantiyede günlük imalatı, plan ile gerçekleşeni büro ve saha arasında izleyen takip programı (test aşamasında; Windows ve Android, iOS ve macOS yakında).</li>
       </List>
 
@@ -32,7 +33,7 @@ export default function AboutPage() {
       <H2>Bize ulaş</H2>
       <p>
         Soru, öneri ve destek için <a href={`mailto:${COMPANY.email}`} className="text-primary hover:text-primary-light">{COMPANY.email}</a> adresine
-        yazabilir ya da <a href="/iletisim" className="text-primary hover:text-primary-light">iletişim sayfasındaki</a> bilgileri
+        yazabilirsin ya da <a href="/iletisim" className="text-primary hover:text-primary-light">iletişim sayfasındaki</a> bilgileri
         kullanabilirsin.
       </p>
     </LegalPage>

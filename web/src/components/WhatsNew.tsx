@@ -17,7 +17,7 @@ export default function WhatsNew() {
             <p className="eyebrow">Yenilikler</p>
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white">Son güncellemelerde neler değişti?</h2>
           </div>
-          <p className="text-sm text-muted">Android 4.3 · Masaüstü önizleme</p>
+          <p className="text-sm text-muted">Android 4.5 · Masaüstü yayında (Windows MSI ve Microsoft Store)</p>
         </div>
         <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {items.map((i) => (

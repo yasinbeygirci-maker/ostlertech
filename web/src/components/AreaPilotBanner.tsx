@@ -9,7 +9,7 @@ export default function AreaPilotBanner() {
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Yeni · Sürüm 1.0</p>
           <h2 className="text-lg md:text-xl font-bold text-white">AreaPilot: AutoCAD'de alan ve çevre metrajı</h2>
           <p className="text-sm text-muted">
-            Kapalı alanları oda adına göre toplar, çizime yazar, Excel'e aktarır. İlk açılıştan itibaren {AREAPILOT.trialDays} gün ücretsiz deneme.
+            Kapalı alanları, yanındaki yazıdan okuduğu koda göre toplar, çizime yazar, Excel'e aktarır. İlk açılıştan itibaren {AREAPILOT.trialDays} gün ücretsiz deneme.
           </p>
         </div>
         <div className="flex flex-wrap gap-3 shrink-0">

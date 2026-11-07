@@ -61,7 +61,7 @@ export const URUNLER: Urun[] = [
     id: "areapilot",
     ad: "AreaPilot",
     slogan: "AutoCAD'de alan ve çevre metrajı",
-    aciklama: "AutoCAD çizimindeki kapalı alanları bulur, oda adını kod olarak okur, alan ve çevreyi toplar; çizime yazar, tablo ekler, Excel'e aktarır. Windows, AutoCAD 2013-2027.",
+    aciklama: "AutoCAD çizimindeki kapalı alanları bulur, kodlarını yanındaki yazıdan okur, alan ve çevreyi toplar; çizime yazar, tablo ekler, Excel'e aktarır. Windows, AutoCAD 2013-2027.",
     platform: "Windows (AutoCAD)",
     ikon: "Layers",
     renk: "#4C8DFF",

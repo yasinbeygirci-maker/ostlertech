@@ -225,7 +225,7 @@ export const EN: Content = {
         "Choose a new password that is at least 15 characters long and different for every account.",
         "In your Google Account, go to Security & sign-in > Your devices > Manage all devices, pick the stolen phone and sign out. Changing the password may not be enough: the device you use to verify your identity when you sign in can stay signed in.",
         "If your two-step verification codes were on the stolen phone, you can sign in with the backup codes you saved.",
-        "If your Apple Account lists devices you don't recognise, remove them.",
+        "If your Apple Account lists devices you don't recognize, remove them.",
       ],
       sources: ["Apple", "NIST", "Google"],
     },

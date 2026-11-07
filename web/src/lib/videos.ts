@@ -26,7 +26,7 @@ export const VIDEOS: Video[] = [
     id: "YCgxinKeziA",
     title: "AreaPilot: AutoCAD'de alan ve çevre metrajı, saniyeler içinde",
     description:
-      "Otel tip kat planında 76 alanı oda adına göre toplar, çizime yazar, tabloyu plana ekler, Excel'e aktarır. İlk açılıştan itibaren 7 gün ücretsiz deneme.",
+      "Otel tip kat planında 76 alanı, yanındaki yazıdan okuduğu koda göre toplar, çizime yazar, tabloyu plana ekler, Excel'e aktarır. İlk açılıştan itibaren 7 gün ücretsiz deneme.",
     poster: "/videos/areapilot-tanitim.jpg?v=20261025",
     duration: "PT1M2S",
     durationLabel: "1:02",

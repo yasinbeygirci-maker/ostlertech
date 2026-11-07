@@ -44,7 +44,7 @@ Wrapped copies of the vault key stored on the device (Android only, only if you 
 - **Check value:** the app does not store your master password. Next to the salt it stores an HMAC-SHA256 value
   computed with the vault key. If the password you enter gives the same value, it is correct. Someone who obtains
   this value can try guessing passwords; each guess costs a 600,000-iteration derivation.
-- **Randomness:** salts, initialisation vectors, the recovery key and the password generator use the operating
+- **Randomness:** salts, initialization vectors, the recovery key and the password generator use the operating
   system's secure random number source.
 - **Older vaults:** vaults created in SyncPass 3.x keep opening with the older setting (PBKDF2-HMAC-SHA1, 200,000
   iterations). The app does not upgrade them automatically when they are opened.
@@ -57,7 +57,7 @@ SyncPass Android and SyncPass Desktop use the same encrypted format. Every encry
 |---|---|---|
 | Format marker | 4 bytes | `SPv2` |
 | Salt | 16 bytes | The salt the key was derived with |
-| Initialisation vector (IV) | 12 bytes | New and random for every encryption |
+| Initialization vector (IV) | 12 bytes | New and random for every encryption |
 | Ciphertext + authentication tag | variable + 16 bytes | AES-256-GCM |
 
 The whole value is encoded as text with Base64. AES-256-GCM is authenticated encryption: a value that was changed,
@@ -152,7 +152,7 @@ without knowing your master password; how strong this protection is depends on h
 | Login | Title, username, password, address (URL), notes, 2FA secret, extra fields, recovery codes |
 | Payment card | Card number, card type, cardholder, expiry date, CVV, CVV2, PIN |
 | Identity document | First name, last name, ID number, serial number, date and place of birth, issue and expiry date, issuing authority, details, link to the document image on the phone |
-| Corporate document | Organisation, tax number, social security number, policy number, license key |
+| Corporate document | Organization, tax number, social security number, policy number, license key |
 | Crypto wallet | Recovery phrase, private key |
 | Bank account | Bank name, account holder, IBAN, account number, branch code, SWIFT code |
 | Passkey | Site, username, credential ID, user handle, private key |
@@ -163,9 +163,9 @@ without knowing your master password; how strong this protection is depends on h
 | Wallet card | Barcode data |
 
 **Not encrypted on their own** (these stay encrypted with the whole file and never leave as plain text): titles of
-items other than logins, category, item type, times, favourite mark, password strength and leak count, the phone link
-of a custom icon you picked for a login, card colour, authenticator algorithm and digit settings, Wi-Fi security type,
-crypto network name, organisation on a wallet card, device name and last-used time of a passkey. In the database on
+items other than logins, category, item type, times, favorite mark, password strength and leak count, the phone link
+of a custom icon you picked for a login, card color, authenticator algorithm and digit settings, Wi-Fi security type,
+crypto network name, organization on a wallet card, device name and last-used time of a passkey. In the database on
 your phone these fields are protected by the database encryption only.
 
 ### What Google can see
@@ -295,4 +295,4 @@ There are no advertising, analytics or crash reporting libraries in the app.
 ## 13. Reporting a vulnerability
 
 If you have found a security vulnerability, write to **guvenlik@ostlertech.com** (English or Turkish). Scope, rules and
-process are on the [Report a vulnerability](/en/report-vulnerability) page. We have no bounty programme.
+process are on the [Report a vulnerability](/en/report-vulnerability) page. We have no bounty program.

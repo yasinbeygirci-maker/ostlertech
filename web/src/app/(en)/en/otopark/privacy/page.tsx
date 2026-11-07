@@ -105,7 +105,7 @@ export default function OtoparkPrivacyEnPage() {
         Google acts as a controller of this data under its own data protection terms. For users in the European Union,
         Google&apos;s terms rely on the EU Standard Contractual Clauses and the Data Privacy Framework; they do not include the
         standard contract announced by the Turkish Personal Data Protection Board for transfers from Türkiye. If you do not
-        allow personalised ads, the data sent to Google is limited to what is needed to show and count ads and prevent
+        allow personalized ads, the data sent to Google is limited to what is needed to show and count ads and prevent
         fraud; if you buy the &quot;Ad-free pack&quot;, the game does not start the ad system at all.
       </p>
 

@@ -169,7 +169,7 @@ export default function SyncSitePrivacyEnPage() {
         <li>We are not aware of any adequacy decision of the Board for the European Union or Ireland.</li>
         <li>
           We have Supabase’s standard data processing agreement, which is based on the EU Standard Contractual Clauses.{" "}
-          <strong className="text-foreground">It is not the standard contract recognised under KVKK.</strong> The transfer therefore does not currently rely
+          <strong className="text-foreground">It is not the standard contract recognized under KVKK.</strong> The transfer therefore does not currently rely
           on one of the appropriate safeguards listed in KVKK Art. 9, and this carries a risk of non-compliance.
         </li>
         <li>
