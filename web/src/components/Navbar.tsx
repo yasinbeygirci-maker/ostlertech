@@ -9,10 +9,27 @@ import { PLAY_URL } from "@/lib/site";
 const EN_PATH: Record<string, string> = {
   "/": "/en",
   "/areapilot": "/en/areapilot",
+  "/cornertab": "/en/cornertab",
+  "/cornertab/privacy": "/en/cornertab/privacy",
+  "/dijital-guvenlik-plani": "/en/digital-security-plan",
   "/gizlilik": "/en/privacy",
+  "/guvenlik/sifreleme-belgesi": "/en/security/whitepaper",
+  "/guvenlik-acigi-bildir": "/en/report-vulnerability",
+  "/guvenlik-kontrol-listesi": "/en/security-checklist",
+  "/hozeni/privacy": "/en/hozeni/privacy",
+  "/iki-adimli-dogrulama": "/en/password-manager-with-authenticator",
   "/kullanim-sartlari": "/en/terms",
-  "/teslimat-ve-iade": "/en/refunds",
+  "/oklar/privacy": "/en/oklar/privacy",
+  "/otopark/privacy": "/en/otopark/privacy",
+  "/packle/privacy": "/en/packle/privacy",
+  "/sifre-yoneticisi": "/en/offline-password-manager",
+  "/sifre-yoneticisi-karsilastirma": "/en/password-manager-comparison",
   "/satin-al": "/en/pricing",
+  "/syncsite": "/en/syncsite",
+  "/syncsite/gizlilik": "/en/syncsite/privacy",
+  "/syncsite/hesap-silme": "/en/syncsite/delete-account",
+  "/teslimat-ve-iade": "/en/refunds",
+  "/telefon-calinirsa": "/en/if-your-phone-is-stolen",
 };
 
 const links = [
@@ -32,6 +49,8 @@ export default function Navbar() {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname() ?? "/";
   const enHref = EN_PATH[pathname.replace(/\/+$/, "") || "/"] ?? "/en";
+  // AreaPilot sayfasında sağ üst düğme o ürüne gider, SyncPass'e değil.
+  const apSayfasi = pathname === "/areapilot" || pathname.startsWith("/areapilot/");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -69,7 +88,7 @@ export default function Navbar() {
           </span>
         </a>
 
-        <div className="hidden lg:flex items-center gap-2 text-sm font-medium text-muted">
+        <div className="hidden xl:flex items-center gap-2 text-sm font-medium text-muted">
           {links.map((l) => (
             <a key={l.href} href={l.href} className="press inline-flex items-center min-h-[44px] px-3 hover:text-white">
               {l.label}
@@ -79,16 +98,22 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1.5 text-sm" role="group" aria-label="Dil / Language">
-            <span aria-current="true" lang="tr" className="font-semibold text-white">Türkçe</span>
+            <span aria-current="true" lang="tr" className="font-semibold text-white"><span className="sm:hidden">TR</span><span className="hidden sm:inline">Türkçe</span></span>
             <span aria-hidden className="text-muted">|</span>
-            <a href={enHref} lang="en" hrefLang="en" className="press inline-flex items-center min-h-[44px] text-muted hover:text-white">English</a>
+            <a href={enHref} lang="en" hrefLang="en" aria-label="English" className="press inline-flex items-center min-h-[44px] text-muted hover:text-white"><span className="sm:hidden">EN</span><span className="hidden sm:inline">English</span></a>
           </div>
-          <a href={PLAY_URL} target="_blank" rel="noopener" className="hidden sm:inline-flex btn-primary !py-2 !px-4 text-sm">
-            SyncPass'i indir
-          </a>
+          {apSayfasi ? (
+            <a href="#indir" className="hidden sm:inline-flex btn-primary !py-2 !px-4 text-sm whitespace-nowrap">
+              7 gün ücretsiz dene
+            </a>
+          ) : (
+            <a href={PLAY_URL} target="_blank" rel="noopener" className="hidden sm:inline-flex btn-primary !py-2 !px-4 text-sm whitespace-nowrap">
+              SyncPass'i indir
+            </a>
+          )}
           <button
             ref={buttonRef}
-            className="press lg:hidden -mr-2 flex h-12 w-12 items-center justify-center text-muted hover:text-white"
+            className="press xl:hidden -mr-2 flex h-12 w-12 items-center justify-center text-muted hover:text-white"
             onClick={() => setOpen(!open)}
             aria-label={open ? "Menüyü kapat" : "Menüyü aç"}
             aria-expanded={open}
@@ -103,7 +128,7 @@ export default function Navbar() {
       <div
         id="mobil-menu"
         inert={!open}
-        className="menu-panel material lg:hidden absolute right-3 left-3 top-[calc(100%-4px)] rounded-2xl px-5 py-5 flex flex-col gap-1 origin-top-right transition-[transform,opacity] duration-300 [transition-timing-function:cubic-bezier(0.2,0.9,0.25,1)]"
+        className="menu-panel material xl:hidden absolute right-3 left-3 top-[calc(100%-4px)] rounded-2xl px-5 py-5 flex flex-col gap-1 origin-top-right transition-[transform,opacity] duration-300 [transition-timing-function:cubic-bezier(0.2,0.9,0.25,1)]"
         style={{
           opacity: open ? 1 : 0,
           transform: open ? "none" : "scale(0.94)",
@@ -116,9 +141,15 @@ export default function Navbar() {
             {l.label}
           </a>
         ))}
-        <a href={PLAY_URL} target="_blank" rel="noopener" className="btn-primary mt-3 !min-h-[48px]">
-          SyncPass: Google Play&apos;den indir
-        </a>
+        {apSayfasi ? (
+          <a href="#indir" onClick={() => setOpen(false)} className="btn-primary mt-3 !min-h-[48px]">
+            AreaPilot: 7 gün ücretsiz dene
+          </a>
+        ) : (
+          <a href={PLAY_URL} target="_blank" rel="noopener" className="btn-primary mt-3 !min-h-[48px]">
+            SyncPass: Google Play&apos;den indir
+          </a>
+        )}
       </div>
     </nav>
   );
