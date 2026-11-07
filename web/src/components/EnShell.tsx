@@ -18,7 +18,11 @@ export function EnHeader({ trHref = "/" }: { trHref?: string }) {
           <a href="/en/areapilot" className="hover:text-white">AreaPilot</a>
         </nav>
         <div className="flex items-center gap-3">
-          <a href={trHref} lang="tr" hrefLang="tr" className="text-sm text-muted hover:text-white">Türkçe</a>
+          <div className="flex items-center gap-1.5 text-sm" role="group" aria-label="Language / Dil">
+            <a href={trHref} lang="tr" hrefLang="tr" className="inline-flex items-center min-h-[44px] text-muted hover:text-white">Türkçe</a>
+            <span aria-hidden className="text-muted">|</span>
+            <span aria-current="true" lang="en" className="font-semibold text-white">English</span>
+          </div>
           <a href={PLAY_URL} className="btn-primary !py-2 !px-4 text-sm whitespace-nowrap" rel="noopener">Get the app</a>
         </div>
       </div>

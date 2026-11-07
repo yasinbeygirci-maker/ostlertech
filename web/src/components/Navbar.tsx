@@ -1,8 +1,19 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { PLAY_URL } from "@/lib/site";
+
+// Türkçe sayfanın İngilizce karşılığı; tabloda yoksa İngilizce ana sayfa.
+const EN_PATH: Record<string, string> = {
+  "/": "/en",
+  "/areapilot": "/en/areapilot",
+  "/gizlilik": "/en/privacy",
+  "/kullanim-sartlari": "/en/terms",
+  "/teslimat-ve-iade": "/en/refunds",
+  "/satin-al": "/en/pricing",
+};
 
 const links = [
   { href: "/syncpass#ozellikler", label: "Özellikler" },
@@ -10,6 +21,7 @@ const links = [
   { href: "/syncpass#guvenlik", label: "Güvenlik" },
   { href: "/syncpass#fiyat", label: "Fiyat" },
   { href: "/products", label: "Ürünler" },
+  { href: "/areapilot", label: "AreaPilot" },
   { href: "/videolar", label: "Videolar" },
   { href: "/iletisim", label: "İletişim" },
 ];
@@ -18,6 +30,8 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const pathname = usePathname() ?? "/";
+  const enHref = EN_PATH[pathname.replace(/\/+$/, "") || "/"] ?? "/en";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -64,6 +78,11 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 text-sm" role="group" aria-label="Dil / Language">
+            <span aria-current="true" lang="tr" className="font-semibold text-white">Türkçe</span>
+            <span aria-hidden className="text-muted">|</span>
+            <a href={enHref} lang="en" hrefLang="en" className="press inline-flex items-center min-h-[44px] text-muted hover:text-white">English</a>
+          </div>
           <a href={PLAY_URL} target="_blank" rel="noopener" className="hidden sm:inline-flex btn-primary !py-2 !px-4 text-sm">
             SyncPass'i indir
           </a>
