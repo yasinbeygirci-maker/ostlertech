@@ -1,23 +1,31 @@
 import type { Metadata } from "next";
 import LegalPage, { H2, List } from "@/components/LegalPage";
 import { COMPANY, DESKTOP_LICENSE, PADDLE_BUYER_TERMS_URL } from "@/lib/site";
+import AreaPilotLegalSections from "@/components/AreaPilotLegalSections";
+import { areapilotLegalLive, REFUND_DESCRIPTION, REFUND_INTRO, REFUND_SECTION } from "@/lib/areapilot-legal";
 
 // /teslimat-ve-iade sayfasının İngilizce karşılığı. Biri değişirse diğeri de aynı işte güncellenir.
 export const metadata: Metadata = {
   title: "Delivery and Refund Policy",
-  description: "SyncPass Desktop Premium: electronic delivery, subscription cancellation and a no-questions-asked refund within 14 days.",
+  description: areapilotLegalLive() ? REFUND_DESCRIPTION.en : "SyncPass Desktop Premium: electronic delivery, subscription cancellation and a no-questions-asked refund within 14 days.",
   alternates: { canonical: "/en/refunds", languages: { tr: "/teslimat-ve-iade", en: "/en/refunds" } },
 };
 
 const link = "text-primary hover:text-primary-light";
 
 export default function RefundsEnPage() {
+  // AreaPilot section (5) stays CLOSED until Zeynep + Yasin approve: lib/areapilot-legal.ts AREAPILOT_LEGAL_ONAY_BEKLIYOR.
+  const live = areapilotLegalLive();
   return (
     <LegalPage eyebrow="Legal" title="Delivery and Refund Policy" lang="en" altLink={{ href: "/teslimat-ve-iade", label: "Türkçe sürüm" }}>
-      <p>
+      {live ? (
+        <p>{REFUND_INTRO.en}</p>
+      ) : (
+        <p>
         This policy applies to SyncPass Desktop Premium licenses purchased through ostlertech.com. Our sales are made by
         our Merchant of Record, Paddle.com; payments and refunds are handled by Paddle.
       </p>
+      )}
 
       <H2>1. Delivery</H2>
       <List>
@@ -64,7 +72,9 @@ export default function RefundsEnPage() {
         never connects.
       </p>
 
-      <H2>5. Your statutory rights</H2>
+      {live && <AreaPilotLegalSections sections={[REFUND_SECTION.en]} />}
+
+      <H2>{live ? "6. Your statutory rights" : "5. Your statutory rights"}</H2>
       <p>
         This policy does not limit the rights given to you by the consumer laws of your country. Your purchase is also
         subject to the{" "}

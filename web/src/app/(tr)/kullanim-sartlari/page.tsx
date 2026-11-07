@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import LegalPage, { H2, List, SellerBlock } from "@/components/LegalPage";
 import { COMPANY, DESKTOP_LICENSE, PADDLE_BUYER_TERMS_URL } from "@/lib/site";
+import AreaPilotLegalSections from "@/components/AreaPilotLegalSections";
+import { areapilotLegalLive, TERMS_INTRO2, TERMS_SECTIONS, TERMS_SHIFT } from "@/lib/areapilot-legal";
 
 export const metadata: Metadata = {
   title: "Kullanım ve Satış Koşulları",
@@ -11,6 +13,9 @@ export const metadata: Metadata = {
 const link = "text-primary hover:text-primary-light";
 
 export default function TermsPage() {
+  // AreaPilot bölümleri (7-11) Zeynep + Yasin onayına kadar KAPALI: lib/areapilot-legal.ts AREAPILOT_LEGAL_ONAY_BEKLIYOR.
+  const live = areapilotLegalLive();
+  const sh = live ? TERMS_SHIFT : 0;
   return (
     <LegalPage eyebrow="Yasal" title="Kullanım ve Satış Koşulları" updatedOn="18 Ekim 2026" altLink={{ href: "/en/terms", label: "English version" }}>
       <p>
@@ -18,17 +23,21 @@ export default function TermsPage() {
         ostlertech.com üzerinden satın alınan lisanslar için geçerlidir. Uygulamayı kullanarak ya da lisans satın alarak
         bu koşulları kabul etmiş olursunuz.
       </p>
-      <p>
+      {live ? (
+        <p>{TERMS_INTRO2.tr}</p>
+      ) : (
+        <p>
         Satış koşulları ürünü nereden satın aldığınıza göre ayrılır: ostlertech.com üzerinden Paddle ile satılan SyncPass
         Masaüstü lisanslarına 2-5. bölümler, Google Play üzerinden satılan SyncPass Android Premium planlarına 6. bölüm
         uygulanır. Diğer bölümler hepsi için geçerlidir.
       </p>
+      )}
 
       <H2>1. Taraflar</H2>
       <p>Yazılımın geliştiricisi ve lisans veren:</p>
       <SellerBlock />
 
-      <H2>2. SyncPass Masaüstü satışı: Paddle yetkili satıcımızdır</H2>
+      <H2>{live ? "2. ostlertech.com satışları: Paddle yetkili satıcımızdır" : "2. SyncPass Masaüstü satışı: Paddle yetkili satıcımızdır"}</H2>
       <p>
         ostlertech.com üzerinden verilen siparişlerde sipariş süreci çevrim içi satıcımız Paddle.com tarafından
         yürütülür. Paddle.com bu siparişlerin tümünün yetkili satıcısıdır (<span lang="en">Merchant of Record</span>). Ödeme, faturalandırma, vergiler, müşteri hizmetleri
@@ -75,21 +84,23 @@ export default function TermsPage() {
         <li>İade talepleri Google Play'in iade kurallarına göre değerlendirilir.</li>
       </List>
 
-      <H2>7. Lisans bitince</H2>
+      {live && <AreaPilotLegalSections sections={TERMS_SECTIONS.tr} />}
+
+      <H2>{`${7 + sh}. ${live ? "SyncPass: lisans bitince" : "Lisans bitince"}`}</H2>
       <p>
         Abonelik sona erdiğinde ya da ödeme iade edildiğinde uygulama ücretsiz sürüme geçer. Kasanız hiçbir durumda
         kilitlenmez: tüm kayıtlarınızı görmeye, kopyalamaya, düzenlemeye ve dışa aktarmaya devam edersiniz. Uygulama lisansı yaklaşık haftada bir yenilediği için geçiş, iptal ya da iadeden
         sonra internete bağlıyken genellikle 7 gün içinde, hiç bağlanmazsa en geç 30 gün içinde gerçekleşir.
       </p>
 
-      <H2>8. Ana şifre ve verileriniz</H2>
+      <H2>{`${8 + sh}. Ana şifre ve verileriniz`}</H2>
       <p>
         SyncPass kasanızı yalnızca sizin bildiğiniz ana şifreyle cihazınızda şifreler. Ana şifrenizi bilmediğimiz ve
         saklamadığımız için unutulan bir ana şifreyi geri getiremeyiz. Kasanızı düzenli olarak yedeklemek sizin
         sorumluluğunuzdadır.
       </p>
 
-      <H2>9. Sorumluluğun sınırı</H2>
+      <H2>{`${9 + sh}. Sorumluluğun sınırı`}</H2>
       <p>
         Uygulamaları özenle geliştirir ve test ederiz; ancak yazılım "olduğu gibi" sunulur ve hiçbir yazılım tamamen
         hatasız değildir. Yürürlükteki tüketici mevzuatının size tanıdığı haklar saklı kalmak kaydıyla, kasıt veya ağır
@@ -97,14 +108,14 @@ export default function TermsPage() {
         bedeliyle sınırlıdır.
       </p>
 
-      <H2>10. Fikri mülkiyet</H2>
+      <H2>{`${10 + sh}. Fikri mülkiyet`}</H2>
       <p>
         Uygulamaların, logoların ve içeriklerin tüm hakları {COMPANY.legalName} ({COMPANY.tradeName}) adına saklıdır.
         Lisans size yazılımı kullanma hakkı verir; kaynak koduna veya markalara ilişkin bir hak vermez. Uygulamalarda
         kullanılan açık kaynak bileşenlerin lisansları uygulama içinde listelenir.
       </p>
 
-      <H2>11. Değişiklikler ve uygulanacak hukuk</H2>
+      <H2>{`${11 + sh}. Değişiklikler ve uygulanacak hukuk`}</H2>
       <p>
         Bu koşulları güncelleyebiliriz; önemli değişiklikleri sitede duyururuz. Değişiklikler, yürürlük tarihinden önce
         ödediğiniz dönemi aleyhinize etkilemez. Bu koşullara Türkiye Cumhuriyeti hukuku uygulanır; tüketici olarak

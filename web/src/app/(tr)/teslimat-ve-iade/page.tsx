@@ -1,23 +1,31 @@
 import type { Metadata } from "next";
 import LegalPage, { H2, List } from "@/components/LegalPage";
 import { COMPANY, DESKTOP_LICENSE, PADDLE_BUYER_TERMS_URL } from "@/lib/site";
+import AreaPilotLegalSections from "@/components/AreaPilotLegalSections";
+import { areapilotLegalLive, REFUND_DESCRIPTION, REFUND_INTRO, REFUND_SECTION } from "@/lib/areapilot-legal";
 
 export const metadata: Metadata = {
   title: "Teslimat ve İade Politikası",
-  description: "SyncPass Masaüstü Premium: elektronik teslimat, abonelik iptali ve 14 gün içinde koşulsuz iade.",
+  description: areapilotLegalLive() ? REFUND_DESCRIPTION.tr : "SyncPass Masaüstü Premium: elektronik teslimat, abonelik iptali ve 14 gün içinde koşulsuz iade.",
   alternates: { canonical: "/teslimat-ve-iade", languages: { tr: "/teslimat-ve-iade", en: "/en/refunds" } },
 };
 
 const link = "text-primary hover:text-primary-light";
 
 export default function DeliveryRefundPage() {
+  // AreaPilot bölümü (5) Zeynep + Yasin onayına kadar KAPALI: lib/areapilot-legal.ts AREAPILOT_LEGAL_ONAY_BEKLIYOR.
+  const live = areapilotLegalLive();
   return (
     <LegalPage eyebrow="Yasal" title="Teslimat ve İade Politikası" altLink={{ href: "/en/refunds", label: "English version" }}>
-      <p>
+      {live ? (
+        <p>{REFUND_INTRO.tr}</p>
+      ) : (
+        <p>
         Bu politika ostlertech.com üzerinden satın alınan {DESKTOP_LICENSE.name} lisansları için geçerlidir. Satışlarımızı
         yetkili satıcımız (<span lang="en">Merchant of Record</span>) Paddle.com yapar; ödeme ve iadeler Paddle tarafından
         yürütülür.
       </p>
+      )}
 
       <H2>1. Teslimat</H2>
       <List>
@@ -62,7 +70,9 @@ export default function DeliveryRefundPage() {
         internete bağlıysanız genellikle 7 gün içinde, uygulama hiç internete bağlanmazsa en geç 30 gün içinde.
       </p>
 
-      <H2>5. Yasal haklarınız</H2>
+      {live && <AreaPilotLegalSections sections={[REFUND_SECTION.tr]} />}
+
+      <H2>{live ? "6. Yasal haklarınız" : "5. Yasal haklarınız"}</H2>
       <p>
         Bu politika, bulunduğunuz ülkenin tüketici mevzuatının size tanıdığı hakları kısıtlamaz. Satın alma ayrıca{" "}
         <a href={PADDLE_BUYER_TERMS_URL} target="_blank" rel="noopener" className={link}>Paddle Alıcı Koşulları</a>'na tabidir.

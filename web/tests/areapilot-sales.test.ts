@@ -9,11 +9,22 @@ import {
   AREAPILOT_TIER_DEVICES,
   AREAPILOT_TIER_IDS,
   AREAPILOT_TIER_PRICES,
+  AREAPILOT_TIER_PRICES_EXCL_TAX,
   SALES_COPY,
+  areapilotPreInfo,
   areapilotWelcomeCopy,
   checkoutRequest,
   salesPayload,
 } from "../src/lib/areapilot-sales.ts";
+import {
+  AREAPILOT_LEGAL_ONAY_BEKLIYOR,
+  PRIVACY_ADDITIONS,
+  REFUND_SECTION,
+  TERMS_INTRO2,
+  TERMS_SECTIONS,
+  TERMS_SHIFT,
+  areapilotLegalLive,
+} from "../src/lib/areapilot-legal.ts";
 import { areapilotPricesReady, AREAPILOT_PRICE_IDS, PADDLE_PRICE_PLANS } from "../src/lib/paddle-tiers.ts";
 import { paddleConfig, salesOpenFor } from "../src/lib/paddle-env.ts";
 import { purchaseKeyMailCopy } from "../src/lib/license-mail-copy.ts";
@@ -159,13 +170,100 @@ test("satış kartları: üç katman, bilgisayar sayısı kart metninde ve 1.x /
   }
 });
 
-test("yasal satırlar: iade 14 gün, Paddle satıcı notu, Autodesk bağlantısızlık", () => {
-  assert.match(SALES_COPY.tr.legal.refund, /14 gün/);
-  assert.match(SALES_COPY.en.legal.refund, /14 days/);
-  assert.match(SALES_COPY.tr.legal.paddle, /Paddle\.com/);
-  assert.match(SALES_COPY.en.legal.paddle, /Paddle\.com/);
-  assert.match(SALES_COPY.tr.legal.trademark, /Autodesk ile bağlantılı değildir/);
-  assert.match(SALES_COPY.en.legal.trademark, /not affiliated with Autodesk/);
+// ---------------------------------------------------------------- ön bilgi kutusu (Zeynep §5.1) ve yasal sayfa ekleri
+
+const FORBIDDEN_LEGAL = FORBIDDEN.filter(([name]) => name !== "fiyat tutarı");
+
+test("ön bilgi kutusu: 7 madde, iade 14 gün, Paddle satıcı notu, Autodesk bağlantısızlık; TR 'siz' hitabında", () => {
+  for (const lang of ["tr", "en"] as const) {
+    const p = areapilotPreInfo(lang);
+    assert.equal(p.items.length, 7, lang);
+    const all = [p.title, ...p.items.map((i) => i.label + " " + i.text), p.trademark].join("\n");
+    assert.match(all, /14/);
+    assert.match(all, /Paddle\.com/);
+    assert.match(all, /Merchant of Record/);
+    assert.match(all, /1\.x/);
+    assert.match(all, /destek@ostlertech\.com/);
+    for (const [name, re] of FORBIDDEN_LEGAL) assert.doesNotMatch(all, re, `${lang} ${name}`);
+    assert.match(p.trademark, lang === "tr" ? /Autodesk tarafından yapılmamış, onaylanmamış ve desteklenmemektedir/ : /not made, endorsed or supported by Autodesk/);
+    // adı geçen iki sayfa var ve bağlantılı; sözleşme/gizlilik sayfaları henüz yok: bağlantı çizilmez
+    const hrefs = p.links.filter((l) => l.href).map((l) => l.href);
+    assert.deepEqual(hrefs, lang === "tr" ? ["/kullanim-sartlari", "/teslimat-ve-iade"] : ["/en/terms", "/en/refunds"]);
+  }
+  const tr = areapilotPreInfo("tr").items.map((i) => i.text).join("\n");
+  assert.match(tr, /\b(sizin|biz|bulunduğunuz|girerseniz|hakkınız)\b/);
+  // JS \b yalnız ASCII harflere bakar; Türkçe harfler için açık bakış (kelime tam eşleşsin)
+  assert.doesNotMatch(tr, /(^|[^a-zçğıöşü])(bulunduğun|girersen|hakkın)(?![a-zçğıöşü])/i);
+});
+
+test("ön bilgi kutusundaki üç toplam tek kaynak tablosundan gelir (AREAPILOT_TIER_PRICES) ve elle yazılmış tutar yok", () => {
+  for (const lang of ["tr", "en"] as const) {
+    const price = areapilotPreInfo(lang).items[1].text;
+    for (const tier of AREAPILOT_TIER_IDS) {
+      assert.ok(price.includes(`${AREAPILOT_TIER_PRICES_EXCL_TAX[tier][lang]} = ${AREAPILOT_TIER_PRICES[tier][lang]}`), `${lang} ${tier}`);
+    }
+  }
+  assert.ok(areapilotPreInfo("tr").items[1].text.includes("₺2.398,80") && areapilotPreInfo("tr").items[1].text.includes("₺9.598,80") && areapilotPreInfo("tr").items[1].text.includes("₺23.998,80"));
+  const src = fs.readFileSync(path.join(SRC, "lib", "areapilot-sales.ts"), "utf8");
+  const pre = src.slice(src.indexOf("export function areapilotPreInfo"), src.indexOf("export interface WelcomeCopy"));
+  assert.doesNotMatch(pre, /₺\s?\d|\d\s?₺/, "ön bilgi işlevinde sabit tutar yazılmaz");
+});
+
+test("kart fiyat cümlesi ile ön bilgi çelişmez: kart ana fiyatı KDV dahil toplam, ön bilgi de aynı toplamı söyler", () => {
+  for (const lang of ["tr", "en"] as const) {
+    const text = areapilotPreInfo(lang).items[1].text;
+    assert.match(text, lang === "tr" ? /KDV dahil toplam/ : /including 20% VAT/);
+    assert.doesNotMatch(text, /vergileri içerir|exclude tax|KDV hariçtir/i);
+  }
+});
+
+test("AreaPilot yasal sayfa ekleri: onay beklerken KAPALI, metinde yasak ifade ve işaret yok, TR/EN aynı bölüm sayısı", () => {
+  assert.equal(AREAPILOT_LEGAL_ONAY_BEKLIYOR, true, "Zeynep + Yasin onayı olmadan yayına açılmaz");
+  assert.equal(areapilotLegalLive(), false);
+  assert.equal(TERMS_SECTIONS.tr.length, TERMS_SHIFT);
+  assert.equal(TERMS_SECTIONS.en.length, TERMS_SHIFT);
+  const all = [
+    TERMS_INTRO2.tr,
+    TERMS_INTRO2.en,
+    ...TERMS_SECTIONS.tr.flatMap((s) => [s.heading, ...s.items.map((i) => i.text)]),
+    ...TERMS_SECTIONS.en.flatMap((s) => [s.heading, ...s.items.map((i) => i.text)]),
+    ...[REFUND_SECTION.tr, REFUND_SECTION.en].flatMap((s) => [s.heading, ...s.items.map((i) => (i.lead ?? "") + i.text)]),
+    ...Object.values(PRIVACY_ADDITIONS.tr),
+    ...Object.values(PRIVACY_ADDITIONS.en),
+  ].join("\n");
+  for (const [name, re] of FORBIDDEN_LEGAL) assert.doesNotMatch(all, re, name);
+  assert.doesNotMatch(all, /\[S\d|\[If S|kabul edilirse|internetsiz|vergileri içerir|ONAY-BEKLIYOR/i);
+  // K8 (doğrulama hizmeti 90 gün duyuru) ve K9 (ticari kullanım) metinde
+  assert.match(TERMS_SECTIONS.tr[2].items[0].text, /en az 90 gün önce duyururuz ve geçerli lisansların doğrulamasız çalışmasını sağlayan bir güncelleme yayımlarız/);
+  assert.match(TERMS_SECTIONS.en[2].items[0].text, /at least 90 days in advance and release an update that lets valid licenses work without the check/);
+  assert.match(TERMS_SECTIONS.tr[0].items[0].text, /ticari işler dahil/);
+  assert.match(TERMS_SECTIONS.en[0].items[0].text, /including commercial work/);
+  // K2 uyumu: fiyat cümlesi KDV dahil toplamı söyler
+  assert.match(TERMS_SECTIONS.tr[0].items[0].text, /%20 KDV dahil toplam/);
+  // iade: 14 gün, düğme adları ön bilgiyle aynı
+  assert.match(REFUND_SECTION.tr.items[2].text, /14 gün/);
+  assert.match(REFUND_SECTION.en.items[2].text, /14 days/);
+  assert.match(TERMS_SECTIONS.tr[2].items[0].text, /“Bu bilgisayardan kaldır”/);
+  assert.match(TERMS_SECTIONS.tr[2].items[0].text, /“Cihazlarımı sıfırla \(e-posta\)”/);
+});
+
+test("yasal sayfalar bayrağa bağlı: kapalıyken eski numaralar, AreaPilot bölümü yalnız areapilotLegalLive() ile çizilir", () => {
+  const pages = [
+    "app/(tr)/kullanim-sartlari/page.tsx",
+    "app/(en)/en/terms/page.tsx",
+    "app/(tr)/teslimat-ve-iade/page.tsx",
+    "app/(en)/en/refunds/page.tsx",
+    "app/(tr)/gizlilik/page.tsx",
+    "app/(en)/en/privacy/page.tsx",
+  ];
+  for (const rel of pages) {
+    const t = fs.readFileSync(path.join(SRC, rel), "utf8");
+    assert.match(t, /areapilotLegalLive\(\)/, rel);
+    assert.match(t, /\{live &&|\{live \?/, rel);
+  }
+  // kapalıyken eski bölüm başlıkları değişmez (numara kayması yalnız live iken)
+  const terms = fs.readFileSync(path.join(SRC, "app/(tr)/kullanim-sartlari/page.tsx"), "utf8");
+  assert.match(terms, /const sh = live \? TERMS_SHIFT : 0;/);
 });
 
 test("kart fiyatları koda SABİT ve KDV DAHİL (Yasin 2026-11-07); vergi hesabı ve Paddle önizlemesi yok", () => {

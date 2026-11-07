@@ -78,9 +78,8 @@ export function checkoutRequest(priceId: string, lang: SalesLang, origin: string
 // ---- Metin ----
 // Hitap: "sen" (yasal metin değil, satış sayfası). Yasak: çevrimdışı/internetsiz, reklamsız, "en iyi", rakip adı, sevkiyat/takip/birleştirme/montaj,
 // yapay zekâ. tests/areapilot-sales.test.ts bunları tarar.
-// [ZEYNEP] kapısı: aşağıdaki "legal" satırları (iade, vergi, Paddle satıcı notu, tek seferlik lisans, Autodesk notu) mevcut SyncPass metninden
-// ve 2026-10-28 satış planından alındı; AreaPilot için ürün eki (teslimat-ve-iade/kullanim-sartlari sayfalarında AreaPilot yok) YAZILMADI.
-// Bayrak açılmadan önce Zeynep onaylar; Defne dil denetimi yapar.
+// Mesafeli satış ön bilgisi (iade, vergi, Paddle satıcı notu, Autodesk notu) aşağıda areapilotPreInfo() içindedir (Zeynep hukuk kapısı §5.1, yasal metin: "siz").
+// AreaPilot yasal sayfa ekleri ayrı dosyada: areapilot-legal.ts (onay bekliyor, kapalı). Bayrak açılmadan önce Zeynep + Yasin onaylar; Defne dil denetimi yapar.
 export interface TierCopy {
   name: string;
   devices: string;
@@ -100,27 +99,18 @@ export interface SalesCopy {
   highlightedLabel: string;
   tiers: Record<AreaPilotTierId, TierCopy>;
   after: string[];
-  legal: {
-    paddle: string;
-    refund: string;
-    trademark: string;
-    termsLabel: string;
-    termsHref: string;
-    refundLabel: string;
-    refundHref: string;
-  };
   error: string;
 }
 
 const commonTr = (n: number): string[] => [
   "Tek seferlik ödeme, yenileme yok",
-  "Tüm 1.x sürümlerinde geçerli",
-  n === 1 ? "Kod 1 bilgisayarda kullanılır" : `Aynı kodu en fazla ${n} bilgisayarda kullanabilirsin`,
+  "Tüm 1.x sürümlerinde geçerli (2.0 dahil değil)",
+  n === 1 ? "Kodu 1 bilgisayarda kullanabilirsin" : `Aynı kodu en çok ${n} bilgisayarda kullanabilirsin`,
 ];
 const commonEn = (n: number): string[] => [
-  "One payment, no renewals",
-  "Valid for all 1.x versions",
-  n === 1 ? "The key works on 1 computer" : `Use the same key on up to ${n} computers`,
+  "One-time payment, no renewal",
+  "Valid for all 1.x versions (not 2.0)",
+  n === 1 ? "Use the key on 1 computer" : `Use the same key on up to ${n} computers`,
 ];
 
 export const SALES_COPY: Record<SalesLang, SalesCopy> = {
@@ -139,19 +129,10 @@ export const SALES_COPY: Record<SalesLang, SalesCopy> = {
       firm: { name: "Firma", devices: "20 bilgisayar", features: commonTr(20) },
     },
     after: [
-      "Ödeme bitince lisans kodun hemen açılan sayfada görünür ve e-postana da gönderilir. Kodu başkasıyla paylaşma: kodu bilen onu kendi bilgisayarına kurabilir.",
-      "Bilgisayar değiştirirken eski bilgisayarda AreaPilot Lisans penceresinden Kaldır'a basarsın; yer yeni bilgisayara açılır.",
+      "Ödeme bitince lisans kodun açılan sayfada görünür ve e-postana da gönderilir. Kodu yalnız kendi işinde ya da firmanın bilgisayarlarında, lisanstaki bilgisayar sayısı kadar kullan; firmanın dışından kimseyle paylaşma: kodu bilen onu kendi bilgisayarında etkinleştirip bilgisayar hakkını tüketebilir.",
+      "Kodu girmek için AutoCAD'de AREAPILOT_LISANS yaz; \"AreaPilot Lisansı\" penceresinde kodu yapıştırıp \"Etkinleştir\"e bas.",
+      "Bilgisayar değiştirirken eski bilgisayarda \"Bu bilgisayardan kaldır\"a bas (internet gerekir, 30 günde en çok 3 kez); hak yeni bilgisayara geçer. Eski bilgisayara ulaşamıyorsan \"Cihazlarımı sıfırla (e-posta)\" ile bilgisayarlarını sıfırlayabilirsin (30 günde en çok 2 kez); sıfırlamada kodun yenisiyle değişir.",
     ],
-    legal: {
-      paddle:
-        "Siparişin yetkili satıcımız Paddle.com (Merchant of Record) tarafından işlenir; kart bilgilerin bize iletilmez.",
-      refund: "Ödeme tarihinden itibaren 14 gün içinde gerekçe göstermeden ücretin tamamını iade ederiz.",
-      trademark: "AutoCAD, Autodesk, Inc.'in tescilli markasıdır. AreaPilot, Autodesk ile bağlantılı değildir.",
-      termsLabel: "Kullanım ve satış koşulları",
-      termsHref: "/kullanim-sartlari",
-      refundLabel: "Teslimat ve iade politikası",
-      refundHref: "/teslimat-ve-iade",
-    },
     error: "Fiyatlar şu an yüklenemedi. Sayfayı yenile; sorun sürerse destek@ostlertech.com adresine yaz.",
   },
   en: {
@@ -169,22 +150,78 @@ export const SALES_COPY: Record<SalesLang, SalesCopy> = {
       firm: { name: "Firm", devices: "20 computers", features: commonEn(20) },
     },
     after: [
-      "When the payment completes, your license key appears on the page that opens and is also emailed to you. Do not share the key: anyone who has it can install it on their own computer.",
-      "When you change computers, press Remove in the AreaPilot License window on the old one; the slot is freed for the new computer.",
+      "When the payment completes, your license key appears on the page that opens and is also emailed to you. Use the key only for your own work or on your company's computers, up to the number of computers in the license, and do not share it outside your company: anyone who has it can activate it on their own computer and use up your computer limit.",
+      "To enter the key, type AREAPILOT_LISANS in AutoCAD, paste the key in the \"AreaPilot License\" window and press \"Activate\".",
+      "When you switch computers, press \"Remove from this computer\" on the old one (needs internet, up to 3 times in 30 days). If you can't reach the old computer, use \"Reset my devices (email)\" (up to 2 times in 30 days); a reset replaces your key with a new one.",
     ],
-    legal: {
-      paddle:
-        "Your order is processed by our reseller Paddle.com, the Merchant of Record; your card details never reach us.",
-      refund: "You can ask for a full refund within 14 days of payment, no questions asked.",
-      trademark: "AutoCAD is a registered trademark of Autodesk, Inc. AreaPilot is not affiliated with Autodesk.",
-      termsLabel: "Terms of use and sale",
-      termsHref: "/en/terms",
-      refundLabel: "Delivery and refund policy",
-      refundHref: "/en/refunds",
-    },
     error: "Prices could not be loaded right now. Refresh the page; if it continues, write to destek@ostlertech.com.",
   },
 };
+
+// ---- Mesafeli satış ön bilgisi (Zeynep hukuk kapısı §5.1; yasal metin: TR "siz") ----
+// SALES_COPY'den AYRI: orası "sen" hitabı ve fiyat tutarı yasağıyla taranır. Tutarlar yalnız yukarıdaki sabit tablolardan okunur (tek kaynak).
+export interface PreInfoItem {
+  label: string;
+  text: string;
+}
+export interface PreInfoLink {
+  label: string;
+  /** null: sayfa henüz yok, bağlantı çizilmez (yayına kapalı sözleşme/gizlilik sayfaları; areapilot-legal.ts onayıyla birlikte eklenir). */
+  href: string | null;
+}
+export interface PreInfoCopy {
+  title: string;
+  items: PreInfoItem[];
+  links: PreInfoLink[];
+  trademark: string;
+}
+
+function tierLine(lang: SalesLang, names: Record<AreaPilotTierId, string>): string {
+  return AREAPILOT_TIER_IDS.map((t) => `${names[t]} ${AREAPILOT_TIER_PRICES_EXCL_TAX[t][lang]} = ${AREAPILOT_TIER_PRICES[t][lang]}`).join("; ");
+}
+
+export function areapilotPreInfo(lang: SalesLang): PreInfoCopy {
+  if (lang === "en") {
+    return {
+      title: "Before you buy",
+      items: [
+        { label: "Product and compatibility", text: "AreaPilot 1.x; Windows 10 and 11 (64-bit), AutoCAD® 2013-2027 (64-bit). It does not run in AutoCAD LT. Before you buy, try it on your own version with the 7-day full trial; the versions it has been tested with are listed on this page." },
+        { label: "Price, taxes and seller", text: `The amounts on the cards are totals including 20% VAT for Türkiye: ${tierLine("en", { individual: "Individual", office: "Office", firm: "Company" })}. For other countries tax is calculated for your country. The amount you pay is the tax-inclusive total shown on the checkout page; if you enter a tax number, the tax may change. It is a one-time payment and does not renew. The seller, who takes your payment, is our reseller Paddle.com (Merchant of Record); Paddle sends your receipt, and your payment details do not reach us.` },
+        { label: "Delivery", text: "Your license key is shown on the page that opens right after payment and emailed to the address you paid with." },
+        { label: "License checks", text: "Activation needs an internet connection; after that, a licensed computer needs to run AreaPilot while online at least once every 90 days. A check sends only the license key, a random device number and the version. \"Remove from this computer\" can be used up to 3 times and \"Reset my devices (email)\" up to 2 times in 30 days; a reset replaces your key with a new one." },
+        { label: "Versions", text: "The license is valid for all 1.x versions; 2.0 and later major versions are not included." },
+        { label: "Withdrawal and refunds", text: "Because the license key is digital content delivered right after payment, the statutory right of withdrawal does not apply to this purchase where your law allows this exception. We still refund the full price of Individual, Office and Company licenses if you ask within 14 days of payment, no reason needed; refunds are for the whole license." },
+        { label: "Complaints", text: "destek@ostlertech.com. Consumers keep the rights and remedies of their local law." },
+      ],
+      links: [
+        { label: "Terms of Use and Sale", href: "/en/terms" },
+        { label: "Delivery and Refund Policy", href: "/en/refunds" },
+        { label: "License Agreement", href: null },
+        { label: "Privacy Policy", href: null },
+      ],
+      trademark: "AutoCAD is a registered trademark or trademark of Autodesk, Inc. and/or its subsidiaries and/or affiliates in the USA and/or other countries. AreaPilot is not made, endorsed or supported by Autodesk.",
+    };
+  }
+  return {
+    title: "Satın almadan önce",
+    items: [
+      { label: "Ürün ve uyumluluk", text: "AreaPilot 1.x; Windows 10 ve 11 (64 bit), AutoCAD® 2013-2027 (64 bit). AutoCAD LT'de çalışmaz. Satın almadan önce 7 günlük tam denemeyle kendi sürümünüzde deneyin; denendiği sürümler bu sayfada yazılıdır." },
+      { label: "Fiyat, vergiler ve satıcı", text: `Kartlardaki tutarlar Türkiye için %20 KDV dahil toplam fiyattır: ${tierLine("tr", { individual: "Bireysel", office: "Ofis", firm: "Firma" })}. Türkiye dışında vergi bulunduğunuz ülkeye göre hesaplanır. Ödeyeceğiniz tutar, ödeme sayfasında gösterilen vergiler dahil toplamdır; vergi numarası girerseniz vergi tutarı değişebilir. Tek seferlik ödemedir, yenilenmez. Satıcı ve ödemeyi alan, yetkili satıcımız Paddle.com'dur (Merchant of Record); makbuzunuzu Paddle gönderir, ödeme bilgileriniz bize iletilmez.` },
+      { label: "Teslimat", text: "Lisans kodu ödemeden hemen sonra açılan sayfada gösterilir ve ödemede kullandığınız e-posta adresine gönderilir." },
+      { label: "Lisans doğrulaması", text: "Etkinleştirmek için internet gerekir; sonra lisanslı bilgisayarın en az 90 günde bir, internete bağlıyken AreaPilot'u çalıştırması gerekir. Doğrulamada yalnız lisans kodu, rastgele bir cihaz numarası ve sürüm gönderilir. \"Bu bilgisayardan kaldır\" 30 günde en çok 3 kez, \"Cihazlarımı sıfırla (e-posta)\" 30 günde en çok 2 kez kullanılabilir; sıfırlamada kodunuz yenisiyle değişir." },
+      { label: "Sürümler", text: "Lisans bütün 1.x sürümlerinde geçerlidir; 2.0 ve sonraki ana sürümler dahil değildir." },
+      { label: "Cayma ve iade", text: "Lisans kodu ödemeden hemen sonra teslim edilen dijital içerik olduğu için bu satışta yasal cayma hakkı uygulanmaz (Mesafeli Sözleşmeler Yönetmeliği md. 15/1-ğ). Buna rağmen Bireysel, Ofis ve Firma lisanslarının hepsinde, ödeme tarihinden itibaren 14 gün içinde gerekçe göstermeden ücretin tamamını iade ederiz; iade lisansın tamamı için yapılır." },
+      { label: "Şikâyet", text: "destek@ostlertech.com. Tüketici hakem heyetine ya da tüketici mahkemesine başvurma hakkınız saklıdır." },
+    ],
+    links: [
+      { label: "Kullanım ve Satış Koşulları", href: "/kullanim-sartlari" },
+      { label: "Teslimat ve İade Politikası", href: "/teslimat-ve-iade" },
+      { label: "Lisans Sözleşmesi", href: null },
+      { label: "Gizlilik Politikası", href: null },
+    ],
+    trademark: "AutoCAD, Autodesk, Inc.'in ve/veya bağlı şirketlerinin ABD'de ve/veya diğer ülkelerde tescilli markası ya da markasıdır. AreaPilot, Autodesk tarafından yapılmamış, onaylanmamış ve desteklenmemektedir.",
+  };
+}
 
 /** Teşekkür sayfası (/welcome) metni, ürüne göre. SyncPass metni ayrı kalır (welcome/page.tsx), burada yalnız AreaPilot. */
 export interface WelcomeCopy {

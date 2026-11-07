@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import LegalPage, { H2, List, SellerBlock } from "@/components/LegalPage";
 import { COMPANY, DESKTOP_LICENSE, FREE_ITEM_LIMIT, PADDLE_BUYER_TERMS_URL } from "@/lib/site";
+import AreaPilotLegalSections from "@/components/AreaPilotLegalSections";
+import { areapilotLegalLive, TERMS_INTRO2, TERMS_SECTIONS, TERMS_SHIFT } from "@/lib/areapilot-legal";
 
 // /kullanim-sartlari sayfasının İngilizce karşılığı. Biri değişirse diğeri de aynı işte güncellenir.
 export const metadata: Metadata = {
@@ -12,6 +14,9 @@ export const metadata: Metadata = {
 const link = "text-primary hover:text-primary-light";
 
 export default function TermsEnPage() {
+  // AreaPilot sections (7-11) stay CLOSED until Zeynep + Yasin approve: lib/areapilot-legal.ts AREAPILOT_LEGAL_ONAY_BEKLIYOR.
+  const live = areapilotLegalLive();
+  const sh = live ? TERMS_SHIFT : 0;
   return (
     <LegalPage eyebrow="Legal" title="Terms of Use and Sale" lang="en" updatedOn="18 October 2026" altLink={{ href: "/kullanim-sartlari", label: "Türkçe sürüm" }}>
       <p>
@@ -19,17 +24,21 @@ export default function TermsEnPage() {
         licenses purchased through ostlertech.com. By using an app or purchasing a license you accept these terms. If
         this English version and the Turkish version differ, the Turkish version prevails.
       </p>
-      <p>
+      {live ? (
+        <p>{TERMS_INTRO2.en}</p>
+      ) : (
+        <p>
         The terms of sale depend on where you buy: sections 2-5 apply to SyncPass Desktop licenses sold on
         ostlertech.com through Paddle, and section 6 applies to SyncPass for Android Premium plans sold through Google
         Play. All other sections apply to both.
       </p>
+      )}
 
       <H2>1. Parties</H2>
       <p>The developer of the software and licensor:</p>
       <SellerBlock lang="en" />
 
-      <H2>2. SyncPass Desktop sales: Paddle is our Merchant of Record</H2>
+      <H2>{live ? "2. Sales on ostlertech.com: Paddle is our Merchant of Record" : "2. SyncPass Desktop sales: Paddle is our Merchant of Record"}</H2>
       <p>
         For orders placed on ostlertech.com, our order process is conducted by our online reseller Paddle.com.
         Paddle.com is the Merchant of Record for all these orders. Paddle provides all customer service inquiries and handles returns. Payment, invoicing and taxes are
@@ -72,21 +81,23 @@ export default function TermsEnPage() {
         <li>Refund requests are handled under Google Play's refund policies.</li>
       </List>
 
-      <H2>7. When the license ends</H2>
+      {live && <AreaPilotLegalSections sections={TERMS_SECTIONS.en} />}
+
+      <H2>{`${7 + sh}. ${live ? "SyncPass: when the license ends" : "When the license ends"}`}</H2>
       <p>
         When a subscription ends or a payment is refunded, the app switches to the free version. Your vault is never
         locked: you can still view, copy, edit and export all your entries. Because the app renews the license about once a week, the switch usually happens
         within 7 days after a cancellation or refund if the app is online, and within 30 days at the latest if it never connects.
       </p>
 
-      <H2>8. Master password and your data</H2>
+      <H2>{`${8 + sh}. Master password and your data`}</H2>
       <p>
         SyncPass encrypts your vault on your device with a master password that only you know. Because we neither know
         nor store your master password, we cannot recover a forgotten one. Backing up your vault regularly is your
         responsibility.
       </p>
 
-      <H2>9. Limitation of liability</H2>
+      <H2>{`${9 + sh}. Limitation of liability`}</H2>
       <p>
         We develop and test our apps carefully, but the software is provided "as is" and no software is entirely free of
         errors. Without prejudice to your rights under applicable consumer law, and except in cases of intent or gross
@@ -94,14 +105,14 @@ export default function TermsEnPage() {
         12 months.
       </p>
 
-      <H2>10. Intellectual property</H2>
+      <H2>{`${10 + sh}. Intellectual property`}</H2>
       <p>
         All rights to the apps, logos and content are reserved by {COMPANY.legalName} ({COMPANY.tradeName}). The license
         gives you the right to use the software; it gives no rights to the source code or trademarks. Licenses of the
         open-source components used in the apps are listed inside the apps.
       </p>
 
-      <H2>11. Changes and governing law</H2>
+      <H2>{`${11 + sh}. Changes and governing law`}</H2>
       <p>
         We may update these terms and will announce significant changes on the website. Changes do not affect, to your
         disadvantage, a period you paid for before they took effect. These terms are governed by the laws of the Republic

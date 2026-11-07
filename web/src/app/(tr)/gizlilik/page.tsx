@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import LegalPage, { H2, List, SellerBlock } from "@/components/LegalPage";
 import { COMPANY } from "@/lib/site";
+import { areapilotLegalLive, PRIVACY_ADDITIONS } from "@/lib/areapilot-legal";
 
 export const metadata: Metadata = {
   title: "Gizlilik Politikası ve KVKK Aydınlatma Metni",
@@ -9,6 +10,9 @@ export const metadata: Metadata = {
 };
 
 export default function SitePrivacyPage() {
+  // AreaPilot lisans/e-posta/Resend eklemeleri Zeynep + Yasin onayına kadar KAPALI: lib/areapilot-legal.ts AREAPILOT_LEGAL_ONAY_BEKLIYOR.
+  const live = areapilotLegalLive();
+  const add = PRIVACY_ADDITIONS.tr;
   return (
     <LegalPage eyebrow="Yasal" title="Gizlilik Politikası ve KVKK Aydınlatma Metni" updatedOn="31 Ekim 2026" altLink={{ href: "/en/privacy", label: "English version" }}>
       <p>
@@ -26,7 +30,12 @@ export default function SitePrivacyPage() {
         <li><strong className="text-foreground">Siteyi gezerken:</strong> sitemizin kendisi çerez kullanmaz. Yalnız satın alma sayfasında (/satin-al) Paddle'ın ödeme bileşeni yüklenir; bu bileşen paddle.com alan adında kötüye kullanıma karşı koruma için kısa süreli bir güvenlik çerezi bırakır ve ödeme penceresini açarsanız kendi çerezlerini kullanabilir (Paddle gizlilik politikası). Ödemeyi tamamladığınızda lisans kodunuzu gösterebilmek için işlem numarası yalnız o sekmenin oturum belleğinde tutulur ve sekmeyi kapatınca silinir. Hangi sayfaların ne kadar ziyaret edildiğini görmek için Vercel Web Analytics kullanıyoruz; bu araç çerez kullanmaz, sizi tanımlamaz ve ziyaretleri her gün değişen anonim bir özetle sayar (sayfa adresi, ülke, cihaz ve tarayıcı türü gibi toplu bilgiler). Barındırma hizmetimiz (Vercel) ayrıca güvenlik ve hata ayıklama için IP adresi ve tarayıcı bilgisini kısa süreli sunucu kayıtlarında tutar.</li>
         <li><strong className="text-foreground">Bekleme listesi:</strong> e-posta adresiniz. İki ayrı amaç vardır: (a) beta indirme bağlantısını size iletmek ve beta sürümüyle ilgili zorunlu bilgilendirme (güncelleme, son kullanım tarihi); (b) yeni ürün ve kampanya duyurularını e-postayla göndermek, bu yalnızca formdaki ayrı kutuyu işaretlemeniz halinde yapılır ve dilediğiniz zaman e-postadaki bağlantıdan çıkabilirsiniz. Kutuyu işaretlemezseniz (b) kapsamında e-posta almazsınız; (a) yine de uygulanır. Rızanızın tarihi ve gösterilen metnin sürümü kaydedilir.</li>
         <li><strong className="text-foreground">Satın alma:</strong> satışlarımızı yetkili satıcımız (Merchant of Record) Paddle.com yapar. Ödeme ve fatura bilgilerinizi Paddle toplar ve kendi gizlilik politikasına göre işler. Paddle bize yalnızca e-posta adresinizi, ülkenizi, satın aldığınız planı, işlem ve abonelik numaralarını ve ödeme durumunu iletir. Amaç: lisansın teslimi, abonelik durumunun izlenmesi, iade ve destek.</li>
+        {live ? (
+          <li><strong className="text-foreground">Lisans:</strong> {add.license}</li>
+        ) : (
         <li><strong className="text-foreground">Lisans:</strong> lisans kodu, etkinleştirildiği cihazlar için uygulamanın ürettiği rastgele cihaz numarası, uygulama sürümü ve son doğrulama tarihi. Amaç: lisansın geçerliliğini ve cihaz sınırını denetlemek. Kasanızın içeriği hiçbir zaman bize gelmez.</li>
+        )}
+        {live && <li><strong className="text-foreground">Lisans e-postaları:</strong> {add.licenseMail}</li>}
         <li><strong className="text-foreground">Destek yazışmaları:</strong> size yanıt verebilmek için e-posta içeriği.</li>
         <li><strong className="text-foreground">Instagram mesajları:</strong> @ostlertech hesabına mesaj yazdığınızda ya da bir gönderimize yorum bıraktığınızda Instagram kullanıcı adınız ve hesap numaranız, mesajınızın ya da yorumunuzun içeriği, bizimle yazışma geçmişiniz ve bir otomasyon bunu gerektiriyorsa hesabımızı takip edip etmediğiniz bilgisi işlenir. Bu mesajları ChatPlace adlı mesajlaşma otomasyonu hizmetiyle yönetiriz: belirli bir kelimeyle yazdığınızda istediğiniz bağlantı ya da bilgi size otomatik mesajla gönderilir. Mesajlarınızın bir kısmına yapay zekâ destekli otomatik asistan yanıt verebilir; bu durumda mesajınızın içeriği yanıtı üretmek için ChatPlace'in yapay zekâ hizmet sağlayıcılarına iletilir. Amaç: sorunuzu yanıtlamak ve istediğiniz bağlantıyı ya da bilgiyi göndermek; hukuki sebep, bize yazdığınız mesaja yanıt verebilmek için meşru menfaatimizdir. Bu yazışmaları başka bir yere aktarmaz, reklam için kullanmayız. ChatPlace'teki sohbet kayıtları son yazışmadan 6 ay sonra silinir. Instagram uygulamasındaki yazışma kopyası Meta'nın kendi kurallarına tabidir; onu biz silemeyiz.</li>
         <li><strong className="text-foreground">Güvenlik açığı bildirimleri:</strong> e-posta adresiniz, yazdıysanız adınız ve bildirimin içeriği; amaç bildirimi değerlendirmek, size yanıt vermek ve açığı gidermek. Hukuki sebep: ürünlerimizin güvenliğini sağlamaya yönelik meşru menfaatimiz. Adınız ya da takma adınız teşekkür listesinde yalnızca açık rızanızla yayımlanır.</li>
@@ -46,6 +55,7 @@ export default function SitePrivacyPage() {
         <li>Paddle.com Market Ltd (Birleşik Krallık): yetkili satıcı olarak ödemenin alınması, faturalandırma, vergiler, abonelik ve iadeler. /satin-al sayfasını açtığınızda, bir düğmeye basmanız beklenmeden, fiyatların gösterilmesi için Paddle'ın ödeme betiği (cdn.paddle.com) ve bu betiğin yüklediği, Paddle'a ait ProfitWell betiği (public.profitwell.com) yüklenir; bu sırada IP adresiniz, tarayıcı bilginiz ve ülke bilginiz Paddle'a iletilir (<a href="https://www.paddle.com/legal/privacy" target="_blank" rel="noopener" className="text-primary hover:text-primary-light">Paddle gizlilik politikası</a>).</li>
         <li>Supabase Pte. Ltd. (Singapur şirketi; veritabanı sunucuları İrlanda, AB): lisans ve bekleme listesi kayıtlarının saklanması.</li>
         <li>Vercel: sitenin ve lisans doğrulama hizmetinin barındırılması; anonim ziyaret istatistikleri (Web Analytics).</li>
+        {live && <li>{add.resendItem}</li>}
         <li>ChatPlace, Inc. (ABD): Instagram mesajlaşma otomasyonu (otomatik yanıtlar ve yapay zekâ destekli asistan). ChatPlace, yapay zekâ yanıtları için mesaj içeriğini ABD'deki yapay zekâ hizmet sağlayıcılarına iletir.</li>
         <li>Cloudflare, Inc. (ABD): e-posta yönlendirme; destek@, yasin@ ve guvenlik@ostlertech.com adreslerine yazdığınız e-postalar Cloudflare üzerinden posta kutumuza iletilir.</li>
         <li>Google LLC (ABD): bu e-postaların alındığı posta kutusu (Gmail).</li>
@@ -59,7 +69,7 @@ export default function SitePrivacyPage() {
         sayılan uygun güvencelerden birine (Kurul'un yeterlilik kararı ya da Kurul'un ilan ettiği standart sözleşmenin
         imzalanıp Kurum'a bildirilmesi) dayanmamaktadır. Supabase'e standart sözleşme imzalanması için 18.10.2026 tarihinde
         talep ilettik; yanıt beklenmektedir. ChatPlace ile de standart sözleşme henüz imzalanmamıştır. İmzalanırsa Kurum'a
-        bildirir ve bu metni güncelleriz. Hesap tabanlı uygulamalarımızın
+        bildirir ve bu metni güncelleriz.{live ? ` ${add.resendTransfer}` : null} Hesap tabanlı uygulamalarımızın
         yurt dışı aktarımı kendi gizlilik politikalarında ayrıca anlatılır.
       </p>
 

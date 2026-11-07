@@ -3,12 +3,13 @@
 import { useEffect, useState } from "react";
 import { initializePaddle, type Paddle } from "@paddle/paddle-js";
 import { Check } from "lucide-react";
-import { AREAPILOT_TIER_IDS, AREAPILOT_TIER_PRICES, AREAPILOT_TIER_PRICES_EXCL_TAX, SALES_COPY, checkoutRequest, type AreaPilotTierId, type SalesLang, type SalesPayload } from "@/lib/areapilot-sales";
+import { AREAPILOT_TIER_IDS, AREAPILOT_TIER_PRICES, AREAPILOT_TIER_PRICES_EXCL_TAX, SALES_COPY, areapilotPreInfo, checkoutRequest, type AreaPilotTierId, type SalesLang, type SalesPayload } from "@/lib/areapilot-sales";
 
 // Satış AÇIKKEN çizilen fiyat bölümü (AreaPilotPricing kapısı yükler). Fiyatlar KDV dahil ve sabit (AREAPILOT_TIER_PRICES); vergi hesabı ya da Paddle önizlemesi yok.
 // Adet seçimi yoktur: her düğme quantity 1 ile ödeme açar. Ürün/plan/cihaz sayısını sunucu fiyat tablosu belirler.
 export default function AreaPilotPricingOpen({ lang, payload }: { lang: SalesLang; payload: Extract<SalesPayload, { open: true }> }) {
   const c = SALES_COPY[lang];
+  const pre = areapilotPreInfo(lang);
   const [paddle, setPaddle] = useState<Paddle>();
   const [error, setError] = useState(false);
   const { environment, token, prices } = payload;
@@ -42,6 +43,31 @@ export default function AreaPilotPricingOpen({ lang, payload }: { lang: SalesLan
           <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white">{c.title}</h2>
           <p className="max-w-3xl text-muted leading-relaxed">{c.lead}</p>
         </div>
+
+        {/* Mesafeli satış ön bilgisi (Zeynep §5.1): "Satın al" düğmelerinin üstünde, gövde yazı boyutunda. */}
+        <aside aria-labelledby="areapilot-onbilgi" className="rounded-3xl border border-line bg-card p-6 md:p-8">
+          <h3 id="areapilot-onbilgi" className="text-xl font-bold text-white">{pre.title}</h3>
+          <ol className="mt-4 list-decimal space-y-3 pl-6 text-base leading-relaxed text-foreground">
+            {pre.items.map((it) => (
+              <li key={it.label}>
+                <strong className="text-white">{it.label}:</strong> {it.text}
+              </li>
+            ))}
+          </ol>
+          <p className="mt-4 text-base text-muted">
+            {pre.links
+              .filter((l) => l.href)
+              .map((l, i) => (
+                <span key={l.label}>
+                  {i > 0 && " · "}
+                  <a href={l.href!} className="text-primary underline hover:text-primary-light">
+                    {l.label}
+                  </a>
+                </span>
+              ))}
+          </p>
+          <p className="mt-3 text-base text-muted">{pre.trademark}</p>
+        </aside>
 
         <div className="grid gap-6 lg:grid-cols-3">
           {AREAPILOT_TIER_IDS.map((tier) => {
@@ -96,19 +122,6 @@ export default function AreaPilotPricingOpen({ lang, payload }: { lang: SalesLan
           {c.after.map((p) => (
             <p key={p}>{p}</p>
           ))}
-          <p>{c.legal.refund}</p>
-          <p>
-            {c.legal.paddle}{" "}
-            <a href={c.legal.termsHref} className="text-primary underline hover:text-primary-light">
-              {c.legal.termsLabel}
-            </a>
-            {" · "}
-            <a href={c.legal.refundHref} className="text-primary underline hover:text-primary-light">
-              {c.legal.refundLabel}
-            </a>
-            .
-          </p>
-          <p className="text-xs">{c.legal.trademark}</p>
         </div>
       </div>
     </section>
