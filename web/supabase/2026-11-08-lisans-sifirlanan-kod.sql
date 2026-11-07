@@ -6,11 +6,17 @@
 -- Yerel Postgres olmadığı için çalıştırılarak SINANMADI; uygulamadan önce hazırlık projesinde şu iki adım denenmeli:
 --   (1) sıfırlama sonrası: select count(*) from sp_license_retired_keys;  -> 1
 --   (2) aynı lisansı ikinci kez sıfırla: iki satır, eski kodların özeti birbirinden farklı.
--- KOD (durum sorgusu) bu migrasyondan ÖNCE dağıtılırsa sp_license_retired_keys yok hatası verir; yalnız "eski kod" yolu 500 döner
--- (istemci 5xx'te düşmez). Yine de sıra: önce migrasyon, sonra kod.
+-- SIRA: (1) bu migrasyon, (2) site dağıtımı (durum ucu), (3) istemci 1.0. KOD bu migrasyondan ÖNCE dağıtılırsa sp_license_retired_keys
+-- yok hatası verir ve durum ucunda BİLİNMEYEN HER KOD (yanlış yazılmış kodlar dahil; güncel kodlar etkilenmez) 404 yerine 500 döner,
+-- günlük "license store" hatasıyla dolar. İstemci 5xx'te düşmez, yani zarar yok; yine de sıra korunur.
 -- Saklama: satır lisansa bağlıdır (on delete cascade); lisans silinince (sp_purge_ended_licenses) birlikte gider. Dolaylı kişisel veridir
--- (lisans e-postaya bağlı): eski kodun tek yönlü özeti, lisans kimliği ve tarih tutulur; Gizlilik §4/§9 ve site ek maddesinde sayılır. Geri alma: eski sp_consume_reset_token tanımını 2026-11-06-lisans-urun.sql'den yeniden
--- çalıştır; drop table public.sp_license_retired_keys;
+-- (lisans e-postaya bağlı): eski kodun tek yönlü özeti, lisans kimliği ve tarih tutulur; Gizlilik §4/§9 ve site ek maddesinde sayılır.
+--
+-- GERİ ALMA (SIRA ÖNEMLİ, numaralı):
+--   (1) Önce KODU geri al (durum ucundaki findRetiredKeyOwner çağrısı olmayan sürüm): tablo düşünce bilinmeyen her kod 500 döner.
+--   (2) Sonra eski sp_consume_reset_token tanımını 2026-11-06-lisans-urun.sql'den yeniden çalıştır (create or replace; yetkiler korunur).
+--   (3) En son: drop table public.sp_license_retired_keys;
+--       (2) yapılmadan (3) çalıştırılırsa yeni işlev tabloyu arar ve e-postayla sıfırlama "relation sp_license_retired_keys does not exist" ile 500 verir.
 
 begin;
 

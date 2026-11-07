@@ -2,7 +2,7 @@
 // Saf dosya (birim testli: tests/license-core.test.ts): Next/server-only/Supabase yok, göreli içe aktarma yalnız `import type`.
 // Veritabanı erişimi LicenseStore ile dışarıdan verilir (sunucuda lib/server/license.ts Supabase uygulamasını bağlar).
 // Sözleşme: D:\Development\OstlerTech\yonetim\areapilot-lisans-sozlesmesi.md
-import { createHash, createPrivateKey, createPublicKey, randomBytes, sign, verify } from "node:crypto";
+import { createHash, createHmac, createPrivateKey, createPublicKey, randomBytes, sign, verify } from "node:crypto";
 import type { LicensePlan, LicenseProduct } from "./paddle-tiers";
 
 export type Plan = LicensePlan;
@@ -226,6 +226,11 @@ export interface LicenseStore {
   /** Cihaz bu lisansta kayıtlı mı (salt okur; durum sorgusu için). Hatada fırlatır. */
   hasDevice(licenseId: string, deviceId: string): Promise<boolean>;
   /**
+   * Bu lisansta daha önce bir cihaz GERÇEKTEN kaldırıldı mı (sp_license_removals'ta satır var mı; kayıtsız cihaz kaldırma satır bırakmaz).
+   * Durum sorgusunda device_registered:false yalnız böyle bir iz varsa söylenir; iz yoksa alan hiç gelmez. Hatada fırlatır.
+   */
+  hasRemovalTrace(licenseId: string): Promise<boolean>;
+  /**
    * Cihaz sıfırlamada DEĞİŞTİRİLMİŞ eski kodun sahibi lisans (yoksa null). Yalnız durum sorgusunda kullanılır: sıfırlanan kodla
    * etkinleştirilmiş bilgisayar, kodu "bulunamadı" (404, düşme yok) yerine "bu cihaz kayıtlı değil" diye öğrensin. Hatada fırlatır.
    */
@@ -247,6 +252,28 @@ export interface LicenseStore {
 }
 
 export type ResetOutcome = { result: "invalid" } | { result: "limit" } | { result: "ok"; email: string | null; lang: ResetLang };
+
+/** Durum yanıtında imzalanan (istemciyi düşürebilen) durumlar. */
+const ENDING_STATUSES: ReadonlySet<string> = new Set(["refunded", "canceled", "revoked"]);
+
+/**
+ * Durum yanıtı imzası: HMAC-SHA256, anahtar = istemcinin zaten bildiği lisans kodu (yeni sır yok), hex. İleti: sürüm etiketi, durum,
+ * device_registered ("true" | "false" | "-" alan yok) ve cihaz no. İstemci (LicenseClient) aynı iletiyi kurar ve YALNIZ düşürme
+ * yanıtlarında imzayı doğrular; imzasız düşürme yanıtını yok sayar.
+ */
+export function statusSignature(key: string, status: string, deviceRegistered: boolean | undefined, deviceId: string): string {
+  const dr = deviceRegistered === undefined ? "-" : deviceRegistered ? "true" : "false";
+  const message = ["areapilot-status-v1", status, dr, deviceId].join("\n");
+  return createHmac("sha256", key).update(message, "utf8").digest("hex");
+}
+
+/** Durum yanıtı gövdesi: yalnız refunded/canceled/revoked ya da device_registered:false ise imzalanır; active yanıtlar imzasız kalır. */
+export function statusBody(key: string, deviceId: string, status: LicenseStatus, deviceRegistered: boolean | undefined): Record<string, unknown> {
+  const body: Record<string, unknown> = { status };
+  if (deviceRegistered !== undefined) body.device_registered = deviceRegistered;
+  if (ENDING_STATUSES.has(status) || deviceRegistered === false) body.sig = statusSignature(key, status, deviceRegistered, deviceId);
+  return body;
+}
 
 export type LicenseOp = "activate" | "renew" | "deactivate" | "status";
 export interface ApiResult {
@@ -294,7 +321,7 @@ export async function handleLicenseRequest(
       if (op === "status") {
         // Sıfırlamada değiştirilmiş eski kod: lisans var ama bu kodla artık hiçbir cihaz kayıtlı değil (Yasin kararı K11 = a).
         const owner = await store.findRetiredKeyOwner(key, product);
-        if (owner) return { status: 200, body: { status: owner.status, device_registered: false } };
+        if (owner) return { status: 200, body: statusBody(key, deviceId, owner.status, false) };
       }
       return { status: 404, body: { error: "invalid_key" } };
     }
@@ -313,7 +340,12 @@ export async function handleLicenseRequest(
       // Salt okur durum sorgusu (AreaPilot süresiz belge; istemci 7 günde bir sorar). Belge üretmez, cihaz eklemez/güncellemez,
       // süre uzatmaz. İstemci YALNIZ refunded/canceled/revoked ya da device_registered=false yanıtında lisansı düşürür; başka her
       // şeyde (ağ, 5xx, 404, bozuk yanıt) çalışır. device_registered eski istemcilerce yok sayılır (geriye uyumlu ek alan).
-      return { status: 200, body: { status: license.status, device_registered: await store.hasDevice(license.id, deviceId) } };
+      // device_registered: kayıtlıysa true; kayıtlı değilse YALNIZ bu lisansta gerçek bir cihaz kaldırma izi varsa false (kaldırılan/
+      // sıfırlanan cihazın kopyası düşsün); iz yoksa alan hiç gelmez (istemci için "bilinmiyor": düşme yok).
+      let registered: boolean | undefined;
+      if (await store.hasDevice(license.id, deviceId)) registered = true;
+      else if (await store.hasRemovalTrace(license.id)) registered = false;
+      return { status: 200, body: statusBody(key, deviceId, license.status, registered) };
     }
 
     const entitled = entitlementUntil(license, now);

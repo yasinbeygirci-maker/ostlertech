@@ -273,6 +273,30 @@ test("tam iade lisansı iade durumuna alır (mevcut davranış)", async () => {
   assert.equal(h.store.tables.sp_licenses[0].status, "refunded");
 });
 
+test("kazanılan ters ibraz (chargeback_reverse, approved, full) iade edilmiş lisansı yeniden açar; ters ibraz sonrası aynı olay yinelenirse zarar yok", async () => {
+  const h = harness();
+  await h.post(customerEvent());
+  await h.post(txn(OFFICE));
+  const adj = (id: string, action: string, over: Record<string, unknown> = {}) => ({ event_id: id, event_type: "adjustment.created", data: { action, status: "approved", type: "full", transaction_id: "txn_01aaaaaaaaaaaaaaaaaaaaaaaa", ...over } });
+  await h.post(adj("evt_cb", "chargeback"));
+  assert.equal(h.store.tables.sp_licenses[0].status, "refunded");
+  await h.post(adj("evt_cbr_pending", "chargeback_reverse", { status: "pending_approval" }));
+  assert.equal(h.store.tables.sp_licenses[0].status, "refunded", "onaylanmamış ters ibraz açmaz");
+  await h.post(adj("evt_cbr_partial", "chargeback_reverse", { type: "partial" }));
+  assert.equal(h.store.tables.sp_licenses[0].status, "refunded", "kısmi ters ibraz açmaz");
+  await h.post(adj("evt_cbr", "chargeback_reverse"));
+  assert.equal(h.store.tables.sp_licenses[0].status, "active");
+});
+
+test("ters ibraz yalnız 'refunded' lisansı açar: iptal/askıya alınmış lisans ezilmez", async () => {
+  const h = harness();
+  await h.post(customerEvent());
+  await h.post(txn(OFFICE));
+  h.store.tables.sp_licenses[0].status = "revoked";
+  await h.post({ event_id: "evt_cbr2", event_type: "adjustment.created", data: { action: "chargeback_reverse", status: "approved", type: "full", transaction_id: "txn_01aaaaaaaaaaaaaaaaaaaaaaaa" } });
+  assert.equal(h.store.tables.sp_licenses[0].status, "revoked");
+});
+
 // ---------------------------------------------------------------- e-posta TEK kez: olay sırası, yineleme, eşzamanlılık (migrasyon: key_email_sent_at)
 
 const TXN_ID = "txn_01aaaaaaaaaaaaaaaaaaaaaaaa";

@@ -75,6 +75,11 @@ export function supabaseLicenseStore(db: SupabaseClient): LicenseStore {
       if (error) fail(error, "hasDevice");
       return (data?.length ?? 0) > 0;
     },
+    async hasRemovalTrace(licenseId) {
+      const { data, error } = await db.from("sp_license_removals").select("id").eq("license_id", licenseId).limit(1);
+      if (error) fail(error, "hasRemovalTrace");
+      return (data?.length ?? 0) > 0;
+    },
     async findRetiredKeyOwner(key, product) {
       const { data: retired, error } = await db.from("sp_license_retired_keys").select("license_id").eq("retired_key_hash", createHash("sha256").update(key, "utf8").digest("hex")).maybeSingle<{ license_id: string }>();
       if (error) fail(error, "findRetiredKeyOwner");

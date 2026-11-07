@@ -176,10 +176,16 @@ async function handle({ event_type, data }: PaddleEvent, deps: PaddleEventDeps, 
   }
 
   if (event_type === "adjustment.created" || event_type === "adjustment.updated") {
-    if (data.action !== "refund" && data.action !== "chargeback") return;
+    if (data.action !== "refund" && data.action !== "chargeback" && data.action !== "chargeback_reverse") return;
     if (data.status !== "approved") return;
     // Kısmi iade lisansı düşürmez (yalnız tam iade/itiraz).
     if (data.type !== "full") return;
+    if (data.action === "chargeback_reverse") {
+      // Kazanılan ters ibraz (Paddle itirazı başarıyla savundu; action adı Paddle API belgesinden doğrulandı: "chargeback_reverse"): lisans yalnız
+      // "refunded" ise yeniden açılır (iptal/askı gibi başka bir durumu ezmez). İstemci tarafı: düşen müşteri kodunu yeniden girer.
+      await must(db.from("sp_licenses").update({ status: "active", updated_at: now }).eq("paddle_transaction_id", data.transaction_id).eq("status", "refunded"));
+      return;
+    }
     await must(db.from("sp_licenses").update({ status: "refunded", updated_at: now }).eq("paddle_transaction_id", data.transaction_id));
   }
 }

@@ -2,7 +2,7 @@
 // fiyat kimliği tablosu, satış bayrağı, e-posta sözcükleri. Çalıştırma: npm test
 import test from "node:test";
 import assert from "node:assert/strict";
-import { generateKeyPairSync, createPublicKey, verify } from "node:crypto";
+import { generateKeyPairSync, createPublicKey, createHmac, verify } from "node:crypto";
 import {
   areapilotPublicKey,
   PERPETUAL_EXP,
@@ -23,6 +23,7 @@ import {
   newLicenseKey,
   normalizeKey,
   signLicenseToken,
+  statusSignature,
   SigningNotConfigured,
   verifyAreapilotToken,
   type LicenseRow,
@@ -183,7 +184,7 @@ test("sözleşmedeki örnek belge (sahte genel anahtar) doğrulanır; süresi do
 // ---- uç nokta mantığı (sahte depo) ----
 
 interface FakeOpts {
-  failAt?: "find" | "register" | "touch" | "remove" | "hasDevice" | "retired";
+  failAt?: "find" | "register" | "touch" | "remove" | "hasDevice" | "retired" | "trace";
 }
 
 function fakeStore(rows: LicenseRow[], opts: FakeOpts = {}) {
@@ -227,6 +228,10 @@ function fakeStore(rows: LicenseRow[], opts: FakeOpts = {}) {
     async hasDevice(id, dev) {
       if (opts.failAt === "hasDevice") throw new Error("db");
       return devices.get(id)?.has(dev) ?? false;
+    },
+    async hasRemovalTrace(id) {
+      if (opts.failAt === "trace") throw new Error("db");
+      return (removals.get(id)?.length ?? 0) > 0;
     },
     async findRetiredKeyOwner(key, product) {
       if (opts.failAt === "retired") throw new Error("db");
@@ -299,12 +304,12 @@ test("durum sorgusu (salt okur): iade/iptal/askı durumunu açık söyler, belge
   const canceled = row({ license_key: "APL-44444-44444-44444-44444", id: "44444444-2222-4333-8444-555555555555", status: "canceled" });
   const revoked = row({ license_key: "APL-66666-66666-66666-66666", id: "66666666-2222-4333-8444-555555555555", status: "revoked" });
   const { store, devices } = fakeStore([aplRow, refunded, canceled, revoked]);
-  // Cihaz bu lisansta kayıtlı değilken: status active ama device_registered=false (istemci bunu açık cevap sayıp düşer).
-  assert.deepEqual((await call("status", "areapilot", { key: aplRow.license_key, deviceId: DEV_A }, store)).body, { status: "active", device_registered: false });
+  // Cihaz kayıtlı değil ve bu lisansta hiç cihaz kaldırılmamış (iz yok): alan hiç gelmez, imza da yok (R5 A, R6 C).
+  assert.deepEqual((await call("status", "areapilot", { key: aplRow.license_key, deviceId: DEV_A }, store)).body, { status: "active" });
   for (const r of [refunded, canceled, revoked]) {
     const res = await call("status", "areapilot", { key: r.license_key, deviceId: DEV_A }, store);
     assert.equal(res.status, 200);
-    assert.deepEqual(res.body, { status: r.status, device_registered: false }, "belge/token yok, yalnız durum ve cihaz bilgisi");
+    assert.deepEqual(res.body, { status: r.status, sig: statusSignature(r.license_key, r.status, undefined, DEV_A) }, "belge/token yok; yalnız durum + imza (iz yok: device_registered alanı yok)");
   }
   assert.equal(devices.get(aplRow.id)?.size ?? 0, 0, "durum sorgusu cihaz kaydetmedi");
   assert.equal((await call("status", "areapilot", { key: "APL-33333-33333-33333-33333", deviceId: DEV_A }, store)).status, 404);
@@ -316,10 +321,11 @@ test("durum sorgusu: kayıtlı cihaz device_registered=true; kaldırılan cihaz 
   await call("activate", "areapilot", { key: aplRow.license_key, deviceId: DEV_A }, store);
   const st = { key: aplRow.license_key, deviceId: DEV_A };
   assert.deepEqual((await call("status", "areapilot", st, store)).body, { status: "active", device_registered: true });
-  assert.deepEqual((await call("status", "areapilot", { ...st, deviceId: DEV_B.toUpperCase() }, store)).body, { status: "active", device_registered: false }, "başka cihaz kayıtlı değil");
+  assert.deepEqual((await call("status", "areapilot", { ...st, deviceId: DEV_B.toUpperCase() }, store)).body, { status: "active" }, "başka cihaz kayıtlı değil ama kaldırma izi yok: alan yok");
   assert.equal(devices.get(aplRow.id)?.size, 1, "durum sorgusu cihaz eklemedi/silmedi");
   await call("deactivate", "areapilot", st, store);
-  assert.deepEqual((await call("status", "areapilot", st, store)).body, { status: "active", device_registered: false }, "kaldırılan cihaz");
+  const sigA = statusSignature(aplRow.license_key, "active", false, DEV_A);
+  assert.deepEqual((await call("status", "areapilot", st, store)).body, { status: "active", device_registered: false, sig: sigA }, "kaldırılan cihaz: iz var, imzalı false");
 });
 
 test("durum sorgusu (K11): sıfırlamada değiştirilen eski kod 404 değil {active, device_registered:false}; yeni kod kayıtsız cihazı false söyler; eski kod yalnız durumda tanınır", async () => {
@@ -334,8 +340,8 @@ test("durum sorgusu (K11): sıfırlamada değiştirilen eski kod 404 değil {act
   assert.equal((await store.consumeResetToken("h", new Date(NOW).toISOString(), newKey)).result, "ok");
   assert.equal(retiredKeys.get(oldKey), fresh.id);
   const old = await call("status", "areapilot", { key: oldKey, deviceId: DEV_A }, store);
-  assert.deepEqual(old, { status: 200, body: { status: "active", device_registered: false } });
-  assert.deepEqual((await call("status", "areapilot", { key: newKey, deviceId: DEV_A }, store)).body, { status: "active", device_registered: false }, "yeni kodla henüz etkinleştirilmemiş cihaz");
+  assert.deepEqual(old, { status: 200, body: { status: "active", device_registered: false, sig: statusSignature(oldKey, "active", false, DEV_A) } });
+  assert.deepEqual((await call("status", "areapilot", { key: newKey, deviceId: DEV_A }, store)).body, { status: "active" }, "yeni kodla henüz etkinleştirilmemiş cihaz: iz yok, alan yok");
   // Eski kod başka hiçbir işlemde tanınmaz.
   for (const op of ["activate", "renew", "deactivate"] as const) {
     assert.deepEqual(await call(op, "areapilot", { key: oldKey, deviceId: DEV_A }, store), { status: 404, body: { error: "invalid_key" } }, op);
@@ -346,12 +352,29 @@ test("durum sorgusu (K11): sıfırlamada değiştirilen eski kod 404 değil {act
 });
 
 test("durum sorgusu: depo hatasında 500 server_error (ne 200 ne 404; istemci 5xx'te düşmez)", async () => {
-  for (const failAt of ["hasDevice", "retired", "find"] as const) {
+  for (const failAt of ["hasDevice", "trace", "retired", "find"] as const) {
     const { store } = fakeStore([aplRow], { failAt });
     const key = failAt === "retired" ? "APL-33333-33333-33333-33333" : aplRow.license_key;
     const r = await call("status", "areapilot", { key, deviceId: DEV_A }, store);
     assert.deepEqual(r, { status: 500, body: { error: "server_error" } }, failAt);
   }
+});
+
+test("durum yanıtı imzası (R6): yalnız düşürme yanıtları imzalı; active imzasız; imza lisans kodu + durum + device_registered + cihaz no'ya bağlı, bağımsız HMAC ile doğrulanır", async () => {
+  const refunded = row({ license_key: "APL-22222-22222-22222-22222", id: "22222222-2222-4333-8444-555555555555", status: "refunded" });
+  const { store } = fakeStore([aplRow, refunded]);
+  const hmac = (key: string, msg: string) => createHmac("sha256", key).update(msg, "utf8").digest("hex");
+  const act = await call("status", "areapilot", { key: aplRow.license_key, deviceId: DEV_A }, store);
+  assert.equal("sig" in act.body, false, "active + alan yok: imzasız");
+  await call("activate", "areapilot", { key: aplRow.license_key, deviceId: DEV_A }, store);
+  const ok = await call("status", "areapilot", { key: aplRow.license_key, deviceId: DEV_A }, store);
+  assert.deepEqual(ok.body, { status: "active", device_registered: true }, "active + true: imzasız");
+  const ref = await call("status", "areapilot", { key: refunded.license_key, deviceId: DEV_A }, store);
+  assert.equal(ref.body.sig, hmac(refunded.license_key, ["areapilot-status-v1", "refunded", "-", DEV_A].join(String.fromCharCode(10))));
+  assert.notEqual(ref.body.sig, statusSignature(refunded.license_key, "refunded", undefined, DEV_B), "cihaz no imzaya girer");
+  assert.notEqual(ref.body.sig, statusSignature(aplRow.license_key, "refunded", undefined, DEV_A), "lisans kodu imzaya girer");
+  assert.notEqual(ref.body.sig, statusSignature(refunded.license_key, "canceled", undefined, DEV_A), "durum imzaya girer");
+  assert.match(String(ref.body.sig), /^[0-9a-f]{64}$/);
 });
 
 test("etkinleştirme: SyncPass yanıt biçimi değişmedi ({token, plan, expiresAt})", async () => {
