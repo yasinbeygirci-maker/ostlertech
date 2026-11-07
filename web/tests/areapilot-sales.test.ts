@@ -233,9 +233,27 @@ test("AreaPilot yasal sayfa ekleri: onay beklerken KAPALI, metinde yasak ifade v
   ].join("\n");
   for (const [name, re] of FORBIDDEN_LEGAL) assert.doesNotMatch(all, re, name);
   assert.doesNotMatch(all, /\[S\d|\[If S|kabul edilirse|internetsiz|vergileri içerir|ONAY-BEKLIYOR/i);
-  // K8 (doğrulama hizmeti 90 gün duyuru) ve K9 (ticari kullanım) metinde
-  assert.match(TERMS_SECTIONS.tr[2].items[0].text, /en az 90 gün önce duyururuz ve geçerli lisansların doğrulamasız çalışmasını sağlayan bir güncelleme yayımlarız/);
-  assert.match(TERMS_SECTIONS.en[2].items[0].text, /at least 90 days in advance and release an update that lets valid licenses work without the check/);
+  // K10 (süresiz belge + haftalık sessiz durum sorgusu) ve K11=a (sıfırlanan/kaldırılan cihaz düşer) metinde; eski model (90 gün, yenileme, doğrulama süresi, K8 duyurusu) YOK
+  assert.match(TERMS_SECTIONS.tr[2].items[0].text, /bitiş tarihi yoktur/);
+  assert.match(TERMS_SECTIONS.tr[2].items[0].text, /sunucumuz erişilemez olsa da lisans çalışmaya devam eder/);
+  assert.match(TERMS_SECTIONS.tr[2].items[0].text, /yaklaşık 7 günde bir/);
+  assert.match(TERMS_SECTIONS.tr[2].items[0].text, /Eski kodla etkinleştirilmiş bilgisayarlar, internete bağlıyken yapılan bir sonraki lisans durum sorgusunda ücretsiz moda geçer/);
+  assert.match(TERMS_SECTIONS.en[2].items[0].text, /has no end date/);
+  assert.match(TERMS_SECTIONS.en[2].items[0].text, /keeps working even if our server cannot be reached/);
+  assert.match(TERMS_SECTIONS.en[2].items[0].text, /about once every 7 days/);
+  assert.match(TERMS_SECTIONS.en[2].items[0].text, /Computers activated with the old key switch to free mode at their next license status check/);
+  assert.match(REFUND_SECTION.tr.items[3].text, /sonraki lisans durum sorgusunda/);
+  assert.match(REFUND_SECTION.en.items[3].text, /next license status check/);
+  const eskiModel = /90 g[üu]n|90 days|son doğrulamadan|doğrulamasız|yeniden doğrular|renews it|re-?verif|doğrulama hizmeti|en geç 90|within 90 days/i;
+  for (const [name, text] of [["legal", all], ["preinfo tr", JSON.stringify(areapilotPreInfo("tr"))], ["preinfo en", JSON.stringify(areapilotPreInfo("en"))]] as const) {
+    assert.doesNotMatch(text, eskiModel, `eski lisans modeli kalmış: ${name}`);
+  }
+  // ön bilgi madde 4: bitiş tarihi yok + haftalık sorgu + iade/eski kod düşmesi
+  assert.match(areapilotPreInfo("tr").items[3].text, /Lisansın bitiş tarihi yoktur/);
+  assert.match(areapilotPreInfo("tr").items[3].text, /yaklaşık haftada bir/);
+  assert.match(areapilotPreInfo("en").items[3].text, /has no end date/);
+  assert.match(areapilotPreInfo("en").items[3].text, /about once a week/);
+  // K9 (ticari kullanım) metinde
   assert.match(TERMS_SECTIONS.tr[0].items[0].text, /ticari işler dahil/);
   assert.match(TERMS_SECTIONS.en[0].items[0].text, /including commercial work/);
   // K2 uyumu: fiyat cümlesi KDV dahil toplamı söyler
@@ -276,7 +294,7 @@ test("kart fiyatları koda SABİT ve KDV DAHİL (Yasin 2026-11-07); vergi hesab�
   assert.match(SALES_COPY.tr.taxIncluded, /KDV dahil/);
   assert.match(SALES_COPY.tr.priceNote, /ödeme adımında/);
   const comp = fs.readFileSync(path.join(SRC, "components", "AreaPilotPricingOpen.tsx"), "utf8");
-  assert.doesNotMatch(comp, /PricePreview|formattedTotals|subtotal|\* 1[.,]2|1\.2/, "kartta Paddle önizlemesi ya da vergi hesabı yok");
+  assert.doesNotMatch(comp, /PricePreview|formattedTotals|subtotal|\* 1[.,]2|1\.2/, "kartta Paddle önizlemesi ya da vergi hesabı yok");
   assert.match(comp, /AREAPILOT_TIER_PRICES\[tier\]/);
   const lib = fs.readFileSync(path.join(SRC, "lib", "areapilot-sales.ts"), "utf8");
   assert.doesNotMatch(lib, /PricePreview|formattedTotals/);
