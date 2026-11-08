@@ -27,7 +27,16 @@ const iconMap: Record<string, React.ComponentType<{ className?: string; size?: n
   Gamepad2,
 };
 
+// Oyunlar uygulamalardan ayrı bölümde gösterilir (reklam içerirler; uygulamalar reklamsızdır).
+const OYUN_IDS = new Set(["oklar", "beepout", "packle", "hozeni"]);
+
 export default function ProductsPage() {
+  const uygulamalar = URUNLER.filter((u) => !OYUN_IDS.has(u.id));
+  const oyunlar = URUNLER.filter((u) => OYUN_IDS.has(u.id));
+  const bolumler = [
+    { baslik: "Uygulamalar", liste: uygulamalar },
+    { baslik: "Oyunlar", liste: oyunlar },
+  ];
   return (
     <main className="min-h-screen bg-background overflow-x-hidden text-white">
       <Navbar />
@@ -49,7 +58,7 @@ export default function ProductsPage() {
           </h1>
           
           <p className="max-w-2xl mx-auto text-base md:text-lg text-white/60 font-normal leading-relaxed">
-            Şifre yönetiminden sağlık takibine, küçük işletmelerden proje yönetimine: yayında olan ve hazırlanan uygulamalarımız.
+            Şifre yönetiminden sağlık takibine, küçük işletmelerden proje yönetimine: yayında olan ve hazırlanan uygulamalarımız ve oyunlarımız.
           </p>
         </div>
       </section>
@@ -57,8 +66,11 @@ export default function ProductsPage() {
       {/* Products Grid Section */}
       <section className="pb-32 px-6">
         <div className="max-w-7xl mx-auto">
+          {bolumler.map((bolum) => (
+          <div key={bolum.baslik} className="mb-20 last:mb-0">
+          <h2 className="text-3xl font-bold tracking-tight text-white mb-8">{bolum.baslik}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {URUNLER.map((urun: Urun) => {
+            {bolum.liste.map((urun: Urun) => {
               const IconComponent = iconMap[urun.ikon] || Layers;
               
               return (
@@ -157,6 +169,8 @@ export default function ProductsPage() {
               );
             })}
           </div>
+          </div>
+          ))}
         </div>
       </section>
 
