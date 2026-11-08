@@ -32,7 +32,7 @@ Bağımsız denetimin kamuya açık olup olmadığı üründen ürüne değişir
 
 | Yaklaşım | Paylaşım ve aile planı | 2FA kodu (TOTP) | Geçiş Anahtarı (passkey) | Sızıntı kontrolü |
 |---|---|---|---|---|
-| SyncPass | Yok | Var (Premium) | Android 14 ve üstünde ücretsiz; Windows'ta yalnız gösterir, oluşturamaz | Var (Premium): Have I Been Pwned. Şifrenin kendisi değil, SHA-1 özetinin yalnızca ilk 5 karakteri gönderilir; eşleşme cihazda yapılır |
+| SyncPass | Yok | Var (Premium) | Android 14 ve üstünde ücretsiz; Windows'ta gösterilir ama oluşturulamaz ve düzenlenemez | Var (Premium): Have I Been Pwned. Şifrenin kendisi değil, SHA-1 özetinin yalnızca ilk 5 karakteri gönderilir; eşleşme cihazda yapılır |
 | Bulut kasalı yöneticiler | Üründen ürüne değişir | Üründen ve plandan plana değişir | Üründen ürüne değişir | Üründen ve plandan plana değişir |
 | Yerel dosyalı, açık kaynak yöneticiler | Üründen ürüne değişir | Üründen ürüne değişir | Üründen ürüne değişir | Üründen ürüne değişir |
 
@@ -118,4 +118,4 @@ SyncPass'in Chrome eklentisi: https://chromewebstore.google.com/detail/bbighjeek
 
 İlgili: [Şifre yöneticisi nedir](/sifre-yoneticisi) · [İki adımlı doğrulama](/iki-adimli-dogrulama) · [Geçiş Anahtarı (passkey) nedir](/passkey-nedir)
 
-Google, Android, Google Play, Google Drive, Google Authenticator, Chrome ve Gemini, Google LLC'nin ticari markalarıdır. Windows, Microsoft şirketler grubunun ticari markasıdır. iPhone, Mac ve macOS, Apple Inc.'in ABD'de ve diğer ülke ve bölgelerde tescilli ticari markalarıdır. iOS, Cisco'nun ABD'de ve diğer ülkelerde ticari markası ya da tescilli ticari markasıdır ve lisansla kullanılır. Linux, Linus Torvalds'ın ABD'de ve diğer ülkelerde tescilli ticari markasıdır. Diğer ürün adları sahiplerine ait olabilir.
+Google, Android, Google Play, Google Drive, Google Authenticator, Chrome ve Gemini, Google LLC'nin ticari markalarıdır. Windows, Microsoft şirketler grubunun ticari markasıdır. iPhone, Mac ve macOS, Apple Inc.'in ABD'de ve diğer ülke ve bölgelerde tescilli ticari markalarıdır. iOS, Cisco'nun ABD'de ve diğer ülkelerde ticari markası ya da tescilli ticari markasıdır ve lisansla kullanılır. Linux, Linus Torvalds'ın ABD'de ve diğer ülkelerde tescilli ticari markasıdır. Diğer ürün adları sahiplerine ait olabilir. OstlerTech bu şirketlerle bağlantılı değildir.

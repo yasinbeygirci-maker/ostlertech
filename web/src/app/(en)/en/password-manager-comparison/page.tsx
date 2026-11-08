@@ -7,8 +7,8 @@ import { paylasimMeta } from "@/lib/paylasim-meta";
 // open-source / SyncPass). Neden: Ticari Reklam ve Haksız Ticari Uygulamalar Yönetmeliği md. 8/1-a (Zeynep). Adres değişmedi (SEO).
 // TR eşi: /sifre-yoneticisi-karsilastirma. Ürün/marka adı ekleme; tests/icerik.test.ts sayfa kaynağındaki yasak adları denetler.
 // SyncPass satırları yayındaki koddan (Android 4.5.21 main, masaüstü sync-alignment, 2026-11-08): ücretsiz sınır 15; 2FA ve Drive
-// eşitleme Premium; geçiş anahtarı sağlayıcısında Premium kapısı yok (Android 14+), masaüstü geçiş anahtarını yalnız gösterir
-// (CloudItemCodec: "created and edited only on the phone"). İçe aktarma: Android UniversalImporter/CsvImporter/OtpImport.
+// eşitleme Premium; geçiş anahtarı sağlayıcısında Premium kapısı yok (Android 14+), masaüstü geçiş anahtarını gösterir, oluşturamaz
+// ve düzenleyemez (CloudItemCodec: "created and edited only on the phone"; VaultScreen'de geçiş anahtarına Düzenle düğmesi yok). İçe aktarma: Android UniversalImporter/CsvImporter/OtpImport.
 const TITLE = "Password Manager Comparison by Category";
 const DESCRIPTION =
   "Compare cloud-vault and local-file password managers with SyncPass, category by category: where the vault lives, accounts, sync, devices and the free version.";
@@ -30,7 +30,7 @@ const rows: { label: string; values: [string, string, string] }[] = [
   { label: "Devices", values: ["Android and Windows (no iOS, macOS or Linux version)", "Varies by product; most have a phone app", "Varies by product; separate apps may open the same file on a phone"] },
   { label: "Sync between devices", values: ["Optional, through your own Google Drive (Premium)", "Automatic through the provider", "You move the file yourself or sync it through a cloud folder"] },
   { label: "2FA codes (TOTP)", values: ["Yes (Premium)", "Varies by product and plan", "Varies by product"] },
-  { label: "Passkeys", values: ["Free on Android 14 and later; Windows only shows passkeys and cannot create them", "Varies by product", "Varies by product"] },
+  { label: "Passkeys", values: ["Free on Android 14 and later; Windows shows passkeys but cannot create or edit them", "Varies by product", "Varies by product"] },
   { label: "Sharing and family plans", values: ["No", "Varies by product", "Varies by product"] },
   { label: "Source code", values: ["Not open source; no independent security audit", "Varies by product", "Open"] },
   { label: "Free version", values: [`Up to ${FREE_ITEM_LIMIT} items`, "Varies by product and plan", "Varies by product"] },
@@ -155,7 +155,7 @@ export default function PasswordManagerComparison() {
             Google, Android, Google Play, Google Drive and Google Authenticator are trademarks of Google LLC. Windows is a trademark of the Microsoft
             group of companies. iPhone, Mac and macOS are trademarks of Apple Inc., registered in the U.S. and other countries and regions. IOS is a
             trademark or registered trademark of Cisco in the U.S. and other countries and is used under license. Linux is the registered trademark of
-            Linus Torvalds in the U.S. and other countries. Other product names may be trademarks of their owners.
+            Linus Torvalds in the U.S. and other countries. Other product names may be trademarks of their owners. OstlerTech is not affiliated with these companies.
           </p>
           <p className="mt-8 text-center text-sm text-muted">
             Related: <a href="/en/offline-password-manager" className="text-primary hover:text-primary-light">on-device password manager</a>
