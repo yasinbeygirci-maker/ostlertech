@@ -105,7 +105,7 @@ export default function BetaDownloadForm({ copy, lang, privacyHref }: { copy: Ar
       <button type="submit" disabled={busy} className="btn-primary w-full !py-3 disabled:opacity-60">
         {busy ? <Loader2 size={18} className="animate-spin" /> : <Download size={18} />} {busy ? copy.sending : copy.button}
       </button>
-      <p className="text-xs leading-relaxed text-muted">
+      <p className="text-[15px] leading-relaxed text-muted">
         {copy.notice}{" "}
         <a href={privacyHref} className="text-primary hover:text-primary-light underline">
           {copy.noticeLink}

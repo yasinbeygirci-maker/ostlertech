@@ -155,7 +155,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       button: "İndirme bağlantısını al",
       sending: "Gönderiliyor…",
       notice:
-        "E-postanızı AreaPilot indirme bağlantısını vermek ve deneme sürümüyle ilgili önemli bildirimler (kritik düzeltme, deneme süresinin bitişi) için kullanırız. Aşağıdaki kutuyu işaretlemediğiniz sürece reklam ya da duyuru göndermeyiz. Ayrıntılar:",
+        "E-postanı AreaPilot indirme bağlantısını vermek ve deneme sürümüyle ilgili önemli bildirimler (kritik düzeltme, deneme süresinin bitişi) için kullanırız. Yukarıdaki kutuyu işaretlemediğin sürece reklam ya da duyuru göndermeyiz. Ayrıntılar:",
       noticeLink: "AreaPilot aydınlatma metni",
       marketing: "OstlerTech'in yeni ürün ve kampanya duyurularını e-postayla almak istiyorum (dilediğin zaman e-postadaki bağlantıdan çıkabilirsin).",
       successTitle: "İndirme bağlantın hazır.",
@@ -302,7 +302,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       button: "Get the download link",
       sending: "Sending…",
       notice:
-        "We use your email to give you the AreaPilot download link and to send important notices about the trial (critical fixes, end of the trial). We do not send marketing or announcements unless you tick the box below. Details:",
+        "We use your email to give you the AreaPilot download link and to send important notices about the trial (critical fixes, end of the trial). We do not send marketing or announcements unless you tick the box above. Details:",
       noticeLink: "AreaPilot privacy notice",
       marketing: "I would like to receive OstlerTech's new product and campaign announcements by email (you can unsubscribe at any time via the link in the email).",
       successTitle: "Your download link is ready.",

@@ -14,7 +14,7 @@ const mono = JetBrains_Mono({ subsets: ["latin", "latin-ext"], variable: "--font
 
 const TEMEL = {
   tr: {
-    title: "OstlerTech: Verisini kendinde tutmak isteyenler için uygulamalar",
+    title: "OstlerTech: Verisi sende kalan uygulamalar",
     description:
       "Verisini kendinde tutmak isteyen kişiler ve küçük işletmeler için SyncPass, AreaPilot, CornerTab, SyncDia ve SyncSite'ı geliştiren bağımsız yazılım stüdyosu.",
     locale: "tr_TR",

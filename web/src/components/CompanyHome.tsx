@@ -32,7 +32,7 @@ export function CompanyHero() {
         </h1>
         <p className="max-w-2xl mx-auto text-lg md:text-xl text-muted leading-[1.5]">
           Türkiye&apos;de kurulu bağımsız bir yazılım stüdyosuyuz. Bireyler ve küçük işletmeler için sade ve güvenli uygulamalar
-          geliştiriyoruz: şifre yöneticisi, AutoCAD alan metrajı, esnaf defteri ve şantiye takibi.
+          geliştiriyoruz: şifre yöneticisi, AutoCAD alan metrajı, esnaf defteri ve şantiye kaydı.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <a href="#urunler" className="btn-primary !px-7 !min-h-[48px] text-base">

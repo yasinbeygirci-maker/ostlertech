@@ -9,7 +9,7 @@ import { paylasimMeta } from "@/lib/paylasim-meta";
 // Names of other products are plain text only (ic-kurallar). Re-check before editing: these change.
 const TITLE = "SyncPass vs KeePassXC vs Bitwarden vs Enpass: Honest Comparison";
 const DESCRIPTION =
-  "Where each password manager keeps your vault, accounts, platforms, sync and 2FA codes. Written by the SyncPass team, including where SyncPass falls short.";
+  "Where each password manager keeps your vault, whether it needs an account, how sync and 2FA work. By the SyncPass team, incl. where SyncPass falls short.";
 const PATH = "/en/password-manager-comparison";
 
 export const metadata: Metadata = {

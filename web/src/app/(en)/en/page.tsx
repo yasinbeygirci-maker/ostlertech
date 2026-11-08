@@ -50,7 +50,7 @@ const faq = [
   { q: "Does it work on both Android and Windows?", a: `Yes. The Android app is on Google Play (${MIN_ANDROID} and later) and the Windows app uses the same vault format. iOS and macOS versions are not available.` },
   { q: "Can I copy 2FA codes quickly?", a: "With Premium, the current 2FA code sits in the same entry as the password, so you copy both from one place. You can also move your accounts from Google Authenticator by scanning its export QR code." },
   { q: "What happens if I forget my master password?", a: "We cannot reset it because we never know it. Create a recovery QR code in Settings after setting up the vault and keep it somewhere safe; it can unlock the vault from the lock screen." },
-  { q: "Is it free?", a: `The free version stores up to ${FREE_ITEM_LIMIT} items with no ads. Premium adds unlimited items, 2FA codes, Drive backup and breach checks. Prices are shown in Google Play in your local currency.` },
+  { q: "Is it free?", a: `The free version stores up to ${FREE_ITEM_LIMIT} items. Premium adds unlimited items, 2FA codes, Drive backup and breach checks. Prices are shown in Google Play in your local currency.` },
 ];
 
 const ld = [
@@ -92,7 +92,7 @@ export default function EnglishHome() {
             <a href={PLAY_URL} className="btn-primary !py-3.5 text-base" rel="noopener">Get it free on Google Play</a>
             <a href={DESKTOP_DOWNLOAD.url} className="btn-secondary !py-3.5 text-base">Download for Windows</a>
           </div>
-          <p className="text-xs text-muted">{MIN_ANDROID} and later · {FREE_ITEM_LIMIT} items free · No ads · {LANGUAGE_COUNT} languages</p>
+          <p className="text-xs text-muted">{MIN_ANDROID} and later · {FREE_ITEM_LIMIT} items free · {LANGUAGE_COUNT} languages</p>
         </div>
       </section>
 

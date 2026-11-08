@@ -140,7 +140,7 @@ export const SALES_COPY: Record<SalesLang, SalesCopy> = {
     title: "Pricing",
     lead: "AreaPilot is a one-time license: pay once and use it on every 1.x version. Pick the tier by how many computers you will use it on.",
     once: "one-time",
-    taxIncluded: "incl. VAT (Turkey)",
+    taxIncluded: "incl. VAT (Türkiye)",
     priceNote: "The prices shown are totals including 20% VAT for Türkiye. You pay the total shown at checkout; if you enter a tax number or buy from another country, the tax may change.",
     buy: "Buy",
     highlightedLabel: "For most teams",

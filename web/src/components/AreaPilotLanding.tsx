@@ -35,6 +35,8 @@ export default function AreaPilotLanding({ lang }: { lang: Lang }) {
             <p className="eyebrow">{c.badge}</p>
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">
               {c.h1}
+              {/* Boşluk: ekran okuyucu ve arama motoru iki satırı bitişik okumasın ("...var? AreaPilot: ..."). Görünüm aynı (alt satır blok). */}
+              {" "}
               <span className="mt-3 block text-lg md:text-xl font-semibold tracking-normal text-primary-light">{c.h1Sub}</span>
             </h1>
             <p className="text-lg text-foreground leading-relaxed font-semibold">{c.lead}</p>

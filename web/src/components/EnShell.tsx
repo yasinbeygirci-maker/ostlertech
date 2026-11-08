@@ -13,7 +13,7 @@ const navLinks = [
 
 /** cta: sağ üst düğme. Verilmezse SyncPass'in Play sayfası; AreaPilot sayfası kendi deneme formunu verir. */
 export function EnHeader({ trHref = "/", cta }: { trHref?: string; cta?: { href: string; label: string; menuLabel: string } }) {
-  const button = cta ?? { href: PLAY_URL, label: "Get the app", menuLabel: "SyncPass: Get it on Google Play" };
+  const button = cta ?? { href: PLAY_URL, label: "Get the app", menuLabel: "Get SyncPass on Google Play" };
   const external = !cta;
   return (
     <header className="fixed top-0 inset-x-0 z-50 border-b border-line bg-background/80 backdrop-blur-xl" style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}>

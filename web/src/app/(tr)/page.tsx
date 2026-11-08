@@ -8,7 +8,7 @@ import { FACEBOOK_URL } from "@/components/SocialLinks";
 import { ORGANIZATION_ID } from "@/lib/areapilot-ld";
 import { paylasimMeta } from "@/lib/paylasim-meta";
 
-const BASLIK = "OstlerTech: Verisini kendinde tutmak isteyenler için uygulamalar";
+const BASLIK = "OstlerTech: Verisi sende kalan uygulamalar";
 const ACIKLAMA =
   "Verisini kendinde tutmak isteyen kişiler ve küçük işletmeler için SyncPass, AreaPilot, CornerTab, SyncDia ve SyncSite'ı geliştiren bağımsız yazılım stüdyosu.";
 

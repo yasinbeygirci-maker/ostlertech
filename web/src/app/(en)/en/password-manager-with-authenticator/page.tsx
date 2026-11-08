@@ -8,13 +8,13 @@ import { paylasimMeta } from "@/lib/paylasim-meta";
 // OtpImport reads Google Authenticator "otpauth-migration" QR codes; codes are copied with the sensitive flag and the clipboard
 // is cleared after the configured time. 2FA codes are Premium on Android and on Windows (desktop 1.4.5).
 export const metadata: Metadata = {
-  title: "Password Manager with Built-in Authenticator (2FA Codes)",
+  title: "Password Manager with Built-in 2FA Codes",
   description:
     "Keep 2FA codes next to your passwords and copy them in one tap: what SyncPass supports, moving from Google Authenticator, and when a separate app is safer.",
   alternates: { canonical: "/en/password-manager-with-authenticator" },
   // Yalnız openGraph.url/locale verilince kök düzenin görseli ve başlığı düşüyordu; paylasimMeta hepsini verir.
   ...paylasimMeta({
-    title: "Password Manager with Built-in Authenticator (2FA Codes)",
+    title: "Password Manager with Built-in 2FA Codes",
     description: "Keep 2FA codes next to your passwords and copy them in one tap.",
     path: "/en/password-manager-with-authenticator",
     lang: "en",

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 export default function AreaPilotEnPage() {
   return (
     <main lang="en" className="min-h-screen bg-background">
-      <EnHeader trHref={AREAPILOT.path} cta={{ href: "#indir", label: c.cta, menuLabel: `AreaPilot: ${c.cta}` }} />
+      <EnHeader trHref={AREAPILOT.path} cta={{ href: "#indir", label: c.cta, menuLabel: "Try AreaPilot free for 7 days" }} />
       <AreaPilotLanding lang="en" />
       <EnFooter />
     </main>
