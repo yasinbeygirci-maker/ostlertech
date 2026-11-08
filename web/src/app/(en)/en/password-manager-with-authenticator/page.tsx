@@ -133,7 +133,7 @@ export default function PasswordManagerWithAuthenticator() {
           </div>
           <p className="mt-8 text-center text-sm text-muted">
             Related: <a href="/en/offline-password-manager" className="text-primary hover:text-primary-light">on-device password manager for Android and Windows</a>
-            {" · "}<a href="/en" className="text-primary hover:text-primary-light">SyncPass features and pricing</a>
+            {" · "}<a href="/en/syncpass" className="text-primary hover:text-primary-light">SyncPass features and pricing</a>
           </p>
         </div>
       </section>

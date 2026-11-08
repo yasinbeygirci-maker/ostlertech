@@ -13,7 +13,7 @@ export default function YouTubeFacade({ video, priority = false, lang = "tr", pl
     <div className="relative aspect-video overflow-hidden rounded-2xl border border-line bg-surface shadow-window">
       {playing ? (
         <iframe
-          src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1&hl=${lang}&cc_lang_pref=tr`}
+          src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1&hl=${lang}&cc_lang_pref=${video.dil}`}
           title={video.title}
           allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
           allowFullScreen
@@ -49,3 +49,4 @@ export default function YouTubeFacade({ video, priority = false, lang = "tr", pl
 }
 
 export const YOUTUBE_NOTE = "Oynat'a bastığında video YouTube'dan (youtube-nocookie.com) yüklenir.";
+export const YOUTUBE_NOTE_EN = "When you press play, the video loads from YouTube (youtube-nocookie.com).";

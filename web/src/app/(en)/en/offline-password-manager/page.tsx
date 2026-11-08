@@ -150,7 +150,7 @@ export default function OfflinePasswordManager() {
             ))}
           </div>
           <p className="mt-8 text-center text-sm text-muted">
-            More about SyncPass: <a href="/en" className="text-primary hover:text-primary-light">features, security and pricing</a>.
+            More about SyncPass: <a href="/en/syncpass" className="text-primary hover:text-primary-light">features, security and pricing</a>.
           </p>
         </div>
       </section>

@@ -31,7 +31,7 @@ export default function EnMenu({ links, cta }: { links: EnMenuLink[]; cta: EnMen
       <button
         ref={buttonRef}
         type="button"
-        className="lg:hidden -mr-2 flex h-12 w-12 items-center justify-center text-muted hover:text-white"
+        className="xl:hidden -mr-2 flex h-12 w-12 items-center justify-center text-muted hover:text-white"
         onClick={() => setOpen(!open)}
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
@@ -42,7 +42,7 @@ export default function EnMenu({ links, cta }: { links: EnMenuLink[]; cta: EnMen
       <div
         id="en-mobile-menu"
         inert={!open}
-        className="lg:hidden absolute right-3 left-3 top-[calc(100%+4px)] rounded-2xl border border-line bg-background px-5 py-5 flex flex-col gap-1 shadow-xl transition-[transform,opacity] duration-200"
+        className="xl:hidden absolute right-3 left-3 top-[calc(100%+4px)] rounded-2xl border border-line bg-background px-5 py-5 flex flex-col gap-1 shadow-xl transition-[transform,opacity] duration-200"
         style={{ opacity: open ? 1 : 0, transform: open ? "none" : "scale(0.96)", pointerEvents: open ? "auto" : "none" }}
       >
         {links.map((l) => (

@@ -6,7 +6,7 @@ import { AREAPILOT } from "@/lib/areapilot";
 import { AREAPILOT_COPY, type Lang } from "@/lib/areapilot-content";
 import { areapilotAppLd } from "@/lib/areapilot-ld";
 import YouTubeFacade from "@/components/YouTubeFacade";
-import { VIDEOS } from "@/lib/videos";
+import { VIDEOS_EN, VIDEOS_TR } from "@/lib/videos";
 
 // AreaPilot 1.0 sayfasının gövdesi (TR ve EN aynı yapı). Üst çubuk/alt bilgi sayfa dosyasında.
 // Görseller (Deniz [GORSEL-1..5]) henüz yok: nötr örnek çizimden ekran görüntüsü gelince eklenir; yer tutucu gösterilmez.
@@ -75,12 +75,12 @@ export default function AreaPilotLanding({ lang }: { lang: Lang }) {
           <p className="text-sm text-muted">
             {lang === "tr"
               ? "Kısa tanıtım ve adım adım kullanım. Seslendirme ve altyazı Türkçe."
-              : "A short intro and a step-by-step walkthrough. Narration and subtitles are in Turkish; English versions are coming."}
+              : "A short intro and a step-by-step walkthrough, narrated in English."}
           </p>
           <div className="grid gap-8 md:grid-cols-2">
-            {VIDEOS.filter((v) => v.product === "AreaPilot").map((v) => (
+            {(lang === "en" ? VIDEOS_EN : VIDEOS_TR).filter((v) => v.product === "AreaPilot").map((v) => (
               <article key={v.id} className="space-y-3">
-                <YouTubeFacade video={v} />
+                <YouTubeFacade video={v} lang={lang} />
                 <h3 className="font-bold text-white">{v.title}</h3>
                 <p className="text-sm text-muted">{v.durationLabel}</p>
               </article>

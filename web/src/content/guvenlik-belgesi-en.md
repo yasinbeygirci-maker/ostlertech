@@ -4,7 +4,7 @@ Last updated: 31 October 2026 · Versions covered: SyncPass Android 4.5, SyncPas
 
 This document explains how SyncPass protects your data at a technical level: how the key is generated, what is encrypted
 and how, what is not encrypted, what leaves your device, and what SyncPass does and does not protect against. For a
-shorter summary, see the [Security](/en#security) section.
+shorter summary, see the [Security](/en/syncpass#security) section.
 
 We wrote this document by checking the app's source code, and we say where we could not verify something. The source
 code is not public, so you cannot test this directly; that is why we have tried to be detailed and specific. The

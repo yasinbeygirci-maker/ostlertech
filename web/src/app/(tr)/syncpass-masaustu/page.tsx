@@ -7,7 +7,7 @@ import { BROWSER_EXTENSION, DESKTOP_DOWNLOAD, DESKTOP_LICENSE, MS_STORE_URL, SCR
 export const metadata: Metadata = {
   title: "SyncPass Masaüstü",
   description: `SyncPass Masaüstü (Windows): ücretsiz sürüm ve Premium (aylık, yıllık ya da ömür boyu), ${DESKTOP_LICENSE.devices} bilgisayar, kasan bilgisayarında şifreli.`,
-  alternates: { canonical: "/syncpass-masaustu" },
+  alternates: { canonical: "/syncpass-masaustu", languages: { tr: "/syncpass-masaustu", en: "/en/syncpass-desktop" } },
 };
 
 const features = [

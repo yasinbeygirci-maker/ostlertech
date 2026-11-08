@@ -1,4 +1,6 @@
-// YouTube videoları. Yeni video yayınlanınca buraya eklenir; ana sayfa ilkini, /videolar hepsini gösterir.
+// YouTube videoları. Yeni video yayınlanınca buraya eklenir; ana sayfa ilkini, /videolar ve /en/videos hepsini gösterir.
+// dil: videonun seslendirme dili. Türkçe sayfalar Türkçe videoları gösterir; İngilizce sayfalar önce İngilizce videoları,
+// İngilizcesi olmayan ürünlerde Türkçe videoyu "Türkçe" notuyla ve en alanındaki İngilizce başlıkla gösterir.
 export interface Video {
   id: string; // YouTube video kimliği
   title: string;
@@ -8,6 +10,9 @@ export interface Video {
   durationLabel: string;
   uploadDate: string;
   product: "SyncPass" | "SyncSite" | "OstlerTech" | "AreaPilot" | "CornerTab";
+  dil: "tr" | "en";
+  /** Türkçe video İngilizce sayfada gösterilirken başlık ve açıklama (US English). */
+  en?: { title: string; description: string };
 }
 
 export const VIDEOS: Video[] = [
@@ -21,6 +26,12 @@ export const VIDEOS: Video[] = [
     durationLabel: "0:59",
     uploadDate: "2026-10-30",
     product: "SyncPass",
+    dil: "tr",
+    en: {
+      title: "SyncPass in 1 minute",
+      description:
+        "Passwords, cards and 2FA codes in one encrypted vault. The vault is encrypted with AES-256 on your phone; we keep no copy of it on our servers.",
+    },
   },
   {
     id: "YCgxinKeziA",
@@ -32,6 +43,7 @@ export const VIDEOS: Video[] = [
     durationLabel: "1:02",
     uploadDate: "2026-10-25",
     product: "AreaPilot",
+    dil: "tr",
   },
   {
     id: "bpLvw27iesM",
@@ -43,6 +55,33 @@ export const VIDEOS: Video[] = [
     durationLabel: "2:45",
     uploadDate: "2026-10-25",
     product: "AreaPilot",
+    dil: "tr",
+  },
+  // İngilizce AreaPilot videoları: YouTube'da herkese açık (oEmbed + izleme sayfası 2026-11-08). Kapak YouTube küçük resminden
+  // yerel kopya (kendi videomuz). Süreler izleme sayfasındaki lengthSeconds: 63 ve 185.
+  {
+    id: "rDErHEELats",
+    title: "AreaPilot: area and perimeter takeoff in AutoCAD, in seconds",
+    description:
+      "On a typical hotel floor plan it totals 76 areas by the code it reads from the text next to them, writes the results into the drawing, adds the table to the plan and exports to Excel. Free for 7 days from first launch.",
+    poster: "/videos/areapilot-intro-en.webp?v=20261108",
+    duration: "PT1M3S",
+    durationLabel: "1:03",
+    uploadDate: "2026-10-25",
+    product: "AreaPilot",
+    dil: "en",
+  },
+  {
+    id: "HxpTIv4bH9Y",
+    title: "AreaPilot walkthrough: area and perimeter takeoff of a hotel floor in AutoCAD, start to finish",
+    description:
+      "Command and drawing unit, Select by Layer, list and totals, rooms lighting up when you click a row, search, Click Inside, code source setting, Apply to Drawing, table, Excel and Outline.",
+    poster: "/videos/areapilot-walkthrough-en.webp?v=20261108",
+    duration: "PT3M5S",
+    durationLabel: "3:05",
+    uploadDate: "2026-10-25",
+    product: "AreaPilot",
+    dil: "en",
   },
   {
     id: "A6AXJ7QkqEE",
@@ -54,5 +93,22 @@ export const VIDEOS: Video[] = [
     durationLabel: "2:37",
     uploadDate: "2026-10-31",
     product: "CornerTab",
+    dil: "tr",
+    en: {
+      title: "How to use the CornerTab credit ledger, start to finish",
+      description:
+        "See CornerTab from start to finish: writing debts, taking payments, reminders, statements, end of day and backups. Narration and subtitles are in Turkish.",
+    },
   },
 ];
+
+/** Türkçe sayfalarda gösterilen videolar (Türkçe seslendirme). */
+export const VIDEOS_TR = VIDEOS.filter((v) => v.dil === "tr");
+
+/**
+ * İngilizce sayfalarda gösterilen videolar: İngilizce seslendirmeli olanlar; o ürünün İngilizcesi yoksa Türkçe video,
+ * İngilizce başlık/açıklamayla (title/description en alanından). turkce: sayfada "Türkçe" notu gösterilsin diye.
+ */
+export const VIDEOS_EN: (Video & { turkce: boolean })[] = VIDEOS.filter(
+  (v) => v.dil === "en" || (v.en && !VIDEOS.some((o) => o.dil === "en" && o.product === v.product)),
+).map((v) => (v.dil === "en" ? { ...v, turkce: false } : { ...v, title: v.en!.title, description: v.en!.description, turkce: true }));

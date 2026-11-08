@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WelcomeFlow from "@/components/WelcomeFlow";
+import { EnHeader, EnFooter } from "@/components/EnShell";
 
 export const metadata: Metadata = {
   title: "Teşekkürler",
@@ -15,12 +16,12 @@ export default async function WelcomePage({ searchParams }: { searchParams: Prom
   const hintProduct = q.urun === "areapilot" ? "areapilot" : null;
   const lang = q.lang === "en" ? "en" : "tr";
   return (
-    <main className="min-h-screen bg-background">
-      <Navbar />
+    <main lang={lang} className="min-h-screen bg-background">
+      {lang === "en" ? <EnHeader trHref="/welcome" /> : <Navbar />}
       <section className="section-padding !pt-36">
         <WelcomeFlow hintProduct={hintProduct} lang={lang} />
       </section>
-      <Footer />
+      {lang === "en" ? <EnFooter /> : <Footer />}
     </main>
   );
 }

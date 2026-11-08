@@ -12,12 +12,12 @@ import Footer from "@/components/Footer";
 import type { Metadata } from "next";
 import { PLAY_URL, SITE_URL, SCREENS_VERSION } from "@/lib/site";
 
-// SyncPass tam açılış sayfası (eskiden ana sayfaydı). İngilizce karşılığı /en.
+// SyncPass tam açılış sayfası (eskiden ana sayfaydı). İngilizce karşılığı /en/syncpass.
 export const metadata: Metadata = {
   title: { absolute: "SyncPass: Şifrelerin senin cihazında | OstlerTech" },
   description:
     "SyncPass, şifrelerini, kartlarını ve 2FA kodlarını (Premium) cihazında şifreli tutan şifre yöneticisidir. Kasanın kopyası sunucularımızda tutulmaz.",
-  alternates: { canonical: "/syncpass", languages: { tr: "/syncpass", en: "/en", "x-default": "/syncpass" } },
+  alternates: { canonical: "/syncpass", languages: { tr: "/syncpass", en: "/en/syncpass", "x-default": "/syncpass" } },
   openGraph: {
     type: "website",
     locale: "tr_TR",

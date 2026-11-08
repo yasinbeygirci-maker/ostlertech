@@ -5,7 +5,7 @@ import { COMPANY } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Hakkımızda",
   description: "OstlerTech: verisini kendisinde tutmak isteyen herkes için güvenlik ve iş uygulamaları geliştiren bağımsız yazılım stüdyosu.",
-  alternates: { canonical: "/hakkimizda" },
+  alternates: { canonical: "/hakkimizda", languages: { tr: "/hakkimizda", en: "/en/about" } },
 };
 
 export default function AboutPage() {

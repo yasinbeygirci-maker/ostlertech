@@ -59,7 +59,7 @@ export default function PasswordManagerComparison() {
   return (
     <main lang="en" className="min-h-screen bg-background overflow-x-hidden">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
-      <EnHeader trHref="/sifre-yoneticisi" />
+      <EnHeader trHref="/sifre-yoneticisi-karsilastirma" />
 
       <section className="section-padding !pt-36">
         <div className="max-w-3xl mx-auto space-y-6">

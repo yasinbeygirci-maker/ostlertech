@@ -1,7 +1,7 @@
 import { Check } from "lucide-react";
 import YouTubeFacade from "@/components/YouTubeFacade";
 import { CORNERTAB } from "@/lib/cornertab";
-import { VIDEOS } from "@/lib/videos";
+import { VIDEOS_EN, VIDEOS_TR } from "@/lib/videos";
 
 type Lang = "tr" | "en";
 
@@ -56,7 +56,7 @@ export const CORNERTAB_COPY = {
 
 export default function CornerTabLanding({ lang }: { lang: Lang }) {
   const c = CORNERTAB_COPY[lang];
-  const video = VIDEOS.find((v) => v.product === "CornerTab");
+  const video = (lang === "en" ? VIDEOS_EN : VIDEOS_TR).find((v) => v.product === "CornerTab");
   const ld = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",

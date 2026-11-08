@@ -10,7 +10,7 @@ const columns = [
       { href: "/syncpass#fiyat", label: "Fiyat" },
       { href: PLAY_URL, label: "Google Play", external: true },
       { href: MS_STORE_URL, label: "Microsoft Store (Windows)", external: true },
-      { href: "/en", label: "English" },
+      { href: "/en/syncpass", label: "English" },
     ],
   },
   {

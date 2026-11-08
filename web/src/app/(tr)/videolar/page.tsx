@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import YouTubeFacade, { YOUTUBE_NOTE } from "@/components/YouTubeFacade";
-import { VIDEOS } from "@/lib/videos";
+import { VIDEOS_TR as VIDEOS } from "@/lib/videos";
 import { SITE_URL, YOUTUBE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Videolar",
   description: "SyncPass ve diğer OstlerTech uygulamalarının tanıtım ve nasıl yapılır videoları.",
-  alternates: { canonical: "/videolar" },
+  alternates: { canonical: "/videolar", languages: { tr: "/videolar", en: "/en/videos" } },
 };
 
 const jsonLd = VIDEOS.map((v) => ({
