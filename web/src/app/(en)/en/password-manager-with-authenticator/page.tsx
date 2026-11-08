@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Check } from "lucide-react";
 import { EnHeader, EnFooter } from "@/components/EnShell";
 import { PLAY_URL, SITE_URL, FREE_ITEM_LIMIT, DESKTOP_DOWNLOAD } from "@/lib/site";
+import { paylasimMeta } from "@/lib/paylasim-meta";
 
 // Claims checked against the code (2026-10-11): TotpManager supports SHA1/SHA256/SHA512, 6-8 digits, custom period and HOTP;
 // OtpImport reads Google Authenticator "otpauth-migration" QR codes; codes are copied with the sensitive flag and the clipboard
@@ -9,9 +10,15 @@ import { PLAY_URL, SITE_URL, FREE_ITEM_LIMIT, DESKTOP_DOWNLOAD } from "@/lib/sit
 export const metadata: Metadata = {
   title: "Password Manager with Built-in Authenticator (2FA Codes)",
   description:
-    "Keep 2FA codes next to your passwords and copy them in one tap. What SyncPass supports, how to move from Google Authenticator, and when a separate authenticator app is the safer choice.",
+    "Keep 2FA codes next to your passwords and copy them in one tap: what SyncPass supports, moving from Google Authenticator, and when a separate app is safer.",
   alternates: { canonical: "/en/password-manager-with-authenticator" },
-  openGraph: { locale: "en_US", url: `${SITE_URL}/en/password-manager-with-authenticator` },
+  // Yalnız openGraph.url/locale verilince kök düzenin görseli ve başlığı düşüyordu; paylasimMeta hepsini verir.
+  ...paylasimMeta({
+    title: "Password Manager with Built-in Authenticator (2FA Codes)",
+    description: "Keep 2FA codes next to your passwords and copy them in one tap.",
+    path: "/en/password-manager-with-authenticator",
+    lang: "en",
+  }),
 };
 
 const supports = [

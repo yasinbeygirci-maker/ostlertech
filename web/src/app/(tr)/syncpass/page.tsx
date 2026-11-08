@@ -16,7 +16,7 @@ import { PLAY_URL, SITE_URL, SCREENS_VERSION } from "@/lib/site";
 export const metadata: Metadata = {
   title: { absolute: "SyncPass: Şifrelerin senin cihazında | OstlerTech" },
   description:
-    "SyncPass, şifrelerini, kartlarını ve 2FA kodlarını (Premium) cihazında şifreli tutan şifre yöneticisidir. Kasanın kopyası sunucularımızda tutulmaz; ana şifreni bizimle paylaşmazsın.",
+    "SyncPass, şifrelerini, kartlarını ve 2FA kodlarını (Premium) cihazında şifreli tutan şifre yöneticisidir. Kasanın kopyası sunucularımızda tutulmaz.",
   alternates: { canonical: "/syncpass", languages: { tr: "/syncpass", en: "/en", "x-default": "/syncpass" } },
   openGraph: {
     type: "website",

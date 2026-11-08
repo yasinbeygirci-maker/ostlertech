@@ -7,7 +7,7 @@ import { PLAY_URL } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Passkey (Geçiş Anahtarı) Nedir, Nasıl Oluşturulur?",
   description:
-    "Passkey (geçiş anahtarı) nedir, şifreden neden daha güvenlidir? Google, Microsoft ve WhatsApp'ta passkey oluşturma adımları, nerede saklandığı ve telefonu kaybedince ne olacağı.",
+    "Passkey (geçiş anahtarı) nedir, neden şifreden güvenlidir? Google, Microsoft ve WhatsApp'ta passkey oluşturma, nerede saklandığı, telefon kaybolunca ne olur.",
   alternates: { canonical: "/passkey-nedir" },
 };
 

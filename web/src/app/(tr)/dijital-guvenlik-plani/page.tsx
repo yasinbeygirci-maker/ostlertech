@@ -7,7 +7,7 @@ import GuideChecklist, { guideMetadata, type GuideItem } from "@/components/Guid
 const PATH = "/dijital-guvenlik-plani";
 const title = "7 günde dijital güvenlik planı: günde 10 dakika";
 const description =
-  "Günde 10 dakika, her gün tek iş: e-posta hesabı, şifreleri tek yere toplamak, tekrar eden şifreler, iki adımlı doğrulama, kurtarma seçenekleri, telefon ve eski hesaplar.";
+  "Günde 10 dakika, her gün tek iş: e-posta hesabı, şifreleri tek yere toplamak, tekrar eden şifreler, iki adımlı doğrulama, kurtarma, telefon ve eski hesaplar.";
 
 export const metadata: Metadata = guideMetadata({ path: PATH, trPath: PATH, enPath: "/en/digital-security-plan", lang: "tr", title, description });
 

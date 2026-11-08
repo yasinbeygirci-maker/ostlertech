@@ -11,7 +11,7 @@ export const CORNERTAB_COPY = {
   tr: {
     title: "CornerTab: Veresiye defteri uygulaması",
     description:
-      "CornerTab esnaf için veresiye defteridir: müşteri ve tedarikçi hesaplarını, borç ve tahsilatları kaydeder, hesap ekstresini PDF olarak hazırlar. Defter cihazında şifreli saklanır.",
+      "CornerTab esnaf için veresiye defteri: müşteri ve tedarikçi hesaplarını, borç ve tahsilatları kaydeder, ekstreyi PDF hazırlar. Defter cihazda şifreli durur.",
     badge: "Google Play'de",
     h1: "CornerTab, veresiye defterin telefonunda",
     lead: "Müşteri ve tedarikçi hesaplarını, borç ve tahsilatları tek yerde tut; hesap ekstresini PDF olarak hazırla.",
@@ -33,7 +33,7 @@ export const CORNERTAB_COPY = {
   en: {
     title: "CornerTab: Credit ledger app for small shops",
     description:
-      "CornerTab is a credit ledger for small businesses: it records customer and supplier accounts, debts and payments, and prepares account statements as PDF. The ledger is stored encrypted on your device.",
+      "CornerTab is a credit ledger for small shops: customer and supplier accounts, debts, payments and PDF statements. The ledger is stored encrypted on your device.",
     badge: "On Google Play",
     h1: "CornerTab, your credit ledger on your phone",
     lead: "Keep customer and supplier accounts, debts and payments in one place, and prepare account statements as PDF.",

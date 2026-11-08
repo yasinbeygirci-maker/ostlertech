@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/server/supabase-admin";
 import { AREAPILOT } from "@/lib/areapilot";
-import { checkWaitlistRequest, ipHash, MARKETING_CONSENT_VERSION, WAITLIST_LIMIT_PER_HOUR, type WaitlistProduct } from "@/lib/waitlist-core";
+import { checkWaitlistRequest, ipHash, MARKETING_CONSENT_VERSION, WAITLIST_LIMIT_PER_HOUR, waitlistIpKey, waitlistSuccessBody, type WaitlistProduct } from "@/lib/waitlist-core";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -26,8 +26,8 @@ export async function POST(req: Request) {
   if (check.kind === "invalid") return json({ error: check.field }, 400);
 
   const ip = (req.headers.get("x-forwarded-for")?.split(",")[0] ?? req.headers.get("x-real-ip") ?? "").trim();
-  // Özet anahtarı: sunucudaki gizli anahtar (tarayıcıya gitmez); ayrı bir sır gerektirmez.
-  const hash = ipHash(ip, process.env.WAITLIST_IP_SECRET || process.env.SUPABASE_SERVICE_ROLE_KEY || "");
+  // Özet anahtarı: WAITLIST_IP_SECRET; tanımsızsa service-role anahtarından türetilen ayrı anahtar (waitlistIpKey, Burak D3).
+  const hash = ipHash(ip, waitlistIpKey(process.env.WAITLIST_IP_SECRET, process.env.SUPABASE_SERVICE_ROLE_KEY));
 
   // Duyuru onayı kaydı supabase/2026-10-31-bekleme-onay.sql ile gelir. Migration uygulanıp WAITLIST_CONSENT_DB=1 verilene
   // kadar onay kaydedilemez: kutu işaretliyse onayı sessizce kaybetmek yerine kayıt reddedilir (kutu işaretsizse beta akışı aynen sürer).
@@ -48,12 +48,17 @@ export async function POST(req: Request) {
     const { data, error } = consentDb
       ? await supabaseAdmin().rpc("site_waitlist_join_v2", { ...base, p_marketing: check.marketing, p_consent_version: MARKETING_CONSENT_VERSION })
       : await supabaseAdmin().rpc("site_waitlist_join", base);
-    if (error) throw new Error(error.message);
+    if (error) {
+      // Günlüğe veritabanı iletisi YAZILMAZ (kişisel veri taşıyabilir; Burak D4): yalnız PostgREST/Postgres hata kodu.
+      console.error("bekleme listesi", check.product, "rpc", error.code ?? "kod-yok");
+      return json({ error: "server" }, 500);
+    }
     result = String(data);
   } catch (e) {
-    console.error("bekleme listesi", check.product, (e as Error).message);
+    console.error("bekleme listesi", check.product, (e as Error)?.name ?? "Error");
     return json({ error: "server" }, 500);
   }
   if (result === "rate_limited") return json({ error: "rate_limited" }, 429);
-  return json({ ok: true, status: result, downloads: DOWNLOADS[check.product] });
+  // Yeni kayıt ile önceden kayıtlı adres AYNI yanıtı alır: yanıttan adresin listede olup olmadığı okunmaz (Burak O1).
+  return json(waitlistSuccessBody(DOWNLOADS[check.product]));
 }

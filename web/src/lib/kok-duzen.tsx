@@ -8,40 +8,60 @@ import { SCREENS_VERSION, SITE_URL } from "@/lib/site";
 
 // Masaüstü uygulamasıyla aynı yazı tipleri.
 const sans = Manrope({ subsets: ["latin", "latin-ext"], variable: "--font-sans", display: "swap" });
-const mono = JetBrains_Mono({ subsets: ["latin", "latin-ext"], variable: "--font-mono", display: "swap" });
+// preload: false (2026-11-08 hız): eş aralıklı yazı yalnız birkaç küçük öğede (SHA, lisans kodu, sayaç); önceden her sayfada iki dosya
+// (~56 KB) yüksek öncelikle iniyordu. Artık yalnız o yazının kullanıldığı sayfada, gerektiğinde iner (display: swap).
+const mono = JetBrains_Mono({ subsets: ["latin", "latin-ext"], variable: "--font-mono", display: "swap", preload: false });
 
-const description =
-  "OstlerTech, verisini kendisinde tutmak isteyen bireyler ve küçük işletmeler için SyncPass, AreaPilot, CornerTab, SyncDia ve SyncSite uygulamalarını geliştiren bağımsız bir yazılım stüdyosudur.";
-
-export const temelMetadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: {
-    default: "OstlerTech: Verisini kendinde tutmak isteyenler için uygulamalar",
-    template: "%s | OstlerTech",
-  },
-  description,
-  keywords: ["ostlertech", "syncpass", "şifre yöneticisi", "areapilot", "cornertab", "syncsite", "syncdia", "yazılım stüdyosu"],
-  authors: [{ name: "OstlerTech" }],
-  creator: "OstlerTech",
-  icons: { icon: "/icon.png", apple: "/apple-touch-icon.png" },
-  alternates: { canonical: "/" },
-  openGraph: {
-    type: "website",
+const TEMEL = {
+  tr: {
+    title: "OstlerTech: Verisini kendinde tutmak isteyenler için uygulamalar",
+    description:
+      "Verisini kendinde tutmak isteyen kişiler ve küçük işletmeler için SyncPass, AreaPilot, CornerTab, SyncDia ve SyncSite'ı geliştiren bağımsız yazılım stüdyosu.",
     locale: "tr_TR",
-    url: SITE_URL,
-    title: "OstlerTech: Verisini kendinde tutmak isteyenler için uygulamalar",
-    description,
-    siteName: "OstlerTech",
-    images: [{ url: `/og-image.png?v=${SCREENS_VERSION}`, width: 1200, height: 630, alt: "OstlerTech uygulamaları" }],
+    imageAlt: "OstlerTech uygulamaları",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "OstlerTech: Verisini kendinde tutmak isteyenler için uygulamalar",
-    description,
-    images: [`/og-image.png?v=${SCREENS_VERSION}`],
+  en: {
+    title: "OstlerTech: Privacy-first apps that keep your data with you",
+    description:
+      "Independent software studio building SyncPass, AreaPilot, CornerTab, SyncDia and SyncSite for people and small businesses who keep their data with them.",
+    locale: "en_US",
+    imageAlt: "OstlerTech apps",
   },
-  robots: { index: true, follow: true },
-};
+} as const;
+
+// Kök düzenin paylaşım kartı. og:url BİLEREK yok: sayfa kendi openGraph'ını vermezse paylaşılan adres kullanılır
+// (önceden her sayfa og:url olarak ana sayfayı taşıyordu). Sayfa openGraph verirse bu blok bütünüyle yerine geçer,
+// bu yüzden sayfalar paylasimMeta() (lib/paylasim-meta.ts) ile görseli de verir.
+export function temelMetadataFor(lang: "tr" | "en"): Metadata {
+  const t = TEMEL[lang];
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: { default: t.title, template: "%s | OstlerTech" },
+    description: t.description,
+    keywords: ["ostlertech", "syncpass", "şifre yöneticisi", "areapilot", "cornertab", "syncsite", "syncdia", "yazılım stüdyosu"],
+    authors: [{ name: "OstlerTech" }],
+    creator: "OstlerTech",
+    icons: { icon: "/icon.png", apple: "/apple-touch-icon.png" },
+    alternates: { canonical: "/" },
+    openGraph: {
+      type: "website",
+      locale: t.locale,
+      title: t.title,
+      description: t.description,
+      siteName: "OstlerTech",
+      images: [{ url: `/og-image.png?v=${SCREENS_VERSION}`, width: 1200, height: 630, alt: t.imageAlt }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t.title,
+      description: t.description,
+      images: [`/og-image.png?v=${SCREENS_VERSION}`],
+    },
+    robots: { index: true, follow: true },
+  };
+}
+
+export const temelMetadata: Metadata = temelMetadataFor("tr");
 
 export const temelViewport: Viewport = {
   themeColor: "#0B0D11",

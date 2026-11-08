@@ -27,7 +27,7 @@ export const VIDEOS: Video[] = [
     title: "AreaPilot: AutoCAD'de alan ve çevre metrajı, saniyeler içinde",
     description:
       "Otel tip kat planında 76 alanı, yanındaki yazıdan okuduğu koda göre toplar, çizime yazar, tabloyu plana ekler, Excel'e aktarır. İlk açılıştan itibaren 7 gün ücretsiz deneme.",
-    poster: "/videos/areapilot-tanitim.jpg?v=20261025",
+    poster: "/videos/areapilot-tanitim.webp?v=20261108",
     duration: "PT1M2S",
     durationLabel: "1:02",
     uploadDate: "2026-10-25",
@@ -38,7 +38,7 @@ export const VIDEOS: Video[] = [
     title: "AreaPilot kullanımı: AutoCAD'de otel katının alan ve çevre metrajı baştan sona",
     description:
       "Komut ve birim ayarı, Katmandan Seç, liste ve toplam, satıra tıklayınca odaların yanması, kod arama, İçine Tıkla, Kod seçimi, çizime yazma, tablo, Excel ve Dış kontur.",
-    poster: "/videos/areapilot-kullanim.jpg?v=20261025",
+    poster: "/videos/areapilot-kullanim.webp?v=20261108",
     duration: "PT2M45S",
     durationLabel: "2:45",
     uploadDate: "2026-10-25",
@@ -49,7 +49,7 @@ export const VIDEOS: Video[] = [
     title: "CornerTab Veresiye Defteri Nasıl Kullanılır? Baştan Sona Rehber",
     description:
       "CornerTab'ı baştan sona gör: borç yazma, tahsilat alma, hatırlatma, ekstre, gün sonu ve yedek alma. Seslendirme ve altyazı Türkçe.",
-    poster: "/videos/cornertab-kullanim.jpg?v=20261031",
+    poster: "/videos/cornertab-kullanim.webp?v=20261108",
     duration: "PT2M37S",
     durationLabel: "2:37",
     uploadDate: "2026-10-31",

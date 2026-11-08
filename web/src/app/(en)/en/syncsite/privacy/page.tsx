@@ -8,7 +8,7 @@ const N = SYNCSITE.name;
 
 export const metadata: Metadata = {
   title: `${N} Privacy Policy and Notice`,
-  description: `${N} (formerly ${SYNCSITE.formerName}) construction-site tracking app: without a ${N} account your data stays on your device; with an account it is stored on servers in the EU (Ireland). The transfer abroad is explained openly.`,
+  description: `${N} construction app: without an account your data stays on your device; with an account it is stored in the EU (Ireland). Transfers abroad are explained.`,
   alternates: { canonical: SYNCSITE.privacyEnPath, languages: { tr: SYNCSITE.privacyPath, en: SYNCSITE.privacyEnPath } },
 };
 
@@ -158,7 +158,7 @@ export default function SyncSitePrivacyEnPage() {
       <p>
         Some of Supabase’s own service providers (support and infrastructure) are in the United States and other countries; data may be accessed from
         there during support or maintenance. Current list:{" "}
-        <a href="https://supabase.com/legal/subprocessors" className={link}>supabase.com/legal/subprocessors</a>.
+        <a href="https://supabase.com/legal/customer-resources/subprocessor-list" className={link}>supabase.com/legal/customer-resources/subprocessor-list</a>.
       </p>
       <p>
         <strong className="text-foreground">Current status of the transfer abroad.</strong> Because the servers are outside Türkiye, your data is

@@ -4,20 +4,22 @@ import { Check, Lock, KeyRound, Fingerprint, HardDrive, QrCode, Monitor, Cloud, 
 import {
   PLAY_URL, SITE_URL, FREE_ITEM_LIMIT, PBKDF2_ITERATIONS, LANGUAGE_COUNT, MIN_ANDROID, DESKTOP_DOWNLOAD, DESKTOP_LICENSE, CONTACT_EMAIL,
 } from "@/lib/site";
+import { paylasimMeta } from "@/lib/paylasim-meta";
 
 // English landing page. Every claim mirrors the Turkish homepage components (Hero, Features, Security, Pricing, Faq),
 // which are themselves checked against the app's code. If a feature or a Premium lock changes, update both.
 export const metadata: Metadata = {
   title: "SyncPass: On-Device Password Manager for Android and Windows",
   description:
-    "SyncPass keeps passwords, cards, passkeys and 2FA codes (Premium) encrypted on your device. We keep no copy of your vault on our servers, and your master password never leaves your phone. Free for up to 15 items.",
+    "SyncPass keeps passwords, cards, passkeys and 2FA codes (Premium) encrypted on your device. No copy of your vault on our servers. Free for up to 15 items.",
   alternates: { canonical: "/en", languages: { tr: "/syncpass", en: "/en", "x-default": "/syncpass" } },
-  openGraph: {
+  // Kendi openGraph bloğu görsel vermiyordu (og:image düşüyordu); paylasimMeta görseli de verir.
+  ...paylasimMeta({
     title: "SyncPass: your vault stays on your device",
     description: "Password manager for Android and Windows that keeps your vault encrypted with AES-256 on your device.",
-    url: `${SITE_URL}/en`,
-    locale: "en_US",
-  },
+    path: "/en",
+    lang: "en",
+  }),
 };
 
 const features = [

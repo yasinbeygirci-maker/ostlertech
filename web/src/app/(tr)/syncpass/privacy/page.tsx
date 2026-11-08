@@ -136,7 +136,7 @@ export default function SyncPassPrivacyPolicy() {
                 <li><strong className="text-white/80">Kasa güvenlik raporu (premium):</strong> yalnızca sayılar ve evet/hayır bilgileri gönderilir: güvenlik puanı, kayıt sayısı, zayıf, tekrar kullanılan ve sızmış şifre sayısı, e-posta sızıntı sayısı ile biyometrik kilidin, bulut senkronunun ve acil durum erişiminin açık olup olmadığı. Şifreler, kullanıcı adları, kayıt adları ve e-posta adresleri gönderilmez.</li>
               </ul>
               <p>
-                Gemini&apos;ye gönderilen içerik, Google tarafından <A href="https://ai.google.dev/gemini-api/terms">Gemini API Ek Hizmet Şartları</A> kapsamında işlenir.
+                Gemini&apos;ye gönderilen içerik, Google tarafından <A href="https://aistudio.google.com/docs/terms">Gemini API Ek Hizmet Şartları</A> kapsamında işlenir.
                 Bu şartlar Google&apos;ın içeriği hizmetlerini geliştirmek için kullanmasına izin verebilir.
               </p>
             </Sub>
@@ -296,7 +296,7 @@ export default function SyncPassPrivacyPolicy() {
                 <li><strong className="text-white/80">Vault security report (premium):</strong> only numbers and yes/no values are sent: the security score, the number of items, the number of weak, reused and leaked passwords, the email breach count, and whether biometric unlock, cloud sync and emergency access are turned on. Passwords, usernames, item names and email addresses are not sent.</li>
               </ul>
               <p>
-                Content sent to Gemini is processed by Google under the <A href="https://ai.google.dev/gemini-api/terms">Gemini API Additional Terms of Service</A>,
+                Content sent to Gemini is processed by Google under the <A href="https://aistudio.google.com/docs/terms">Gemini API Additional Terms of Service</A>,
                 which may allow Google to use it to improve its services.
               </p>
             </Sub>

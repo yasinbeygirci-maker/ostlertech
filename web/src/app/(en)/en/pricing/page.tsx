@@ -31,7 +31,7 @@ export default async function PricingEnPage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center">
             <p className="eyebrow">SyncPass Desktop · Windows</p>
-            <h1 className="mt-3 text-3xl md:text-5xl font-extrabold tracking-tight text-white">{open ? "Choose your plan" : "Plans"}</h1>
+            <h1 className="mt-3 text-3xl md:text-5xl font-extrabold tracking-tight text-white">{open ? "Choose your plan" : "SyncPass Desktop plans"}</h1>
             <p className="mt-4 text-muted">On every plan your vault stays encrypted on your computer and is never sent to our servers; if you turn on Premium sync, the encrypted vault goes only to your own Google Drive.</p>
             <p className="mt-2 text-sm text-muted">
               The only product sold on this page is a license for SyncPass Desktop (Windows), a password manager that

@@ -1,7 +1,9 @@
 // Bekleme/beta listesi isteği denetimi. Çalıştırma: npm test
 import test from "node:test";
 import assert from "node:assert/strict";
-import { checkWaitlistRequest, ipHash, WAITLIST_MIN_FILL_MS } from "../src/lib/waitlist-core.ts";
+import fs from "node:fs";
+import path from "node:path";
+import { checkWaitlistRequest, ipHash, WAITLIST_MIN_FILL_MS, waitlistIpKey, waitlistSuccessBody } from "../src/lib/waitlist-core.ts";
 
 const now = 1_800_000_000_000;
 const ok = { product: "areapilot", email: " Deniz@Example.com ", lang: "en", t: now - WAITLIST_MIN_FILL_MS - 1 };
@@ -45,4 +47,22 @@ test("IP saklanmaz: anahtarlı özet, aynı IP aynı özet, anahtar ya da IP yok
   assert.ok(!a!.includes("203"));
   assert.equal(ipHash("", "gizli"), null);
   assert.equal(ipHash("203.0.113.7", ""), null);
+});
+
+test("IP özeti anahtarı: ayrı sır varsa o; yoksa service-role anahtarından türetilen farklı anahtar (Burak D3)", () => {
+  assert.equal(waitlistIpKey("ayri-sir", "service-role"), "ayri-sir");
+  const turetilen = waitlistIpKey(undefined, "service-role");
+  assert.match(turetilen, /^[0-9a-f]{64}$/);
+  assert.notEqual(turetilen, "service-role");
+  assert.equal(turetilen, waitlistIpKey("", "service-role"), "boş dizge tanımsız sayılır");
+  assert.notEqual(ipHash("203.0.113.7", turetilen), ipHash("203.0.113.7", "service-role"));
+  assert.equal(waitlistIpKey(undefined, undefined), "");
+});
+
+test("başarı yanıtı listede olup olmadığını söylemez (Burak O1): status alanı yok, iki yol aynı gövde", () => {
+  const body = waitlistSuccessBody({ installer: "https://example.com/x.exe" });
+  assert.deepEqual(Object.keys(body).sort(), ["downloads", "ok"]);
+  const route = fs.readFileSync(path.join(process.cwd(), "src", "app", "api", "bekleme", "route.ts"), "utf8");
+  assert.doesNotMatch(route, /status:\s*result|["']added["']|["']exists["']/, "rota sonuç türünü yanıta yazmamalı");
+  assert.doesNotMatch(route, /error\.message|\.message\)/, "günlüğe veritabanı iletisi yazılmamalı (Burak D4)");
 });

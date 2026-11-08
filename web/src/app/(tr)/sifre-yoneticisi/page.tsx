@@ -7,7 +7,7 @@ import { FREE_ITEM_LIMIT, PLAY_URL } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Şifre Yöneticisi Nedir, Telefonda Nerede?",
   description:
-    "Kayıtlı şifrelerin telefonunun neresinde? Google, Chrome, iPhone, Samsung, Xiaomi ve Huawei şifre kasasının yeri adım adım. Şifre yöneticisi nedir, ne işe yarar?",
+    "Kayıtlı şifrelerin telefonunun neresinde? Google, Chrome, iPhone, Samsung, Xiaomi ve Huawei şifre kasasının yeri adım adım. Şifre yöneticisi ne işe yarar?",
   alternates: { canonical: "/sifre-yoneticisi" },
 };
 

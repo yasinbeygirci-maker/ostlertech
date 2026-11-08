@@ -9,7 +9,7 @@ import { paddleConfig, salesOpen } from "@/lib/paddle-env";
 export const metadata: Metadata = {
   title: "SyncPass Masaüstü planları",
   description: "SyncPass Masaüstü (Windows): ücretsiz sürüm ve Premium planları.",
-  alternates: { canonical: "/satin-al" },
+  alternates: { canonical: "/satin-al", languages: { tr: "/satin-al", en: "/en/pricing" } },
 };
 
 // Ziyaretçinin ülkesine göre her istekte oluşturulur; satış anahtarı ve Paddle ayarları istek anında okunur.
@@ -34,7 +34,7 @@ export default async function PricingPage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center">
             <p className="eyebrow">SyncPass Masaüstü · <span lang="en">Windows</span></p>
-            <h1 className="mt-3 text-3xl md:text-5xl font-extrabold tracking-tight text-white">{open ? "Sana uygun planı seç" : "Planlar"}</h1>
+            <h1 className="mt-3 text-3xl md:text-5xl font-extrabold tracking-tight text-white">{open ? "Sana uygun planı seç" : "SyncPass Masaüstü planları"}</h1>
             <p className="mt-4 text-muted">Kasan her planda bilgisayarında şifreli durur ve sunucularımıza gönderilmez; Premium eşitlemeyi açarsan şifreli kasa yalnız kendi Google Drive'ına gider.</p>
             <p className="mt-2 text-sm text-muted">
               Bu sayfada satılan ürün yalnızca SyncPass Masaüstü (Windows) lisansıdır: kasayı bilgisayarında tutan bir şifre

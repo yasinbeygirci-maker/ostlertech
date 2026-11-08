@@ -4,6 +4,7 @@ import AreaPilotPricing from "@/components/AreaPilotPricing";
 import { SellerBlock } from "@/components/LegalPage";
 import { AREAPILOT } from "@/lib/areapilot";
 import { AREAPILOT_COPY, type Lang } from "@/lib/areapilot-content";
+import { areapilotAppLd } from "@/lib/areapilot-ld";
 import YouTubeFacade from "@/components/YouTubeFacade";
 import { VIDEOS } from "@/lib/videos";
 
@@ -17,31 +18,7 @@ export default function AreaPilotLanding({ lang }: { lang: Lang }) {
     "@type": "FAQPage",
     mainEntity: c.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
   };
-  const appLd = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: "AreaPilot",
-    applicationCategory: "DesignApplication",
-    applicationSubCategory: "AutoCAD plugin",
-    operatingSystem: "Windows 10, Windows 11",
-    softwareVersion: AREAPILOT.version,
-    description: c.description,
-    inLanguage: lang,
-    url: `https://www.ostlertech.com${lang === "tr" ? AREAPILOT.path : AREAPILOT.enPath}`,
-    // Fiyat: KDV dahil sabit liste (Bireysel / Ofis / Firma, tek seferlik lisans); sayfa satış bayrağından bağımsız statik olduğu için aralık verilir.
-    offers: {
-      "@type": "AggregateOffer",
-      priceCurrency: "TRY",
-      lowPrice: "2398.80",
-      highPrice: "23998.80",
-      offerCount: 3,
-      description:
-        lang === "tr"
-          ? "Tek seferlik lisans (Bireysel, Ofis, Firma), fiyatlar KDV dahil. İlk açılıştan itibaren 7 gün ücretsiz deneme."
-          : "One-time license (Individual, Office, Firm), prices include VAT. 7-day free trial from first launch.",
-    },
-    publisher: { "@type": "Organization", name: "OstlerTech", url: "https://www.ostlertech.com" },
-  };
+  const appLd = areapilotAppLd(lang);
   const H2 = ({ children, id }: { children: React.ReactNode; id?: string }) => (
     <h2 id={id} className="scroll-mt-28 text-2xl md:text-3xl font-extrabold tracking-tight text-white">
       {children}
@@ -56,7 +33,10 @@ export default function AreaPilotLanding({ lang }: { lang: Lang }) {
         <div className="max-w-6xl mx-auto grid gap-12 lg:grid-cols-[1.2fr_1fr] items-start">
           <div className="space-y-6">
             <p className="eyebrow">{c.badge}</p>
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">{c.h1}</h1>
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">
+              {c.h1}
+              <span className="mt-3 block text-lg md:text-xl font-semibold tracking-normal text-primary-light">{c.h1Sub}</span>
+            </h1>
             <p className="text-lg text-foreground leading-relaxed font-semibold">{c.lead}</p>
             <p className="text-muted leading-relaxed">{c.sub}</p>
             <a href="#indir" className="btn-primary inline-flex !py-3.5 text-base">

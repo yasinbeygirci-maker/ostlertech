@@ -72,7 +72,7 @@ export const BROWSER_EXTENSION = {
 // Ekran görüntüleri ve OG görseli aynı adla yenilenince bu değer artırılır (tarayıcı ve paylaşım önbelleği eskiyi göstermesin).
 export const SCREENS_VERSION = "20261030";
 
-export const PADDLE_BUYER_TERMS_URL = "https://www.paddle.com/legal/checkout-buyer-terms";
+export const PADDLE_BUYER_TERMS_URL = "https://www.paddle.com/legal/buyer-terms";
 
 export const LEGAL_UPDATED = "7 Kasım 2026";
 export const LEGAL_UPDATED_EN = "7 November 2026"; // İngilizce sürümlerin (/en/...) tarihi

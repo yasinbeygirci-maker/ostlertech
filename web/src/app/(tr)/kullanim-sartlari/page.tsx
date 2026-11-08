@@ -6,7 +6,7 @@ import { areapilotLegalLive, TERMS_INTRO2, TERMS_SECTIONS, TERMS_SHIFT } from "@
 
 export const metadata: Metadata = {
   title: "Kullanım ve Satış Koşulları",
-  description: "OstlerTech uygulamalarının kullanım koşulları; Paddle üzerinden satılan SyncPass Masaüstü Premium lisansı ve Google Play üzerinden satılan SyncPass Android Premium.",
+  description: "OstlerTech uygulamalarının kullanım koşulları; Paddle üzerinden satılan SyncPass Masaüstü ve AreaPilot lisansları, Google Play'deki SyncPass Android Premium.",
   alternates: { canonical: "/kullanim-sartlari", languages: { tr: "/kullanim-sartlari", en: "/en/terms" } },
 };
 

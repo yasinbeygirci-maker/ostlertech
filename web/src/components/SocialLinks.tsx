@@ -13,8 +13,9 @@ export default function SocialLinks({ lang = "tr" }: { lang?: Lang }) {
   const label = lang === "en" ? "Follow us" : "Bizi takip edin";
   const items = [
     { href: INSTAGRAM_URL, name: "Instagram", src: "/img/sosyal/instagram.svg", w: 54, h: 54 },
-    { href: FACEBOOK_URL, name: "Facebook", src: "/img/sosyal/facebook.png", w: 54, h: 54 },
-    { href: YOUTUBE_URL, name: "YouTube", src: "/img/sosyal/youtube.png", w: 117, h: 100, pad: 20 },
+    // Sayfada 3 kat çözünürlüklü, oranı korunmuş küçültülmüş kopya (asıl dosya 2084 px, 55 KB idi; KAYNAK.md).
+    { href: FACEBOOK_URL, name: "Facebook", src: "/img/sosyal/facebook-162.png", w: 54, h: 54 },
+    { href: YOUTUBE_URL, name: "YouTube", src: "/img/sosyal/youtube-300.png", w: 117, h: 100, pad: 20 },
   ];
   return (
     <div>
@@ -29,7 +30,8 @@ export default function SocialLinks({ lang = "tr" }: { lang?: Lang }) {
               aria-label={`OstlerTech ${i.name}`}
               className="flex items-center justify-center min-w-[44px] min-h-[44px] opacity-90 hover:opacity-100 transition-opacity"
             >
-              <img src={i.src} alt="" width={i.w} height={i.h} style={{ height: i.h, width: "auto" }} />
+              {/* Alt bilgide: tembel yüklenir; yoksa React her sayfanın başında yüksek öncelikli "preload" olarak ister. */}
+              <img src={i.src} alt="" width={i.w} height={i.h} loading="lazy" decoding="async" style={{ height: i.h, width: "auto" }} />
             </a>
           </li>
         ))}

@@ -9,7 +9,7 @@ const N = SYNCSITE.name;
 
 export const metadata: Metadata = {
   title: `${N} Gizlilik Politikası ve Aydınlatma Metni`,
-  description: `${N} (eski adı ${SYNCSITE.formerName}) şantiye takip uygulaması: hesap açmadan kullanıldığında veri cihazda kalır; hesap açılırsa AB’deki (İrlanda) sunucuda tutulur. Yurt dışı aktarım durumu açıkça anlatılır.`,
+  description: `${N} şantiye uygulaması: hesap açmadan kullanıldığında veri cihazda kalır; hesap açılırsa AB’deki (İrlanda) sunucuda tutulur. Yurt dışı aktarım anlatılır.`,
   alternates: { canonical: SYNCSITE.privacyPath, languages: { tr: SYNCSITE.privacyPath, en: SYNCSITE.privacyEnPath } },
 };
 
@@ -164,7 +164,7 @@ export default function SyncSitePrivacyPage() {
       <p>
         Supabase’in kendi hizmet sağlayıcılarından bazıları (destek ve altyapı) ABD’de ve başka ülkelerdedir; destek ya da bakım
         sırasında verilere oradan erişilebilir. Güncel liste:{" "}
-        <a href="https://supabase.com/legal/subprocessors" className={link}>supabase.com/legal/subprocessors</a>.
+        <a href="https://supabase.com/legal/customer-resources/subprocessor-list" className={link}>supabase.com/legal/customer-resources/subprocessor-list</a>.
       </p>
       <p>
         <strong className="text-foreground">Yurt dışına aktarımın şu anki durumu.</strong> Sunucular Türkiye dışında olduğu için hesap

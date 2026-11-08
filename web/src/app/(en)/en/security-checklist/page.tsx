@@ -7,7 +7,7 @@ import { IG_TELEFON_CALINIRSA } from "@/lib/play-utm";
 const PATH = "/en/security-checklist";
 const title = "Security checklist: if your phone got stolen, would your accounts be safe?";
 const description =
-  "A 10-point security checklist: a different password for every account, at least 15 characters, two-step verification, recovery codes, screen lock and breach checks. Sources: NIST, CISA and Google.";
+  "10-point security checklist: unique passwords, 15+ characters, two-step verification, recovery codes, screen lock, breach checks. Sources: NIST, CISA, Google.";
 
 export const metadata: Metadata = guideMetadata({ path: PATH, trPath: "/guvenlik-kontrol-listesi", enPath: PATH, lang: "en", title, description });
 

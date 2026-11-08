@@ -1,17 +1,23 @@
 import type { Metadata } from "next";
 import { EnHeader, EnFooter } from "@/components/EnShell";
 import { PLAY_URL, SITE_URL, FREE_ITEM_LIMIT, DESKTOP_DOWNLOAD } from "@/lib/site";
+import { paylasimMeta } from "@/lib/paylasim-meta";
 
 // SyncPass rows checked against the code (2026-10-11). Other products checked against public sources on 2026-10-11:
 // Enpass free = 25 items, own-cloud or Wi-Fi sync, passkeys, built-in TOTP; Bitwarden built-in TOTP is Premium, open source,
 // self-hosting; KeePassXC 2.7.7+ passkeys through its browser extension, no official mobile app (KeePassDX is a separate project).
 // Names of other products are plain text only (ic-kurallar). Re-check before editing: these change.
+const TITLE = "SyncPass vs KeePassXC vs Bitwarden vs Enpass: Honest Comparison";
+const DESCRIPTION =
+  "Where each password manager keeps your vault, accounts, platforms, sync and 2FA codes. Written by the SyncPass team, including where SyncPass falls short.";
+const PATH = "/en/password-manager-comparison";
+
 export const metadata: Metadata = {
-  title: "SyncPass vs KeePassXC vs Bitwarden vs Enpass: Honest Comparison",
-  description:
-    "Where each password manager keeps your vault, whether you need an account, which platforms it runs on, how sync and 2FA codes work, and which one fits you. Written by the SyncPass team, including where SyncPass falls short.",
-  alternates: { canonical: "/en/password-manager-comparison" },
-  openGraph: { locale: "en_US", url: `${SITE_URL}/en/password-manager-comparison` },
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: PATH, languages: { tr: "/sifre-yoneticisi-karsilastirma", en: PATH } },
+  // openGraph tek başına verilince kök düzenin görseli düşüyordu (og:image yoktu); paylasimMeta görseli de verir.
+  ...paylasimMeta({ title: TITLE, description: DESCRIPTION, path: PATH, lang: "en" }),
 };
 
 const products = ["SyncPass", "KeePassXC", "Bitwarden", "Enpass"] as const;

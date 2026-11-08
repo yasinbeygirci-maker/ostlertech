@@ -2,15 +2,22 @@ import type { Metadata } from "next";
 import { Check } from "lucide-react";
 import { EnHeader, EnFooter } from "@/components/EnShell";
 import { PLAY_URL, SITE_URL, FREE_ITEM_LIMIT, DESKTOP_DOWNLOAD } from "@/lib/site";
+import { paylasimMeta } from "@/lib/paylasim-meta";
 
 // Claims checked against the code (2026-10-11): the vault is a local encrypted database; phone and Windows sync is Premium and
 // goes through the user's own Google Drive hidden app folder (DRIVE_APPDATA scope), never through an OstlerTech server.
 export const metadata: Metadata = {
   title: "Password Manager That Keeps Your Vault on Your Device (Android and Windows)",
   description:
-    "A password manager that keeps your encrypted vault on your device instead of a vendor's servers. How SyncPass works on Android and Windows, how sync works through your own Google Drive, and who it is not for.",
+    "A password manager that keeps your encrypted vault on your device, not a vendor's servers: SyncPass on Android and Windows, sync via your own Google Drive.",
   alternates: { canonical: "/en/offline-password-manager" },
-  openGraph: { locale: "en_US", url: `${SITE_URL}/en/offline-password-manager` },
+  // Yalnız openGraph.url/locale verilince kök düzenin görseli ve başlığı düşüyordu; paylasimMeta hepsini verir.
+  ...paylasimMeta({
+    title: "Password Manager That Keeps Your Vault on Your Device (Android and Windows)",
+    description: "A password manager that keeps your encrypted vault on your device instead of a vendor's servers.",
+    path: "/en/offline-password-manager",
+    lang: "en",
+  }),
 };
 
 const approaches = [

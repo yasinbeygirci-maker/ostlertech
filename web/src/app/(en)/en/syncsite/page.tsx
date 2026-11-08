@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   title: `${SYNCSITE.name}: Email verified`,
   description: `Your ${SYNCSITE.name} account email is verified; return to the app and sign in.`,
   alternates: { canonical: "/en/syncsite", languages: { tr: "/syncsite", en: "/en/syncsite" } },
+  // Doğrulama e-postasının iniş sayfası, ürün sayfası değil: aramada çıkmasın (Kerem/Aslı 2026-11-07). Sitemap'te de yok.
+  robots: { index: false, follow: true },
 };
 
 const link = "text-primary hover:text-primary-light";

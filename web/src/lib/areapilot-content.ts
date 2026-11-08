@@ -2,8 +2,14 @@
 // Kaynak: Deniz, pazarlama/2026-10-23-areapilot-beta-sayfa.md; hukuk düzeni Zeynep, hukuk/2026-10-23-areapilot-beta-gizlilik.md
 // (Bağlantı hemen sayfada; 2026-10-31 T4-B: duyuru e-postası için AYRI, işaretsiz onay kutusu var, beta bağlantısı ona bağlı değil). Sürüm ve son gün AREAPILOT sabitinden gelir. Hitap: sayfada "sen", yasal metinde "siz".
 import { AREAPILOT } from "./areapilot";
+import { AREAPILOT_TIER_PRICES as P } from "./areapilot-sales";
 
 const A = AREAPILOT;
+
+// SSS'deki fiyat cümlesi sunucuda çizilen HTML'de durur (satış kartları tarayıcıda, bayrağa bağlı çizilir; arama motorları ve
+// JS çalıştırmayan okuyucular fiyatı buradan görür). Tutarlar kartlarla aynı sabitten gelir, elle yazılmaz.
+const fiyatTr = `Türkiye için KDV dahil fiyatlar: Bireysel (1 bilgisayar) ${P.individual.tr}, Ofis (5 bilgisayar) ${P.office.tr}, Firma (20 bilgisayar) ${P.firm.tr}.`;
+const fiyatEn = `Prices including VAT for Türkiye: Individual (1 computer) ${P.individual.en}, Office (5 computers) ${P.office.en}, Firm (20 computers) ${P.firm.en}.`;
 
 export type Lang = "tr" | "en";
 
@@ -12,6 +18,8 @@ export interface AreaPilotCopy {
   description: string;
   badge: string;
   h1: string;
+  /** H1 içindeki küçük ikinci satır: ürün adı + arama niyeti (Deniz SEO 2026-11-07). Görünen büyük başlık h1 olarak kalır. */
+  h1Sub: string;
   lead: string;
   sub: string;
   cta: string;
@@ -71,11 +79,12 @@ export interface AreaPilotCopy {
 
 export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
   tr: {
-    title: "AreaPilot: AutoCAD için alan ve metraj eklentisi",
+    title: "AutoCAD alan ve m² metraj eklentisi: AreaPilot",
     description:
-      "Çizimdeki kapalı alanları bulur, kodlarını yanındaki yazıdan okur, alan ve çevreyi toplar ve Excel'e aktarır. AutoCAD 2013-2027, Windows. 7 gün ücretsiz deneme, ardından ücretsiz modda 15 alana kadar.",
+      "AutoCAD çizimindeki kapalı alanları bulur, kodunu yanındaki yazıdan okur, m² ve çevreyi toplayıp Excel'e aktarır. 7 gün ücretsiz dene; tek seferlik lisans.",
     badge: `Sürüm ${A.version}`,
     h1: "Bu alanda kaç m² kaplama var?",
+    h1Sub: "AreaPilot: AutoCAD alan ve m² metraj eklentisi",
     lead: "AreaPilot, AutoCAD çizimindeki kapalı alanları bulur, kodlarını yanındaki yazıdan okur, alan ve çevreyi toplar ve Excel'e aktarır.",
     sub: "Bir yapıdaki tüm imalatların alanlarını tek tek ölçüp hesap makinesinde toplaman gerekmez.",
     cta: "7 gün ücretsiz dene",
@@ -162,7 +171,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     faq: [
       {
         q: "AreaPilot ücretli mi?",
-        a: "Evet, tek seferlik lisanslı bir üründür. İndirdikten sonra ilk açılıştan itibaren 7 gün tüm özellikler ücretsiz açıktır; ödeme bilgisi istemeyiz. Deneme bitince AreaPilot kilitlenmez, ücretsiz modda her çalıştırmada en çok 15 alanı işler. Sınırsız kullanım için lisans satın alınır; fiyatlar ve koşullar bu sayfadaki Fiyatlar bölümünde.",
+        a: `Evet, tek seferlik lisanslı bir üründür. İndirdikten sonra ilk açılıştan itibaren 7 gün tüm özellikler ücretsiz açıktır; ödeme bilgisi istemeyiz. Deneme bitince AreaPilot kilitlenmez, ücretsiz modda her çalıştırmada en çok 15 alanı işler. Sınırsız kullanım için tek seferlik lisans satın alınır. ${fiyatTr} Koşullar bu sayfadaki Fiyatlar bölümünde.`,
       },
       {
         q: "Çizimlerim nereye gidiyor?",
@@ -217,11 +226,12 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     trademark: "AutoCAD, Autodesk, Inc.'in tescilli markasıdır. AreaPilot, Autodesk ile bağlantılı değildir.",
   },
   en: {
-    title: "AreaPilot: area takeoff add-in for AutoCAD",
+    title: "AutoCAD area and m² takeoff add-in: AreaPilot",
     description:
-      "Finds closed areas in your drawing, reads their codes from nearby text, totals m² and exports to Excel. AutoCAD 2013-2027, Windows. 7-day free trial, then free mode with up to 15 areas per run.",
+      "Finds closed areas in AutoCAD drawings, reads their codes from nearby text, totals m² and perimeter, and exports to Excel. 7-day free trial; one-time license.",
     badge: `Version ${A.version}`,
     h1: "How many m² of cladding are in this area?",
+    h1Sub: "AreaPilot: AutoCAD area and m² takeoff add-in",
     lead: "AreaPilot finds the closed areas in your AutoCAD drawing, reads their codes from the text next to them, totals the m² and exports it to Excel.",
     sub: "No more measuring the area of every work item in a building one by one and adding it up on a calculator.",
     cta: "Try free for 7 days",
@@ -306,7 +316,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     },
     faqTitle: "FAQ",
     faq: [
-      { q: "Is AreaPilot paid?", a: "Yes, it is a one-time licensed product. After you download it, all features are free for 7 days from first launch and we do not ask for payment details. When the trial ends AreaPilot does not lock; in free mode it processes up to 15 areas per run. A license removes the limit; prices and terms are in the Pricing section on this page." },
+      { q: "Is AreaPilot paid?", a: `Yes, it is a one-time licensed product. After you download it, all features are free for 7 days from first launch and we do not ask for payment details. When the trial ends AreaPilot does not lock; in free mode it processes up to 15 areas per run. A one-time license removes the limit. ${fiyatEn} Terms are in the Pricing section on this page.` },
       {
         q: "Where do my drawings go?",
         a: "Your drawing never leaves your computer. AreaPilot processes it on your computer; your drawing, your results and your user name are not sent to us, and there is no analytics or usage tracking. To check for a new version it reads the version file on ostlertech.com; no drawing or license information is sent with that request. If you enter a license key it connects to our server: activation sends the license key, a random device number and the application version; and while AreaPilot is running and the computer is online, about once a week it makes a license status check (only the license key and the device number are sent). In the trial and free mode nothing is sent for the license. As with any internet request, our server sees your IP address. If an error occurs, the report is saved on your computer, is never sent automatically and is deleted after 30 days; you decide whether to send it to us. The report does not contain your drawing.",

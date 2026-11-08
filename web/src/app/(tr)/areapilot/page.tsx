@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import AreaPilotLanding from "@/components/AreaPilotLanding";
 import { AREAPILOT } from "@/lib/areapilot";
 import { AREAPILOT_COPY } from "@/lib/areapilot-content";
+import { paylasimMeta } from "@/lib/paylasim-meta";
 
 const c = AREAPILOT_COPY.tr;
 
@@ -11,6 +12,14 @@ export const metadata: Metadata = {
   title: c.title,
   description: c.description,
   alternates: { canonical: AREAPILOT.path, languages: { tr: AREAPILOT.path, en: AREAPILOT.enPath, "x-default": AREAPILOT.enPath } },
+  ...paylasimMeta({
+    title: `${c.title} | OstlerTech`,
+    description: c.description,
+    path: AREAPILOT.path,
+    lang: "tr",
+    image: "/areapilot/og-areapilot.png?v=20261108",
+    imageAlt: c.h1Sub,
+  }),
 };
 
 // AreaPilot 1.0 (TR). Sürüm denetimi aynı yolun altındaki public/areapilot/surum.json'u okur.

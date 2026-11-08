@@ -40,6 +40,25 @@ export function checkWaitlistRequest(body: unknown, now = Date.now()): WaitlistC
 /** Duyuru onayı için gösterilen metnin sürümü; metin değişirse (areapilot-content form.marketing) bu da değişir. */
 export const MARKETING_CONSENT_VERSION = "2026-10-31-v1";
 
+/**
+ * IP özeti anahtarı. WAITLIST_IP_SECRET tanımlıysa o; değilse (2026-11-08 itibarıyla Vercel'de tanımsız, Burak D3) service-role
+ * anahtarından AYRI amaçlı bir anahtar türetilir: service-role anahtarı HMAC'e doğrudan girmez (anahtar ayrımı). İkisi de yoksa ""
+ * (ipHash null döner, hız sınırı yalnız DB tarafında atlanır; bekleme listesi çalışmaya devam eder).
+ */
+export function waitlistIpKey(dedicated: string | undefined, serviceRoleKey: string | undefined): string {
+  if (dedicated) return dedicated;
+  if (!serviceRoleKey) return "";
+  return createHmac("sha256", serviceRoleKey).update("ostlertech:waitlist-ip-hash:v1").digest("hex");
+}
+
+/**
+ * Başarı yanıtının gövdesi. Kayıt yeni de olsa önceden var da olsa AYNI: "added"/"exists" yanıta girmez (Burak O1, e-posta
+ * numaralandırması). İndirme bağlantıları her iki durumda da döner.
+ */
+export function waitlistSuccessBody(downloads: Record<string, string>): { ok: true; downloads: Record<string, string> } {
+  return { ok: true, downloads };
+}
+
 /** IP saklanmaz; hız sınırı için sunucu gizli anahtarıyla HMAC özeti (geri çevrilemez, 1 günde silinir). */
 export function ipHash(ip: string, secret: string): string | null {
   if (!ip || !secret) return null;

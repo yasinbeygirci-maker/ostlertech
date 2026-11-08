@@ -8,7 +8,7 @@ import { IG_TELEFON_CALINIRSA } from "@/lib/play-utm";
 const PATH = "/guvenlik-kontrol-listesi";
 const title = "Güvenlik kontrol listesi: telefonun çalınsa hesapların güvende mi?";
 const description =
-  "10 maddelik güvenlik kontrol listesi: ayrı şifre, en az 15 karakter, iki adımlı doğrulama, kurtarma kodları, ekran kilidi, sızıntı kontrolü. Hepsi NIST, CISA ve Google kaynaklı.";
+  "10 maddelik güvenlik listesi: ayrı şifre, en az 15 karakter, iki adımlı doğrulama, kurtarma kodları, ekran kilidi, sızıntı kontrolü. Kaynak: NIST, CISA, Google.";
 
 export const metadata: Metadata = guideMetadata({ path: PATH, trPath: PATH, enPath: "/en/security-checklist", lang: "tr", title, description });
 

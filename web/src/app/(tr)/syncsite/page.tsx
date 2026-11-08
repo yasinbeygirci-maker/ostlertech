@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   title: `${SYNCSITE.name}: E-posta doğrulandı`,
   description: `${SYNCSITE.name} hesabının e-postası doğrulandı; uygulamaya dönüp giriş yapabilirsin.`,
   alternates: { canonical: "/syncsite", languages: { tr: "/syncsite", en: "/en/syncsite" } },
+  // Doğrulama e-postasının iniş sayfası, ürün sayfası değil: aramada çıkmasın (Kerem/Aslı 2026-11-07). Sitemap'te de yok.
+  robots: { index: false, follow: true },
 };
 
 const link = "text-primary hover:text-primary-light";
