@@ -1,65 +1,50 @@
-SyncPass'i biz geliştiriyoruz; bu yüzden sayfayı bunu aklında tutarak oku. Adil olmaya çalıştık: burada geçen her uygulama işini yapan, gerçek kullanıcısı olan bir şifre yöneticisi. Aralarındaki asıl farklar kasanın nerede durduğu, hangi cihazlarda çalıştığı, ücretsiz sürümün kapsamı ve kaynak kodunun ya da bağımsız denetimin açık olup olmadığı.
+SyncPass'i biz geliştiriyoruz; bu yüzden sayfayı bunu aklında tutarak oku. Bu sayfa belirli ürünleri değerlendirmez ve sıralama yapmaz. Şifre yöneticilerini iki yaygın yaklaşıma göre gruplar ve SyncPass'i yanlarına koyar: bulut kasalı yöneticiler ve yerel dosyalı, açık kaynak yöneticiler. Aralarındaki asıl farklar kasanın nerede durduğu, hangi cihazlarda çalıştığı, ücretsiz sürümün kapsamı ve kaynak kodunun açık olup olmadığıdır.
 
-Bu sayfa sıralama yapmaz. Hangisinin "en iyi" olduğunu söylemiyoruz; cihazlarına ve ihtiyacına hangisinin uyduğunu görmene yardım ediyoruz. Başka bir uygulama sana daha çok uyuyorsa onu kullan.
+Son kontrol: 8 Kasım 2026. SyncPass bilgileri kendi kodumuzdan ve Android için SyncPass 4.5 ile SyncPass Masaüstü 1.4 sürümlerinden alındı. Kategori satırları genel bilgilerdir; her üründe farklı olabilir, karar vermeden önce ilgilendiğin ürünün kendi sayfasına bak.
 
-Son kontrol: 30 Ekim 2026. Diğer ürünlerin planları ve özellikleri değişir; karar vermeden önce kendi sitelerine bak. Rakip bilgilerinin kaynakları sayfa sonundaki "Kaynaklar" bölümünde.
+## İki yaklaşım ve SyncPass
 
-## Tabloları nasıl okumalı
-
-- **Var / Yok:** Resmî sayfada ya da (SyncPass için) kodumuzda doğrulanan bilgi.
-- **Belirtilmemiş:** Resmî sayfada bu bilgi yazmıyor; var ya da yok demiyoruz.
-- **Doğrulanmadı:** Bilgiyi bu karşılaştırmada doğrulayamadık.
-- **Ücretli plan:** Özelliğin yalnızca ücretli planda olduğunu belirtir.
+- **Bulut kasalı yöneticiler:** kasa sağlayıcının sunucularında şifreli durur ve cihazların arasında otomatik eşitlenir. Genellikle sağlayıcıda hesap açılır.
+- **Yerel dosyalı, açık kaynak yöneticiler:** kasa bilgisayarındaki şifreli bir dosyadır. Hesap gerekmez; dosyayı nasıl eşitleyeceğini ya da telefonda nasıl açacağını sen seçersin.
+- **SyncPass:** kasa telefonda ve bilgisayarda şifreli durur; isteğe bağlı eşitleme kendi Google Drive hesabın üzerinden yapılır.
 
 ## 1) Hangi cihazlarda çalışıyor?
 
-| Ürün | Android | iOS | Windows | macOS | Linux |
-|---|---|---|---|---|---|
-| SyncPass | Var | Yok | Var | Yok | Yok |
-| Bitwarden | Var | Var | Var | Var | Var |
-| KeePassXC | Resmî uygulama yok | Resmî uygulama yok | Var | Var | Var |
-| 1Password | Var | Var | Var | Var | Var |
-| Proton Pass | Var | Var | Var | Var | Var |
-| Dashlane | Var | Var | Belirtilmemiş | Belirtilmemiş | Belirtilmemiş |
+| Yaklaşım | Telefon | Bilgisayar |
+|---|---|---|
+| SyncPass | Android (iOS sürümü yok) | Windows (macOS ve Linux sürümü yok) |
+| Bulut kasalı yöneticiler | Üründen ürüne değişir; çoğunun telefon uygulaması var | Üründen ürüne değişir |
+| Yerel dosyalı, açık kaynak yöneticiler | Üründen ürüne değişir; telefonda aynı dosyayı açan ayrı uygulamalar olabilir | Üründen ürüne değişir |
 
-KeePassXC bir masaüstü uygulamasıdır; telefonda aynı dosyayı açan, topluluğun yaptığı ayrı uygulamalar vardır (örneğin KeePassDX), bunlar KeePassXC projesinin parçası değildir. SyncPass'in tarayıcı eklentisi Chrome içindir ve Windows uygulamasına bağlı çalışır.
+SyncPass'in tarayıcı eklentisi Chrome içindir ve Windows uygulamasına bağlı çalışır.
 
-## 2) Kasan nerede duruyor, kaynak kodu ve denetim ne durumda?
+## 2) Kasan nerede duruyor, hesap ve kaynak kodu ne durumda?
 
-| Ürün | Kasa nerede | Açık kaynak | Bağımsız denetim (kamuya açık) |
-|---|---|---|---|
-| SyncPass | Cihazda şifreli. İsteğe bağlı eşitleme kendi Google Drive hesabında (Premium). Kasanın kopyası sunucularımızda tutulmaz | Hayır | Yok |
-| Bitwarden | Sağlayıcının bulutunda; istersen kendi sunucunda | Evet | Var: Cure53 ve diğer firmalar (2018-2025 arası liste) |
-| KeePassXC | Bilgisayarındaki yerel dosya | Evet | Fransa'nın ANSSI kurumundan güvenlik vizesi (CSPN birinci düzey sertifikası, sürüm 2.7.9); bağımsız denetim raporu değil |
-| 1Password | Sağlayıcının bulutunda | Belirtilmemiş | Belirtilmemiş |
-| Proton Pass | Sağlayıcının bulutunda | Evet | Var: Recruity Labs 2026, Cure53 2023 |
-| Dashlane | Sağlayıcının bulutunda | Belirtilmemiş | Belirtilmemiş |
+| Yaklaşım | Kasa nerede | Hesap | Eşitleme | Kaynak kodu |
+|---|---|---|---|---|
+| SyncPass | Cihazda şifreli: Android'de şifreli veritabanı, Windows'ta şifreli dosya. Kasanın kopyası sunucularımızda tutulmaz | Başlamak için SyncPass hesabı gerekmez | İsteğe bağlı, kendi Google Drive hesabın üzerinden (Premium) | Açık değil; bağımsız güvenlik denetimi yok |
+| Bulut kasalı yöneticiler | Sağlayıcının sunucularında şifreli | Genellikle sağlayıcı hesabı gerekir | Sağlayıcı üzerinden otomatik | Üründen ürüne değişir |
+| Yerel dosyalı, açık kaynak yöneticiler | Bilgisayarındaki şifreli dosya | Hesap gerekmez | Dosyayı kendin taşırsın ya da bir bulut klasörüyle eşitlersin | Açık |
 
-"Belirtilmemiş" yazan yerlerde resmî sayfada bu bilgiye rastlamadık; bu, o ürünün açık kaynak olmadığı ya da denetlenmediği anlamına gelmez.
+Bağımsız denetimin kamuya açık olup olmadığı üründen ürüne değişir; ilgilendiğin ürünün kendi sayfasına bak.
 
 ## 3) Özellikler
 
-| Ürün | Paylaşım | Aile planı | 2FA kodu (TOTP) | Geçiş Anahtarı (passkey) | Sızıntı izleme |
-|---|---|---|---|---|---|
-| SyncPass | Yok | Yok | Ücretli plan (Premium) | Ücretli plan (Premium); Android 14 ve üstünde geçiş anahtarı sağlayıcısı olarak | Ücretli plan: Have I Been Pwned. Şifrenin kendisi değil, SHA-1 özetinin yalnızca ilk 5 karakteri gönderilir; eşleşme cihazda yapılır |
-| Bitwarden | Var | Var (en fazla 6 kişi) | Ücretli plan | Var | Ücretli plan (kasa sağlığı) |
-| KeePassXC | Belirtilmemiş | Belirtilmemiş | Var | Var | Belirtilmemiş |
-| 1Password | Var (kasa ve süreli bağlantı) | Var (en fazla 5 kişi) | Var | Var | Var (Watchtower) |
-| Proton Pass | Ücretli plan | Belirtilmemiş | Ücretli plan | Var (ücretsiz planda da) | Ücretli plan (karanlık ağ izleme) |
-| Dashlane | Var | Var (en fazla 10 kişi) | Belirtilmemiş | Var | Ücretli plan (karanlık ağ) |
+| Yaklaşım | Paylaşım ve aile planı | 2FA kodu (TOTP) | Geçiş Anahtarı (passkey) | Sızıntı kontrolü |
+|---|---|---|---|---|
+| SyncPass | Yok | Var (Premium) | Android 14 ve üstünde ücretsiz; Windows'ta yalnız gösterir, oluşturamaz | Var (Premium): Have I Been Pwned. Şifrenin kendisi değil, SHA-1 özetinin yalnızca ilk 5 karakteri gönderilir; eşleşme cihazda yapılır |
+| Bulut kasalı yöneticiler | Üründen ürüne değişir | Üründen ve plandan plana değişir | Üründen ürüne değişir | Üründen ve plandan plana değişir |
+| Yerel dosyalı, açık kaynak yöneticiler | Üründen ürüne değişir | Üründen ürüne değişir | Üründen ürüne değişir | Üründen ürüne değişir |
 
 SyncPass'te Android'de nota eklenen dosya kasaya kopyalanmaz, yalnız telefondaki dosyanın bağlantısı tutulur. Windows uygulaması eklenen dosyayı kasanın içinde şifreli saklar. Pasaport ya da sözleşme taraması saklamak istiyorsan bunu bil.
 
 ## 4) Ücretsiz sürüm
 
-| Ürün | Ücretsiz sürümde ne var |
+| Yaklaşım | Ücretsiz sürümde ne var |
 |---|---|
-| SyncPass | 15 kayıt, reklam yok |
-| Bitwarden | Fiyat sayfasında kayıt sınırı belirtilmemiş |
-| KeePassXC | Tamamen ücretsiz; bağışla desteklenir |
-| 1Password | Doğrulanmadı |
-| Proton Pass | Sınırsız kayıt, sınırsız cihaz |
-| Dashlane | Resmî sayfada 14 günlük deneme anılıyor; ücretsiz sürüm anılmıyor |
+| SyncPass | 15 kayıt |
+| Bulut kasalı yöneticiler | Ürüne ve plana göre değişir |
+| Yerel dosyalı, açık kaynak yöneticiler | Üründen ürüne değişir |
 
 Fiyat rakamı vermiyoruz: planlar ve para birimleri sık değişiyor. SyncPass Premium Windows'ta aylık, yıllık ya da tek seferlik ödemeli ömür boyu planla satılır; ödemeyi yetkili satıcımız Paddle alır. Android'de Premium Google Play üzerinden alınır. Fiyat bölgene göre gösterilir.
 
@@ -67,11 +52,10 @@ Fiyat rakamı vermiyoruz: planlar ve para birimleri sık değişiyor. SyncPass P
 
 Aşağıdakiler sıralama değil, ihtiyaç eşleştirmesidir.
 
-- **Her cihazında, kurulumla uğraşmadan, otomatik eşitlemeli bir uygulama istiyorsan:** Bitwarden, 1Password, Proton Pass ya da Dashlane. Bunlarda kasa sağlayıcının bulutunda durur ve tüm büyük platformlarda uygulamaları vardır. Kaynak kodunun açık olması senin için önemliyse Bitwarden ve Proton Pass'in kodu açıktır.
-- **Bilgisayarında, tamamen yerel bir dosyayla, ücretsiz ve açık kaynak çalışmak istiyorsan:** KeePassXC. Eşitlemeyi (bulut klasörü ya da USB) ve telefon uygulamasını sen seçersin.
-- **iPhone ya da Mac'in varsa:** Bitwarden, 1Password, Proton Pass ve Dashlane iOS'ta çalışır. SyncPass'in iOS ve macOS sürümü yok.
-- **Android ve Windows kullanıyorsan, kasanın cihazında şifreli durmasını ve eşitlemenin (istersen) kendi Google Drive hesabında yapılmasını istiyorsan:** SyncPass. Aynı uygulamada 2FA kodları, Geçiş Anahtarı ve sızıntı kontrolü Premium'da; şifreli yedek de var.
-- **Aile ya da ekip olarak paylaşımlı kasa istiyorsan:** SyncPass şu an uygun değil; paylaşım ve aile planı yok.
+- **Her cihazında, kurulumla uğraşmadan, otomatik eşitlemeli bir uygulama istiyorsan:** bulut kasalı yöneticiler. Kasa sağlayıcının sunucularında durur ve cihazların arasında otomatik eşitlenir.
+- **Bilgisayarında tamamen yerel bir dosyayla ve açık kaynaklı bir araçla çalışmak istiyorsan:** yerel dosyalı, açık kaynak yöneticiler. Eşitlemeyi (bulut klasörü ya da USB) ve telefon uygulamasını sen seçersin.
+- **Android ve Windows kullanıyorsan, kasanın cihazında şifreli durmasını ve eşitlemenin (istersen) kendi Google Drive hesabında yapılmasını istiyorsan:** SyncPass. Aynı uygulamada geçiş anahtarı (Android 14 ve üstünde ücretsiz), ayrıca 2FA kodları ve sızıntı kontrolü (Premium) var; şifreli yedek de var.
+- **iPhone, Mac ya da Linux kullanıyorsan, ailenle ya da ekibinle kasa paylaşmak istiyorsan ya da kaynak kodunun açık olması şartsa:** SyncPass şu an uygun değil.
 
 ## SyncPass'in eksikleri
 
@@ -79,9 +63,9 @@ Başlıca eksiklerimiz:
 
 - iOS, macOS ve Linux sürümü yok.
 - Kasa paylaşımı ve aile planı yok.
-- **SyncPass açık kaynak değildir:** kaynak kodu herkese açık bir lisansla yayımlanmıyor. Kaynak kodunu kendin denetlemek şartsa bu ölçüte uyan seçenekler Bitwarden, Proton Pass ve KeePassXC.
+- **SyncPass açık kaynak değildir:** kaynak kodu herkese açık bir lisansla yayımlanmıyor. Kaynak kodunu kendin denetlemek şartsa açık kaynak lisanslı bir şifre yöneticisi bu ölçüte uyar.
 - Bağımsız bir güvenlik denetimimiz yok. Kod kapalı olduğu için bu önemli bir boşluk. Bağımsız denetim yaptırmak için bir karar ya da takvimimiz yok.
-- Ücretsiz sürüm 15 kayıtla sınırlı; 2FA kodları ve Geçiş Anahtarı Premium'da.
+- Ücretsiz sürüm 15 kayıtla sınırlı; 2FA kodları ve sızıntı kontrolü Premium'da.
 - Android'de nota eklenen dosya kasaya kopyalanmaz, yalnız bağlantısı tutulur (yukarıda).
 - Tarayıcı eklentisi yalnızca Chrome için ve Windows uygulamasına bağlı.
 - Hata ödülü programımız yok; bulduğun bir güvenlik açığını [Güvenlik açığı bildir](/guvenlik-acigi-bildir) sayfasındaki yolla bildirebilirsin.
@@ -92,7 +76,7 @@ Güvenlikle ilgili sınırların tam listesi [güvenlik ve şifreleme belgemizde
 
 - Kasan cihazında şifreli durur (Android'de şifreli veritabanı, Windows'ta şifreli dosya). Kasanın kopyası sunucularımızda tutulmaz.
 - Ana şifren ve kasanı açan anahtar cihazından çıkmaz; ana şifreni biz de bilmeyiz.
-- Uygulamada reklam, analitik ya da çökme raporlama kütüphanesi yoktur.
+- Uygulamada analitik ya da çökme raporlama kütüphanesi yoktur.
 - Şifreleme: Android'de kasa SQLCipher ile, hassas alanlar ve Windows'taki kasa dosyası AES-256-GCM ile şifrelenir; anahtar ana şifrenden PBKDF2-HMAC-SHA256 (600.000 tur) ile cihazında üretilir. Android'de parmak iziyle açma Android Keystore ile korunur ve ekran görüntüsü engellenir; Windows'ta kopyalanan değer pano geçmişine alınmaz. Ayrıntı: [Güvenlik ve şifreleme belgesi](/guvenlik/sifreleme-belgesi).
 
 Bazı özellikler internete bağlanır. Hangisi neyi gönderir:
@@ -111,31 +95,27 @@ Tam liste: [güvenlik ve şifreleme belgesi](/guvenlik/sifreleme-belgesi), 8. b�
 
 ## Sık sorulan sorular
 
-**Bitwarden mi, KeePassXC mi, SyncPass mı?**
-Üçü farklı ihtiyaçlara göre yapılmış. Bitwarden otomatik eşitleme ve tüm platformlarda uygulama isteyenler için; kaynak kodu açık, kasa sağlayıcının bulutunda (istersen kendi sunucunda). KeePassXC bilgisayarında yerel dosyayla, ücretsiz ve açık kaynak çalışmak isteyenler için; eşitlemeyi ve telefon uygulamasını kendin seçersin. SyncPass Android ve Windows kullananlar için; kasa cihazda şifreli durur, eşitleme istersen kendi Google Drive hesabında olur. SyncPass'in iOS sürümü, paylaşımı ve açık kaynak kodu yok.
+**Bulut kasalı mı, yerel dosyalı mı yönetici seçmeliyim?**
+İkisi farklı ihtiyaçlara göre yapılmış. Bulut kasalı yöneticilerde kasa sağlayıcının sunucularında şifreli durur; otomatik eşitleme isteyenlere uyar. Yerel dosyalı, açık kaynak yöneticilerde kasa bilgisayarındaki dosyadır; yerel çalışmak, eşitlemeyi ve telefon uygulamasını kendin seçmek isteyenlere uyar. SyncPass Android ve Windows kullananlar için; kasa cihazda şifreli durur, eşitleme istersen kendi Google Drive hesabında olur. SyncPass'in iOS sürümü, paylaşımı ve açık kaynak kodu yok.
 
 **Bir şifre yöneticisinin güvenli olup olmadığını nasıl anlarım?**
-Bu sayfa sıralama yapmıyor; bir ürünün ötekinden üstün olduğunu kanıtlayamayız. Bakabileceğin ölçütler şunlar: kasanın nerede durduğu, kaynak kodunun açık olup olmadığı, bağımsız denetimin kamuya açık olması ve ana şifrenin gücü. Yukarıdaki "Kasan nerede duruyor" tablosunda bu bilgileri ürün ürün yazdık; SyncPass'in kodu kapalı ve bağımsız denetimi yok.
+Bu sayfa sıralama yapmıyor; bir yaklaşımın ötekinden üstün olduğunu söylemiyoruz. Bakabileceğin ölçütler şunlar: kasanın nerede durduğu, kaynak kodunun açık olup olmadığı, bağımsız denetimin kamuya açık olması ve ana şifrenin gücü. SyncPass'in kodu kapalı ve bağımsız bir güvenlik denetimi yapılmadı; kasa ise cihazında şifreli durur.
 
 **SyncPass açık kaynak mı?**
-Hayır. SyncPass'in kaynak kodu herkese açık bir lisansla yayımlanmıyor. Kaynak kodunun herkes tarafından denetlenebilmesi senin için şartsa Bitwarden, Proton Pass ya da KeePassXC bu ölçüte uyar. SyncPass'in bağımsız bir güvenlik denetimi de henüz yok.
+Hayır. SyncPass'in kaynak kodu herkese açık bir lisansla yayımlanmıyor. Kaynak kodunun herkes tarafından denetlenebilmesi senin için şartsa açık kaynak lisanslı bir şifre yöneticisi bu ölçüte uyar.
 
 **iPhone ya da Mac kullanıyorum, SyncPass'i kullanabilir miyim?**
-Şu an hayır. SyncPass Android ve Windows için var; iOS, macOS ve Linux sürümü yok. Telefonun iPhone ise Bitwarden, 1Password, Proton Pass, Dashlane gibi iOS uygulaması olan bir şifre yöneticisi daha uygun olur.
+Şu an hayır. SyncPass Android ve Windows için var; iOS, macOS ve Linux sürümü yok. Telefonun iPhone ise iOS uygulaması olan bir şifre yöneticisi daha uygun olur.
 
 **Şifrelerimi başka bir yöneticiden SyncPass'e taşıyabilir miyim?**
-Evet. Windows uygulaması Chrome, Edge, Firefox, Bitwarden, 1Password, KeePass, LastPass, Proton Pass (CSV) ve Kaspersky (TXT) dışa aktarımlarını içe aktarır. Android'de de içe aktarma var ve Google Authenticator dışa aktarma QR kodundan 2FA hesapları alınabilir. Dashlane dışa aktarımını henüz test etmedik; bunda önce küçük bir deneme yapmanı öneririz.
+Çoğu durumda evet. Android ve Windows uygulamaları, tarayıcıların ve birçok şifre yöneticisinin dışa aktardığı CSV dosyalarını içe aktarır; desteklenen kaynakların listesi uygulamanın içe aktarma ekranında. Android'de ayrıca 2FA hesapları, standart 2FA kurulum QR kodlarından ve Google Authenticator'ın “Hesapları aktar” dışa aktarma QR kodundan alınabilir. Listede olmayan bir kaynaktan taşıyorsan önce küçük bir deneme yapmanı öneririz.
 
-## Kaynaklar
+## Bu sayfa hakkında
 
-Rakip bilgileri 30 Ekim 2026'da aşağıdaki resmî sayfalardan okundu. Hata görürsen [iletişim sayfamızdan](/iletisim) yaz, düzeltelim.
+Bu karşılaştırma kategorilere göredir; belirli ürünleri değerlendirmez. Ürünlerin özellikleri ve planları zamanla değişebilir: kendi ihtiyacına göre değerlendir ve ilgilendiğin ürünün kendi sayfasına bak. Yanlış ya da eski bir bilgi görürsen [iletişim sayfamızdan](/iletisim) yaz, düzeltelim.
 
-- 1Password: https://1password.com/features
-- Bitwarden: https://bitwarden.com/help/is-bitwarden-audited/ , https://bitwarden.com/pricing/
-- Proton Pass: https://proton.me/pass , denetim yazısı https://proton.me/blog/proton-pass-audit-2026
-- Dashlane: https://www.dashlane.com/features
-- KeePassXC: https://keepassxc.org/ , denetim ve sertifika: https://keepassxc.org/audits/ (31 Ekim 2026'da okundu)
-
-SyncPass bilgileri kendi kodumuzdan ve sürüm 4.5 / masaüstü 1.4.15 doğrulamasından alındı (Chrome Web Store sayfası: https://chromewebstore.google.com/detail/bbighjeekihcenhofnmefgmcadddahbk). Adı geçen ürün ve markalar sahiplerine aittir; OstlerTech bu şirketlerle bağlantılı değildir.
+SyncPass'in Chrome eklentisi: https://chromewebstore.google.com/detail/bbighjeekihcenhofnmefgmcadddahbk
 
 İlgili: [Şifre yöneticisi nedir](/sifre-yoneticisi) · [İki adımlı doğrulama](/iki-adimli-dogrulama) · [Geçiş Anahtarı (passkey) nedir](/passkey-nedir)
+
+Google, Android, Google Play, Google Drive, Google Authenticator, Chrome ve Gemini, Google LLC'nin ticari markalarıdır. Windows, Microsoft şirketler grubunun ticari markasıdır. iPhone, Mac ve macOS, Apple Inc.'in ABD'de ve diğer ülke ve bölgelerde tescilli ticari markalarıdır. iOS, Cisco'nun ABD'de ve diğer ülkelerde ticari markası ya da tescilli ticari markasıdır ve lisansla kullanılır. Linux, Linus Torvalds'ın ABD'de ve diğer ülkelerde tescilli ticari markasıdır. Diğer ürün adları sahiplerine ait olabilir.

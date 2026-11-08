@@ -6,11 +6,13 @@ import { readContent } from "@/lib/content";
 import { DESKTOP_DOWNLOAD, PLAY_URL, SITE_URL } from "@/lib/site";
 
 // İçerik: src/content/sifre-yoneticisi-karsilastirma.md (kaynak: OstlerTech\site-icerik\2026-10-31\karsilastirma-tr.md,
-// scripts/icerik-esitle.mjs ile kopyalanır). Zeynep (hukuk) ve Defne (dil) 2026-10-31 bulguları işlendi; yayın Yasin onayı bekler.
+// scripts/icerik-esitle.mjs ile kopyalanır). Yasin kararı (2026-11-04, yeniden 2026-11-08): rakip ürün adı yok, kategori
+// karşılaştırması; adres aynı kalır (SEO). Taslak v3'teki yayınlanmamış SyncPass bilgileri (Android 25 kayıt, not eki 5 MB)
+// burada YOK: bu kopya yayındaki 4.5.21'e göre elle yazıldı. Eşitleme betiğini o sürümler yayınlanmadan çalıştırma.
 const PATH = "/sifre-yoneticisi-karsilastirma";
 const TITLE = "Şifre yöneticisi karşılaştırması: SyncPass";
 const DESCRIPTION =
-  "Bitwarden, KeePassXC, 1Password, Proton Pass, Dashlane ve SyncPass yan yana: platform, kasa yeri, ücretsiz sürüm, denetim. Eksikler de yazılı.";
+  "Bulut kasalı ve yerel dosyalı şifre yöneticilerini SyncPass ile kategori kategori karşılaştır: kasa yeri, hesap, eşitleme, cihazlar, ücretsiz sürüm.";
 const IMAGE = { url: "/og-image.png", width: 1200, height: 630 };
 
 export const metadata: Metadata = {
@@ -60,7 +62,7 @@ export default function SifreYoneticisiKarsilastirma() {
         <div className="max-w-3xl mx-auto space-y-6">
           <p className="eyebrow">Karşılaştırma</p>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">
-            Şifre yöneticisi karşılaştırması: Bitwarden, KeePassXC, SyncPass ve diğerleri
+            Şifre yöneticisi karşılaştırması: bulut kasalı, yerel dosyalı ve SyncPass
           </h1>
           {intro && <MiniMarkdown source={intro.body} />}
         </div>

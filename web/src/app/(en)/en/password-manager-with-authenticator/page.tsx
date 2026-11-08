@@ -42,7 +42,7 @@ const faq = [
   { q: "Can I import my codes from Google Authenticator?", a: "Yes. Export your accounts as a QR code in Google Authenticator (Transfer accounts, then Export accounts) and scan it in SyncPass. All accounts in the QR code are imported." },
   { q: "Do the codes work without internet?", a: "Yes. Time-based codes are calculated on the device from the shared secret and the current time. Only the device clock needs to be correct." },
   { q: "Does SyncPass support push approvals or Steam Guard?", a: "No. SyncPass generates standard TOTP and HOTP codes, which is what most websites use. Push sign-in prompts (like Microsoft Authenticator approvals) and Steam Guard use their own systems and are not supported." },
-  { q: "Is the authenticator free?", a: `No. 2FA codes are part of Premium on Android and Windows, together with unlimited items, Drive backup and sync, and breach checks. The free version stores up to ${FREE_ITEM_LIMIT} items, with no ads.` },
+  { q: "Is the authenticator free?", a: `No. 2FA codes are part of Premium on Android and Windows, together with unlimited items, Drive backup and sync, and breach checks. The free version stores up to ${FREE_ITEM_LIMIT} items.` },
 ];
 
 const ld = {

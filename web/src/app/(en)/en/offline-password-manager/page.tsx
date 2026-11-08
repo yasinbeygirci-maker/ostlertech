@@ -21,14 +21,15 @@ export const metadata: Metadata = {
 };
 
 const approaches = [
-  { name: "Cloud password managers", example: "Bitwarden, 1Password, NordPass", where: "Encrypted vault on the company's servers, cached on your devices", account: "Required", sync: "Automatic through the vendor" },
-  { name: "Local vault files", example: "KeePass, KeePassXC", where: "An encrypted file on your computer", account: "None", sync: "You move or sync the file yourself" },
+  // Rakip ürün adı yok (Yasin kararı 2026-11-04/08); örnek sütunu kategoriyi tarif eder.
+  { name: "Cloud-vault managers", example: "Vault hosted by the provider", where: "Encrypted vault on the provider's servers, cached on your devices", account: "Usually required", sync: "Automatic through the provider" },
+  { name: "Local-file, open-source managers", example: "Vault is a file you manage", where: "An encrypted file on your computer", account: "None", sync: "You move or sync the file yourself" },
   { name: "SyncPass", example: "Android and Windows", where: "An encrypted database on your phone or PC", account: "Your Google account for Play purchases and Drive", sync: "Optional, through your own Google Drive (Premium)" },
 ];
 
 const notFor = [
   "You use an iPhone or a Mac: SyncPass is available only on Android and Windows.",
-  "You require open-source code you can audit yourself: look at KeePassXC or Bitwarden.",
+  "You need open-source code you can audit yourself: choose a password manager with an open-source license.",
   "You want your vault shared with family members: SyncPass has no shared vaults.",
 ];
 
@@ -37,7 +38,7 @@ const faq = [
   { q: "Where exactly is my vault stored?", a: "On your phone (or your Windows PC) as an encrypted database. The master password is never stored or sent anywhere. OstlerTech does not run a server that holds vaults." },
   { q: "Can I sync between my phone and my computer without a cloud?", a: "Sync between Android and Windows uses your own Google Drive: the already encrypted vault goes into a hidden app folder only SyncPass can see. It is a Premium feature. Without it, each device keeps its own vault." },
   { q: "What happens if I lose my phone?", a: "Restore from your encrypted backup (a file you exported, or your Drive backup with Premium) and unlock it with your master password. Without a backup, a local vault cannot be recovered; that is the trade-off of not keeping a copy on our servers." },
-  { q: "Is it free?", a: `The free version stores up to ${FREE_ITEM_LIMIT} items, with no ads. Premium adds unlimited items, 2FA codes, Drive backup and sync, and breach checks.` },
+  { q: "Is it free?", a: `The free version stores up to ${FREE_ITEM_LIMIT} items. Premium adds unlimited items, 2FA codes, Drive backup and sync, and breach checks.` },
 ];
 
 const ld = {
