@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import LegalPage, { H2, SellerBlock } from "@/components/LegalPage";
 import { FACEBOOK_URL } from "@/components/SocialLinks";
-import { COMPANY, INSTAGRAM_URL, YOUTUBE_URL } from "@/lib/site";
+import { COMPANY, INSTAGRAM_URL, LINKEDIN_URL, TIKTOK_URL, YOUTUBE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "İletişim",
   description: "OstlerTech iletişim ve firma bilgileri: adres, KEP adresi ve e-posta.",
-  alternates: { canonical: "/iletisim" },
+  alternates: { canonical: "/iletisim", languages: { tr: "/iletisim", en: "/en/contact" } },
 };
 
 export default function ContactPage() {
@@ -47,6 +47,10 @@ export default function ContactPage() {
         <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary-light">Facebook</a>
         {" · "}
         <a href={YOUTUBE_URL} target="_blank" rel="noopener" className="text-primary hover:text-primary-light">YouTube</a>
+        {" · "}
+        <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary-light">LinkedIn</a>
+        {" · "}
+        <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary-light">TikTok</a>
       </p>
     </LegalPage>
   );

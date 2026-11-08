@@ -22,6 +22,12 @@ export const INSTAGRAM_URL = "https://www.instagram.com/ostlertech/";
 
 export const YOUTUBE_URL = "https://www.youtube.com/@OstlerTech";
 
+// LinkedIn şirket sayfası: 2026-11-08 canlı doğrulandı (sayfa başlığı "OstlerTech | LinkedIn", urn:li:organization:145402819).
+export const LINKEDIN_URL = "https://www.linkedin.com/company/ostlertech/";
+
+// TikTok şirket hesabı @ostlertech: 2026-11-08 oEmbed ile doğrulandı (author_name "OstlerTech"). Kurucunun kişisel hesabı değil.
+export const TIKTOK_URL = "https://www.tiktok.com/@ostlertech";
+
 // Firma bilgileri: iletişim, gizlilik ve kullanım koşullarında aynı olmalı (6563 s. Kanun).
 // Satışları Paddle (Merchant of Record) yapar; biz yazılımın geliştiricisi ve lisans vereniz.
 export const COMPANY = {
