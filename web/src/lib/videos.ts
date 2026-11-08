@@ -30,7 +30,7 @@ export const VIDEOS: Video[] = [
     en: {
       title: "SyncPass in 1 minute",
       description:
-        "Passwords, cards and 2FA codes in one encrypted vault. The vault is encrypted with AES-256 on your phone; we keep no copy of it on our servers.",
+        "Passwords, cards and 2FA codes in one vault. It is encrypted with AES-256 on your phone; we keep no copy of it on our servers.",
     },
   },
   {
@@ -63,7 +63,7 @@ export const VIDEOS: Video[] = [
     id: "rDErHEELats",
     title: "AreaPilot: area and perimeter takeoff in AutoCAD, in seconds",
     description:
-      "On a typical hotel floor plan it totals 76 areas by the code it reads from the text next to them, writes the results into the drawing, adds the table to the plan and exports to Excel. Free for 7 days from first launch.",
+      "On a typical hotel floor plan it totals 76 areas by the codes it reads from the text next to them, writes the results into the drawing, adds the table to the plan and exports to Excel. Free for 7 days from first launch.",
     poster: "/videos/areapilot-intro-en.webp?v=20261108",
     duration: "PT1M3S",
     durationLabel: "1:03",
@@ -75,7 +75,7 @@ export const VIDEOS: Video[] = [
     id: "HxpTIv4bH9Y",
     title: "AreaPilot walkthrough: area and perimeter takeoff of a hotel floor in AutoCAD, start to finish",
     description:
-      "Command and drawing unit, Select by Layer, list and totals, rooms lighting up when you click a row, search, Click Inside, code source setting, Apply to Drawing, table, Excel and Outline.",
+      "Command and drawing unit, Select by Layer, list and totals, rooms lighting up when you click a row, code search, Click Inside, the Code source setting, Apply to Drawing, table, Excel and Outline.",
     poster: "/videos/areapilot-walkthrough-en.webp?v=20261108",
     duration: "PT3M5S",
     durationLabel: "3:05",
@@ -97,7 +97,7 @@ export const VIDEOS: Video[] = [
     en: {
       title: "How to use the CornerTab credit ledger, start to finish",
       description:
-        "See CornerTab from start to finish: writing debts, taking payments, reminders, statements, end of day and backups. Narration and subtitles are in Turkish.",
+        "See CornerTab from start to finish: recording debts, collecting payments, reminders, statements, end-of-day totals and backups.",
     },
   },
 ];

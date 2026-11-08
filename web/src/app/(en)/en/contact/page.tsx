@@ -6,7 +6,7 @@ import { COMPANY, INSTAGRAM_URL, LINKEDIN_URL, TIKTOK_URL, YOUTUBE_URL } from "@
 // English counterpart of /iletisim. Business details come from the same SellerBlock (lang="en") as the English terms and privacy pages.
 export const metadata: Metadata = {
   title: "Contact",
-  description: "OstlerTech contact and business details: address, registered email (KEP) and email.",
+  description: "OstlerTech contact and business details: address, registered electronic mail (KEP) address and support email.",
   alternates: { canonical: "/en/contact", languages: { tr: "/iletisim", en: "/en/contact" } },
 };
 

@@ -5,7 +5,7 @@ import { COMPANY } from "@/lib/site";
 // English counterpart of /hakkimizda. Keep both in sync.
 export const metadata: Metadata = {
   title: "About us",
-  description: "OstlerTech: an independent software studio building security and business apps for everyone who wants to keep their data with them.",
+  description: "OstlerTech: an independent software studio building apps for individuals and small businesses who want to keep their data with them.",
   alternates: { canonical: "/en/about", languages: { tr: "/hakkimizda", en: "/en/about" } },
 };
 
@@ -19,9 +19,9 @@ export default function AboutPageEn() {
 
       <H2>What we build</H2>
       <List>
-        <li><strong className="text-foreground">SyncPass</strong>: a password manager that keeps passwords, cards and 2FA codes encrypted on your device (Android and Windows; a Chrome extension for Windows).</li>
-        <li><strong className="text-foreground">AreaPilot</strong>: an area and quantity takeoff plugin for AutoCAD (Windows; 7-day free trial).</li>
-        <li><strong className="text-foreground">SyncSite</strong>: a program that tracks daily work on construction sites, planned against actual, between the office and the field (in testing; Windows and Android, iOS and macOS coming soon).</li>
+        <li><strong className="text-foreground">SyncPass</strong>: a password manager that keeps passwords, cards and 2FA codes (Premium) encrypted on your device (Android and Windows; a Chrome extension for Windows).</li>
+        <li><strong className="text-foreground">AreaPilot</strong>: an area and perimeter takeoff plug-in for AutoCAD (Windows; 7-day free trial).</li>
+        <li><strong className="text-foreground">SyncSite</strong>: an app for tracking daily progress on construction sites, planned versus actual, shared between the office and the field (in testing; Windows and Android, iOS and macOS coming soon).</li>
       </List>
 
       <H2>How we work</H2>

@@ -87,15 +87,15 @@ export const URUNLER: Urun[] = [
     en: {
       ad: "SyncPass Desktop",
       slogan: "The same vault, on Windows",
-      aciklama: "A Windows app that uses the same encryption and vault format as Android. Three-column layout, keyboard shortcuts and copying that stays out of Windows clipboard history. With the Chrome extension it fills sign-in pages from the vault on this computer.",
+      aciklama: "The Windows version of SyncPass, with the same encryption and vault format as Android. Three-column layout, keyboard shortcuts and copying that stays out of Windows clipboard history. With the Chrome extension it fills sign-in pages from the vault on this computer.",
       platform: "Windows",
-      cta: "Download free for Windows",
+      cta: "Download the free version for Windows",
       ekler: [
         { etiket: "Get it from Microsoft Store", url: MS_STORE_URL },
         { etiket: "Details and pricing", url: "/en/syncpass-desktop" },
         { etiket: "Extension on the Chrome Web Store", url: BROWSER_EXTENSION.chromeUrl },
       ],
-      not: `Available on Microsoft Store. The direct download on this page is version ${DESKTOP_DOWNLOAD.version}. An Edge extension is in preparation.`,
+      not: `Available on Microsoft Store. The direct download on this page is version ${DESKTOP_DOWNLOAD.version}. An Edge extension is coming.`,
     },
   },
   {
@@ -115,9 +115,9 @@ export const URUNLER: Urun[] = [
     en: {
       ad: "AreaPilot",
       slogan: "Area and perimeter takeoff in AutoCAD",
-      aciklama: "Finds the closed areas in an AutoCAD drawing, reads their codes from the text next to them and totals area and perimeter; writes the results into the drawing, adds a table and exports to Excel. Windows, AutoCAD 2013-2027.",
+      aciklama: "Finds the closed areas in an AutoCAD drawing, reads their codes from the text next to them and totals area and perimeter; writes the results into the drawing, adds a table and exports to Excel. Windows, AutoCAD 2013–2027.",
       platform: "Windows (AutoCAD)",
-      cta: `Try AreaPilot (${AREAPILOT.trialDays} days free)`,
+      cta: `Try AreaPilot free for ${AREAPILOT.trialDays} days`,
       ekler: [{ etiket: "Videos", url: `${AREAPILOT.enPath}#videolar` }],
       not: `Version ${AREAPILOT.version}. Free for ${AREAPILOT.trialDays} days from first launch, then free mode for up to ${AREAPILOT.freeLimit} areas per run.`,
     },
@@ -155,7 +155,7 @@ export const URUNLER: Urun[] = [
     en: {
       ad: "CornerTab",
       slogan: "Your credit ledger on your phone",
-      aciklama: "A credit ledger for small shops: it records customer and supplier accounts, debts and payments, and prepares account statements as PDF. The ledger is stored encrypted on your device; you can add an optional PIN or fingerprint lock and make encrypted backups.",
+      aciklama: "A credit ledger for small shops: it records customer and supplier accounts, debts and payments, and prepares account statements as PDFs. The ledger is stored encrypted on your device; you can add an optional PIN or fingerprint lock and make encrypted backups.",
       platform: "Android",
       cta: "Get it on Google Play",
       ekler: [{ etiket: "How-to video", url: CORNERTAB.pageEnPath }, { etiket: "Privacy policy", url: CORNERTAB.enPath }],
@@ -267,8 +267,8 @@ export const URUNLER: Urun[] = [
     url: null,
     en: {
       ad: "SyncSite",
-      slogan: "Daily construction site progress, from the office and the field in one place",
-      aciklama: "A construction site program that tracks planned against actual work by block, floor and room. Daily reports (quantity, crew, notes, blockers) are entered from the field; the desktop and phone apps sync by themselves when they are online.",
+      slogan: "Daily site progress, in one place for the office and the field",
+      aciklama: "A construction site app that compares planned and actual work by block, floor and room. Daily reports (quantity, crew, notes, blockers) are entered from the field; the desktop and phone apps sync automatically when they are connected.",
       platform: "Windows and Android (iOS and macOS coming soon)",
     },
   },

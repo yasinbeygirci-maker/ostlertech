@@ -6,14 +6,14 @@ import { BROWSER_EXTENSION, DESKTOP_DOWNLOAD, DESKTOP_LICENSE, LANGUAGE_COUNT, M
 // English counterpart of /syncpass-masaustu. Same claims, same constants; Premium prices come from the checkout (Paddle), not from here.
 export const metadata: Metadata = {
   title: "SyncPass Desktop",
-  description: `SyncPass Desktop (Windows): free version and Premium (monthly, yearly or lifetime), ${DESKTOP_LICENSE.devices} computers, your vault encrypted on your computer.`,
+  description: `SyncPass Desktop (Windows): free version and Premium (monthly, yearly or lifetime) for up to ${DESKTOP_LICENSE.devices} computers, your vault encrypted on your computer.`,
   alternates: { canonical: "/en/syncpass-desktop", languages: { tr: "/syncpass-masaustu", en: "/en/syncpass-desktop" } },
 };
 
 const features = [
   "The same encryption and vault format as Android (AES-256-GCM)",
   "Categories, list and details side by side: a three-column layout",
-  "Quick search from anywhere with Ctrl+Shift+Space; type the username and password automatically with Ctrl+Alt+A/U/P",
+  "Quick search from anywhere with Ctrl+Shift+Space; auto-type with Ctrl+Alt+A (username and password), Ctrl+Alt+U (username) or Ctrl+Alt+P (password)",
   "Chrome extension: the SyncPass button on a sign-in page fills the username and password from the vault on this computer",
   "A copied password is not written to Windows clipboard history or the cloud clipboard",
   "Password health: weak and reused passwords; breach check and 2FA codes are Premium",
@@ -57,7 +57,7 @@ export default function DesktopLicensePageEn() {
               <span className="text-sm text-muted">Version {DESKTOP_DOWNLOAD.version} · {DESKTOP_DOWNLOAD.sizeLabel} · Windows 10 (2004) or Windows 11, 64-bit</span>
             </div>
             <p className="text-sm text-muted">
-              To fill in your browser:{" "}
+              To fill sign-in pages in your browser:{" "}
               <a href={BROWSER_EXTENSION.chromeUrl} className="font-semibold text-primary hover:text-primary-light" target="_blank" rel="noopener">Add to Chrome →</a>{" "}
               The extension stores no passwords; items are filled from SyncPass Desktop running on the same computer.
             </p>
@@ -65,7 +65,7 @@ export default function DesktopLicensePageEn() {
               <summary className="cursor-pointer font-semibold text-foreground">If Windows shows an &quot;unrecognized app&quot; warning when you install the .msi file</summary>
               <p className="mt-3">
                 Because you download the installer directly from this site, Windows SmartScreen may show a warning. You can continue with
-                <strong className="text-foreground"> More info → Run anyway</strong>. You can check that the file came from us with its SHA-256 hash:
+                <strong className="text-foreground"> More info → Run anyway</strong>. You can verify the file by comparing its SHA-256 hash:
               </p>
               <code className="mt-2 block break-all font-mono text-xs text-foreground">{DESKTOP_DOWNLOAD.sha256}</code>
               <p className="mt-2">
@@ -83,7 +83,7 @@ export default function DesktopLicensePageEn() {
               <Monitor size={22} className="text-primary" /> {DESKTOP_LICENSE.name.replace("Masaüstü", "Desktop")}
             </div>
             <div className="text-sm text-muted">
-              Monthly, yearly or lifetime · {DESKTOP_LICENSE.devices} computers · prices for your country, taxes included
+              Monthly, yearly or lifetime · up to {DESKTOP_LICENSE.devices} computers · prices for your country, taxes included
             </div>
             <ul className="space-y-3">
               {features.map((f) => (
