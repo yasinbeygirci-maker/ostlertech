@@ -14,6 +14,8 @@ const DISARIDA: Record<string, string> = {
   "/welcome": "ödeme sonrası teşekkür sayfası, noindex",
   "/syncsite": "SyncSite e-posta doğrulama iniş sayfası, noindex",
   "/en/syncsite": "SyncSite e-posta doğrulama iniş sayfası, noindex",
+  "/tilvora/kaynak": "Tilvora açık kaynak (Sparrow, jagua-rs) kaynak kodu sayfası; ürün henüz tanıtılmadı, noindex",
+  "/en/tilvora/kaynak": "Tilvora açık kaynak (Sparrow, jagua-rs) kaynak kodu sayfası; ürün henüz tanıtılmadı, noindex",
 };
 
 function routes(dir = APP, out: string[] = []): string[] {
