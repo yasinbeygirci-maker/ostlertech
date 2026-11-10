@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/syncpass/privacy" },
 };
 
-const EFFECTIVE_TR = "30 Ekim 2026";
-const EFFECTIVE_EN = "30 October 2026";
+const EFFECTIVE_TR = "10 Kasım 2026";
+const EFFECTIVE_EN = "10 November 2026";
 const CONTACT_EMAIL = "destek@ostlertech.com";
 
 function Section({ n, title, children }: { n: string; title: string; children: ReactNode }) {
@@ -108,6 +108,10 @@ export default function SyncPassPrivacyPolicy() {
             <p>
               Yedeği istediğiniz zaman Google Drive&apos;dan silebilirsiniz (Ayarlar → Uygulamaları yönet → SyncPass → Gizli uygulama verilerini sil).
               SyncPass&apos;in erişimini <A href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</A> adresinden kaldırabilirsiniz.
+            </p>
+            <p>
+              SyncPass&apos;in içinde Google Drive&apos;daki yedeği silen bir düğme yoktur. Android&apos;deki &quot;Bağlantıyı Kes&quot; düğmesi yalnızca SyncPass&apos;in o telefondaki Google oturumunu kapatır;
+              Drive&apos;daki yedeği silmez ve Google hesabınızdaki erişim iznini kaldırmaz.
             </p>
             <p>
               SyncPass&apos;in Google API&apos;lerinden aldığı bilgileri kullanması ve başka bir uygulamaya aktarması, Sınırlı Kullanım (Limited Use) şartları dahil olmak üzere{" "}
@@ -208,7 +212,11 @@ export default function SyncPassPrivacyPolicy() {
           </Section>
 
           <Section n="07" title="Saklama ve silme">
-            <p>Verileriniz, siz silene, uygulamayı sıfırlayana veya kaldırana kadar cihazınızda kalır. Bulut yedeği, 3. bölümde anlatıldığı şekilde silene kadar Google Drive&apos;ınızda kalır. Verilerinizi biz tutmadığımız için sizin adınıza silemez veya dışa aktaramayız; her ikisini de uygulama içinden kendiniz yapabilirsiniz.</p>
+            <p>Verileriniz, siz silene, uygulamayı sıfırlayana veya kaldırana kadar cihazınızda kalır. Verilerinizi biz tutmadığımız için sizin adınıza silemez veya dışa aktaramayız; bunları kendiniz yaparsınız:</p>
+            <ul className={list}>
+              <li>Cihazınızdaki kayıtları uygulama içinden silebilirsiniz. Android&apos;de kasanızı şifreli bir yedek dosyası olarak dışa da aktarabilirsiniz; SyncPass Masaüstü&apos;nde dosyaya dışa aktarma yoktur.</li>
+              <li>Google Drive&apos;daki bulut yedeği uygulama içinden silinmez. Kasayı sıfırlamak, &quot;Bağlantıyı Kes&quot; düğmesi ya da uygulamayı kaldırmak da onu silmez. Yedek, siz 3. bölümdeki yoldan Google Drive&apos;dan silene kadar Google Drive&apos;ınızda kalır.</li>
+            </ul>
             <p>Çökme raporlarından elimize geçebilecek kişisel bilgileri en fazla 30 gün tutar, sonra sileriz (4. bölüm).</p>
           </Section>
 
@@ -221,11 +229,12 @@ export default function SyncPassPrivacyPolicy() {
           </Section>
 
           <Section n="10" title="Haklarınız">
-            <p>Bulunduğunuz yere göre (örneğin KVKK veya GDPR kapsamında) kişisel verilerinize erişme, bunları düzeltme ve silme haklarınız vardır. Kasanız cihazlarınızda ve kendi Google hesabınızda saklandığı için bu hakları doğrudan uygulama içinden kullanabilirsiniz. Her türlü sorunuz için aşağıdaki adresten bize ulaşabilirsiniz.</p>
+            <p>Bulunduğunuz yere göre (örneğin KVKK veya GDPR kapsamında) kişisel verilerinize erişme, bunları düzeltme ve silme haklarınız vardır. Kasanız cihazlarınızda ve kendi Google hesabınızda saklandığı için bu hakları kendiniz kullanırsınız: cihazınızdaki kayıtlar için uygulama içinden, Google Drive&apos;daki yedek için 3. bölümdeki Google Drive yolundan. Her türlü sorunuz için aşağıdaki adresten bize ulaşabilirsiniz.</p>
           </Section>
 
           <Section n="11" title="Değişiklikler">
             <p>Bu politikayı güncelleyebiliriz. Güncellemelerde yukarıdaki yürürlük tarihini değiştirir, önemli değişiklikleri uygulama içinde bildiririz.</p>
+            <p>10 Kasım 2026 güncellemesi: Google Drive&apos;daki yedeğin uygulama içinden değil Google Drive&apos;dan silindiği, &quot;Bağlantıyı Kes&quot; düğmesinin yedeği silmediği ve SyncPass Masaüstü&apos;nde dosyaya dışa aktarma olmadığı açıkça yazıldı (3., 7. ve 10. bölümler).</p>
             <p>30 Ekim 2026 güncellemesi: Android sistem yedeği ve geçiş anahtarı bağlantıları eklendi; kasa raporu ve yardım ekranının Gemini&apos;ye ne gönderdiği koda uygun olarak düzeltildi; Play Integrity ve kayıt paylaşım kodu anlatımları kaldırıldı; iletişim adresi güncellendi.</p>
           </Section>
 
@@ -268,6 +277,10 @@ export default function SyncPassPrivacyPolicy() {
             <p>
               You can delete the backup at any time in Google Drive (Settings → Manage apps → SyncPass → Delete hidden app data) and remove SyncPass&apos;s access at{" "}
               <A href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</A>.
+            </p>
+            <p>
+              SyncPass has no button that deletes the backup in Google Drive. &quot;Disconnect&quot; on Android only signs SyncPass out of Google on that phone;
+              it does not delete the backup in Drive and does not remove SyncPass&apos;s access from your Google account.
             </p>
             <p>
               SyncPass&apos;s use and transfer of information received from Google APIs to any other app will adhere to the{" "}
@@ -368,7 +381,11 @@ export default function SyncPassPrivacyPolicy() {
           </Section>
 
           <Section n="07" title="Retention and deletion">
-            <p>Your data stays on your device until you delete it, reset the app or uninstall it. The cloud backup stays in your Google Drive until you delete it as described in section 3. Because we do not hold your data, we cannot delete or export it for you. You can do both yourself within the app.</p>
+            <p>Your data stays on your device until you delete it, reset the app or uninstall it. Because we do not hold your data, we cannot delete or export it for you; you do this yourself:</p>
+            <ul className={list}>
+              <li>You can delete the items on your device within the app. On Android you can also export your vault as an encrypted backup file; SyncPass Desktop has no export to a file.</li>
+              <li>The cloud backup in Google Drive cannot be deleted from within the app, and resetting the vault, the &quot;Disconnect&quot; button or uninstalling the app does not delete it either. It stays in your Google Drive until you delete it there as described in section 3.</li>
+            </ul>
             <p>Personal information that may reach us through crash reports is kept for at most 30 days and then deleted (section 4).</p>
           </Section>
 
@@ -381,11 +398,12 @@ export default function SyncPassPrivacyPolicy() {
           </Section>
 
           <Section n="10" title="Your rights">
-            <p>Depending on where you live (for example under the GDPR or Turkey&apos;s KVKK), you have rights to access, correct and delete your personal data. Since your vault is stored on your devices and in your own Google account, you can exercise these rights directly in the app. For any question, contact us using the address below.</p>
+            <p>Depending on where you live (for example under the GDPR or Turkey&apos;s KVKK), you have rights to access, correct and delete your personal data. Since your vault is stored on your devices and in your own Google account, you exercise these rights yourself: within the app for the items on your devices, and in Google Drive, as described in section 3, for the backup stored there. For any question, contact us using the address below.</p>
           </Section>
 
           <Section n="11" title="Changes">
             <p>We may update this policy. We will change the effective date above and, for significant changes, notify you in the app.</p>
+            <p>Update of 10 November 2026: made clear that the backup in Google Drive is deleted in Google Drive, not within the app, that the &quot;Disconnect&quot; button does not delete it, and that SyncPass Desktop has no export to a file (sections 3, 7 and 10).</p>
             <p>Update of 30 October 2026: added the Android system backup and passkey connections; corrected what the vault report and help screen send to Gemini to match the code; removed the Play Integrity and record share-code descriptions; updated the contact address.</p>
           </Section>
 
