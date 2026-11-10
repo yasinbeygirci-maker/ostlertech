@@ -106,7 +106,7 @@ export default function SyncPassPrivacyPolicy() {
             </ul>
             <p>Yedek, yüklenmeden önce cihazınızda şifrelenir. OstlerTech sunucularında değil, Google hesabınızda saklanır ve yalnızca ana şifrenizle çözülebilir.</p>
             <p>
-              Yedeği istediğiniz zaman Google Drive&apos;dan silebilirsiniz (Ayarlar → Uygulamaları yönet → SyncPass → Gizli uygulama verilerini sil).
+              Yedeği istediğiniz zaman Google Drive&apos;dan silebilirsiniz: bilgisayarda drive.google.com&apos;da dişli simge → Ayarlar → Uygulamaları yönet → SyncPass&apos;in yanındaki Seçenekler → Gizli uygulama verilerini sil.
               SyncPass&apos;in erişimini <A href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</A> adresinden kaldırabilirsiniz.
             </p>
             <p>
@@ -235,7 +235,7 @@ export default function SyncPassPrivacyPolicy() {
 
           <Section n="11" title="Değişiklikler">
             <p>Bu politikayı güncelleyebiliriz. Güncellemelerde yukarıdaki yürürlük tarihini değiştirir, önemli değişiklikleri uygulama içinde bildiririz.</p>
-            <p>10 Kasım 2026 güncellemesi: Google Drive&apos;daki yedeğin uygulama içinden değil Google Drive&apos;dan silindiği, &quot;Bağlantıyı Kes&quot; düğmesinin yedeği silmediği, SyncPass Masaüstü&apos;nde dosyaya dışa aktarma olmadığı ve uygulamayı kaldırmanın Google Play aboneliğini iptal etmediği açıkça yazıldı (3., 7. ve 10. bölümler).</p>
+            <p>10 Kasım 2026 güncellemesi: Google Drive&apos;daki yedeğin uygulama içinden değil Google Drive&apos;dan silindiği (silme yolu uygulamadaki anlatımla aynı yazıldı), &quot;Bağlantıyı Kes&quot; düğmesinin yedeği silmediği, SyncPass Masaüstü&apos;nde dosyaya dışa aktarma olmadığı ve uygulamayı kaldırmanın Google Play aboneliğini iptal etmediği açıkça yazıldı (3., 7. ve 10. bölümler).</p>
             <p>30 Ekim 2026 güncellemesi: Android sistem yedeği ve geçiş anahtarı bağlantıları eklendi; kasa raporu ve yardım ekranının Gemini&apos;ye ne gönderdiği koda uygun olarak düzeltildi; Play Integrity ve kayıt paylaşım kodu anlatımları kaldırıldı; iletişim adresi güncellendi.</p>
           </Section>
 
@@ -276,7 +276,7 @@ export default function SyncPassPrivacyPolicy() {
             </ul>
             <p>The backup is encrypted on your device before it is uploaded. It is stored in your Google account, not on OstlerTech servers, and it can only be decrypted with your master password.</p>
             <p>
-              You can delete the backup at any time in Google Drive (Settings → Manage apps → SyncPass → Delete hidden app data) and remove SyncPass&apos;s access at{" "}
+              You can delete the backup at any time in Google Drive: on a computer at drive.google.com, gear icon → Settings → Manage apps → Options next to SyncPass → Delete hidden app data. You can remove SyncPass&apos;s access at{" "}
               <A href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</A>.
             </p>
             <p>
@@ -405,7 +405,7 @@ export default function SyncPassPrivacyPolicy() {
 
           <Section n="11" title="Changes">
             <p>We may update this policy. We will change the effective date above and, for significant changes, notify you in the app.</p>
-            <p>Update of 10 November 2026: made clear that the backup in Google Drive is deleted in Google Drive, not within the app, that the &quot;Disconnect&quot; button does not delete it, that SyncPass Desktop has no export to a file, and that uninstalling the app does not cancel a Google Play subscription (sections 3, 7 and 10).</p>
+            <p>Update of 10 November 2026: made clear that the backup in Google Drive is deleted in Google Drive, not within the app (the steps now match the app&apos;s own instructions), that the &quot;Disconnect&quot; button does not delete it, that SyncPass Desktop has no export to a file, and that uninstalling the app does not cancel a Google Play subscription (sections 3, 7 and 10).</p>
             <p>Update of 30 October 2026: added the Android system backup and passkey connections; corrected what the vault report and help screen send to Gemini to match the code; removed the Play Integrity and record share-code descriptions; updated the contact address.</p>
           </Section>
 
