@@ -1,11 +1,11 @@
-// Oyun gizlilik sayfaları (Packle, Hozeni, Okey, Batak, Sayı Toplama, Gemiza, Vızvız; TR + EN) için yayın öncesi denetim: yasak ifadeler ve zorunlu bilgiler.
+// Oyun gizlilik sayfaları (Packle, Hozeni, Okey, Batak, Sayı Toplama, Gemiza, Uch Uch; TR + EN) için yayın öncesi denetim: yasak ifadeler ve zorunlu bilgiler.
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 
 const kok = path.join(process.cwd(), "src", "app");
-const sayfalar = ["packle", "hozeni", "okey", "batak", "sayitoplama", "gemiza", "vizviz"].flatMap((o) => [
+const sayfalar = ["packle", "hozeni", "okey", "batak", "sayitoplama", "gemiza", "uchuch"].flatMap((o) => [
   { oyun: o, dil: "tr", yol: path.join(kok, "(tr)", o, "privacy", "page.tsx") },
   { oyun: o, dil: "en", yol: path.join(kok, "(en)", "en", o, "privacy", "page.tsx") },
 ]);

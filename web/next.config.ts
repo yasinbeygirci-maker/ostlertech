@@ -25,6 +25,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/privacy", destination: "/syncpass/privacy", permanent: true },
+      // Uch Uch (eski adlar Vızvız ve Skimwing): eski gizlilik adresleri zincirsiz, doğrudan yeni adrese kalıcı yönlenir.
+      { source: "/vizviz/privacy", destination: "/uchuch/privacy", permanent: true },
+      { source: "/skimwing/privacy", destination: "/uchuch/privacy", permanent: true },
+      { source: "/en/vizviz/privacy", destination: "/en/uchuch/privacy", permanent: true },
+      { source: "/en/skimwing/privacy", destination: "/en/uchuch/privacy", permanent: true },
       // Satışları Paddle (Merchant of Record) yaptığı için bu iki belge Kullanım ve Satış Koşulları'na katıldı.
       { source: "/mesafeli-satis-sozlesmesi", destination: "/kullanim-sartlari", permanent: true },
       { source: "/on-bilgilendirme-formu", destination: "/kullanim-sartlari", permanent: true },
