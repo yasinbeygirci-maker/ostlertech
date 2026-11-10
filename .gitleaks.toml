@@ -1,0 +1,45 @@
+# Gitleaks yapılandırması (2026-11-10, Burak)
+#
+# Varsayılan kuralların hepsi açık kalır (useDefault). Aşağıdaki izin listesi YALNIZ
+# generic-api-key kuralında ve YALNIZ bulunan değerin kendisi (secret) birebir şu
+# sabitlerden biriyse çalışır; yol (path) izni yoktur, satırın geri kalanı yine taranır.
+#
+# Neden değer bazlı, neden yol bazlı değil:
+# - Test dosyalarına yol izni vermek, ileride oraya yapıştırılan gerçek bir anahtarı da gizler.
+# - Parmak izi (.gitleaksignore) commit SHA'sına bağlıdır; aynı sabit başka dalda
+#   (syncpass-omurboyu, paddle-canli, paytr-odeme) ya da yeniden düzenlenmiş satırda her
+#   seferinde yeniden kırmızı yakar ve ekip "CI hep kırmızı" diye bakmayı bırakır.
+# - Aşağıdaki değerler rastgele değildir: lisans alfabesinin (license-core.ts ALPHABET)
+#   ilk 20 karakteri sırayla. Gerçek bir kod 30^20 olasılıkla buna eşit çıkar; canlı
+#   sp_licenses'ta eşleşen satır 0 (2026-11-10, özetle sorgulandı, değer gönderilmedi).
+#
+# Kanıt ve bulgu listesi: OstlerTech/guvenlik/bulgular/2026-11-10-gitleaks-secret-scan.md
+# Yeni bir test sabiti gerekiyorsa buraya EKLEME; testte değeri ALPHABET'ten üret ya da
+# bu sıralı yer tutucuyu kullan.
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Lisans kodu yer tutucusu: ALPHABET[0:20] sırayla (SPD/APL önekli, tireli, tiresiz, küçük harfli)"
+targetRules = ["generic-api-key"]
+regexTarget = "secret"
+regexes = [
+  '''(?i)^(?:(?:SPD|APL)-?)?23456-?789AB-?CDEFG-?HJKMN$''',
+]
+
+[[allowlists]]
+description = "Lisans alfabesi sabitinin kendisi (gizli değil, kaynakta herkese açık)"
+targetRules = ["generic-api-key"]
+regexTarget = "secret"
+regexes = [
+  '''^23456789ABCDEFGHJKMNPQRSTVWXYZ$''',
+]
+
+[[allowlists]]
+description = "PayTR test anahtarı yer tutucusu (TESTKEY + ardışık rakam), paytr-odeme dalı"
+targetRules = ["generic-api-key"]
+regexTarget = "secret"
+regexes = [
+  '''^TESTKEY1234567890$''',
+]
