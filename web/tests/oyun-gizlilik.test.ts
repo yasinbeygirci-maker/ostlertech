@@ -44,7 +44,9 @@ for (const s of sayfalar) {
   });
   test(`${ad}: 16+, AdMob, 16 altı ve iletişim bilgisi var`, () => {
     assert.ok(metin.includes("AdMob"));
-    assert.ok(s.dil === "tr" ? metin.includes("16 yaş") : metin.includes("16 and over"));
+    // Hedef yaş: Okey 18+ (Yasin 2026-11-10); diğer oyunlar 16+ (Batak 18+ onaylanınca buraya eklenir).
+    const yas = s.oyun === "okey" ? "18" : "16";
+    assert.ok(s.dil === "tr" ? metin.includes(`${yas} yaş`) : metin.includes(`${yas} and over`));
     assert.ok(s.dil === "tr" ? /16 yaşından küçük/.test(metin) : /under 16/.test(metin));
     assert.ok(metin.includes("{COMPANY.email}") && metin.includes("{COMPANY.legalName}"), "firma bilgisi sabitlerden gelmeli");
     assert.ok(metin.includes(`/${s.oyun}/privacy`) && metin.includes(`/en/${s.oyun}/privacy`), "TR/EN karşılıklı bağlantı");
