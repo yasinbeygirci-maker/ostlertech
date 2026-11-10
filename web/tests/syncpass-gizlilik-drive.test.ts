@@ -31,6 +31,13 @@ test("syncpass/privacy EN: Drive backup is not deleted within the app, Disconnec
   assert.match(enBolum, /in Google Drive, as described in section 3, for the backup stored there/);
 });
 
+test("syncpass/privacy: silme bölümü bağlantı çapası (Play hesap silme bağlantısı) ve abonelik uyarısı TR+EN", () => {
+  assert.match(trBolum, /title="Saklama ve silme" id="silme"/);
+  assert.match(enBolum, /title="Retention and deletion" id="deletion"/);
+  assert.match(trBolum, /Premium aboneliğinizi iptal etmez/);
+  assert.match(enBolum, /does not cancel a Premium subscription on Google Play/);
+});
+
 test("syncpass/privacy: 4.5.25 düğmesi için gelecek vaadi yok", () => {
   assert.doesNotMatch(metin, /yakında|coming soon|sonraki sürümde|next version/i);
 });
