@@ -27,7 +27,7 @@ export default function OkeyPrivacyEnPage() {
         <li>The Game&apos;s interface is in Turkish.</li>
         <li>The Game contains ads, served by Google AdMob: a fixed ad area (banner) at the bottom of the screen, optional rewarded ads, and a full-screen ad that opens with a short countdown after a hand has ended, once the end-of-hand panel is shown. No full-screen ad is shown while a hand is being played.</li>
         <li>The Game has no purchases.</li>
-        <li>The Game is designed for users aged 16 and over. If your year of birth shows that you may be under 16, no ads are shown and no ad data is sent to Google. Users under 18 (or whose year of birth does not show for certain that they are 18 or over) only see non-personalized ads. For everyone else, ads are personalized only if you allow it; you can withdraw your permission at any time.</li>
+        <li>The Game is designed for users aged 18 and over. If your year of birth shows that you may be under 16, no ads are shown and no ad data is sent to Google. Users under 18 (or whose year of birth does not show for certain that they are 18 or over) only see non-personalized ads. For everyone else, ads are personalized only if you allow it; you can withdraw your permission at any time.</li>
         <li>We don&apos;t use our own analytics tools and the Game doesn&apos;t send data to any server of ours. The Game connects to the internet for ads.</li>
       </List>
       <H2>3. Data that stays on your device</H2>
@@ -66,12 +66,12 @@ export default function OkeyPrivacyEnPage() {
         <li>Support emails: 1 year after the request is closed.</li>
       </List>
       <H2>9. Children</H2>
-      <p>The Game is designed for users aged 16 and over; people under 16 should not use the Game. It is not directed at children and is not part of the Google Play Families program. Ads shown in the Game are limited to content suitable for general audiences (PG). We do not verify your age; we only ask for your year of birth when the Game starts.</p>
+      <p>The Game is designed for users aged 18 and over; people under 18 should not use the Game. It is not directed at children and is not part of the Google Play Families program. Ads shown in the Game are limited to content suitable for general audiences (PG). We do not verify your age; we only ask for your year of birth when the Game starts. If someone under 18 opens the Game anyway, the following protections apply:</p>
       <List>
-        <li><b>If your year of birth shows that you may be under 16:</b> a one-time note tells you that the Game is designed for users aged 16 and over. No ads are shown in the Game; the ad component and Google&apos;s consent tool are never started, so no ad data is sent to Google. You get the hint without watching an ad.</li>
+        <li><b>If your year of birth shows that you may be under 16:</b> a one-time note tells you the age the Game is designed for. No ads are shown in the Game; the ad component and Google&apos;s consent tool are never started, so no ad data is sent to Google. You get the hint without watching an ad.</li>
         <li><b>If you are 16 or 17, or if your year of birth does not show for certain that you are 18 or over:</b> ads are always shown without personalization; a setting is sent to Google, with ad requests and with the consent tool&apos;s query, indicating that you are under the age of consent and asking for ad treatment suitable for teenagers; neither our consent window nor Google&apos;s consent form is shown to you. Even then, Google processes the limited information described in section 4 to show and count ads and to prevent fraud.</li>
       </List>
-      <p>If you believe a child under 16 is using the Game, please write to {COMPANY.email}; uninstalling the Game or clearing its data is enough to delete the data on the device.</p>
+      <p>If you believe someone under 18 is using the Game, please write to {COMPANY.email}; uninstalling the Game or clearing its data is enough to delete the data on the device.</p>
       <H2>10. Your rights</H2>
       <p>Under KVKK Art. 11 and the GDPR you have the right to access, rectify and erase your data, to object and to complain. Because we keep no data that identifies you, the fastest route for most requests is Google: you can reset your advertising ID, change your consent choice in the Game, or contact Google through <a href="https://myaccount.google.com" className={link}>your Google Account</a>. Requests sent to {COMPANY.email} are answered within 30 days at the latest. You can complain to the Turkish Personal Data Protection Board or, in the EU, to the data protection authority of your country.</p>
       <H2>11. Changes</H2>
