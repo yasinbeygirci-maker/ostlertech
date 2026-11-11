@@ -1,3 +1,5 @@
+-- EMEKLİ / ÇALIŞTIRMAYIN (2026-11-11, Burak B3/B4): bu nesneler canlıda VAR (1 satır) ama sitede çağıran kod yok. Anon erişimi
+-- supabase/2026-11-11-anydoc-guvenli.sql ile kapatılır. Bu dosyayı yeniden çalıştırmak koşulsuz anon eklemesini/üyelik sorgusunu geri açar.
 -- AnyDoc bekleme listesi — Atlas planı (2026-09-16)
 -- Supabase Dashboard > SQL Editor'de BİR KEZ çalıştırın.
 -- Sonrası: /api/anydoc/bekleme canlı kayıt almaya başlar.

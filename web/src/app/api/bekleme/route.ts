@@ -7,7 +7,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 // Ürün bekleme/beta listesi. Tablo site_waitlist (supabase/2026-10-23-bekleme-listesi.sql); tarayıcı doğrudan yazamaz.
-// Koruma: bal küpü alanı + en kısa doldurma süresi + IP özeti başına saatte WAITLIST_LIMIT_PER_HOUR kayıt; çift kayıt yok.
+// Koruma: bal küpü alanı + en kısa doldurma süresi + IP özeti başına saatte WAITLIST_LIMIT_PER_HOUR DENEME (adres listede olsun olmasın sayılır, supabase/2026-11-11-bekleme-deneme-sayaci.sql); çift kayıt yok.
 // Başarıda (yeni ya da önceden kayıtlı) ürünün indirme bağlantıları döner; bağlantılar sayfa HTML'inde yer almaz.
 // Bağlantı yalnız sayfada gösterilir. E-posta beta bildirimleri içindir; yeni ürün/kampanya duyurusu yalnız marketing_consent=true
 // olan satırlara gönderilebilir (2026-10-31 T4-B; sitede e-posta gönderen kod yok).
