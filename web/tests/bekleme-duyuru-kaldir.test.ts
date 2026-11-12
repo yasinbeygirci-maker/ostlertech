@@ -117,3 +117,29 @@ test("SQL: hız sınırı davranışı korunur; göç tekrar çalıştırılabil
   await assert.rejects(db.query("select public.site_waitlist_join_v2('areapilot','z@example.com','tr','s_x',null,'i',5,false,null)"), /permission denied/);
   await db.exec("reset role");
 });
+
+// ---- Zeynep metin kapısı (hukuk/2026-11-12-bekleme-duyuru-kaldirma-metin-kapisi.md) K1-K4 ----
+test("gizlilik metinleri: K1 daraltılmış açık rıza + 5/2-c ve f, K2 tarih, K3 saklama, K4 IP özeti 'kısa süreli'", () => {
+  const tr = read("src", "app", "(tr)", "gizlilik", "page.tsx");
+  const en = read("src", "app", "(en)", "en", "privacy", "page.tsx");
+  assert.match(tr, /Açık rıza yalnızca güvenlik açığı bildiriminde adınızın teşekkür listesinde yayımlanması için geçerlidir\./);
+  assert.match(tr, /\(md\. 5\/2-c\) ve bu bildirimlerin yapılmasındaki meşru menfaatimize \(md\. 5\/2-f\) dayanır\. Bekleme listesi için açık rıza istenmez ve bu listeden tanıtım ya da duyuru e-postası gönderilmez\./);
+  assert.match(en, /Explicit consent applies only to publishing your name on the acknowledgements list for security reports\./);
+  assert.match(en, /\(Art\. 5\(2\)\(c\)\) and our legitimate interest in sending these notices \(Art\. 5\(2\)\(f\)\)\. We do not ask for consent for the waiting list and send no promotional or announcement emails from it\./);
+  assert.match(tr, /updatedOn="12 Kasım 2026"/);
+  assert.match(en, /updatedOn="12 November 2026"/);
+  assert.match(tr, /deneme süresinin bitişinden 6 ay sonra ya da talebiniz üzerine \(en geç 30 gün içinde\) silinir; silme kaydı tutulur\./);
+  assert.match(en, /deleted 6 months after your trial period ends, or on your request \(within 30 days at the latest\); deletions are logged\./);
+  assert.doesNotMatch(tr, /ürün çıktıktan 6 ay|o gün silinir/);
+  assert.doesNotMatch(en, /after the product is released|on the day you ask/);
+  assert.match(tr, /geri döndürülemez bir özeti de kısa süreli tutulur/);
+  assert.match(en, /is also kept for a short period/);
+  assert.doesNotMatch(tr + en, /en çok bir gün|at most one day/);
+});
+
+test("sıfırlama SQL'i: UYGULANMADI + sıra notu var, yalnız rıza alanlarını boşaltır, satır silmez", () => {
+  const s = sql("2026-11-12-bekleme-riza-sifirla.sql");
+  assert.match(s, /UYGULANMADI/);
+  assert.match(s, /SIRA/);
+  assert.doesNotMatch(s.replace(/--.*$/gm, ""), /\bdelete\b|\bdrop\b|\btruncate\b/i);
+});

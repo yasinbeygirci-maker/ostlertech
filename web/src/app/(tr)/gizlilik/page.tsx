@@ -14,7 +14,7 @@ export default function SitePrivacyPage() {
   const live = areapilotLegalLive();
   const add = PRIVACY_ADDITIONS.tr;
   return (
-    <LegalPage eyebrow="Yasal" title="Gizlilik Politikası ve KVKK Aydınlatma Metni" updatedOn="7 Kasım 2026" altLink={{ href: "/en/privacy", label: "English version" }}>
+    <LegalPage eyebrow="Yasal" title="Gizlilik Politikası ve KVKK Aydınlatma Metni" updatedOn="12 Kasım 2026" altLink={{ href: "/en/privacy", label: "English version" }}>
       <p>
         Bu metin ostlertech.com web sitesini ve buradan yapılan satın almaları kapsar. Uygulamalarımızın kendi gizlilik
         politikaları ayrıdır: <a href="/syncpass/privacy" className="text-primary hover:text-primary-light">SyncPass gizlilik politikası</a>,
@@ -28,7 +28,7 @@ export default function SitePrivacyPage() {
       <H2>2. Hangi verileri, neden işliyoruz</H2>
       <List>
         <li><strong className="text-foreground">Siteyi gezerken:</strong> sitemizin kendisi çerez kullanmaz. Yalnız satın alma sayfalarında (/satin-al ve /areapilot) Paddle'ın ödeme bileşeni yüklenir; bu bileşen paddle.com alan adında kötüye kullanıma karşı koruma için kısa süreli bir güvenlik çerezi bırakır ve ödeme penceresini açarsanız kendi çerezlerini kullanabilir (Paddle gizlilik politikası). Ödemeyi tamamladığınızda lisans kodunuzu gösterebilmek için işlem numarası yalnız o sekmenin oturum belleğinde tutulur ve sekmeyi kapatınca silinir. Hangi sayfaların ne kadar ziyaret edildiğini görmek için Vercel Web Analytics kullanıyoruz; bu araç çerez kullanmaz, sizi tanımlamaz ve ziyaretleri her gün değişen anonim bir özetle sayar (sayfa adresi, ülke, cihaz ve tarayıcı türü gibi toplu bilgiler). Barındırma hizmetimiz (Vercel) ayrıca güvenlik ve hata ayıklama için IP adresi ve tarayıcı bilgisini kısa süreli sunucu kayıtlarında tutar.</li>
-        <li><strong className="text-foreground">Bekleme listesi:</strong> e-posta adresiniz. Amaç: indirme bağlantısını size iletmek ve deneme sürümüyle ilgili zorunlu bilgilendirme (güncelleme, deneme süresinin bitişi).</li>
+        <li><strong className="text-foreground">Bekleme listesi:</strong> e-posta adresiniz, isteğe bağlı seçtiğiniz AutoCAD sürümü ve kayıt tarihi; formun kötüye kullanımını sınırlamak için IP adresinizin geri döndürülemez bir özeti de kısa süreli tutulur. Amaç: indirme bağlantısı formu gönderdiğinizde ekranda gösterilir; e-posta adresiniz, deneme sürümüyle ilgili zorunlu bildirimleri (kritik hata düzeltmesi, deneme süresinin bitişi, koşul değişikliği) size iletebilmemiz için saklanır. Bu bildirimler tanıtım içermez.</li>
         <li><strong className="text-foreground">Satın alma:</strong> satışlarımızı yetkili satıcımız (Merchant of Record) Paddle.com yapar. Ödeme ve fatura bilgilerinizi Paddle toplar ve kendi gizlilik politikasına göre işler. Paddle bize yalnızca e-posta adresinizi, ülkenizi, satın aldığınız planı, işlem ve abonelik numaralarını ve ödeme durumunu iletir. Amaç: lisansın teslimi, abonelik durumunun izlenmesi, iade ve destek.</li>
         {live ? (
           <li><strong className="text-foreground">Lisans:</strong> {add.license}</li>
@@ -44,9 +44,7 @@ export default function SitePrivacyPage() {
 
       <H2>3. Hukuki sebepler</H2>
       <p>
-        Verileriniz 6698 sayılı Kişisel Verilerin Korunması Kanunu'nun 5. maddesindeki şu sebeplere dayanarak işlenir:
-        bir sözleşmenin kurulması veya ifası (lisans, destek), kanuni yükümlülüklerimiz, meşru menfaatimiz (site ve
-        lisans güvenliği, Instagram mesajlarınıza yanıt verilmesi) ve açık rızanız. Bekleme listesindeki indirme bağlantısı ve deneme sürümüyle ilgili bildirimler sözleşmenin kurulması ve ifasına (md. 5/2-c) dayanır.
+        Verileriniz 6698 sayılı Kişisel Verilerin Korunması Kanunu'nun 5. maddesindeki şu sebeplere dayanarak işlenir: bir sözleşmenin kurulması veya ifası (lisans, destek), kanuni yükümlülüklerimiz, meşru menfaatimiz (site ve lisans güvenliği, Instagram mesajlarınıza yanıt verilmesi) ve açık rızanız. Açık rıza yalnızca güvenlik açığı bildiriminde adınızın teşekkür listesinde yayımlanması için geçerlidir. Bekleme listesindeki indirme bağlantısı ve deneme sürümüyle ilgili bildirimler sözleşmenin kurulması ve ifasına (md. 5/2-c) ve bu bildirimlerin yapılmasındaki meşru menfaatimize (md. 5/2-f) dayanır. Bekleme listesi için açık rıza istenmez ve bu listeden tanıtım ya da duyuru e-postası gönderilmez.
       </p>
 
       <H2>4. Aktarım</H2>
@@ -77,7 +75,7 @@ export default function SitePrivacyPage() {
       <List>
         <li>Satışa ilişkin fatura kayıtları Paddle'da tutulur; bizdeki muhasebe kayıtları ilgili mevzuatın öngördüğü süre (10 yıl) saklanır.</li>
         <li>AreaPilot lisans kayıtları: lisans geçerli olduğu sürece; lisans iade edilir, ödemesine itiraz edilir ya da sözleşmeye aykırılık nedeniyle iptal edilirse iade ya da iptal tarihinden 1 yıl sonra haftalık otomatik silmeyle silinir. Kaldırılan bilgisayarın kaydı kaldırıldığı anda silinir. Diğer lisans kayıtları: lisans süresi boyunca ve bitiminden sonra 1 yıl.</li>
-        <li>Bekleme listesi: ürün çıktıktan 6 ay sonra ya da siz daha önce çıkmak isterseniz o gün silinir.</li>
+        <li>Bekleme listesi (AreaPilot indirme formu): deneme süresinin bitişinden 6 ay sonra ya da talebiniz üzerine (en geç 30 gün içinde) silinir; silme kaydı tutulur.</li>
         <li>Destek yazışmaları: konu kapandıktan sonra 1 yıl.</li>
         <li>Instagram sohbet kayıtları (ChatPlace): son yazışmadan 6 ay sonra silinir.</li>
         <li>Güvenlik açığı bildirimleri: konu kapandıktan sonra 2 yıl; teşekkür listesindeki ad, izninizi geri alana kadar.</li>
