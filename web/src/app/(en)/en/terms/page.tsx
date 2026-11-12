@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import LegalPage, { H2, List, SellerBlock } from "@/components/LegalPage";
-import { COMPANY, DESKTOP_LICENSE, FREE_ITEM_LIMIT, PADDLE_BUYER_TERMS_URL } from "@/lib/site";
+import { COMPANY, DESKTOP_LICENSE, FREE_ITEM_LIMIT_DESKTOP, PADDLE_BUYER_TERMS_URL } from "@/lib/site";
 import AreaPilotLegalSections from "@/components/AreaPilotLegalSections";
 import { areapilotLegalLive, TERMS_INTRO2, TERMS_SECTIONS, TERMS_SHIFT } from "@/lib/areapilot-legal";
 
@@ -49,7 +49,7 @@ export default function TermsEnPage() {
       <H2>3. SyncPass Desktop: product and plans</H2>
       <p>
         <strong className="text-foreground">SyncPass Desktop Premium</strong> is a license for the SyncPass Desktop app
-        (Windows 10 and 11) that removes the limits of the free version. The free version holds up to {FREE_ITEM_LIMIT}{" "}
+        (Windows 10 and 11) that removes the limits of the free version. The free version holds up to {FREE_ITEM_LIMIT_DESKTOP}{" "}
         entries and phone sync is turned off; Premium has no entry limit and phone sync is turned on.
       </p>
       <List>

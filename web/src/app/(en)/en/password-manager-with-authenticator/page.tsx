@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Check } from "lucide-react";
 import { EnHeader, EnFooter } from "@/components/EnShell";
-import { PLAY_URL, SITE_URL, FREE_ITEM_LIMIT, DESKTOP_DOWNLOAD } from "@/lib/site";
+import { PLAY_URL, SITE_URL, FREE_LIMIT_EN, DESKTOP_DOWNLOAD } from "@/lib/site";
 import { paylasimMeta } from "@/lib/paylasim-meta";
 
 // Claims checked against the code (2026-10-11): TotpManager supports SHA1/SHA256/SHA512, 6-8 digits, custom period and HOTP;
@@ -42,7 +42,7 @@ const faq = [
   { q: "Can I import my codes from Google Authenticator?", a: "Yes. Export your accounts as a QR code in Google Authenticator (Transfer accounts, then Export accounts) and scan it in SyncPass. All accounts in the QR code are imported." },
   { q: "Do the codes work without internet?", a: "Yes. Time-based codes are calculated on the device from the shared secret and the current time. Only the device clock needs to be correct." },
   { q: "Does SyncPass support push approvals or Steam Guard?", a: "No. SyncPass generates standard TOTP and HOTP codes, which is what most websites use. Push sign-in prompts (like Microsoft Authenticator approvals) and Steam Guard use their own systems and are not supported." },
-  { q: "Is the authenticator free?", a: `No. 2FA codes are part of Premium on Android and Windows, together with unlimited items, Drive backup and sync, and breach checks. The free version stores up to ${FREE_ITEM_LIMIT} items.` },
+  { q: "Is the authenticator free?", a: `No. 2FA codes are part of Premium on Android and Windows, together with unlimited items, Drive backup and sync, and breach checks. The free version stores up to ${FREE_LIMIT_EN}.` },
 ];
 
 const ld = {

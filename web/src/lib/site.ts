@@ -83,8 +83,28 @@ export const PADDLE_BUYER_TERMS_URL = "https://www.paddle.com/legal/buyer-terms"
 export const LEGAL_UPDATED = "7 Kasım 2026";
 export const LEGAL_UPDATED_EN = "7 November 2026"; // İngilizce sürümlerin (/en/...) tarihi
 
-// Uygulamadaki sabitlerle aynı olmalı (MainVaultScreen.freeLimit, EncryptionManager.PBKDF2_ITERATIONS).
-export const FREE_ITEM_LIMIT = 15;
+// Uygulamadaki sabitlerle aynı olmalı (FreeTier.ITEM_LIMIT, EncryptionManager.PBKDF2_ITERATIONS).
+// Ücretsiz kayıt sınırı platforma göre ayrı: Android (Play'de yayında 4.5.24) ve Masaüstü (yayındaki 1.4.17,
+// LicenseManager.FREE_ITEM_LIMIT). Masaüstü 25'li sürümü yayınlanınca YALNIZ FREE_ITEM_LIMIT_DESKTOP = 25 yapılır;
+// ikisi eşit olunca aşağıdaki ortak cümleler tek sayıya kendiliğinden iner.
+// Kullanım şartlarının TR metni (kullanim-sartlari/page.tsx) bu sabite bağlı DEĞİL, elle yazılı (yasal metin).
+export const FREE_ITEM_LIMIT_ANDROID: number = 25;
+export const FREE_ITEM_LIMIT_DESKTOP: number = 15;
+
+// Platform belirtmeyen genel cümleler için.
+const sameLimit = FREE_ITEM_LIMIT_ANDROID === FREE_ITEM_LIMIT_DESKTOP;
+/** "25 kayıt" / "Android'de 25, masaüstünde 15 kayıt" */
+export const FREE_LIMIT_TR = sameLimit
+  ? `${FREE_ITEM_LIMIT_ANDROID} kayıt`
+  : `Android'de ${FREE_ITEM_LIMIT_ANDROID}, masaüstünde ${FREE_ITEM_LIMIT_DESKTOP} kayıt`;
+/** "25 kayda kadar ücretsiz" / "Android'de 25, masaüstünde 15 kayda kadar ücretsiz" */
+export const FREE_UP_TO_TR = sameLimit
+  ? `${FREE_ITEM_LIMIT_ANDROID} kayda kadar ücretsiz`
+  : `Android'de ${FREE_ITEM_LIMIT_ANDROID}, masaüstünde ${FREE_ITEM_LIMIT_DESKTOP} kayda kadar ücretsiz`;
+/** "25 items" / "25 items on Android and 15 on desktop" */
+export const FREE_LIMIT_EN = sameLimit
+  ? `${FREE_ITEM_LIMIT_ANDROID} items`
+  : `${FREE_ITEM_LIMIT_ANDROID} items on Android and ${FREE_ITEM_LIMIT_DESKTOP} on desktop`;
 export const PBKDF2_ITERATIONS = "600.000";
 export const LANGUAGE_COUNT = 12;
 export const MIN_ANDROID = "Android 7.0";

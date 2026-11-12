@@ -42,7 +42,7 @@ SyncPass'te Android'de nota eklenen dosya kasaya kopyalanmaz, yalnız telefondak
 
 | Yaklaşım | Ücretsiz sürümde ne var |
 |---|---|
-| SyncPass | 15 kayıt |
+| SyncPass | Android'de 25, masaüstünde 15 kayıt |
 | Bulut kasalı yöneticiler | Ürüne ve plana göre değişir |
 | Yerel dosyalı, açık kaynak yöneticiler | Üründen ürüne değişir |
 
@@ -65,7 +65,7 @@ Başlıca eksiklerimiz:
 - Kasa paylaşımı ve aile planı yok.
 - **SyncPass açık kaynak değildir:** kaynak kodu herkese açık bir lisansla yayımlanmıyor. Kaynak kodunu kendin denetlemek şartsa açık kaynak lisanslı bir şifre yöneticisi bu ölçüte uyar.
 - Bağımsız bir güvenlik denetimimiz yok. Kod kapalı olduğu için bu önemli bir boşluk. Bağımsız denetim yaptırmak için bir karar ya da takvimimiz yok.
-- Ücretsiz sürüm 15 kayıtla sınırlı; 2FA kodları ve sızıntı kontrolü Premium'da.
+- Ücretsiz sürüm Android'de 25, masaüstünde 15 kayıtla sınırlı; 2FA kodları ve sızıntı kontrolü Premium'da.
 - Android'de nota eklenen dosya kasaya kopyalanmaz, yalnız bağlantısı tutulur (yukarıda).
 - Tarayıcı eklentisi yalnızca Chrome için ve Windows uygulamasına bağlı.
 - Hata ödülü programımız yok; bulduğun bir güvenlik açığını [Güvenlik açığı bildir](/guvenlik-acigi-bildir) sayfasındaki yolla bildirebilirsin.

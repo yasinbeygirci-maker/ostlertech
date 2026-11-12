@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Check } from "lucide-react";
 import { EnHeader, EnFooter } from "@/components/EnShell";
-import { PLAY_URL, SITE_URL, FREE_ITEM_LIMIT, DESKTOP_DOWNLOAD } from "@/lib/site";
+import { PLAY_URL, SITE_URL, FREE_LIMIT_EN, DESKTOP_DOWNLOAD } from "@/lib/site";
 import { paylasimMeta } from "@/lib/paylasim-meta";
 
 // Claims checked against the code (2026-10-11): the vault is a local encrypted database; phone and Windows sync is Premium and
@@ -38,7 +38,7 @@ const faq = [
   { q: "Where exactly is my vault stored?", a: "On your phone (or your Windows PC) as an encrypted database. The master password is never stored or sent anywhere. OstlerTech does not run a server that holds vaults." },
   { q: "Can I sync between my phone and my computer without a cloud?", a: "Sync between Android and Windows uses your own Google Drive: the already encrypted vault goes into a hidden app folder only SyncPass can see. It is a Premium feature. Without it, each device keeps its own vault." },
   { q: "What happens if I lose my phone?", a: "Restore from your encrypted backup (a file you exported, or your Drive backup with Premium) and unlock it with your master password. Without a backup, a local vault cannot be recovered; that is the trade-off of not keeping a copy on our servers." },
-  { q: "Is it free?", a: `The free version stores up to ${FREE_ITEM_LIMIT} items. Premium adds unlimited items, 2FA codes, Drive backup and sync, and breach checks.` },
+  { q: "Is it free?", a: `The free version stores up to ${FREE_LIMIT_EN}. Premium adds unlimited items, 2FA codes, Drive backup and sync, and breach checks.` },
 ];
 
 const ld = {

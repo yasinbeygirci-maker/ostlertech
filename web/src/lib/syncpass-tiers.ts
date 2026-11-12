@@ -1,5 +1,7 @@
 // SyncPass Masaüstü fiyat sayfası planları (tarayıcı tarafı). AreaPilot fiyat kimlikleri BİLEREK burada değil:
 // paddle-tiers.ts yalnız sunucuda kullanılır; bu dosya istemci paketine girer.
+import { FREE_ITEM_LIMIT_DESKTOP } from "./site";
+
 // Fiyat sayfasındaki planlar. Metni ve fiyat kimliklerini yalnızca burada değiştir.
 // Fiyat kimlikleri Paddle > Catalog > Products > SyncPass Desktop Premium altındadır (gizli değildir).
 // Tutarlar burada yazılmaz: sayfa her zaman Paddle'ın ziyaretçinin ülkesine göre döndürdüğü tutarı gösterir.
@@ -24,7 +26,7 @@ export const TIERS: Tier[] = [
     name: "Ücretsiz",
     description: "Denemek ve az sayıda kayıt için.",
     features: [
-      "15 kayda kadar",
+      `${FREE_ITEM_LIMIT_DESKTOP} kayda kadar`,
       "Android ile aynı şifreleme (AES-256-GCM)",
       "Kopyalanan şifre Windows pano geçmişine yazılmaz",
       "Kasanın kopyası sunucularımızda tutulmaz",
@@ -33,7 +35,7 @@ export const TIERS: Tier[] = [
       name: "Free",
       description: "To try it out and for a few items.",
       features: [
-        "Up to 15 items",
+        `Up to ${FREE_ITEM_LIMIT_DESKTOP} items`,
         "Same encryption as Android (AES-256-GCM)",
         "Copied passwords are kept out of Windows clipboard history",
         "We keep no copy of your vault on our servers",

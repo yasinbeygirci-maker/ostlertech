@@ -3,7 +3,7 @@ import { Check, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SifreOlusturucu from "@/components/SifreOlusturucu";
-import { FREE_ITEM_LIMIT, PLAY_URL } from "@/lib/site";
+import { FREE_UP_TO_TR, PLAY_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Güvenli Şifre Oluşturucu: Rastgele Güçlü Şifre",
@@ -134,7 +134,7 @@ export default function GuvenliSifreOlusturucu() {
             kaydedersin.
           </p>
           <ul className="space-y-2 text-sm text-muted">
-            <li className="flex gap-3"><Check size={16} className="mt-0.5 shrink-0 text-ok" /> {FREE_ITEM_LIMIT} kayda kadar ücretsiz</li>
+            <li className="flex gap-3"><Check size={16} className="mt-0.5 shrink-0 text-ok" /> {FREE_UP_TO_TR}</li>
             <li className="flex gap-3"><Check size={16} className="mt-0.5 shrink-0 text-ok" /> Premium ile 2FA kodları ve Google Drive'a şifreli yedek</li>
             <li className="flex gap-3"><Check size={16} className="mt-0.5 shrink-0 text-ok" /> Android ve Windows'ta aynı kasa</li>
           </ul>

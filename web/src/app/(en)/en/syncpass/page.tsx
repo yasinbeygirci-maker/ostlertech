@@ -6,7 +6,7 @@ import {
   Columns3, Command, ClipboardX, SunMoon, EyeOff,
 } from "lucide-react";
 import {
-  PLAY_URL, SITE_URL, FREE_ITEM_LIMIT, PBKDF2_ITERATIONS, LANGUAGE_COUNT, MIN_ANDROID, DESKTOP_DOWNLOAD, DESKTOP_LICENSE, CONTACT_EMAIL,
+  PLAY_URL, SITE_URL, FREE_ITEM_LIMIT_ANDROID, FREE_LIMIT_EN, PBKDF2_ITERATIONS, LANGUAGE_COUNT, MIN_ANDROID, DESKTOP_DOWNLOAD, DESKTOP_LICENSE, CONTACT_EMAIL,
   MS_STORE_URL, BROWSER_EXTENSION,
 } from "@/lib/site";
 import { AREAPILOT } from "@/lib/areapilot";
@@ -19,7 +19,7 @@ import { paylasimMeta } from "@/lib/paylasim-meta";
 export const metadata: Metadata = {
   title: { absolute: "SyncPass: On-Device Password Manager | OstlerTech" },
   description:
-    "SyncPass keeps passwords, cards, passkeys and 2FA codes (Premium) encrypted on your device. No copy of your vault on our servers. Free for up to 15 items.",
+    "SyncPass keeps passwords, cards, passkeys and 2FA codes (Premium) encrypted on your device. No copy of your vault on our servers. Free for up to 25 items on Android.",
   alternates: { canonical: "/en/syncpass", languages: { tr: "/syncpass", en: "/en/syncpass", "x-default": "/syncpass" } },
   // Kendi openGraph bloğu görsel vermiyordu (og:image düşüyordu); paylasimMeta görseli de verir.
   ...paylasimMeta({
@@ -73,7 +73,7 @@ const leaves = [
 ];
 
 // Mirrors components/Pricing.tsx.
-const free = [`Up to ${FREE_ITEM_LIMIT} items`, "All item types: logins, cards, bank accounts, Wi-Fi, notes, passkeys", "Autofill and passkey provider", "Fingerprint unlock", "Password generator and security score", "Encrypted local backup and recovery QR"];
+const free = [`Up to ${FREE_ITEM_LIMIT_ANDROID} items`, "All item types: logins, cards, bank accounts, Wi-Fi, notes, passkeys", "Autofill and passkey provider", "Fingerprint unlock", "Password generator and security score", "Encrypted local backup and recovery QR"];
 const premium = ["Unlimited items", "2FA / TOTP codes in the vault", "Encrypted Google Drive backup and restore", "Breach check (Have I Been Pwned)", "Everything in the free version"];
 
 // Turkish FAQ (components/Faq.tsx) plus questions English readers asked about accounts and platforms.
@@ -85,7 +85,7 @@ const faq = [
   { q: "Does it work on both Android and Windows?", a: `Yes. The Android app is on Google Play (${MIN_ANDROID} and later) and SyncPass Desktop for Windows uses the same vault format. There is no iPhone or Mac version, and we are not giving a date for iOS or macOS.` },
   { q: "Can I copy 2FA codes quickly?", a: "With Premium, the current 2FA code sits in the same entry as the password, so you copy both from one place. You can also move your accounts from Google Authenticator by scanning its export QR code." },
   { q: "What happens if I forget my master password?", a: "We cannot reset it because we never know it. Create a recovery QR code in Settings after setting up the vault and keep it somewhere safe; it can unlock the vault from the lock screen." },
-  { q: "Is it free?", a: `The free version stores up to ${FREE_ITEM_LIMIT} items and has no ads. Premium adds unlimited items, 2FA codes, Drive backup and breach checks. Prices are shown in Google Play in your local currency.` },
+  { q: "Is it free?", a: `The free version stores up to ${FREE_LIMIT_EN} and has no ads. Premium adds unlimited items, 2FA codes, Drive backup and breach checks. Prices are shown in Google Play in your local currency.` },
 ];
 
 const ld = [
@@ -127,7 +127,7 @@ export default function SyncPassEn() {
             <a href={PLAY_URL} className="btn-primary !py-3.5 text-base" rel="noopener">Get it free on Google Play</a>
             <a href="#desktop" className="btn-secondary !py-3.5 text-base">Windows version</a>
           </div>
-          <p className="text-xs text-muted">{MIN_ANDROID} and later · {FREE_ITEM_LIMIT} items free · {LANGUAGE_COUNT} languages · No ads</p>
+          <p className="text-xs text-muted">{MIN_ANDROID} and later · {FREE_ITEM_LIMIT_ANDROID} items free · {LANGUAGE_COUNT} languages · No ads</p>
         </div>
       </section>
 
