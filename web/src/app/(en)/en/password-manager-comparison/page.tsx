@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { EnHeader, EnFooter } from "@/components/EnShell";
-import { PLAY_URL, FREE_ITEM_LIMIT, DESKTOP_DOWNLOAD } from "@/lib/site";
+import { PLAY_URL, FREE_LIMIT_EN, DESKTOP_DOWNLOAD } from "@/lib/site";
 import { paylasimMeta } from "@/lib/paylasim-meta";
 
 // Yasin kararı (2026-11-04, yeniden 2026-11-08): rakip ürün adı YOK; sayfa kategori karşılaştırmasıdır (cloud-vault / local-file
 // open-source / SyncPass). Neden: Ticari Reklam ve Haksız Ticari Uygulamalar Yönetmeliği md. 8/1-a (Zeynep). Adres değişmedi (SEO).
 // TR eşi: /sifre-yoneticisi-karsilastirma. Ürün/marka adı ekleme; tests/icerik.test.ts sayfa kaynağındaki yasak adları denetler.
-// SyncPass satırları yayındaki koddan (Android 4.5.21 main, masaüstü sync-alignment, 2026-11-08): ücretsiz sınır 15; 2FA ve Drive
+// SyncPass satırları yayındaki koddan (Android 4.5.21 main, masaüstü sync-alignment, 2026-11-08): ücretsiz sınır Android 25 / masaüstü 15 (site.ts); 2FA ve Drive
 // eşitleme Premium; geçiş anahtarı sağlayıcısında Premium kapısı yok (Android 14+), masaüstü geçiş anahtarını gösterir, oluşturamaz
 // ve düzenleyemez (CloudItemCodec: "created and edited only on the phone"; VaultScreen'de geçiş anahtarına Düzenle düğmesi yok). İçe aktarma: Android UniversalImporter/CsvImporter/OtpImport.
 const TITLE = "Password Manager Comparison by Category";
@@ -33,7 +33,7 @@ const rows: { label: string; values: [string, string, string] }[] = [
   { label: "Passkeys", values: ["Free on Android 14 and later; Windows shows passkeys but cannot create or edit them", "Varies by product", "Varies by product"] },
   { label: "Sharing and family plans", values: ["No", "Varies by product", "Varies by product"] },
   { label: "Source code", values: ["Not open source; no independent security audit", "Varies by product", "Open"] },
-  { label: "Free version", values: [`Up to ${FREE_ITEM_LIMIT} items`, "Varies by product and plan", "Varies by product"] },
+  { label: "Free version", values: [`Up to ${FREE_LIMIT_EN}`, "Varies by product and plan", "Varies by product"] },
 ];
 
 const picks = [
@@ -123,7 +123,7 @@ export default function PasswordManagerComparison() {
           </ul>
           <p className="text-muted leading-relaxed">
             Where SyncPass falls short: no iPhone or Mac app, no shared family vaults, not open source, no independent security audit, and a
-            free version limited to {FREE_ITEM_LIMIT} items.
+            free version limited to {FREE_LIMIT_EN}.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <a href={PLAY_URL} className="btn-primary !py-3.5" rel="noopener">Get SyncPass on Google Play</a>

@@ -1,6 +1,6 @@
 import { ArrowRight, Monitor } from "lucide-react";
 import ConstellationBackground from "@/components/ConstellationBackground";
-import { PLAY_URL, PBKDF2_ITERATIONS, LANGUAGE_COUNT, MIN_ANDROID, FREE_ITEM_LIMIT, SCREENS_VERSION } from "@/lib/site";
+import { PLAY_URL, PBKDF2_ITERATIONS, LANGUAGE_COUNT, MIN_ANDROID, FREE_ITEM_LIMIT_ANDROID, SCREENS_VERSION } from "@/lib/site";
 
 export function PlayIcon({ className = "" }: { className?: string }) {
   return (
@@ -57,7 +57,7 @@ export default function Hero() {
               Windows sürümü
             </a>
           </div>
-          <p className="text-xs text-muted">{MIN_ANDROID} ve üzeri · Ücretsiz sürümde {FREE_ITEM_LIMIT} kayıt · Reklam yok</p>
+          <p className="text-xs text-muted">{MIN_ANDROID} ve üzeri · Ücretsiz sürümde {FREE_ITEM_LIMIT_ANDROID} kayıt · Reklam yok</p>
         </div>
 
         <div className="relative mx-auto w-full max-w-2xl lg:max-w-none pb-10 sm:pb-0 animate-rise [animation-delay:150ms]">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { EnHeader, EnFooter } from "@/components/EnShell";
 import GuideChecklist, { guideMetadata, type GuideItem } from "@/components/GuideChecklist";
+import { FREE_LIMIT_EN } from "@/lib/site";
 
 // Page for the Instagram "PLAN" comment magnet. Premium labels checked in code: VaultHealthScreen isPremium (ortak-beyin §16).
 const PATH = "/en/digital-security-plan";
@@ -26,7 +27,7 @@ const items: GuideItem[] = [
     heading: "Day 2 · Put every password in one place",
     lines: [
       "Export the passwords from your browser or old password manager and bring them into your new vault. Add the ones in your notes by hand. Then delete the export file (and empty the bin).",
-      "SyncPass: Settings → Import & Export; pick the CSV/JSON file from your browser or old password manager. The free version holds 15 items.",
+      "SyncPass: Settings → Import & Export; pick the CSV/JSON file from your browser or old password manager. The free version holds " + FREE_LIMIT_EN + ".",
     ],
   },
   {

@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { Download } from "lucide-react";
 import PlayCta from "@/components/PlayCta";
 import type { IgDefaults } from "@/lib/play-utm";
-import { SCREENS_VERSION, SITE_URL } from "@/lib/site";
+import { SCREENS_VERSION, SITE_URL, FREE_ITEM_LIMIT_ANDROID } from "@/lib/site";
 
 // Sayfa metaverisi: openGraph/twitter kök düzenden birleşmez, yazılınca görsel ve başlık da burada verilmeli
 // (yoksa paylaşımda ana sayfanın başlığı ve görselsiz kart çıkar).
@@ -79,8 +79,8 @@ const SOURCES: Record<Lang, { key: SourceKey; name: string; url: string; note?: 
 };
 
 const UI: Record<Lang, { pdf: string; syncpass: string; sources: string; sourcesId: string; free: string }> = {
-  tr: { pdf: "PDF olarak indir", syncpass: "SyncPass'te:", sources: "Kaynaklar (erişim 19.10.2026)", sourcesId: "kaynaklar", free: "15 kayda kadar ücretsiz" },
-  en: { pdf: "Download as PDF", syncpass: "SyncPass:", sources: "Sources (accessed 19 Oct 2026)", sourcesId: "sources", free: "free for up to 15 items" },
+  tr: { pdf: "PDF olarak indir", syncpass: "SyncPass'te:", sources: "Kaynaklar (erişim 19.10.2026)", sourcesId: "kaynaklar", free: `Android'de ${FREE_ITEM_LIMIT_ANDROID} kayda kadar ücretsiz` },
+  en: { pdf: "Download as PDF", syncpass: "SyncPass:", sources: "Sources (accessed 19 Oct 2026)", sourcesId: "sources", free: `free for up to ${FREE_ITEM_LIMIT_ANDROID} items on Android` },
 };
 
 export default function GuideChecklist({

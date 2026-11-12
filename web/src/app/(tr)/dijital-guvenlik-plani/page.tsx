@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GuideChecklist, { guideMetadata, type GuideItem } from "@/components/GuideChecklist";
+import { FREE_LIMIT_TR } from "@/lib/site";
 
 // Instagram "PLAN" yorum mıknatısının sayfası. Premium ibareleri koddan: VaultHealthScreen isPremium (ortak-beyin §16).
 const PATH = "/dijital-guvenlik-plani";
@@ -28,7 +29,7 @@ const items: GuideItem[] = [
     lines: [
       "Tarayıcında ya da önceki şifre yöneticinde duran şifreleri dışa aktar, sonra yeni kasana al. Not defterindekileri elle ekle.",
       "Aktardıktan sonra dışa aktarma dosyasını sil (çöp kutusundan da).",
-      "SyncPass'te: Ayarlar → İçe ve Dışa Aktar; tarayıcından ya da önceki şifre yöneticinden aldığın CSV/JSON dosyasını seç. Ücretsiz sürüm 15 kayıt tutar.",
+      "SyncPass'te: Ayarlar → İçe ve Dışa Aktar; tarayıcından ya da önceki şifre yöneticinden aldığın CSV/JSON dosyasını seç. Ücretsiz sürüm " + FREE_LIMIT_TR + " tutar.",
     ],
   },
   {

@@ -1,10 +1,10 @@
 import { Check } from "lucide-react";
-import { PLAY_URL, FREE_ITEM_LIMIT } from "@/lib/site";
+import { PLAY_URL, FREE_ITEM_LIMIT_ANDROID } from "@/lib/site";
 
 // Kilitler uygulamadaki isPremium kontrollerinden alındı (kayıt sınırı, TOTP, Drive, sızıntı kontrolü).
 // Fiyatlar Google Play'den bölgeye göre gelir; burada rakam yazılmaz ki eskimesin.
 const free = [
-  `${FREE_ITEM_LIMIT} kayda kadar`,
+  `${FREE_ITEM_LIMIT_ANDROID} kayda kadar`,
   "Tüm kayıt türleri: giriş, kart, banka, Wi-Fi, not, geçiş anahtarı",
   "Otomatik doldurma ve geçiş anahtarı sağlayıcısı",
   "Parmak izi ile kilit açma",
