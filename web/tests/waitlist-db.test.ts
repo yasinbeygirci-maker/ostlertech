@@ -101,13 +101,6 @@ test("gizlilik: site_waitlist satırlarına ip_hash yazılmaz; 1 günden eski de
   assert.equal(n, 0, "1 günden eski deneme silindi");
 });
 
-test("duyuru onayı davranışı DEĞİŞMEDİ (B2 hukuk kararı bekliyor): v2 hâlâ onay kaydediyor", async () => {
-  const db = await newDb(FIXED);
-  assert.equal(await join(db, "onay@example.com", "ip-1", 5, true), "added");
-  const r = await db.query<{ marketing_consent: boolean }>("select marketing_consent from public.site_waitlist where email = 'onay@example.com'");
-  assert.equal(r.rows[0].marketing_consent, true);
-});
-
 test("deneme tablosu ve sınır işlevi anon/authenticated'a kapalı", async () => {
   const db = await newDb(FIXED);
   await join(db, "k@example.com", "ip-K");

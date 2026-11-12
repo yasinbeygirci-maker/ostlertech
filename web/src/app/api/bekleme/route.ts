@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/server/supabase-admin";
 import { AREAPILOT } from "@/lib/areapilot";
-import { checkWaitlistRequest, ipHash, MARKETING_CONSENT_VERSION, WAITLIST_LIMIT_PER_HOUR, waitlistIpKey, waitlistSuccessBody, type WaitlistProduct } from "@/lib/waitlist-core";
+import { checkWaitlistRequest, ipHash, WAITLIST_LIMIT_PER_HOUR, waitlistIpKey, waitlistSuccessBody, type WaitlistProduct } from "@/lib/waitlist-core";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -9,8 +9,8 @@ export const dynamic = "force-dynamic";
 // Ürün bekleme/beta listesi. Tablo site_waitlist (supabase/2026-10-23-bekleme-listesi.sql); tarayıcı doğrudan yazamaz.
 // Koruma: bal küpü alanı + en kısa doldurma süresi + IP özeti başına saatte WAITLIST_LIMIT_PER_HOUR DENEME (adres listede olsun olmasın sayılır, supabase/2026-11-11-bekleme-deneme-sayaci.sql); çift kayıt yok.
 // Başarıda (yeni ya da önceden kayıtlı) ürünün indirme bağlantıları döner; bağlantılar sayfa HTML'inde yer almaz.
-// Bağlantı yalnız sayfada gösterilir. E-posta beta bildirimleri içindir; yeni ürün/kampanya duyurusu yalnız marketing_consent=true
-// olan satırlara gönderilebilir (2026-10-31 T4-B; sitede e-posta gönderen kod yok).
+// Bağlantı yalnız sayfada gösterilir. E-posta yalnız beta/deneme bildirimleri içindir. Duyuru (pazarlama) onayı toplanmaz ve sitede e-posta
+// gönderen kod yoktur (Yasin kararı 2026-11-12: bekleme listesinden duyuru e-postası gönderilmeyecek).
 
 const DOWNLOADS: Record<WaitlistProduct, Record<string, string>> = {
   areapilot: AREAPILOT.downloads,
@@ -29,11 +29,6 @@ export async function POST(req: Request) {
   // Özet anahtarı: WAITLIST_IP_SECRET; tanımsızsa service-role anahtarından türetilen ayrı anahtar (waitlistIpKey, Burak D3).
   const hash = ipHash(ip, waitlistIpKey(process.env.WAITLIST_IP_SECRET, process.env.SUPABASE_SERVICE_ROLE_KEY));
 
-  // Duyuru onayı kaydı supabase/2026-10-31-bekleme-onay.sql ile gelir. Migration uygulanıp WAITLIST_CONSENT_DB=1 verilene
-  // kadar onay kaydedilemez: kutu işaretliyse onayı sessizce kaybetmek yerine kayıt reddedilir (kutu işaretsizse beta akışı aynen sürer).
-  const consentDb = process.env.WAITLIST_CONSENT_DB === "1";
-  if (check.marketing && !consentDb) return json({ error: "consent_unavailable" }, 503);
-
   let result: string;
   try {
     const base = {
@@ -45,9 +40,7 @@ export async function POST(req: Request) {
       p_ip_hash: hash,
       p_limit_per_hour: WAITLIST_LIMIT_PER_HOUR,
     };
-    const { data, error } = consentDb
-      ? await supabaseAdmin().rpc("site_waitlist_join_v2", { ...base, p_marketing: check.marketing, p_consent_version: MARKETING_CONSENT_VERSION })
-      : await supabaseAdmin().rpc("site_waitlist_join", base);
+    const { data, error } = await supabaseAdmin().rpc("site_waitlist_join", base);
     if (error) {
       // Günlüğe veritabanı iletisi YAZILMAZ (kişisel veri taşıyabilir; Burak D4): yalnız PostgREST/Postgres hata kodu.
       console.error("bekleme listesi", check.product, "rpc", error.code ?? "kod-yok");
