@@ -31,7 +31,7 @@ export default function OtoparkPrivacyEnPage() {
       <List>
         <li>The Game has no sign-up. We never ask for your name, email or phone number.</li>
         <li>Your level progress, daily puzzles, trophies and settings are stored only on your device and never reach us.</li>
-        <li>The Game has optional rewarded ads: you choose to watch an ad for an extra hint or an extra life. Ads are served by Google AdMob.</li>
+        <li>The Game has optional rewarded ads: you choose to watch an ad for an extra hint or an extra heart. Ads are served by Google AdMob.</li>
         <li>Ads are personalized only if you allow it. Outside the European Economic Area, the United Kingdom and Switzerland, users under 18 always get non-personalized ads. You can withdraw your consent at any time.</li>
         <li>The one-time &quot;Ad-free pack&quot; purchase is made through Google Play. Your payment card details never reach us.</li>
         <li>We don&apos;t use our own analytics tools and the Game doesn&apos;t send data to any server of ours. The Game connects to the internet for ads and purchases.</li>
@@ -86,7 +86,7 @@ export default function OtoparkPrivacyEnPage() {
 
       <H2>5. Purchases (Google Play)</H2>
       <List>
-        <li>The &quot;Ad-free pack&quot; is a one-time purchase, not a subscription; it does not renew and you are not charged again. Once purchased, no ads are shown in the Game, and hints and extra lives need no video. The Game then never starts its ad system. If Google Play cannot be reached when you reinstall the Game, ads may be shown until your purchase is verified.</li>
+        <li>The &quot;Ad-free pack&quot; is a one-time purchase, not a subscription; it does not renew and you are not charged again. Once purchased, no ads are shown in the Game, and hints and extra hearts need no video. The Game then never starts its ad system. If Google Play cannot be reached when you reinstall the Game, ads may be shown until your purchase is verified.</li>
         <li>The purchase button is on the Game&apos;s level screen. If the product is not on sale in Google Play or is not offered in your country, the purchase cannot be made.</li>
         <li>Provider: {COMPANY.tradeName} ({COMPANY.legalName}, sole proprietorship), {COMPANY.address}, {COMPANY.email}. The sale is made through Google Play; in some countries (such as the European Economic Area and the United Kingdom) Google acts as the seller, elsewhere it acts as our agent. Google Play shows the price, payment method and taxes on its payment screen.</li>
         <li>Your payment details and purchase record are processed by Google under the Google Play terms. Google shows us order information such as the order number, date, product, amount and the buyer&apos;s country/region; your payment card details never reach us.</li>

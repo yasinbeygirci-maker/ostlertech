@@ -31,7 +31,7 @@ export default function OklarPrivacyPage() {
         <li>Oyunda üyelik yoktur. Adınızı, e-postanızı ya da telefonunuzu sormayız.</li>
         <li>Oyun ilerlemeniz yalnız cihazınızda tutulur; bize gelmez.</li>
         <li>Oyunda isteğe bağlı ödüllü reklam vardır: ipucu ya da ek can için reklam izlemeyi siz seçersiniz. Reklamları Google AdMob gösterir.</li>
-        <li>Reklamlar yalnız izin verirseniz kişiselleştirilir. Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre dışında 18 yaşından küçüklere her zaman kişiselleştirilmemiş reklam gösterilir. İzninizi istediğiniz zaman geri alabilirsiniz.</li>
+        <li>Reklamlar yalnız izin verirseniz kişiselleştirilir. 18 yaşından küçüklere (ya da 18 yaşını doldurduğu kesin anlaşılmayanlara) her ülkede yalnız kişiselleştirilmemiş reklam gösterilir. İzninizi istediğiniz zaman geri alabilirsiniz.</li>
         <li>18 yaşını doldurduğu anlaşılan kullanıcılara isteğe bağlı, tek seferlik &quot;Reklamsız paket&quot; satın alımı Google Play üzerinden sunulur. Ödeme kartı bilgileriniz bize gelmez.</li>
         <li>Kendi analitik aracımızı kullanmıyoruz ve oyun bize ait bir sunucuya veri göndermez. Reklam ve satın alma için oyun internete bağlanır.</li>
       </List>
@@ -62,16 +62,12 @@ export default function OklarPrivacyPage() {
         <a href="https://policies.google.com/technologies/ads" className={link}>Google reklamları</a>.
       </p>
       <p>
-        <b>Onay ve kişiselleştirilmemiş reklam.</b> Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre&apos;de oyunu ilk
-        açtığınızda Google&apos;ın onay formu gösterilir ve onay alınmadan reklam isteği yapılmaz. Türkiye dahil diğer ülkelerde
-        oyunu ilk açtığınızda önce doğum yılınız sorulur, ardından kendi onay penceremiz gösterilir: kişiselleştirilmiş reklama
-        izin verirseniz Google reklamları ilgi alanınıza göre seçer; izin vermezseniz ya da 18 yaşından küçükseniz reklamlar
-        kişiselleştirilmeden gösterilir. Bu adımlar tamamlanmadan reklam isteği yapılmaz. Kişiselleştirilmemiş reklamda da
+        <b>Onay ve kişiselleştirilmemiş reklam.</b> Oyunu ilk açtığınızda, bulunduğunuz ülke ne olursa olsun önce doğum yılınız sorulur; bu soru cevaplanmadan reklam bileşeni ve Google&apos;ın onay aracı çalışmaz. 18 yaşından küçükseniz ya da doğum yılınızdan 18 yaşını doldurduğunuz kesin anlaşılmıyorsa reklamlar her zaman kişiselleştirilmeden gösterilir, Google&apos;a rıza yaşının altında olduğunuzu bildiren ayar gönderilir ve size ne bizim onay penceremiz ne de Google&apos;ın onay formu gösterilir. 18 yaşını doldurduysanız: Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre&apos;de Google&apos;ın onay formu, Türkiye dahil diğer ülkelerde kendi onay penceremiz gösterilir; kişiselleştirilmiş reklama izin verirseniz Google reklamları ilgi alanınıza göre seçer, izin vermezseniz reklamlar kişiselleştirilmeden gösterilir. Bu adımlar tamamlanmadan reklam isteği yapılmaz. Kişiselleştirilmemiş reklamda da
         Google reklamı göstermek, saymak ve sahtekârlığı önlemek için sınırlı bilgi işler. ABD&apos;nin bazı eyaletlerinde ayrıca
         Google&apos;ın gizlilik seçenekleri sunulur; kişisel bilgilerinizin reklam için satılmasını veya paylaşılmasını oradan
         reddedebilirsiniz (oyunda &quot;Google gizlilik seçenekleri (ABD)&quot; bağlantısı). Tercihinizi oyunda{" "}
         <b>Ayarlar &gt; Hakkında &gt; Gizlilik seçenekleri</b> bölümünden değiştirebilirsiniz (bu bölüm, bulunduğunuz yere göre
-        Google&apos;ın formunu ya da kendi onay penceremizi açar; izninizi verdiğiniz kadar kolay geri alabilirsiniz). Reklam
+        Google&apos;ın formunu ya da kendi onay penceremizi açar, 18 yaşından küçük olduğu anlaşılan kullanıcılara ise kişiselleştirilmiş reklam gösterilmediğini söyler; izninizi verdiğiniz kadar kolay geri alabilirsiniz). Reklam
         kimliğinizi Android ayarlarından sıfırlayabilir veya silebilirsiniz. Reklam izlemek zorunlu değildir; &quot;Reklamsız
         paket&quot; satın alındığında oyun reklam sistemini hiç başlatmaz.
       </p>
@@ -124,7 +120,7 @@ export default function OklarPrivacyPage() {
 
       <H2>9. Çocuklar</H2>
       <p>
-        Oyun 13 yaş ve üzeri kullanıcılar için tasarlanmıştır; çocuklara yönelik değildir. Reklamlarda içerik sınırı (PG) uygularız. Yaşınızı doğrulamıyoruz. Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre dışında oyunu ilk açtığınızda doğum yılınızı sorarız: 18 yaşından küçükseniz ya da doğum yılınızdan 18 yaşını doldurduğunuz kesin anlaşılmıyorsa reklamlar her zaman kişiselleştirilmeden gösterilir ve onay penceremiz size gösterilmez; bu durumda da Google, 4. bölümde yazan sınırlı bilgiyi reklamı göstermek, saymak ve sahtekârlığı önlemek için işler. Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre&apos;de doğum yılı sorulmaz; reklamların kişiselleştirilip kişiselleştirilmeyeceği Google&apos;ın onay formundaki seçiminize göre belirlenir. Satın alma seçeneği 18 yaşın altındaki ve yaşı bilinmeyen kullanıcılara gösterilmez; ancak oyun satın alma olup olmadığını ve ürün bilgisini her yaşta Google Play&apos;e (Google hesabınızla) sorar. Bu sorguda reklam verisi gönderilmez; Google Play bileşeni kendi işleyiş ve teşhis verisini Google&apos;a gönderebilir. 13 yaşından küçük bir çocuğun oyunu kullandığını düşünüyorsanız {COMPANY.email} adresine yazın; cihazdaki verileri silmek için oyunu kaldırmanız ya da verilerini temizlemeniz yeterlidir.
+        Oyun 13 yaş ve üzeri kullanıcılar için tasarlanmıştır; çocuklara yönelik değildir. Reklamlarda içerik sınırı (PG) uygularız. Yaşınızı doğrulamıyoruz. Oyunu ilk açtığınızda, bulunduğunuz ülke ne olursa olsun doğum yılınızı sorarız: 18 yaşından küçükseniz ya da doğum yılınızdan 18 yaşını doldurduğunuz kesin anlaşılmıyorsa reklamlar her zaman kişiselleştirilmeden gösterilir, Google&apos;a rıza yaşının altında olduğunuzu bildiren ayar gönderilir ve size ne bizim onay penceremiz ne de Google&apos;ın onay formu gösterilir; bu durumda da Google, 4. bölümde yazan sınırlı bilgiyi reklamı göstermek, saymak ve sahtekârlığı önlemek için işler. Satın alma seçeneği 18 yaşın altındaki ve yaşı bilinmeyen kullanıcılara gösterilmez; ancak oyun satın alma olup olmadığını ve ürün bilgisini her yaşta Google Play&apos;e (Google hesabınızla) sorar. Bu sorguda reklam verisi gönderilmez; Google Play bileşeni kendi işleyiş ve teşhis verisini Google&apos;a gönderebilir. 13 yaşından küçük bir çocuğun oyunu kullandığını düşünüyorsanız {COMPANY.email} adresine yazın; cihazdaki verileri silmek için oyunu kaldırmanız ya da verilerini temizlemeniz yeterlidir.
       </p>
 
       <H2>10. Haklarınız</H2>

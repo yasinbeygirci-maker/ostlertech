@@ -28,7 +28,7 @@ export default function OklarPrivacyEnPage() {
         <li>The Game has no sign-up. We never ask for your name, email or phone number.</li>
         <li>Your progress is stored only on your device and never reaches us.</li>
         <li>The Game has optional rewarded ads: you choose to watch an ad for a hint or an extra heart. Ads are served by Google AdMob.</li>
-        <li>Ads are personalized only if you allow it. Outside the European Economic Area, the United Kingdom and Switzerland, users under 18 always get non-personalized ads. You can withdraw your consent at any time.</li>
+        <li>Ads are personalized only if you allow it. In every country, users under 18 (or whose year of birth does not show for certain that they are 18 or over) only get non-personalized ads. You can withdraw your consent at any time.</li>
         <li>Users whose year of birth shows they are 18 or over are offered an optional one-time &quot;Ad-free pack&quot; purchase through Google Play. Your payment card details never reach us.</li>
         <li>We don&apos;t use our own analytics tools and the Game doesn&apos;t send data to any server of ours. The Game connects to the internet for ads and purchases.</li>
       </List>
@@ -59,16 +59,12 @@ export default function OklarPrivacyEnPage() {
         <a href="https://policies.google.com/technologies/ads" className={link}>Google advertising</a>.
       </p>
       <p>
-        <b>Consent and non-personalized ads.</b> In the European Economic Area, the United Kingdom and Switzerland, Google&apos;s
-        consent form is shown when you first open the Game, and no ad is requested before consent is obtained. In all other
-        countries, including Türkiye, you are first asked for your year of birth and then our own consent window is shown when
-        you first open the Game: if you allow personalized ads, Google chooses ads based on your interests; if you don&apos;t, or if
-        you are under 18, ads are shown without personalization. No ad is requested before these steps are completed. Even for
+        <b>Consent and non-personalized ads.</b> When you first open the Game, you are first asked for your year of birth, wherever you are; until you answer, neither the ad component nor Google&apos;s consent tool runs. If you are under 18, or if your year of birth does not show for certain that you are 18 or over, ads are always shown without personalization, a setting is sent to Google indicating that you are under the age of consent, and neither our consent window nor Google&apos;s consent form is shown to you. If you are 18 or over: in the European Economic Area, the United Kingdom and Switzerland Google&apos;s consent form is shown, and in all other countries, including Türkiye, our own consent window is shown; if you allow personalized ads, Google chooses ads based on your interests, and if you don&apos;t, ads are shown without personalization. No ad is requested before these steps are completed. Even for
         non-personalized ads, Google processes limited information to show and count ads and to prevent fraud. In certain US
         states, Google&apos;s privacy options are also offered, where you can opt out of the sale or sharing of your personal
         information for ads (&quot;Do Not Sell or Share My Personal Information&quot;). You can change your choice in the Game
         under <b>Settings &gt; About &gt; Privacy options</b> (depending on where you are, this opens Google&apos;s form or our own
-        consent window; withdrawing is as easy as giving consent). You can reset or delete your advertising ID in Android
+        consent window, and tells users under 18 that they are not shown personalized ads; withdrawing is as easy as giving consent). You can reset or delete your advertising ID in Android
         settings. Watching ads is optional; once the &quot;Ad-free pack&quot; is purchased, the Game does not start the ad system
         at all.
       </p>
@@ -121,7 +117,7 @@ export default function OklarPrivacyEnPage() {
 
       <H2>9. Children</H2>
       <p>
-        The Game is designed for users aged 13 and over and is not directed at children. We limit ad content to the PG rating. We do not verify your age. Outside the European Economic Area, the United Kingdom and Switzerland, we ask for your year of birth when you first open the Game: if you are under 18, or if your year of birth does not show for certain that you are 18 or over, ads are always shown without personalization and our consent window is not shown to you; even then, Google processes the limited information described in section 4 to show and count ads and to prevent fraud. In the European Economic Area, the United Kingdom and Switzerland, your year of birth is not asked; whether ads are personalized depends on your choice in Google&apos;s consent form. The purchase option is not shown to users under 18 or users whose age is unknown; however, at any age the Game asks Google Play (with your Google account) whether a purchase was made and for the product information. No ad data is sent in this request; the Google Play component may send its own operational and diagnostic data to Google. If you believe a child under 13 is using the Game, write to {COMPANY.email}; uninstalling the Game or clearing its data is enough to delete the data on the device.
+        The Game is designed for users aged 13 and over and is not directed at children. We limit ad content to the PG rating. We do not verify your age. When you first open the Game, we ask for your year of birth, wherever you are: if you are under 18, or if your year of birth does not show for certain that you are 18 or over, ads are always shown without personalization, a setting is sent to Google indicating that you are under the age of consent, and neither our consent window nor Google&apos;s consent form is shown to you; even then, Google processes the limited information described in section 4 to show and count ads and to prevent fraud. The purchase option is not shown to users under 18 or users whose age is unknown; however, at any age the Game asks Google Play (with your Google account) whether a purchase was made and for the product information. No ad data is sent in this request; the Google Play component may send its own operational and diagnostic data to Google. If you believe a child under 13 is using the Game, write to {COMPANY.email}; uninstalling the Game or clearing its data is enough to delete the data on the device.
       </p>
 
       <H2>10. Your rights</H2>
