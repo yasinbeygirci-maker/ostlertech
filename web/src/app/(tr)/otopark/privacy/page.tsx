@@ -36,7 +36,7 @@ export default function OtoparkPrivacyPage() {
         <li>Bölüm ilerlemeniz, günlük bulmacalarınız, kupalarınız ve ayarlarınız yalnız cihazınızda tutulur; bize gelmez.</li>
         <li>Oyunda isteğe bağlı ödüllü reklam vardır: ek ipucu ya da ek can için reklam izlemeyi siz seçersiniz. Reklamları Google AdMob gösterir.</li>
         <li>Reklamlar yalnız izin verirseniz kişiselleştirilir. Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre dışında 18 yaşından küçüklere her zaman kişiselleştirilmemiş reklam gösterilir. İzninizi istediğiniz zaman geri alabilirsiniz.</li>
-        <li>Tek seferlik &quot;Reklamsız paket&quot; satın alma Google Play üzerinden yapılır; ödeme bilgileriniz bize gelmez.</li>
+        <li>Tek seferlik &quot;Reklamsız paket&quot; satın alımı Google Play üzerinden yapılır. Ödeme kartı bilgileriniz bize gelmez.</li>
         <li>Kendi analitik aracımızı kullanmıyoruz ve oyun bize ait bir sunucuya veri göndermez. Reklam ve satın alma için oyun internete bağlanır.</li>
       </List>
 
@@ -89,16 +89,24 @@ export default function OtoparkPrivacyPage() {
       </p>
 
       <H2>5. Satın almalar (Google Play)</H2>
-      <p>
-        &quot;Reklamsız paket&quot; Google Play faturalandırma sistemiyle satın alınır. Ödeme bilgileriniz ve satın alma
-        kaydınız Google tarafından işlenir. Oyun satın almayı yalnız cihazınızda Google Play üzerinden doğrular; adınız ya da
-        ödeme bilginiz bize gelmez. İadeler Google Play&apos;in iade kurallarına tabidir.
-      </p>
+      <List>
+        <li>&quot;Reklamsız paket&quot; tek seferlik bir satın almadır, abonelik değildir; yenilenmez ve tekrar ücret alınmaz. Satın alındığında oyunda reklam gösterilmez; ipucu ve ek can için video izlemeniz gerekmez. Bu durumda oyun reklam sistemini hiç başlatmaz. Oyunu yeniden yüklediğinizde Google Play&apos;e ulaşılamıyorsa, satın alımınız doğrulanana kadar reklam gösterilebilir.</li>
+        <li>Satın alma düğmesi oyunun bölüm ekranında bulunur. Ürün Google Play&apos;de satışa açık değilse ya da ülkenizde sunulmuyorsa satın alma yapılamaz.</li>
+        <li>Satıcı: {COMPANY.tradeName} ({COMPANY.legalName}, şahıs işletmesi), {COMPANY.address}, {COMPANY.email}. Satış Google Play üzerinden yapılır; Google bazı ülkelerde (Avrupa Ekonomik Alanı ve Birleşik Krallık gibi) satıcı sıfatıyla, diğer ülkelerde bizim adımıza aracı olarak işlem yapar. Fiyatı, ödeme yöntemini ve vergileri Google Play ödeme ekranında gösterir.</li>
+        <li>Ödeme bilgileriniz ve satın alma kaydınız Google tarafından, Google Play koşullarına göre işlenir. Google bize sipariş numarası, tarih, ürün, tutar ve alıcının ülkesi/bölgesi gibi sipariş bilgilerini gösterir; ödeme kartı bilginiz bize gelmez.</li>
+        <li>Oyun, satın alımınız olup olmadığını ve satın alma seçeneğinin ürün bilgisini (fiyatını) her açılışta cihazınızdaki Google Play&apos;e sorar; bunun için bize ait bir sunucu kullanılmaz ve sonuç yalnız cihazınızda tutulur.</li>
+        <li>Ödemeniz beklemedeyse (örneğin nakit ya da kodla ödeme), ödeme tamamlanana kadar paket açılmaz.</li>
+        <li>Aynı Google hesabıyla başka bir cihazda ya da oyunu yeniden yükledikten sonra satın alımınızı &quot;Satın alımı geri yükle&quot; ile geri alabilirsiniz; oyun bunu açılışta kendiliğinden de dener.</li>
+        <li>Cayma hakkı: Satın aldığınız paket ödeme tamamlanır tamamlanmaz cihazınızda açılan bir dijital içerik olduğu için, Türkiye&apos;deki satışlarda Mesafeli Sözleşmeler Yönetmeliği md. 15/1-ğ uyarınca yasal cayma hakkı uygulanmaz. Bulunduğunuz ülkenin hukuku size daha geniş bir hak tanıyorsa o hak saklıdır.</li>
+        <li>İade: İade talepleri Google Play&apos;in iade kurallarına göre değerlendirilir. Google Play&apos;e göre satın almadan sonraki 48 saat içinde iadeyi Google Play&apos;den isteyebilirsiniz; 48 saatten sonra bize {COMPANY.email} adresinden sipariş numaranızla yazabilirsiniz, talebinizi Google Play kurallarına ve yürürlükteki mevzuata göre değerlendiririz. Satın alma iade edilir ya da Google Play satın almayı artık göstermezse reklamlar yeniden gösterilir.</li>
+        <li>Şikâyet: {COMPANY.email}. Türkiye&apos;de tüketici hakem heyetine ya da tüketici mahkemesine başvurabilirsiniz.</li>
+      </List>
 
       <H2>6. İşleme amaçları ve hukuki sebepler</H2>
       <List>
         <li><b>Cihazdaki ilerleme ve ayarlar:</b> oyunun çalışması; bize aktarılmaz.</li>
         <li><b>AdMob&apos;un topladığı veriler:</b> reklam gösterme ve ölçme, sahtekârlık önleme. Kişiselleştirilmiş reklam için açık rızanız (KVKK md. 5/1, GDPR md. 6/1-a): AEA, Birleşik Krallık ve İsviçre&apos;de Google&apos;ın onay formuyla, diğer ülkelerde oyundaki onay penceremizle alınır ve istediğiniz zaman geri alınabilir. Kişiselleştirilmemiş reklam ve sahtekârlık önleme için meşru menfaat (KVKK md. 5/2-f, GDPR md. 6/1-f). Rızanızı geri almanız, geri almadan önceki işlemeyi etkilemez.</li>
+        <li><b>Satın alma ve sipariş kayıtları:</b> satışı yapmak, iade ve destek taleplerini yanıtlamak, vergi ve muhasebe yükümlülüklerini yerine getirmek; KVKK md. 5/2-c (sözleşmenin kurulması ve ifası) ve 5/2-ç (hukuki yükümlülük), GDPR md. 6/1-b ve 6/1-c.</li>
         <li><b>Destek e-postaları:</b> sorunuza yanıt vermek; KVKK md. 5/2-c ve 5/2-f.</li>
       </List>
 
@@ -117,12 +125,13 @@ export default function OtoparkPrivacyPage() {
       <List>
         <li>Cihazdaki ilerleme ve ayarlar: oyunu silene ya da verileri temizleyene kadar.</li>
         <li>AdMob verileri: <a href="https://policies.google.com/technologies/retention" className={link}>Google&apos;ın saklama politikasına</a> göre.</li>
-        <li>Destek e-postaları: talep kapandıktan sonra 1 yıl.</li>
+        <li>Satın alma kaydı: Google Play&apos;in koşullarına göre (Google hesabınızın sipariş geçmişinde görünür). Google Play Console&apos;daki sipariş bilgileri, vergi ve muhasebe mevzuatının gerektirdiği süre boyunca saklanır.</li>
+        <li>Destek ve iade e-postaları: talep kapandıktan sonra 1 yıl.</li>
       </List>
 
       <H2>9. Çocuklar</H2>
       <p>
-        Oyun 16 yaş ve üzeri kullanıcılar için tasarlanmıştır; çocuklara yönelik değildir ve Google Play&apos;in Aileler programında yer almaz. Oyunda gösterilen reklamlar genel izleyiciye uygun (PG) içerikle sınırlıdır. Yaşınızı doğrulamıyoruz. Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre dışında oyunu ilk açtığınızda doğum yılınızı sorarız: 18 yaşından küçükseniz ya da doğum yılınızdan 18 yaşını doldurduğunuz kesin anlaşılmıyorsa reklamlar her zaman kişiselleştirilmeden gösterilir ve onay penceremiz size gösterilmez; bu durumda da Google, 4. bölümde yazan sınırlı bilgiyi reklamı göstermek, saymak ve sahtekârlığı önlemek için işler. Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre&apos;de doğum yılı sorulmaz; reklamların kişiselleştirilip kişiselleştirilmeyeceği Google&apos;ın onay formundaki seçiminize göre belirlenir. 16 yaşından küçük bir çocuğun oyunu kullandığını düşünüyorsanız {COMPANY.email} adresine yazın; cihazdaki verileri silmek için oyunu kaldırmanız ya da verilerini temizlemeniz yeterlidir.
+        Oyun 16 yaş ve üzeri kullanıcılar için tasarlanmıştır; çocuklara yönelik değildir ve Google Play&apos;in Aileler programında yer almaz. Oyunda gösterilen reklamlar genel izleyiciye uygun (PG) içerikle sınırlıdır. Yaşınızı doğrulamıyoruz. Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre dışında oyunu ilk açtığınızda doğum yılınızı sorarız: 18 yaşından küçükseniz ya da doğum yılınızdan 18 yaşını doldurduğunuz kesin anlaşılmıyorsa reklamlar her zaman kişiselleştirilmeden gösterilir ve onay penceremiz size gösterilmez; bu durumda da Google, 4. bölümde yazan sınırlı bilgiyi reklamı göstermek, saymak ve sahtekârlığı önlemek için işler. Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre&apos;de doğum yılı sorulmaz; reklamların kişiselleştirilip kişiselleştirilmeyeceği Google&apos;ın onay formundaki seçiminize göre belirlenir. Oyun, satın alma olup olmadığını ve ürün bilgisini yaşınıza bakmadan Google Play&apos;e (Google hesabınızla) sorar; bu sorguda reklam verisi gönderilmez, ancak Google Play bileşeni kendi işleyiş ve teşhis verisini Google&apos;a gönderebilir. 16 yaşından küçük bir çocuğun oyunu kullandığını düşünüyorsanız {COMPANY.email} adresine yazın; cihazdaki verileri silmek için oyunu kaldırmanız ya da verilerini temizlemeniz yeterlidir.
       </p>
 
       <H2>10. Haklarınız</H2>

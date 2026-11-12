@@ -14,7 +14,7 @@ const link = "text-primary hover:text-primary-light";
 export default function OklarPrivacyPage() {
   return (
     <LegalPage eyebrow="Oklar" title="Oklar Gizlilik Politikası" updated={false} altLink={{ href: "/en/oklar/privacy", label: "English" }}>
-      <p>Son güncelleme: 5 Kasım 2026</p>
+      <p>Son güncelleme: 12 Kasım 2026</p>
       <p>
         Bu politika, Oklar mobil oyununu (&quot;Oyun&quot;) kullandığınızda hangi verilerin işlendiğini anlatır. 6698 sayılı
         Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında aydınlatma metni, AB Genel Veri Koruma Tüzüğü (GDPR) kapsamında
@@ -32,7 +32,7 @@ export default function OklarPrivacyPage() {
         <li>Oyun ilerlemeniz yalnız cihazınızda tutulur; bize gelmez.</li>
         <li>Oyunda isteğe bağlı ödüllü reklam vardır: ipucu ya da ek can için reklam izlemeyi siz seçersiniz. Reklamları Google AdMob gösterir.</li>
         <li>Reklamlar yalnız izin verirseniz kişiselleştirilir. Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre dışında 18 yaşından küçüklere her zaman kişiselleştirilmemiş reklam gösterilir. İzninizi istediğiniz zaman geri alabilirsiniz.</li>
-        <li>Tek seferlik &quot;Reklamsız paket&quot; satın alma Google Play üzerinden yapılır; ödeme bilgileriniz bize gelmez.</li>
+        <li>18 yaşını doldurduğu anlaşılan kullanıcılara isteğe bağlı, tek seferlik &quot;Reklamsız paket&quot; satın alımı Google Play üzerinden sunulur. Ödeme kartı bilgileriniz bize gelmez.</li>
         <li>Kendi analitik aracımızı kullanmıyoruz ve oyun bize ait bir sunucuya veri göndermez. Reklam ve satın alma için oyun internete bağlanır.</li>
       </List>
 
@@ -83,16 +83,23 @@ export default function OklarPrivacyPage() {
       </p>
 
       <H2>5. Satın almalar (Google Play)</H2>
-      <p>
-        &quot;Reklamsız paket&quot; satın alma Google Play faturalandırma sistemiyle yapılır. Ödeme bilgileriniz ve satın alma kaydınız
-        Google tarafından işlenir. Oyun satın almayı yalnız cihazınızda Google Play üzerinden doğrular; adınız ya da ödeme
-        bilginiz bize gelmez. İadeler Google Play&apos;in iade kurallarına tabidir.
-      </p>
+      <List>
+        <li>&quot;Reklamsız paket&quot; tek seferlik bir satın almadır, abonelik değildir; yenilenmez ve tekrar ücret alınmaz. Satın alındığında oyunda reklam gösterilmez; ipucu ve ek can için video izlemeniz gerekmez. Bu durumda oyun reklam sistemini hiç başlatmaz. Oyunu yeniden yüklediğinizde Google Play&apos;e ulaşılamıyorsa, satın alımınız doğrulanana kadar reklam gösterilebilir.</li>
+        <li>Satıcı: {COMPANY.tradeName} ({COMPANY.legalName}, şahıs işletmesi), {COMPANY.address}, {COMPANY.email}. Satış Google Play üzerinden yapılır; Google bazı ülkelerde (Avrupa Ekonomik Alanı ve Birleşik Krallık gibi) satıcı sıfatıyla, diğer ülkelerde bizim adımıza aracı olarak işlem yapar. Fiyatı, ödeme yöntemini ve vergileri Google Play ödeme ekranında gösterir.</li>
+        <li>Ödeme bilgileriniz ve satın alma kaydınız Google tarafından, Google Play koşullarına göre işlenir. Google bize sipariş numarası, tarih, ürün, tutar ve alıcının ülkesi/bölgesi gibi sipariş bilgilerini gösterir; ödeme kartı bilginiz bize gelmez.</li>
+        <li>Oyun, satın alımınız olup olmadığını ve satın alma seçeneğinin ürün bilgisini (fiyatını) her açılışta, yaşınızdan bağımsız olarak, cihazınızdaki Google Play&apos;e sorar; bunun için bize ait bir sunucu kullanılmaz ve sonuç yalnız cihazınızda tutulur. Satın alma düğmesi, geri yükleme düğmesi ve cayma/iade bilgisi ise yalnız doğum yılınızdan 18 yaşını doldurduğunuz anlaşılırsa ve Google Play fiyatı bildirirse gösterilir. Daha önce satın almış bir kullanıcının hakkı, yaşı ne olursa olsun uygulanır.</li>
+        <li>Ödemeniz beklemedeyse (örneğin nakit ya da kodla ödeme), ödeme tamamlanana kadar paket açılmaz.</li>
+        <li>Aynı Google hesabıyla başka bir cihazda ya da oyunu yeniden yükledikten sonra satın alımınızı &quot;Satın alımı geri yükle&quot; ile geri alabilirsiniz; oyun bunu açılışta kendiliğinden de dener.</li>
+        <li>Cayma hakkı: Satın aldığınız paket ödeme tamamlanır tamamlanmaz cihazınızda açılan bir dijital içerik olduğu için, Türkiye&apos;deki satışlarda Mesafeli Sözleşmeler Yönetmeliği md. 15/1-ğ uyarınca yasal cayma hakkı uygulanmaz. Bulunduğunuz ülkenin hukuku size daha geniş bir hak tanıyorsa o hak saklıdır.</li>
+        <li>İade: İade talepleri Google Play&apos;in iade kurallarına göre değerlendirilir. Google Play&apos;e göre satın almadan sonraki 48 saat içinde iadeyi Google Play&apos;den isteyebilirsiniz; 48 saatten sonra bize {COMPANY.email} adresinden sipariş numaranızla yazabilirsiniz, talebinizi Google Play kurallarına ve yürürlükteki mevzuata göre değerlendiririz. Satın alma iade edilir ya da Google Play satın almayı artık göstermezse reklamlar yeniden gösterilir.</li>
+        <li>Şikâyet: {COMPANY.email}. Türkiye&apos;de tüketici hakem heyetine ya da tüketici mahkemesine başvurabilirsiniz.</li>
+      </List>
 
       <H2>6. İşleme amaçları ve hukuki sebepler</H2>
       <List>
         <li><b>Cihazdaki ilerleme:</b> oyunun çalışması; bize aktarılmaz.</li>
         <li><b>AdMob&apos;un topladığı veriler:</b> reklam gösterme ve ölçme, sahtekârlık önleme. Kişiselleştirilmiş reklam için açık rızanız (KVKK md. 5/1, GDPR md. 6/1-a): AEA, Birleşik Krallık ve İsviçre&apos;de Google&apos;ın onay formuyla, diğer ülkelerde oyundaki onay penceremizle alınır ve istediğiniz zaman geri alınabilir. Kişiselleştirilmemiş reklam ve sahtekârlık önleme için meşru menfaat (KVKK md. 5/2-f, GDPR md. 6/1-f). Rızanızı geri almanız, geri almadan önceki işlemeyi etkilemez.</li>
+        <li><b>Satın alma ve sipariş kayıtları:</b> satışı yapmak, iade ve destek taleplerini yanıtlamak, vergi ve muhasebe yükümlülüklerini yerine getirmek; KVKK md. 5/2-c (sözleşmenin kurulması ve ifası) ve 5/2-ç (hukuki yükümlülük), GDPR md. 6/1-b ve 6/1-c.</li>
         <li><b>Destek e-postaları:</b> sorunuza yanıt vermek; KVKK md. 5/2-c ve 5/2-f.</li>
       </List>
 
@@ -111,12 +118,13 @@ export default function OklarPrivacyPage() {
       <List>
         <li>Cihazdaki ilerleme: oyunu silene ya da verileri temizleyene kadar.</li>
         <li>AdMob verileri: <a href="https://policies.google.com/technologies/retention" className={link}>Google&apos;ın saklama politikasına</a> göre.</li>
-        <li>Destek e-postaları: talep kapandıktan sonra 1 yıl.</li>
+        <li>Satın alma kaydı: Google Play&apos;in koşullarına göre (Google hesabınızın sipariş geçmişinde görünür). Google Play Console&apos;daki sipariş bilgileri, vergi ve muhasebe mevzuatının gerektirdiği süre boyunca saklanır.</li>
+        <li>Destek ve iade e-postaları: talep kapandıktan sonra 1 yıl.</li>
       </List>
 
       <H2>9. Çocuklar</H2>
       <p>
-        Oyun 13 yaş ve üzeri kullanıcılar için tasarlanmıştır; çocuklara yönelik değildir. Reklamlarda içerik sınırı (PG) uygularız. Yaşınızı doğrulamıyoruz. Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre dışında oyunu ilk açtığınızda doğum yılınızı sorarız: 18 yaşından küçükseniz ya da doğum yılınızdan 18 yaşını doldurduğunuz kesin anlaşılmıyorsa reklamlar her zaman kişiselleştirilmeden gösterilir ve onay penceremiz size gösterilmez; bu durumda da Google, 4. bölümde yazan sınırlı bilgiyi reklamı göstermek, saymak ve sahtekârlığı önlemek için işler. Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre&apos;de doğum yılı sorulmaz; reklamların kişiselleştirilip kişiselleştirilmeyeceği Google&apos;ın onay formundaki seçiminize göre belirlenir. 13 yaşından küçük bir çocuğun oyunu kullandığını düşünüyorsanız {COMPANY.email} adresine yazın; cihazdaki verileri silmek için oyunu kaldırmanız ya da verilerini temizlemeniz yeterlidir.
+        Oyun 13 yaş ve üzeri kullanıcılar için tasarlanmıştır; çocuklara yönelik değildir. Reklamlarda içerik sınırı (PG) uygularız. Yaşınızı doğrulamıyoruz. Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre dışında oyunu ilk açtığınızda doğum yılınızı sorarız: 18 yaşından küçükseniz ya da doğum yılınızdan 18 yaşını doldurduğunuz kesin anlaşılmıyorsa reklamlar her zaman kişiselleştirilmeden gösterilir ve onay penceremiz size gösterilmez; bu durumda da Google, 4. bölümde yazan sınırlı bilgiyi reklamı göstermek, saymak ve sahtekârlığı önlemek için işler. Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre&apos;de doğum yılı sorulmaz; reklamların kişiselleştirilip kişiselleştirilmeyeceği Google&apos;ın onay formundaki seçiminize göre belirlenir. Satın alma seçeneği 18 yaşın altındaki ve yaşı bilinmeyen kullanıcılara gösterilmez; ancak oyun satın alma olup olmadığını ve ürün bilgisini her yaşta Google Play&apos;e (Google hesabınızla) sorar. Bu sorguda reklam verisi gönderilmez; Google Play bileşeni kendi işleyiş ve teşhis verisini Google&apos;a gönderebilir. 13 yaşından küçük bir çocuğun oyunu kullandığını düşünüyorsanız {COMPANY.email} adresine yazın; cihazdaki verileri silmek için oyunu kaldırmanız ya da verilerini temizlemeniz yeterlidir.
       </p>
 
       <H2>10. Haklarınız</H2>

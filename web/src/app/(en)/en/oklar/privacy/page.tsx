@@ -14,7 +14,7 @@ const link = "text-primary hover:text-primary-light";
 export default function OklarPrivacyEnPage() {
   return (
     <LegalPage eyebrow="Oklar" title="Oklar Privacy Policy" lang="en" updated={false} altLink={{ href: "/oklar/privacy", label: "Türkçe sürüm" }}>
-      <p>Last updated: 5 November 2026</p>
+      <p>Last updated: 12 November 2026</p>
       <p>
         This policy explains which data is processed when you use the Oklar mobile game (the &quot;Game&quot;). It serves as the
         information notice under Turkey&apos;s Personal Data Protection Law (KVKK) and the EU General Data Protection Regulation (GDPR).
@@ -29,7 +29,7 @@ export default function OklarPrivacyEnPage() {
         <li>Your progress is stored only on your device and never reaches us.</li>
         <li>The Game has optional rewarded ads: you choose to watch an ad for a hint or an extra heart. Ads are served by Google AdMob.</li>
         <li>Ads are personalized only if you allow it. Outside the European Economic Area, the United Kingdom and Switzerland, users under 18 always get non-personalized ads. You can withdraw your consent at any time.</li>
-        <li>The one-time &quot;Ad-free pack&quot; purchase is made through Google Play; your payment details never reach us.</li>
+        <li>Users whose year of birth shows they are 18 or over are offered an optional one-time &quot;Ad-free pack&quot; purchase through Google Play. Your payment card details never reach us.</li>
         <li>We don&apos;t use our own analytics tools and the Game doesn&apos;t send data to any server of ours. The Game connects to the internet for ads and purchases.</li>
       </List>
 
@@ -80,16 +80,23 @@ export default function OklarPrivacyEnPage() {
       </p>
 
       <H2>5. Purchases (Google Play)</H2>
-      <p>
-        &quot;Ad-free pack&quot; is purchased through Google Play Billing. Your payment details and purchase record are processed by Google. The
-        Game verifies the purchase only on your device through Google Play; your name or payment details never reach us. Refunds
-        follow Google Play&apos;s refund rules.
-      </p>
+      <List>
+        <li>&quot;Ad-free pack&quot; is a one-time purchase, not a subscription; it does not renew and you are not charged again. Once purchased, no ads are shown in the Game, and hints and extra hearts need no video. The Game then never starts its ad system. If Google Play cannot be reached when you reinstall the Game, ads may be shown until your purchase is verified.</li>
+        <li>Provider: {COMPANY.tradeName} ({COMPANY.legalName}, sole proprietorship), {COMPANY.address}, {COMPANY.email}. The sale is made through Google Play; in some countries (such as the European Economic Area and the United Kingdom) Google acts as the seller, elsewhere it acts as our agent. Google Play shows the price, payment method and taxes on its payment screen.</li>
+        <li>Your payment details and purchase record are processed by Google under the Google Play terms. Google shows us order information such as the order number, date, product, amount and the buyer&apos;s country/region; your payment card details never reach us.</li>
+        <li>Each time it opens, and regardless of your age, the Game asks Google Play on your device whether you own the purchase and for the product information (the price) of the purchase option; no server of ours is used and the result is kept only on your device. The purchase button, the restore button and the withdrawal/refund notice are shown only if your year of birth shows that you are 18 or over and Google Play reports a price. The right of a user who has already purchased applies at any age.</li>
+        <li>If your payment is pending (for example, cash or code payments), the pack is not unlocked until the payment completes.</li>
+        <li>You can restore your purchase on another device with the same Google account, or after reinstalling the Game, with &quot;Restore purchase&quot;; the Game also tries this automatically when it opens.</li>
+        <li>Right of withdrawal: because the purchased pack is digital content unlocked on your device as soon as the payment completes, the statutory right of withdrawal does not apply to sales in Türkiye under Article 15(1)(ğ) of the Turkish Distance Contracts Regulation. Any wider right granted to you by the law of your country remains unaffected.</li>
+        <li>Refunds: refund requests are handled under Google Play&apos;s refund rules. According to Google Play, you can request a refund from Google Play within 48 hours of purchase; after 48 hours you can email us at {COMPANY.email} with your order number, and we will consider your request under Google Play&apos;s rules and applicable law. If the purchase is refunded, or Google Play no longer shows it, ads are shown again.</li>
+        <li>Complaints: {COMPANY.email}. In Türkiye you can apply to consumer arbitration committees or consumer courts.</li>
+      </List>
 
       <H2>6. Purposes and legal bases</H2>
       <List>
         <li><b>On-device progress:</b> running the Game; not transferred to us.</li>
         <li><b>Data collected by AdMob:</b> serving and measuring ads, fraud prevention. Personalized ads: your consent (GDPR Art. 6(1)(a), KVKK Art. 5(1)), collected through Google&apos;s consent form in the EEA, UK and Switzerland and through our in-game consent window elsewhere; you can withdraw it at any time. Non-personalized ads and fraud prevention: legitimate interest (GDPR Art. 6(1)(f), KVKK Art. 5(2)(f)). Withdrawing consent does not affect processing before withdrawal.</li>
+        <li><b>Purchase and order records:</b> to make the sale, answer refund and support requests, and meet tax and accounting obligations; KVKK Art. 5(2)(c) and 5(2)(ç), GDPR Art. 6(1)(b) and 6(1)(c).</li>
         <li><b>Support emails:</b> answering your request; KVKK Art. 5(2)(c) and 5(2)(f).</li>
       </List>
 
@@ -108,12 +115,13 @@ export default function OklarPrivacyEnPage() {
       <List>
         <li>On-device progress: until you uninstall the Game or clear its data.</li>
         <li>AdMob data: per <a href="https://policies.google.com/technologies/retention" className={link}>Google&apos;s retention policy</a>.</li>
-        <li>Support emails: 1 year after the request is closed.</li>
+        <li>Purchase record: under the Google Play terms (visible in your Google account&apos;s order history). Order information in Google Play Console is kept for as long as tax and accounting law requires.</li>
+        <li>Support and refund emails: 1 year after the request is closed.</li>
       </List>
 
       <H2>9. Children</H2>
       <p>
-        The Game is designed for users aged 13 and over and is not directed at children. We limit ad content to the PG rating. We do not verify your age. Outside the European Economic Area, the United Kingdom and Switzerland, we ask for your year of birth when you first open the Game: if you are under 18, or if your year of birth does not show for certain that you are 18 or over, ads are always shown without personalization and our consent window is not shown to you; even then, Google processes the limited information described in section 4 to show and count ads and to prevent fraud. In the European Economic Area, the United Kingdom and Switzerland, your year of birth is not asked; whether ads are personalized depends on your choice in Google&apos;s consent form. If you believe a child under 13 is using the Game, write to {COMPANY.email}; uninstalling the Game or clearing its data is enough to delete the data on the device.
+        The Game is designed for users aged 13 and over and is not directed at children. We limit ad content to the PG rating. We do not verify your age. Outside the European Economic Area, the United Kingdom and Switzerland, we ask for your year of birth when you first open the Game: if you are under 18, or if your year of birth does not show for certain that you are 18 or over, ads are always shown without personalization and our consent window is not shown to you; even then, Google processes the limited information described in section 4 to show and count ads and to prevent fraud. In the European Economic Area, the United Kingdom and Switzerland, your year of birth is not asked; whether ads are personalized depends on your choice in Google&apos;s consent form. The purchase option is not shown to users under 18 or users whose age is unknown; however, at any age the Game asks Google Play (with your Google account) whether a purchase was made and for the product information. No ad data is sent in this request; the Google Play component may send its own operational and diagnostic data to Google. If you believe a child under 13 is using the Game, write to {COMPANY.email}; uninstalling the Game or clearing its data is enough to delete the data on the device.
       </p>
 
       <H2>10. Your rights</H2>
