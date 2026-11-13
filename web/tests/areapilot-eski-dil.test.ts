@@ -33,7 +33,7 @@ for (const f of dosyalar) {
 
 test("videos.ts: AreaPilot videolarının açıklamasında 7 gün ücretsiz deneme yazar (TR ve EN)", () => {
   const s = fs.readFileSync(path.join(kok, "lib/videos.ts"), "utf8");
-  for (const id of ["YCgxinKeziA", "rDErHEELats"]) {
+  for (const id of ["pcB5aCDr55k", "z7T8voXMUkI"]) {
     const blok = s.slice(s.indexOf(`id: "${id}"`)).split("},")[0];
     assert.match(blok, /7 gün ücretsiz deneme|Free for 7 days from first launch/, `${id}: 7 gün cümlesi yok`);
   }

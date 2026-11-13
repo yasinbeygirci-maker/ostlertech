@@ -17,7 +17,7 @@ export interface Video {
 
 export const VIDEOS: Video[] = [
   {
-    id: "T0E4S781Q0k",
+    id: "OD4kIrI_p-0",
     title: "SyncPass'i 1 dakikada tanı",
     description:
       "Şifreler, kartlar ve 2FA kodları tek şifreli kasada. Kasa telefonda AES-256 ile şifrelenir; kopyası sunucularımızda tutulmaz.",
@@ -34,7 +34,7 @@ export const VIDEOS: Video[] = [
     },
   },
   {
-    id: "YCgxinKeziA",
+    id: "pcB5aCDr55k",
     title: "AreaPilot: AutoCAD'de alan ve çevre metrajı, saniyeler içinde",
     description:
       "Otel tip kat planında 76 alanı, yanındaki yazıdan okuduğu koda göre toplar, çizime yazar, tabloyu plana ekler, Excel'e aktarır. İlk açılıştan itibaren 7 gün ücretsiz deneme.",
@@ -46,7 +46,7 @@ export const VIDEOS: Video[] = [
     dil: "tr",
   },
   {
-    id: "bpLvw27iesM",
+    id: "jHxtpNy5bhM",
     title: "AreaPilot kullanımı: AutoCAD'de otel katının alan ve çevre metrajı baştan sona",
     description:
       "Komut ve birim ayarı, Katmandan Seç, liste ve toplam, satıra tıklayınca odaların yanması, kod arama, İçine Tıkla, Kod seçimi, çizime yazma, tablo, Excel ve Dış kontur.",
@@ -60,7 +60,7 @@ export const VIDEOS: Video[] = [
   // İngilizce AreaPilot videoları: YouTube'da herkese açık (oEmbed + izleme sayfası 2026-11-08). Kapak YouTube küçük resminden
   // yerel kopya (kendi videomuz). Süreler izleme sayfasındaki lengthSeconds: 63 ve 185.
   {
-    id: "rDErHEELats",
+    id: "z7T8voXMUkI",
     title: "AreaPilot: area and perimeter takeoff in AutoCAD, in seconds",
     description:
       "On a typical hotel floor plan it totals 76 areas by the codes it reads from the text next to them, writes the results into the drawing, adds the table to the plan and exports to Excel. Free for 7 days from first launch.",
@@ -72,7 +72,7 @@ export const VIDEOS: Video[] = [
     dil: "en",
   },
   {
-    id: "HxpTIv4bH9Y",
+    id: "nKRgVVP-xt4",
     title: "AreaPilot walkthrough: area and perimeter takeoff of a hotel floor in AutoCAD, start to finish",
     description:
       "Command and drawing unit, Select by Layer, list and totals, rooms lighting up when you click a row, code search, Click Inside, the Code source setting, Apply to Drawing, table, Excel and Outline.",
