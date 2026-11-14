@@ -11,7 +11,7 @@ const sqlFile = (name: string) => fs.readFileSync(path.join(process.cwd(), "supa
 const K1 = "2026-11-14-tek-lisans-k1.sql";
 
 // Supabase'in varsayılanlarını taklit eder: roller + yeni nesnelere anon/authenticated yetkisi (asıl koruma RLS + açık revoke).
-async function newDb(opts: { retention?: boolean } = {}) {
+async function newDb(opts: { retention?: boolean; beforeK1?: string } = {}) {
   const db = new PGlite();
   await db.exec(`
     create role anon nologin; create role authenticated nologin; create role service_role nologin;
@@ -41,6 +41,7 @@ async function newDb(opts: { retention?: boolean } = {}) {
   `);
   for (const f of ["2026-11-06-lisans-urun.sql", "2026-11-08-lisans-sifirlanan-kod.sql"]) await db.exec(sqlFile(f));
   if (opts.retention) for (const f of ["2026-11-07-lisans-saklama-silme.sql", "2026-11-10-sp-saklama-silme-syncpass.sql"]) await db.exec(sqlFile(f));
+  if (opts.beforeK1) await db.exec(opts.beforeK1);
   await db.exec(sqlFile(K1));
   return db;
 }
@@ -297,4 +298,68 @@ test("Ş18: saklama silmesi: bitiş + 1 yıl geçmiş Play satırı, cihazları 
   const toks = await db.query<{ token_hash: string }>("select token_hash from public.sp_play_tokens order by 1");
   assert.deepEqual(toks.rows.map((t) => t.token_hash), [th("FRESH"), th("LIVE")], "silinen lisansın İKİ jeton özeti de gitti");
   assert.equal(await count(db, "sp_purge_log"), 1);
+});
+
+// ---- Burak kod kapısı düzeltmeleri ----
+
+test("D1: lisans-test satırında yeniden claim 14 günü İLERİ KAYDIRMAZ (en erken bitiş kalır); gerçek (play) satırda dönem sonu ilerler", async () => {
+  const db = await newDb();
+  const first = await claim(db, { token: "T", source: "play_test", periodEnd: "2026-11-28T12:00:00Z", now: "2026-11-14T12:00:00Z" });
+  assert.equal(new Date(String(first.license?.current_period_end)).toISOString(), "2026-11-28T12:00:00.000Z");
+  for (const [now, end] of [["2026-11-27T12:00:00Z", "2026-12-11T12:00:00Z"], ["2026-12-10T12:00:00Z", "2026-12-24T12:00:00Z"], ["2027-01-05T12:00:00Z", "2027-01-19T12:00:00Z"]]) {
+    const again = await claim(db, { token: "T", source: "play_test", periodEnd: end, now });
+    assert.equal(new Date(String(again.license?.current_period_end)).toISOString(), "2026-11-28T12:00:00.000Z", "ilk 14 gün sabit");
+  }
+  // gerçek abonelik: yenilemede dönem sonu ilerler
+  await claim(db, { token: "R", key: KEY(1), periodEnd: "2026-12-01T00:00:00Z" });
+  const renew = await claim(db, { token: "R", key: KEY(2), periodEnd: "2027-01-01T00:00:00Z" });
+  assert.equal(new Date(String(renew.license?.current_period_end)).toISOString(), "2027-01-01T00:00:00.000Z");
+});
+
+test("D2: zincir çatalı: lisansın tek ETKİN jetonu vardır; eski jetonla claim etkin jetonu geri çevirmez; eski jetonun iadesi lisansı düşürmez", async () => {
+  const db = await newDb();
+  await claim(db, { token: "OLD" });
+  await claim(db, { token: "NEW", linked: "OLD", key: KEY(1) });
+  await claim(db, { token: "THIRD", linked: "OLD", key: KEY(2) }); // çatal: ikinci çocuk
+  const active = await db.query<{ token_hash: string }>("select token_hash from public.sp_play_tokens where superseded_at is null");
+  assert.deepEqual(active.rows.map((r) => r.token_hash), [th("THIRD")], "tek etkin jeton");
+  const back = await claim(db, { token: "NEW", status: "canceled" });
+  assert.equal(back.superseded, true);
+  const row = await db.query<{ play_token_hash: string; status: string }>("select play_token_hash, status from public.sp_licenses");
+  assert.deepEqual(row.rows[0], { play_token_hash: th("THIRD"), status: "active" }, "etkin jeton geri çevrilmedi");
+  const mark = await db.query<{ r: string }>("select public.sp_play_mark_voided($1,$2) as r", [th("NEW"), NOW]);
+  assert.equal(mark.rows[0].r, "superseded");
+  assert.equal((await db.query<{ s: string }>("select status as s from public.sp_licenses")).rows[0].s, "active");
+  // birleştirme dalı da kazananın önceki etkin jetonlarını eskitir
+  const db2 = await newDb();
+  await claim(db2, { token: "A1", key: KEY(0) });
+  await claim(db2, { token: "A2", linked: "A1", key: KEY(1) }); // A satırı: etkin A2
+  await claim(db2, { token: "B1", key: KEY(3) }); // ayrı satır
+  const merged = await claim(db2, { token: "B1", linked: "A2", key: KEY(4) });
+  assert.equal(merged.merged, true);
+  const act = await db2.query<{ token_hash: string }>("select token_hash from public.sp_play_tokens where superseded_at is null");
+  assert.deepEqual(act.rows.map((r) => r.token_hash), [th("B1")]);
+});
+
+test("D5: Ş7'nin dayanakları: işlev danışma kilidi alır VE tekillik indeksle zorlanır (kilit olmasa da çift satır oluşmaz)", async () => {
+  const db = await newDb();
+  const def = (await db.query<{ d: string }>("select pg_get_functiondef('public.sp_claim_play_license(text,text,text,text,text,int,text,text,timestamptz,text,timestamptz,text,boolean)'::regprocedure) as d")).rows[0].d;
+  assert.ok((def.match(/pg_advisory_xact_lock/g) ?? []).length >= 2, "yeni ve bağlı jeton için kilit");
+  await claim(db, { token: "A" });
+  await assert.rejects(
+    db.query("insert into public.sp_licenses (license_key, plan, product, source, play_token_hash) values ($1,'month','syncpass_desktop','play',$2)", [KEY(7), th("A")]),
+    /sp_licenses_play_token_hash_uq/,
+  );
+  await assert.rejects(db.query("insert into public.sp_play_tokens (token_hash, license_id) select $1, id from public.sp_licenses limit 1", [th("A")]), /duplicate key|sp_play_tokens_pkey/);
+});
+
+test("D6: email NOT NULL ise göç bunu kaldırır ve Play claim çalışır; başka varsayılansız NOT NULL sütun varsa göç BAŞTAN durur", async () => {
+  const ok = await newDb({ beforeK1: "alter table public.sp_licenses alter column email set not null;" });
+  const a = await claim(ok);
+  assert.equal(a.result, "ok");
+  assert.equal((await ok.query<{ n: string }>("select is_nullable as n from information_schema.columns where table_name='sp_licenses' and column_name='email'")).rows[0].n, "YES");
+  await assert.rejects(
+    newDb({ beforeK1: "alter table public.sp_licenses add column musteri_no text not null default 'x'; alter table public.sp_licenses alter column musteri_no drop default;" }),
+    /varsayilansiz NOT NULL/,
+  );
 });

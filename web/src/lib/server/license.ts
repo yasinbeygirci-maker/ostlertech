@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { priceInfo } from "@/lib/paddle-tiers";
 import { playRefreshHook } from "@/lib/server/play";
+import { selectLicenseCompat } from "@/lib/license-select";
 import {
   DEACTIVATE_WINDOW_DAYS,
   RESET_LIMIT,
@@ -28,8 +29,8 @@ export function planForPrice(priceId: string) {
   return priceInfo(priceId)?.plan ?? null;
 }
 
-// Play alanları (source, play_*) 2026-11-14-tek-lisans-k1.sql göçüyle gelir: BU KOD O GÖÇTEN SONRA dağıtılır (aksi halde 42703).
-const SELECT = "id, license_key, product, plan, status, current_period_end, max_devices, email, source, play_purchase_token, play_product_id, play_state, play_checked_at";
+// Play alanları (source, play_*) 2026-11-14-tek-lisans-k1.sql göçüyle gelir. Göç henüz yoksa okuma eski sütun listesine düşer (O1: lib/license-select.ts),
+// yani kod göçten önce çıksa bile Paddle/AreaPilot uçları bozulmaz. Yine de SIRA: önce göç, sonra main'e birleştirme.
 
 // Veritabanı hatasında FIRLATIR (çekirdek 500 server_error yapar); hata asla "kayıt yok" gibi görünmez.
 // Fırlatılan hata yalnız Postgres/PostgREST kodunu taşır: ileti satır içeriği (kod, e-posta) içerebilir.
@@ -40,7 +41,7 @@ function fail(error: { code?: string } | null, where: string): never {
 export function supabaseLicenseStore(db: SupabaseClient): LicenseStore {
   return {
     async findLicense(key: string, product: Product) {
-      const { data, error } = await db.from("sp_licenses").select(SELECT).eq("license_key", key).eq("product", product).maybeSingle<LicenseRow>();
+      const { data, error } = await selectLicenseCompat<LicenseRow>((cols) => db.from("sp_licenses").select(cols).eq("license_key", key).eq("product", product).maybeSingle<LicenseRow>());
       if (error) fail(error, "findLicense");
       return data ?? null;
     },
@@ -86,7 +87,7 @@ export function supabaseLicenseStore(db: SupabaseClient): LicenseStore {
       const { data: retired, error } = await db.from("sp_license_retired_keys").select("license_id").eq("retired_key_hash", createHash("sha256").update(key, "utf8").digest("hex")).maybeSingle<{ license_id: string }>();
       if (error) fail(error, "findRetiredKeyOwner");
       if (!retired) return null;
-      const { data, error: err2 } = await db.from("sp_licenses").select(SELECT).eq("id", retired.license_id).eq("product", product).maybeSingle<LicenseRow>();
+      const { data, error: err2 } = await selectLicenseCompat<LicenseRow>((cols) => db.from("sp_licenses").select(cols).eq("id", retired.license_id).eq("product", product).maybeSingle<LicenseRow>());
       if (err2) fail(err2, "findRetiredKeyOwner");
       return data ?? null;
     },

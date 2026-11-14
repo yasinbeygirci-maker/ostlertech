@@ -18,7 +18,9 @@ import {
   type LicenseStore,
 } from "../src/lib/license-core.ts";
 import { PLAY_PACKAGE_NAME, PLAY_PRODUCTS } from "../src/lib/play-catalog.ts";
+import { LICENSE_COLUMNS, LICENSE_COLUMNS_LEGACY, selectLicenseCompat } from "../src/lib/license-select.ts";
 import {
+  isRetryableDbError,
   PlayApiError,
   PLAY_STALE_MS,
   PLAY_TEST_GRANT_MS,
@@ -90,6 +92,7 @@ class FakeStore implements PlayStore {
   updates: { id: string; patch: StatePatch }[] = [];
   delayMs = 0;
   failWith: Error | null = null;
+  claimFailures: Error[] = [];
   private n = 0;
   async findByTokenHash(hash: string) {
     if (this.failWith) throw this.failWith;
@@ -99,6 +102,8 @@ class FakeStore implements PlayStore {
   }
   async claim(p: ClaimParams): Promise<ClaimResult> {
     if (this.failWith) throw this.failWith;
+    const queued = this.claimFailures.shift();
+    if (queued) throw queued;
     this.claims.push(p);
     if (this.delayMs) await new Promise((r) => setTimeout(r, this.delayMs));
     // atomik bölüm: await yok
@@ -469,6 +474,95 @@ test("Ş7: ikinci claim taze satırı Google'a sormadan döndürür (kota); baya
   assert.equal(c.body.key, a.body.key, "bayat yeniden sorgu da aynı kodu verir");
 });
 
+// ---- D3 / D5 / D8 / O1 (Burak kod kapısı) ----
+
+test("D3: erişim belirteci alımı da zaman aşımına bağlı; asılırsa 503 'unavailable' (auth değil), fetch hiç çağrılmaz", async () => {
+  let fetched = 0;
+  const v = createHttpVerifier({
+    fetch: async () => {
+      fetched++;
+      return { status: 200, json: async () => ({}) };
+    },
+    accessToken: () => new Promise<string>(() => undefined), // hiç dönmez
+    timeoutMs: 25,
+  });
+  const t0 = Date.now();
+  await assert.rejects(v.getSubscription("t"), (e) => e instanceof PlayApiError && e.kind === "unavailable");
+  assert.ok(Date.now() - t0 < 2000);
+  assert.equal(fetched, 0);
+  const s = new FakeStore();
+  const r = await handlePlayClaim(body(), { verifier: v, store: s, newKey: () => "SPD-23456-789AB-CDEFG-HJKM", now: () => NOW, log: { error() {}, warn() {} } });
+  assert.equal(r.status, 503);
+  assert.deepEqual(r.body, { error: "verify_unavailable" });
+  assert.equal(s.claims.length, 0);
+});
+
+test("D5: depo claim'i 23505/40P01 ile düşerse BİR kez yeniden denenir; ikinci hata ya da başka hata 500", async () => {
+  assert.equal(isRetryableDbError(new Error("playClaim: 23505")), true);
+  assert.equal(isRetryableDbError(new Error("playClaim: 40P01")), true);
+  assert.equal(isRetryableDbError(new Error("playClaim: 42703")), false);
+  assert.equal(isRetryableDbError("x"), false);
+  let h = harness();
+  h.s.claimFailures = [new Error("playClaim: 23505")];
+  let r = await handlePlayClaim(body(), h.deps);
+  assert.equal(r.status, 200, "bir kez yeniden denendi");
+  assert.equal(h.s.licenses.size, 1);
+  h = harness();
+  h.s.claimFailures = [new Error("playClaim: 23505"), new Error("playClaim: 23505")];
+  r = await handlePlayClaim(body(), h.deps);
+  assert.equal(r.status, 500);
+  h = harness();
+  h.s.claimFailures = [new Error("playClaim: 42703")];
+  r = await handlePlayClaim(body(), h.deps);
+  assert.equal(r.status, 500, "yeniden denenmez");
+  assert.equal(h.s.claims.length, 0);
+});
+
+test("D8: refresh'in durum-dışı dalı (pending / invalid / test_blocked) satırı ve depoyu DEĞİŞTİRMEZ", async () => {
+  const cases: [string, GoogleSubscription][] = [
+    ["pending", sub("SUBSCRIPTION_STATE_PENDING", "premium_monthly", NOW + 400 * DAY)],
+    ["invalid", sub("SUBSCRIPTION_STATE_ACTIVE", "yabanci_urun", NOW + 400 * DAY)],
+    ["test_blocked", sub("SUBSCRIPTION_STATE_ACTIVE", "premium_monthly", NOW + 400 * DAY, { testPurchase: {} })],
+  ];
+  for (const [name, g] of cases) {
+    const h = harness();
+    const row = await playRow(h, 3 * DAY);
+    const before = JSON.stringify(row);
+    h.v.subscription = g;
+    const out = await refreshPlayLicense(row, h.deps, NOW);
+    assert.equal(JSON.stringify(out), before, name);
+    assert.equal(h.s.updates.length, 0, name);
+    assert.ok(h.v.calls.length >= 2, name + ": Google'a soruldu");
+  }
+});
+
+test("O1: ortak okuma yeni sütunlar yoksa (42703) eski sütun listesine düşer; başka hata aynen döner; yeni sütunlar varsa tek çağrı", async () => {
+  const seen: string[] = [];
+  const row = { id: "1" };
+  const noPlayColumns = await selectLicenseCompat<typeof row>(async (cols) => {
+    seen.push(cols);
+    return cols === LICENSE_COLUMNS_LEGACY ? { data: row, error: null } : { data: null, error: { code: "42703" } };
+  });
+  assert.deepEqual(noPlayColumns, { data: row, error: null });
+  assert.deepEqual(seen, [LICENSE_COLUMNS, LICENSE_COLUMNS_LEGACY]);
+  assert.ok(!LICENSE_COLUMNS_LEGACY.includes("play_") && !LICENSE_COLUMNS_LEGACY.includes("source"));
+  seen.length = 0;
+  const ok = await selectLicenseCompat<typeof row>(async (cols) => {
+    seen.push(cols);
+    return { data: row, error: null };
+  });
+  assert.equal(ok.data, row);
+  assert.deepEqual(seen, [LICENSE_COLUMNS]);
+  seen.length = 0;
+  const other = await selectLicenseCompat<typeof row>(async (cols) => {
+    seen.push(cols);
+    return { data: null, error: { code: "57014" } };
+  });
+  assert.equal(other.error?.code, "57014");
+  assert.equal(seen.length, 1, "42703 dışındaki hata yeniden denenmez");
+  assert.ok(LICENSE_COLUMNS.startsWith(LICENSE_COLUMNS_LEGACY));
+});
+
 // ---- Ş10 zincir (çekirdek: bağlı jeton özet olarak depoya gider) ----
 
 test("Ş10: linkedPurchaseToken ve outOfAppPurchaseContext.expiredPurchaseToken aynı satıra bağlanır; kod ve cihaz değişmez; ham eski jeton depoya gitmez", async () => {
@@ -656,7 +750,7 @@ test("Ş20: sağlık yoklaması yalnız HTTP durum kodlarını döndürür (veri
   assert.ok(!JSON.stringify(out).includes(TOKEN));
   // jetonsuz: yalnız iptal listesi
   assert.deepEqual(await probePlayApi(v, {}, NOW), { voidedpurchases: 200 });
-  assert.ok(VOIDED_WINDOW_MS === 3 * DAY);
+  assert.equal(VOIDED_WINDOW_MS, 30 * DAY, "D7: iptal listesi penceresi Google'ın sınırı (30 gün)");
 });
 
 // ---- Ş12 imza anahtarı döndürme (sunucu tarafı) ----

@@ -15,6 +15,10 @@
 --   select relname, relrowsecurity from pg_class where relname in ('sp_licenses','sp_license_devices');   -- ikisi de true olmalı
 --   select has_table_privilege('anon','public.sp_licenses','select'), has_table_privilege('authenticated','public.sp_licenses','select');  -- false, false
 --   select conname, confdeltype from pg_constraint where conrelid = 'public.sp_license_devices'::regclass and contype = 'f';  -- 'c' = cascade
+--   select column_name, is_nullable, column_default, is_identity from information_schema.columns where table_schema='public' and table_name='sp_licenses' order by 1;
+--     -- D6: email disinda varsayilansiz NOT NULL sutun cikarsa DUR (gocun 0. adimi da bunu kendisi denetler ve hata verir).
+--   select exists(select 1 from information_schema.columns where table_name='sp_licenses' and column_name='ended_at') as ended_at_var,
+--          exists(select 1 from pg_trigger where tgname='sp_licenses_ended_at_trg') as tetikleyici_var, version();
 --   select conname, pg_get_constraintdef(oid) from pg_constraint where conrelid = 'public.sp_licenses'::regclass and contype = 'c';
 --     -- status denetimi 'active','canceled','paused','refunded','revoked' degerlerine izin vermeli (bu gocun yazdigi degerler); vermiyorsa DUR.
 --
@@ -40,6 +44,8 @@ begin;
 
 -- 0) Ön denetimler ----------------------------------------------------------------------------------------------------------
 do $$
+declare
+  v_blockers text;
 begin
   if not exists (select 1 from information_schema.columns where table_schema = 'public' and table_name = 'sp_licenses' and column_name = 'product') then
     raise exception 'sp_licenses.product yok; once 2026-11-06-lisans-urun.sql uygulanmali';
@@ -50,7 +56,20 @@ begin
   if (select data_type from information_schema.columns where table_schema = 'public' and table_name = 'sp_licenses' and column_name = 'id') is distinct from 'uuid' then
     raise exception 'sp_licenses.id uuid degil; bu migrasyon uuid varsayar';
   end if;
+  -- D6 (Burak kod kapisi): sp_claim_play_license'in insert'u yalniz asagidaki sutunlari yazar. Bunlarin disinda, varsayilansiz ve NOT NULL
+  -- baska bir sutun varsa (kimlik/uretilen sutunlar haric) her yeni Play claim 500 verir: gocu BASTAN durdur.
+  -- (email Play satirinda bos olur; Paddle kodu da adres yokken null yazar, yani zaten bos olabilmeli: asagida NOT NULL kaldirilir.)
+  select string_agg(column_name, ', ' order by column_name) into v_blockers
+    from information_schema.columns
+    where table_schema = 'public' and table_name = 'sp_licenses'
+      and is_nullable = 'NO' and column_default is null and is_identity = 'NO' and is_generated = 'NEVER'
+      and column_name not in ('email', 'license_key', 'product', 'plan', 'max_devices', 'status', 'source');
+  if v_blockers is not null then
+    raise exception 'sp_licenses icinde varsayilansiz NOT NULL sutun(lar) var: %; Play satiri bunlari dolduramaz, once Burak''a sor', v_blockers;
+  end if;
 end $$;
+
+alter table public.sp_licenses alter column email drop not null;
 
 -- 1) sp_licenses: Play alanları ---------------------------------------------------------------------------------------------
 alter table public.sp_licenses add column if not exists source text not null default 'paddle';
@@ -166,7 +185,9 @@ begin
         -- Eski satır (kullanıcının elindeki kod) korunur: yeni jeton ona taşınır, yeni satır `revoked` olur ve jetonunu bırakır.
         update public.sp_licenses set status = 'revoked', play_token_hash = null, play_purchase_token = null, updated_at = p_now where id = v_lic;
         update public.sp_play_tokens set license_id = v_other where token_hash = p_token_hash;
-        update public.sp_play_tokens set superseded_at = p_now where token_hash = p_linked_hash;
+        -- D2: kazanan satirin onceki TUM etkin jetonlari (yalniz bagli olan degil) yerine gecilmis olur; tek etkin jeton kurali.
+        update public.sp_play_tokens set superseded_at = p_now
+          where license_id = v_other and superseded_at is null and token_hash <> p_token_hash;
         update public.sp_licenses set
             play_token_hash = p_token_hash, play_purchase_token = p_token, play_product_id = p_product_id, plan = p_plan,
             status = p_status, current_period_end = p_period_end, play_state = p_play_state, play_checked_at = p_now,
@@ -179,7 +200,11 @@ begin
     -- İade bitiş durumudur: Play'de ters ibraz yok, yeniden açma yalnız yeni bir satın alma (zincir) ile olur.
     update public.sp_licenses set
         status = case when status = 'refunded' then status else p_status end,
-        current_period_end = case when status = 'refunded' then current_period_end else p_period_end end,
+        -- D1: lisans-test satirinin 14 gunu ilk claim'de verilir, yeniden claim ILERI KAYDIRMAZ (en erken olan kalir).
+        current_period_end = case
+          when status = 'refunded' then current_period_end
+          when source = 'play_test' and p_source = 'play_test' and current_period_end is not null then least(current_period_end, p_period_end)
+          else p_period_end end,
         plan = p_plan, play_product_id = p_product_id, play_state = p_play_state, play_checked_at = p_now,
         max_devices = p_max_devices, source = p_source, updated_at = p_now,
         play_purchase_token = p_token, play_token_hash = p_token_hash
@@ -192,7 +217,8 @@ begin
     select license_id into v_linked_lic from public.sp_play_tokens where token_hash = p_linked_hash;
     if found then
       perform 1 from public.sp_licenses where id = v_linked_lic for update;
-      update public.sp_play_tokens set superseded_at = p_now where token_hash = p_linked_hash and superseded_at is null;
+      -- D2: lisansin o anki TUM etkin jetonlari eski olur (cataldaki kardes jeton dahil): etkin jeton her zaman tektir.
+      update public.sp_play_tokens set superseded_at = p_now where license_id = v_linked_lic and superseded_at is null;
       insert into public.sp_play_tokens (token_hash, license_id, first_seen) values (p_token_hash, v_linked_lic, p_now);
       -- Kod ve cihazlar AYNI kalır; plan Google'ın yeni ürünü, durum yeni satın almanın durumu.
       update public.sp_licenses set
@@ -225,6 +251,7 @@ declare
   v_lic public.sp_licenses.id%type;
   v_sup timestamptz;
   v_status text;
+  v_active text;
 begin
   select license_id, superseded_at into v_lic, v_sup from public.sp_play_tokens where token_hash = p_token_hash;
   if not found then
@@ -233,7 +260,11 @@ begin
   if v_sup is not null then
     return 'superseded';
   end if;
-  select status into v_status from public.sp_licenses where id = v_lic for update;
+  select status, play_token_hash into v_status, v_active from public.sp_licenses where id = v_lic for update;
+  -- D2: yalniz lisansin ETKIN jetonunun iadesi lisansi dusurur.
+  if v_active is distinct from p_token_hash then
+    return 'superseded';
+  end if;
   if v_status = 'refunded' then
     return 'already';
   end if;

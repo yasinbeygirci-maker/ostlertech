@@ -17,8 +17,8 @@ export const PLAY_STALE_MS = DAY;
 export const PLAY_TEST_GRANT_MS = 14 * DAY;
 /** Google çağrılarında zaman aşımı (Ş15). */
 export const PLAY_TIMEOUT_MS = 8000;
-/** İptal edilen satın alma listesinde geriye bakılan pencere (çakışmalı: günlük koşuda 3 gün). */
-export const VOIDED_WINDOW_MS = 3 * DAY;
+/** İptal edilen satın alma listesinde geriye bakılan pencere: Google'ın sınırı 30 gün (D7: cron günlerce düşse de iadeler kaçmasın). */
+export const VOIDED_WINDOW_MS = 30 * DAY;
 export const VOIDED_MAX_PAGES = 10;
 
 export type PlaySource = "play" | "play_test";
@@ -107,11 +107,21 @@ export function classifyStatus(status: number): PlayErrorKind {
 export function createHttpVerifier(opts: HttpVerifierOptions): PlayVerifier {
   const timeoutMs = opts.timeoutMs ?? PLAY_TIMEOUT_MS;
   async function getJson(url: string): Promise<unknown> {
+    // D3: erişim belirteci alımı (OIDC + STS + iamcredentials) da AYNI süre sınırının içinde; asılırsa "ulaşılamadı" (503), "auth" değil.
     let bearer: string;
+    let tokenTimer: ReturnType<typeof setTimeout> | undefined;
     try {
-      bearer = await opts.accessToken();
-    } catch {
+      bearer = await Promise.race([
+        opts.accessToken(),
+        new Promise<never>((_, reject) => {
+          tokenTimer = setTimeout(() => reject(new PlayApiError("unavailable")), timeoutMs);
+        }),
+      ]);
+    } catch (e) {
+      if (e instanceof PlayApiError) throw e;
       throw new PlayApiError("auth");
+    } finally {
+      clearTimeout(tokenTimer);
     }
     const ctrl = new AbortController();
     const timer = setTimeout(() => ctrl.abort(), timeoutMs);
@@ -344,6 +354,11 @@ function isFresh(row: PlayLicenseRow, now: number): boolean {
   return !Number.isNaN(at) && now - at < PLAY_STALE_MS && now >= at;
 }
 
+/** Depo hatası iletisi `<yer>: <Postgres kodu>` biçimindedir (yalnız kod taşır). 23505 benzersiz ihlali, 40P01 kilitlenme, 40001 serileştirme. */
+export function isRetryableDbError(e: unknown): boolean {
+  return e instanceof Error && /: (23505|40P01|40001)$/.test(e.message);
+}
+
 function errName(e: unknown): string {
   return e instanceof Error ? e.constructor.name : "error";
 }
@@ -397,7 +412,7 @@ export async function handlePlayClaim(rawBody: unknown, deps: PlayDeps): Promise
     if (decision.kind === "test_blocked") return { status: 403, body: { error: "test_purchase" } };
 
     // 7) Atomik kayıt. Yeni satır yalnız şu an hak veren satın almada açılır; mevcut satır (aynı jeton ya da zincir) her durumda güncellenir.
-    const outcome = await deps.store.claim({
+    const claimParams = {
       tokenHash: hash,
       token: parsed.token,
       linkedHash: decision.linkedToken ? hashToken(decision.linkedToken) : null,
@@ -411,7 +426,15 @@ export async function handlePlayClaim(rawBody: unknown, deps: PlayDeps): Promise
       nowIso,
       newKey: deps.newKey(),
       allowCreate: decision.grants,
-    });
+    };
+    // Gerçek Postgres'te çok bağlantılı yarış: benzersiz indeks kaybeden isteği 23505, kilit döngüsü 40P01 ile düşürür; bir kez yeniden dene (D5).
+    let outcome: ClaimResult;
+    try {
+      outcome = await deps.store.claim(claimParams);
+    } catch (e) {
+      if (!isRetryableDbError(e)) throw e;
+      outcome = await deps.store.claim(claimParams);
+    }
     if (outcome.result === "none") return { status: 403, body: { error: "inactive", status: decision.status } };
     if (outcome.result === "manual") {
       // İki satır, yeni satırın cihazı var: otomatik birleştirme yok. Günlükte yalnız lisans kimliği (jeton/kod/e-posta yok).
