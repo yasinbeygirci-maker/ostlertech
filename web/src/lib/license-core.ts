@@ -19,6 +19,17 @@ export interface LicenseRow {
   max_devices: number;
   /** Paddle'dan gelen alıcı e-postası (yalnız cihaz sıfırlama bağlantısı için okunur; yanıta ve günlüğe yazılmaz). */
   email?: string | null;
+  /**
+   * Lisansın kaynağı (yalnız Play alanları göçten sonra gelir). `paddle`: Paddle; `play`: Google Play satın alması;
+   * `play_test`: Play lisans-test satın alması (Burak Ş4: hak süresi `current_period_end`'e bağlıdır, plan ne olursa olsun).
+   * Alan yoksa/boşsa Paddle gibi davranılır (SyncPass ve AreaPilot satırları değişmez).
+   */
+  source?: "paddle" | "play" | "play_test" | null;
+  /** Yalnız Play satırı: Google'a yeniden sorma için ham jeton. Hiçbir yanıta/günlüğe yazılmaz (Burak Ş5). */
+  play_purchase_token?: string | null;
+  play_product_id?: string | null;
+  play_state?: string | null;
+  play_checked_at?: string | null;
 }
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -101,6 +112,12 @@ export function foreignKeyProduct(input: unknown, product: Product): Product | n
 export function entitlementUntil(row: LicenseRow, now = Date.now()): number | null {
   if (row.status === "refunded" || row.status === "revoked" || row.status === "paused") return null;
   const cfg = PRODUCTS[row.product ?? DEFAULT_PRODUCT];
+  if (row.source === "play_test") {
+    // Burak Ş4: lisans-test satın alması ömür boyu planda bile sınırsız hak vermez; hak current_period_end'e bağlıdır, pay yok.
+    const end = row.current_period_end ? Date.parse(row.current_period_end) : NaN;
+    if (Number.isNaN(end) || end <= now) return null;
+    return Math.min(end, now + cfg.tokenLifetimeMs);
+  }
   if (cfg.perpetual) return row.plan === "lifetime" && row.status === "active" ? PERPETUAL_EXP : null;
   const lifetime = cfg.tokenLifetimeMs;
   if (row.plan === "lifetime") return row.status === "active" ? now + lifetime : null;
@@ -135,13 +152,47 @@ export const KNOWN_TEST_PUBLIC_KEYS: Set<string> = new Set([
   "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAERRoh1lkW+t/CwVpEtub3sT0sl8Y2rcSTsiq9UKITzj1+RBqM8vBrcS+D2VrTNoF/gVhdovmtigIOZZp7s/zrsg==",
 ]);
 
-function privateKeyFor(product: Product, env: Env) {
-  const b64 = env[PRODUCTS[product].keyEnv];
-  if (!b64) throw new SigningNotConfigured(`${PRODUCTS[product].keyEnv} tanımlı değil`);
+/**
+ * İmza anahtarı döndürme (Burak Ş12; B1/B2). SyncPass Masaüstü K1 sürümü İKİ genel anahtar kabul eder (eski + yeni). Sunucu
+ * `appVersion` bu eşiğe eşit ya da büyükse YENİ anahtarla (LICENSE_SIGNING_KEY_V2), eski/bilinmeyen sürümlere ESKİ anahtarla imzalar.
+ * V2 ortam değişkeni tanımlı değilse hep eski anahtar kullanılır (anahtar üretilip dağıtılana dek davranış değişmez).
+ * Eşik, masaüstü K1 sürüm numarası kesinleşince Yasin/masaüstü hattıyla teyit edilir (şimdilik 1.5.0 varsayımı).
+ */
+export const SYNCPASS_KEY_V2_ENV = "LICENSE_SIGNING_KEY_V2";
+export const SYNCPASS_KEY_V2_MIN_APP_VERSION = "1.5.0";
+
+/** "1.5.0" / "1.5.0-beta" gibi sürümü sayı üçlüsüne çevirir; çözülemezse null. */
+function parseVersion(v: unknown): [number, number, number] | null {
+  if (typeof v !== "string") return null;
+  const m = /^(\d{1,4})(?:\.(\d{1,4}))?(?:\.(\d{1,4}))?/.exec(v.trim());
+  return m ? [Number(m[1]), Number(m[2] ?? 0), Number(m[3] ?? 0)] : null;
+}
+
+export function appVersionAtLeast(v: unknown, min: string): boolean {
+  const a = parseVersion(v);
+  const b = parseVersion(min);
+  if (!a || !b) return false;
+  for (let i = 0; i < 3; i++) {
+    if (a[i] !== b[i]) return a[i] > b[i];
+  }
+  return true;
+}
+
+export function signingKeyEnvName(product: Product, env: Env, appVersion?: string | null): string {
+  if (product === "syncpass_desktop" && env[SYNCPASS_KEY_V2_ENV] && appVersionAtLeast(appVersion, SYNCPASS_KEY_V2_MIN_APP_VERSION)) {
+    return SYNCPASS_KEY_V2_ENV;
+  }
+  return PRODUCTS[product].keyEnv;
+}
+
+function privateKeyFor(product: Product, env: Env, appVersion?: string | null) {
+  const envName = signingKeyEnvName(product, env, appVersion);
+  const b64 = env[envName];
+  if (!b64) throw new SigningNotConfigured(`${envName} tanımlı değil`);
   const key = createPrivateKey({ key: Buffer.from(b64, "base64"), format: "der", type: "pkcs8" });
   if (env.NODE_ENV === "production") {
     const spki = createPublicKey(key).export({ format: "der", type: "spki" }).toString("base64");
-    if (KNOWN_TEST_PUBLIC_KEYS.has(spki)) throw new SigningNotConfigured(`${PRODUCTS[product].keyEnv} bilinen bir TEST anahtarı; üretimde kullanılamaz`);
+    if (KNOWN_TEST_PUBLIC_KEYS.has(spki)) throw new SigningNotConfigured(`${envName} bilinen bir TEST anahtarı; üretimde kullanılamaz`);
   }
   return key;
 }
@@ -151,9 +202,9 @@ function privateKeyFor(product: Product, env: Env) {
  * SyncPass: Ed25519, gövde {v, lid, plan, dev, exp, iat} (değişmez). AreaPilot: ECDSA P-256/SHA-256, imza IEEE P1363 (r||s, 64 bayt),
  * gövde {v, lid, product, plan, dev, exp, maxDevices, iat}.
  */
-export function signLicenseToken(product: Product, input: TokenInput, opts: { env?: Env; now?: number } = {}): string {
+export function signLicenseToken(product: Product, input: TokenInput, opts: { env?: Env; now?: number; appVersion?: string | null } = {}): string {
   const env = opts.env ?? process.env;
-  const key = privateKeyFor(product, env);
+  const key = privateKeyFor(product, env, opts.appVersion);
   const iat = opts.now ?? Date.now();
   const payload =
     product === "areapilot"
@@ -298,7 +349,16 @@ export async function handleLicenseRequest(
   product: Product,
   rawBody: unknown,
   store: LicenseStore,
-  opts: { env?: Env; now?: number } = {}
+  opts: {
+    env?: Env;
+    now?: number;
+    /**
+     * Play kaynaklı satırda (source play/play_test) Google'a yeniden sorma kancası (Burak Ş8): satır 24 saatten bayatsa durumu tazeler.
+     * Yalnız activate/renew'de çağrılır; Paddle satırlarında kanca satırı DEĞİŞTİRMEDEN döndürmelidir. Fırlatırsa kayıtlı durumla
+     * devam edilir (süre uzatılmaz).
+     */
+    playRefresh?: (license: LicenseRow, now: number) => Promise<LicenseRow>;
+  } = {}
 ): Promise<ApiResult> {
   const body = typeof rawBody === "object" && rawBody !== null ? (rawBody as Record<string, unknown>) : null;
   const key = normalizeKey(body?.key, product);
@@ -348,6 +408,11 @@ export async function handleLicenseRequest(
       return { status: 200, body: statusBody(key, deviceId, license.status, registered) };
     }
 
+    if (opts.playRefresh && (license.source === "play" || license.source === "play_test")) {
+      // Hata "Google'a ulaşılamadı" demektir: kayıtlı durum geçerli kalır, süre uzatılmaz. Hata ayrıntısı yazılmaz (jeton sızmasın).
+      license = await opts.playRefresh(license, now).catch(() => license);
+    }
+
     const entitled = entitlementUntil(license, now);
     if (!entitled) return { status: 403, body: { error: "inactive", status: license.status } };
     until = entitled;
@@ -364,7 +429,7 @@ export async function handleLicenseRequest(
 
   let token: string;
   try {
-    token = signLicenseToken(product, { lid: license.id, plan: license.plan, dev: deviceId, exp: until, maxDevices: license.max_devices }, { env: opts.env, now });
+    token = signLicenseToken(product, { lid: license.id, plan: license.plan, dev: deviceId, exp: until, maxDevices: license.max_devices }, { env: opts.env, now, appVersion });
   } catch (e) {
     // Anahtar içeriği/ayrıntı günlüğe yazılmaz; yalnız hata sınıfı.
     console.error("license sign", product, e instanceof Error ? e.constructor.name : "error");
