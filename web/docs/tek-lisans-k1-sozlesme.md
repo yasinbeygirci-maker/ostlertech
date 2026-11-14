@@ -2,6 +2,7 @@
 
 - Dal: `tek-lisans-k1` (ostlertech-web). Burak ön kapısı: `guvenlik/bulgular/2026-11-14-syncpass-tek-lisans-sunucu-on-kapi.md` (Ş1-Ş24).
 - Durum: kod + testler hazır, **canlıya alınmadı** (Supabase SQL ve Vercel ortamı Yasin onayı ister). Google'a gerçek çağrı hiç yapılmadı.
+- **DAĞITIM SIRASI (kalın kural, Burak O1): `2026-11-14-tek-lisans-k1.sql` canlıda UYGULANIP DOĞRULANMADAN `tek-lisans-k1` dalı `main`'e BİRLEŞTİRİLMEZ.** `main`'e birleştirme Vercel'de üretim dağıtımını kendiliğinden başlatır. Savunma katmanı: ortak okuma yeni sütunlar yoksa (42703) eski sütun listesine düşer (`lib/license-select.ts`), yani sıra hatası olsa bile Paddle/AreaPilot uçları çalışır; yine de Play uçları göçsüz çalışmaz (satır yok) ve sıra kuralı geçerlidir.
 - Android istemcisi bu işin DIŞINDA: bu belge Android tarafının yazılacağı sözleşmedir (K1-6).
 
 ## 1. Ne yapar
@@ -86,7 +87,7 @@ yapılıp jetonu eskiye taşınır; cihazı varsa **otomatik birleştirme yok**,
 ### Test satın alma (Ş4)
 
 Lisans-test hesabı (`testPurchase` / `purchaseType == 0`): `PLAY_ACCEPT_TEST_PURCHASES` kapalıysa 403 `test_purchase`. Açıksa satır `source = play_test`,
-hak en çok **14 gün** (ömür boyu planda bile; `entitlementUntil` `play_test` satırında `current_period_end`'e bakar) ve tazelemede süre uzamaz.
+hak en çok **14 gün** (ömür boyu planda bile; `entitlementUntil` `play_test` satırında `current_period_end`'e bakar). 14 gün ilk claim'de verilir; **yeniden claim ve tazeleme süreyi ileri KAYDIRMAZ** (en erken bitiş kalır; Burak D1).
 Promosyon kodu (`purchaseType 1`) normal lisanstır. Kerem turu bitince bayrak kapatılır; kapalı olduğu Burak AAB kapısında Vercel env ADI düzeyinde okunur.
 
 ## 4. Masaüstü tarafı
@@ -101,7 +102,7 @@ anahtarla, aksi halde eskisiyle imzalanır. Masaüstü K1 sürümü iki genel an
 ## 5. Diğer uçlar
 
 - `GET /api/license/play/cron`: Vercel Cron (günlük 03:17 UTC). `Authorization: Bearer $CRON_SECRET` yoksa/yanlışsa **401**. İptal listesi (`voidedpurchases`, `type=1`,
-  son 3 gün, çakışmalı) + süre bitimi kapatma. Yanıt yalnız sayılar: `{ok, seen, marked, expired}`.
+  son 30 gün = Google'ın sınırı; cron günlerce düşse de iadeler kaçmaz) + süre bitimi kapatma. Yanıt yalnız sayılar: `{ok, seen, marked, expired}`.
 - `POST /api/license/play/health` (Ş20): aynı `CRON_SECRET`. Gövde (hepsi isteğe bağlı): `{subscriptionToken, productId, productToken}`. Yanıt **yalnız HTTP durum kodları**:
   `{"subscriptionsv2":200,"products":200,"voidedpurchases":200}`. 401/403 görülürse ikinci Console iznini kendiliğinden ekleme: Burak'a dön.
   Jeton adrese değil gövdeye konur (günlüğe düşmesin).
@@ -118,9 +119,9 @@ anahtarla, aksi halde eskisiyle imzalanır. Masaüstü K1 sürümü iki genel an
 
 ## 7. Canlıya alım sırası (K1-5)
 
-1. Canlı ön denetim (salt okur) → Burak. 2. `web/supabase/2026-11-14-tek-lisans-k1.sql` (Yasin onayıyla; **koddan ÖNCE**). 3. Vercel ortam değişkenleri.
+1. Canlı ön denetim (salt okur; SQL dosyasının başındaki sorgular, NOT NULL/varsayılan listesi dahil) → Burak. 2. `web/supabase/2026-11-14-tek-lisans-k1.sql` (Yasin onayıyla; **koddan ÖNCE, doğrulanmadan main'e birleştirme YOK**). 3. Vercel ortam değişkenleri.
 4. Site dağıtımı. 5. Ş14 hız kuralları. 6. Ş20 sağlık ucuyla pozitif kontrol. 7. Android (K1-6) yayını bundan SONRA.
-Kod SQL'den önce dağıtılırsa Paddle dahil bütün SyncPass activate/renew istekleri 500 verir (yeni sütunlar yok).
+Kod SQL'den önce dağıtılırsa Play uçları çalışmaz; Paddle/AreaPilot uçları eski sütun listesine düşerek çalışır (O1 savunması, testli). Geri alma: Vercel Instant Rollback (SQL yerinde kalır; göç eski kodla uyumlu).
 
 ## 8. Ş1-Ş24 durumu
 
