@@ -2,6 +2,7 @@ import "server-only";
 import { createHash } from "node:crypto";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { priceInfo } from "@/lib/paddle-tiers";
+import { playRefreshHook } from "@/lib/server/play";
 import {
   DEACTIVATE_WINDOW_DAYS,
   RESET_LIMIT,
@@ -27,7 +28,8 @@ export function planForPrice(priceId: string) {
   return priceInfo(priceId)?.plan ?? null;
 }
 
-const SELECT = "id, license_key, product, plan, status, current_period_end, max_devices, email";
+// Play alanları (source, play_*) 2026-11-14-tek-lisans-k1.sql göçüyle gelir: BU KOD O GÖÇTEN SONRA dağıtılır (aksi halde 42703).
+const SELECT = "id, license_key, product, plan, status, current_period_end, max_devices, email, source, play_purchase_token, play_product_id, play_state, play_checked_at";
 
 // Veritabanı hatasında FIRLATIR (çekirdek 500 server_error yapar); hata asla "kayıt yok" gibi görünmez.
 // Fırlatılan hata yalnız Postgres/PostgREST kodunu taşır: ileti satır içeriği (kod, e-posta) içerebilir.
@@ -126,5 +128,7 @@ export function supabaseLicenseStore(db: SupabaseClient): LicenseStore {
 /** Uç nokta gövdesi: JSON'u okur, çekirdeğe verir. Dönüş HTTP durumu + gövde. */
 export async function runLicenseRoute(req: Request, op: LicenseOp, product: Product, db: SupabaseClient): Promise<ApiResult> {
   const body = await req.json().catch(() => null);
-  return handleLicenseRequest(op, product, body, supabaseLicenseStore(db));
+  // Play kaynaklı satırın 24 saatlik yeniden sorgusu (Burak Ş8); yalnız SyncPass Masaüstü, Paddle/AreaPilot satırlarında etkisiz.
+  const playRefresh = product === "syncpass_desktop" ? playRefreshHook(db) : undefined;
+  return handleLicenseRequest(op, product, body, supabaseLicenseStore(db), { playRefresh });
 }
