@@ -5,8 +5,8 @@ import { cronAuthorized, PlayApiError, sweepVoidedPurchases } from "@/lib/play-c
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-// İptal listesi: en çok 10 sayfa, her biri 8 sn sınırlı; satır başına bir RPC. Varsayılana bırakma.
-export const maxDuration = 60;
+// İptal listesi: en kötü durum belirteç 8 sn + 10 sayfa x 8 sn = 88 sn + satır başına RPC (Burak S2); Fluid açık. Varsayılana bırakma.
+export const maxDuration = 120;
 
 // Günlük iptal/iade taraması (Burak Ş9). Vercel Cron GET ile çağırır ve `Authorization: Bearer $CRON_SECRET` ekler; CRON_SECRET tanımlı değilse
 // ya da başlık yanlışsa HER istek 401'dir (kota tüketimi, P3). Yanıtta yalnız sayılar (jeton/lisans yok).

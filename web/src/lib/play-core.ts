@@ -497,7 +497,7 @@ export interface VoidedSweepResult {
 }
 
 /**
- * İptal edilen satın alma listesi (son 3 gün, çakışmalı pencere). Eşleşen AKTİF jetonlu satır `refunded` olur; eski (yerine geçilmiş)
+ * İptal edilen satın alma listesi (son 30 gün = Google'ın sınırı). Eşleşen AKTİF jetonlu satır `refunded` olur; eski (yerine geçilmiş)
  * jeton yeni aboneliği düşürmez. Google'a ulaşılamazsa PlayApiError fırlatır; hiçbir satır değişmez.
  */
 export async function sweepVoidedPurchases(deps: PlayDeps): Promise<VoidedSweepResult> {

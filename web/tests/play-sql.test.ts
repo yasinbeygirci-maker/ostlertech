@@ -344,7 +344,9 @@ test("D2: zincir çatalı: lisansın tek ETKİN jetonu vardır; eski jetonla cla
 test("D5: Ş7'nin dayanakları: işlev danışma kilidi alır VE tekillik indeksle zorlanır (kilit olmasa da çift satır oluşmaz)", async () => {
   const db = await newDb();
   const def = (await db.query<{ d: string }>("select pg_get_functiondef('public.sp_claim_play_license(text,text,text,text,text,int,text,text,timestamptz,text,timestamptz,text,boolean)'::regprocedure) as d")).rows[0].d;
-  assert.ok((def.match(/pg_advisory_xact_lock/g) ?? []).length >= 2, "yeni ve bağlı jeton için kilit");
+  // S3: yorum satırı/bloğu sayılmaz (kilidi "-- perform ..." yapmak testi atlatmasın); gerçek çağrı biçimi sayılır.
+  const code = def.replace(/\/\*[\s\S]*?\*\//g, "").replace(/--[^\n]*/g, "");
+  assert.ok((code.match(/perform\s+pg_advisory_xact_lock\s*\(/gi) ?? []).length >= 2, "yeni ve bağlı jeton için kilit (yorum dışı)");
   await claim(db, { token: "A" });
   await assert.rejects(
     db.query("insert into public.sp_licenses (license_key, plan, product, source, play_token_hash) values ($1,'month','syncpass_desktop','play',$2)", [KEY(7), th("A")]),

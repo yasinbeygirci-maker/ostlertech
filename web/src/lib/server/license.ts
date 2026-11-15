@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { priceInfo } from "@/lib/paddle-tiers";
 import { playRefreshHook } from "@/lib/server/play";
-import { selectLicenseCompat } from "@/lib/license-select";
+import { findLicenseByKey, findLicenseById } from "@/lib/license-select";
 import {
   DEACTIVATE_WINDOW_DAYS,
   RESET_LIMIT,
@@ -41,7 +41,7 @@ function fail(error: { code?: string } | null, where: string): never {
 export function supabaseLicenseStore(db: SupabaseClient): LicenseStore {
   return {
     async findLicense(key: string, product: Product) {
-      const { data, error } = await selectLicenseCompat<LicenseRow>((cols) => db.from("sp_licenses").select(cols).eq("license_key", key).eq("product", product).maybeSingle<LicenseRow>());
+      const { data, error } = await findLicenseByKey<LicenseRow>(db, key, product);
       if (error) fail(error, "findLicense");
       return data ?? null;
     },
@@ -87,7 +87,7 @@ export function supabaseLicenseStore(db: SupabaseClient): LicenseStore {
       const { data: retired, error } = await db.from("sp_license_retired_keys").select("license_id").eq("retired_key_hash", createHash("sha256").update(key, "utf8").digest("hex")).maybeSingle<{ license_id: string }>();
       if (error) fail(error, "findRetiredKeyOwner");
       if (!retired) return null;
-      const { data, error: err2 } = await selectLicenseCompat<LicenseRow>((cols) => db.from("sp_licenses").select(cols).eq("id", retired.license_id).eq("product", product).maybeSingle<LicenseRow>());
+      const { data, error: err2 } = await findLicenseById<LicenseRow>(db, retired.license_id, product);
       if (err2) fail(err2, "findRetiredKeyOwner");
       return data ?? null;
     },

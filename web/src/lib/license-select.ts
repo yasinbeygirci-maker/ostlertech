@@ -16,3 +16,23 @@ export async function selectLicenseCompat<T>(run: (columns: string) => PromiseLi
   if (first.error?.code === "42703") return run(LICENSE_COLUMNS_LEGACY);
   return first;
 }
+
+// Sorgu zinciri: supabase-js'in kullanılan kısmı (testte sahte). license.ts sütun listesini HİÇ yazmaz; ikisi de buradan geçer (Burak S7).
+interface LicenseQuery {
+  select(columns: string): LicenseQuery;
+  eq(column: string, value: unknown): LicenseQuery;
+  maybeSingle(): PromiseLike<SelectResult<unknown>>;
+}
+export interface LicenseDb {
+  from(table: string): unknown;
+}
+
+/** Lisans kodu + ürün ile satır (activate/renew/deactivate/status). */
+export function findLicenseByKey<T>(db: LicenseDb, key: string, product: string): Promise<SelectResult<T>> {
+  return selectLicenseCompat<T>((cols) => (db.from("sp_licenses") as LicenseQuery).select(cols).eq("license_key", key).eq("product", product).maybeSingle() as PromiseLike<SelectResult<T>>);
+}
+
+/** Lisans kimliği + ürün ile satır (eski kod sahibi araması). */
+export function findLicenseById<T>(db: LicenseDb, id: string, product: string): Promise<SelectResult<T>> {
+  return selectLicenseCompat<T>((cols) => (db.from("sp_licenses") as LicenseQuery).select(cols).eq("id", id).eq("product", product).maybeSingle() as PromiseLike<SelectResult<T>>);
+}

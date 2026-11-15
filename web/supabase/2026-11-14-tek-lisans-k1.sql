@@ -8,7 +8,7 @@
 -- ÖN KOŞUL: 2026-11-06-lisans-urun.sql (sp_license_devices, sp_license_resets, atomik işlevler) ve 2026-11-08-lisans-sifirlanan-kod.sql
 --   (sp_license_retired_keys) uygulanmış olmalı.
 -- SIRA KURALI (önemli): BU DOSYA KODDAN ÖNCE uygulanır. Yeni kod sp_licenses.source / play_* sütunlarını ve aşağıdaki işlevleri SELECT eder; sütun
---   yokken dağıtılırsa SyncPass Paddle dahil BÜTÜN activate/renew istekleri 500 server_error döner (42703). Sütunlar varsayılanlıdır: mevcut
+--   yokken dağıtılırsa Play uçları çalışmaz; Paddle/AreaPilot okuması 42703'te eski sütun listesine düşer (lib/license-select.ts, testli) ama yine de sıra kuralına uyulur. Sütunlar varsayılanlıdır: mevcut
 --   satırlar otomatik source='paddle' olur, Paddle webhook'u değişmeden çalışmaya devam eder.
 --
 -- CANLI ÖN DENETİM (salt okur, bu dosyayı çalıştırmadan önce; çıktıları Burak'a): Burak §6/8

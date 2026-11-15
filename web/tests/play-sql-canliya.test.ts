@@ -12,6 +12,7 @@ const K1 = "2026-11-14-tek-lisans-k1.sql";
 const PRE = "2026-11-14-tek-lisans-k1-on-denetim.sql";
 const POST = "2026-11-14-tek-lisans-k1-son-kontrol.sql";
 const BACK = "2026-11-14-tek-lisans-k1-geri-al.sql";
+const REVOKE = "2026-11-15-tek-lisans-k1-revoke.sql";
 
 async function baseDb(opts: { emailNotNull?: boolean; extra?: string } = {}) {
   const db = new PGlite();
@@ -153,4 +154,73 @@ test("geri alma: email K1 öncesi NOT NULL idi ve boş e-postalı satır var -> 
   await assert.rejects(db.exec(sqlFile(BACK)), /bos e-postali satir var/);
   await db.exec("rollback"); // PGlite açık işlemi bırakır; SQL editöründe hata işlemi zaten geri alır
   assert.deepEqual(await snapshot(db), before);
+});
+
+// ---- S8: ön denetim sp_license_devices RLS satırı ve son kontrol sp_play_tokens yetki satırı gerçekten DUR verir ----
+test("S8: ön denetim sp_license_devices RLS kapalıyken DUR verir", async () => {
+  const db = await baseDb({ extra: "alter table public.sp_license_devices disable row level security" });
+  const rows = await run(db, PRE);
+  assert.equal(byName(rows, "RLS sp_license_devices").sonuc, "DUR");
+  assert.equal(byName(rows, "RLS sp_licenses").sonuc, "TAMAM", "yalnız o satır");
+});
+
+test("S8: son kontrol sp_play_tokens anon yetkisi sızarsa DUR verir (yalnız o satır)", async () => {
+  const db = await baseDb();
+  await db.exec(sqlFile(K1));
+  await db.exec("grant select on table public.sp_play_tokens to anon");
+  const rows = await run(db, POST);
+  assert.equal(byName(rows, "anon/authenticated sp_play_tokens yetkisi").sonuc, "DUR");
+  assert.equal(byName(rows, "anon/authenticated yetkili islev").sonuc, "TAMAM");
+});
+
+// ---- Ş-B: revoke dosyası ----
+async function revokeParts() {
+  const full = sqlFile(REVOKE);
+  const i = full.indexOf("-- Doğrulama (salt okur");
+  return { apply: full.slice(0, i), check: full.slice(i) };
+}
+
+test("Ş-B: revoke öncesi anon/authenticated TÜM yetkili (varsayılan), sonrası 0; service_role etkilenmez; iki kez uygulanır; doğrulama SONUC TAMAM", async () => {
+  const db = await baseDb({ extra: "create table public.sp_paddle_events (id text primary key)" });
+  await db.exec(sqlFile(K1));
+  const { apply, check } = await revokeParts();
+  const priv = async (role: string, p: string) =>
+    (await db.query<{ ok: boolean }>(`select has_table_privilege('${role}','public.sp_licenses','${p}') as ok`)).rows[0].ok;
+  for (const role of ["anon", "authenticated"]) for (const p of ["select", "insert", "update", "delete", "truncate"]) assert.equal(await priv(role, p), true, `öncesi ${role} ${p}`);
+  assert.equal(byName((await db.query<Row>(check)).rows, "SONUC").sonuc, "DUR", "revoke öncesi doğrulama DUR");
+  await db.exec(apply);
+  await db.exec(apply);
+  for (const role of ["anon", "authenticated"]) for (const p of ["select", "insert", "update", "delete", "truncate"]) assert.equal(await priv(role, p), false, `sonrası ${role} ${p}`);
+  const rows = (await db.query<Row>(check)).rows;
+  assert.equal(byName(rows, "SONUC").sonuc, "TAMAM", JSON.stringify(rows));
+  assert.equal(byName(rows, "bakilan tablo sayisi").deger, "4");
+  // site yolu (service_role) çalışmaya devam eder: select + insert + K1 işlevi (canlıda service_role bypassrls)
+  await db.exec("alter role service_role bypassrls");
+  await db.exec("set role service_role");
+  await db.query("select count(*) from public.sp_licenses");
+  const c = await db.query<{ r: { result: string } }>("select public.sp_claim_play_license('hx','rawx',null,'premium_monthly','month',3,'play','active','2026-12-14T12:00:00Z','SUBSCRIPTION_STATE_ACTIVE','2026-11-14T12:00:00Z','SPD-23456-789AB-CDEFG-HJKMC',true) as r");
+  assert.equal(c.rows[0].r.result, "ok");
+  await db.exec("reset role; set role anon");
+  await assert.rejects(db.query("select * from public.sp_licenses"), /permission denied/);
+  await db.exec("reset role");
+});
+
+test("Ş-B: sp_paddle_events yoksa dosya hata vermez (3 tablo); K1 son kontrolü revoke'dan bağımsız TAMAM", async () => {
+  const db = await baseDb();
+  await db.exec(sqlFile(K1));
+  assert.equal(byName(await run(db, POST), "SONUC").sonuc, "TAMAM", "revoke olmadan da K1 son kontrol TAMAM (sırayı kilitlemez)");
+  const { apply, check } = await revokeParts();
+  await db.exec(apply);
+  const rows = (await db.query<Row>(check)).rows;
+  assert.equal(byName(rows, "SONUC").sonuc, "TAMAM");
+  assert.equal(byName(rows, "bakilan tablo sayisi").deger, "3");
+});
+
+test("Ş-B: doğrulama sızıntıyı yakalar (revoke sonrası anon'a tek yetki geri verilince DUR)", async () => {
+  const db = await baseDb();
+  await db.exec(sqlFile(K1));
+  const { apply, check } = await revokeParts();
+  await db.exec(apply);
+  await db.exec("grant truncate on table public.sp_license_devices to authenticated");
+  assert.equal(byName((await db.query<Row>(check)).rows, "SONUC").sonuc, "DUR");
 });

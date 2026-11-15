@@ -18,7 +18,7 @@ import {
   type LicenseStore,
 } from "../src/lib/license-core.ts";
 import { PLAY_PACKAGE_NAME, PLAY_PRODUCTS } from "../src/lib/play-catalog.ts";
-import { LICENSE_COLUMNS, LICENSE_COLUMNS_LEGACY, selectLicenseCompat } from "../src/lib/license-select.ts";
+import { LICENSE_COLUMNS, LICENSE_COLUMNS_LEGACY, findLicenseById, findLicenseByKey, selectLicenseCompat } from "../src/lib/license-select.ts";
 import {
   isRetryableDbError,
   PlayApiError,
@@ -561,6 +561,40 @@ test("O1: ortak okuma yeni sütunlar yoksa (42703) eski sütun listesine düşer
   assert.equal(other.error?.code, "57014");
   assert.equal(seen.length, 1, "42703 dışındaki hata yeniden denenmez");
   assert.ok(LICENSE_COLUMNS.startsWith(LICENSE_COLUMNS_LEGACY));
+});
+
+// S7: license.ts'in iki okuması (kod ile, kimlikle) yeni sütun yokken eski listeyle yeniden dener; sabit tam liste ile geri dönülürse KIRMIZI.
+test("S7: findLicenseByKey / findLicenseById 42703'te eski sütun listesine düşer ve doğru süzgeçleri uygular", async () => {
+  for (const [fn, col, val] of [[findLicenseByKey, "license_key", "SPD-X"], [findLicenseById, "id", "uuid-1"]] as const) {
+    const calls: { table: string; cols: string; filters: [string, unknown][] }[] = [];
+    const db = {
+      from(table: string) {
+        const call = { table, cols: "", filters: [] as [string, unknown][] };
+        calls.push(call);
+        const q = {
+          select(c: string) { call.cols = c; return q; },
+          eq(c: string, v: unknown) { call.filters.push([c, v]); return q; },
+          async maybeSingle() { return call.cols === LICENSE_COLUMNS_LEGACY ? { data: { id: "1" }, error: null } : { data: null, error: { code: "42703" } }; },
+        };
+        return q;
+      },
+    };
+    const r = await fn<{ id: string }>(db, val, "syncpass_desktop");
+    assert.deepEqual(r, { data: { id: "1" }, error: null });
+    assert.equal(calls.length, 2);
+    assert.deepEqual(calls.map((c) => c.cols), [LICENSE_COLUMNS, LICENSE_COLUMNS_LEGACY]);
+    for (const c of calls) {
+      assert.equal(c.table, "sp_licenses");
+      assert.deepEqual(c.filters, [[col, val], ["product", "syncpass_desktop"]]);
+    }
+  }
+});
+
+test("S7: license.ts sütun listesi yazmaz ve iki okumayı da ortak yardımcıdan yapar", () => {
+  const src = fs.readFileSync(path.join(process.cwd(), "src", "lib", "server", "license.ts"), "utf8");
+  assert.ok(/findLicenseByKey\s*</.test(src) && /findLicenseById\s*</.test(src));
+  assert.ok(!/from\("sp_licenses"\)\.select\(/.test(src), "sp_licenses okuması yardımcı dışında select ile yazılmamalı");
+  assert.ok(!src.includes("license_key, product, plan"), "sabit sütun listesi yok");
 });
 
 // ---- Ş10 zincir (çekirdek: bağlı jeton özet olarak depoya gider) ----
