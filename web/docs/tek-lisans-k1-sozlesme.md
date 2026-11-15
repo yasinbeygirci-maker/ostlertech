@@ -50,6 +50,13 @@ Hata kodları (gövde `{ "error": "<kod>" }`):
 | 503 | `verify_unavailable` | Google'a ulaşılamadı (429/5xx/zaman aşımı); hiçbir satır değişmedi | tekrar dene |
 | 503 | `not_configured` | Google yetkisi/federasyon kurulu değil | yalnız kurulum sırasında görülür |
 
+Kodla birebir ek eşleme (tamamı `lib/play-core.ts handlePlayClaim`): taze yerel satır ya da yerine geçilmiş eski jeton -> Google'a gidilmeden `200` aynı kod
+(satır şu an hak vermiyorsa `403 inactive`); iki satır çakışması (`manual`) ve zincir sonucu da `200` (hak varsa) döner, hak yoksa `403 inactive`;
+ilk claim'de hak vermeyen satın alma (`none`) `403 inactive` (`status` alanıyla) ve satır AÇILMAZ. Google'ın tanıdığı ama listemizde olmayan ürün/kalem `404 invalid_purchase`.
+Gövde JSON değilse ya da nesne değilse `400 bad_request`. Platform yanıtları bizim JSON'umuz DEĞİLDİR: `405` (GET), `429` (Vercel Firewall, gövde düz metin),
+`504` (işlev zaman aşımı; `maxDuration` claim için 30 sn). `OPTIONS` -> `204`. Apex `ostlertech.com` 308 ile `www`'ya gider: Android doğrudan `https://www.ostlertech.com/...` çağırır, yönlendirme İZLEMEZ.
+Sunucu en kötü durumda ~16 sn (belirteç 8 + Google 8) + veritabanı sürer; Android okuma süresi 20 sn. Aynı jetonla tekrar çağrı idempotent olduğundan yeniden deneme güvenlidir.
+
 **Android kararı değişmez (Ş17):** `claim`'in HİÇBİR yanıtı (404, 409, 503, ağ yok, 5xx) Android'de Premium'u kapatmaz; yalnız "tablet ve masaüstü kodu" ekranı
 "şimdi alınamadı" der. Premium yalnız Play'den (bugünkü `queryPurchasesAsync`) gelir. JSON `org.json` ile kurulur (Gson/yansıma yok, R8 tuzağı).
 

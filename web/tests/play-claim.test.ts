@@ -705,6 +705,15 @@ test("Ş9: iptal listesi yalnız ETKİN jetonu refunded yapar, eski jeton yeni a
   assert.equal(again.marked, 0);
 });
 
+test("D7: tarama Google'a gerçekten 'şimdi - 30 gün' başlangıcını gönderir (sabiti değil çağrıyı sabitler)", async () => {
+  const h = harness();
+  const seen: number[] = [];
+  h.v.listVoided = async (startMs: number) => { seen.push(startMs); return { tokens: [] }; };
+  await sweepVoidedPurchases(h.deps);
+  assert.equal(seen.length, 1);
+  assert.equal(seen[0], h.deps.now!() - 30 * DAY);
+});
+
 test("Ş9: Google ulaşılamazsa tarama fırlatır, hiçbir satır değişmez", async () => {
   const h = harness();
   await handlePlayClaim(body(), h.deps);
