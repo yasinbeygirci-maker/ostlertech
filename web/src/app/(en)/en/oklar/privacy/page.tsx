@@ -14,7 +14,7 @@ const link = "text-primary hover:text-primary-light";
 export default function OklarPrivacyEnPage() {
   return (
     <LegalPage eyebrow="Oklar" title="Oklar Privacy Policy" lang="en" updated={false} altLink={{ href: "/oklar/privacy", label: "Türkçe sürüm" }}>
-      <p>Last updated: 12 November 2026</p>
+      <p>Last updated: 15 November 2026</p>
       <p>
         This policy explains which data is processed when you use the Oklar mobile game (the &quot;Game&quot;). It serves as the
         information notice under Turkey&apos;s Personal Data Protection Law (KVKK) and the EU General Data Protection Regulation (GDPR).
@@ -94,6 +94,7 @@ export default function OklarPrivacyEnPage() {
         <li><b>Data collected by AdMob:</b> serving and measuring ads, fraud prevention. Personalized ads: your consent (GDPR Art. 6(1)(a), KVKK Art. 5(1)), collected through Google&apos;s consent form in the EEA, UK and Switzerland and through our in-game consent window elsewhere; you can withdraw it at any time. Non-personalized ads and fraud prevention: legitimate interest (GDPR Art. 6(1)(f), KVKK Art. 5(2)(f)). Withdrawing consent does not affect processing before withdrawal.</li>
         <li><b>Purchase and order records:</b> to make the sale, answer refund and support requests, and meet tax and accounting obligations; KVKK Art. 5(2)(c) and 5(2)(ç), GDPR Art. 6(1)(b) and 6(1)(c).</li>
         <li><b>Support emails:</b> answering your request; KVKK Art. 5(2)(c) and 5(2)(f).</li>
+        <li><b>Google Play ratings and reviews:</b> we see the rating and review you publish for the Game on Google Play in Google Play Console. Google Play shows it with your user name and the date, and for some reviews also with device details (manufacturer, screen size, Android version), the Game&apos;s version code and language. We use this information to reply publicly to your review on Google Play and to improve the Game; KVKK Art. 5(2)(f), GDPR Art. 6(1)(f). The Game and the rating prompt send us no other information.</li>
       </List>
 
       <H2>7. International transfers</H2>
@@ -113,6 +114,7 @@ export default function OklarPrivacyEnPage() {
         <li>AdMob data: per <a href="https://policies.google.com/technologies/retention" className={link}>Google&apos;s retention policy</a>.</li>
         <li>Purchase record: under the Google Play terms (visible in your Google account&apos;s order history). Order information in Google Play Console is kept for as long as tax and accounting law requires.</li>
         <li>Support and refund emails: 1 year after the request is closed.</li>
+        <li>Google Play ratings and reviews: under the Google Play terms. Your review is linked to your Google Account and is public; you can edit or delete it on Google Play at any time.</li>
       </List>
 
       <H2>9. Children</H2>

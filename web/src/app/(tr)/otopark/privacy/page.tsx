@@ -116,6 +116,7 @@ export default function OtoparkPrivacyPage() {
         <li><b>AdMob&apos;un topladığı veriler:</b> reklam gösterme ve ölçme, sahtekârlık önleme. Kişiselleştirilmiş reklam için açık rızanız (KVKK md. 5/1, GDPR md. 6/1-a): AEA, Birleşik Krallık ve İsviçre&apos;de Google&apos;ın onay formuyla, diğer ülkelerde oyundaki onay penceremizle alınır ve istediğiniz zaman geri alınabilir. Kişiselleştirilmemiş reklam ve sahtekârlık önleme için meşru menfaat (KVKK md. 5/2-f, GDPR md. 6/1-f). Rızanızı geri almanız, geri almadan önceki işlemeyi etkilemez.</li>
         <li><b>Satın alma ve sipariş kayıtları:</b> satışı yapmak, iade ve destek taleplerini yanıtlamak, vergi ve muhasebe yükümlülüklerini yerine getirmek; KVKK md. 5/2-c (sözleşmenin kurulması ve ifası) ve 5/2-ç (hukuki yükümlülük), GDPR md. 6/1-b ve 6/1-c.</li>
         <li><b>Destek e-postaları:</b> sorunuza yanıt vermek; KVKK md. 5/2-c ve 5/2-f.</li>
+        <li><b>Google Play puan ve yorumları:</b> Google Play&apos;de Oyun için yayımladığınız puanı ve yorumu Google Play Console&apos;da görürüz. Google Play bunu kullanıcı adınız ve tarihle, bazı yorumlarda ayrıca cihaz bilgisi (üretici, ekran boyutu, Android sürümü), Oyunun sürüm numarası ve dil bilgisiyle birlikte gösterir. Bu bilgileri yorumunuza Google Play&apos;de herkese açık yanıt vermek ve Oyunu geliştirmek için kullanırız; KVKK md. 5/2-f, GDPR md. 6/1-f. Oyun ve puan penceresi bize bunun dışında bir bilgi göndermez.</li>
       </List>
 
       <H2>7. Yurt dışına aktarım</H2>
@@ -135,6 +136,7 @@ export default function OtoparkPrivacyPage() {
         <li>AdMob verileri: <a href="https://policies.google.com/technologies/retention" className={link}>Google&apos;ın saklama politikasına</a> göre.</li>
         <li>Satın alma kaydı: Google Play&apos;in koşullarına göre (Google hesabınızın sipariş geçmişinde görünür). Google Play Console&apos;daki sipariş bilgileri, vergi ve muhasebe mevzuatının gerektirdiği süre boyunca saklanır.</li>
         <li>Destek ve iade e-postaları: talep kapandıktan sonra 1 yıl.</li>
+        <li>Google Play puan ve yorumları: Google Play&apos;in koşullarına göre. Yorumunuz Google hesabınıza bağlıdır ve herkese açıktır; Google Play&apos;den istediğiniz zaman düzenleyebilir ya da silebilirsiniz.</li>
       </List>
 
       <H2>9. Çocuklar</H2>
