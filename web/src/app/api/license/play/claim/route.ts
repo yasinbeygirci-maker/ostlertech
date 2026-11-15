@@ -5,6 +5,8 @@ import { handlePlayClaim, parseClaimBody } from "@/lib/play-core";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+// Worst case: belirteç alımı 8 sn + Google 8 sn (+ bir yeniden deneme DB); Android okuma süresi 20 sn. Vercel varsayılanına bırakma, açık yaz.
+export const maxDuration = 30;
 
 // Android uygulaması Play satın alma jetonunu gönderir; sunucu jetonu Google'a doğrulatır ve AYNI lisans satırının SPD kodunu döndürür
 // (masaüstü kodu /api/license/activate'e girer). Gövde yalnız {purchaseToken, productId, kind, appVersion}; kasa verisi, e-posta, hesap kimliği

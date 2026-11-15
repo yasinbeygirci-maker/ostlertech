@@ -26,6 +26,9 @@
 --   source='paddle' ise Play alanları boş. Sebep: iki satır çakışmasında (§1/S6) birleştirmede kaybeden satır `revoked` olur ve jetonunu
 --   kazanan satıra devreder; jetonsuz Play satırı bu yüzden geçerli olmak zorunda. Burak'ın onayı istenir.
 --
+-- GERİ ALMA: tam, korumalı ve testli dosya = 2026-11-14-tek-lisans-k1-geri-al.sql (Play satırı varsa DURUR; email NOT NULL'ı geri koyar).
+--   Ön denetim = 2026-11-14-tek-lisans-k1-on-denetim.sql, uygulama sonrası kontrol = 2026-11-14-tek-lisans-k1-son-kontrol.sql (ikisi de TEK sorgu).
+--   Aşağıdaki liste yalnız özet:
 -- GERİ ALMA (SIRA ÖNEMLİ): (1) önce KODU geri al (Play alanlarını SELECT etmeyen sürüm); (2) sonra:
 --   drop function if exists public.sp_claim_play_license(text,text,text,text,text,int,text,text,timestamptz,text,timestamptz,text,boolean);
 --   drop function if exists public.sp_play_mark_voided(text,timestamptz);
@@ -53,6 +56,13 @@ begin
   if not exists (select 1 from information_schema.tables where table_schema = 'public' and table_name = 'sp_license_retired_keys') then
     raise exception 'sp_license_retired_keys yok; once 2026-11-08-lisans-sifirlanan-kod.sql uygulanmali';
   end if;
+  -- Işlev gövdeleri (plpgsql) çalışma anında çözülür: tablolar yoksa göç "başarılı" görünür ama ilk claim/sıfırlama 500 verir. Baştan durdur.
+  if not exists (select 1 from information_schema.tables where table_schema = 'public' and table_name = 'sp_license_devices') then
+    raise exception 'sp_license_devices yok; once 2026-11-06-lisans-urun.sql uygulanmali';
+  end if;
+  if not exists (select 1 from information_schema.tables where table_schema = 'public' and table_name = 'sp_license_resets') then
+    raise exception 'sp_license_resets yok; once 2026-11-06-lisans-urun.sql uygulanmali';
+  end if;
   if (select data_type from information_schema.columns where table_schema = 'public' and table_name = 'sp_licenses' and column_name = 'id') is distinct from 'uuid' then
     raise exception 'sp_licenses.id uuid degil; bu migrasyon uuid varsayar';
   end if;
@@ -69,6 +79,14 @@ begin
   end if;
 end $$;
 
+-- Geri alma dosyası email'in K1 öncesi NOT NULL olup olmadığını buradan okur (yalnız bu göç NOT NULL'ı kaldırıyorsa not düşülür; ikinci
+-- çalıştırmada sütun zaten boş bırakılabilir olduğundan not ezilmez).
+do $$
+begin
+  if exists (select 1 from information_schema.columns where table_schema = 'public' and table_name = 'sp_licenses' and column_name = 'email' and is_nullable = 'NO') then
+    comment on column public.sp_licenses.email is 'k1-oncesi-not-null';
+  end if;
+end $$;
 alter table public.sp_licenses alter column email drop not null;
 
 -- 1) sp_licenses: Play alanları ---------------------------------------------------------------------------------------------

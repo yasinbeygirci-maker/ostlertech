@@ -4,6 +4,8 @@ import { cronAuthorized, probePlayApi } from "@/lib/play-core";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+// Worst case: belirteç alımı 8 sn + Google 8 sn (+ bir yeniden deneme DB); Android okuma süresi 20 sn. Vercel varsayılanına bırakma, açık yaz.
+export const maxDuration = 30;
 
 // Sağlık/pozitif kontrol ucu (Burak Ş20): tek izinle ("finansal verileri görüntüle") üç Google çağrısının çalıştığını kanıtlar.
 // CRON_SECRET korumalı (yoksa/yanlışsa 401). YANIT YALNIZ HTTP DURUM KODLARIdır: {"subscriptionsv2":200,"products":200,"voidedpurchases":200}.
