@@ -44,3 +44,22 @@ test("urunler.ts: hiçbir ürün 'beta' durumunda değil", () => {
   const s = fs.readFileSync(path.join(kok, "lib/urunler.ts"), "utf8");
   assert.ok(!/durum:\s*"beta"/.test(s));
 });
+
+// "Saniyeler içinde / in seconds" ölçülmemiş hız iddiasıdır (YouTube yükleme notuyla başlıklar: "AreaPilot: AutoCAD'de alan ve
+// çevre metrajı" / "AreaPilot: area and perimeter takeoff in AutoCAD"). AreaPilot metinlerinde ve video listesinde yer almamalı.
+// 2026-11-15, Zeynep/Can; "guvenli-sifre-olusturucu" sayfasındaki cümle parola kırma süresi, AreaPilot'la ilgisi yok.
+const olculmemisHiz = [/saniyeler (içinde|icinde)/i, /saniyelerde/i, /\bin seconds\b/i, /within seconds/i];
+for (const f of dosyalar) {
+  test(`${f}: ölçülmemiş "saniyeler içinde / in seconds" iddiası yok`, () => {
+    const satirlar = fs.readFileSync(path.join(kok, f), "utf8").split(/\r?\n/).filter((l) => !/^\s*(\/\/|\*|\/\*)/.test(l));
+    for (const [i, s] of satirlar.entries()) {
+      for (const r of olculmemisHiz) assert.ok(!r.test(s), `${f}: ${r} bulundu: ${s.trim().slice(0, 120)} (satır ${i + 1})`);
+    }
+  });
+}
+
+test("videos.ts: AreaPilot tanıtım başlıkları YouTube yükleme notuyla aynı (TR ve EN)", () => {
+  const s = fs.readFileSync(path.join(kok, "lib/videos.ts"), "utf8");
+  assert.ok(s.includes(`title: "AreaPilot: AutoCAD'de alan ve çevre metrajı",`));
+  assert.ok(s.includes(`title: "AreaPilot: area and perimeter takeoff in AutoCAD",`));
+});
