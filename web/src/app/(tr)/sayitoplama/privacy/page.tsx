@@ -15,7 +15,7 @@ export default function SayiToplamaPrivacyPage() {
   return (
     <LegalPage eyebrow={"Sayı Toplama"} title="Sayı Toplama Gizlilik Politikası" updated={false} altLink={{ href: "/en/sayitoplama/privacy", label: "English" }}>
       <div className="space-y-6 text-[1.0625rem] leading-relaxed">
-      <p>Son güncelleme: 9 Kasım 2026</p>
+      <p>Son güncelleme: 16 Kasım 2026</p>
       <p>Bu politika, Sayı Toplama mobil oyununu (&quot;Oyun&quot;) kullandığınızda hangi verilerin işlendiğini anlatır. Sayı Toplama, değen karoları sürükleyerek hedef toplamı yaptığınız seviyeli bir sayı bulmaca oyunudur. 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında aydınlatma metni, AB Genel Veri Koruma Tüzüğü (GDPR) kapsamında da bilgilendirme niteliğindedir.</p>
       <H2>1. Veri sorumlusu</H2>
       <p>{COMPANY.legalName} – {COMPANY.tradeName} (şahıs işletmesi). Adres: {COMPANY.address}. İletişim: {COMPANY.email}</p>
@@ -55,6 +55,7 @@ export default function SayiToplamaPrivacyPage() {
         <li><b>Cihazdaki oyun verileri:</b> Oyunun çalışması; bize aktarılmaz.</li>
         <li><b>AdMob&apos;un topladığı veriler:</b> reklam gösterme ve ölçme, sahtekârlık önleme. Kişiselleştirilmiş reklam için açık rızanız (KVKK md. 5/1, GDPR md. 6/1-a): AEA, Birleşik Krallık ve İsviçre&apos;de Google&apos;ın onay formuyla, diğer ülkelerde Oyundaki onay penceremizle alınır ve istediğiniz zaman geri alınabilir. Kişiselleştirilmemiş reklam ve sahtekârlık önleme için meşru menfaat (KVKK md. 5/2-f, GDPR md. 6/1-f). Rızanızı geri almanız, geri almadan önceki işlemeyi etkilemez.</li>
         <li><b>Destek e-postaları:</b> sorunuza yanıt vermek; KVKK md. 5/2-c ve 5/2-f.</li>
+        <li><b>Google Play puan ve yorumları:</b> Google Play&apos;de Oyun için yayımladığınız puanı ve yorumu Google Play Console&apos;da görürüz. Google Play bunu kullanıcı adınız ve tarihle, bazı yorumlarda ayrıca cihaz bilgisi (üretici, ekran boyutu, Android sürümü), Oyunun sürüm numarası ve dil bilgisiyle birlikte gösterir. Bu bilgileri yorumunuza Google Play&apos;de herkese açık yanıt vermek ve Oyunu geliştirmek için kullanırız; KVKK md. 5/2-f, GDPR md. 6/1-f. Oyun bize bunun dışında bir bilgi göndermez.</li>
       </List>
       <H2>7. Yurt dışına aktarım</H2>
       <p>AdMob verileri, Oyundaki reklam bileşeni aracılığıyla cihazınızdan doğrudan Google LLC ve bağlı şirketlerine gönderilir ve Türkiye dışındaki (ABD dahil) sunucularda işlenir. Google bu veriler için kendi veri koruma şartlarına göre veri sorumlusu olarak hareket eder. Google&apos;ın şartları Avrupa Birliği&apos;ndeki kullanıcılar için AB Standart Sözleşme Maddelerine ve Veri Gizliliği Çerçevesine dayanır; Türkiye&apos;den yapılan aktarımlar için Kişisel Verileri Koruma Kurulu&apos;nun ilan ettiği standart sözleşmeye yer vermez. Kişiselleştirilmiş reklama izin vermezseniz Google&apos;a giden reklam verileri reklamı göstermek, saymak ve sahtekârlığı önlemek için gereken sınırlı bilgiyle kalır.</p>
@@ -63,6 +64,7 @@ export default function SayiToplamaPrivacyPage() {
         <li>Cihazdaki oyun verileri: Oyunu silene ya da verileri temizleyene kadar.</li>
         <li>AdMob verileri: <a href="https://policies.google.com/technologies/retention" className={link}>Google&apos;ın saklama politikasına</a> göre.</li>
         <li>Destek e-postaları: talep kapandıktan sonra 1 yıl.</li>
+        <li>Google Play puan ve yorumları: Google Play&apos;in koşullarına göre. Yorumunuz Google hesabınıza bağlıdır ve herkese açıktır; Google Play&apos;den istediğiniz zaman düzenleyebilir ya da silebilirsiniz.</li>
       </List>
       <H2>9. Çocuklar</H2>
       <p>Oyun 16 yaş ve üzeri kullanıcılar için tasarlanmıştır; 16 yaşından küçükler Oyunu kullanmamalıdır. Oyun çocuklara yönelik değildir ve Google Play&apos;in Aileler programında yer almaz. Oyunda gösterilen reklamlar genel izleyiciye uygun (PG) içerikle sınırlıdır. Yaşınızı doğrulamıyoruz; yalnız Oyunun başında doğum yılınızı sorarız.</p>

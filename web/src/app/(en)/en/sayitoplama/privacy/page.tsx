@@ -15,7 +15,7 @@ export default function SayiToplamaPrivacyEnPage() {
   return (
     <LegalPage eyebrow={<span lang="tr">Sayı Toplama</span>} title="Sayı Toplama Privacy Policy" lang="en" updated={false} altLink={{ href: "/sayitoplama/privacy", label: "Türkçe sürüm" }}>
       <div className="space-y-6 text-[1.0625rem] leading-relaxed">
-      <p>Last updated: November 9, 2026</p>
+      <p>Last updated: November 16, 2026</p>
       <p>This policy explains what data is processed when you use the Sayı Toplama mobile game (the &quot;Game&quot;). Sayı Toplama is a level-based number puzzle where you drag touching tiles to reach a target sum. It serves as the privacy notice under the Turkish Personal Data Protection Law No. 6698 (KVKK) and as information under the EU General Data Protection Regulation (GDPR).</p>
       <H2>1. Data controller</H2>
       <p>{COMPANY.legalName} – {COMPANY.tradeName} (sole proprietorship). Address: {COMPANY.address}. Contact: {COMPANY.email}</p>
@@ -55,6 +55,7 @@ export default function SayiToplamaPrivacyEnPage() {
         <li><b>Game data on the device:</b> to run the Game; not transferred to us.</li>
         <li><b>Data collected by AdMob:</b> serving and measuring ads, fraud prevention. Personalized ads: your consent (GDPR Art. 6(1)(a), KVKK Art. 5(1)), collected through Google&apos;s consent form in the EEA, UK and Switzerland and through our in-game consent window elsewhere; you can withdraw it at any time. Non-personalized ads and fraud prevention: legitimate interest (GDPR Art. 6(1)(f), KVKK Art. 5(2)(f)). Withdrawing consent does not affect processing before withdrawal.</li>
         <li><b>Support emails:</b> to answer your question; KVKK Art. 5(2)(c) and 5(2)(f).</li>
+        <li><b>Google Play ratings and reviews:</b> we see the rating and review you publish for the Game on Google Play in Google Play Console. Google Play shows it with your user name and the date, and for some reviews also with device details (manufacturer, screen size, Android version), the Game&apos;s version code and language. We use this information to reply publicly to your review on Google Play and to improve the Game; KVKK Art. 5(2)(f), GDPR Art. 6(1)(f). The Game sends us no other information.</li>
       </List>
       <H2>7. International transfers</H2>
       <p>AdMob data is sent directly from your device to Google LLC and its affiliates through the Game&apos;s advertising component, and is processed on servers outside Türkiye, including the United States. Google acts as a controller of this data under its own data protection terms. For users in the European Union, Google&apos;s terms rely on the EU Standard Contractual Clauses and the Data Privacy Framework; they do not include the standard contract announced by the Turkish Personal Data Protection Board for transfers from Türkiye. If you do not allow personalized ads, the ad data sent to Google is limited to what is needed to show and count ads and prevent fraud.</p>
@@ -63,6 +64,7 @@ export default function SayiToplamaPrivacyEnPage() {
         <li>Game data on the device: until you uninstall the Game or clear its data.</li>
         <li>AdMob data: according to <a href="https://policies.google.com/technologies/retention" className={link}>Google&apos;s retention policy</a>.</li>
         <li>Support emails: 1 year after the request is closed.</li>
+        <li>Google Play ratings and reviews: under the Google Play terms. Your review is linked to your Google Account and is public; you can edit or delete it on Google Play at any time.</li>
       </List>
       <H2>9. Children</H2>
       <p>The Game is designed for users aged 16 and over; people under 16 should not use the Game. It is not directed at children and is not part of the Google Play Families program. Ads shown in the Game are limited to content suitable for general audiences (PG). We do not verify your age; we only ask for your year of birth when the Game starts.</p>
