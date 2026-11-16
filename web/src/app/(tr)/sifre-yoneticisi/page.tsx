@@ -153,7 +153,7 @@ export default function SifreYoneticisi() {
             bilgisayarda da aynı kasayı kullanmak istediğinde işini kolaylaştırır.
           </p>
           <p className="text-muted leading-relaxed">
-            Yeni bir şifreye mi ihtiyacın var? <a href="/guvenli-sifre-olusturucu" className="text-primary hover:text-primary-light">Güvenli şifre oluşturucu</a> ile
+            Telefonda hangi kasayı seçeceğini merak ediyorsan <a href="/sifre-kasasi" className="text-primary hover:text-primary-light">şifre kasası seçme rehberine</a> bak. Yeni bir şifreye mi ihtiyacın var? <a href="/guvenli-sifre-olusturucu" className="text-primary hover:text-primary-light">Güvenli şifre oluşturucu</a> ile
             tarayıcında rastgele ve güçlü bir şifre üretebilirsin.
           </p>
         </div>

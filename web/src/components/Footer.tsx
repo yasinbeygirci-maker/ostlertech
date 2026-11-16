@@ -17,6 +17,7 @@ const columns = [
     title: "Rehberler",
     links: [
       { href: "/guvenli-sifre-olusturucu", label: "Güvenli şifre oluşturucu" },
+      { href: "/sifre-kasasi", label: "Şifre kasası nedir, nasıl seçilir?" },
       { href: "/sifre-yoneticisi", label: "Şifre yöneticisi nerede?" },
       { href: "/passkey-nedir", label: "Passkey nedir?" },
       { href: "/iki-adimli-dogrulama", label: "İki adımlı doğrulama (2FA)" },

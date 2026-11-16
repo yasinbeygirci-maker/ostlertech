@@ -43,7 +43,7 @@ export default function Faq() {
           ))}
         </div>
         <p className="mt-8 text-center text-sm text-muted">
-          Başka bir sorun mu var? <span className="text-foreground">{CONTACT_EMAIL}</span> adresine yaz.
+          Kasa seçerken neye bakmalı? <a href="/sifre-kasasi" className="text-primary hover:text-primary-light underline underline-offset-2">Şifre kasası rehberi</a>. Başka bir sorun mu var? <span className="text-foreground">{CONTACT_EMAIL}</span> adresine yaz.
         </p>
       </div>
     </section>
