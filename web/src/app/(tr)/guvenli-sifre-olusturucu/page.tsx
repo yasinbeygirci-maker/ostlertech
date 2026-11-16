@@ -42,7 +42,7 @@ const sss = [
   },
   {
     q: "Bu kadar farklı şifreyi nasıl hatırlarım?",
-    a: "Hatırlaman gerekmez. Bir şifre yöneticisi bütün şifrelerini şifreli bir kasada saklar; sen yalnızca kasanın ana parolasını hatırlarsın.",
+    a: "Hatırlaman gerekmez. Bir şifre yöneticisi bütün şifrelerini şifreli bir kasada saklar; sen yalnızca kasanın ana şifresini hatırlarsın.",
   },
 ];
 

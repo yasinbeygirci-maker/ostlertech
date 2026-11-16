@@ -73,15 +73,15 @@ const sss = [
   },
   {
     q: "Şifre yöneticisi güvenli mi?",
-    a: "İyi bir şifre yöneticisi kasayı ana parolanla şifreler; şirket bile içindekileri okuyamaz. Asıl risk, her sitede aynı ya da zayıf şifre kullanmaktır. Şifre yöneticisi her hesaba ayrı ve güçlü şifre kullanmayı mümkün kılar.",
+    a: "İyi bir şifre yöneticisi kasayı ana şifrenle şifreler; şirket bile içindekileri okuyamaz. Asıl risk, her sitede aynı ya da zayıf şifre kullanmaktır. Şifre yöneticisi her hesaba ayrı ve güçlü şifre kullanmayı mümkün kılar.",
   },
   {
     q: "Telefonumdaki hazır kasa yeterli mi?",
-    a: "Çoğu kişi için iyi bir başlangıçtır. Hazır kasalar bir hesaba (Google, Apple, Samsung) bağlıdır ve o markanın cihazlarında en iyi çalışır. Telefon markasını değiştirirken ya da bir hesaba bağlı olmayan, cihazında duran bir kasa istediğinde ayrı bir şifre yöneticisi daha uygun olur.",
+    a: "Çoğu kişi için iyi bir başlangıçtır. Hazır kasalar bir hesaba (Google, Apple, Samsung) bağlıdır; telefon markasını değiştirirsen taşıma gerekir. Markadan bağımsız, hesaba bağlı olmayan, cihazında duran bir kasa istediğinde ayrı bir şifre yöneticisi daha uygun olur.",
   },
   {
-    q: "Ana parolamı unutursam ne olur?",
-    a: "Bu, kullandığın şifre yöneticisine göre değişir. Hesaba bağlı kasalarda hesap kurtarma adımları vardır. Ana parolayı şirketin bilmediği kasalarda ise kurtarma kodunu önceden saklaman gerekir; SyncPass bunun için bir kurtarma QR kodu oluşturur.",
+    q: "Ana şifremi unutursam ne olur?",
+    a: "Bu, kullandığın şifre yöneticisine göre değişir. Hesaba bağlı kasalarda hesap kurtarma adımları vardır. Ana şifreyi şirketin bilmediği kasalarda ise kurtarma kodunu önceden saklaman gerekir; SyncPass bunun için bir kurtarma QR kodu oluşturur.",
   },
 ];
 
@@ -143,13 +143,13 @@ export default function SifreYoneticisi() {
         <div className="max-w-3xl mx-auto space-y-5">
           <h2 className="text-3xl font-extrabold tracking-tight text-white">Şifre yöneticisi nedir, ne işe yarar?</h2>
           <p className="text-muted leading-relaxed">
-            Şifre yöneticisi, bütün şifrelerini şifreli bir kasada saklayan uygulamadır. Kasayı tek bir ana parolayla (ya da
+            Şifre yöneticisi, bütün şifrelerini şifreli bir kasada saklayan uygulamadır. Kasayı tek bir ana şifreyle (ya da
             parmak izi, yüz tanıma ile) açarsın; giriş yaparken şifreyi senin yerine doldurur. Böylece her hesaba ayrı ve
             güçlü bir şifre kullanabilir, hiçbirini ezberlemek zorunda kalmazsın.
           </p>
           <p className="text-muted leading-relaxed">
-            Telefonlardaki hazır kasalar (Google, Apple, Samsung) ücretsiz ve kullanışlıdır; bir hesaba bağlıdırlar ve o markanın
-            cihazlarında en iyi çalışırlar. Ayrı bir şifre yöneticisi ise markadan bağımsızdır: telefon değiştirdiğinde ya da
+            Telefonlardaki hazır kasalar (Google, Apple, Samsung) ücretsiz ve kullanışlıdır; bir hesaba bağlıdırlar; telefon markasını
+            değiştirirsen taşıma gerekir. Ayrı bir şifre yöneticisi ise markadan bağımsızdır: telefon değiştirdiğinde ya da
             bilgisayarda da aynı kasayı kullanmak istediğinde işini kolaylaştırır.
           </p>
           <p className="text-muted leading-relaxed">
