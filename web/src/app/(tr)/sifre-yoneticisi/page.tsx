@@ -73,7 +73,7 @@ const sss = [
   },
   {
     q: "Şifre yöneticisi güvenli mi?",
-    a: "İyi bir şifre yöneticisi kasayı ana şifrenle şifreler; şirket bile içindekileri okuyamaz. Asıl risk, her sitede aynı ya da zayıf şifre kullanmaktır. Şifre yöneticisi her hesaba ayrı ve güçlü şifre kullanmayı mümkün kılar.",
+    a: "İyi bir şifre yöneticisi kasayı ana şifrenle şifreler; ana şifren güçlüyse şirket bile içindekileri okuyamaz. Asıl risk, her sitede aynı ya da zayıf şifre kullanmaktır. Şifre yöneticisi her hesaba ayrı ve güçlü şifre kullanmayı mümkün kılar.",
   },
   {
     q: "Telefonumdaki hazır kasa yeterli mi?",

@@ -35,7 +35,7 @@ Kasa anahtarının cihazda saklanan sarmalanmış kopyaları (yalnız Android, y
    └─ Kurtarma QR kodu: QR'daki rastgele anahtarla sarmalanmış
 ```
 
-- **Anahtar türetme:** PBKDF2-HMAC-SHA256, 600.000 tur (yineleme), 16 baytlık rastgele tuz. Bu, OWASP'ın PBKDF2 için önerdiği
+- **Anahtar türetme:** PBKDF2-HMAC-SHA256, yeni kurulan kasalarda 600.000 tur (yineleme), 16 baytlık rastgele tuz. Bu, OWASP'ın PBKDF2 için önerdiği
   alt sınırdır. Tur sayısı her şifre tahminini yavaşlatır; zayıf bir ana şifreyi güçlü yapmaz.
 - **Tek anahtar:** Yukarıdaki işlerin hepsi aynı kasa anahtarını kullanır; ayrı alt anahtarlar türetilmez.
 - **Doğrulama değeri:** Uygulama ana şifreni saklamaz. Tuzla birlikte, kasa anahtarıyla hesaplanmış bir HMAC-SHA256

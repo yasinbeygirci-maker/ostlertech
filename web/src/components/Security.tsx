@@ -3,7 +3,7 @@ import { PBKDF2_ITERATIONS } from "@/lib/site";
 
 const steps = [
   { k: "1", title: "Ana şifre", desc: "Yalnızca senin bildiğin şifre. Hiçbir yerde saklanmaz, hiçbir yere gönderilmez." },
-  { k: "2", title: `PBKDF2 · ${PBKDF2_ITERATIONS} tur`, desc: "Ana şifre, HMAC-SHA256 ile yavaşlatılarak şifreleme anahtarına dönüştürülür; tahmin denemeleri pahalılaşır." },
+  { k: "2", title: `PBKDF2 · ${PBKDF2_ITERATIONS} tur`, desc: "Yeni kurulan kasalarda ana şifre, HMAC-SHA256 ile yavaşlatılarak şifreleme anahtarına dönüştürülür; tahmin denemeleri pahalılaşır." },
   { k: "3", title: "AES-256-GCM + SQLCipher", desc: "Şifreler ve diğer hassas alanlar ayrıca tek tek şifrelenir; veritabanının tamamı da şifreli." },
 ];
 

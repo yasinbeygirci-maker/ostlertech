@@ -238,7 +238,7 @@ export default function SyncPassEn() {
             <ol className="space-y-4">
               {[
                 { t: "Master password", d: "Known only to you. Never stored, never sent anywhere." },
-                { t: `PBKDF2 · ${PBKDF2_ITERATIONS.replace(".", ",")} iterations`, d: "Your password is stretched with HMAC-SHA256 into the encryption key, so guessing attempts become expensive." },
+                { t: `PBKDF2 · ${PBKDF2_ITERATIONS.replace(".", ",")} iterations`, d: "In newly created vaults, your password is stretched with HMAC-SHA256 into the encryption key, so guessing attempts become expensive." },
                 { t: "AES-256-GCM + SQLCipher", d: "Passwords and other sensitive fields are also encrypted one by one; the whole database is encrypted too." },
               ].map((s, i) => (
                 <li key={s.t} className="flex gap-4 rounded-2xl border border-line bg-surface p-5">

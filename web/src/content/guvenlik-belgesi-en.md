@@ -37,7 +37,7 @@ Wrapped copies of the vault key stored on the device (Android only, only if you 
    └─ Recovery QR code: wrapped with the random key in the QR
 ```
 
-- **Key derivation:** PBKDF2-HMAC-SHA256, 600,000 iterations, random 16-byte salt. This is the minimum OWASP
+- **Key derivation:** PBKDF2-HMAC-SHA256, 600,000 iterations in newly created vaults, random 16-byte salt. This is the minimum OWASP
   recommends for PBKDF2. The iteration count slows down every password guess; it does not make a weak master
   password strong.
 - **One key:** all the uses above share the same vault key; no separate subkeys are derived.
