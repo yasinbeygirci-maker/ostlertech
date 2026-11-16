@@ -84,7 +84,7 @@ export default function PrivacyPolicy() {
             <div className="flex flex-col md:flex-row gap-6">
               <div className="flex-1 glass-card p-6 border-white/[0.05]">
                 <p className="text-xs font-black text-primary uppercase tracking-widest mb-2">Hızlı Destek</p>
-                <p className="text-white font-bold">yasin@ostlertech.com</p>
+                <p className="text-white font-bold">destek@ostlertech.com</p>
               </div>
               <div className="flex-1 glass-card p-6 border-white/[0.05]">
                 <p className="text-xs font-black text-primary uppercase tracking-widest mb-2">Kurumsal Web</p>

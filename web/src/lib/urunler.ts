@@ -111,7 +111,7 @@ export const URUNLER: Urun[] = [
     urlEn: AREAPILOT.enPath,
     cta: "AreaPilot'u dene (7 gün ücretsiz)",
     ekler: [{ etiket: "Videolar", url: "/areapilot#videolar" }],
-    not: `Sürüm ${AREAPILOT.version}. İlk açılıştan itibaren ${AREAPILOT.trialDays} gün ücretsiz deneme, sonra ücretsiz modda ${AREAPILOT.freeLimit} alana kadar.`,
+    not: `Sürüm ${AREAPILOT.version}. İlk kullanımdan itibaren ${AREAPILOT.trialDays} gün ücretsiz deneme, sonra ücretsiz modda ${AREAPILOT.freeLimit} alana kadar.`,
     en: {
       ad: "AreaPilot",
       slogan: "Area and perimeter takeoff in AutoCAD",
@@ -119,7 +119,7 @@ export const URUNLER: Urun[] = [
       platform: "Windows (AutoCAD)",
       cta: `Try AreaPilot free for ${AREAPILOT.trialDays} days`,
       ekler: [{ etiket: "Videos", url: `${AREAPILOT.enPath}#videolar` }],
-      not: `Version ${AREAPILOT.version}. Free for ${AREAPILOT.trialDays} days from first launch, then free mode for up to ${AREAPILOT.freeLimit} areas per run.`,
+      not: `Version ${AREAPILOT.version}. Free for ${AREAPILOT.trialDays} days from first use, then free mode for up to ${AREAPILOT.freeLimit} areas per run.`,
     },
   },
   {

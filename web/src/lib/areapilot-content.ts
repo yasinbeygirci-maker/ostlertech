@@ -87,7 +87,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     lead: "AreaPilot, AutoCAD çizimindeki kapalı alanları bulur, kodlarını yanındaki yazıdan okur, alan ve çevreyi toplar ve Excel'e aktarır.",
     sub: "Bir yapıdaki tüm imalatların alanlarını tek tek ölçüp hesap makinesinde toplaman gerekmez.",
     cta: "7 gün ücretsiz dene",
-    ctaNote: `Windows · AutoCAD 2013-2027 · ilk açılıştan itibaren ${A.trialDays} gün ücretsiz deneme`,
+    ctaNote: `Windows · AutoCAD 2013-2027 · ilk kullanımdan itibaren ${A.trialDays} gün ücretsiz deneme`,
     featuresTitle: "Ne yapar",
     features: [
       { h: "Kapalı alanları seçer", p: "Birkaç alanı kendin seç ya da bir katmandaki bütün alanları tek seferde al. Xref ve blok içindeki alanlar da bulunur." },
@@ -121,7 +121,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     betaItems: [
       {
         h: "Deneme süresi:",
-        p: `ilk açılıştan itibaren ${A.trialDays} gün, tüm özellikler açık. Kalan gün pencerenin üst bandında görünür. Süre bitince komutlar kapanmaz, AreaPilot ücretsiz moda geçer: her çalıştırmada en çok ${A.freeLimit} alan işlenir. Lisans kodu girince bu sınır kalkar.`,
+        p: `ilk kullanımdan itibaren ${A.trialDays} gün, tüm özellikler açık. Kalan gün pencerenin üst bandında görünür. Süre bitince komutlar kapanmaz, AreaPilot ücretsiz moda geçer: her çalıştırmada en çok ${A.freeLimit} alan işlenir. Lisans kodu girince bu sınır kalkar.`,
       },
       { h: "Çizimin kopyasında dene.", p: "\"Kopyaları sil (OVERKILL)\" ve \"Kullanılmayanları temizle (PURGE)\" çizimi değiştirir. İkisi de _U ile geri alınır, ama yine de kopya üzerinde çalış." },
       { h: "Bir hata olursa", p: "AutoCAD çalışmaya devam eder, hata raporu bilgisayarına kaydedilir. Raporu sen göndermedikçe bize hiçbir şey gelmez." },
@@ -145,7 +145,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       "AreaPilot \"olduğu gibi\" sunulur. Hesaplanan alan ve miktarları kullanmadan önce kendi çiziminizle kontrol edin; hatalar olabilir. Kanunen sınırlandırılamayan sorumluluklar saklıdır.",
     form: {
       title: "AreaPilot'u indir ve dene",
-      sub: "E-posta adresini bırak, indirme bağlantısı hemen burada açılsın. İlk açılıştan itibaren 7 gün tüm özellikler açık.",
+      sub: "E-posta adresini bırak, indirme bağlantısı hemen burada açılsın. İlk kullanımdan itibaren 7 gün tüm özellikler açık.",
       email: "E-posta adresin",
       emailPh: "ad@firma.com",
       acad: "Hangi AutoCAD'i kullanıyorsun? (isteğe bağlı)",
@@ -169,7 +169,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     faq: [
       {
         q: "AreaPilot ücretli mi?",
-        a: `Evet, tek seferlik lisanslı bir üründür. İndirdikten sonra ilk açılıştan itibaren 7 gün tüm özellikler ücretsiz açıktır; ödeme bilgisi istemeyiz. Deneme bitince AreaPilot kilitlenmez, ücretsiz modda her çalıştırmada en çok 15 alanı işler. Sınırsız kullanım için tek seferlik lisans satın alınır. ${fiyatTr} Koşullar bu sayfadaki Fiyatlar bölümünde.`,
+        a: `Evet, tek seferlik lisanslı bir üründür. İndirdikten sonra ilk kullanımdan itibaren 7 gün tüm özellikler ücretsiz açıktır; ödeme bilgisi istemeyiz. Deneme bitince AreaPilot kilitlenmez, ücretsiz modda her çalıştırmada en çok 15 alanı işler. Sınırsız kullanım için tek seferlik lisans satın alınır. ${fiyatTr} Koşullar bu sayfadaki Fiyatlar bölümünde.`,
       },
       {
         q: "Çizimlerim nereye gidiyor?",
@@ -233,7 +233,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     lead: "AreaPilot finds the closed areas in your AutoCAD drawing, reads their codes from the text next to them, totals the m² and exports it to Excel.",
     sub: "No more measuring the area of every work item in a building one by one and adding it up on a calculator.",
     cta: "Try free for 7 days",
-    ctaNote: `Windows · AutoCAD 2013-2027 · ${A.trialDays}-day free trial from first launch`,
+    ctaNote: `Windows · AutoCAD 2013-2027 · ${A.trialDays}-day free trial from first use`,
     featuresTitle: "What it does",
     features: [
       { h: "Selects closed areas", p: "Pick a few areas yourself, or take every area on a layer at once. Areas inside xrefs and blocks are found too." },
@@ -267,7 +267,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     betaItems: [
       {
         h: "Trial:",
-        p: `${A.trialDays} days from first launch, all features unlocked. The days left are shown in the top band of the window. When the trial ends the commands stay available and AreaPilot switches to free mode: up to ${A.freeLimit} areas are processed per run. Entering a license code removes that limit.`,
+        p: `${A.trialDays} days from first use, all features unlocked. The days left are shown in the top band of the window. When the trial ends the commands stay available and AreaPilot switches to free mode: up to ${A.freeLimit} areas are processed per run. Entering a license code removes that limit.`,
       },
       { h: "Work on a copy of your drawing.", p: "\"Delete duplicates (OVERKILL)\" and \"Purge unused (PURGE)\" change the drawing. Both can be undone with _U, but use a copy anyway." },
       { h: "If something goes wrong,", p: "AutoCAD keeps running and an error report is saved on your computer. Nothing reaches us unless you send it." },
@@ -291,7 +291,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       "AreaPilot is provided \"as is\". Check the calculated areas and quantities against your own drawing before you use them; errors may occur. Liability that cannot be limited by law is unaffected.",
     form: {
       title: "Download and try AreaPilot",
-      sub: "Leave your email and the download link opens right here. All features are unlocked for 7 days from first launch.",
+      sub: "Leave your email and the download link opens right here. All features are unlocked for 7 days from first use.",
       email: "Your email",
       emailPh: "name@company.com",
       acad: "Which AutoCAD do you use? (optional)",
@@ -313,7 +313,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     },
     faqTitle: "FAQ",
     faq: [
-      { q: "Is AreaPilot paid?", a: `Yes, it is a one-time licensed product. After you download it, all features are free for 7 days from first launch and we do not ask for payment details. When the trial ends AreaPilot does not lock; in free mode it processes up to 15 areas per run. A one-time license removes the limit. ${fiyatEn} Terms are in the Pricing section on this page.` },
+      { q: "Is AreaPilot paid?", a: `Yes, it is a one-time licensed product. After you download it, all features are free for 7 days from first use and we do not ask for payment details. When the trial ends AreaPilot does not lock; in free mode it processes up to 15 areas per run. A one-time license removes the limit. ${fiyatEn} Terms are in the Pricing section on this page.` },
       {
         q: "Where do my drawings go?",
         a: "Your drawing never leaves your computer. AreaPilot processes it on your computer; your drawing, your results and your user name are not sent to us, and there is no analytics or usage tracking. To check for a new version it reads the version file on ostlertech.com; no drawing or license information is sent with that request. If you enter a license key it connects to our server: activation sends the license key, a random device number and the application version; and while AreaPilot is running and the computer is online, about once a week it makes a license status check (only the license key and the device number are sent). In the trial and free mode nothing is sent for the license. As with any internet request, our server sees your IP address. If an error occurs, the report is saved on your computer, is never sent automatically and is deleted after 30 days; you decide whether to send it to us. The report does not contain your drawing.",

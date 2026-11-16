@@ -1,4 +1,4 @@
-// AreaPilot 1.0 yayında, deneme ilk açılıştan itibaren 7 gün. Eski "açık beta / 30 gün deneme" dili sitede (sayfa metni,
+// AreaPilot 1.0 yayında, deneme ilk kullanımdan itibaren 7 gün. Eski "açık beta / 30 gün deneme" dili sitede (sayfa metni,
 // video açıklamaları, ürün kartı, paylaşım metinleri) kalmamalı. Hata raporu / başvuru yanıtı "30 gün" cümleleri bilerek hariç
 // (bunlar deneme değil, saklama ve yanıt süresi). 2026-11-12, Tolga'nın video düzeltme bulgusu.
 import { test } from "node:test";
@@ -35,7 +35,7 @@ test("videos.ts: AreaPilot videolarının açıklamasında 7 gün ücretsiz dene
   const s = fs.readFileSync(path.join(kok, "lib/videos.ts"), "utf8");
   for (const id of ["pcB5aCDr55k", "z7T8voXMUkI"]) {
     const blok = s.slice(s.indexOf(`id: "${id}"`)).split("},")[0];
-    assert.match(blok, /7 gün ücretsiz deneme|Free for 7 days from first launch/, `${id}: 7 gün cümlesi yok`);
+    assert.match(blok, /7 gün ücretsiz deneme|Free for 7 days from first use/, `${id}: 7 gün cümlesi yok`);
   }
 });
 

@@ -37,7 +37,7 @@ export const VIDEOS: Video[] = [
     id: "pcB5aCDr55k",
     title: "AreaPilot: AutoCAD'de alan ve çevre metrajı",
     description:
-      "Otel tip kat planında 76 alanı, yanındaki yazıdan okuduğu koda göre toplar, çizime yazar, tabloyu plana ekler, Excel'e aktarır. İlk açılıştan itibaren 7 gün ücretsiz deneme.",
+      "Otel tip kat planında 76 alanı, yanındaki yazıdan okuduğu koda göre toplar, çizime yazar, tabloyu plana ekler, Excel'e aktarır. İlk kullanımdan itibaren 7 gün ücretsiz deneme.",
     poster: "/videos/areapilot-tanitim.webp?v=20261108",
     duration: "PT1M2S",
     durationLabel: "1:02",
@@ -63,7 +63,7 @@ export const VIDEOS: Video[] = [
     id: "z7T8voXMUkI",
     title: "AreaPilot: area and perimeter takeoff in AutoCAD",
     description:
-      "On a typical hotel floor plan it totals 76 areas by the codes it reads from the text next to them, writes the results into the drawing, adds the table to the plan and exports to Excel. Free for 7 days from first launch.",
+      "On a typical hotel floor plan it totals 76 areas by the codes it reads from the text next to them, writes the results into the drawing, adds the table to the plan and exports to Excel. Free for 7 days from first use.",
     poster: "/videos/areapilot-intro-en.webp?v=20261108",
     duration: "PT1M3S",
     durationLabel: "1:03",

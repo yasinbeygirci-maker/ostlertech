@@ -138,7 +138,7 @@ export default function SyncPassEn() {
             <p className="text-xs font-semibold uppercase tracking-widest text-primary">New · Version 1.0</p>
             <h2 className="text-lg md:text-xl font-bold text-white">AreaPilot: area and perimeter takeoff in AutoCAD</h2>
             <p className="text-sm text-muted">
-              It totals closed areas by the codes it reads from the text next to them, writes the results into the drawing and exports to Excel. Free for {AREAPILOT.trialDays} days from first launch.
+              It totals closed areas by the codes it reads from the text next to them, writes the results into the drawing and exports to Excel. Free for {AREAPILOT.trialDays} days from first use.
             </p>
           </div>
           <div className="flex flex-wrap gap-3 shrink-0">

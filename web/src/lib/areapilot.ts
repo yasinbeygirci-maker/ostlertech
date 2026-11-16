@@ -10,7 +10,7 @@ export const AREAPILOT = {
   path: "/areapilot",
   enPath: "/en/areapilot",
   version: "1.0.0",
-  /** Deneme süresi ilk açılıştan itibaren bu kadar gün (istemci: Product.TrialDays varsayılanı 7, paketle.ps1 -Gun 7). Paket tarihine bağlı son gün YOK (TrialMaxDays 0). */
+  /** Deneme süresi ilk kullanımdan itibaren bu kadar gün (istemci: Product.TrialDays varsayılanı 7, paketle.ps1 -Gun 7). Paket tarihine bağlı son gün YOK (TrialMaxDays 0). */
   trialDays: 7,
   /** Deneme/lisans yokken ücretsiz modda her çalıştırmada işlenen en çok alan (istemci: FreeMode.Limit). */
   freeLimit: 15,
