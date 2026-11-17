@@ -16,6 +16,14 @@ export async function GET(req: Request) {
   }
   try {
     const r = await sweepVoidedPurchases(await playDeps(supabaseAdmin()));
+    if (r.voided !== "ok") {
+      // D4: süre bitimi kapatması (expired) iptal listesi hatasından bağımsız koştu; yanıt ikisini ayrı gösterir. Yalnız tür + ham HTTP kodu (jeton yok).
+      console.error("play cron", r.voided, r.voidedHttp ?? "-");
+      return NextResponse.json(
+        { error: r.voided === "auth" ? "not_configured" : "verify_unavailable", voided: r.voided, google: r.voidedHttp ?? null, expired: r.expired },
+        { status: 503, headers: { "Cache-Control": "no-store" } }
+      );
+    }
     return NextResponse.json({ ok: true, seen: r.seen, marked: r.marked, expired: r.expired }, { headers: { "Cache-Control": "no-store" } });
   } catch (e) {
     const kind = e instanceof PlayApiError ? e.kind : "error";

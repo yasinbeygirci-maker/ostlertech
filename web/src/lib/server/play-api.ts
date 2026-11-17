@@ -45,6 +45,12 @@ export function googlePlayVerifier(): PlayVerifier {
     const res = await fetch(url, { method: init.method, headers: init.headers, signal: init.signal, cache: "no-store" });
     return { status: res.status, json: () => res.json() as Promise<unknown> };
   };
-  cached = createHttpVerifier({ fetch: doFetch, accessToken, timeoutMs: PLAY_TIMEOUT_MS });
+  cached = createHttpVerifier({
+    fetch: doFetch,
+    accessToken,
+    timeoutMs: PLAY_TIMEOUT_MS,
+    // D3: Google'ın hata nedeni (sır ayıklanmış: jeton/erişim belirteci yok, 200 karakter sınırı) Vercel günlüğüne düşer.
+    onGoogleError: (info) => console.error("play google", JSON.stringify(info)),
+  });
   return cached;
 }

@@ -25,6 +25,8 @@ import {
   PLAY_STALE_MS,
   PLAY_TEST_GRANT_MS,
   VOIDED_WINDOW_MS,
+  VOIDED_START_MARGIN_MS,
+  voidedStartTime,
   classifyStatus,
   createHttpVerifier,
   cronAuthorized,
@@ -730,7 +732,7 @@ test("Ş9: iptal listesi yalnız ETKİN jetonu refunded yapar, eski jeton yeni a
   assert.notEqual(other.body.key, first.body.key);
   h.v.voided = { pages: [[OLD_TOKEN, "bilinmeyen"], [TOKEN2]] };
   const r = await sweepVoidedPurchases(h.deps);
-  assert.deepEqual(r, { seen: 3, marked: 1, expired: 0 });
+  assert.deepEqual(r, { seen: 3, marked: 1, expired: 0, voided: "ok" });
   const lics = [...h.s.licenses.values()];
   assert.equal(lics.find((l) => l.license_key === first.body.key)!.status, "active", "eski jetonun iadesi yeni aboneliği düşürmedi");
   assert.equal(lics.find((l) => l.license_key === other.body.key)!.status, "refunded");
@@ -739,20 +741,25 @@ test("Ş9: iptal listesi yalnız ETKİN jetonu refunded yapar, eski jeton yeni a
   assert.equal(again.marked, 0);
 });
 
-test("D7: tarama Google'a gerçekten 'şimdi - 30 gün' başlangıcını gönderir (sabiti değil çağrıyı sabitler)", async () => {
+test("D7: tarama Google'a gerçekten 'şimdi - 30 gün + pay' başlangıcını gönderir; pencere ~30 gün kalır, sınırın İÇİNDE (sabiti değil çağrıyı sabitler)", async () => {
   const h = harness();
   const seen: number[] = [];
   h.v.listVoided = async (startMs: number) => { seen.push(startMs); return { tokens: [] }; };
   await sweepVoidedPurchases(h.deps);
   assert.equal(seen.length, 1);
-  assert.equal(seen[0], h.deps.now!() - 30 * DAY);
+  assert.equal(seen[0], h.deps.now!() - 30 * DAY + VOIDED_START_MARGIN_MS);
+  assert.ok(seen[0] > h.deps.now!() - 30 * DAY, "D1: başlangıç Google'ın 30 gün sınırından DAHA YENİ");
+  assert.equal(VOIDED_START_MARGIN_MS, 60 * 60 * 1000);
+  assert.ok(h.deps.now!() - seen[0] > 29 * DAY, "pencere günlük cron için hâlâ ~30 gün (D7 sözleşmesi)");
 });
 
 test("Ş9: Google ulaşılamazsa tarama fırlatır, hiçbir satır değişmez", async () => {
   const h = harness();
   await handlePlayClaim(body(), h.deps);
   h.v.listVoided = async () => { throw new PlayApiError("unavailable"); };
-  await assert.rejects(sweepVoidedPurchases(h.deps), (e) => e instanceof PlayApiError);
+  const r = await sweepVoidedPurchases(h.deps); // D4: fırlatmaz, sonuçta "unavailable" taşır
+  assert.equal(r.voided, "unavailable");
+  assert.equal(r.marked, 0);
   assert.equal([...h.s.licenses.values()][0].status, "active");
 });
 
@@ -882,4 +889,105 @@ test("Ş24: claim ucu yalnız Play katalogunu ve Play çekirdeğini kullanır (P
   assert.ok(!/paddle-tiers"|paddle-events|PADDLE_PRICE_PLANS/.test(core.replace(/import type[^\n]*\n/g, "")), "play-core Paddle fiyat tablosuna dayanmaz");
   // source yalnız play/play_test üretir
   assert.ok(["play", "play_test"].includes((mapSubscription(sub("SUBSCRIPTION_STATE_ACTIVE"), NOW, true) as { source: string }).source));
+});
+
+// ---- 2026-11-17 voidedpurchases 400 düzeltmesi (Burak D1-D4) ----
+
+test("D1: Google kuralı taklidi: istek VARDIĞINDA 'startTime < şimdi - 30 gün' ise 400; belirteç alımı gecikse de tarama 200 alır (pay yoksa kırmızı)", async () => {
+  let clock = NOW;
+  const startTimes: number[] = [];
+  const fakeFetch: FetchLike = async (url) => {
+    const st = Number(new URL(url).searchParams.get("startTime"));
+    startTimes.push(st);
+    if (st < clock - 30 * DAY) return { status: 400, json: async () => ({ error: { status: "INVALID_ARGUMENT", message: "startTime cannot be older than 30 days" } }) };
+    return { status: 200, json: async () => ({ voidedPurchases: [], tokenPagination: {} }) };
+  };
+  // Erişim belirteci alımı 5 sn sürer (adres bundan ÖNCE kurulur): Google'ın saati ilerler, deps.now sabit kalır.
+  const verifier = createHttpVerifier({ fetch: fakeFetch, accessToken: async () => { clock += 5000; return "b"; } });
+  const deps: PlayDeps = { verifier, store: new FakeStore(), newKey: () => "K", now: () => NOW, log: { error() {}, warn() {} } };
+  const r = await sweepVoidedPurchases(deps);
+  assert.equal(r.voided, "ok");
+  assert.equal(startTimes.length, 1);
+  clock = NOW;
+  assert.deepEqual(await probePlayApi(verifier, {}, NOW), { voidedpurchases: 200 }, "sağlık ucu da aynı payı kullanır");
+  assert.equal(voidedStartTime(NOW), NOW - 30 * DAY + VOIDED_START_MARGIN_MS);
+});
+
+test("D2: iptal listesinde 400 'bad_request' (geçersiz jeton DEĞİL); jetonlu çağrıda 400 hâlâ not_found; probe ham Google kodunu gösterir", async () => {
+  assert.equal(classifyStatus(400, true), "bad_request");
+  assert.equal(classifyStatus(400), "not_found");
+  assert.equal(classifyStatus(404, true), "not_found");
+  const mk = (status: number) => createHttpVerifier({ fetch: async () => ({ status, json: async () => ({}) }), accessToken: async () => "b" });
+  const e400 = await mk(400).listVoided(NOW).catch((e) => e);
+  assert.ok(e400 instanceof PlayApiError && e400.kind === "bad_request" && e400.httpStatus === 400);
+  const tok400 = await mk(400).getSubscription(TOKEN).catch((e) => e);
+  assert.ok(tok400 instanceof PlayApiError && tok400.kind === "not_found" && tok400.httpStatus === 400);
+  for (const code of [400, 401, 403, 404, 429, 503]) {
+    const out = await probePlayApi(mk(code), { subscriptionToken: TOKEN }, NOW);
+    assert.deepEqual(out, { subscriptionsv2: code, voidedpurchases: code }, `ham kod ${code}`);
+  }
+  // ham kod yoksa (belirteç alınamadı) tür eşlemesi sürer
+  const noAuth = createHttpVerifier({ fetch: async () => ({ status: 200, json: async () => ({}) }), accessToken: async () => { throw new Error("sts"); } });
+  assert.deepEqual(await probePlayApi(noAuth, {}, NOW), { voidedpurchases: 403 });
+  // claim: jetonlu yolda 400 hâlâ 404 invalid_purchase
+  const h = harness();
+  h.v.subscription = new PlayApiError("not_found", 400);
+  const r = await handlePlayClaim(body(), h.deps);
+  assert.equal(r.status, 404);
+});
+
+test("D3: Google hata nedeni günlüğe düşer; jeton, erişim belirteci, CRON_SECRET benzeri uzun diziler ASLA", async () => {
+  const bearer = "ya29.ERISIM_BELIRTECI_cok_gizli_123456";
+  const cronSecret = "c".repeat(40);
+  const logged: unknown[] = [];
+  const fakeFetch: FetchLike = async () => ({
+    status: 400,
+    json: async () => ({
+      error: {
+        code: 400,
+        status: "INVALID_ARGUMENT",
+        message: `bad token ${TOKEN} bearer ${bearer} secret ${cronSecret} ${"x".repeat(500)}`,
+        errors: [{ reason: "invalidStartTime", message: TOKEN }],
+      },
+    }),
+  });
+  const v = createHttpVerifier({ fetch: fakeFetch, accessToken: async () => bearer, onGoogleError: (i) => logged.push(i) });
+  await assert.rejects(v.getSubscription(TOKEN), (e) => e instanceof PlayApiError);
+  await assert.rejects(v.listVoided(NOW, "pageTok_ABCDEFG"), (e) => e instanceof PlayApiError);
+  assert.equal(logged.length, 2);
+  const text = JSON.stringify(logged);
+  assert.ok(text.includes("invalidStartTime") && text.includes("INVALID_ARGUMENT"), "neden günlükte");
+  assert.ok(text.includes('"call":"voidedpurchases"') && text.includes('"http":400'));
+  for (const secret of [TOKEN, bearer, cronSecret, "pageTok_ABCDEFG"]) assert.ok(!text.includes(secret), `günlükte sır: ${secret.slice(0, 8)}`);
+  for (const i of logged as { message?: string }[]) assert.ok((i.message ?? "").length <= 200, "mesaj 200 karakteri aşmaz");
+  // gövde okunamazsa yalnız kod yazılır, çağrı yine PlayApiError
+  const logs2: unknown[] = [];
+  const v2 = createHttpVerifier({ fetch: async () => ({ status: 502, json: async () => { throw new SyntaxError("x"); } }), accessToken: async () => "b", onGoogleError: (i) => logs2.push(i) });
+  await assert.rejects(v2.listVoided(NOW), (e) => e instanceof PlayApiError && e.kind === "unavailable");
+  assert.deepEqual(logs2, [{ call: "voidedpurchases", http: 502 }]);
+  // gerçek istemcide kanca bağlı ve yalnız ayıklanmış nesneyi yazar
+  const src = fs.readFileSync(path.join(process.cwd(), "src/lib/server/play-api.ts"), "utf8");
+  assert.match(src, /onGoogleError:\s*\(info\)\s*=>\s*console\.error\("play google", JSON\.stringify\(info\)\)/);
+});
+
+test("D4: iptal listesi hata verse de süre bitimi kapatması (expireStale) koşar; sonuç ikisini ayrı gösterir", async () => {
+  const h = harness();
+  let expireCalls = 0;
+  h.s.expireStale = async () => { expireCalls++; return 3; };
+  h.v.listVoided = async () => { throw new PlayApiError("bad_request", 400); };
+  const r = await sweepVoidedPurchases(h.deps);
+  assert.equal(expireCalls, 1);
+  assert.deepEqual(r, { seen: 0, marked: 0, expired: 3, voided: "bad_request", voidedHttp: 400 });
+  // depo hatası iptal döngüsünde: expireStale yine denenir, hata olduğu gibi fırlar
+  const h2 = harness();
+  let exp2 = 0;
+  h2.s.expireStale = async () => { exp2++; return 0; };
+  h2.v.voided = { pages: [["t1"]] };
+  h2.s.markVoided = async () => { throw new Error("db"); };
+  await assert.rejects(sweepVoidedPurchases(h2.deps), /db/);
+  assert.equal(exp2, 1);
+  // cron rotası: hata yolunda 503, expired ayrı görünür
+  const src = fs.readFileSync(path.join(process.cwd(), "src/app/api/license/play/cron/route.ts"), "utf8");
+  assert.match(src, /r\.voided !== "ok"/);
+  assert.match(src, /expired: r\.expired/);
 });

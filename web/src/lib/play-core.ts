@@ -19,6 +19,16 @@ export const PLAY_TEST_GRANT_MS = 14 * DAY;
 export const PLAY_TIMEOUT_MS = 8000;
 /** İptal edilen satın alma listesinde geriye bakılan pencere: Google'ın sınırı 30 gün (D7: cron günlerce düşse de iadeler kaçmasın). */
 export const VOIDED_WINDOW_MS = 30 * DAY;
+/**
+ * Google "startTime 30 günden eski olamaz" der ve sınırı İSTEK VARDIĞINDA kendi saatiyle uygular. Adres erişim belirteci alımından ÖNCE kurulduğu
+ * için tam "şimdi - 30 gün" her zaman sınırı birkaç sn aşıp 400 aldı (2026-11-17, Burak). Pay saat farkını ve belirteç gecikmesini kapatır;
+ * günlük cron için 29 gün 23 saatlik pencere iadeyi kaçırmaz (D7 sözleşmesi: pencere yine ~30 gün).
+ */
+export const VOIDED_START_MARGIN_MS = 60 * 60 * 1000;
+/** İptal listesi için Google'a gönderilen başlangıç (sınırın İÇİNDE). Tarama ve sağlık ucu aynı değeri kullanır. */
+export function voidedStartTime(nowMs: number): number {
+  return nowMs - VOIDED_WINDOW_MS + VOIDED_START_MARGIN_MS;
+}
 export const VOIDED_MAX_PAGES = 10;
 
 export type PlaySource = "play" | "play_test";
@@ -45,15 +55,52 @@ export interface GoogleProductPurchase {
   productId?: string;
 }
 
-export type PlayErrorKind = "not_found" | "auth" | "unavailable";
+/** bad_request: JETONSUZ iptal listesi çağrısında 400 = bizim isteğimiz hatalı (geçersiz jeton DEĞİL); not_found'a katlanmaz (2026-11-17). */
+export type PlayErrorKind = "not_found" | "auth" | "bad_request" | "unavailable";
 
-/** Google çağrısı başarısız. Yalnız tür taşır: ayrıntı (jeton içerebilir) tutulmaz. */
+/** Google çağrısı başarısız. Tür + (varsa) ham HTTP kodu taşır: ayrıntı (jeton içerebilir) tutulmaz. */
 export class PlayApiError extends Error {
   readonly kind: PlayErrorKind;
-  constructor(kind: PlayErrorKind) {
+  /** Google'ın döndürdüğü ham HTTP kodu (zaman aşımı/ağ/belirteç hatasında yok). */
+  readonly httpStatus?: number;
+  constructor(kind: PlayErrorKind, httpStatus?: number) {
     super(`play api: ${kind}`);
     this.kind = kind;
+    this.httpStatus = httpStatus;
   }
+}
+
+/** Google hata gövdesinden günlüğe yazılabilir kısım (D3). Jeton, erişim belirteci ve uzun belirteç benzeri her dizi çıkarılmıştır. */
+export interface GoogleErrorInfo {
+  call: string;
+  http: number;
+  status?: string;
+  reason?: string;
+  message?: string;
+}
+
+const LOG_MESSAGE_MAX = 200;
+
+/** Metni günlüğe uygun hâle getirir: bilinen sırlar ve 32+ karakterlik belirteç benzeri diziler "[x]" olur, uzunluk sınırlanır. */
+export function sanitizeForLog(text: string, secrets: string[]): string {
+  let out = text;
+  for (const sec of secrets) {
+    if (sec.length >= 4) out = out.split(sec).join("[x]").split(encodeURIComponent(sec)).join("[x]");
+  }
+  out = out.replace(/[A-Za-z0-9._~+\/=-]{32,}/g, "[x]").replace(/[\u0000-\u001f\u007f]+/g, " ");
+  return out.slice(0, LOG_MESSAGE_MAX);
+}
+
+export function extractGoogleError(call: string, http: number, body: unknown, secrets: string[]): GoogleErrorInfo {
+  const info: GoogleErrorInfo = { call, http };
+  const e = typeof body === "object" && body !== null ? (body as { error?: unknown }).error : undefined;
+  if (typeof e !== "object" || e === null) return info;
+  const err = e as { status?: unknown; message?: unknown; errors?: unknown };
+  if (typeof err.status === "string") info.status = sanitizeForLog(err.status, secrets).slice(0, 64);
+  if (typeof err.message === "string") info.message = sanitizeForLog(err.message, secrets);
+  const first = Array.isArray(err.errors) ? (err.errors[0] as { reason?: unknown } | undefined) : undefined;
+  if (first && typeof first.reason === "string") info.reason = sanitizeForLog(first.reason, secrets).slice(0, 64);
+  return info;
 }
 
 export interface VoidedPage {
@@ -95,10 +142,16 @@ export interface HttpVerifierOptions {
   /** Kısa ömürlü OAuth erişim belirteci (OIDC federasyonu). Alınamazsa fırlatır -> "auth" sayılır. */
   accessToken: () => Promise<string>;
   timeoutMs?: number;
+  /** D3: 200 olmayan Google yanıtının (sır ayıklanmış) nedeni. Verilmezse hiçbir şey yazılmaz. */
+  onGoogleError?: (info: GoogleErrorInfo) => void;
 }
 
-/** HTTP durumunu hata türüne çevirir: 404/410/400 geçersiz jeton, 401/403 yetki, kalan her şey (429/5xx/ağ) ulaşılamadı. */
-export function classifyStatus(status: number): PlayErrorKind {
+/**
+ * HTTP durumunu hata türüne çevirir: 404/410 (ve JETONLU çağrıda 400) geçersiz jeton, 401/403 yetki, kalan her şey (429/5xx/ağ) ulaşılamadı.
+ * `tokenless` (iptal listesi): orada 400 geçersiz jeton olamaz, "bad_request" (bizim istek hatalı) olur.
+ */
+export function classifyStatus(status: number, tokenless = false): PlayErrorKind {
+  if (status === 400 && tokenless) return "bad_request";
   if (status === 404 || status === 410 || status === 400) return "not_found";
   if (status === 401 || status === 403) return "auth";
   return "unavailable";
@@ -106,7 +159,7 @@ export function classifyStatus(status: number): PlayErrorKind {
 
 export function createHttpVerifier(opts: HttpVerifierOptions): PlayVerifier {
   const timeoutMs = opts.timeoutMs ?? PLAY_TIMEOUT_MS;
-  async function getJson(url: string): Promise<unknown> {
+  async function getJson(url: string, call: string, secrets: string[] = [], tokenless = false): Promise<unknown> {
     // D3: erişim belirteci alımı (OIDC + STS + iamcredentials) da AYNI süre sınırının içinde; asılırsa "ulaşılamadı" (503), "auth" değil.
     let bearer: string;
     let tokenTimer: ReturnType<typeof setTimeout> | undefined;
@@ -127,7 +180,22 @@ export function createHttpVerifier(opts: HttpVerifierOptions): PlayVerifier {
     const timer = setTimeout(() => ctrl.abort(), timeoutMs);
     try {
       const res = await opts.fetch(url, { method: "GET", headers: { Authorization: `Bearer ${bearer}`, Accept: "application/json" }, signal: ctrl.signal });
-      if (res.status !== 200) throw new PlayApiError(classifyStatus(res.status));
+      if (res.status !== 200) {
+        if (opts.onGoogleError) {
+          let body: unknown = null;
+          try {
+            body = await res.json();
+          } catch {
+            // gövde yok/bozuk: yalnız kod yazılır
+          }
+          try {
+            opts.onGoogleError(extractGoogleError(call, res.status, body, [...secrets, bearer]));
+          } catch {
+            // günlük hatası çağrıyı bozmaz
+          }
+        }
+        throw new PlayApiError(classifyStatus(res.status, tokenless), res.status);
+      }
       return await res.json();
     } catch (e) {
       if (e instanceof PlayApiError) throw e;
@@ -138,13 +206,13 @@ export function createHttpVerifier(opts: HttpVerifierOptions): PlayVerifier {
   }
   return {
     async getSubscription(token) {
-      return (await getJson(subscriptionUrl(token))) as GoogleSubscription;
+      return (await getJson(subscriptionUrl(token), "subscriptionsv2", [token])) as GoogleSubscription;
     },
     async getProduct(productId, token) {
-      return (await getJson(productUrl(productId, token))) as GoogleProductPurchase;
+      return (await getJson(productUrl(productId, token), "products", [token])) as GoogleProductPurchase;
     },
     async listVoided(startTimeMs, pageToken) {
-      const j = (await getJson(voidedUrl(startTimeMs, pageToken))) as {
+      const j = (await getJson(voidedUrl(startTimeMs, pageToken), "voidedpurchases", pageToken ? [pageToken] : [], true)) as {
         voidedPurchases?: { purchaseToken?: unknown }[];
         tokenPagination?: { nextPageToken?: unknown };
       };
@@ -492,33 +560,54 @@ export async function refreshPlayLicense(row: PlayLicenseRow, deps: PlayDeps, no
 export interface VoidedSweepResult {
   seen: number;
   marked: number;
+  /** İptal listesi adımının sonucu: "ok" ya da hata türü. Hata olsa da süre bitimi kapatması (expired) ayrıca koşar (D4). */
+  voided: "ok" | PlayErrorKind;
+  /** Hata varsa Google'ın ham HTTP kodu (yoksa undefined). */
+  voidedHttp?: number;
   /** Süresi dolup kapatılan satır sayısı (iptal listesi iadeyi gösterir, doğal süre bitimini göstermez). */
   expired: number;
 }
 
 /**
- * İptal edilen satın alma listesi (son 30 gün = Google'ın sınırı). Eşleşen AKTİF jetonlu satır `refunded` olur; eski (yerine geçilmiş)
- * jeton yeni aboneliği düşürmez. Google'a ulaşılamazsa PlayApiError fırlatır; hiçbir satır değişmez.
+ * İptal edilen satın alma listesi (yaklaşık son 30 gün; başlangıç Google sınırının İÇİNDE, bkz. voidedStartTime). Eşleşen AKTİF jetonlu satır
+ * `refunded` olur; eski (yerine geçilmiş) jeton yeni aboneliği düşürmez. Google hatası FIRLATILMAZ: sonuçta `voided` hata türünü taşır
+ * (çağıran 503 döner). Süre bitimi kapatması iptal listesinin başarısına BAĞLI DEĞİLDİR (D4); depo (DB) hatası fırlatır.
  */
 export async function sweepVoidedPurchases(deps: PlayDeps): Promise<VoidedSweepResult> {
   const now = (deps.now ?? Date.now)();
   const nowIso = new Date(now).toISOString();
-  const start = now - VOIDED_WINDOW_MS;
+  const start = voidedStartTime(now);
   let seen = 0;
   let marked = 0;
+  let voided: VoidedSweepResult["voided"] = "ok";
+  let voidedHttp: number | undefined;
   let page: string | undefined;
-  for (let i = 0; i < VOIDED_MAX_PAGES; i++) {
-    const res = await deps.verifier.listVoided(start, page);
-    for (const t of res.tokens) {
-      seen++;
-      if ((await deps.store.markVoided(hashToken(t), nowIso)) === "marked") marked++;
+  try {
+    for (let i = 0; i < VOIDED_MAX_PAGES; i++) {
+      const res = await deps.verifier.listVoided(start, page);
+      for (const t of res.tokens) {
+        seen++;
+        if ((await deps.store.markVoided(hashToken(t), nowIso)) === "marked") marked++;
+      }
+      if (!res.nextPageToken) break;
+      page = res.nextPageToken;
     }
-    if (!res.nextPageToken) break;
-    page = res.nextPageToken;
+  } catch (e) {
+    if (!(e instanceof PlayApiError)) {
+      // Depo hatası (markVoided): süre bitimini yine dene, sonra hatayı olduğu gibi ilet.
+      try {
+        await deps.store.expireStale(nowIso);
+      } catch {
+        // asıl hata aşağıda fırlar
+      }
+      throw e;
+    }
+    voided = e.kind;
+    voidedHttp = e.httpStatus;
   }
   // Doğal süre bitimi: iptal listesinde görünmez. Google'a sormadan, kayıtlı dönem sonuna göre kapatılır (hak zaten entitlementUntil ile bitmişti).
   const expired = await deps.store.expireStale(nowIso);
-  return { seen, marked, expired };
+  return { seen, marked, expired, voided, ...(voidedHttp !== undefined ? { voidedHttp } : {}) };
 }
 
 // ---- Cron / sağlık ucu kimlik denetimi ----
@@ -542,7 +631,9 @@ export async function probePlayApi(
   now: number = Date.now()
 ): Promise<Record<string, number>> {
   const out: Record<string, number> = {};
-  const code = (e: unknown) => (e instanceof PlayApiError ? (e.kind === "not_found" ? 404 : e.kind === "auth" ? 403 : 503) : 500);
+  // Ham Google kodu varsa O döner (400/401/403/404 ayrı görünsün); yoksa (belirteç/zaman aşımı/ağ) türe göre: auth 403, kalan 503.
+  const code = (e: unknown) =>
+    e instanceof PlayApiError ? (e.httpStatus ?? (e.kind === "not_found" ? 404 : e.kind === "auth" ? 403 : e.kind === "bad_request" ? 400 : 503)) : 500;
   if (input.subscriptionToken) {
     try {
       await verifier.getSubscription(input.subscriptionToken);
@@ -560,7 +651,7 @@ export async function probePlayApi(
     }
   }
   try {
-    await verifier.listVoided(now - VOIDED_WINDOW_MS);
+    await verifier.listVoided(voidedStartTime(now));
     out.voidedpurchases = 200;
   } catch (e) {
     out.voidedpurchases = code(e);
