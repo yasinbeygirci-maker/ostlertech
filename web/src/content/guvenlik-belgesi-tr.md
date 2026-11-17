@@ -1,6 +1,6 @@
 # SyncPass güvenlik ve şifreleme belgesi
 
-Son güncelleme: 31 Ekim 2026 · Kapsadığı sürümler: SyncPass Android 4.5, SyncPass Masaüstü (Windows) 1.4, SyncPass tarayıcı eklentisi (Chrome) 1.1.0
+Son güncelleme: 17 Kasım 2026 · Kapsadığı sürümler: SyncPass Android 4.5, SyncPass Masaüstü (Windows) 1.4, SyncPass tarayıcı eklentisi (Chrome) 1.1.0
 
 Bu belge SyncPass'in verini teknik olarak nasıl koruduğunu anlatır: anahtarın nasıl üretildiği, neyin hangi yöntemle
 şifrelendiği, neyin şifrelenmediği, cihazından neyin çıktığı ve SyncPass'in neye karşı koruyup neye karşı koruyamadığı.
@@ -209,6 +209,7 @@ Google'ın şartları, Gemini'ye gönderilen içeriği hizmetlerini geliştirmek
 |---|---|---|
 | SyncPass Masaüstü lisansını etkinleştirirken; sonra kendiliğinden, yaklaşık haftada bir | ostlertech.com (bizim sunucumuz) | Lisans anahtarı, uygulamanın ürettiği rastgele cihaz numarası, uygulama sürümü. Ücretsiz sürüm bu sunucuya bağlanmaz. |
 | Premium satın alırken (Android) | Google Play | Satın alma Google Play üzerinden yapılır; imzası cihazda doğrulanır. |
+| SyncPass Masaüstü kodu (yalnız Android, Premium varken, sen Ayarlar › Masaüstünde de kullan › "Kodumu al"a dokununca) | ostlertech.com (bizim sunucumuz); sunucu satın almayı Google Play Developer API'ye sorar | Google Play satın alma jetonu, Premium ürünü (aylık, yıllık ya da ömür boyu) ve türü, uygulama sürümü. Cihaz numarası, e-posta adresi ve kasa içeriği gönderilmez; kod telefona kaydedilmez. Sunucudaki lisans kaydı ve saklama süresi gizlilik politikasının 4. bölümünde. |
 | Android'in kendi otomatik yedeği (telefonunda açıksa) | Senin Google hesabın | Uygulama ayarları: ana şifreni doğrulamaya yarayan değer ve tuz, kurtarma QR'ı için sarmalanmış anahtar. Kasa veritabanı ve kişisel bilgiler bu yedeğe girmez. |
 | Geçiş Anahtarı ve otomatik doldurma (Android): Google'ın tarayıcı listesi kendiliğinden 7 günde bir; site dosyası geçiş anahtarı istendiğinde | Google (gstatic.com) ve ilgili site | Google'ın tarayıcı listesi indirilir. Bir uygulama bir site adına geçiş anahtarı isterse, o sitenin herkese açık `assetlinks.json` dosyası okunur. Kasadan bir şey gönderilmez. |
 | Metin ve QR tanıma (Android) | Google | Tanıma cihazda yapılır. Google'ın belgelerine göre ML Kit kütüphanesi kullanım istatistiği gönderebilir. |
@@ -252,7 +253,7 @@ Uygulamada reklam, analitik ya da çökme raporlama kütüphanesi yoktur.
   ana şifreyle tahmin yoluyla açılması da pratikte çok zordur.
 - **Kopyanın değiştirilmesi:** AES-256-GCM, değiştirilmiş bir kopyayı reddeder.
 - **Bizim sunucumuzun ele geçirilmesi:** Sunucularımızda kasa, ana şifre ya da anahtar tutulmaz; SyncPass için yalnızca
-  masaüstü lisans kayıtları ve satın almada iletilen e-posta adresi tutulur. Bu yüzden kasan oradan okunamaz.
+  masaüstü lisans kayıtları (Google Play'den alınan Premium için masaüstü kodu istendiğinde Google Play satın alma jetonu dahil) ve satın almada iletilen e-posta adresi tutulur. Bu yüzden kasan oradan okunamaz.
 - **Kasa dosyasıyla şifre tahmini:** Her deneme 600.000 turluk anahtar türetme gerektirir. Bu, tahmini yavaşlatır
   ama durdurmaz; korumanın gücü ana şifrenin uzunluğuna ve tahmin edilemezliğine bağlıdır.
 - **Başka bir sitenin şifreni istemesi (eklenti):** Şifre yalnız kayıtlı adresine uyan sayfaya verilir.

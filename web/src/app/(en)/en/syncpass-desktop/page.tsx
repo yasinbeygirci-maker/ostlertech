@@ -99,6 +99,7 @@ export default function DesktopLicensePageEn() {
               <li>When the license ends your vault is not locked; you keep using it with the free version.</li>
             </ul>
             <p className="text-xs text-muted">Sales are handled by our online reseller Paddle.com.</p>
+            <p className="text-xs text-muted">Bought Premium on Google Play? You do not pay again: enter the key from Settings › Use on desktop too in the Android app (up to 3 computers).</p>
           </aside>
         </div>
       </section>

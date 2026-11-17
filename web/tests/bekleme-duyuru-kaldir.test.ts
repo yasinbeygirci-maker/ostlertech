@@ -126,8 +126,8 @@ test("gizlilik metinleri: K1 daraltılmış açık rıza + 5/2-c ve f, K2 tarih,
   assert.match(tr, /\(md\. 5\/2-c\) ve bu bildirimlerin yapılmasındaki meşru menfaatimize \(md\. 5\/2-f\) dayanır\. Bekleme listesi için açık rıza istenmez ve bu listeden tanıtım ya da duyuru e-postası gönderilmez\./);
   assert.match(en, /Explicit consent applies only to publishing your name on the acknowledgements list for security reports\./);
   assert.match(en, /\(Art\. 5\(2\)\(c\)\) and our legitimate interest in sending these notices \(Art\. 5\(2\)\(f\)\)\. We do not ask for consent for the waiting list and send no promotional or announcement emails from it\./);
-  assert.match(tr, /updatedOn="12 Kasım 2026"/);
-  assert.match(en, /updatedOn="12 November 2026"/);
+  assert.match(tr, /updatedOn="17 Kasım 2026"/);
+  assert.match(en, /updatedOn="17 November 2026"/);
   assert.match(tr, /deneme süresinin bitişinden 6 ay sonra ya da talebiniz üzerine \(en geç 30 gün içinde\) silinir; silme kaydı tutulur\./);
   assert.match(en, /deleted 6 months after your trial period ends, or on your request \(within 30 days at the latest\); deletions are logged\./);
   assert.doesNotMatch(tr, /ürün çıktıktan 6 ay|o gün silinir/);

@@ -1,6 +1,6 @@
 # SyncPass security and encryption whitepaper
 
-Last updated: 31 October 2026 · Versions covered: SyncPass Android 4.5, SyncPass Desktop (Windows) 1.4, SyncPass browser extension (Chrome) 1.1.0
+Last updated: 17 November 2026 · Versions covered: SyncPass Android 4.5, SyncPass Desktop (Windows) 1.4, SyncPass browser extension (Chrome) 1.1.0
 
 This document explains how SyncPass protects your data at a technical level: how the key is generated, what is encrypted
 and how, what is not encrypted, what leaves your device, and what SyncPass does and does not protect against. For a
@@ -213,6 +213,7 @@ Google's terms may allow it to use content sent to Gemini to improve its service
 |---|---|---|
 | Activating a SyncPass Desktop license; then automatically about once a week | ostlertech.com (our server) | The license key, a random device number made by the app, the app version. The free version never connects to this server. |
 | Buying Premium (Android) | Google Play | The purchase happens through Google Play; its signature is checked on the device. |
+| SyncPass Desktop code (Android only, with Premium, when you tap Settings › Use on desktop too › "Get my code") | ostlertech.com (our server); the server checks the purchase with the Google Play Developer API | The Google Play purchase token, the Premium product (monthly, yearly or lifetime) and its type, the app version. No device number, email address or vault content is sent; the code is not saved on the phone. The license record on our server and how long it is kept are described in section 4 of the privacy policy. |
 | Android's own automatic backup (if on in your phone) | Your Google account | App settings: the check value and salt used to verify your master password, the wrapped key for the recovery QR. The vault database and your personal details are not part of this backup. |
 | Passkeys and autofill (Android): Google's browser list automatically every 7 days; site file when a passkey is requested | Google (gstatic.com) and the site in question | Google's browser list is downloaded. When an app asks for a passkey for a site, that site's public `assetlinks.json` file is read. Nothing from the vault is sent. |
 | Text and QR recognition (Android) | Google | Recognition runs on the device. According to Google's documentation, the ML Kit library may send usage statistics. |
@@ -254,7 +255,7 @@ There are no advertising, analytics or crash reporting libraries in the app.
   master password, a registered fingerprint on Android, or the recovery QR.
 - **Google Drive, or Google, reading the copy:** the Drive copy cannot be opened without your master password; with a strong master password, guessing it is also impractical.
 - **Changes to the copy:** AES-256-GCM rejects a copy that was changed.
-- **Our servers being compromised:** our servers do not hold a vault, master password or key; for SyncPass they hold only desktop license records and the email address passed on with a purchase. So your vault cannot be read from there.
+- **Our servers being compromised:** our servers do not hold a vault, master password or key; for SyncPass they hold only desktop license records (including the Google Play purchase token when a desktop code is requested for Premium bought on Google Play) and the email address passed on with a purchase. So your vault cannot be read from there.
 - **Password guessing with the vault file:** every guess needs a 600,000-iteration key derivation. This slows
   guessing down but does not stop it; the protection depends on how long and unpredictable your master password is.
 - **Another site asking for your password (extension):** a password is only given to a page that matches its saved

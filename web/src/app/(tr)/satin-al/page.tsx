@@ -38,7 +38,7 @@ export default async function PricingPage() {
             <p className="mt-4 text-muted">Kasan her planda bilgisayarında şifreli durur ve sunucularımıza gönderilmez; Premium eşitlemeyi açarsan şifreli kasa yalnız kendi Google Drive'ına gider.</p>
             <p className="mt-2 text-sm text-muted">
               Bu sayfada satılan ürün yalnızca SyncPass Masaüstü (Windows) lisansıdır: kasayı bilgisayarında tutan bir şifre
-              yöneticisi. Masaüstü uygulamasında yapay zekâ ya da sohbet botu özelliği yoktur.{" "}
+              yöneticisi. Masaüstü uygulamasında yapay zekâ ya da sohbet botu özelliği yoktur. Google Play'den SyncPass Premium aldıysan burada yeniden satın alman gerekmez: kodun Android uygulamasında, Ayarlar › Masaüstünde de kullan ekranında.{" "}
               <a href="/en/pricing" className="text-primary hover:text-primary-light" lang="en">English</a>
             </p>
           </div>

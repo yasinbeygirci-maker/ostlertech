@@ -119,6 +119,7 @@ export default function DesktopLicensePage() {
               <li>Lisans bitince kasan kilitlenmez; ücretsiz sürümle kullanmaya devam edersin.</li>
             </ul>
             <p className="text-xs text-muted">Satışlar yetkili satıcımız Paddle.com üzerinden yapılır.</p>
+            <p className="text-xs text-muted">Google Play'den Premium aldıysan ayrıca ödeme yapmazsın: Android uygulamasında Ayarlar › Masaüstünde de kullan ekranındaki kodu gir (en fazla 3 bilgisayar).</p>
           </aside>
         </div>
       </section>

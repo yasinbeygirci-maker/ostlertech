@@ -14,7 +14,7 @@ export default function SitePrivacyPage() {
   const live = areapilotLegalLive();
   const add = PRIVACY_ADDITIONS.tr;
   return (
-    <LegalPage eyebrow="Yasal" title="Gizlilik Politikası ve KVKK Aydınlatma Metni" updatedOn="12 Kasım 2026" altLink={{ href: "/en/privacy", label: "English version" }}>
+    <LegalPage eyebrow="Yasal" title="Gizlilik Politikası ve KVKK Aydınlatma Metni" updatedOn="17 Kasım 2026" altLink={{ href: "/en/privacy", label: "English version" }}>
       <p>
         Bu metin ostlertech.com web sitesini ve buradan yapılan satın almaları kapsar. Uygulamalarımızın kendi gizlilik
         politikaları ayrıdır: <a href="/syncpass/privacy" className="text-primary hover:text-primary-light">SyncPass gizlilik politikası</a>,
@@ -36,6 +36,7 @@ export default function SitePrivacyPage() {
         <li><strong className="text-foreground">Lisans:</strong> lisans kodu, etkinleştirildiği cihazlar için uygulamanın ürettiği rastgele cihaz numarası, uygulama sürümü ve son doğrulama tarihi. Amaç: lisansın geçerliliğini ve cihaz sınırını denetlemek. Kasanızın içeriği hiçbir zaman bize gelmez.</li>
         )}
         {live && <li><strong className="text-foreground">Lisans e-postaları:</strong> {add.licenseMail}</li>}
+        <li><strong className="text-foreground">SyncPass masaüstü kodu (Google Play'den Premium alanlar):</strong> SyncPass Android uygulamasında masaüstü kodunu istediğinizde Google Play satın alma jetonu, Premium ürünü ve uygulama sürümü; sunucumuz bunlarla lisans kodunu, planı, durumu, dönem sonunu ve Google Play'in son bildirdiği durumu saklar, önceki jetonların yalnızca tek yönlü özetini tutar. Amaç: Google Play'de alınan Premium'u SyncPass Masaüstü'nde de açmak, bir kodun en fazla 3 bilgisayarda kullanılmasını sağlamak ve iade ya da iptal edilen satın almaların lisansını kapatmak. Ayrıntı: <a href="/syncpass/privacy" className="text-primary hover:text-primary-light">SyncPass gizlilik politikası</a>.</li>
         <li><strong className="text-foreground">Destek yazışmaları:</strong> size yanıt verebilmek için e-posta içeriği.</li>
         <li><strong className="text-foreground">Instagram mesajları:</strong> @ostlertech hesabına mesaj yazdığınızda ya da bir gönderimize yorum bıraktığınızda Instagram kullanıcı adınız ve hesap numaranız, mesajınızın ya da yorumunuzun içeriği, bizimle yazışma geçmişiniz ve bir otomasyon bunu gerektiriyorsa hesabımızı takip edip etmediğiniz bilgisi işlenir. Bu mesajları ChatPlace adlı mesajlaşma otomasyonu hizmetiyle yönetiriz: belirli bir kelimeyle yazdığınızda istediğiniz bağlantı ya da bilgi size otomatik mesajla gönderilir. Mesajlarınızın bir kısmına yapay zekâ destekli otomatik asistan yanıt verebilir; bu durumda mesajınızın içeriği yanıtı üretmek için ChatPlace'in yapay zekâ hizmet sağlayıcılarına iletilir. Amaç: sorunuzu yanıtlamak ve istediğiniz bağlantıyı ya da bilgiyi göndermek; hukuki sebep, bize yazdığınız mesaja yanıt verebilmek için meşru menfaatimizdir. Bu yazışmaları başka bir yere aktarmaz, reklam için kullanmayız. ChatPlace'teki sohbet kayıtları son yazışmadan 6 ay sonra silinir. Instagram uygulamasındaki yazışma kopyası Meta'nın kendi kurallarına tabidir; onu biz silemeyiz.</li>
         <li><strong className="text-foreground">Güvenlik açığı bildirimleri:</strong> e-posta adresiniz, yazdıysanız adınız ve bildirimin içeriği; amaç bildirimi değerlendirmek, size yanıt vermek ve açığı gidermek. Hukuki sebep: ürünlerimizin güvenliğini sağlamaya yönelik meşru menfaatimiz. Adınız ya da takma adınız teşekkür listesinde yalnızca açık rızanızla yayımlanır.</li>
@@ -57,16 +58,17 @@ export default function SitePrivacyPage() {
         <li>ChatPlace, Inc. (ABD): Instagram mesajlaşma otomasyonu (otomatik yanıtlar ve yapay zekâ destekli asistan). ChatPlace, yapay zekâ yanıtları için mesaj içeriğini ABD'deki yapay zekâ hizmet sağlayıcılarına iletir.</li>
         <li>Cloudflare, Inc. (ABD): e-posta yönlendirme; destek@, yasin@ ve guvenlik@ostlertech.com adreslerine yazdığınız e-postalar Cloudflare üzerinden posta kutumuza iletilir.</li>
         <li>Google LLC (ABD): bu e-postaların alındığı posta kutusu (Gmail).</li>
+        <li>Google LLC (ABD): SyncPass masaüstü kodu istendiğinde Google Play satın almasının doğrulanması (Google Play Developer API).</li>
         <li>Mali müşavir: yasal muhasebe kayıtları.</li>
         <li>YouTube: sitedeki bir videoda yalnızca siz oynat'a bastığınızda (youtube-nocookie.com üzerinden).</li>
         <li>Yetkili kamu kurumları: yalnızca kanunen zorunlu olduğunda.</li>
       </List>
       <p>
         Paddle (Birleşik Krallık), Vercel, Supabase, ChatPlace, Cloudflare ve Google'ın sunucuları yurt dışındadır; sitemizi ziyaret ettiğinizde, bekleme listesine
-        yazıldığınızda, satın alma sayfasını açtığınızda, masaüstü lisansınız doğrulandığında, bize Instagram'dan yazdığınızda ve bize e-posta gönderdiğinizde verileriniz bu sağlayıcılara aktarılır. Bu aktarım bugün itibarıyla KVKK md. 9'da
+        yazıldığınızda, satın alma sayfasını açtığınızda, masaüstü lisansınız doğrulandığında ya da SyncPass Android uygulamasında masaüstü kodu istediğinizde, bize Instagram'dan yazdığınızda ve bize e-posta gönderdiğinizde verileriniz bu sağlayıcılara aktarılır. Bu aktarım bugün itibarıyla KVKK md. 9'da
         sayılan uygun güvencelerden birine (Kurul'un yeterlilik kararı ya da Kurul'un ilan ettiği standart sözleşmenin
         imzalanıp Kurum'a bildirilmesi) dayanmamaktadır. Supabase'e standart sözleşme imzalanması için 18.10.2026 tarihinde
-        talep ilettik; yanıt beklenmektedir. ChatPlace ile de standart sözleşme henüz imzalanmamıştır. İmzalanırsa Kurum'a
+        talep ilettik; yanıt beklenmektedir. ChatPlace, Vercel ve Google ile de standart sözleşme henüz imzalanmamıştır. İmzalanırsa Kurum'a
         bildirir ve bu metni güncelleriz.{live ? ` ${add.resendTransfer}` : null} Hesap tabanlı uygulamalarımızın
         yurt dışı aktarımı kendi gizlilik politikalarında ayrıca anlatılır.
       </p>
@@ -74,7 +76,7 @@ export default function SitePrivacyPage() {
       <H2>5. Saklama süresi</H2>
       <List>
         <li>Satışa ilişkin fatura kayıtları Paddle'da tutulur; bizdeki muhasebe kayıtları ilgili mevzuatın öngördüğü süre (10 yıl) saklanır.</li>
-        <li>AreaPilot lisans kayıtları: lisans geçerli olduğu sürece; lisans iade edilir, ödemesine itiraz edilir ya da sözleşmeye aykırılık nedeniyle iptal edilirse iade ya da iptal tarihinden 1 yıl sonra haftalık otomatik silmeyle silinir. Kaldırılan bilgisayarın kaydı kaldırıldığı anda silinir. Diğer lisans kayıtları: lisans süresi boyunca ve bitiminden sonra 1 yıl.</li>
+        <li>AreaPilot lisans kayıtları: lisans geçerli olduğu sürece; lisans iade edilir, ödemesine itiraz edilir ya da sözleşmeye aykırılık nedeniyle iptal edilirse iade ya da iptal tarihinden 1 yıl sonra haftalık otomatik silmeyle silinir. Kaldırılan bilgisayarın kaydı kaldırıldığı anda silinir. Diğer lisans kayıtları (SyncPass; Google Play satın alma jetonu ve cihaz kayıtları dahil): lisans süresi boyunca ve bitiminden, iadesinden ya da iptalinden sonra 1 yıl; sonra silinir.</li>
         <li>Bekleme listesi (AreaPilot indirme formu): deneme süresinin bitişinden 6 ay sonra ya da talebiniz üzerine (en geç 30 gün içinde) silinir; silme kaydı tutulur.</li>
         <li>Destek yazışmaları: konu kapandıktan sonra 1 yıl.</li>
         <li>Instagram sohbet kayıtları (ChatPlace): son yazışmadan 6 ay sonra silinir.</li>

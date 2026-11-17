@@ -35,7 +35,7 @@ export default async function PricingEnPage() {
             <p className="mt-4 text-muted">On every plan your vault stays encrypted on your computer and is never sent to our servers; if you turn on Premium sync, the encrypted vault goes only to your own Google Drive.</p>
             <p className="mt-2 text-sm text-muted">
               The only product sold on this page is a license for SyncPass Desktop (Windows), a password manager that
-              keeps your vault on your computer. The desktop app has no AI or chatbot features. Terms:{" "}
+              keeps your vault on your computer. The desktop app has no AI or chatbot features. If you bought SyncPass Premium on Google Play you do not need to buy it again here: your key is in the Android app, under Settings › Use on desktop too. Terms:{" "}
               <a href="/en/terms" className="text-primary hover:text-primary-light">Terms of Use</a> ·{" "}
               <a href="/en/refunds" className="text-primary hover:text-primary-light">Refund Policy</a> ·{" "}
               <a href="/en/privacy" className="text-primary hover:text-primary-light">Privacy</a>

@@ -125,8 +125,8 @@ export const TERMS_SECTIONS: Record<LegalLang, LegalSection[]> = {
 // ------------------------------------------------------------------ /teslimat-ve-iade
 
 export const REFUND_INTRO: Record<LegalLang, string> = {
-  tr: "Bu politika ostlertech.com üzerinden satın alınan SyncPass Masaüstü Premium ve AreaPilot lisansları için geçerlidir. Satışlarımızı yetkili satıcımız (Merchant of Record) Paddle.com yapar; ödeme ve iadeler Paddle tarafından yürütülür. SyncPass Masaüstü için 1-4. bölümler, AreaPilot için 5. bölüm, her ikisi için 6. bölüm geçerlidir.",
-  en: "This policy applies to SyncPass Desktop Premium and AreaPilot licenses bought on ostlertech.com. Our reseller Paddle.com (Merchant of Record) makes the sale; Paddle handles payments and refunds. Sections 1-4 apply to SyncPass Desktop, section 5 to AreaPilot and section 6 to both.",
+  tr: "Bu politika ostlertech.com üzerinden satın alınan SyncPass Masaüstü Premium ve AreaPilot lisansları için geçerlidir. Satışlarımızı yetkili satıcımız (Merchant of Record) Paddle.com yapar; ödeme ve iadeler Paddle tarafından yürütülür. SyncPass Masaüstü için 1-4. bölümler, AreaPilot için 5. bölüm, her ikisi için 6. bölüm geçerlidir. Google Play'den alınan SyncPass Premium ve bunun için Android uygulamasında verilen masaüstü kodu bu politikanın kapsamında değildir; bunlara Kullanım koşullarının Google Play bölümü ve Google Play'in iade kuralları uygulanır.",
+  en: "This policy applies to SyncPass Desktop Premium and AreaPilot licenses bought on ostlertech.com. Our reseller Paddle.com (Merchant of Record) makes the sale; Paddle handles payments and refunds. Sections 1-4 apply to SyncPass Desktop, section 5 to AreaPilot and section 6 to both. SyncPass Premium bought on Google Play, and the desktop code given for it in the Android app, are not covered by this policy; the Google Play section of our Terms and Google Play's refund policies apply to them.",
 };
 export const REFUND_DESCRIPTION: Record<LegalLang, string> = {
   tr: "SyncPass Masaüstü Premium ve AreaPilot: elektronik teslimat, 14 gün içinde koşulsuz iade.",

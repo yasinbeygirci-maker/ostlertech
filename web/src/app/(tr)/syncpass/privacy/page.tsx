@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/syncpass/privacy" },
 };
 
-const EFFECTIVE_TR = "10 Kasım 2026";
-const EFFECTIVE_EN = "10 November 2026";
+const EFFECTIVE_TR = "17 Kasım 2026";
+const EFFECTIVE_EN = "17 November 2026";
 const CONTACT_EMAIL = "destek@ostlertech.com";
 
 function Section({ n, title, id, children }: { n: string; title: string; id?: string; children: ReactNode }) {
@@ -160,8 +160,19 @@ export default function SyncPassPrivacyPolicy() {
                 Bu yedeği Android&apos;in yedekleme ayarlarından kapatabilirsiniz.
               </p>
             </Sub>
-            <Sub title="Satın almalar (Android)">
-              <p>Premium satın almalar Google Play Faturalandırma ile yapılır; biz ödeme bilgilerinizi değil, yalnızca satın alma durumunu görürüz.</p>
+            <Sub title="Satın almalar ve masaüstü kodu (Android)">
+              <p>Premium satın almalar Google Play Faturalandırma ile yapılır; ödeme bilgilerinizi biz görmeyiz.</p>
+              <p>
+                Ayarlar&apos;daki &quot;Masaüstünde de kullan&quot; ekranında &quot;Kodumu al&quot; düğmesine dokunduğunuzda uygulama, SyncPass Masaüstü için lisans kodunuzu
+                üretebilmek üzere sunucumuza (ostlertech.com) Google Play satın alma jetonunu, aldığınız Premium ürününü (aylık, yıllık ya da ömür boyu) ve uygulama sürümünü gönderir.
+                Bu istek yalnızca siz bu düğmeye dokunduğunuzda gider; cihaz numarası, Google hesabınızın adı ya da e-posta adresi ve kasanızın içeriği gönderilmez. Kod telefonunuza kaydedilmez.
+              </p>
+              <p>
+                Sunucumuz satın almanın geçerli olup olmadığını Google Play&apos;e sorar ve satın almanıza bağlı bir lisans kaydı tutar: lisans kodu, plan, durum ve dönem sonu,
+                satın alma jetonu (Google Play&apos;e yeniden sorabilmek için), Google Play&apos;in son bildirdiği durum ve sorgu tarihi; abonelik yenilendiğinde ya da plan değiştiğinde
+                önceki jetonların yalnızca tek yönlü özeti. İade ve iptalleri görebilmek için sunucumuz günde bir kez Google Play&apos;in iade listesini okur; masaüstü lisansınız
+                yenilenirken kayıt bir günden eskiyse satın almayı Google Play&apos;e yeniden sorar.
+              </p>
             </Sub>
             <Sub title="Çökme raporları (Windows ve Android)">
               <ul className={list}>
@@ -191,10 +202,33 @@ export default function SyncPassPrivacyPolicy() {
             </Sub>
             <Sub title="Premium lisansı (Masaüstü)">
               <p>
-                SyncPass Masaüstü Premium, ostlertech.com üzerinden yetkili satıcımız Paddle.com aracılığıyla satılır. Lisans kodu
-                girdiğinizde uygulama, lisansı doğrulamak için yaklaşık haftada bir sunucumuza yalnızca lisans kodunu, kendi
-                ürettiği rastgele bir cihaz numarasını ve uygulama sürümünü gönderir. Kasanızın içeriği gönderilmez. Ücretsiz
-                sürüm bu sunucuya hiç bağlanmaz. Lisans kayıtları lisans bitiminden sonra 1 yıl saklanır.
+                SyncPass Masaüstü&apos;nde Premium üç yoldan açılır: ostlertech.com üzerinden yetkili satıcımız Paddle.com aracılığıyla satın alınan lisans kodu,
+                Google Play&apos;den alınan Premium için Android uygulamasında gösterilen kod (yukarıda) ya da Microsoft Store sürümünde Microsoft Store&apos;dan alınan Premium.
+                Lisans kodu girdiğinizde uygulama, lisansı doğrulamak için o anda ve sonra yaklaşık haftada bir (kasanızı açtığınızda, son doğrulamanın üzerinden bir hafta
+                geçtiyse) sunucumuza yalnızca lisans kodunu, kendi ürettiği rastgele bir cihaz numarasını ve uygulama sürümünü gönderir. Sunucumuz bir kodu en fazla
+                3 bilgisayarda kabul eder; bunun için bu cihaz numaralarını, uygulama sürümünü ve son doğrulama tarihini lisans kaydında tutar. Microsoft Store&apos;dan alınan
+                Premium&apos;u uygulama Microsoft Store&apos;a sorar; bu durumda sunucumuza bir şey gönderilmez. Kasanızın içeriği hiçbir durumda gönderilmez. Ücretsiz
+                sürüm bu sunucuya hiç bağlanmaz.
+              </p>
+              <p>
+                Lisans kayıtları (satın alma jetonu ve cihaz kayıtları dahil) lisans sürdüğü sürece ve lisansın bitiminden, iadesinden ya da iptalinden sonra 1 yıl
+                saklanır, sonra silinir. Bir bilgisayarı uygulamadaki &quot;Bu bilgisayardan kaldır&quot; ile kaldırdığınızda o bilgisayarın cihaz kaydı hemen silinir.
+              </p>
+            </Sub>
+            <Sub title="Sunucumuz, hizmet sağlayıcılarımız, yurt dışına aktarım ve hukuki sebepler">
+              <p>
+                Lisans ve masaüstü kodu hizmetimiz Vercel Inc. (ABD) altyapısında çalışır; lisans kayıtları Supabase Pte. Ltd.&apos;nin (Singapur şirketi) İrlanda&apos;daki (AB)
+                veritabanı sunucularında saklanır. Satın almanın doğrulanması için satın alma jetonu Google LLC&apos;nin (ABD) Google Play Developer API&apos;sine gönderilir.
+                Bağlantı sırasında IP adresiniz Vercel&apos;in güvenlik ve hata ayıklama için tuttuğu kısa süreli sunucu kayıtlarında görünür ve kötüye kullanıma karşı koruma için kullanılır.
+              </p>
+              <p>
+                Bu sağlayıcıların sunucuları yurt dışındadır. Bu aktarım bugün itibarıyla KVKK md. 9&apos;da sayılan uygun güvencelerden birine (Kurul&apos;un yeterlilik kararı ya da
+                Kurul&apos;un ilan ettiği standart sözleşmenin imzalanıp Kurum&apos;a bildirilmesi) dayanmamaktadır. Supabase&apos;e standart sözleşme imzalanması için 18.10.2026
+                tarihinde talep ilettik; yanıt beklenmektedir. Vercel ve Google ile standart sözleşme imzalanmamıştır. İmzalanırsa Kurum&apos;a bildirir ve bu metni güncelleriz.
+              </p>
+              <p>
+                Bu verileri, satın aldığınız Premium&apos;u diğer cihazlarınızda kullanabilmeniz için sözleşmenin ifasına (KVKK md. 5/2-c) ve iade edilmiş, iptal edilmiş ya da
+                sahte satın almaların lisans açmasını önlemedeki meşru menfaatimize (KVKK md. 5/2-f) dayanarak işleriz.
               </p>
             </Sub>
           </Section>
@@ -212,11 +246,12 @@ export default function SyncPassPrivacyPolicy() {
           </Section>
 
           <Section n="07" title="Saklama ve silme" id="silme">
-            <p>Verileriniz, siz silene, uygulamayı sıfırlayana veya kaldırana kadar cihazınızda kalır. Verilerinizi biz tutmadığımız için sizin adınıza silemez veya dışa aktaramayız; bunları kendiniz yaparsınız:</p>
+            <p>Cihazınızdaki verileriniz, siz silene, uygulamayı sıfırlayana veya kaldırana kadar cihazınızda kalır. Bu verileri biz tutmadığımız için sizin adınıza silemez veya dışa aktaramayız; bunları kendiniz yaparsınız:</p>
             <ul className={list}>
               <li>Cihazınızdaki kayıtları uygulama içinden silebilirsiniz. Android&apos;de kasanızı şifreli bir yedek dosyası olarak dışa da aktarabilirsiniz; SyncPass Masaüstü&apos;nde dosyaya dışa aktarma yoktur.</li>
               <li>Google Drive&apos;daki bulut yedeği uygulama içinden silinmez. Kasayı sıfırlamak, &quot;Bağlantıyı Kes&quot; düğmesi ya da uygulamayı kaldırmak da onu silmez. Yedek, siz 3. bölümdeki yoldan Google Drive&apos;dan silene kadar Google Drive&apos;ınızda kalır.</li>
               <li>Uygulamayı kaldırmak ya da verilerinizi silmek Google Play&apos;deki Premium aboneliğinizi iptal etmez; aboneliği Google Play&apos;den iptal edersiniz.</li>
+              <li>Sunucumuzdaki lisans kayıtları (4. bölüm) bu yollarla silinmez. Silinmelerini istemek için lisans kodunuzla birlikte {CONTACT_EMAIL} adresine yazın; en geç 30 gün içinde sileriz. Bu kodla açılmış bilgisayarlar bir sonraki doğrulamada ücretsiz sürüme geçer; etkin Google Play Premium&apos;unuz varsa &quot;Kodumu al&quot; ile yeni bir kod alabilirsiniz.</li>
             </ul>
             <p>Çökme raporlarından elimize geçebilecek kişisel bilgileri en fazla 30 gün tutar, sonra sileriz (4. bölüm).</p>
           </Section>
@@ -230,11 +265,12 @@ export default function SyncPassPrivacyPolicy() {
           </Section>
 
           <Section n="10" title="Haklarınız">
-            <p>Bulunduğunuz yere göre (örneğin KVKK veya GDPR kapsamında) kişisel verilerinize erişme, bunları düzeltme ve silme haklarınız vardır. Kasanız cihazlarınızda ve kendi Google hesabınızda saklandığı için bu hakları kendiniz kullanırsınız: cihazınızdaki kayıtlar için uygulama içinden, Google Drive&apos;daki yedek için 3. bölümdeki Google Drive yolundan. Her türlü sorunuz için aşağıdaki adresten bize ulaşabilirsiniz.</p>
+            <p>Bulunduğunuz yere göre (örneğin KVKK veya GDPR kapsamında) kişisel verilerinize erişme, bunları düzeltme ve silme haklarınız vardır. Kasanız cihazlarınızda ve kendi Google hesabınızda saklandığı için bu hakları kendiniz kullanırsınız: cihazınızdaki kayıtlar için uygulama içinden, Google Drive&apos;daki yedek için 3. bölümdeki Google Drive yolundan. Sunucumuzdaki lisans kayıtları (4. bölüm) için bu hakları aşağıdaki adrese yazarak kullanırsınız; en geç 30 gün içinde yanıtlarız. Her türlü sorunuz için de aynı adresten bize ulaşabilirsiniz.</p>
           </Section>
 
           <Section n="11" title="Değişiklikler">
             <p>Bu politikayı güncelleyebiliriz. Güncellemelerde yukarıdaki yürürlük tarihini değiştirir, önemli değişiklikleri uygulama içinde bildiririz.</p>
+            <p>17 Kasım 2026 güncellemesi: Android uygulamasındaki &quot;Masaüstünde de kullan&quot; ekranının sunucumuza gönderdiği bilgiler, sunucumuzdaki lisans kaydının içeriği ve saklama süresi, Microsoft Store Premium&apos;u, hizmet sağlayıcılarımız, yurt dışına aktarım, hukuki sebepler ve lisans kayıtlarının silinmesini isteme yolu eklendi (4., 7. ve 10. bölümler).</p>
             <p>10 Kasım 2026 güncellemesi: Google Drive&apos;daki yedeğin uygulama içinden değil Google Drive&apos;dan silindiği (silme yolu uygulamadaki anlatımla aynı yazıldı), &quot;Bağlantıyı Kes&quot; düğmesinin yedeği silmediği, SyncPass Masaüstü&apos;nde dosyaya dışa aktarma olmadığı ve uygulamayı kaldırmanın Google Play aboneliğini iptal etmediği açıkça yazıldı (3., 7. ve 10. bölümler).</p>
             <p>30 Ekim 2026 güncellemesi: Android sistem yedeği ve geçiş anahtarı bağlantıları eklendi; kasa raporu ve yardım ekranının Gemini&apos;ye ne gönderdiği koda uygun olarak düzeltildi; Play Integrity ve kayıt paylaşım kodu anlatımları kaldırıldı; iletişim adresi güncellendi.</p>
           </Section>
@@ -330,8 +366,19 @@ export default function SyncPassPrivacyPolicy() {
                 You can turn this backup off in Android&apos;s backup settings.
               </p>
             </Sub>
-            <Sub title="Purchases (Android)">
-              <p>Premium purchases are handled by Google Play Billing; we receive the purchase status, not your payment details.</p>
+            <Sub title="Purchases and the desktop code (Android)">
+              <p>Premium purchases are handled by Google Play Billing; we do not see your payment details.</p>
+              <p>
+                When you tap &quot;Get my code&quot; on the &quot;Use on desktop too&quot; screen in Settings, the app sends our server (ostlertech.com) your Google Play purchase token,
+                the Premium product you bought (monthly, yearly or lifetime) and the app version, so that it can create your license code for SyncPass Desktop.
+                This request is sent only when you tap that button; no device number, no Google account name or email address and no vault content is sent. The code is not saved on your phone.
+              </p>
+              <p>
+                Our server asks Google Play whether the purchase is valid and keeps a license record linked to your purchase: the license code, plan, status and period end,
+                the purchase token (so it can ask Google Play again), the status Google Play last reported and the date of that check; when a subscription renews or the plan changes,
+                only a one-way digest of the earlier tokens. To see refunds and cancellations, our server reads Google Play&apos;s refund list once a day, and when your desktop
+                license is renewed and the record is more than a day old it asks Google Play about the purchase again.
+              </p>
             </Sub>
             <Sub title="Crash reports (Windows and Android)">
               <ul className={list}>
@@ -361,10 +408,33 @@ export default function SyncPassPrivacyPolicy() {
             </Sub>
             <Sub title="Premium license (Desktop)">
               <p>
-                SyncPass for Windows Premium is sold on ostlertech.com through our reseller and Merchant of Record, Paddle.com.
-                Once you enter a license key, the app contacts our server about once a week to check it, sending only the
-                license key, a random device number it generated itself and the app version. Your vault contents are never sent.
-                The free version never contacts this server. License records are kept for 1 year after the license ends.
+                Premium in SyncPass for Windows can be turned on in three ways: a license key bought on ostlertech.com through our reseller and Merchant of Record, Paddle.com;
+                the code shown in the Android app for Premium bought on Google Play (see above); or, in the Microsoft Store version, Premium bought from the Microsoft Store.
+                Once you enter a license key, the app checks it with our server at that moment and then about once a week (when you unlock your vault and the last check is
+                more than a week old), sending only the license key, a random device number it generated itself and the app version. Our server accepts a key on up to
+                3 computers; for this it keeps these device numbers, the app version and the date of the last check in the license record. For Premium bought from the
+                Microsoft Store the app asks the Microsoft Store, and nothing is sent to our server. Your vault contents are never sent. The free version never contacts this server.
+              </p>
+              <p>
+                License records (including the purchase token and device records) are kept while the license lasts and for 1 year after it ends, is refunded or is cancelled,
+                and are then deleted. When you remove a computer with &quot;Remove from this computer&quot; in the app, that computer&apos;s device record is deleted at once.
+              </p>
+            </Sub>
+            <Sub title="Our server, service providers, transfers abroad and legal bases">
+              <p>
+                Our license and desktop-code service runs on Vercel Inc. (USA) infrastructure; license records are stored on database servers of Supabase Pte. Ltd.
+                (a Singapore company) in Ireland (EU). To verify a purchase, the purchase token is sent to the Google Play Developer API of Google LLC (USA).
+                During the connection your IP address appears in the short-lived server logs Vercel keeps for security and debugging and is used to protect against abuse.
+              </p>
+              <p>
+                The servers of these providers are outside Türkiye. As of today this transfer does not rely on any of the appropriate safeguards listed in Article 9 of KVKK
+                (an adequacy decision by the Personal Data Protection Board, or the Board&apos;s standard contract signed and notified to the Authority). We sent Supabase a request
+                to sign the standard contract on 18 October 2026; a reply is awaited. No standard contract has been signed with Vercel or Google. If one is signed we will notify
+                the Authority and update this policy.
+              </p>
+              <p>
+                We process this data to perform our contract with you, so that you can use the Premium you bought on your other devices (KVKK Art. 5(2)(c)), and on the basis
+                of our legitimate interest in keeping refunded, cancelled or fake purchases from unlocking a license (KVKK Art. 5(2)(f)).
               </p>
             </Sub>
           </Section>
@@ -382,11 +452,12 @@ export default function SyncPassPrivacyPolicy() {
           </Section>
 
           <Section n="07" title="Retention and deletion" id="deletion">
-            <p>Your data stays on your device until you delete it, reset the app or uninstall it. Because we do not hold your data, we cannot delete or export it for you; you do this yourself:</p>
+            <p>The data on your device stays there until you delete it, reset the app or uninstall it. Because we do not hold this data, we cannot delete or export it for you; you do this yourself:</p>
             <ul className={list}>
               <li>You can delete the items on your device within the app. On Android you can also export your vault as an encrypted backup file; SyncPass Desktop has no export to a file.</li>
               <li>The cloud backup in Google Drive cannot be deleted from within the app, and resetting the vault, the &quot;Disconnect&quot; button or uninstalling the app does not delete it either. It stays in your Google Drive until you delete it there as described in section 3.</li>
               <li>Uninstalling the app or deleting your data does not cancel a Premium subscription on Google Play; you cancel it in Google Play.</li>
+              <li>License records on our server (section 4) are not deleted this way. To ask us to delete them, write to {CONTACT_EMAIL} with your license key; we delete them within 30 days at the latest. Computers unlocked with that key switch to the free version at their next check; if you have an active Google Play Premium you can get a new key with &quot;Get my code&quot;.</li>
             </ul>
             <p>Personal information that may reach us through crash reports is kept for at most 30 days and then deleted (section 4).</p>
           </Section>
@@ -400,11 +471,12 @@ export default function SyncPassPrivacyPolicy() {
           </Section>
 
           <Section n="10" title="Your rights">
-            <p>Depending on where you live (for example under the GDPR or Turkey&apos;s KVKK), you have rights to access, correct and delete your personal data. Since your vault is stored on your devices and in your own Google account, you exercise these rights yourself: within the app for the items on your devices, and in Google Drive, as described in section 3, for the backup stored there. For any question, contact us using the address below.</p>
+            <p>Depending on where you live (for example under the GDPR or Turkey&apos;s KVKK), you have rights to access, correct and delete your personal data. Since your vault is stored on your devices and in your own Google account, you exercise these rights yourself: within the app for the items on your devices, and in Google Drive, as described in section 3, for the backup stored there. For the license records on our server (section 4) you exercise these rights by writing to the address below; we reply within 30 days at the latest. For any other question, contact us at the same address.</p>
           </Section>
 
           <Section n="11" title="Changes">
             <p>We may update this policy. We will change the effective date above and, for significant changes, notify you in the app.</p>
+            <p>Update of 17 November 2026: added what the &quot;Use on desktop too&quot; screen of the Android app sends to our server, what the license record on our server contains and how long it is kept, Premium from the Microsoft Store, our service providers, transfers abroad, the legal bases and how to ask for license records to be deleted (sections 4, 7 and 10).</p>
             <p>Update of 10 November 2026: made clear that the backup in Google Drive is deleted in Google Drive, not within the app (the steps now match the app&apos;s own instructions), that the &quot;Disconnect&quot; button does not delete it, that SyncPass Desktop has no export to a file, and that uninstalling the app does not cancel a Google Play subscription (sections 3, 7 and 10).</p>
             <p>Update of 30 October 2026: added the Android system backup and passkey connections; corrected what the vault report and help screen send to Gemini to match the code; removed the Play Integrity and record share-code descriptions; updated the contact address.</p>
           </Section>
