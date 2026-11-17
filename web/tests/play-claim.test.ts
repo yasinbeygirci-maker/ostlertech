@@ -30,6 +30,8 @@ import {
   classifyStatus,
   createHttpVerifier,
   cronAuthorized,
+  cronResponse,
+  sanitizeForLog,
   handlePlayClaim,
   hashToken,
   mapProduct,
@@ -986,8 +988,65 @@ test("D4: iptal listesi hata verse de süre bitimi kapatması (expireStale) koş
   h2.s.markVoided = async () => { throw new Error("db"); };
   await assert.rejects(sweepVoidedPurchases(h2.deps), /db/);
   assert.equal(exp2, 1);
-  // cron rotası: hata yolunda 503, expired ayrı görünür
+  // cron rotası yanıtı cronResponse'tan alır ve durumunu aynen iletir (davranış testi aşağıda: B1)
   const src = fs.readFileSync(path.join(process.cwd(), "src/app/api/license/play/cron/route.ts"), "utf8");
-  assert.match(src, /r\.voided !== "ok"/);
-  assert.match(src, /expired: r\.expired/);
+  assert.match(src, /cronResponse\(r\)/);
+  assert.match(src, /status:\s*out\.status/);
+});
+
+test("B1: cron yanıtı: iptal listesi hatası HER türde 503 (ok yok, expired ayrı), başarı 200 ok", async () => {
+  for (const kind of ["bad_request", "auth", "unavailable", "not_found"] as const) {
+    const out = cronResponse({ seen: 0, marked: 0, expired: 2, voided: kind, voidedHttp: 400 });
+    assert.equal(out.status, 503, `tür ${kind}`);
+    assert.equal(out.body.ok, undefined, "hata yanıtında ok olmaz");
+    assert.equal(out.body.voided, kind);
+    assert.equal(out.body.google, 400);
+    assert.equal(out.body.expired, 2);
+  }
+  assert.equal(cronResponse({ seen: 0, marked: 0, expired: 0, voided: "auth" }).body.error, "not_configured");
+  assert.equal(cronResponse({ seen: 0, marked: 0, expired: 0, voided: "unavailable" }).body.google, null);
+  const ok = cronResponse({ seen: 3, marked: 1, expired: 4, voided: "ok" });
+  assert.equal(ok.status, 200);
+  assert.deepEqual(ok.body, { ok: true, seen: 3, marked: 1, expired: 4 });
+  // gerçek tarama sonucundan uçtan uca: Google 400 → 503
+  const h = harness();
+  h.v.listVoided = async () => { throw new PlayApiError("bad_request", 400); };
+  assert.equal(cronResponse(await sweepVoidedPurchases(h.deps)).status, 503);
+});
+
+test("B2: doğrulayıcı hata günlüğünde 32 altı kısa bearer ve kısa sayfa jetonu (yalnız açık listeyle yakalanır) görünmez", async () => {
+  const shortBearer = "ya29.kisaBearer1";
+  const page = "pg/Tok+1=2";
+  const logged: unknown[] = [];
+  const v = createHttpVerifier({
+    fetch: async () => ({ status: 400, json: async () => ({ error: { status: "X", message: `b ${shortBearer} p ${encodeURIComponent(page)} q ${page}`, errors: [{ reason: "r" }] } }) }),
+    accessToken: async () => shortBearer,
+    onGoogleError: (i) => logged.push(i),
+  });
+  await assert.rejects(v.listVoided(NOW, page), (e) => e instanceof PlayApiError);
+  const text = JSON.stringify(logged);
+  assert.ok(text.includes('"http":400'), "kayıt yazıldı");
+  for (const s of [shortBearer, page, encodeURIComponent(page)]) assert.ok(!text.includes(s), `günlükte sır: ${s}`);
+});
+
+test("B2/B3: günlük ayıklayıcı: açık sır listesi, bearer, URL kodlu ve bölünmüş sır; orderId ve e-posta maskelenir", () => {
+  // kısa (32 altı) sayfa jetonu ve kısa bearer yalnız açık sır listesiyle yakalanır
+  assert.ok(!sanitizeForLog("page pageTok_ABCDEFG end", ["pageTok_ABCDEFG"]).includes("pageTok_ABCDEFG"));
+  assert.ok(!sanitizeForLog("auth ya29.kisa-bearer", ["ya29.kisa-bearer"]).includes("kisa-bearer"));
+  // URL kodlu biçim (listesine ham sır verilir, mesajda kodlu görünür)
+  const raw = "tok/en+with=chars&x";
+  const enc = encodeURIComponent(raw);
+  assert.notEqual(enc, raw);
+  assert.ok(!sanitizeForLog(`q=${enc}`, [raw]).includes(enc), "kodlu sır maskelenmedi");
+  // 4 karakterden kısa sır listeye girmez (aşırı maskeleme olmasın)
+  assert.equal(sanitizeForLog("abc abc", ["abc"]), "abc abc");
+  // 32+ karakterlik uzun diziler listede olmasa da maskelenir
+  assert.ok(!sanitizeForLog(`x ${"A".repeat(40)} y`, []).includes("AAAA"));
+  // B3: orderId (ekli biçim dahil) ve e-posta
+  const m = sanitizeForLog("order GPA.3312-4455-6677-88990 and GPA.1234-5678-9012-34567..3 mail Ayse.Demir+x@example.com done", []);
+  assert.ok(!m.includes("GPA.") && !m.includes("@") && !m.includes("example.com"), m);
+  assert.ok(m.startsWith("order [x] and [x] mail [x] done"), m);
+  // kontrol karakterleri ve uzunluk sınırı
+  assert.ok(!/[\u0000-\u001f]/.test(sanitizeForLog("a\nb\u0000c", [])));
+  assert.ok(sanitizeForLog("z".repeat(500).replace(/(.{10})/g, "$1 "), []).length <= 200);
 });

@@ -87,6 +87,8 @@ export function sanitizeForLog(text: string, secrets: string[]): string {
   for (const sec of secrets) {
     if (sec.length >= 4) out = out.split(sec).join("[x]").split(encodeURIComponent(sec)).join("[x]");
   }
+  // B3: sipariş numarası (GPA.dddd-dddd-dddd-ddddd, ..N ekli biçim dahil) ve e-posta adresi hata mesajında yankılanırsa maskelenir.
+  out = out.replace(/GPA\.\d{4}-\d{4}-\d{4}-\d{5}(?:\.\.\d+)?/gi, "[x]").replace(/[^\s@<>"']+@[^\s@<>"']+/g, "[x]");
   out = out.replace(/[A-Za-z0-9._~+\/=-]{32,}/g, "[x]").replace(/[\u0000-\u001f\u007f]+/g, " ");
   return out.slice(0, LOG_MESSAGE_MAX);
 }
@@ -608,6 +610,18 @@ export async function sweepVoidedPurchases(deps: PlayDeps): Promise<VoidedSweepR
   // Doğal süre bitimi: iptal listesinde görünmez. Google'a sormadan, kayıtlı dönem sonuna göre kapatılır (hak zaten entitlementUntil ile bitmişti).
   const expired = await deps.store.expireStale(nowIso);
   return { seen, marked, expired, voided, ...(voidedHttp !== undefined ? { voidedHttp } : {}) };
+}
+
+/** Cron yanıtı (B1): saf işlev, davranış testi var. İptal listesi/Google hatası ASLA 200 olmaz (503; aksi hâlde ömür boyu iadesi sessizce kaçar). */
+export function cronResponse(r: VoidedSweepResult): { status: number; body: Record<string, unknown> } {
+  if (r.voided !== "ok") {
+    // D4: süre bitimi kapatması iptal listesi hatasından bağımsız koştu; yanıt ikisini ayrı gösterir. Yalnız tür + ham HTTP kodu (jeton yok).
+    return {
+      status: 503,
+      body: { error: r.voided === "auth" ? "not_configured" : "verify_unavailable", voided: r.voided, google: r.voidedHttp ?? null, expired: r.expired },
+    };
+  }
+  return { status: 200, body: { ok: true, seen: r.seen, marked: r.marked, expired: r.expired } };
 }
 
 // ---- Cron / sağlık ucu kimlik denetimi ----
