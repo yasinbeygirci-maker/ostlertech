@@ -15,8 +15,8 @@ export default function UchUchPrivacyPage() {
   return (
     <LegalPage eyebrow={"Uch Uch"} title="Uch Uch Gizlilik Politikası" updated={false} altLink={{ href: "/en/uchuch/privacy", label: "English" }}>
       <div className="space-y-6 text-[1.0625rem] leading-relaxed">
-      <p>Son güncelleme: 15 Kasım 2026</p>
-      <p>Bu politika, Uch Uch mobil oyununu (&quot;Oyun&quot;) kullandığınızda hangi verilerin işlendiğini anlatır. Uch Uch, ekrana dokunarak yusufçuğu sütunların arasından uçurduğunuz bir beceri oyunudur. 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında aydınlatma metni, AB Genel Veri Koruma Tüzüğü (GDPR) kapsamında da bilgilendirme niteliğindedir.</p>
+      <p>Son güncelleme: 18 Kasım 2026</p>
+      <p>Bu politika, Uch Uch mobil oyununu (&quot;Oyun&quot;) kullandığınızda hangi verilerin işlendiğini anlatır. Uch Uch, ekrana dokunarak uçan karakteri sütunların arasından uçurduğunuz bir beceri oyunudur. 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında aydınlatma metni, AB Genel Veri Koruma Tüzüğü (GDPR) kapsamında da bilgilendirme niteliğindedir.</p>
       <H2>1. Veri sorumlusu</H2>
       <p>{COMPANY.legalName} – {COMPANY.tradeName} (şahıs işletmesi). Adres: {COMPANY.address}. İletişim: {COMPANY.email}</p>
       <H2>2. Kısaca</H2>
@@ -80,6 +80,7 @@ export default function UchUchPrivacyPage() {
       <H2>11. Değişiklikler</H2>
       <p>Oyun yeni bir veri toplamaya başlarsa ya da reklamların hangi yaşa gösterildiği değişirse bu politika o sürüm yayınlanmadan önce güncellenir ve tarih değişir.</p>
       <p>15 Kasım 2026 güncellemesi: Oyunun tasarlandığı yaş bilgisi güncellendi ve Google Play puan ve yorumlarına ilişkin bilgi eklendi. Reklamların hangi yaşa gösterildiği ve işlenen veriler değişmedi: 16 yaşından küçük olabileceği anlaşılan kullanıcılara reklam gösterilmez.</p>
+      <p>18 Kasım 2026 güncellemesi: Oyunun tanımındaki karakter anlatımı karakterden bağımsız hale getirildi. Reklamların hangi yaşa gösterildiği ve işlenen veriler değişmedi.</p>
       </div>
     </LegalPage>
   );

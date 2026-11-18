@@ -15,8 +15,8 @@ export default function UchUchPrivacyEnPage() {
   return (
     <LegalPage eyebrow={"Uch Uch"} title="Uch Uch Privacy Policy" lang="en" updated={false} altLink={{ href: "/uchuch/privacy", label: "Türkçe sürüm" }}>
       <div className="space-y-6 text-[1.0625rem] leading-relaxed">
-      <p>Last updated: November 15, 2026</p>
-      <p>This policy explains what data is processed when you use the Uch Uch mobile game (the &quot;Game&quot;). Uch Uch is a skill game where you tap to fly a dragonfly between pillars. It serves as the privacy notice under the Turkish Personal Data Protection Law No. 6698 (KVKK) and as information under the EU General Data Protection Regulation (GDPR).</p>
+      <p>Last updated: November 18, 2026</p>
+      <p>This policy explains what data is processed when you use the Uch Uch mobile game (the &quot;Game&quot;). Uch Uch is a skill game where you tap to guide a flying character between pillars. It serves as the privacy notice under the Turkish Personal Data Protection Law No. 6698 (KVKK) and as information under the EU General Data Protection Regulation (GDPR).</p>
       <H2>1. Data controller</H2>
       <p>{COMPANY.legalName} – {COMPANY.tradeName} (sole proprietorship). Address: {COMPANY.address}. Contact: {COMPANY.email}</p>
       <H2>2. In short</H2>
@@ -80,6 +80,7 @@ export default function UchUchPrivacyEnPage() {
       <H2>11. Changes</H2>
       <p>If the Game starts collecting new data, or if the ages that are shown ads change, this policy is updated, and its date changed, before that version is released.</p>
       <p>Update of November 15, 2026: the information on the ages the Game is designed for was updated and information on Google Play ratings and reviews was added. Which ages are shown ads and what data is processed did not change: users who may be under 16 are not shown ads.</p>
+      <p>Update of November 18, 2026: the description of the character in the Game was made independent of any specific character. Which ages are shown ads and what data is processed did not change.</p>
       </div>
     </LegalPage>
   );
