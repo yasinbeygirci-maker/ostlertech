@@ -203,7 +203,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       },
       {
         h: "Eski kayıtlar:",
-        p: "18 Kasım 2026'dan önce bu formda e-posta adresi bırakmış kişilerin kayıtları (e-posta adresi, isteğe bağlı AutoCAD sürümü, kayıt tarihi, IP adresinin geri döndürülemez özeti) Supabase Pte. Ltd.'nin (Singapur şirketi) İrlanda'daki sunucularında tutuluyordu ve silinecektir; silme kaydı tutulur. Bu kayıtlardan tanıtım ya da duyuru e-postası gönderilmez.",
+        p: "18 Kasım 2026'dan önce bu formda e-posta adresi bırakmış kişilerin kayıtları (e-posta adresi, isteğe bağlı AutoCAD sürümü, kayıt tarihi, IP adresinin geri döndürülemez özeti) Supabase Pte. Ltd.'nin (Singapur şirketi) İrlanda'daki sunucularında tutuluyordu ve 18 Kasım 2026'da silindi; silme kaydı tutuldu. Bu kayıtlardan tanıtım ya da duyuru e-postası gönderilmez.",
       },
       {
         h: "Haklarınız (KVKK md. 11):",
@@ -342,7 +342,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       },
       {
         h: "Old records:",
-        p: "records of people who left an email address in this form before 18 November 2026 (email address, optional AutoCAD version, sign-up date, irreversible digest of the IP address) were kept on the servers of Supabase Pte. Ltd. (a Singapore company) in Ireland and will be deleted; the deletion is logged. No promotional or announcement email is sent from these records.",
+        p: "records of people who left an email address in this form before 18 November 2026 (email address, optional AutoCAD version, sign-up date, irreversible digest of the IP address) were kept on the servers of Supabase Pte. Ltd. (a Singapore company) in Ireland and were deleted on 18 November 2026; the deletion is logged. No promotional or announcement email is sent from these records.",
       },
       {
         h: "Your rights (KVKK Art. 11):",

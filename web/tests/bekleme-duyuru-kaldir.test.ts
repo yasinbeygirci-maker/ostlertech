@@ -123,13 +123,13 @@ test("gizlilik metinleri: açık rıza yalnız teşekkür listesi; indirme formu
   const tr = read("src", "app", "(tr)", "gizlilik", "page.tsx");
   const en = read("src", "app", "(en)", "en", "privacy", "page.tsx");
   assert.match(tr, /Açık rıza yalnızca güvenlik açığı bildiriminde adınızın teşekkür listesinde yayımlanması için geçerlidir\./);
-  assert.match(tr, /AreaPilot indirme formu artık kişisel veri toplamaz; eski bekleme listesi kayıtları için açık rıza istenmez, bu kayıtlar silinir ve bu kayıtlardan tanıtım ya da duyuru e-postası gönderilmez\./);
+  assert.match(tr, /AreaPilot indirme formu artık kişisel veri toplamaz; eski bekleme listesi kayıtları için açık rıza istenmez, bu kayıtlar 18 Kasım 2026'da silindi ve bu kayıtlardan tanıtım ya da duyuru e-postası gönderilmez\./);
   assert.match(en, /Explicit consent applies only to publishing your name on the acknowledgements list for security reports\./);
-  assert.match(en, /The AreaPilot download form no longer collects personal data; we do not ask for consent for the old waiting-list records, they will be deleted, and no promotional or announcement emails are sent from them\./);
+  assert.match(en, /The AreaPilot download form no longer collects personal data; we do not ask for consent for the old waiting-list records, they were deleted on 18 November 2026, and no promotional or announcement emails are sent from them\./);
   assert.match(tr, /updatedOn="18 Kasım 2026"/);
   assert.match(en, /updatedOn="18 November 2026"/);
-  assert.match(tr, /Eski bekleme listesi kayıtları \(18 Kasım 2026'dan önce AreaPilot indirme formuna e-posta bırakanlar\): silinir ve silme kaydı tutulur/);
-  assert.match(en, /Old waiting-list records \(people who left an email in the AreaPilot download form before 18 November 2026\): deleted, and the deletion is logged/);
+  assert.match(tr, /Eski bekleme listesi kayıtları \(18 Kasım 2026'dan önce AreaPilot indirme formuna e-posta bırakanlar\): 18 Kasım 2026'da silindi, silme kaydı tutuldu/);
+  assert.match(en, /Old waiting-list records \(people who left an email in the AreaPilot download form before 18 November 2026\): deleted on 18 November 2026, and the deletion is logged/);
   assert.doesNotMatch(tr, /ürün çıktıktan 6 ay|o gün silinir/);
   assert.doesNotMatch(en, /after the product is released|on the day you ask/);
   assert.doesNotMatch(tr + en, /en çok bir gün|at most one day/);
