@@ -1,6 +1,6 @@
 // AreaPilot 1.0 sayfasının metni (TR + EN). Satış bölümü ayrı (AreaPilotPricing), bayrak açılınca kendiliğinden çizilir.
 // Kaynak: Deniz, pazarlama/2026-10-23-areapilot-beta-sayfa.md; hukuk düzeni Zeynep, hukuk/2026-10-23-areapilot-beta-gizlilik.md
-// (Bağlantı hemen sayfada; 2026-11-12: duyuru e-postası onay kutusu KALDIRILDI (Yasin kararı), bekleme listesinden duyuru gönderilmez). Sürüm ve son gün AREAPILOT sabitinden gelir. Hitap: sayfada "sen", yasal metinde "siz".
+// (Bağlantı hemen sayfada; 2026-11-12: duyuru e-postası onay kutusu KALDIRILDI (Yasin kararı); 2026-11-18: indirme formundan e-posta alanı da kaldırıldı, hiçbir kişisel veri toplanmaz). Sürüm ve son gün AREAPILOT sabitinden gelir. Hitap: sayfada "sen", yasal metinde "siz".
 import { AREAPILOT } from "./areapilot";
 import { AREAPILOT_TIER_PRICES as P } from "./areapilot-sales";
 
@@ -44,11 +44,6 @@ export interface AreaPilotCopy {
   form: {
     title: string;
     sub: string;
-    email: string;
-    emailPh: string;
-    acad: string;
-    acadUnknown: string;
-    acadNone: string;
     button: string;
     sending: string;
     notice: string;
@@ -58,8 +53,6 @@ export interface AreaPilotCopy {
     installer: string;
     guideTr: string;
     guideEn: string;
-    errEmail: string;
-    errRate: string;
     errServer: string;
   };
   faqTitle: string;
@@ -145,25 +138,18 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       "AreaPilot \"olduğu gibi\" sunulur. Hesaplanan alan ve miktarları kullanmadan önce kendi çiziminizle kontrol edin; hatalar olabilir. Kanunen sınırlandırılamayan sorumluluklar saklıdır.",
     form: {
       title: "AreaPilot'u indir ve dene",
-      sub: "E-posta adresini bırak, indirme bağlantısı hemen burada açılsın. İlk kullanımdan itibaren 7 gün tüm özellikler açık.",
-      email: "E-posta adresin",
-      emailPh: "ad@firma.com",
-      acad: "Hangi AutoCAD'i kullanıyorsun? (isteğe bağlı)",
-      acadUnknown: "Bilmiyorum",
-      acadNone: "Seçmek istemiyorum",
+      sub: "Düğmeye bas, indirme bağlantısı hemen burada açılsın. E-posta ya da başka bir bilgi istemiyoruz. İlk kullanımdan itibaren 7 gün tüm özellikler açık.",
       button: "İndirme bağlantısını al",
-      sending: "Gönderiliyor…",
+      sending: "Açılıyor…",
       notice:
-        "E-postanı AreaPilot indirme bağlantısını vermek ve deneme sürümüyle ilgili önemli bildirimler (kritik düzeltme, deneme süresinin bitişi) için kullanırız. Ayrıntılar:",
+        "Bu form e-posta adresi ya da başka bir kişisel veri istemez ve hiçbir kayıt oluşturmaz. Her web isteği gibi IP adresin barındırma sağlayıcımız Vercel'in (ABD) kısa süreli sunucu kayıtlarında görünür. Ayrıntılar:",
       noticeLink: "AreaPilot aydınlatma metni",
       successTitle: "İndirme bağlantın hazır.",
       successNote: "Kurulum dosyası ve rehberler GitHub üzerindeki sürüm sayfamızdan iner. Kurulumda iki uyarı göreceksin; ne yapacağın aşağıda yazıyor.",
       installer: `AreaPilot ${A.version} kurulum dosyası (Windows)`,
       guideTr: "Kullanım ve test rehberi (Türkçe, PDF)",
       guideEn: "User and test guide (English, PDF)",
-      errEmail: "Gönderilemedi. Adresi kontrol edip yeniden dene.",
-      errRate: "Çok fazla deneme yapıldı. Biraz sonra yeniden dene.",
-      errServer: "Şu an kaydedemedik. Biraz sonra yeniden dene ya da bize yaz.",
+      errServer: "Bağlantıyı şu an açamadık. Biraz sonra yeniden dene ya da bize yaz.",
     },
     faqTitle: "Sık sorulan sorular",
     faq: [
@@ -208,14 +194,17 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     notice: [
       {
         h: "Hangi veri, neden:",
-        p: "İndirme formuna yazdığınız e-posta adresi, isteğe bağlı olarak seçtiğiniz AutoCAD sürümü ve kaydın tarihi. Amaç: indirme bağlantısını vermek ve deneme sürümüyle ilgili önemli bildirimleri (kritik hata düzeltmesi, deneme süresinin bitişi, koşul değişikliği) göndermek. Bu bildirimler tanıtım içermez.",
+        p: "İndirme formu e-posta adresi, AutoCAD sürümü ya da başka bir kişisel veri istemez ve veritabanımıza kayıt yazmaz; düğmeye bastığınızda indirme bağlantısı ekranda gösterilir. Bu istek, her web isteği gibi, IP adresinizle birlikte barındırma sağlayıcımız Vercel'in kısa süreli sunucu kayıtlarında görünür; bu kayıtlar sitenin güvenliği ve hata ayıklama içindir.",
       },
-      { h: "Hukuki sebep:", p: "İndirme bağlantısı ve deneme bildirimleri için: deneme kullanımına ilişkin ilişkinin kurulması ve ifası (KVKK md. 5/2-c) ve bildirimlerin yapılmasındaki meşru menfaatimiz (md. 5/2-f)." },
+      { h: "Hukuki sebep:", p: "Sitenin güvenliği ve işleyişi için sunucu kayıtlarının tutulmasındaki meşru menfaatimiz (KVKK md. 5/2-f)." },
       {
         h: "Aktarım:",
-        p: "E-postanız Supabase Pte. Ltd.'nin (Singapur şirketi) İrlanda'daki sunucularında saklanır; site Vercel Inc. (ABD) üzerinde çalışır ve formu gönderdiğinizde IP adresiniz bu sağlayıcılara ulaşır. Bu sağlayıcıların sunucuları yurt dışındadır; onlarla KVKK md. 9 uyarınca Kurul'un ilan ettiği standart sözleşmeleri imzalama sürecini yürütüyoruz. Verinizi satmayız, reklam için paylaşmayız.",
+        p: "Site Vercel Inc. (ABD) üzerinde çalışır; formu kullandığınızda IP adresiniz Vercel'e ulaşır. Vercel'in sunucuları yurt dışındadır ve bu aktarım bugün itibarıyla KVKK md. 9'da sayılan güvencelerden birine (yeterlilik kararı ya da Kurul'un ilan ettiği standart sözleşmenin imzalanıp Kurum'a bildirilmesi) dayanmamaktadır; Vercel ile standart sözleşme imzalanmamıştır. İmzalanırsa Kurum'a bildirir ve bu metni güncelleriz. Verinizi satmayız, reklam için paylaşmayız.",
       },
-      { h: "Saklama:", p: "Deneme süresinin bitişinden 6 ay sonra ya da siz daha önce isterseniz silinir; silme kaydı tutulur." },
+      {
+        h: "Eski kayıtlar:",
+        p: "18 Kasım 2026'dan önce bu formda e-posta adresi bırakmış kişilerin kayıtları (e-posta adresi, isteğe bağlı AutoCAD sürümü, kayıt tarihi, IP adresinin geri döndürülemez özeti) Supabase Pte. Ltd.'nin (Singapur şirketi) İrlanda'daki sunucularında tutuluyordu ve silinecektir; silme kaydı tutulur. Bu kayıtlardan tanıtım ya da duyuru e-postası gönderilmez.",
+      },
       {
         h: "Haklarınız (KVKK md. 11):",
         p: "verinizin işlenip işlenmediğini öğrenme, bilgi isteme, düzeltme, silme, itiraz ve zararın giderilmesini isteme. Başvuru: destek@ostlertech.com ya da KEP; en geç 30 gün içinde yanıt. Kişisel Verileri Koruma Kurulu'na şikâyet hakkınız saklıdır.",
@@ -291,25 +280,18 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       "AreaPilot is provided \"as is\". Check the calculated areas and quantities against your own drawing before you use them; errors may occur. Liability that cannot be limited by law is unaffected.",
     form: {
       title: "Download and try AreaPilot",
-      sub: "Leave your email and the download link opens right here. All features are unlocked for 7 days from first use.",
-      email: "Your email",
-      emailPh: "name@company.com",
-      acad: "Which AutoCAD do you use? (optional)",
-      acadUnknown: "Not sure",
-      acadNone: "Prefer not to say",
+      sub: "Press the button and the download link opens right here. We do not ask for an email or any other information. All features are unlocked for 7 days from first use.",
       button: "Get the download link",
-      sending: "Sending…",
+      sending: "Opening…",
       notice:
-        "We use your email to give you the AreaPilot download link and to send important notices about the trial (critical fixes, end of the trial). Details:",
+        "This form does not ask for an email address or any other personal data and creates no record. Like every web request, your IP address appears in the short-lived server logs of our hosting provider Vercel (USA). Details:",
       noticeLink: "AreaPilot privacy notice",
       successTitle: "Your download link is ready.",
       successNote: "The installer and guides download from our release page on GitHub. You will see two warnings during setup; what to do is explained below.",
       installer: `AreaPilot ${A.version} installer (Windows)`,
       guideTr: "Kullanım ve test rehberi (Turkish, PDF)",
       guideEn: "User and test guide (English, PDF)",
-      errEmail: "Could not send. Check the address and try again.",
-      errRate: "Too many attempts. Please try again a little later.",
-      errServer: "We could not save it right now. Please try again later or write to us.",
+      errServer: "We could not open the link right now. Please try again later or write to us.",
     },
     faqTitle: "FAQ",
     faq: [
@@ -351,14 +333,17 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     notice: [
       {
         h: "What and why:",
-        p: "the email address you enter in the download form, the AutoCAD version you optionally select and the date you signed up. Purpose: giving you the download link and sending important notices about the trial (critical fixes, end of the trial, changes to its terms). These notices contain no promotion.",
+        p: "the download form does not ask for an email address, an AutoCAD version or any other personal data and writes no record to our database; the download link is shown on screen when you press the button. Like every web request, this request appears with your IP address in the short-lived server logs of our hosting provider Vercel; these logs serve the security of the site and debugging.",
       },
-      { h: "Legal basis:", p: "for the download link and trial notices: establishing and performing the trial use relationship (KVKK Art. 5(2)(c)) and our legitimate interest in sending these notices (Art. 5(2)(f))." },
+      { h: "Legal basis:", p: "our legitimate interest in keeping server logs for the security and operation of the site (KVKK Art. 5(2)(f))." },
       {
         h: "Transfers:",
-        p: "your email is stored on Supabase Pte. Ltd. (a Singapore company) servers in Ireland; the site runs on Vercel Inc. (USA), which receives your IP address when you submit the form. These servers are outside Türkiye; we are in the process of signing the standard contracts announced by the Turkish Personal Data Protection Board under Article 9 of KVKK with these providers. We do not sell your data or share it for advertising.",
+        p: "the site runs on Vercel Inc. (USA); when you use the form your IP address reaches Vercel. Vercel's servers are outside Türkiye and, as of today, this transfer does not rely on any of the safeguards listed in Article 9 of KVKK (an adequacy decision, or the Board's standard contract signed and notified to the Authority); no standard contract has been signed with Vercel. If one is signed we will notify the Authority and update this text. We do not sell your data or share it for advertising.",
       },
-      { h: "Retention:", p: "deleted 6 months after your trial period ends, or earlier if you ask; deletions are logged." },
+      {
+        h: "Old records:",
+        p: "records of people who left an email address in this form before 18 November 2026 (email address, optional AutoCAD version, sign-up date, irreversible digest of the IP address) were kept on the servers of Supabase Pte. Ltd. (a Singapore company) in Ireland and will be deleted; the deletion is logged. No promotional or announcement email is sent from these records.",
+      },
       {
         h: "Your rights (KVKK Art. 11):",
         p: "to learn whether your data is processed, request information, correction or deletion, object, and claim compensation. Write to destek@ostlertech.com or our KEP address; we reply within 30 days. You may also complain to the Personal Data Protection Board.",

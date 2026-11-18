@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/syncpass/privacy" },
 };
 
-const EFFECTIVE_TR = "17 Kasım 2026";
-const EFFECTIVE_EN = "17 November 2026";
+const EFFECTIVE_TR = "18 Kasım 2026";
+const EFFECTIVE_EN = "18 November 2026";
 const CONTACT_EMAIL = "destek@ostlertech.com";
 
 function Section({ n, title, id, children }: { n: string; title: string; id?: string; children: ReactNode }) {
@@ -223,8 +223,7 @@ export default function SyncPassPrivacyPolicy() {
               </p>
               <p>
                 Bu sağlayıcıların sunucuları yurt dışındadır. Bu aktarım bugün itibarıyla KVKK md. 9&apos;da sayılan uygun güvencelerden birine (Kurul&apos;un yeterlilik kararı ya da
-                Kurul&apos;un ilan ettiği standart sözleşmenin imzalanıp Kurum&apos;a bildirilmesi) dayanmamaktadır. Supabase&apos;e standart sözleşme imzalanması için 18.10.2026
-                tarihinde talep ilettik; yanıt beklenmektedir. Vercel ve Google ile standart sözleşme imzalanmamıştır. İmzalanırsa Kurum&apos;a bildirir ve bu metni güncelleriz.
+                Kurul&apos;un ilan ettiği standart sözleşmenin imzalanıp Kurum&apos;a bildirilmesi) dayanmamaktadır. Supabase&apos;den Kurul&apos;un standart sözleşmesini imzalamasını 18.10.2026 tarihinde istedik; Supabase 17.11.2026 tarihli yazılı yanıtında bu sözleşmeyi ve Türkiye&apos;ye özgü başka bir aktarım aracını imzalamadığını bildirdi. Lisans kayıtları Avrupa Birliği&apos;nde (İrlanda) tutulur; Supabase&apos;in Avrupa Birliği standart sözleşme maddelerine dayanan veri işleme eki KVKK md. 9&apos;daki güvencelerden biri değildir. Vercel ve Google ile standart sözleşme imzalanmamıştır. Bu sağlayıcılardan biriyle standart sözleşme imzalanırsa Kurum&apos;a bildirir ve bu metni güncelleriz.
               </p>
               <p>
                 Bu verileri, satın aldığınız Premium&apos;u diğer cihazlarınızda kullanabilmeniz için sözleşmenin ifasına (KVKK md. 5/2-c) ve iade edilmiş, iptal edilmiş ya da
@@ -270,6 +269,7 @@ export default function SyncPassPrivacyPolicy() {
 
           <Section n="11" title="Değişiklikler">
             <p>Bu politikayı güncelleyebiliriz. Güncellemelerde yukarıdaki yürürlük tarihini değiştirir, önemli değişiklikleri uygulama içinde bildiririz.</p>
+            <p>18 Kasım 2026 güncellemesi: Supabase&apos;in 17 Kasım 2026 tarihli yazılı yanıtı (KVKK standart sözleşmesini imzalamıyor) ve lisans kayıtlarının Avrupa Birliği&apos;nde tutulduğu bilgisi yurt dışı aktarım bölümüne eklendi; bekleyen-yanıt ifadesi kaldırıldı.</p>
             <p>17 Kasım 2026 güncellemesi: Android uygulamasındaki &quot;Masaüstünde de kullan&quot; ekranının sunucumuza gönderdiği bilgiler, sunucumuzdaki lisans kaydının içeriği ve saklama süresi, Microsoft Store Premium&apos;u, hizmet sağlayıcılarımız, yurt dışına aktarım, hukuki sebepler ve lisans kayıtlarının silinmesini isteme yolu eklendi (4., 7. ve 10. bölümler).</p>
             <p>10 Kasım 2026 güncellemesi: Google Drive&apos;daki yedeğin uygulama içinden değil Google Drive&apos;dan silindiği (silme yolu uygulamadaki anlatımla aynı yazıldı), &quot;Bağlantıyı Kes&quot; düğmesinin yedeği silmediği, SyncPass Masaüstü&apos;nde dosyaya dışa aktarma olmadığı ve uygulamayı kaldırmanın Google Play aboneliğini iptal etmediği açıkça yazıldı (3., 7. ve 10. bölümler).</p>
             <p>30 Ekim 2026 güncellemesi: Android sistem yedeği ve geçiş anahtarı bağlantıları eklendi; kasa raporu ve yardım ekranının Gemini&apos;ye ne gönderdiği koda uygun olarak düzeltildi; Play Integrity ve kayıt paylaşım kodu anlatımları kaldırıldı; iletişim adresi güncellendi.</p>
@@ -428,9 +428,7 @@ export default function SyncPassPrivacyPolicy() {
               </p>
               <p>
                 The servers of these providers are outside Türkiye. As of today this transfer does not rely on any of the appropriate safeguards listed in Article 9 of KVKK
-                (an adequacy decision by the Personal Data Protection Board, or the Board&apos;s standard contract signed and notified to the Authority). We sent Supabase a request
-                to sign the standard contract on 18 October 2026; a reply is awaited. No standard contract has been signed with Vercel or Google. If one is signed we will notify
-                the Authority and update this policy.
+                (an adequacy decision by the Personal Data Protection Board, or the Board&apos;s standard contract signed and notified to the Authority). We asked Supabase on 18 October 2026 to sign the Board&apos;s standard contract; in its written reply of 17 November 2026 Supabase stated that it does not sign this contract or any other Türkiye-specific transfer instrument. License records are stored in the European Union (Ireland) and Supabase&apos;s data processing addendum, which relies on the European Union standard contractual clauses, applies; that addendum is not one of the safeguards listed in Article 9 of KVKK. No standard contract has been signed with Vercel or Google. If a standard contract is signed with any of these providers, we will notify the Authority and update this policy.
               </p>
               <p>
                 We process this data to perform our contract with you, so that you can use the Premium you bought on your other devices (KVKK Art. 5(2)(c)), and on the basis
@@ -476,6 +474,7 @@ export default function SyncPassPrivacyPolicy() {
 
           <Section n="11" title="Changes">
             <p>We may update this policy. We will change the effective date above and, for significant changes, notify you in the app.</p>
+            <p>Update of 18 November 2026: added Supabase&apos;s written reply of 17 November 2026 (it does not sign the KVKK standard contract) and the fact that license records are stored in the European Union to the transfers section; removed the pending-reply wording.</p>
             <p>Update of 17 November 2026: added what the &quot;Use on desktop too&quot; screen of the Android app sends to our server, what the license record on our server contains and how long it is kept, Premium from the Microsoft Store, our service providers, transfers abroad, the legal bases and how to ask for license records to be deleted (sections 4, 7 and 10).</p>
             <p>Update of 10 November 2026: made clear that the backup in Google Drive is deleted in Google Drive, not within the app (the steps now match the app&apos;s own instructions), that the &quot;Disconnect&quot; button does not delete it, that SyncPass Desktop has no export to a file, and that uninstalling the app does not cancel a Google Play subscription (sections 3, 7 and 10).</p>
             <p>Update of 30 October 2026: added the Android system backup and passkey connections; corrected what the vault report and help screen send to Gemini to match the code; removed the Play Integrity and record share-code descriptions; updated the contact address.</p>

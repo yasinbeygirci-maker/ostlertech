@@ -17,7 +17,7 @@ test("form: duyuru onay kutusu yok ve istek gövdesi marketing göndermez", () =
 test("rota: rıza alanı okunmaz, v2 (rıza) işlevi çağrılmaz, WAITLIST_CONSENT_DB yok", () => {
   const r = read("src", "app", "api", "bekleme", "route.ts");
   assert.doesNotMatch(r, /marketing|site_waitlist_join_v2|WAITLIST_CONSENT_DB|MARKETING_CONSENT_VERSION|consent_unavailable/);
-  assert.match(r, /site_waitlist_join/);
+  assert.doesNotMatch(r, /site_waitlist_join/); // 2026-11-18: rota artık veritabanına yazmıyor
 });
 
 test("istek denetimi: gövdedeki marketing:true yok sayılır, sonuçta rıza alanı yok", async () => {
@@ -119,21 +119,19 @@ test("SQL: hız sınırı davranışı korunur; göç tekrar çalıştırılabil
 });
 
 // ---- Zeynep metin kapısı (hukuk/2026-11-12-bekleme-duyuru-kaldirma-metin-kapisi.md) K1-K4 ----
-test("gizlilik metinleri: K1 daraltılmış açık rıza + 5/2-c ve f, K2 tarih, K3 saklama, K4 IP özeti 'kısa süreli'", () => {
+test("gizlilik metinleri: açık rıza yalnız teşekkür listesi; indirme formu kayıt yazmaz, eski kayıtlar silinir (18 Kasım 2026)", () => {
   const tr = read("src", "app", "(tr)", "gizlilik", "page.tsx");
   const en = read("src", "app", "(en)", "en", "privacy", "page.tsx");
   assert.match(tr, /Açık rıza yalnızca güvenlik açığı bildiriminde adınızın teşekkür listesinde yayımlanması için geçerlidir\./);
-  assert.match(tr, /\(md\. 5\/2-c\) ve bu bildirimlerin yapılmasındaki meşru menfaatimize \(md\. 5\/2-f\) dayanır\. Bekleme listesi için açık rıza istenmez ve bu listeden tanıtım ya da duyuru e-postası gönderilmez\./);
+  assert.match(tr, /AreaPilot indirme formu artık kişisel veri toplamaz; eski bekleme listesi kayıtları için açık rıza istenmez, bu kayıtlar silinir ve bu kayıtlardan tanıtım ya da duyuru e-postası gönderilmez\./);
   assert.match(en, /Explicit consent applies only to publishing your name on the acknowledgements list for security reports\./);
-  assert.match(en, /\(Art\. 5\(2\)\(c\)\) and our legitimate interest in sending these notices \(Art\. 5\(2\)\(f\)\)\. We do not ask for consent for the waiting list and send no promotional or announcement emails from it\./);
-  assert.match(tr, /updatedOn="17 Kasım 2026"/);
-  assert.match(en, /updatedOn="17 November 2026"/);
-  assert.match(tr, /deneme süresinin bitişinden 6 ay sonra ya da talebiniz üzerine \(en geç 30 gün içinde\) silinir; silme kaydı tutulur\./);
-  assert.match(en, /deleted 6 months after your trial period ends, or on your request \(within 30 days at the latest\); deletions are logged\./);
+  assert.match(en, /The AreaPilot download form no longer collects personal data; we do not ask for consent for the old waiting-list records, they will be deleted, and no promotional or announcement emails are sent from them\./);
+  assert.match(tr, /updatedOn="18 Kasım 2026"/);
+  assert.match(en, /updatedOn="18 November 2026"/);
+  assert.match(tr, /Eski bekleme listesi kayıtları \(18 Kasım 2026'dan önce AreaPilot indirme formuna e-posta bırakanlar\): silinir ve silme kaydı tutulur/);
+  assert.match(en, /Old waiting-list records \(people who left an email in the AreaPilot download form before 18 November 2026\): deleted, and the deletion is logged/);
   assert.doesNotMatch(tr, /ürün çıktıktan 6 ay|o gün silinir/);
   assert.doesNotMatch(en, /after the product is released|on the day you ask/);
-  assert.match(tr, /geri döndürülemez bir özeti de kısa süreli tutulur/);
-  assert.match(en, /is also kept for a short period/);
   assert.doesNotMatch(tr + en, /en çok bir gün|at most one day/);
 });
 

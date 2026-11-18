@@ -4,18 +4,13 @@ import { useEffect, useState } from "react";
 import { CheckCircle2, Download, FileText, Loader2 } from "lucide-react";
 import type { AreaPilotCopy } from "@/lib/areapilot-content";
 
-// AreaPilot indirme formu (eski adı beta formu): e-posta + isteğe bağlı AutoCAD sürümü + form altı bilgi satırı (duyuru onay kutusu 2026-11-12'de kaldırıldı: bekleme listesinden duyuru e-postası gönderilmez).
-// Bağlantılar sayfa kaynağında yok, yalnız /api/bekleme yanıtında gelir. Bal küpü alanı ve doldurma süresi
-// bot ayıklamak içindir (sunucu ayrıca IP özeti başına saatte 5 kayıt sınırı uygular).
+// AreaPilot indirme formu: yalnız bir düğme + form altı bilgi satırı. E-posta ve AutoCAD sürümü alanları 2026-11-18'de kaldırıldı
+// (Supabase KVKK md. 9 kararı): sunucuya kişisel veri gitmez, hiçbir şey saklanmaz.
+// Bağlantılar sayfa kaynağında yok, yalnız /api/bekleme yanıtında gelir. Bal küpü alanı ve doldurma süresi bot ayıklamak içindir.
 type Downloads = { installer: string; guideTr: string; guideEn: string };
-
-const YEARS = Array.from({ length: 15 }, (_, i) => String(2013 + i)).reverse();
-const input = "mt-1 w-full rounded-xl border border-line bg-surface px-4 py-3 text-base text-white placeholder:text-muted/60 focus:border-primary focus:outline-none";
 
 export default function BetaDownloadForm({ copy, lang, privacyHref }: { copy: AreaPilotCopy["form"]; lang: "tr" | "en"; privacyHref: string }) {
   const [started, setStarted] = useState(0);
-  const [email, setEmail] = useState("");
-  const [acad, setAcad] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [links, setLinks] = useState<Downloads | null>(null);
@@ -26,24 +21,17 @@ export default function BetaDownloadForm({ copy, lang, privacyHref }: { copy: Ar
     e.preventDefault();
     if (busy) return;
     setError(null);
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      setError(copy.errEmail);
-      return;
-    }
     setBusy(true);
     const website = (new FormData(e.currentTarget).get("website") as string) ?? "";
     try {
       const res = await fetch("/api/bekleme", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ product: "areapilot", email, autocad: acad || undefined, lang, website, t: started }),
+        body: JSON.stringify({ product: "areapilot", website, t: started }),
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.downloads) setLinks(data.downloads);
-      else if (res.status === 429) setError(copy.errRate);
-      else if (res.status === 400) setError(copy.errEmail);
-      else if (res.ok) setError(copy.errServer); // bot ayıklaması: kayıt yok
-      else setError(copy.errServer);
+      else setError(copy.errServer); // bot ayıklaması ya da sunucu hatası
     } catch {
       setError(copy.errServer);
     } finally {
@@ -74,28 +62,12 @@ export default function BetaDownloadForm({ copy, lang, privacyHref }: { copy: Ar
 
   return (
     <form onSubmit={submit} noValidate className="space-y-4">
-      {/* Bal küpü: insanlar görmez, doldurulursa kayıt yapılmaz. */}
+      {/* Bal küpü: insanlar görmez, doldurulursa bağlantı verilmez. */}
       <div aria-hidden className="absolute -left-[9999px] h-px w-px overflow-hidden">
         <label>
           Website <input name="website" tabIndex={-1} autoComplete="off" />
         </label>
       </div>
-      <label className="block text-sm text-muted">
-        {copy.email}
-        <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" inputMode="email" autoComplete="email" required placeholder={copy.emailPh} className={input} />
-      </label>
-      <label className="block text-sm text-muted">
-        {copy.acad}
-        <select value={acad} onChange={(e) => setAcad(e.target.value)} className={input}>
-          <option value="">{copy.acadNone}</option>
-          {YEARS.map((y) => (
-            <option key={y} value={y}>
-              AutoCAD {y}
-            </option>
-          ))}
-          <option value="unknown">{copy.acadUnknown}</option>
-        </select>
-      </label>
       {error && <p className="text-sm text-weak">✕ {error}</p>}
       <button type="submit" disabled={busy} className="btn-primary w-full !py-3 disabled:opacity-60">
         {busy ? <Loader2 size={18} className="animate-spin" /> : <Download size={18} />} {busy ? copy.sending : copy.button}

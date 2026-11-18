@@ -1,19 +1,19 @@
-// Bekleme/beta listesi isteği denetimi. Çalıştırma: npm test
+// AreaPilot indirme formu isteği denetimi + "kişisel veri toplanmaz" kanıtı (2026-11-18). Çalıştırma: npm test
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
-import { checkWaitlistRequest, ipHash, WAITLIST_MIN_FILL_MS, waitlistIpKey, waitlistSuccessBody } from "../src/lib/waitlist-core.ts";
+import { checkWaitlistRequest, WAITLIST_MIN_FILL_MS, waitlistSuccessBody } from "../src/lib/waitlist-core.ts";
 
 const now = 1_800_000_000_000;
-const ok = { product: "areapilot", email: " Deniz@Example.com ", lang: "en", t: now - WAITLIST_MIN_FILL_MS - 1 };
+const ok = { product: "areapilot", t: now - WAITLIST_MIN_FILL_MS - 1 };
+const read = (...p: string[]) => fs.readFileSync(path.join(process.cwd(), ...p), "utf8");
 
-test("geçerli istek: e-posta küçük harf ve kırpılmış, dil, isteğe bağlı AutoCAD sürümü", () => {
-  assert.deepEqual(checkWaitlistRequest({ ...ok, autocad: "2021" }, now), { kind: "ok", product: "areapilot", email: "deniz@example.com", lang: "en", autocadVersion: "2021" });
-  const r = checkWaitlistRequest({ ...ok, autocad: "2099" }, now);
-  assert.ok(r.kind === "ok" && r.autocadVersion === null);
-  const u = checkWaitlistRequest({ ...ok, autocad: "unknown", lang: "xx" }, now);
-  assert.ok(u.kind === "ok" && u.autocadVersion === "unknown" && u.lang === "tr");
+test("geçerli istek: e-posta olmadan kabul; eski istemcinin gönderdiği e-posta sonuca girmez", () => {
+  assert.deepEqual(checkWaitlistRequest(ok, now), { kind: "ok", product: "areapilot" });
+  const r = checkWaitlistRequest({ ...ok, email: "kisi@example.com", autocad: "2021", lang: "en" }, now);
+  assert.deepEqual(r, { kind: "ok", product: "areapilot" });
+  assert.ok(!JSON.stringify(r).includes("kisi@example.com"));
 });
 
 test("bot: bal küpü dolu, çok hızlı gönderim ya da zaman yok", () => {
@@ -23,37 +23,54 @@ test("bot: bal küpü dolu, çok hızlı gönderim ya da zaman yok", () => {
   assert.equal(checkWaitlistRequest(null, now).kind, "bot");
 });
 
-test("geçersiz: bilinmeyen ürün, bozuk e-posta", () => {
+test("geçersiz: bilinmeyen ürün", () => {
   assert.deepEqual(checkWaitlistRequest({ ...ok, product: "syncpass" }, now), { kind: "invalid", field: "product" });
-  for (const email of ["x", "a@b", "a b@c.com", "a@b.c", "<a@b.com>"]) {
-    assert.deepEqual(checkWaitlistRequest({ ...ok, email }, now), { kind: "invalid", field: "email" }, email);
-  }
 });
 
-test("IP saklanmaz: anahtarlı özet, aynı IP aynı özet, anahtar ya da IP yoksa null", () => {
-  const a = ipHash("203.0.113.7", "gizli");
-  assert.match(a!, /^[0-9a-f]{32}$/);
-  assert.equal(a, ipHash("203.0.113.7", "gizli"));
-  assert.notEqual(a, ipHash("203.0.113.7", "baska"));
-  assert.ok(!a!.includes("203"));
-  assert.equal(ipHash("", "gizli"), null);
-  assert.equal(ipHash("203.0.113.7", ""), null);
-});
-
-test("IP özeti anahtarı: ayrı sır varsa o; yoksa service-role anahtarından türetilen farklı anahtar (Burak D3)", () => {
-  assert.equal(waitlistIpKey("ayri-sir", "service-role"), "ayri-sir");
-  const turetilen = waitlistIpKey(undefined, "service-role");
-  assert.match(turetilen, /^[0-9a-f]{64}$/);
-  assert.notEqual(turetilen, "service-role");
-  assert.equal(turetilen, waitlistIpKey("", "service-role"), "boş dizge tanımsız sayılır");
-  assert.notEqual(ipHash("203.0.113.7", turetilen), ipHash("203.0.113.7", "service-role"));
-  assert.equal(waitlistIpKey(undefined, undefined), "");
-});
-
-test("başarı yanıtı listede olup olmadığını söylemez (Burak O1): status alanı yok, iki yol aynı gövde", () => {
+test("başarı yanıtı yalnız indirme bağlantılarını taşır", () => {
   const body = waitlistSuccessBody({ installer: "https://example.com/x.exe" });
   assert.deepEqual(Object.keys(body).sort(), ["downloads", "ok"]);
-  const route = fs.readFileSync(path.join(process.cwd(), "src", "app", "api", "bekleme", "route.ts"), "utf8");
-  assert.doesNotMatch(route, /status:\s*result|["']added["']|["']exists["']/, "rota sonuç türünü yanıta yazmamalı");
-  assert.doesNotMatch(route, /error\.message|\.message\)/, "günlüğe veritabanı iletisi yazılmamalı (Burak D4)");
+});
+
+test("rota: veritabanına/Supabase'e yazmaz, e-posta okumaz, günlüğe veri yazmaz", () => {
+  const r = read("src", "app", "api", "bekleme", "route.ts");
+  const kod = r.replace(/^\s*\/\/.*$/gm, ""); // yorum satırları hariç
+  assert.doesNotMatch(kod, /supabase|rpc\(|site_waitlist|email|x-forwarded-for|x-real-ip|console\./i);
+});
+
+test("form: e-posta ve AutoCAD alanı yok, e-posta sunucuya gönderilmez", () => {
+  const f = read("src", "components", "BetaDownloadForm.tsx");
+  const kod = f.replace(/^\s*\/\/.*$/gm, "");
+  assert.doesNotMatch(kod, /type="email"|\bemail\b|autocad|<select/i);
+  assert.match(kod, /JSON\.stringify\(\{ product: "areapilot", website, t: started \}\)/);
+});
+
+test("metinler (TR+EN): eski vaatler ve 'yanıt beklenmektedir' kalmadı", () => {
+  const files = [
+    read("src", "lib", "areapilot-content.ts"),
+    read("src", "app", "(tr)", "gizlilik", "page.tsx"),
+    read("src", "app", "(en)", "en", "privacy", "page.tsx"),
+    read("src", "app", "(tr)", "syncpass", "privacy", "page.tsx"),
+  ];
+  const yasak = [
+    /deneme sürümüyle ilgili (zorunlu|önemli) bildirim/i,
+    /important notices about the trial/i,
+    /essential notices about the trial/i,
+    /yanıt beklenmektedir/i,
+    /a reply is awaited/i,
+    /Türkiye(’|')deki bir sunucuya taşı/i,
+  ];
+  for (const text of files) for (const re of yasak) assert.doesNotMatch(text, re, String(re));
+});
+
+test("gizlilik sayfaları: 18 Kasım 2026 tarihi ve Supabase'in yazılı reddi var", () => {
+  const tr = read("src", "app", "(tr)", "gizlilik", "page.tsx");
+  const en = read("src", "app", "(en)", "en", "privacy", "page.tsx");
+  const sp = read("src", "app", "(tr)", "syncpass", "privacy", "page.tsx");
+  assert.match(tr, /updatedOn="18 Kasım 2026"/);
+  assert.match(en, /updatedOn="18 November 2026"/);
+  assert.match(sp, /EFFECTIVE_TR = "18 Kasım 2026"/);
+  assert.match(sp, /EFFECTIVE_EN = "18 November 2026"/);
+  for (const t of [tr, sp]) assert.match(t, /17\.11\.2026 tarihli yazılı yanıtında/);
+  for (const t of [en, sp]) assert.match(t, /written reply of 17 November 2026/);
 });

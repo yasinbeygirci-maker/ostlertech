@@ -17,7 +17,7 @@ export default function PrivacyEnPage() {
   const live = areapilotLegalLive();
   const add = PRIVACY_ADDITIONS.en;
   return (
-    <LegalPage eyebrow="Legal" title="Privacy Policy" lang="en" updatedOn="17 November 2026" altLink={{ href: "/gizlilik", label: "Türkçe sürüm" }}>
+    <LegalPage eyebrow="Legal" title="Privacy Policy" lang="en" updatedOn="18 November 2026" altLink={{ href: "/gizlilik", label: "Türkçe sürüm" }}>
       <p>
         This notice covers the ostlertech.com website and purchases made through it. It is also our information notice
         under Türkiye's Personal Data Protection Law No. 6698 (KVKK). Our apps have their own privacy policies:{" "}
@@ -31,7 +31,7 @@ export default function PrivacyEnPage() {
       <H2>2. What data we process and why</H2>
       <List>
         <li><strong className="text-foreground">Browsing the site:</strong> our site itself does not use cookies. Only on the purchase pages (/en/pricing and /en/areapilot) is Paddle's checkout component loaded; it sets a short-lived security cookie on the paddle.com domain to protect against abuse and may use its own cookies if you open the checkout (Paddle privacy policy). When you complete a payment, the transaction ID is kept only in that tab's session storage so that your license code can be shown, and it is deleted when you close the tab. To see how often pages are visited we use Vercel Web Analytics; it uses no cookies, does not identify you and counts visits through an anonymous summary that changes every day (aggregate information such as page address, country, device and browser type). Our host (Vercel) also keeps IP address and browser information in short-lived server logs for security and debugging.</li>
-        <li><strong className="text-foreground">Waiting list:</strong> your email address, the AutoCAD version you optionally select and the date you signed up; to limit abuse of the form, an irreversible digest of your IP address is also kept for a short period. Purpose: the download link is shown on screen when you submit the form; your email address is kept so that we can send you essential notices about the trial version (critical fixes, end of the trial, changes to its terms). These notices contain no promotion.</li>
+        <li><strong className="text-foreground">AreaPilot download form:</strong> the form does not ask for an email address or any other personal data and writes no record to our database; the download link is shown on screen when you press the button. Like every web request, this request appears with your IP address in the short-lived server logs of our hosting provider Vercel (USA). Records of people who left an email address in the form before 18 November 2026 (email address, optional AutoCAD version, sign-up date, irreversible digest of the IP address) will be deleted; no promotional or announcement email is sent from them.</li>
         <li><strong className="text-foreground">Purchases:</strong> our sales are made by our Merchant of Record, Paddle.com. Paddle collects your payment and billing details and processes them under its own privacy policy. Paddle sends us only your email address, country, the plan you bought, transaction and subscription IDs and payment status. Purpose: delivering the license, tracking subscription status, refunds and support.</li>
         {live ? (
           <li><strong className="text-foreground">License:</strong> {add.license}</li>
@@ -48,14 +48,14 @@ export default function PrivacyEnPage() {
 
       <H2>3. Legal grounds</H2>
       <p>
-        Your data is processed on the following grounds under Article 5 of KVKK: concluding or performing a contract (license, support), our legal obligations, our legitimate interest (security of the site and licenses, replying to your Instagram messages) and your explicit consent. Explicit consent applies only to publishing your name on the acknowledgements list for security reports. The download link and trial notices for the waiting list rest on concluding and performing a contract (Art. 5(2)(c)) and our legitimate interest in sending these notices (Art. 5(2)(f)). We do not ask for consent for the waiting list and send no promotional or announcement emails from it.
+        Your data is processed on the following grounds under Article 5 of KVKK: concluding or performing a contract (license, support), our legal obligations, our legitimate interest (security of the site and licenses, replying to your Instagram messages) and your explicit consent. Explicit consent applies only to publishing your name on the acknowledgements list for security reports. The AreaPilot download form no longer collects personal data; we do not ask for consent for the old waiting-list records, they will be deleted, and no promotional or announcement emails are sent from them.
       </p>
 
       <H2>4. Sharing</H2>
       <p>We do not sell your data or share it for advertising. To provide the service it is shared only with these providers:</p>
       <List>
         <li>Paddle.com Market Ltd (United Kingdom): as Merchant of Record, taking payments, invoicing, taxes, subscriptions and refunds. When you open the /en/pricing or /en/areapilot page, without waiting for you to press a button, Paddle's checkout script (cdn.paddle.com) and the Paddle-owned ProfitWell script it loads (public.profitwell.com) are loaded so that prices can be shown; your IP address, browser information and country are then sent to Paddle (<a href="https://www.paddle.com/legal/privacy" target="_blank" rel="noopener" className={link}>Paddle privacy policy</a>).</li>
-        <li>Supabase Pte. Ltd. (Singapore company; database servers in Ireland, EU): storing license and waiting-list records.</li>
+        <li>Supabase Pte. Ltd. (Singapore company; database servers in Ireland, EU): storing license records.</li>
         <li>Vercel: hosting the site and the license check service; anonymous visit statistics (Web Analytics).</li>
         {live && <li>{add.resendItem}</li>}
         <li>ChatPlace, Inc. (United States): Instagram messaging automation (automatic replies and an AI-assisted assistant). For AI replies, ChatPlace sends message content to AI service providers in the United States.</li>
@@ -67,11 +67,10 @@ export default function PrivacyEnPage() {
         <li>Competent public authorities: only where required by law.</li>
       </List>
       <p>
-        Paddle (United Kingdom), Vercel, Supabase, ChatPlace, Cloudflare and Google servers are outside Türkiye; when you visit our site, join the waiting list, open the purchase page, your
+        Paddle (United Kingdom), Vercel, Supabase, ChatPlace, Cloudflare and Google servers are outside Türkiye; when you visit our site, open the purchase page, your
         desktop license is checked or you request a desktop code in the SyncPass Android app, you message us on Instagram or you email us, your data is transferred to these providers. As of today this transfer does not rely on any of
         the appropriate safeguards listed in Article 9 of KVKK (an adequacy decision by the Personal Data Protection Board,
-        or the Board's standard contract signed and notified to the Authority). We sent Supabase a request to sign the
-        standard contract on 18 October 2026; a reply is awaited. No standard contract has been signed with ChatPlace, Vercel or Google yet either. If one is signed we will notify the Authority and update this text.{live ? ` ${add.resendTransfer}` : null}
+        or the Board's standard contract signed and notified to the Authority). We asked Supabase on 18 October 2026 to sign the Board's standard contract; in its written reply of 17 November 2026 Supabase stated that it does not sign this contract or any other Türkiye-specific transfer instrument. Records held by Supabase are stored in the European Union (Ireland) and Supabase's data processing addendum, which relies on the European Union standard contractual clauses, applies; that addendum is not one of the safeguards listed in Article 9 of KVKK. No standard contract has been signed with ChatPlace, Vercel or Google yet either. If a standard contract is signed with any of these providers, we will notify the Authority and update this text.{live ? ` ${add.resendTransfer}` : null}
         Data transfers of our account-based apps are described separately in their own privacy policies.
       </p>
 
@@ -79,7 +78,7 @@ export default function PrivacyEnPage() {
       <List>
         <li>Invoice records for sales are kept by Paddle; our accounting records are kept for the period required by law (10 years).</li>
         <li>AreaPilot license records: for as long as the license is valid; if the license is refunded, the payment is disputed or it is cancelled for breach of contract, they are deleted by a weekly automatic deletion 1 year after the refund or cancellation date. The record of a removed computer is deleted the moment it is removed. Other license records (SyncPass, including the Google Play purchase token and device records): for the life of the license and 1 year after it ends, is refunded or is cancelled; then they are deleted.</li>
-        <li>Waiting list (AreaPilot download form): deleted 6 months after your trial period ends, or on your request (within 30 days at the latest); deletions are logged.</li>
+        <li>Old waiting-list records (people who left an email in the AreaPilot download form before 18 November 2026): deleted, and the deletion is logged; the form no longer creates records.</li>
         <li>Support emails: 1 year after the matter is closed.</li>
         <li>Instagram conversation records (ChatPlace): deleted 6 months after the last message.</li>
         <li>Security vulnerability reports: 2 years after the matter is closed; a name on the acknowledgements list until you withdraw your permission.</li>

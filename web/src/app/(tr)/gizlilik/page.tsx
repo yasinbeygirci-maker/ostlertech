@@ -14,7 +14,7 @@ export default function SitePrivacyPage() {
   const live = areapilotLegalLive();
   const add = PRIVACY_ADDITIONS.tr;
   return (
-    <LegalPage eyebrow="Yasal" title="Gizlilik Politikası ve KVKK Aydınlatma Metni" updatedOn="17 Kasım 2026" altLink={{ href: "/en/privacy", label: "English version" }}>
+    <LegalPage eyebrow="Yasal" title="Gizlilik Politikası ve KVKK Aydınlatma Metni" updatedOn="18 Kasım 2026" altLink={{ href: "/en/privacy", label: "English version" }}>
       <p>
         Bu metin ostlertech.com web sitesini ve buradan yapılan satın almaları kapsar. Uygulamalarımızın kendi gizlilik
         politikaları ayrıdır: <a href="/syncpass/privacy" className="text-primary hover:text-primary-light">SyncPass gizlilik politikası</a>,
@@ -28,7 +28,7 @@ export default function SitePrivacyPage() {
       <H2>2. Hangi verileri, neden işliyoruz</H2>
       <List>
         <li><strong className="text-foreground">Siteyi gezerken:</strong> sitemizin kendisi çerez kullanmaz. Yalnız satın alma sayfalarında (/satin-al ve /areapilot) Paddle'ın ödeme bileşeni yüklenir; bu bileşen paddle.com alan adında kötüye kullanıma karşı koruma için kısa süreli bir güvenlik çerezi bırakır ve ödeme penceresini açarsanız kendi çerezlerini kullanabilir (Paddle gizlilik politikası). Ödemeyi tamamladığınızda lisans kodunuzu gösterebilmek için işlem numarası yalnız o sekmenin oturum belleğinde tutulur ve sekmeyi kapatınca silinir. Hangi sayfaların ne kadar ziyaret edildiğini görmek için Vercel Web Analytics kullanıyoruz; bu araç çerez kullanmaz, sizi tanımlamaz ve ziyaretleri her gün değişen anonim bir özetle sayar (sayfa adresi, ülke, cihaz ve tarayıcı türü gibi toplu bilgiler). Barındırma hizmetimiz (Vercel) ayrıca güvenlik ve hata ayıklama için IP adresi ve tarayıcı bilgisini kısa süreli sunucu kayıtlarında tutar.</li>
-        <li><strong className="text-foreground">Bekleme listesi:</strong> e-posta adresiniz, isteğe bağlı seçtiğiniz AutoCAD sürümü ve kayıt tarihi; formun kötüye kullanımını sınırlamak için IP adresinizin geri döndürülemez bir özeti de kısa süreli tutulur. Amaç: indirme bağlantısı formu gönderdiğinizde ekranda gösterilir; e-posta adresiniz, deneme sürümüyle ilgili zorunlu bildirimleri (kritik hata düzeltmesi, deneme süresinin bitişi, koşul değişikliği) size iletebilmemiz için saklanır. Bu bildirimler tanıtım içermez.</li>
+        <li><strong className="text-foreground">AreaPilot indirme formu:</strong> form e-posta adresi ya da başka bir kişisel veri istemez ve veritabanımıza kayıt yazmaz; indirme bağlantısı düğmeye bastığınızda ekranda gösterilir. Bu istek, her web isteği gibi, IP adresinizle birlikte barındırma sağlayıcımız Vercel'in (ABD) kısa süreli sunucu kayıtlarında görünür. 18 Kasım 2026'dan önce formda e-posta adresi bırakmış kişilerin kayıtları (e-posta adresi, isteğe bağlı AutoCAD sürümü, kayıt tarihi, IP adresinin geri döndürülemez özeti) silinecektir; bu kayıtlardan tanıtım ya da duyuru e-postası gönderilmez.</li>
         <li><strong className="text-foreground">Satın alma:</strong> satışlarımızı yetkili satıcımız (Merchant of Record) Paddle.com yapar. Ödeme ve fatura bilgilerinizi Paddle toplar ve kendi gizlilik politikasına göre işler. Paddle bize yalnızca e-posta adresinizi, ülkenizi, satın aldığınız planı, işlem ve abonelik numaralarını ve ödeme durumunu iletir. Amaç: lisansın teslimi, abonelik durumunun izlenmesi, iade ve destek.</li>
         {live ? (
           <li><strong className="text-foreground">Lisans:</strong> {add.license}</li>
@@ -45,14 +45,14 @@ export default function SitePrivacyPage() {
 
       <H2>3. Hukuki sebepler</H2>
       <p>
-        Verileriniz 6698 sayılı Kişisel Verilerin Korunması Kanunu'nun 5. maddesindeki şu sebeplere dayanarak işlenir: bir sözleşmenin kurulması veya ifası (lisans, destek), kanuni yükümlülüklerimiz, meşru menfaatimiz (site ve lisans güvenliği, Instagram mesajlarınıza yanıt verilmesi) ve açık rızanız. Açık rıza yalnızca güvenlik açığı bildiriminde adınızın teşekkür listesinde yayımlanması için geçerlidir. Bekleme listesindeki indirme bağlantısı ve deneme sürümüyle ilgili bildirimler sözleşmenin kurulması ve ifasına (md. 5/2-c) ve bu bildirimlerin yapılmasındaki meşru menfaatimize (md. 5/2-f) dayanır. Bekleme listesi için açık rıza istenmez ve bu listeden tanıtım ya da duyuru e-postası gönderilmez.
+        Verileriniz 6698 sayılı Kişisel Verilerin Korunması Kanunu'nun 5. maddesindeki şu sebeplere dayanarak işlenir: bir sözleşmenin kurulması veya ifası (lisans, destek), kanuni yükümlülüklerimiz, meşru menfaatimiz (site ve lisans güvenliği, Instagram mesajlarınıza yanıt verilmesi) ve açık rızanız. Açık rıza yalnızca güvenlik açığı bildiriminde adınızın teşekkür listesinde yayımlanması için geçerlidir. AreaPilot indirme formu artık kişisel veri toplamaz; eski bekleme listesi kayıtları için açık rıza istenmez, bu kayıtlar silinir ve bu kayıtlardan tanıtım ya da duyuru e-postası gönderilmez.
       </p>
 
       <H2>4. Aktarım</H2>
       <p>Verilerinizi satmayız ve reklam amacıyla paylaşmayız. Hizmeti sunabilmek için yalnızca şu hizmet sağlayıcılarla paylaşılır:</p>
       <List>
         <li>Paddle.com Market Ltd (Birleşik Krallık): yetkili satıcı olarak ödemenin alınması, faturalandırma, vergiler, abonelik ve iadeler. /satin-al ya da /areapilot sayfasını açtığınızda, bir düğmeye basmanız beklenmeden, fiyatların gösterilmesi için Paddle'ın ödeme betiği (cdn.paddle.com) ve bu betiğin yüklediği, Paddle'a ait ProfitWell betiği (public.profitwell.com) yüklenir; bu sırada IP adresiniz, tarayıcı bilginiz ve ülke bilginiz Paddle'a iletilir (<a href="https://www.paddle.com/legal/privacy" target="_blank" rel="noopener" className="text-primary hover:text-primary-light">Paddle gizlilik politikası</a>).</li>
-        <li>Supabase Pte. Ltd. (Singapur şirketi; veritabanı sunucuları İrlanda, AB): lisans ve bekleme listesi kayıtlarının saklanması.</li>
+        <li>Supabase Pte. Ltd. (Singapur şirketi; veritabanı sunucuları İrlanda, AB): lisans kayıtlarının saklanması.</li>
         <li>Vercel: sitenin ve lisans doğrulama hizmetinin barındırılması; anonim ziyaret istatistikleri (Web Analytics).</li>
         {live && <li>{add.resendItem}</li>}
         <li>ChatPlace, Inc. (ABD): Instagram mesajlaşma otomasyonu (otomatik yanıtlar ve yapay zekâ destekli asistan). ChatPlace, yapay zekâ yanıtları için mesaj içeriğini ABD'deki yapay zekâ hizmet sağlayıcılarına iletir.</li>
@@ -64,12 +64,9 @@ export default function SitePrivacyPage() {
         <li>Yetkili kamu kurumları: yalnızca kanunen zorunlu olduğunda.</li>
       </List>
       <p>
-        Paddle (Birleşik Krallık), Vercel, Supabase, ChatPlace, Cloudflare ve Google'ın sunucuları yurt dışındadır; sitemizi ziyaret ettiğinizde, bekleme listesine
-        yazıldığınızda, satın alma sayfasını açtığınızda, masaüstü lisansınız doğrulandığında ya da SyncPass Android uygulamasında masaüstü kodu istediğinizde, bize Instagram'dan yazdığınızda ve bize e-posta gönderdiğinizde verileriniz bu sağlayıcılara aktarılır. Bu aktarım bugün itibarıyla KVKK md. 9'da
+        Paddle (Birleşik Krallık), Vercel, Supabase, ChatPlace, Cloudflare ve Google'ın sunucuları yurt dışındadır; sitemizi ziyaret ettiğinizde, satın alma sayfasını açtığınızda, masaüstü lisansınız doğrulandığında ya da SyncPass Android uygulamasında masaüstü kodu istediğinizde, bize Instagram'dan yazdığınızda ve bize e-posta gönderdiğinizde verileriniz bu sağlayıcılara aktarılır. Bu aktarım bugün itibarıyla KVKK md. 9'da
         sayılan uygun güvencelerden birine (Kurul'un yeterlilik kararı ya da Kurul'un ilan ettiği standart sözleşmenin
-        imzalanıp Kurum'a bildirilmesi) dayanmamaktadır. Supabase'e standart sözleşme imzalanması için 18.10.2026 tarihinde
-        talep ilettik; yanıt beklenmektedir. ChatPlace, Vercel ve Google ile de standart sözleşme henüz imzalanmamıştır. İmzalanırsa Kurum'a
-        bildirir ve bu metni güncelleriz.{live ? ` ${add.resendTransfer}` : null} Hesap tabanlı uygulamalarımızın
+        imzalanıp Kurum'a bildirilmesi) dayanmamaktadır. Supabase'den Kurul'un standart sözleşmesini imzalamasını 18.10.2026 tarihinde istedik; Supabase 17.11.2026 tarihli yazılı yanıtında bu sözleşmeyi ve Türkiye'ye özgü başka bir aktarım aracını imzalamadığını bildirdi. Supabase'teki kayıtlar Avrupa Birliği'nde (İrlanda) tutulur ve Supabase'in Avrupa Birliği standart sözleşme maddelerine dayanan veri işleme eki uygulanır; bu ek, KVKK md. 9'da sayılan güvencelerden biri değildir. ChatPlace, Vercel ve Google ile de standart sözleşme henüz imzalanmamıştır. Bu sağlayıcılardan biriyle standart sözleşme imzalanırsa Kurum'a bildirir ve bu metni güncelleriz.{live ? ` ${add.resendTransfer}` : null} Hesap tabanlı uygulamalarımızın
         yurt dışı aktarımı kendi gizlilik politikalarında ayrıca anlatılır.
       </p>
 
@@ -77,7 +74,7 @@ export default function SitePrivacyPage() {
       <List>
         <li>Satışa ilişkin fatura kayıtları Paddle'da tutulur; bizdeki muhasebe kayıtları ilgili mevzuatın öngördüğü süre (10 yıl) saklanır.</li>
         <li>AreaPilot lisans kayıtları: lisans geçerli olduğu sürece; lisans iade edilir, ödemesine itiraz edilir ya da sözleşmeye aykırılık nedeniyle iptal edilirse iade ya da iptal tarihinden 1 yıl sonra haftalık otomatik silmeyle silinir. Kaldırılan bilgisayarın kaydı kaldırıldığı anda silinir. Diğer lisans kayıtları (SyncPass; Google Play satın alma jetonu ve cihaz kayıtları dahil): lisans süresi boyunca ve bitiminden, iadesinden ya da iptalinden sonra 1 yıl; sonra silinir.</li>
-        <li>Bekleme listesi (AreaPilot indirme formu): deneme süresinin bitişinden 6 ay sonra ya da talebiniz üzerine (en geç 30 gün içinde) silinir; silme kaydı tutulur.</li>
+        <li>Eski bekleme listesi kayıtları (18 Kasım 2026'dan önce AreaPilot indirme formuna e-posta bırakanlar): silinir ve silme kaydı tutulur; form artık kayıt oluşturmaz.</li>
         <li>Destek yazışmaları: konu kapandıktan sonra 1 yıl.</li>
         <li>Instagram sohbet kayıtları (ChatPlace): son yazışmadan 6 ay sonra silinir.</li>
         <li>Güvenlik açığı bildirimleri: konu kapandıktan sonra 2 yıl; teşekkür listesindeki ad, izninizi geri alana kadar.</li>
