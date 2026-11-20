@@ -24,6 +24,10 @@ export interface AreaPilotCopy {
   sub: string;
   cta: string;
   ctaNote: string;
+  /** Hero altı ve indirme kartı: AutoCAD LT uyarısı (Mert M3). */
+  ltNote: string;
+  /** "Mimarlar için" kısa bölümü; yalnız sayfanın zaten anlattığı davranışı söyler (Mert M1). */
+  architects: { title: string; items: { h: string; p: string }[]; videoId: string; videoLabel: string };
   featuresTitle: string;
   features: { h: string; p: string }[];
   languages: string;
@@ -77,10 +81,21 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     badge: `Sürüm ${A.version}`,
     h1: "Bu alanda kaç m² kaplama var?",
     h1Sub: "AreaPilot: AutoCAD alan ve m² metraj eklentisi",
-    lead: "AreaPilot, AutoCAD çizimindeki kapalı alanları bulur, kodlarını yanındaki yazıdan okur, alan ve çevreyi toplar ve Excel'e aktarır.",
-    sub: "Bir yapıdaki tüm imalatların alanlarını tek tek ölçüp hesap makinesinde toplaman gerekmez.",
+    lead: "AreaPilot, AutoCAD çizimindeki kapalı alanları (oda, kat, cam, panel) bulur, kodlarını yanındaki yazıdan okur, alan ve çevreyi toplar ve Excel'e aktarır.",
+    sub: "Bir yapıdaki oda ve kat alanlarını da, cephe ve imalat alanlarını da tek tek ölçüp hesap makinesinde toplaman gerekmez.",
     cta: "7 gün ücretsiz dene",
     ctaNote: `Windows · AutoCAD 2013-2027 · ilk kullanımdan itibaren ${A.trialDays} gün ücretsiz deneme`,
+    ltNote: "AutoCAD (tam sürüm) gerekir; AutoCAD LT'de çalışmaz.",
+    architects: {
+      title: "Mimarlar için: oda ve kat alan tablosu",
+      items: [
+        { h: "Oda ve kat alanlarını tek seferde al.", p: "Odaları kendin seç ya da bir katmandaki bütün kapalı alanları tek seferde al; her alan için m² ve çevre çıkar." },
+        { h: "Oda adına göre gruplar ve toplar.", p: "Alanın içindeki ya da yanındaki yazıyı (örneğin oda adı) o alanın kodu olarak okur, aynı yazıdakileri gruplar; her grup için adet, m² ve çevre toplamı görünür." },
+        { h: "Çizime alan yazısı ve tablo, Excel'e liste.", p: "Alan yazıları ve tablo çizime eklenir; liste ve toplamlar .xlsx dosyası olarak kaydedilir. İç içe alanlarda kolon ve şaft boşluğu düşer, üst üste çizilmiş aynı alan iki kez sayılmaz." },
+      ],
+      videoId: "jHxtpNy5bhM",
+      videoLabel: "Otel katında baştan sona kullanım (video)",
+    },
     featuresTitle: "Ne yapar",
     features: [
       { h: "Kapalı alanları seçer", p: "Birkaç alanı kendin seç ya da bir katmandaki bütün alanları tek seferde al. Xref ve blok içindeki alanlar da bulunur." },
@@ -219,10 +234,21 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     badge: `Version ${A.version}`,
     h1: "How many m² of cladding are in this area?",
     h1Sub: "AreaPilot: AutoCAD area and m² takeoff add-in",
-    lead: "AreaPilot finds the closed areas in your AutoCAD drawing, reads their codes from the text next to them, totals the m² and exports it to Excel.",
-    sub: "No more measuring the area of every work item in a building one by one and adding it up on a calculator.",
+    lead: "AreaPilot finds the closed areas in your AutoCAD drawing (rooms, floors, glass, panels), reads their codes from the text next to them, totals the m² and exports it to Excel.",
+    sub: "No more measuring room and floor areas, or facade and work-item areas, one by one in a building and adding them up on a calculator.",
     cta: "Try free for 7 days",
     ctaNote: `Windows · AutoCAD 2013-2027 · ${A.trialDays}-day free trial from first use`,
+    ltNote: "Requires AutoCAD (full version); does not work in AutoCAD LT.",
+    architects: {
+      title: "For architects: a room and floor area table",
+      items: [
+        { h: "Take room and floor areas in one go.", p: "Pick the rooms yourself, or take every closed area on a layer at once; you get m² and perimeter for each area." },
+        { h: "Groups and totals by room name.", p: "Text inside or next to an area (for example the room name) becomes that area's code, and areas with the same text are grouped; each group shows count, m² and perimeter totals." },
+        { h: "Area labels and a table in the drawing, a list in Excel.", p: "Area labels and a table go into the drawing; the list and totals are saved as an .xlsx file. In nested areas the opening (column, shaft) is subtracted, and the same area drawn twice is counted once." },
+      ],
+      videoId: "nKRgVVP-xt4",
+      videoLabel: "Start-to-finish walkthrough on a hotel floor (video)",
+    },
     featuresTitle: "What it does",
     features: [
       { h: "Selects closed areas", p: "Pick a few areas yourself, or take every area on a layer at once. Areas inside xrefs and blocks are found too." },

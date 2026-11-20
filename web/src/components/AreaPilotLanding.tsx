@@ -19,6 +19,8 @@ export default function AreaPilotLanding({ lang }: { lang: Lang }) {
     mainEntity: c.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
   };
   const appLd = areapilotAppLd(lang);
+  const allVideos = (lang === "en" ? VIDEOS_EN : VIDEOS_TR).filter((v) => v.product === "AreaPilot");
+  const archVideo = allVideos.find((v) => v.id === c.architects.videoId);
   const H2 = ({ children, id }: { children: React.ReactNode; id?: string }) => (
     <h2 id={id} className="scroll-mt-28 text-2xl md:text-3xl font-extrabold tracking-tight text-white">
       {children}
@@ -40,17 +42,46 @@ export default function AreaPilotLanding({ lang }: { lang: Lang }) {
               <span className="mt-3 block text-lg md:text-xl font-semibold tracking-normal text-primary-light">{c.h1Sub}</span>
             </h1>
             <p className="text-lg text-foreground leading-relaxed font-semibold">{c.lead}</p>
-            <p className="text-muted leading-relaxed">{c.sub}</p>
+            <p className="text-[17px] text-muted leading-relaxed">{c.sub}</p>
             <a href="#indir" className="btn-primary inline-flex !py-3.5 text-base">
               {c.cta}
             </a>
-            <p className="text-sm text-muted">{c.ctaNote}</p>
+            <p className="text-base text-muted">{c.ctaNote}</p>
+            <p className="flex items-start gap-2 text-[17px] font-semibold text-white">
+              <AlertTriangle size={20} className="mt-1 shrink-0 text-weak" aria-hidden /> {c.ltNote}
+            </p>
           </div>
           <aside id="indir" className="scroll-mt-28 rounded-3xl border border-primary/30 bg-gradient-to-b from-primary/10 to-card p-6 md:p-8">
             <h2 className="text-xl font-bold text-white">{c.form.title}</h2>
-            <p className="mt-1 mb-5 text-sm text-muted">{c.form.sub}</p>
+            <p className="mt-1 mb-4 text-base text-muted">{c.form.sub}</p>
+            <p className="mb-5 flex items-start gap-2 rounded-xl border border-weak/40 bg-weak/10 px-4 py-3 text-base font-semibold text-white">
+              <AlertTriangle size={20} className="mt-0.5 shrink-0 text-weak" aria-hidden /> {c.ltNote}
+            </p>
             <BetaDownloadForm copy={c.form} lang={lang} privacyHref={privacyHref} />
           </aside>
+        </div>
+      </section>
+
+      <section id="mimarlar" className="section-padding border-t border-line scroll-mt-28">
+        <div className="max-w-6xl mx-auto grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+          <div className="space-y-6">
+            <H2>{c.architects.title}</H2>
+            <ul className="space-y-4">
+              {c.architects.items.map((it) => (
+                <li key={it.h} className="flex gap-3 text-[17px] leading-relaxed text-foreground">
+                  <Check size={20} className="mt-1 shrink-0 text-ok" aria-hidden />
+                  <span>
+                    <strong className="text-white">{it.h}</strong> {it.p}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          {/* Küçük resim telefonda başlığın hemen altında (Mert M2); kullanım videosu Videolar bölümünde tekrar edilmez. */}
+          <figure className="order-first space-y-3 lg:order-none">
+            {archVideo && <YouTubeFacade video={archVideo} lang={lang} priority />}
+            <figcaption className="text-base text-muted">{c.architects.videoLabel}</figcaption>
+          </figure>
         </div>
       </section>
 
@@ -78,7 +109,7 @@ export default function AreaPilotLanding({ lang }: { lang: Lang }) {
               : "A short intro and a step-by-step walkthrough, narrated in English."}
           </p>
           <div className="grid gap-8 md:grid-cols-2">
-            {(lang === "en" ? VIDEOS_EN : VIDEOS_TR).filter((v) => v.product === "AreaPilot").map((v) => (
+            {allVideos.filter((v) => v.id !== c.architects.videoId).map((v) => (
               <article key={v.id} className="space-y-3">
                 <YouTubeFacade video={v} lang={lang} />
                 <h3 className="font-bold text-white">{v.title}</h3>

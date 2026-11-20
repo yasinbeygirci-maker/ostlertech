@@ -24,6 +24,16 @@ export function checkWaitlistRequest(body: unknown, now = Date.now()): WaitlistC
   return { kind: "ok", product: product as WaitlistProduct };
 }
 
+/**
+ * İstemci için: formun açılışından (started) en az WAITLIST_MIN_FILL_MS geçmesine kalan süre (ms). Sayfa açılır açılmaz basan
+ * kullanıcının isteği sunucuda "bot" sayılıp bağlantısız dönüyordu (S2); istemci göndermeden önce bu kadar bekler.
+ * started yok/geçersizse (henüz kurulmamış) tam süre beklenir.
+ */
+export function waitlistRemainingMs(started: number, now = Date.now()): number {
+  if (!Number.isFinite(started) || started <= 0) return WAITLIST_MIN_FILL_MS + 100;
+  return Math.max(0, started + WAITLIST_MIN_FILL_MS + 100 - now); // +100 ms: saat/ağ sapması payı
+}
+
 /** Başarı yanıtının gövdesi: yalnız indirme bağlantıları. */
 export function waitlistSuccessBody(downloads: Record<string, string>): { ok: true; downloads: Record<string, string> } {
   return { ok: true, downloads };

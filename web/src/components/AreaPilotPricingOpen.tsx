@@ -44,30 +44,13 @@ export default function AreaPilotPricingOpen({ lang, payload }: { lang: SalesLan
           <p className="max-w-3xl text-muted leading-relaxed">{c.lead}</p>
         </div>
 
-        {/* Mesafeli satış ön bilgisi (Zeynep §5.1): "Satın al" düğmelerinin üstünde, gövde yazı boyutunda. */}
-        <aside aria-labelledby="areapilot-onbilgi" className="rounded-3xl border border-line bg-card p-6 md:p-8">
-          <h3 id="areapilot-onbilgi" className="text-xl font-bold text-white">{pre.title}</h3>
-          <ol className="mt-4 list-decimal space-y-3 pl-6 text-base leading-relaxed text-foreground">
-            {pre.items.map((it) => (
-              <li key={it.label}>
-                <strong className="text-white">{it.label}:</strong> {it.text}
-              </li>
-            ))}
-          </ol>
-          <p className="mt-4 text-base text-muted">
-            {pre.links
-              .filter((l) => l.href)
-              .map((l, i) => (
-                <span key={l.label}>
-                  {i > 0 && " · "}
-                  <a href={l.href!} className="text-primary underline hover:text-primary-light">
-                    {l.label}
-                  </a>
-                </span>
-              ))}
-          </p>
-          <p className="mt-3 text-base text-muted">{pre.trademark}</p>
-        </aside>
+        {/* Kartlar önce (Mert S3); ön bilgi hemen altta kalır, burada ona bağlantı verilir. Mesafeli satış ön bilgisi (Zeynep §5.1) silinmedi, yalnız yeri değişti: yeni sıra Zeynep onayı ister. */}
+        <p className="text-base text-muted">
+          {c.preHint}{" "}
+          <a href="#areapilot-onbilgi" className="text-primary underline hover:text-primary-light">
+            {pre.title}
+          </a>
+        </p>
 
         <div className="grid gap-6 lg:grid-cols-3">
           {AREAPILOT_TIER_IDS.map((tier) => {
@@ -115,6 +98,31 @@ export default function AreaPilotPricingOpen({ lang, payload }: { lang: SalesLan
         </div>
 
         <p className="text-center text-base text-muted">{c.priceNote}</p>
+
+        {/* Mesafeli satış ön bilgisi (Zeynep §5.1): "Satın al" düğmelerinin üstünde, gövde yazı boyutunda. */}
+        <aside aria-labelledby="areapilot-onbilgi" className="rounded-3xl border border-line bg-card p-6 md:p-8">
+          <h3 id="areapilot-onbilgi" className="text-xl font-bold text-white">{pre.title}</h3>
+          <ol className="mt-4 list-decimal space-y-3 pl-6 text-base leading-relaxed text-foreground">
+            {pre.items.map((it) => (
+              <li key={it.label}>
+                <strong className="text-white">{it.label}:</strong> {it.text}
+              </li>
+            ))}
+          </ol>
+          <p className="mt-4 text-base text-muted">
+            {pre.links
+              .filter((l) => l.href)
+              .map((l, i) => (
+                <span key={l.label}>
+                  {i > 0 && " · "}
+                  <a href={l.href!} className="text-primary underline hover:text-primary-light">
+                    {l.label}
+                  </a>
+                </span>
+              ))}
+          </p>
+          <p className="mt-3 text-base text-muted">{pre.trademark}</p>
+        </aside>
 
         {error && <p className="text-center text-sm text-weak">{c.error}</p>}
 

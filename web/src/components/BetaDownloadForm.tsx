@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { CheckCircle2, Download, FileText, Loader2 } from "lucide-react";
 import type { AreaPilotCopy } from "@/lib/areapilot-content";
+import { waitlistRemainingMs } from "@/lib/waitlist-core";
 
 // AreaPilot indirme formu: yalnız bir düğme + form altı bilgi satırı. E-posta ve AutoCAD sürümü alanları 2026-11-18'de kaldırıldı
 // (Supabase KVKK md. 9 kararı): sunucuya kişisel veri gitmez, hiçbir şey saklanmaz.
@@ -24,6 +25,9 @@ export default function BetaDownloadForm({ copy, lang, privacyHref }: { copy: Ar
     setBusy(true);
     const website = (new FormData(e.currentTarget).get("website") as string) ?? "";
     try {
+      // Sunucu 2,5 sn'den hızlı gelen isteği bot sayıp bağlantısız döner; erken basan kullanıcı hata görmesin diye kalan süre beklenir ("Açılıyor…").
+      const wait = waitlistRemainingMs(started);
+      if (wait > 0) await new Promise((r) => setTimeout(r, wait));
       const res = await fetch("/api/bekleme", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
