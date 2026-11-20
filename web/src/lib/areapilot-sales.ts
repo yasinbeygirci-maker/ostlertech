@@ -95,8 +95,6 @@ export interface SalesCopy {
   taxIncluded: string;
   /** Kartların altındaki tek satır. */
   priceNote: string;
-  /** Kartların üstünde, alttaki ön bilgiye bağlantı veren kısa cümle (bağlantı metni ön bilgi başlığıdır). */
-  preHint: string;
   buy: string;
   highlightedLabel: string;
   tiers: Record<AreaPilotTierId, TierCopy>;
@@ -123,7 +121,6 @@ export const SALES_COPY: Record<SalesLang, SalesCopy> = {
     once: "tek seferlik",
     taxIncluded: "Türkiye için KDV dahil",
     priceNote: "Gösterilen fiyatlar Türkiye için %20 KDV dahil toplamdır. Ödeyeceğin tutar ödeme adımında gösterilen toplamdır; vergi numarası girersen ya da başka bir ülkeden alırsan vergi tutarı değişebilir.",
-    preHint: "Cayma, iade ve teslimat bilgisi kartların altında:",
     buy: "Satın al",
     highlightedLabel: "Çoğu ekip için",
     tiers: {
@@ -145,7 +142,6 @@ export const SALES_COPY: Record<SalesLang, SalesCopy> = {
     once: "one-time",
     taxIncluded: "incl. VAT (Türkiye)",
     priceNote: "The prices shown are totals including 20% VAT for Türkiye. You pay the total shown at checkout; if you enter a tax number or buy from another country, the tax may change.",
-    preHint: "Withdrawal, refund and delivery details are below the cards:",
     buy: "Buy",
     highlightedLabel: "For most teams",
     tiers: {
