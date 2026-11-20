@@ -102,7 +102,7 @@ export const URUNLER: Urun[] = [
     id: "areapilot",
     ad: "AreaPilot",
     slogan: "AutoCAD'de alan ve çevre metrajı",
-    aciklama: "AutoCAD çizimindeki kapalı alanları bulur, kodlarını yanındaki yazıdan okur, alan ve çevreyi toplar; çizime yazar, tablo ekler, Excel'e aktarır. Windows, AutoCAD 2013-2027.",
+    aciklama: "AutoCAD çizimindeki kapalı alanları bulur, kodlarını alanın içindeki yazıdan okur, alan ve çevreyi toplar; çizime yazar, tablo ekler, Excel'e aktarır. Windows, AutoCAD 2013-2027.",
     platform: "Windows (AutoCAD)",
     ikon: "Layers",
     renk: "#4C8DFF",
@@ -115,7 +115,7 @@ export const URUNLER: Urun[] = [
     en: {
       ad: "AreaPilot",
       slogan: "Area and perimeter takeoff in AutoCAD",
-      aciklama: "Finds the closed areas in an AutoCAD drawing, reads their codes from the text next to them and totals area and perimeter; writes the results into the drawing, adds a table and exports to Excel. Windows, AutoCAD 2013–2027.",
+      aciklama: "Finds the closed areas in an AutoCAD drawing, reads their codes from the text inside them and totals area and perimeter; writes the results into the drawing, adds a table and exports to Excel. Windows, AutoCAD 2013–2027.",
       platform: "Windows (AutoCAD)",
       cta: `Try AreaPilot free for ${AREAPILOT.trialDays} days`,
       ekler: [{ etiket: "Videos", url: `${AREAPILOT.enPath}#videolar` }],

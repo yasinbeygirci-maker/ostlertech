@@ -77,11 +77,11 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
   tr: {
     title: "AutoCAD alan ve m² metraj eklentisi: AreaPilot",
     description:
-      "AutoCAD çizimindeki kapalı alanları bulur, kodunu yanındaki yazıdan okur, m² ve çevreyi toplayıp Excel'e aktarır. 7 gün ücretsiz dene; tek seferlik lisans.",
+      "AutoCAD çizimindeki kapalı alanları bulur, kodunu içindeki yazıdan okur, m² ve çevreyi toplayıp Excel'e aktarır. 7 gün ücretsiz dene; tek seferlik lisans.",
     badge: `Sürüm ${A.version}`,
     h1: "Bu alanda kaç m² kaplama var?",
     h1Sub: "AreaPilot: AutoCAD alan ve m² metraj eklentisi",
-    lead: "AreaPilot, AutoCAD çizimindeki kapalı alanları (oda, kat, cam, panel) bulur, kodlarını yanındaki yazıdan okur, alan ve çevreyi toplar ve Excel'e aktarır.",
+    lead: "AreaPilot, AutoCAD çizimindeki kapalı alanları (oda, kat, cam, panel) bulur, kodlarını alanın içindeki yazıdan okur, alan ve çevreyi toplar ve Excel'e aktarır.",
     sub: "Bir yapıdaki oda ve kat alanlarını da, cephe ve imalat alanlarını da tek tek ölçüp hesap makinesinde toplaman gerekmez.",
     cta: "7 gün ücretsiz dene",
     ctaNote: `Windows · AutoCAD 2013-2027 · ilk kullanımdan itibaren ${A.trialDays} gün ücretsiz deneme`,
@@ -90,7 +90,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       title: "Mimarlar için: oda ve kat alan tablosu",
       items: [
         { h: "Oda ve kat alanlarını tek seferde al.", p: "Odaları kendin seç ya da bir katmandaki bütün kapalı alanları tek seferde al; her alan için m² ve çevre çıkar." },
-        { h: "Oda adına göre gruplar ve toplar.", p: "Alanın içindeki ya da yanındaki yazıyı (örneğin oda adı) o alanın kodu olarak okur, aynı yazıdakileri gruplar; her grup için adet, m² ve çevre toplamı görünür." },
+        { h: "Oda adına göre gruplar ve toplar.", p: "Alanın içindeki yazıyı (örneğin oda adı) o alanın kodu olarak okur, aynı yazıdakileri gruplar; her grup için adet, m² ve çevre toplamı görünür." },
         { h: "Çizime alan yazısı ve tablo, Excel'e liste.", p: "Alan yazıları ve tablo çizime eklenir; liste ve toplamlar .xlsx dosyası olarak kaydedilir. İç içe alanlarda kolon ve şaft boşluğu düşer, üst üste çizilmiş aynı alan iki kez sayılmaz." },
       ],
       videoId: "jHxtpNy5bhM",
@@ -99,7 +99,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     featuresTitle: "Ne yapar",
     features: [
       { h: "Kapalı alanları seçer", p: "Birkaç alanı kendin seç ya da bir katmandaki bütün alanları tek seferde al. Xref ve blok içindeki alanlar da bulunur." },
-      { h: "Kodu yanındaki yazıdan okur", p: "Alanın içindeki ya da yanındaki yazıyı (TEXT, MTEXT, blok niteliği) o alanın kodu olarak alır, aynı koddakileri gruplar. Aynı alanda birden çok yazı varsa Ayarlar'daki Kod seçimi hangisinin alınacağını belirler." },
+      { h: "Kodu alanın içindeki yazıdan okur", p: "Alanın içindeki yazıyı (TEXT, MTEXT, blok niteliği; yazı alanın sınırının dışındaysa okunmaz) o alanın kodu olarak alır, aynı koddakileri gruplar. Aynı alanda birden çok yazı varsa Ayarlar'daki Kod seçimi hangisinin alınacağını belirler; mimari planda oda numarası ya da kapı etiketi de varsa \"En uzun yazı\"yı seç." },
       { h: "Alanı ve çevreyi birlikte toplar", p: "Her kod için alan, çevre, adet ve toplamlar listede görünür. Bir satırı tıklayınca o alanlar çizimde yanar; İçine Tıkla ile imlecin altında alan ve çevre görünür. Listede kod arayabilir, satırın işaretini kaldırıp toplamdan çıkarabilirsin." },
       { h: "Boşlukları ve kopyaları ayıklar", p: "İç içe alanlarda içteki boşluğu (kolon, şaft) düşer; üst üste çizilmiş aynı alanı iki kez saymaz." },
       { h: "Kapalı olmayan çizgilerden sınır çıkarır", p: "Alanın içine tıkla, bir bölgedeki bütün alanları al ya da seçtiğin çizgilerin kapattığı bölgeleri sınır olarak çizime ekle. Dış kontur, köşelerindeki küçük boşlukları çizgileri köşede uzatarak (yayları kendi doğrultusunda) kapatır ve tek kapalı sınır çıkarır." },
@@ -234,7 +234,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     badge: `Version ${A.version}`,
     h1: "How many m² of cladding are in this area?",
     h1Sub: "AreaPilot: AutoCAD area and m² takeoff add-in",
-    lead: "AreaPilot finds the closed areas in your AutoCAD drawing (rooms, floors, glass, panels), reads their codes from the text next to them, totals the m² and exports it to Excel.",
+    lead: "AreaPilot finds the closed areas in your AutoCAD drawing (rooms, floors, glass, panels), reads their codes from the text inside them, totals the m² and exports it to Excel.",
     sub: "No more measuring room and floor areas, or facade and work-item areas, one by one in a building and adding them up on a calculator.",
     cta: "Try free for 7 days",
     ctaNote: `Windows · AutoCAD 2013-2027 · ${A.trialDays}-day free trial from first use`,
@@ -243,7 +243,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       title: "For architects: a room and floor area table",
       items: [
         { h: "Take room and floor areas in one go.", p: "Pick the rooms yourself, or take every closed area on a layer at once; you get m² and perimeter for each area." },
-        { h: "Groups and totals by room name.", p: "Text inside or next to an area (for example the room name) becomes that area's code, and areas with the same text are grouped; each group shows count, m² and perimeter totals." },
+        { h: "Groups and totals by room name.", p: "Text inside an area (for example the room name) becomes that area's code, and areas with the same text are grouped; each group shows count, m² and perimeter totals." },
         { h: "Area labels and a table in the drawing, a list in Excel.", p: "Area labels and a table go into the drawing; the list and totals are saved as an .xlsx file. In nested areas the opening (column, shaft) is subtracted, and the same area drawn twice is counted once." },
       ],
       videoId: "nKRgVVP-xt4",
@@ -252,7 +252,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     featuresTitle: "What it does",
     features: [
       { h: "Selects closed areas", p: "Pick a few areas yourself, or take every area on a layer at once. Areas inside xrefs and blocks are found too." },
-      { h: "Reads the code from nearby text", p: "Text inside or next to an area (TEXT, MTEXT, block attributes) becomes that area's code, and areas with the same code are grouped. If an area holds several texts, the Code source setting decides which one is used." },
+      { h: "Reads the code from the text inside the area", p: "Text inside an area (TEXT, MTEXT, block attributes; text outside the outline is not read) becomes that area's code, and areas with the same code are grouped. If an area holds several texts, the Code source setting decides which one is used; on architectural plans that also carry room numbers or door tags, choose \"Longest text\"." },
       { h: "Totals area and perimeter together", p: "For every code the list shows area, perimeter, count and totals. Click a row and those areas light up in the drawing; Click Inside shows area and perimeter under the cursor. Search the list by code, or untick a row to leave it out of the total." },
       { h: "Handles openings and duplicates", p: "In nested areas the inner opening (column, shaft) is subtracted; the same area drawn twice is counted once." },
       { h: "Builds boundaries from open lines", p: "Click inside an area, take every area in a region, or turn the regions closed by the lines you select into boundaries in the drawing. Outline closes small gaps at the corners by extending the lines (arcs along their own direction) and produces one closed boundary." },
