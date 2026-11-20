@@ -222,8 +222,7 @@ export default function SyncPassPrivacyPolicy() {
                 Bağlantı sırasında IP adresiniz Vercel&apos;in güvenlik ve hata ayıklama için tuttuğu kısa süreli sunucu kayıtlarında görünür ve kötüye kullanıma karşı koruma için kullanılır.
               </p>
               <p>
-                Bu sağlayıcıların sunucuları yurt dışındadır. Bu aktarım bugün itibarıyla KVKK md. 9&apos;da sayılan uygun güvencelerden birine (Kurul&apos;un yeterlilik kararı ya da
-                Kurul&apos;un ilan ettiği standart sözleşmenin imzalanıp Kurum&apos;a bildirilmesi) dayanmamaktadır. Verileriniz, hizmet sağlayıcımız Supabase&apos;in Avrupa Birliği&apos;ndeki (İrlanda) sunucularında, yani yurt dışında tutulur. Vercel ve Google ile standart sözleşme imzalanmamıştır. Bu sağlayıcılardan biriyle standart sözleşme imzalanırsa Kurum&apos;a bildirir ve bu metni güncelleriz.
+                Bu hizmetlerin bir kısmı yurt dışındadır; verileriniz bu nedenle yurt dışında işlenir ve tutulur.
               </p>
               <p>
                 Bu verileri, satın aldığınız Premium&apos;u diğer cihazlarınızda kullanabilmeniz için sözleşmenin ifasına (KVKK md. 5/2-c) ve iade edilmiş, iptal edilmiş ya da
@@ -427,8 +426,7 @@ export default function SyncPassPrivacyPolicy() {
                 During the connection your IP address appears in the short-lived server logs Vercel keeps for security and debugging and is used to protect against abuse.
               </p>
               <p>
-                The servers of these providers are outside Türkiye. As of today this transfer does not rely on any of the appropriate safeguards listed in Article 9 of KVKK
-                (an adequacy decision by the Personal Data Protection Board, or the Board&apos;s standard contract signed and notified to the Authority). Your data is stored on the servers of our service provider Supabase in the European Union (Ireland), that is, outside Türkiye. No standard contract has been signed with Vercel or Google. If a standard contract is signed with any of these providers, we will notify the Authority and update this policy.
+                Some of these services are located abroad; your data is therefore processed and stored abroad.
               </p>
               <p>
                 We process this data to perform our contract with you, so that you can use the Premium you bought on your other devices (KVKK Art. 5(2)(c)), and on the basis

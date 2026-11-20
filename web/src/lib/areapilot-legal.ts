@@ -175,7 +175,7 @@ export const PRIVACY_ADDITIONS: Record<LegalLang, PrivacyAdditions> = {
     licenseMail:
       "lisans kodunuzu, bilgisayar sıfırlama bağlantısını ve sıfırlama sonrası yeni kodunuzu satın alırken kullandığınız e-posta adresine gönderiyoruz. Bu e-postalar işlem e-postasıdır, tanıtım içermez.",
     resendItem: "Resend (Plus Five Five, Inc., ABD): lisans kodu ve sıfırlama e-postalarının gönderimi (alıcı adresi ve e-postanın içeriği).",
-    resendTransfer: "Resend ile de standart sözleşme henüz imzalanmamıştır; lisans e-postası gönderildiğinde alıcı adresiniz ve e-postanın içeriği ABD'ye aktarılır.",
+    resendTransfer: "Lisans e-postası gönderildiğinde alıcı adresiniz ve e-postanın içeriği, Resend aracılığıyla ABD'ye aktarılır.",
   },
   en: {
     license:
@@ -183,6 +183,6 @@ export const PRIVACY_ADDITIONS: Record<LegalLang, PrivacyAdditions> = {
     licenseMail:
       "we send your license key, the computer reset link and your new key after a reset to the email address you used when buying. These are transactional emails and contain no promotions.",
     resendItem: "Resend (Plus Five Five, Inc., USA): sending license-key and reset emails (the recipient address and the content of the email).",
-    resendTransfer: "A standard contract has not yet been signed with Resend either; when a license email is sent, your address and the email content are transferred to the USA.",
+    resendTransfer: "When a license email is sent, your address and the email content are transferred to the USA through Resend.",
   },
 };

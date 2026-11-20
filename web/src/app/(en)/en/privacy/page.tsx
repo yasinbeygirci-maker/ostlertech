@@ -56,7 +56,7 @@ export default function PrivacyEnPage() {
       <List>
         <li>Paddle.com Market Ltd (United Kingdom): as Merchant of Record, taking payments, invoicing, taxes, subscriptions and refunds. When you open the /en/pricing or /en/areapilot page, without waiting for you to press a button, Paddle's checkout script (cdn.paddle.com) and the Paddle-owned ProfitWell script it loads (public.profitwell.com) are loaded so that prices can be shown; your IP address, browser information and country are then sent to Paddle (<a href="https://www.paddle.com/legal/privacy" target="_blank" rel="noopener" className={link}>Paddle privacy policy</a>).</li>
         <li>Supabase Pte. Ltd. (Singapore company; database servers in Ireland, EU): storing license records.</li>
-        <li>Vercel: hosting the site and the license check service; anonymous visit statistics (Web Analytics).</li>
+        <li>Vercel Inc. (USA): hosting the site and the license check service; anonymous visit statistics (Web Analytics).</li>
         {live && <li>{add.resendItem}</li>}
         <li>ChatPlace, Inc. (United States): Instagram messaging automation (automatic replies and an AI-assisted assistant). For AI replies, ChatPlace sends message content to AI service providers in the United States.</li>
         <li>Cloudflare, Inc. (United States): email forwarding; emails you write to destek@, yasin@ and guvenlik@ostlertech.com are forwarded through Cloudflare to our mailbox.</li>
@@ -68,9 +68,7 @@ export default function PrivacyEnPage() {
       </List>
       <p>
         Paddle (United Kingdom), Vercel, Supabase, ChatPlace, Cloudflare and Google servers are outside Türkiye; when you visit our site, open the purchase page, your
-        desktop license is checked or you request a desktop code in the SyncPass Android app, you message us on Instagram or you email us, your data is transferred to these providers. As of today this transfer does not rely on any of
-        the appropriate safeguards listed in Article 9 of KVKK (an adequacy decision by the Personal Data Protection Board,
-        or the Board's standard contract signed and notified to the Authority). Your data is stored on the servers of our service provider Supabase in the European Union (Ireland), that is, outside Türkiye. No standard contract has been signed with ChatPlace, Vercel or Google yet either. If a standard contract is signed with any of these providers, we will notify the Authority and update this text.{live ? ` ${add.resendTransfer}` : null}
+        desktop license is checked or you request a desktop code in the SyncPass Android app, you message us on Instagram or you email us, your data is transferred to these providers. Some of these services are located abroad; your data is therefore processed and stored abroad.{live ? ` ${add.resendTransfer}` : null}
         Data transfers of our account-based apps are described separately in their own privacy policies.
       </p>
 

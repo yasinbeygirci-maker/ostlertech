@@ -34,7 +34,7 @@ export default function SyncSitePrivacyPage() {
         <p className="font-semibold text-foreground">Kısa bilgi</p>
         <List>
           <li>Uygulamayı <strong className="text-foreground">hesap açmadan</strong> da kullanabilirsiniz: uygulama sunucularımıza hiçbir veri göndermez; verileriniz cihazınızda kalır.</li>
-          <li>Hesap açarsanız verileriniz Avrupa Birliği’ndeki (İrlanda) sunucularda tutulur. <strong className="text-foreground">Bu bir yurt dışı aktarımdır ve bugün KVKK md. 9’daki güvencelerden birine dayanmamaktadır</strong> (6. bölüm).</li>
+          <li>Hesap açarsanız verileriniz, hizmet sağlayıcımız Supabase’in Avrupa Birliği’ndeki (İrlanda) sunucularında, yani yurt dışında tutulur (6. bölüm).</li>
           <li>Reklam, analiz (istatistik), çökme raporu ve yapay zekâ servisi yoktur. Verilerinizi satmaz, pazarlamada kullanmayız.</li>
           <li>Konum (GPS) izni istenmez; fotoğraflardaki konum bilgisi buluta gitmeden silinir.</li>
           <li>Hesabınızı uygulamadan ya da <a href={SYNCSITE.deletePath} className={link}>hesap silme sayfasından</a> silebilirsiniz.</li>

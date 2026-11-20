@@ -34,7 +34,7 @@ export default function SyncSitePrivacyEnPage() {
         <p className="font-semibold text-foreground">Short notice</p>
         <List>
           <li>You can use the app <strong className="text-foreground">without a {N} account</strong>: the app sends no data to our servers; your data stays on your device.</li>
-          <li>If you create an account, your data is stored on servers in the European Union (Ireland). <strong className="text-foreground">This is a transfer abroad and today it does not rely on one of the safeguards in KVKK Art. 9</strong> (section 6).</li>
+          <li>If you create an account, your data is stored on the servers of our service provider Supabase in the European Union (Ireland), that is, outside Türkiye (section 6).</li>
           <li>There is no advertising, analytics, crash-reporting or AI service. We do not sell your data or use it for marketing.</li>
           <li>The app asks for no location (GPS) permission; location data inside photos is removed before upload.</li>
           <li>You can delete your account in the app or on the <a href={SYNCSITE.deleteEnPath} className={link}>account deletion page</a>.</li>

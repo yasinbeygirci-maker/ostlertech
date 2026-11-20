@@ -53,7 +53,7 @@ export default function SitePrivacyPage() {
       <List>
         <li>Paddle.com Market Ltd (Birleşik Krallık): yetkili satıcı olarak ödemenin alınması, faturalandırma, vergiler, abonelik ve iadeler. /satin-al ya da /areapilot sayfasını açtığınızda, bir düğmeye basmanız beklenmeden, fiyatların gösterilmesi için Paddle'ın ödeme betiği (cdn.paddle.com) ve bu betiğin yüklediği, Paddle'a ait ProfitWell betiği (public.profitwell.com) yüklenir; bu sırada IP adresiniz, tarayıcı bilginiz ve ülke bilginiz Paddle'a iletilir (<a href="https://www.paddle.com/legal/privacy" target="_blank" rel="noopener" className="text-primary hover:text-primary-light">Paddle gizlilik politikası</a>).</li>
         <li>Supabase Pte. Ltd. (Singapur şirketi; veritabanı sunucuları İrlanda, AB): lisans kayıtlarının saklanması.</li>
-        <li>Vercel: sitenin ve lisans doğrulama hizmetinin barındırılması; anonim ziyaret istatistikleri (Web Analytics).</li>
+        <li>Vercel Inc. (ABD): sitenin ve lisans doğrulama hizmetinin barındırılması; anonim ziyaret istatistikleri (Web Analytics).</li>
         {live && <li>{add.resendItem}</li>}
         <li>ChatPlace, Inc. (ABD): Instagram mesajlaşma otomasyonu (otomatik yanıtlar ve yapay zekâ destekli asistan). ChatPlace, yapay zekâ yanıtları için mesaj içeriğini ABD'deki yapay zekâ hizmet sağlayıcılarına iletir.</li>
         <li>Cloudflare, Inc. (ABD): e-posta yönlendirme; destek@, yasin@ ve guvenlik@ostlertech.com adreslerine yazdığınız e-postalar Cloudflare üzerinden posta kutumuza iletilir.</li>
@@ -64,9 +64,7 @@ export default function SitePrivacyPage() {
         <li>Yetkili kamu kurumları: yalnızca kanunen zorunlu olduğunda.</li>
       </List>
       <p>
-        Paddle (Birleşik Krallık), Vercel, Supabase, ChatPlace, Cloudflare ve Google'ın sunucuları yurt dışındadır; sitemizi ziyaret ettiğinizde, satın alma sayfasını açtığınızda, masaüstü lisansınız doğrulandığında ya da SyncPass Android uygulamasında masaüstü kodu istediğinizde, bize Instagram'dan yazdığınızda ve bize e-posta gönderdiğinizde verileriniz bu sağlayıcılara aktarılır. Bu aktarım bugün itibarıyla KVKK md. 9'da
-        sayılan uygun güvencelerden birine (Kurul'un yeterlilik kararı ya da Kurul'un ilan ettiği standart sözleşmenin
-        imzalanıp Kurum'a bildirilmesi) dayanmamaktadır. Verileriniz, hizmet sağlayıcımız Supabase'in Avrupa Birliği'ndeki (İrlanda) sunucularında, yani yurt dışında tutulur. ChatPlace, Vercel ve Google ile de standart sözleşme henüz imzalanmamıştır. Bu sağlayıcılardan biriyle standart sözleşme imzalanırsa Kurum'a bildirir ve bu metni güncelleriz.{live ? ` ${add.resendTransfer}` : null} Hesap tabanlı uygulamalarımızın
+        Paddle (Birleşik Krallık), Vercel, Supabase, ChatPlace, Cloudflare ve Google'ın sunucuları yurt dışındadır; sitemizi ziyaret ettiğinizde, satın alma sayfasını açtığınızda, masaüstü lisansınız doğrulandığında ya da SyncPass Android uygulamasında masaüstü kodu istediğinizde, bize Instagram'dan yazdığınızda ve bize e-posta gönderdiğinizde verileriniz bu sağlayıcılara aktarılır. Bu hizmetlerin bir kısmı yurt dışındadır; verileriniz bu nedenle yurt dışında işlenir ve tutulur.{live ? ` ${add.resendTransfer}` : null} Hesap tabanlı uygulamalarımızın
         yurt dışı aktarımı kendi gizlilik politikalarında ayrıca anlatılır.
       </p>
 
