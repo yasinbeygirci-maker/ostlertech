@@ -199,7 +199,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       { h: "Hukuki sebep:", p: "Sitenin güvenliği ve işleyişi için sunucu kayıtlarının tutulmasındaki meşru menfaatimiz (KVKK md. 5/2-f)." },
       {
         h: "Aktarım:",
-        p: "Site Vercel Inc. (ABD) üzerinde çalışır; formu kullandığınızda IP adresiniz Vercel'e ulaşır. Vercel'in sunucuları yurt dışındadır ve bu aktarım bugün itibarıyla KVKK md. 9'da sayılan güvencelerden birine (yeterlilik kararı ya da Kurul'un ilan ettiği standart sözleşmenin imzalanıp Kurum'a bildirilmesi) dayanmamaktadır; Vercel ile standart sözleşme imzalanmamıştır. İmzalanırsa Kurum'a bildirir ve bu metni güncelleriz. Verinizi satmayız, reklam için paylaşmayız.",
+        p: "Site Vercel Inc. (ABD) üzerinde çalışır; formu kullandığınızda IP adresiniz Vercel'e ulaşır. Vercel'in sunucuları yurt dışındadır; verileriniz bu nedenle yurt dışında işlenir ve tutulur. Verinizi satmayız, reklam için paylaşmayız.",
       },
       {
         h: "Eski kayıtlar:",
@@ -338,7 +338,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       { h: "Legal basis:", p: "our legitimate interest in keeping server logs for the security and operation of the site (KVKK Art. 5(2)(f))." },
       {
         h: "Transfers:",
-        p: "the site runs on Vercel Inc. (USA); when you use the form your IP address reaches Vercel. Vercel's servers are outside Türkiye and, as of today, this transfer does not rely on any of the safeguards listed in Article 9 of KVKK (an adequacy decision, or the Board's standard contract signed and notified to the Authority); no standard contract has been signed with Vercel. If one is signed we will notify the Authority and update this text. We do not sell your data or share it for advertising.",
+        p: "the site runs on Vercel Inc. (USA); when you use the form your IP address reaches Vercel. Vercel's servers are outside Türkiye; your data is therefore processed and stored abroad. We do not sell your data or share it for advertising.",
       },
       {
         h: "Old records:",

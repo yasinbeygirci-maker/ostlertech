@@ -64,7 +64,7 @@ export default function SitePrivacyPage() {
         <li>Yetkili kamu kurumları: yalnızca kanunen zorunlu olduğunda.</li>
       </List>
       <p>
-        Paddle (Birleşik Krallık), Vercel, Supabase, ChatPlace, Cloudflare ve Google'ın sunucuları yurt dışındadır; sitemizi ziyaret ettiğinizde, satın alma sayfasını açtığınızda, masaüstü lisansınız doğrulandığında ya da SyncPass Android uygulamasında masaüstü kodu istediğinizde, bize Instagram'dan yazdığınızda ve bize e-posta gönderdiğinizde verileriniz bu sağlayıcılara aktarılır. Bu hizmetlerin bir kısmı yurt dışındadır; verileriniz bu nedenle yurt dışında işlenir ve tutulur.{live ? ` ${add.resendTransfer}` : null} Hesap tabanlı uygulamalarımızın
+        Sitemizi ziyaret ettiğinizde, satın alma sayfasını açtığınızda, masaüstü lisansınız doğrulandığında ya da SyncPass Android uygulamasında masaüstü kodu istediğinizde, bize Instagram'dan yazdığınızda ve bize e-posta gönderdiğinizde verileriniz bu sağlayıcılara aktarılır. Bu hizmetlerin bir kısmı yurt dışındadır; verileriniz bu nedenle yurt dışında işlenir ve tutulur.{live ? ` ${add.resendTransfer}` : null} Hesap tabanlı uygulamalarımızın
         yurt dışı aktarımı kendi gizlilik politikalarında ayrıca anlatılır.
       </p>
 

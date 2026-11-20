@@ -67,7 +67,7 @@ export default function PrivacyEnPage() {
         <li>Competent public authorities: only where required by law.</li>
       </List>
       <p>
-        Paddle (United Kingdom), Vercel, Supabase, ChatPlace, Cloudflare and Google servers are outside Türkiye; when you visit our site, open the purchase page, your
+        When you visit our site, open the purchase page, your
         desktop license is checked or you request a desktop code in the SyncPass Android app, you message us on Instagram or you email us, your data is transferred to these providers. Some of these services are located abroad; your data is therefore processed and stored abroad.{live ? ` ${add.resendTransfer}` : null}
         Data transfers of our account-based apps are described separately in their own privacy policies.
       </p>
