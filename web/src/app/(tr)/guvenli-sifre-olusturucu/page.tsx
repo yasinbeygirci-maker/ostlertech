@@ -136,7 +136,7 @@ export default function GuvenliSifreOlusturucu() {
           <ul className="space-y-2 text-sm text-muted">
             <li className="flex gap-3"><Check size={16} className="mt-0.5 shrink-0 text-ok" /> {FREE_UP_TO_TR}</li>
             <li className="flex gap-3"><Check size={16} className="mt-0.5 shrink-0 text-ok" /> Premium ile 2FA kodları ve Google Drive'a şifreli yedek</li>
-            <li className="flex gap-3"><Check size={16} className="mt-0.5 shrink-0 text-ok" /> Android ve Windows'ta aynı kasa</li>
+            <li className="flex gap-3"><Check size={16} className="mt-0.5 shrink-0 text-ok" /> Android ve Windows'ta aynı şifreleme ve kasa biçimi</li>
           </ul>
           <div className="flex flex-wrap gap-3 pt-2">
             <a href={PLAY_URL} className="btn-primary !py-3.5" rel="noopener">Google Play'den indir</a>

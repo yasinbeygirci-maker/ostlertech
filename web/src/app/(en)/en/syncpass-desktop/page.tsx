@@ -46,7 +46,7 @@ export default function DesktopLicensePageEn() {
         <div className="max-w-6xl mx-auto grid lg:grid-cols-[1.2fr_1fr] gap-12 items-start">
           <div className="space-y-6">
             <p className="eyebrow">SyncPass Desktop · Windows</p>
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">The same vault on your computer.</h1>
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">The same encryption and vault format on your computer.</h1>
             <p className="text-lg text-muted leading-relaxed">
               SyncPass Desktop uses the same encryption and vault format as the Android app. Your vault stays encrypted on your computer;
               we keep no copy of it on our servers.

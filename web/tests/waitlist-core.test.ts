@@ -63,7 +63,7 @@ test("metinler (TR+EN): eski vaatler ve 'yanıt beklenmektedir' kalmadı", () =>
   for (const text of files) for (const re of yasak) assert.doesNotMatch(text, re, String(re));
 });
 
-test("gizlilik sayfaları: 18 Kasım 2026 tarihi ve Supabase'in yazılı reddi var", () => {
+test("gizlilik sayfaları: 18 Kasım 2026 tarihi var, Supabase sade yurt dışı cümlesi, sözleşme hikâyesi yok", () => {
   const tr = read("src", "app", "(tr)", "gizlilik", "page.tsx");
   const en = read("src", "app", "(en)", "en", "privacy", "page.tsx");
   const sp = read("src", "app", "(tr)", "syncpass", "privacy", "page.tsx");
@@ -71,6 +71,8 @@ test("gizlilik sayfaları: 18 Kasım 2026 tarihi ve Supabase'in yazılı reddi v
   assert.match(en, /updatedOn="18 November 2026"/);
   assert.match(sp, /EFFECTIVE_TR = "18 Kasım 2026"/);
   assert.match(sp, /EFFECTIVE_EN = "18 November 2026"/);
-  for (const t of [tr, sp]) assert.match(t, /17\.11\.2026 tarihli yazılı yanıtında/);
-  for (const t of [en, sp]) assert.match(t, /written reply of 17 November 2026/);
+  // Yasin kararı (20 Kas 2026): sözleşme isteği/ret hikâyesi yok; yalnız sade yurt dışı cümlesi.
+  for (const t of [tr, sp]) assert.match(t, /Supabase(&apos;|')in Avrupa Birliği(&apos;|')ndeki \(İrlanda\) sunucularında, yani yurt dışında tutulur/);
+  for (const t of [en, sp]) assert.match(t, /servers of our service provider Supabase in the European Union \(Ireland\), that is, outside Türkiye/);
+  for (const t of [tr, en, sp]) assert.doesNotMatch(t, /imzalamadığını bildirdi|does not sign this contract|18\.10\.2026 tarihinde istedik|18 October 2026 to sign/);
 });

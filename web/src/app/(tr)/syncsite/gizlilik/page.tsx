@@ -167,22 +167,9 @@ export default function SyncSitePrivacyPage() {
         <a href="https://supabase.com/legal/customer-resources/subprocessor-list" className={link}>supabase.com/legal/customer-resources/subprocessor-list</a>.
       </p>
       <p>
-        <strong className="text-foreground">Yurt dışına aktarımın şu anki durumu.</strong> Sunucular Türkiye dışında olduğu için hesap
-        açtığınızda verileriniz yurt dışına aktarılır (KVKK md. 9). Bu aktarımın; Kurul’un yeterlilik kararına ya da Kurul’un ilan ettiği
-        standart sözleşmenin değiştirilmeden imzalanıp Kurum’a bildirilmesine dayanması gerekir. Bugün itibarıyla:
+        <strong className="text-foreground">Yurt dışına aktarım.</strong> Verileriniz, hizmet sağlayıcımız Supabase’in Avrupa Birliği’ndeki
+        (İrlanda) sunucularında, yani yurt dışında tutulur.
       </p>
-      <List>
-        <li>Kurul’un Avrupa Birliği ya da İrlanda için verdiği bir yeterlilik kararını bilmiyoruz.</li>
-        <li>
-          Supabase’in standart veri işleme sözleşmesi var; bu sözleşme Avrupa Birliği’nin standart sözleşme maddelerine dayanır,{" "}
-          <strong className="text-foreground">KVKK’nın kabul ettiği standart sözleşme değildir.</strong> Bu nedenle aktarım şu an KVKK
-          md. 9’da sayılan uygun güvencelerden birine dayanmamaktadır; bu, hukuka aykırılık riski taşıyan bir durumdur.
-        </li>
-        <li>
-          Supabase’den Kurul’un standart sözleşmesini imzalamasını 18.10.2026 tarihinde istedik; yanıt gelmedi. İmzalanırsa Kurum’a
-          bildirir ve bu metni güncelleriz. İmzalanmazsa verileri Türkiye’deki bir sunucuya taşımayı değerlendireceğiz.
-        </li>
-      </List>
       <p>
         Bunu kabul etmek istemezseniz Uygulamayı <strong className="text-foreground">hesap açmadan</strong> kullanın (giriş ekranındaki
         hesap açmadan devam etme düğmesi): verileriniz cihazınızdan çıkmaz. Hesabınızı istediğiniz an silebilirsiniz (7. bölüm). Bunların dışında kişisel verileri yalnız yetkili kurum ve

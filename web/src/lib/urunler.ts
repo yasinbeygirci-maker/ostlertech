@@ -70,7 +70,7 @@ export const URUNLER: Urun[] = [
   {
     id: "syncpassdesktop",
     ad: "SyncPass Masaüstü",
-    slogan: "Aynı kasa, Windows'ta",
+    slogan: "Aynı kasa biçimi, Windows'ta",
     aciklama: "Android ile aynı şifreleme ve kasa biçimini kullanan Windows uygulaması. Üç sütunlu düzen, klavye kısayolları ve Windows pano geçmişine düşmeyen kopyalama. Chrome eklentisiyle giriş sayfalarını bu bilgisayardaki kasadan doldurur.",
     platform: "Windows",
     ikon: "Monitor",
@@ -86,7 +86,7 @@ export const URUNLER: Urun[] = [
     not: `Microsoft Store'da yayında. Bu sayfadaki doğrudan indirme sürümü ${DESKTOP_DOWNLOAD.version}. Edge eklentisi hazırlanıyor.`,
     en: {
       ad: "SyncPass Desktop",
-      slogan: "The same vault, on Windows",
+      slogan: "The same vault format, on Windows",
       aciklama: "The Windows version of SyncPass, with the same encryption and vault format as Android. Three-column layout, keyboard shortcuts and copying that stays out of Windows clipboard history. With the Chrome extension it fills sign-in pages from the vault on this computer.",
       platform: "Windows",
       cta: "Download the free version for Windows",

@@ -197,7 +197,7 @@ export default function SyncPassEn() {
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="text-center space-y-4 max-w-2xl mx-auto">
             <p className="eyebrow">SyncPass Desktop · Windows</p>
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">The same vault on your computer.</h2>
+            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">The same encryption and vault format on your computer.</h2>
             <p className="text-lg text-muted">
               The same encryption, vault format and security score as Android. Download it free for Windows, and fill sign-in pages from the vault
               on this computer with the Chrome extension.

@@ -149,7 +149,7 @@ export default function SifreKasasi() {
           <p className={govde}>
             Google, Apple ve Samsung telefonlarında hazır bir kasa vardır; ücretsizdir ve çoğu kişi için iyi bir başlangıçtır.
             Bu kasalar bir hesaba bağlıdır; telefon markasını değiştirirsen taşıma gerekir. Markadan bağımsız bir kasa
-            istiyorsan ya da bilgisayarında da aynı kasayı kullanmak istiyorsan ayrı bir şifre yöneticisi daha uygun olur.
+            istiyorsan ya da bilgisayarında da kullanabileceğin bir kasa istiyorsan ayrı bir şifre yöneticisi daha uygun olur.
             Hazır kasanın yerini bulmak için{" "}
             <a href="/sifre-yoneticisi" className={link}>şifre yöneticisi telefonda nerede bulunur</a> rehberine bakabilir,
             kategorileri yan yana görmek için{" "}

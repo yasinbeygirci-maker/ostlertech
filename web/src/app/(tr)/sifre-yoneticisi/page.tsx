@@ -150,7 +150,7 @@ export default function SifreYoneticisi() {
           <p className="text-muted leading-relaxed">
             Telefonlardaki hazır kasalar (Google, Apple, Samsung) ücretsiz ve kullanışlıdır; bir hesaba bağlıdırlar; telefon markasını
             değiştirirsen taşıma gerekir. Ayrı bir şifre yöneticisi ise markadan bağımsızdır: telefon değiştirdiğinde ya da
-            bilgisayarda da aynı kasayı kullanmak istediğinde işini kolaylaştırır.
+            bilgisayarda da kullanmak istediğinde (eşitleme Premium ile) işini kolaylaştırır.
           </p>
           <p className="text-muted leading-relaxed">
             Telefonda hangi kasayı seçeceğini merak ediyorsan <a href="/sifre-kasasi" className="text-primary hover:text-primary-light">şifre kasası seçme rehberine</a> bak. Yeni bir şifreye mi ihtiyacın var? <a href="/guvenli-sifre-olusturucu" className="text-primary hover:text-primary-light">Güvenli şifre oluşturucu</a> ile
@@ -169,7 +169,7 @@ export default function SifreYoneticisi() {
           <ul className="space-y-2 text-sm text-muted">
             <li className="flex gap-3"><Check size={16} className="mt-0.5 shrink-0 text-ok" /> {FREE_UP_TO_TR}</li>
             <li className="flex gap-3"><Check size={16} className="mt-0.5 shrink-0 text-ok" /> Premium ile 2FA kodları ve Google Drive'a şifreli yedek</li>
-            <li className="flex gap-3"><Check size={16} className="mt-0.5 shrink-0 text-ok" /> Android ve Windows'ta aynı kasa</li>
+            <li className="flex gap-3"><Check size={16} className="mt-0.5 shrink-0 text-ok" /> Android ve Windows'ta aynı şifreleme ve kasa biçimi</li>
           </ul>
           <div className="flex flex-wrap gap-3 pt-2">
             <a href={PLAY_URL} className="btn-primary !py-3.5" rel="noopener">Google Play'den indir</a>

@@ -161,22 +161,9 @@ export default function SyncSitePrivacyEnPage() {
         <a href="https://supabase.com/legal/customer-resources/subprocessor-list" className={link}>supabase.com/legal/customer-resources/subprocessor-list</a>.
       </p>
       <p>
-        <strong className="text-foreground">Current status of the transfer abroad.</strong> Because the servers are outside Türkiye, your data is
-        transferred abroad when you create an account (KVKK Art. 9). Such a transfer must rely on an adequacy decision of the Turkish Board, or on the
-        Board’s standard contract, signed unchanged by the parties and notified to the Authority. As of today:
+        <strong className="text-foreground">Transfer abroad.</strong> Your data is stored on the servers of our service provider Supabase in the
+        European Union (Ireland), that is, outside Türkiye.
       </p>
-      <List>
-        <li>We are not aware of any adequacy decision of the Board for the European Union or Ireland.</li>
-        <li>
-          We have Supabase’s standard data processing agreement, which is based on the EU Standard Contractual Clauses.{" "}
-          <strong className="text-foreground">It is not the standard contract recognized under KVKK.</strong> The transfer therefore does not currently rely
-          on one of the appropriate safeguards listed in KVKK Art. 9, and this carries a risk of non-compliance.
-        </li>
-        <li>
-          We asked Supabase on 18.10.2026 to sign the Board’s standard contract; there has been no reply. If it is signed we will notify the Authority and
-          update this notice. If it is not, we will consider moving the data to a server in Türkiye.
-        </li>
-      </List>
       <p>
         If you do not want to accept this, use the app <strong className="text-foreground">without a {N} account</strong> (the button on the sign-in screen for continuing without
         creating an account): your data then never leaves your device. You can delete your account at any time (section 7). Apart from this, we disclose personal data only to

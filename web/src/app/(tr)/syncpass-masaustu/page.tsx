@@ -65,7 +65,7 @@ export default function DesktopLicensePage() {
         <div className="max-w-6xl mx-auto grid lg:grid-cols-[1.2fr_1fr] gap-12 items-start">
           <div className="space-y-6">
             <p className="eyebrow">SyncPass Masaüstü · <span lang="en">Windows</span></p>
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">Bilgisayarda da aynı kasa.</h1>
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">Bilgisayarda da aynı şifreleme, aynı kasa biçimi.</h1>
             <p className="text-lg text-muted leading-relaxed">
               SyncPass Masaüstü, Android uygulamasıyla aynı şifrelemeyi ve kasa biçimini kullanır. Kasan
               bilgisayarında şifreli durur; kopyası sunucularımızda tutulmaz.

@@ -29,7 +29,7 @@ export default function Desktop() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center max-w-2xl mx-auto space-y-4 mb-12">
           <p className="eyebrow">SyncPass Masaüstü · <span lang="en">Windows</span></p>
-          <h2 className="text-4xl md:text-5xl font-extrabold tracking-[-0.02em] text-white">Bilgisayarda da aynı kasa.</h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold tracking-[-0.02em] text-white">Bilgisayarda da aynı şifreleme, aynı kasa biçimi.</h2>
           <p className="text-lg text-muted">
             Android ile aynı şifreleme ve kasa biçimi, aynı güvenlik puanı. Windows için ücretsiz indir; Chrome
             eklentisiyle giriş sayfalarını bu bilgisayardaki kasadan doldur.
