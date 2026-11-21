@@ -12,7 +12,7 @@ Son kontrol: 8 Kasım 2026. SyncPass bilgileri kendi kodumuzdan ve Android için
 
 | Yaklaşım | Telefon | Bilgisayar |
 |---|---|---|
-| SyncPass | Android (iOS sürümü yok) | Windows (macOS ve Linux sürümü yok) |
+| SyncPass | Android (iPhone sürümü test aşamasında) | Windows (macOS ve Linux sürümü yok) |
 | Bulut kasalı yöneticiler | Üründen ürüne değişir; çoğunun telefon uygulaması var | Üründen ürüne değişir |
 | Yerel dosyalı, açık kaynak yöneticiler | Üründen ürüne değişir; telefonda aynı dosyayı açan ayrı uygulamalar olabilir | Üründen ürüne değişir |
 
@@ -61,7 +61,7 @@ Aşağıdakiler sıralama değil, ihtiyaç eşleştirmesidir.
 
 Başlıca eksiklerimiz:
 
-- iOS, macOS ve Linux sürümü yok.
+- iPhone sürümü test aşamasında; macOS ve Linux sürümü yok.
 - Kasa paylaşımı ve aile planı yok.
 - **SyncPass açık kaynak değildir:** kaynak kodu herkese açık bir lisansla yayımlanmıyor. Kaynak kodunu kendin denetlemek şartsa açık kaynak lisanslı bir şifre yöneticisi bu ölçüte uyar.
 - Bağımsız bir güvenlik denetimimiz yok. Kod kapalı olduğu için bu önemli bir boşluk. Bağımsız denetim yaptırmak için bir karar ya da takvimimiz yok.
@@ -105,7 +105,7 @@ Bu sayfa sıralama yapmıyor; bir yaklaşımın ötekinden üstün olduğunu sö
 Hayır. SyncPass'in kaynak kodu herkese açık bir lisansla yayımlanmıyor. Kaynak kodunun herkes tarafından denetlenebilmesi senin için şartsa açık kaynak lisanslı bir şifre yöneticisi bu ölçüte uyar.
 
 **iPhone ya da Mac kullanıyorum, SyncPass'i kullanabilir miyim?**
-Şu an hayır. SyncPass Android ve Windows için var; iOS, macOS ve Linux sürümü yok. Telefonun iPhone ise iOS uygulaması olan bir şifre yöneticisi daha uygun olur.
+Henüz değil. SyncPass Android ve Windows için var; iPhone sürümü test aşamasında, macOS ve Linux sürümü yok.
 
 **Şifrelerimi başka bir yöneticiden SyncPass'e taşıyabilir miyim?**
 Çoğu durumda evet. Android ve Windows uygulamaları, tarayıcıların ve birçok şifre yöneticisinin dışa aktardığı CSV dosyalarını içe aktarır; desteklenen kaynakların listesi uygulamanın içe aktarma ekranında. Android'de ayrıca 2FA hesapları, standart 2FA kurulum QR kodlarından ve Google Authenticator'ın “Hesapları aktar” dışa aktarma QR kodundan alınabilir. Listede olmayan bir kaynaktan taşıyorsan önce küçük bir deneme yapmanı öneririz.

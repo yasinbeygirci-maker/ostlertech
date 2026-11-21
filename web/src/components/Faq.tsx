@@ -19,7 +19,7 @@ const faqs = [
   },
   {
     q: "iPhone veya Mac sürümü var mı?",
-    a: "Hayır. Android ve Windows sürümleri yayında. iOS ve macOS için bir tarih vermiyoruz.",
+    a: "Henüz değil. Android ve Windows sürümleri yayında, iPhone sürümü test aşamasında. macOS için bir tarih vermiyoruz.",
   },
 ];
 

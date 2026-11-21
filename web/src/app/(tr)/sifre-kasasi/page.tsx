@@ -65,7 +65,7 @@ const sss = [
   },
   {
     q: "SyncPass iPhone'da çalışır mı?",
-    a: "Hayır. Android ve Windows sürümleri yayında. iOS ve macOS için bir tarih vermiyoruz.",
+    a: "Henüz değil. Android ve Windows sürümleri yayında, iPhone sürümü test aşamasında. macOS için bir tarih vermiyoruz.",
   },
   {
     q: "Ana şifremi unutursam kasam açılır mı?",
@@ -171,7 +171,7 @@ export default function SifreKasasi() {
             <li className="flex gap-3"><Check size={20} className="mt-1 shrink-0 text-ok" /><span><strong className="text-white">Kurtarma:</strong> ana şifreni bilmediğimiz için sıfırlayamayız; kurulumdan sonra Ayarlar'dan kurtarma QR kodu oluşturursun. Günlük açılışta parmak iziyle de açabilirsin.</span></li>
             <li className="flex gap-3"><Check size={20} className="mt-1 shrink-0 text-ok" /><span><strong className="text-white">Otomatik doldurma</strong> Android 7.0 ve üstünde çalışır; geçiş anahtarı sağlayıcısı olarak Android 14 ve üstünde çalışır.</span></li>
             <li className="flex gap-3"><Check size={20} className="mt-1 shrink-0 text-ok" /><span><strong className="text-white">Çıkış kapısı sınırlı, dürüstçe:</strong> başka şifre yöneticilerinden ve tarayıcılardan dışa aktarılan dosyaları içe aktarabilirsin. Dışarı ise yalnızca SyncPass'in kendi şifreli yedek dosyası çıkar; başka bir yöneticinin okuyacağı düz bir dosya (CSV gibi) vermiyoruz. Windows sürümünde dosyaya yedek şu an yok.</span></li>
-            <li className="flex gap-3"><Check size={20} className="mt-1 shrink-0 text-ok" /><span><strong className="text-white">Cihazlar:</strong> SyncPass Android 7.0 ve üstünde, Windows'ta ise SyncPass Masaüstü olarak çalışır. iOS ve macOS sürümü yok; bunun için tarih vermiyoruz. Premium'da şifreli kasa dosyası kendi Google Drive hesabına yedeklenir.</span></li>
+            <li className="flex gap-3"><Check size={20} className="mt-1 shrink-0 text-ok" /><span><strong className="text-white">Cihazlar:</strong> SyncPass Android 7.0 ve üstünde, Windows'ta ise SyncPass Masaüstü olarak çalışır. iPhone sürümü test aşamasında; macOS sürümü yok ve bunun için tarih vermiyoruz. Premium'da şifreli kasa dosyası kendi Google Drive hesabına yedeklenir.</span></li>
             <li className="flex gap-3"><Check size={20} className="mt-1 shrink-0 text-ok" /><span><strong className="text-white">Ücretsiz başlarsın, reklam yok:</strong> Android'de {FREE_ITEM_LIMIT_ANDROID} kayda kadar. Sınırsız kayıt, iki adımlı doğrulama (2FA) kodları ve Drive yedeği Premium'da; aylık, yıllık ya da ömür boyu seçeneği var. Güncel fiyatı Google Play bulunduğun bölgenin para biriminde gösterir.</span></li>
           </ul>
           <p className="text-base text-muted leading-relaxed">

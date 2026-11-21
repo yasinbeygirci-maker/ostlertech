@@ -25,12 +25,12 @@ interface Item {
 export default function SocialLinks({ lang = "tr" }: { lang?: Lang }) {
   const label = lang === "en" ? "Follow us" : "Bizi takip edin";
   const items: Item[] = [
-    { href: INSTAGRAM_URL, name: "Instagram", src: "/img/sosyal/instagram.svg", w: 54, h: 54 },
-    // Sayfada 3 kat çözünürlüklü, oranı korunmuş küçültülmüş kopya (asıl dosya 2084 px, 55 KB idi; KAYNAK.md).
-    { href: FACEBOOK_URL, name: "Facebook", src: "/img/sosyal/facebook-162.png", w: 54, h: 54 },
-    { href: YOUTUBE_URL, name: "YouTube", src: "/img/sosyal/youtube-300.png", w: 117, h: 100, pad: 20 },
     // LinkedIn [in] beyaz sürüm (resmî paket, ® işaretiyle birlikte, kırpılmadan); 3 kat kopya, dosya yüksekliği 54 px.
     { href: LINKEDIN_URL, name: "LinkedIn", src: "/img/sosyal/linkedin-162.png", w: 58, h: 54 },
+    { href: INSTAGRAM_URL, name: "Instagram", src: "/img/sosyal/instagram.svg", w: 54, h: 54 },
+    { href: YOUTUBE_URL, name: "YouTube", src: "/img/sosyal/youtube-300.png", w: 117, h: 100, pad: 20 },
+    // Sayfada 3 kat çözünürlüklü, oranı korunmuş küçültülmüş kopya (asıl dosya 2084 px, 55 KB idi; KAYNAK.md).
+    { href: FACEBOOK_URL, name: "Facebook", src: "/img/sosyal/facebook-162.png", w: 54, h: 54 },
     { href: TIKTOK_URL, name: "TikTok" },
   ];
   return (

@@ -27,13 +27,13 @@ export default function ContactPageEn() {
 
       <H2>Social media</H2>
       <p>
-        <a href={INSTAGRAM_URL} target="_blank" rel="noopener" className="text-primary hover:text-primary-light">Instagram</a>
+        <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary-light">LinkedIn</a>
         {" · "}
-        <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary-light">Facebook</a>
+        <a href={INSTAGRAM_URL} target="_blank" rel="noopener" className="text-primary hover:text-primary-light">Instagram</a>
         {" · "}
         <a href={YOUTUBE_URL} target="_blank" rel="noopener" className="text-primary hover:text-primary-light">YouTube</a>
         {" · "}
-        <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary-light">LinkedIn</a>
+        <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary-light">Facebook</a>
         {" · "}
         <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary-light">TikTok</a>
       </p>

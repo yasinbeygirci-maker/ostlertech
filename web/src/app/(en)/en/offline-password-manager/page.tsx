@@ -28,7 +28,7 @@ const approaches = [
 ];
 
 const notFor = [
-  "You use an iPhone or a Mac: SyncPass is available only on Android and Windows.",
+  "You use a Mac, or you need SyncPass on an iPhone today: SyncPass is available on Android and Windows; the iPhone version is in testing.",
   "You need open-source code you can audit yourself: choose a password manager with an open-source license.",
   "You want your vault shared with family members: SyncPass has no shared vaults.",
 ];
