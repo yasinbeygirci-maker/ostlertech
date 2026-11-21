@@ -22,7 +22,7 @@ export default function UchUchPrivacyEnPage() {
       <H2>2. In short</H2>
       <List>
         <li>The Game has no sign-up. We don&apos;t ask for your name, email address or phone number.</li>
-        <li>The following is stored only on your device and not sent to us: your best score and the total honey you have collected.</li>
+        <li>The following is stored only on your device and not sent to us: your best score, the total honey you have collected and your sound setting (on/off).</li>
         <li>There is no connection to other players, no chat and no leaderboard.</li>
         <li>The Game contains ads. Ads are served by Google AdMob: a fixed ad area (banner) at the bottom of the screen, optional rewarded ads, and a full-screen ad that opens with a short countdown after a game has ended, once the &quot;Game over&quot; screen is shown. No full-screen ad is shown while you are playing (flying).</li>
         <li>The Game is designed for users aged 16 and over. When the Game starts, you are asked for your year of birth. If it shows that you may be under 16, no ads are shown and no ad data is sent to Google. Users under 18 (or whose year of birth does not show for certain that they are 18 or over) only see non-personalized ads. For everyone else, ads are personalized only if you allow it; you can withdraw your permission at any time.</li>
@@ -30,7 +30,7 @@ export default function UchUchPrivacyEnPage() {
         <li>We don&apos;t use our own analytics tools and the Game doesn&apos;t send data to any server of ours. For users aged 16 and over, the Game connects to the internet for ads.</li>
       </List>
       <H2>3. Data that stays on your device</H2>
-      <p>The following is stored only on your device, and we can&apos;t see it: your best score and the total honey you have collected. If you uninstall the Game or clear its data, this data is deleted. If Android backup is turned on, Android may include your game progress in the backup in your own Google account and in device-to-device transfers; your age group, your ad choice and the record of Google&apos;s consent tool are not included. Google manages that backup and we have no access to it.</p>
+      <p>The following is stored only on your device, and we can&apos;t see it: your best score, the total honey you have collected and your sound setting (on/off). If you uninstall the Game or clear its data, this data is deleted. If Android backup is turned on, Android may include your game progress in the backup in your own Google account and in device-to-device transfers; your age group, your ad choice and the record of Google&apos;s consent tool are not included. Google manages that backup and we have no access to it.</p>
       <H2>4. Ads (Google AdMob)</H2>
       <p>This section applies to users aged 16 and over. If your year of birth shows that you may be under 16, you are not shown the ads described here and the ad component is never started (section 9).</p>
       <p>Ads in the Game are served by Google&apos;s AdMob service:</p>

@@ -22,7 +22,7 @@ export default function UchUchPrivacyPage() {
       <H2>2. Kısaca</H2>
       <List>
         <li>Oyunda üyelik yoktur. Adınızı, e-postanızı ya da telefonunuzu sormayız.</li>
-        <li>En yüksek skorunuz ve topladığınız bal toplamı yalnız cihazınızda tutulur; bize gelmez.</li>
+        <li>En yüksek skorunuz, topladığınız bal toplamı ve ses ayarınız (açık/kapalı) yalnız cihazınızda tutulur; bize gelmez.</li>
         <li>Oyunda başka oyuncularla bağlantı, sohbet ya da sıralama tablosu yoktur.</li>
         <li>Oyun reklam içerir. Reklamları Google AdMob gösterir: ekranın altında sabit bir reklam alanı (banner), isteğe bağlı ödüllü reklamlar ve bir oyun bittiğinde, &quot;Oyun bitti&quot; ekranı göründükten sonra kısa bir geri sayımla açılan tam ekran reklam. Oyun sürerken (uçarken) tam ekran reklam gösterilmez.</li>
         <li>Oyun 16 yaş ve üzeri için tasarlanmıştır. Oyunun başında doğum yılınız sorulur. Doğum yılınızdan 16 yaşından küçük olabileceğiniz anlaşılırsa reklam gösterilmez ve Google&apos;a reklam verisi gönderilmez. 18 yaşından küçüklere (ya da 18 yaşını doldurduğu kesin anlaşılmayanlara) yalnız kişiselleştirilmemiş reklam gösterilir. Diğer kullanıcılarda reklamlar yalnız izin verirseniz kişiselleştirilir; izninizi istediğiniz zaman geri alabilirsiniz.</li>
@@ -30,7 +30,7 @@ export default function UchUchPrivacyPage() {
         <li>Kendi analitik aracımızı kullanmıyoruz ve Oyun bize ait bir sunucuya veri göndermez. Oyun, 16 yaş ve üzerindeki kullanıcılarda reklamlar için internete bağlanır.</li>
       </List>
       <H2>3. Cihazınızda kalan veriler</H2>
-      <p>En yüksek skorunuz ve topladığınız bal toplamı yalnız cihazınızda saklanır; bunları biz görmeyiz. Oyunu silerseniz ya da uygulama verilerini temizlerseniz bu veriler silinir. Android yedeklemesi açıksa Android oyun ilerlemenizi sizin Google hesabınızdaki yedeğe ve yeni cihaza aktarıma alabilir; yaş grubunuz, reklam tercihiniz ve Google&apos;ın onay aracının kaydı bu yedeğe ve aktarıma alınmaz. Bu yedeği Google yönetir, biz erişemeyiz.</p>
+      <p>En yüksek skorunuz, topladığınız bal toplamı ve ses ayarınız (açık/kapalı) yalnız cihazınızda saklanır; bunları biz görmeyiz. Oyunu silerseniz ya da uygulama verilerini temizlerseniz bu veriler silinir. Android yedeklemesi açıksa Android oyun ilerlemenizi sizin Google hesabınızdaki yedeğe ve yeni cihaza aktarıma alabilir; yaş grubunuz, reklam tercihiniz ve Google&apos;ın onay aracının kaydı bu yedeğe ve aktarıma alınmaz. Bu yedeği Google yönetir, biz erişemeyiz.</p>
       <H2>4. Reklamlar (Google AdMob)</H2>
       <p>Bu bölüm 16 yaş ve üzerindeki kullanıcılar içindir. Doğum yılınızdan 16 yaşından küçük olabileceğiniz anlaşılırsa bu bölümdeki reklamlar size gösterilmez ve reklam bileşeni hiç başlatılmaz (9. bölüm).</p>
       <p>Oyundaki reklamları Google&apos;ın AdMob hizmeti gösterir:</p>
