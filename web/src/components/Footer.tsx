@@ -66,7 +66,7 @@ export default function Footer() {
             </span>
           </a>
           <p className="text-sm text-muted max-w-xs leading-relaxed">
-            Verisini kendisinde tutmak isteyen herkes için güvenlik ve sağlık uygulamaları geliştiriyoruz.
+            Verisini kendisinde tutmak isteyen bireyler ve küçük işletmeler için sade ve güvenli uygulamalar geliştiriyoruz.
           </p>
           <p className="text-sm text-muted">{CONTACT_EMAIL}</p>
           {COMPANY.phone && <p className="text-sm text-muted">{COMPANY.phone}</p>}
