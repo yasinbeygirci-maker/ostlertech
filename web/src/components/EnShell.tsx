@@ -106,7 +106,7 @@ export function EnFooter() {
             <img src="/logo-ostlertech.png" alt="" width={28} height={28} loading="lazy" decoding="async" className="rounded-full logo-tile" />
             <span className="text-lg font-bold tracking-tight text-white">Ostler<span className="text-primary">Tech</span></span>
           </a>
-          <p className="text-sm text-muted max-w-xs leading-relaxed">Privacy-first apps for individuals and small businesses who want to keep their data with them.</p>
+          <p className="text-sm text-muted max-w-xs leading-relaxed">We build simple, secure apps for individuals and small businesses who want to keep their data with them.</p>
           <p className="text-sm text-muted">{CONTACT_EMAIL}</p>
           {COMPANY.phone && <p className="text-sm text-muted">{COMPANY.phone}</p>}
         </div>
