@@ -11,7 +11,7 @@ import { paylasimMeta } from "@/lib/paylasim-meta";
 // The SyncPass landing page that used to be here moved to /en/syncpass on 2026-11-08.
 const TITLE = "OstlerTech: Apps that keep your data with you";
 const DESCRIPTION =
-  "Independent software studio building SyncPass, AreaPilot, CornerTab, SyncDia and SyncSite for people and small businesses who want to keep their data with them.";
+  "Independent software studio building SyncPass, AreaPilot, CornerTab and SyncSite for people and small businesses who want to keep their data with them.";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
