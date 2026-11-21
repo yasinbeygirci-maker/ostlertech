@@ -16,14 +16,14 @@ const TEMEL = {
   tr: {
     title: "OstlerTech: Verisi sende kalan uygulamalar",
     description:
-      "Verisini kendinde tutmak isteyen kişiler ve küçük işletmeler için SyncPass, AreaPilot, CornerTab ve SyncSite'ı geliştiren bağımsız yazılım stüdyosu.",
+      "Verisini kendinde tutmak isteyen kişiler ve küçük işletmeler için SyncPass, AreaPilot, CornerTab, SyncSite ve yakında SyncDia'yı geliştiren bağımsız yazılım stüdyosu.",
     locale: "tr_TR",
     imageAlt: "OstlerTech uygulamaları",
   },
   en: {
     title: "OstlerTech: Privacy-first apps that keep your data with you",
     description:
-      "Independent software studio building SyncPass, AreaPilot, CornerTab and SyncSite for people and small businesses who keep their data with them.",
+      "Independent software studio building SyncPass, AreaPilot, CornerTab, SyncSite and (coming soon) SyncDia for people and small businesses who keep their data with them.",
     locale: "en_US",
     imageAlt: "OstlerTech apps",
   },

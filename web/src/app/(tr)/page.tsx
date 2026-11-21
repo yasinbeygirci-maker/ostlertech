@@ -10,7 +10,7 @@ import { paylasimMeta } from "@/lib/paylasim-meta";
 
 const BASLIK = "OstlerTech: Verisi sende kalan uygulamalar";
 const ACIKLAMA =
-  "Verisini kendinde tutmak isteyen kişiler ve küçük işletmeler için SyncPass, AreaPilot, CornerTab ve SyncSite'ı geliştiren bağımsız yazılım stüdyosu.";
+  "Verisini kendinde tutmak isteyen kişiler ve küçük işletmeler için SyncPass, AreaPilot, CornerTab, SyncSite ve yakında SyncDia'yı geliştiren bağımsız yazılım stüdyosu.";
 
 // Şirket vitrini. SyncPass tam açılış sayfası /syncpass adresine taşındı.
 export const metadata: Metadata = {
