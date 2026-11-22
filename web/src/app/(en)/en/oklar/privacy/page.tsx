@@ -14,7 +14,7 @@ const link = "text-primary hover:text-primary-light";
 export default function OklarPrivacyEnPage() {
   return (
     <LegalPage eyebrow="Oklar" title="Oklar Privacy Policy" lang="en" updated={false} altLink={{ href: "/oklar/privacy", label: "Türkçe sürüm" }}>
-      <p>Last updated: 15 November 2026</p>
+      <p>Last updated: 22 November 2026</p>
       <p>
         This policy explains which data is processed when you use the Oklar mobile game (the &quot;Game&quot;). It serves as the
         information notice under Turkey&apos;s Personal Data Protection Law (KVKK) and the EU General Data Protection Regulation (GDPR).
@@ -35,7 +35,7 @@ export default function OklarPrivacyEnPage() {
 
       <H2>3. Data that stays on your device</H2>
       <p>
-        Unlocked levels and progress are stored only on your device; we cannot see them. They are deleted if you uninstall the
+        Unlocked levels, your progress, your win streak, the arrow colors you unlock and your game settings (such as sound, vibration and theme) are stored only on your device; we cannot see them. They are deleted if you uninstall the
         Game or clear its data. If Android backup is on, Android may include this data in the backup in your own Google account,
         which Google manages and we cannot access.
       </p>

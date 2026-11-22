@@ -14,7 +14,7 @@ const link = "text-primary hover:text-primary-light";
 export default function OklarPrivacyPage() {
   return (
     <LegalPage eyebrow="Oklar" title="Oklar Gizlilik Politikası" updated={false} altLink={{ href: "/en/oklar/privacy", label: "English" }}>
-      <p>Son güncelleme: 15 Kasım 2026</p>
+      <p>Son güncelleme: 22 Kasım 2026</p>
       <p>
         Bu politika, Oklar mobil oyununu (&quot;Oyun&quot;) kullandığınızda hangi verilerin işlendiğini anlatır. 6698 sayılı
         Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında aydınlatma metni, AB Genel Veri Koruma Tüzüğü (GDPR) kapsamında
@@ -38,7 +38,7 @@ export default function OklarPrivacyPage() {
 
       <H2>3. Cihazınızda kalan veriler</H2>
       <p>
-        Açtığınız bölümler ve ilerlemeniz yalnız cihazınızda saklanır; bunları biz görmeyiz. Oyunu silerseniz ya da uygulama
+        Açtığınız bölümler, ilerlemeniz, kazanma seriniz, açtığınız ok renkleri ve oyun ayarlarınız (ses, titreşim, tema gibi) yalnız cihazınızda saklanır; bunları biz görmeyiz. Oyunu silerseniz ya da uygulama
         verilerini temizlerseniz silinir. Android yedeklemesi açıksa Android bu verileri sizin Google hesabınızdaki yedeğe
         alabilir; bu yedeği Google yönetir, biz erişemeyiz.
       </p>
