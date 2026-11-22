@@ -15,14 +15,14 @@ export default function SayiToplamaPrivacyEnPage() {
   return (
     <LegalPage eyebrow={<span lang="tr">Sayı Toplama</span>} title="Sayı Toplama Privacy Policy" lang="en" updated={false} altLink={{ href: "/sayitoplama/privacy", label: "Türkçe sürüm" }}>
       <div className="space-y-6 text-[1.0625rem] leading-relaxed">
-      <p>Last updated: November 16, 2026</p>
+      <p>Last updated: November 23, 2026</p>
       <p>This policy explains what data is processed when you use the Sayı Toplama mobile game (the &quot;Game&quot;). Sayı Toplama is a level-based number puzzle where you drag touching tiles to reach a target sum. It serves as the privacy notice under the Turkish Personal Data Protection Law No. 6698 (KVKK) and as information under the EU General Data Protection Regulation (GDPR).</p>
       <H2>1. Data controller</H2>
       <p>{COMPANY.legalName} – {COMPANY.tradeName} (sole proprietorship). Address: {COMPANY.address}. Contact: {COMPANY.email}</p>
       <H2>2. In short</H2>
       <List>
         <li>The Game has no sign-up. We don&apos;t ask for your name, email address or phone number.</li>
-        <li>The following is stored only on your device and not sent to us: your best score and stars for each level, and the highest level you have unlocked.</li>
+        <li>The following is stored only on your device and not sent to us: your best score and stars for each level, the highest level you have unlocked, your daily task result and your day streak (how many days in a row you played).</li>
         <li>There is no connection to other players, no chat and no leaderboard.</li>
         <li>The Game contains ads, served by Google AdMob: a fixed ad area (banner) at the bottom of the screen, optional rewarded ads, and a full-screen ad that opens with a short countdown after a level has ended (passed or out of moves), once the result screen is shown. No full-screen ad is shown while a level is being played.</li>
         <li>The Game has no purchases.</li>
@@ -30,7 +30,7 @@ export default function SayiToplamaPrivacyEnPage() {
         <li>We don&apos;t use our own analytics tools and the Game doesn&apos;t send data to any server of ours. The Game connects to the internet for ads.</li>
       </List>
       <H2>3. Data that stays on your device</H2>
-      <p>The following is stored only on your device, and we can&apos;t see it: your best score and stars for each level, the highest level you have unlocked, the state of a level you left unfinished, and your sound, vibration and guide settings. If you uninstall the Game or clear its data, this data is deleted. If Android backup is turned on, Android may include your game progress and these settings in the backup in your own Google account and in device-to-device transfers; your age group, your ad choice and the record of Google&apos;s consent tool are not included. Google manages that backup and we have no access to it.</p>
+      <p>The following is stored only on your device, and we can&apos;t see it: your best score and stars for each level, the highest level you have unlocked, the state of a level you left unfinished, your daily task result (day, stars, best score), your day streak, the state of a daily task you left unfinished, and your sound, vibration and guide settings. If you uninstall the Game or clear its data, this data is deleted. If Android backup is turned on, Android may include your game progress and these settings in the backup in your own Google account and in device-to-device transfers; your age group, your ad choice and the record of Google&apos;s consent tool are not included. Google manages that backup and we have no access to it.</p>
       <H2>4. Ads (Google AdMob)</H2>
       <p>Ads in the Game are served by Google&apos;s AdMob service:</p>
       <List>

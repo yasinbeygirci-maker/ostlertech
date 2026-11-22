@@ -15,14 +15,14 @@ export default function SayiToplamaPrivacyPage() {
   return (
     <LegalPage eyebrow={"Sayı Toplama"} title="Sayı Toplama Gizlilik Politikası" updated={false} altLink={{ href: "/en/sayitoplama/privacy", label: "English" }}>
       <div className="space-y-6 text-[1.0625rem] leading-relaxed">
-      <p>Son güncelleme: 16 Kasım 2026</p>
+      <p>Son güncelleme: 23 Kasım 2026</p>
       <p>Bu politika, Sayı Toplama mobil oyununu (&quot;Oyun&quot;) kullandığınızda hangi verilerin işlendiğini anlatır. Sayı Toplama, değen karoları sürükleyerek hedef toplamı yaptığınız seviyeli bir sayı bulmaca oyunudur. 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında aydınlatma metni, AB Genel Veri Koruma Tüzüğü (GDPR) kapsamında da bilgilendirme niteliğindedir.</p>
       <H2>1. Veri sorumlusu</H2>
       <p>{COMPANY.legalName} – {COMPANY.tradeName} (şahıs işletmesi). Adres: {COMPANY.address}. İletişim: {COMPANY.email}</p>
       <H2>2. Kısaca</H2>
       <List>
         <li>Oyunda üyelik yoktur. Adınızı, e-postanızı ya da telefonunuzu sormayız.</li>
-        <li>Her seviyedeki en iyi puanınız ve yıldızlarınız, açtığınız en yüksek seviye yalnız cihazınızda tutulur; bize gelmez.</li>
+        <li>Her seviyedeki en iyi puanınız ve yıldızlarınız, açtığınız en yüksek seviye, günlük görevdeki sonucunuz ve gün seriniz (art arda kaç gün oynadığınız) yalnız cihazınızda tutulur; bize gelmez.</li>
         <li>Oyunda başka oyuncularla bağlantı, sohbet ya da sıralama tablosu yoktur.</li>
         <li>Oyun reklam içerir. Reklamları Google AdMob gösterir: ekranın altında sabit bir reklam alanı (banner), isteğe bağlı ödüllü reklamlar ve bir seviye bittikten sonra (geçildiğinde ya da hamleler bittiğinde), sonuç ekranı göründükten sonra kısa bir geri sayımla açılan tam ekran reklam. Bir seviye oynanırken tam ekran reklam gösterilmez.</li>
         <li>Oyunda satın alma yoktur.</li>
@@ -30,7 +30,7 @@ export default function SayiToplamaPrivacyPage() {
         <li>Kendi analitik aracımızı kullanmıyoruz ve Oyun bize ait bir sunucuya veri göndermez. Oyun reklamlar için internete bağlanır.</li>
       </List>
       <H2>3. Cihazınızda kalan veriler</H2>
-      <p>Her seviyedeki en iyi puanınız ve yıldızlarınız, açtığınız en yüksek seviye, yarıda bıraktığınız seviyenin durumu ve ses, titreşim ve rehber ayarlarınız yalnız cihazınızda saklanır; bunları biz görmeyiz. Oyunu silerseniz ya da uygulama verilerini temizlerseniz bu veriler silinir. Android yedeklemesi açıksa Android oyun ilerlemenizi ve bu ayarları sizin Google hesabınızdaki yedeğe ve yeni cihaza aktarıma alabilir; yaş grubunuz, reklam tercihiniz ve Google&apos;ın onay aracının kaydı bu yedeğe ve aktarıma alınmaz. Bu yedeği Google yönetir, biz erişemeyiz.</p>
+      <p>Her seviyedeki en iyi puanınız ve yıldızlarınız, açtığınız en yüksek seviye, yarıda bıraktığınız seviyenin durumu, günlük görevin sonucu (gün, yıldız, en iyi puan), gün seriniz, yarıda bıraktığınız günlük görevin durumu ve ses, titreşim ve rehber ayarlarınız yalnız cihazınızda saklanır; bunları biz görmeyiz. Oyunu silerseniz ya da uygulama verilerini temizlerseniz bu veriler silinir. Android yedeklemesi açıksa Android oyun ilerlemenizi ve bu ayarları sizin Google hesabınızdaki yedeğe ve yeni cihaza aktarıma alabilir; yaş grubunuz, reklam tercihiniz ve Google&apos;ın onay aracının kaydı bu yedeğe ve aktarıma alınmaz. Bu yedeği Google yönetir, biz erişemeyiz.</p>
       <H2>4. Reklamlar (Google AdMob)</H2>
       <p>Oyundaki reklamları Google&apos;ın AdMob hizmeti gösterir:</p>
       <List>
