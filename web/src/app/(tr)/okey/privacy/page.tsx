@@ -15,14 +15,14 @@ export default function OkeyPrivacyPage() {
   return (
     <LegalPage eyebrow={"Okey"} title="Okey Gizlilik Politikası" updated={false} altLink={{ href: "/en/okey/privacy", label: "English" }}>
       <div className="space-y-6 text-[1.0625rem] leading-relaxed">
-      <p>Son güncelleme: 16 Kasım 2026</p>
+      <p>Son güncelleme: 23 Kasım 2026</p>
       <p>Bu politika, Okey mobil oyununu (&quot;Oyun&quot;) kullandığınızda hangi verilerin işlendiğini anlatır. Okey, bilgisayarın yönettiği rakiplere karşı düz okey ve 101 oynanan taş oyunudur. 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında aydınlatma metni, AB Genel Veri Koruma Tüzüğü (GDPR) kapsamında da bilgilendirme niteliğindedir.</p>
       <H2>1. Veri sorumlusu</H2>
       <p>{COMPANY.legalName} – {COMPANY.tradeName} (şahıs işletmesi). Adres: {COMPANY.address}. İletişim: {COMPANY.email}</p>
       <H2>2. Kısaca</H2>
       <List>
         <li>Oyunda üyelik yoktur. Adınızı, e-postanızı ya da telefonunuzu sormayız.</li>
-        <li>Süren oyununuz (masanın ve puan durumunun kaydı) yalnız cihazınızda tutulur; bize gelmez.</li>
+        <li>Süren oyununuz (masanın ve puan durumunun kaydı), oyun istatistikleriniz (oynanan ve kazanılan el ve oyun sayıları, seri, en iyi puan) ve oyun ayarlarınız (oyun türü, el sayısı, rakip seviyesi, kural seçenekleri) cihazınızda tutulur; bize gönderilmez.</li>
         <li>Oyunu bilgisayarın yönettiği rakiplere karşı oynarsınız; başka oyuncularla bağlantı, sohbet ya da sıralama tablosu yoktur. Oyunda gerçek ya da sanal para, fiş, jeton veya bahis yoktur; puanlar yalnız oyunun skorudur ve hiçbir değere dönüşmez.</li>
         <li>Oyun reklam içerir. Reklamları Google AdMob gösterir: ekranın altında sabit bir reklam alanı (banner), isteğe bağlı ödüllü reklamlar ve bir el bittiğinde, el sonu paneli göründükten sonra kısa bir geri sayımla açılan tam ekran reklam. Bir el oynanırken tam ekran reklam gösterilmez.</li>
         <li>Oyunda satın alma yoktur.</li>
@@ -30,7 +30,7 @@ export default function OkeyPrivacyPage() {
         <li>Kendi analitik aracımızı kullanmıyoruz ve Oyun bize ait bir sunucuya veri göndermez. Oyun reklamlar için internete bağlanır.</li>
       </List>
       <H2>3. Cihazınızda kalan veriler</H2>
-      <p>Süren oyununuz (masanın ve puan durumunun kaydı) yalnız cihazınızda saklanır; bunları biz görmeyiz. Oyunu silerseniz ya da uygulama verilerini temizlerseniz bu veriler silinir. Android yedeklemesi açıksa Android oyun ilerlemenizi sizin Google hesabınızdaki yedeğe ve yeni cihaza aktarıma alabilir; yaş grubunuz, reklam tercihiniz ve Google&apos;ın onay aracının kaydı bu yedeğe ve aktarıma alınmaz. Bu yedeği Google yönetir, biz erişemeyiz.</p>
+      <p>Süren oyununuz (masanın ve puan durumunun kaydı), oyun istatistikleriniz (oynanan ve kazanılan el ve oyun sayıları, seri, en iyi puan) ve oyun ayarlarınız (oyun türü, el sayısı, rakip seviyesi, kural seçenekleri) cihazınızda saklanır; bize gönderilmez, bunları biz görmeyiz. Oyunu silerseniz ya da uygulama verilerini temizlerseniz bu veriler silinir. Android yedeklemesi açıksa Android oyun ilerlemenizi, oyun istatistiklerinizi ve oyun ayarlarınızı sizin Google hesabınızdaki yedeğe ve yeni cihaza aktarıma alabilir; yaş grubunuz, reklam tercihiniz ve Google&apos;ın onay aracının kaydı bu yedeğe ve aktarıma alınmaz. Bu yedeği Google yönetir, biz erişemeyiz.</p>
       <H2>4. Reklamlar (Google AdMob)</H2>
       <p>Oyundaki reklamları Google&apos;ın AdMob hizmeti gösterir:</p>
       <List>
@@ -52,7 +52,7 @@ export default function OkeyPrivacyPage() {
       <p>Oyunda uygulama içi satın alma yoktur; Oyun Google Play ödeme bileşenini kullanmaz ve sizden ödeme bilgisi almaz.</p>
       <H2>6. İşleme amaçları ve hukuki sebepler</H2>
       <List>
-        <li><b>Cihazdaki oyun verileri:</b> Oyunun çalışması; bize aktarılmaz.</li>
+        <li><b>Cihazdaki oyun verileri</b> (süren oyun, istatistikler, ayarlar)<b>:</b> Oyunun çalışması ve sayılarınızı size göstermesi; bize aktarılmaz.</li>
         <li><b>AdMob&apos;un topladığı veriler:</b> reklam gösterme ve ölçme, sahtekârlık önleme. Kişiselleştirilmiş reklam için açık rızanız (KVKK md. 5/1, GDPR md. 6/1-a): AEA, Birleşik Krallık ve İsviçre&apos;de Google&apos;ın onay formuyla, diğer ülkelerde Oyundaki onay penceremizle alınır ve istediğiniz zaman geri alınabilir. Kişiselleştirilmemiş reklam ve sahtekârlık önleme için meşru menfaat (KVKK md. 5/2-f, GDPR md. 6/1-f). Rızanızı geri almanız, geri almadan önceki işlemeyi etkilemez.</li>
         <li><b>Destek e-postaları:</b> sorunuza yanıt vermek; KVKK md. 5/2-c ve 5/2-f.</li>
         <li><b>Google Play puan ve yorumları:</b> Google Play&apos;de Oyun için yayımladığınız puanı ve yorumu Google Play Console&apos;da görürüz. Google Play bunu kullanıcı adınız ve tarihle, bazı yorumlarda ayrıca cihaz bilgisi (üretici, ekran boyutu, Android sürümü), Oyunun sürüm numarası ve dil bilgisiyle birlikte gösterir. Bu bilgileri yorumunuza Google Play&apos;de herkese açık yanıt vermek ve Oyunu geliştirmek için kullanırız; KVKK md. 5/2-f, GDPR md. 6/1-f. Oyun bize bunun dışında bir bilgi göndermez.</li>
@@ -61,7 +61,7 @@ export default function OkeyPrivacyPage() {
       <p>AdMob verileri, Oyundaki reklam bileşeni aracılığıyla cihazınızdan doğrudan Google LLC ve bağlı şirketlerine gönderilir ve Türkiye dışındaki (ABD dahil) sunucularda işlenir. Google bu veriler için kendi veri koruma şartlarına göre veri sorumlusu olarak hareket eder. Kişiselleştirilmiş reklama izin vermezseniz Google&apos;a giden reklam verileri reklamı göstermek, saymak ve sahtekârlığı önlemek için gereken sınırlı bilgiyle kalır.</p>
       <H2>8. Saklama süreleri</H2>
       <List>
-        <li>Cihazdaki oyun verileri: Oyunu silene ya da verileri temizleyene kadar.</li>
+        <li>Cihazdaki oyun verileri (süren oyun, istatistikler, ayarlar): Oyunu silene ya da verileri temizleyene kadar.</li>
         <li>AdMob verileri: <a href="https://policies.google.com/technologies/retention" className={link}>Google&apos;ın saklama politikasına</a> göre.</li>
         <li>Destek e-postaları: talep kapandıktan sonra 1 yıl.</li>
         <li>Google Play puan ve yorumları: Google Play&apos;in koşullarına göre. Yorumunuz Google hesabınıza bağlıdır ve herkese açıktır; Google Play&apos;den istediğiniz zaman düzenleyebilir ya da silebilirsiniz.</li>

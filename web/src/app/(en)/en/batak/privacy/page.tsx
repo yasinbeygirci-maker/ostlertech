@@ -15,14 +15,14 @@ export default function BatakPrivacyEnPage() {
   return (
     <LegalPage eyebrow={"Batak"} title="Batak Privacy Policy" lang="en" updated={false} altLink={{ href: "/batak/privacy", label: "Türkçe sürüm" }}>
       <div className="space-y-6 text-[1.0625rem] leading-relaxed">
-      <p>Last updated: November 16, 2026</p>
+      <p>Last updated: November 23, 2026</p>
       <p>This policy explains what data is processed when you use the Batak mobile game (the &quot;Game&quot;). Batak is a card game with bidding (ihale) played against computer-controlled opponents. It serves as the privacy notice under the Turkish Personal Data Protection Law No. 6698 (KVKK) and as information under the EU General Data Protection Regulation (GDPR).</p>
       <H2>1. Data controller</H2>
       <p>{COMPANY.legalName} – {COMPANY.tradeName} (sole proprietorship). Address: {COMPANY.address}. Contact: {COMPANY.email}</p>
       <H2>2. In short</H2>
       <List>
         <li>The Game has no sign-up. We don&apos;t ask for your name, email address or phone number.</li>
-        <li>The following is stored only on your device and not sent to us: your game in progress (a record of the deal, the moves played and the scores).</li>
+        <li>The following is stored on your device and not sent to us: your game in progress (a record of the deal, the moves played and the scores), your game statistics (games played and won, hands played and hands where you bid and fell short, streaks, highest score) and your game settings (opponent level, number of hands, rule for leading trumps).</li>
         <li>You play against computer-controlled opponents; there is no connection to other players, no chat and no leaderboard. The Game has no real or virtual money, chips, tokens or betting; the &quot;bid&quot; (ihale) is the game rule of calling a number of tricks, and points are only the game score and cannot be exchanged for anything.</li>
         <li>The Game&apos;s interface is in Turkish.</li>
         <li>The Game contains ads, served by Google AdMob: a fixed ad area (banner) at the bottom of the screen, optional rewarded ads, and a full-screen ad that opens with a short countdown after a hand has ended, once the hand summary is shown. No full-screen ad is shown while a hand is being played.</li>
@@ -31,7 +31,7 @@ export default function BatakPrivacyEnPage() {
         <li>We don&apos;t use our own analytics tools and the Game doesn&apos;t send data to any server of ours. The Game connects to the internet for ads.</li>
       </List>
       <H2>3. Data that stays on your device</H2>
-      <p>The following is stored only on your device, and we can&apos;t see it: your game in progress (a record of the deal, the moves played and the scores). If you uninstall the Game or clear its data, this data is deleted. If Android backup is turned on, Android may include your game progress in the backup in your own Google account and in device-to-device transfers; your age group, your ad choice and the record of Google&apos;s consent tool are not included. Google manages that backup and we have no access to it.</p>
+      <p>The following is stored on your device and is not sent to us, so we can&apos;t see it: your game in progress (a record of the deal, the moves played and the scores), your game statistics (games played and won, hands played and hands where you bid and fell short, streaks, highest score) and your game settings (opponent level, number of hands, rule for leading trumps). If you uninstall the Game or clear its data, this data is deleted. If Android backup is turned on, Android may include your game progress, game statistics and game settings in the backup in your own Google account and in device-to-device transfers; your age group, your ad choice and the record of Google&apos;s consent tool are not included. Google manages that backup and we have no access to it.</p>
       <H2>4. Ads (Google AdMob)</H2>
       <p>Ads in the Game are served by Google&apos;s AdMob service:</p>
       <List>
@@ -53,7 +53,7 @@ export default function BatakPrivacyEnPage() {
       <p>The Game has no in-app purchases; it does not use Google Play&apos;s billing component and does not ask you for payment details.</p>
       <H2>6. Purposes and legal bases</H2>
       <List>
-        <li><b>Game data on the device:</b> to run the Game; not transferred to us.</li>
+        <li><b>Game data on the device</b> (game in progress, statistics, settings)<b>:</b> to run the Game and show you your numbers; not transferred to us.</li>
         <li><b>Data collected by AdMob:</b> serving and measuring ads, fraud prevention. Personalized ads: your consent (GDPR Art. 6(1)(a), KVKK Art. 5(1)), collected through Google&apos;s consent form in the EEA, UK and Switzerland and through our in-game consent window elsewhere; you can withdraw it at any time. Non-personalized ads and fraud prevention: legitimate interest (GDPR Art. 6(1)(f), KVKK Art. 5(2)(f)). Withdrawing consent does not affect processing before withdrawal.</li>
         <li><b>Support emails:</b> to answer your question; KVKK Art. 5(2)(c) and 5(2)(f).</li>
         <li><b>Google Play ratings and reviews:</b> we see the rating and review you publish for the Game on Google Play in Google Play Console. Google Play shows it with your user name and the date, and for some reviews also with device details (manufacturer, screen size, Android version), the Game&apos;s version code and language. We use this information to reply publicly to your review on Google Play and to improve the Game; KVKK Art. 5(2)(f), GDPR Art. 6(1)(f). The Game sends us no other information.</li>
@@ -62,7 +62,7 @@ export default function BatakPrivacyEnPage() {
       <p>AdMob data is sent directly from your device to Google LLC and its affiliates through the Game&apos;s advertising component, and is processed on servers outside Türkiye, including the United States. Google acts as a controller of this data under its own data protection terms. For users in the European Union, If you do not allow personalized ads, the ad data sent to Google is limited to what is needed to show and count ads and prevent fraud.</p>
       <H2>8. Retention</H2>
       <List>
-        <li>Game data on the device: until you uninstall the Game or clear its data.</li>
+        <li>Game data on the device (game in progress, statistics, settings): until you uninstall the Game or clear its data.</li>
         <li>AdMob data: according to <a href="https://policies.google.com/technologies/retention" className={link}>Google&apos;s retention policy</a>.</li>
         <li>Support emails: 1 year after the request is closed.</li>
         <li>Google Play ratings and reviews: under the Google Play terms. Your review is linked to your Google Account and is public; you can edit or delete it on Google Play at any time.</li>
