@@ -8,6 +8,6 @@ export const OTOPARK = {
   name: "Beepout",
   path: "/otopark/privacy",
   enPath: "/en/otopark/privacy",
-  updatedTr: "15 Kasım 2026",
-  updatedEn: "15 November 2026",
+  updatedTr: "23 Kasım 2026",
+  updatedEn: "November 23, 2026",
 } as const;

@@ -5,7 +5,7 @@ import { COMPANY } from "@/lib/site";
 // Kaynak: OstlerTech/hukuk/oklar-gizlilik-politikasi.md (Zeynep taslağı). İngilizcesi /en/oklar/privacy; biri değişirse diğeri de.
 export const metadata: Metadata = {
   title: "Oklar Gizlilik Politikası",
-  description: "Oklar ok bulmaca oyunu: üyelik yok, ilerleme cihazda, isteğe bağlı ödüllü reklam (Google AdMob).",
+  description: "Oklar ok bulmaca oyunu: üyelik yok, ilerleme ve ayarlar cihazda, isteğe bağlı ödüllü reklam (Google AdMob).",
   alternates: { canonical: "/oklar/privacy", languages: { tr: "/oklar/privacy", en: "/en/oklar/privacy" } },
 };
 
@@ -14,7 +14,7 @@ const link = "text-primary hover:text-primary-light";
 export default function OklarPrivacyPage() {
   return (
     <LegalPage eyebrow="Oklar" title="Oklar Gizlilik Politikası" updated={false} altLink={{ href: "/en/oklar/privacy", label: "English" }}>
-      <p>Son güncelleme: 22 Kasım 2026</p>
+      <p>Son güncelleme: 23 Kasım 2026</p>
       <p>
         Bu politika, Oklar mobil oyununu (&quot;Oyun&quot;) kullandığınızda hangi verilerin işlendiğini anlatır. 6698 sayılı
         Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında aydınlatma metni, AB Genel Veri Koruma Tüzüğü (GDPR) kapsamında
@@ -29,7 +29,7 @@ export default function OklarPrivacyPage() {
       <H2>2. Kısaca</H2>
       <List>
         <li>Oyunda üyelik yoktur. Adınızı, e-postanızı ya da telefonunuzu sormayız.</li>
-        <li>Oyun ilerlemeniz yalnız cihazınızda tutulur; bize gelmez.</li>
+        <li>Oyun ilerlemeniz, kazanma seriniz, seçtiğiniz ok rengi ve oyun ayarlarınız yalnız cihazınızda tutulur; bize gönderilmez.</li>
         <li>Oyunda isteğe bağlı ödüllü reklam vardır: ipucu ya da ek can için reklam izlemeyi siz seçersiniz. Reklamları Google AdMob gösterir.</li>
         <li>Reklamlar yalnız izin verirseniz kişiselleştirilir. 18 yaşından küçüklere (ya da 18 yaşını doldurduğu kesin anlaşılmayanlara) her ülkede yalnız kişiselleştirilmemiş reklam gösterilir. İzninizi istediğiniz zaman geri alabilirsiniz.</li>
         <li>18 yaşını doldurduğu anlaşılan kullanıcılara isteğe bağlı, tek seferlik &quot;Reklamsız paket&quot; satın alımı Google Play üzerinden sunulur. Ödeme kartı bilgileriniz bize gelmez.</li>
@@ -38,7 +38,7 @@ export default function OklarPrivacyPage() {
 
       <H2>3. Cihazınızda kalan veriler</H2>
       <p>
-        Açtığınız bölümler, ilerlemeniz, kazanma seriniz, açtığınız ok renkleri ve oyun ayarlarınız (ses, titreşim, tema gibi) yalnız cihazınızda saklanır; bunları biz görmeyiz. Oyunu silerseniz ya da uygulama
+        Açtığınız bölümler, ilerlemeniz, kazanma seriniz ve en iyi seriniz, seçtiğiniz ok rengi ve oyun ayarlarınız (ses, titreşim, tema gibi) yalnız cihazınızda saklanır; bunları biz görmeyiz. Oyunu silerseniz ya da uygulama
         verilerini temizlerseniz silinir. Android yedeklemesi açıksa Android bu verileri sizin Google hesabınızdaki yedeğe
         alabilir; bu yedeği Google yönetir, biz erişemeyiz.
       </p>
@@ -93,7 +93,7 @@ export default function OklarPrivacyPage() {
 
       <H2>6. İşleme amaçları ve hukuki sebepler</H2>
       <List>
-        <li><b>Cihazdaki ilerleme:</b> oyunun çalışması; bize aktarılmaz.</li>
+        <li><b>Cihazdaki ilerleme, seri, ok rengi ve ayarlar:</b> oyunun çalışması; bize aktarılmaz.</li>
         <li><b>AdMob&apos;un topladığı veriler:</b> reklam gösterme ve ölçme, sahtekârlık önleme. Kişiselleştirilmiş reklam için açık rızanız (KVKK md. 5/1, GDPR md. 6/1-a): AEA, Birleşik Krallık ve İsviçre&apos;de Google&apos;ın onay formuyla, diğer ülkelerde oyundaki onay penceremizle alınır ve istediğiniz zaman geri alınabilir. Kişiselleştirilmemiş reklam ve sahtekârlık önleme için meşru menfaat (KVKK md. 5/2-f, GDPR md. 6/1-f). Rızanızı geri almanız, geri almadan önceki işlemeyi etkilemez.</li>
         <li><b>Satın alma ve sipariş kayıtları:</b> satışı yapmak, iade ve destek taleplerini yanıtlamak, vergi ve muhasebe yükümlülüklerini yerine getirmek; KVKK md. 5/2-c (sözleşmenin kurulması ve ifası) ve 5/2-ç (hukuki yükümlülük), GDPR md. 6/1-b ve 6/1-c.</li>
         <li><b>Destek e-postaları:</b> sorunuza yanıt vermek; KVKK md. 5/2-c ve 5/2-f.</li>
@@ -111,7 +111,7 @@ export default function OklarPrivacyPage() {
 
       <H2>8. Saklama süreleri</H2>
       <List>
-        <li>Cihazdaki ilerleme: oyunu silene ya da verileri temizleyene kadar.</li>
+        <li>Cihazdaki ilerleme, seri, ok rengi ve ayarlar: oyunu silene ya da verileri temizleyene kadar.</li>
         <li>AdMob verileri: <a href="https://policies.google.com/technologies/retention" className={link}>Google&apos;ın saklama politikasına</a> göre.</li>
         <li>Satın alma kaydı: Google Play&apos;in koşullarına göre (Google hesabınızın sipariş geçmişinde görünür). Google Play Console&apos;daki sipariş bilgileri, vergi ve muhasebe mevzuatının gerektirdiği süre boyunca saklanır.</li>
         <li>Destek ve iade e-postaları: talep kapandıktan sonra 1 yıl.</li>

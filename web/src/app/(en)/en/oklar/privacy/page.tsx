@@ -5,7 +5,7 @@ import { COMPANY } from "@/lib/site";
 // English version of /oklar/privacy. Keep both in sync.
 export const metadata: Metadata = {
   title: "Oklar Privacy Policy",
-  description: "Oklar arrow puzzle game: no sign-up, progress stays on the device, optional rewarded ads (Google AdMob).",
+  description: "Oklar arrow puzzle game: no sign-up, progress and settings stay on the device, optional rewarded ads (Google AdMob).",
   alternates: { canonical: "/en/oklar/privacy", languages: { tr: "/oklar/privacy", en: "/en/oklar/privacy" } },
 };
 
@@ -14,7 +14,7 @@ const link = "text-primary hover:text-primary-light";
 export default function OklarPrivacyEnPage() {
   return (
     <LegalPage eyebrow="Oklar" title="Oklar Privacy Policy" lang="en" updated={false} altLink={{ href: "/oklar/privacy", label: "Türkçe sürüm" }}>
-      <p>Last updated: 22 November 2026</p>
+      <p>Last updated: November 23, 2026</p>
       <p>
         This policy explains which data is processed when you use the Oklar mobile game (the &quot;Game&quot;). It serves as the
         information notice under Turkey&apos;s Personal Data Protection Law (KVKK) and the EU General Data Protection Regulation (GDPR).
@@ -26,7 +26,7 @@ export default function OklarPrivacyEnPage() {
       <H2>2. In short</H2>
       <List>
         <li>The Game has no sign-up. We never ask for your name, email or phone number.</li>
-        <li>Your progress is stored only on your device and never reaches us.</li>
+        <li>Your progress, win streak, chosen arrow color and game settings are kept on your device and are not sent to us.</li>
         <li>The Game has optional rewarded ads: you choose to watch an ad for a hint or an extra heart. Ads are served by Google AdMob.</li>
         <li>Ads are personalized only if you allow it. In every country, users under 18 (or whose year of birth does not show for certain that they are 18 or over) only get non-personalized ads. You can withdraw your consent at any time.</li>
         <li>Users whose year of birth shows they are 18 or over are offered an optional one-time &quot;Ad-free pack&quot; purchase through Google Play. Your payment card details never reach us.</li>
@@ -35,7 +35,7 @@ export default function OklarPrivacyEnPage() {
 
       <H2>3. Data that stays on your device</H2>
       <p>
-        Unlocked levels, your progress, your win streak, the arrow colors you unlock and your game settings (such as sound, vibration and theme) are stored only on your device; we cannot see them. They are deleted if you uninstall the
+        Unlocked levels, your progress, your win streak and best streak, the arrow color you choose and your game settings (such as sound, vibration and theme) are stored only on your device; we cannot see them. They are deleted if you uninstall the
         Game or clear its data. If Android backup is on, Android may include this data in the backup in your own Google account,
         which Google manages and we cannot access.
       </p>
@@ -90,7 +90,7 @@ export default function OklarPrivacyEnPage() {
 
       <H2>6. Purposes and legal bases</H2>
       <List>
-        <li><b>On-device progress:</b> running the Game; not transferred to us.</li>
+        <li><b>On-device progress, streak, arrow color and settings:</b> running the Game; not transferred to us.</li>
         <li><b>Data collected by AdMob:</b> serving and measuring ads, fraud prevention. Personalized ads: your consent (GDPR Art. 6(1)(a), KVKK Art. 5(1)), collected through Google&apos;s consent form in the EEA, UK and Switzerland and through our in-game consent window elsewhere; you can withdraw it at any time. Non-personalized ads and fraud prevention: legitimate interest (GDPR Art. 6(1)(f), KVKK Art. 5(2)(f)). Withdrawing consent does not affect processing before withdrawal.</li>
         <li><b>Purchase and order records:</b> to make the sale, answer refund and support requests, and meet tax and accounting obligations; KVKK Art. 5(2)(c) and 5(2)(ç), GDPR Art. 6(1)(b) and 6(1)(c).</li>
         <li><b>Support emails:</b> answering your request; KVKK Art. 5(2)(c) and 5(2)(f).</li>
@@ -108,7 +108,7 @@ export default function OklarPrivacyEnPage() {
 
       <H2>8. Retention</H2>
       <List>
-        <li>On-device progress: until you uninstall the Game or clear its data.</li>
+        <li>On-device progress, streak, arrow color and settings: until you uninstall the Game or clear its data.</li>
         <li>AdMob data: per <a href="https://policies.google.com/technologies/retention" className={link}>Google&apos;s retention policy</a>.</li>
         <li>Purchase record: under the Google Play terms (visible in your Google account&apos;s order history). Order information in Google Play Console is kept for as long as tax and accounting law requires.</li>
         <li>Support and refund emails: 1 year after the request is closed.</li>

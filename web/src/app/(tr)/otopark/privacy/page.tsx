@@ -33,8 +33,8 @@ export default function OtoparkPrivacyPage() {
       <H2>2. Kısaca</H2>
       <List>
         <li>Oyunda üyelik yoktur. Adınızı, e-postanızı ya da telefonunuzu sormayız.</li>
-        <li>Bölüm ilerlemeniz, günlük bulmacalarınız, kupalarınız, ayarlarınız ve oyun içi sayaçlarınız (örneğin puan penceresinin ne zaman gösterileceğini belirleyen sayaçlar) yalnız cihazınızda tutulur; bize gelmez.</li>
-        <li>Oyunda isteğe bağlı ödüllü reklam vardır: ek ipucu ya da ek can için reklam izlemeyi siz seçersiniz. Reklamları Google AdMob gösterir.</li>
+        <li>Bölüm ilerlemeniz, bölümlerde kazandığınız yıldızlar, günlük bulmacalarınız, gün seriniz, kupalarınız, ayarlarınız ve oyun içi sayaçlarınız (örneğin puan penceresinin ne zaman gösterileceğini belirleyen sayaçlar) yalnız cihazınızda tutulur; bize gelmez.</li>
+        <li>Oyunda isteğe bağlı ödüllü reklam vardır: ek ipucu, ek can ya da (her denemede bir kez) çıkmazdan geri sarma için reklam izlemeyi siz seçersiniz. Reklamları Google AdMob gösterir.</li>
         <li>Oyunu ilk açtığınızda, bulunduğunuz ülke ne olursa olsun doğum yılınız sorulur. Reklamlar yalnız izin verirseniz kişiselleştirilir; 18 yaşından küçüklere (ya da 18 yaşını doldurduğu kesin anlaşılmayanlara) her ülkede yalnız kişiselleştirilmemiş reklam gösterilir. İzninizi istediğiniz zaman geri alabilirsiniz.</li>
         <li>Ürünün satışta olduğu ülkelerde, 18 yaşını doldurduğu anlaşılan kullanıcılara isteğe bağlı, tek seferlik &quot;Reklamsız paket&quot; satın alımı Google Play üzerinden sunulur. Ödeme kartı bilgileriniz bize gelmez.</li>
         <li>Günlük bulmacanın sonucunu yalnız siz isterseniz, telefonunuzun paylaşım penceresiyle paylaşırsınız; bu paylaşım bize gelmez. Oyun zaman zaman Google Play&apos;in uygulama içi puan penceresini açabilir. 18 yaşını doldurduğu anlaşılan kullanıcılara oyunun &quot;Diğer oyunlarımız&quot; bölümü de gösterilir.</li>
@@ -43,7 +43,7 @@ export default function OtoparkPrivacyPage() {
 
       <H2>3. Cihazınızda kalan veriler</H2>
       <p>
-        Açtığınız bölümler, günlük bulmaca ilerlemeniz, kupalarınız ve ayarlarınız (ses, titreşim, tema gibi) ile oyunun kendi
+        Açtığınız bölümler, bölümlerde kazandığınız yıldızlar, günlük bulmaca ilerlemeniz, gün seriniz, kupalarınız ve ayarlarınız (ses, titreşim, tema gibi) ile oyunun kendi
         sayaçları (tamamlanan bölüm ve günlük bulmaca sayısı, puan penceresinin daha önce gösterilip gösterilmediği) yalnız
         cihazınızda saklanır; bunları biz görmeyiz. Günün bulmacası da internete bağlanmadan cihazınızda üretilir. Oyunu
         silerseniz ya da uygulama verilerini temizlerseniz bu veriler silinir. Android yedeklemesi açıksa Android bu verileri
@@ -96,7 +96,7 @@ export default function OtoparkPrivacyPage() {
 
       <H2>5. Satın almalar (Google Play)</H2>
       <List>
-        <li>&quot;Reklamsız paket&quot; tek seferlik bir satın almadır, abonelik değildir; yenilenmez ve tekrar ücret alınmaz. Satın alındığında oyunda reklam gösterilmez; ipucu ve ek can için video izlemeniz gerekmez. Bu durumda oyun reklam sistemini hiç başlatmaz. Oyunu yeniden yüklediğinizde Google Play&apos;e ulaşılamıyorsa, satın alımınız doğrulanana kadar reklam gösterilebilir.</li>
+        <li>&quot;Reklamsız paket&quot; tek seferlik bir satın almadır, abonelik değildir; yenilenmez ve tekrar ücret alınmaz. Satın alındığında oyunda reklam gösterilmez; ipucu, ek can ve çıkmazdan geri sarma için video izlemeniz gerekmez. Bu durumda oyun reklam sistemini hiç başlatmaz. Oyunu yeniden yüklediğinizde Google Play&apos;e ulaşılamıyorsa, satın alımınız doğrulanana kadar reklam gösterilebilir.</li>
         <li>Paket, Google Play&apos;in satın alma kaydına bağlıdır: oyun satın alımınız olup olmadığını Google Play&apos;e sorar ve satın alma iade edilirse ya da Google Play satın almayı artık göstermezse paket kapanır. Satın alma ve geri yükleme için Google Play&apos;in bulunduğu, Google hesabıyla oturum açılmış bir Android cihaz gerekir; bunun dışında ek bir donanım ya da yazılım gerekmez.</li>
         <li>Satın alma satırı oyunun bölüm ekranında bulunur ve ürün Google Play&apos;de satışa açık olan ülkelerde, yalnız doğum yılınızdan 18 yaşını doldurduğunuz anlaşılan kullanıcılara ve Google Play fiyatı bildirirse gösterilir. Satın alma düğmesine bastığınızda, ödeme ekranı açılmadan önce bir pencere fiyatı, ödemeyi kimin aldığını, cayma hakkı bilgisini ve iade koşullarını gösterir; ödemeye ancak bu penceredeki &quot;Reklamsız paket&quot; düğmesine basarak geçersiniz, &quot;İptal&quot; ile vazgeçebilirsiniz. Ürün satışa açık değilse ya da ülkenizde sunulmuyorsa satın alma yapılamaz.</li>
         <li>Satıcı: {COMPANY.tradeName} ({COMPANY.legalName}, şahıs işletmesi), vergi dairesi / no: {COMPANY.taxOffice} / {COMPANY.taxNumber}, adres: {COMPANY.address}, telefon: {COMPANY.phone}, e-posta: {COMPANY.email}. Satış Google Play üzerinden yapılır; Google bazı ülkelerde (Avrupa Ekonomik Alanı ve Birleşik Krallık gibi) satıcı sıfatıyla, diğer ülkelerde bizim adımıza aracı olarak işlem yapar. Fiyatı, ödeme yöntemini ve vergileri Google Play ödeme ekranında gösterir; ödeme ekranındaki tutar vergiler dahil son tutardır.</li>

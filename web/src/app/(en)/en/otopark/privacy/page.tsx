@@ -30,8 +30,8 @@ export default function OtoparkPrivacyEnPage() {
       <H2>2. In short</H2>
       <List>
         <li>The Game has no sign-up. We never ask for your name, email or phone number.</li>
-        <li>Your level progress, daily puzzles, trophies, settings and in-game counters (for example, the counters that decide when the rating prompt is shown) are stored only on your device and never reach us.</li>
-        <li>The Game has optional rewarded ads: you choose to watch an ad for an extra hint or an extra heart. Ads are served by Google AdMob.</li>
+        <li>Your level progress, the stars you earn in levels, daily puzzles, your daily streak, trophies, settings and in-game counters (for example, the counters that decide when the rating prompt is shown) are stored only on your device and never reach us.</li>
+        <li>The Game has optional rewarded ads: you choose to watch an ad for an extra hint, an extra heart or (once per attempt) a rewind out of a dead end. Ads are served by Google AdMob.</li>
         <li>When you first open the Game, you are asked for your year of birth, wherever you are. Ads are personalized only if you allow it; in every country, users under 18 (or whose year of birth does not show for certain that they are 18 or over) only get non-personalized ads. You can withdraw your consent at any time.</li>
         <li>In countries where the product is on sale, users who are shown to be 18 or over are offered an optional one-time &quot;Ad-free pack&quot; purchase through Google Play. Your payment card details never reach us.</li>
         <li>You can share the result of the daily puzzle only if you choose to, through your phone&apos;s share sheet; that share does not reach us. The Game may occasionally open Google Play&apos;s in-app rating prompt. Users who are shown to be 18 or over also see the Game&apos;s &quot;Our other games&quot; section.</li>
@@ -40,7 +40,7 @@ export default function OtoparkPrivacyEnPage() {
 
       <H2>3. Data that stays on your device</H2>
       <p>
-        Unlocked levels, daily puzzle progress, trophies and settings (such as sound, vibration and theme), together with the Game&apos;s own counters
+        Unlocked levels, the stars you earn in levels, daily puzzle progress, your daily streak, trophies and settings (such as sound, vibration and theme), together with the Game&apos;s own counters
         (the number of completed levels and daily puzzles, and whether the rating prompt has already been shown), are stored only on your device;
         we cannot see them. The daily puzzle is also generated on your device without going online. This data is deleted if you uninstall the Game
         or clear its data. If Android backup is on, Android may include this data in the backup in your own Google account, which Google manages
@@ -89,7 +89,7 @@ export default function OtoparkPrivacyEnPage() {
 
       <H2>5. Purchases (Google Play)</H2>
       <List>
-        <li>The &quot;Ad-free pack&quot; is a one-time purchase, not a subscription; it does not renew and you are not charged again. Once purchased, no ads are shown in the Game, and hints and extra hearts need no video. The Game then never starts its ad system. If Google Play cannot be reached when you reinstall the Game, ads may be shown until your purchase is verified.</li>
+        <li>The &quot;Ad-free pack&quot; is a one-time purchase, not a subscription; it does not renew and you are not charged again. Once purchased, no ads are shown in the Game, and hints, extra hearts and rewinds out of a dead end need no video. The Game then never starts its ad system. If Google Play cannot be reached when you reinstall the Game, ads may be shown until your purchase is verified.</li>
         <li>The pack depends on Google Play&apos;s purchase record: the Game asks Google Play whether you own the purchase, and if the purchase is refunded or Google Play no longer shows it, the pack is switched off. Buying and restoring need an Android device with Google Play and a signed-in Google account; no other hardware or software is needed.</li>
         <li>The purchase row is on the Game&apos;s level screen and is shown only in countries where the product is on sale, only to users who are shown to be 18 or over from their year of birth, and only if Google Play reports the price. When you tap the purchase button, before the payment screen opens, a window shows the price, who takes the payment, the right-of-withdrawal information and the refund terms; you reach payment only by tapping &quot;Ad-free pack&quot; in that window, and you can back out with &quot;Cancel&quot;. If the product is not on sale or is not offered in your country, the purchase cannot be made.</li>
         <li>Provider: {COMPANY.tradeName} ({COMPANY.legalName}, sole proprietorship), tax office / number: {COMPANY.taxOffice} / {COMPANY.taxNumber}, address: {COMPANY.address}, phone: {COMPANY.phone}, email: {COMPANY.email}. The sale is made through Google Play; in some countries (such as the European Economic Area and the United Kingdom) Google acts as the seller, elsewhere it acts as our agent. Google Play shows the price, payment method and taxes on its payment screen; the amount on the payment screen is the final amount including taxes.</li>
