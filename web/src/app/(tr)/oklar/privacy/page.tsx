@@ -63,9 +63,7 @@ export default function OklarPrivacyPage() {
       </p>
       <p>
         <b>Onay ve kişiselleştirilmemiş reklam.</b> Oyunu ilk açtığınızda, bulunduğunuz ülke ne olursa olsun önce doğum yılınız sorulur; bu soru cevaplanmadan reklam bileşeni ve Google&apos;ın onay aracı çalışmaz. 18 yaşından küçükseniz ya da doğum yılınızdan 18 yaşını doldurduğunuz kesin anlaşılmıyorsa reklamlar her zaman kişiselleştirilmeden gösterilir, Google&apos;a rıza yaşının altında olduğunuzu bildiren ayar gönderilir ve size ne bizim onay penceremiz ne de Google&apos;ın onay formu gösterilir. 18 yaşını doldurduysanız: Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre&apos;de Google&apos;ın onay formu, Türkiye dahil diğer ülkelerde kendi onay penceremiz gösterilir; kişiselleştirilmiş reklama izin verirseniz Google reklamları ilgi alanınıza göre seçer, izin vermezseniz reklamlar kişiselleştirilmeden gösterilir. Bu adımlar tamamlanmadan reklam isteği yapılmaz. Kişiselleştirilmemiş reklamda da
-        Google reklamı göstermek, saymak ve sahtekârlığı önlemek için sınırlı bilgi işler. ABD&apos;nin bazı eyaletlerinde ayrıca
-        Google&apos;ın gizlilik seçenekleri sunulur; kişisel bilgilerinizin reklam için satılmasını veya paylaşılmasını oradan
-        reddedebilirsiniz (oyunda &quot;Google gizlilik seçenekleri (ABD)&quot; bağlantısı). Tercihinizi oyunda{" "}
+        Google reklamı göstermek, saymak ve sahtekârlığı önlemek için sınırlı bilgi işler. Tercihinizi oyunda{" "}
         <b>Ayarlar &gt; Hakkında &gt; Gizlilik seçenekleri</b> bölümünden değiştirebilirsiniz (bu bölüm, bulunduğunuz yere göre
         Google&apos;ın formunu ya da kendi onay penceremizi açar, 18 yaşından küçük olduğu anlaşılan kullanıcılara ise kişiselleştirilmiş reklam gösterilmediğini söyler; izninizi verdiğiniz kadar kolay geri alabilirsiniz). Reklam
         kimliğinizi Android ayarlarından sıfırlayabilir veya silebilirsiniz. Reklam izlemek zorunlu değildir; &quot;Reklamsız

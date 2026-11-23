@@ -78,9 +78,7 @@ export default function OtoparkPrivacyPage() {
         onay formu, Türkiye dahil diğer ülkelerde kendi onay penceremiz gösterilir; kişiselleştirilmiş reklama izin verirseniz
         Google reklamları ilgi alanınıza göre seçer, izin vermezseniz reklamlar kişiselleştirilmeden gösterilir. Bu adımlar
         tamamlanmadan reklam isteği yapılmaz. Kişiselleştirilmemiş reklamda da Google reklamı göstermek, saymak ve sahtekârlığı
-        önlemek için sınırlı bilgi işler. ABD&apos;nin bazı eyaletlerinde ayrıca Google&apos;ın gizlilik seçenekleri sunulur;
-        kişisel bilgilerinizin reklam için satılmasını veya paylaşılmasını oradan reddedebilirsiniz (oyunda &quot;Google gizlilik
-        seçenekleri (ABD)&quot; bağlantısı). Tercihinizi oyunda <b>Ayarlar &gt; Hakkında &gt; Gizlilik seçenekleri</b> bölümünden
+        önlemek için sınırlı bilgi işler. Tercihinizi oyunda <b>Ayarlar &gt; Hakkında &gt; Gizlilik seçenekleri</b> bölümünden
         değiştirebilirsiniz (bu bölüm, bulunduğunuz yere göre Google&apos;ın formunu ya da kendi onay penceremizi açar, 18 yaşından
         küçük olduğu anlaşılan kullanıcılara ise kişiselleştirilmiş reklam gösterilmediğini söyler; izninizi verdiğiniz kadar kolay
         geri alabilirsiniz). Reklam kimliğinizi Android ayarlarından sıfırlayabilir veya silebilirsiniz. Reklam izlemek zorunlu

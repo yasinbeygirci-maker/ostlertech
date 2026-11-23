@@ -60,9 +60,7 @@ export default function OklarPrivacyEnPage() {
       </p>
       <p>
         <b>Consent and non-personalized ads.</b> When you first open the Game, you are first asked for your year of birth, wherever you are; until you answer, neither the ad component nor Google&apos;s consent tool runs. If you are under 18, or if your year of birth does not show for certain that you are 18 or over, ads are always shown without personalization, a setting is sent to Google indicating that you are under the age of consent, and neither our consent window nor Google&apos;s consent form is shown to you. If you are 18 or over: in the European Economic Area, the United Kingdom and Switzerland Google&apos;s consent form is shown, and in all other countries, including Türkiye, our own consent window is shown; if you allow personalized ads, Google chooses ads based on your interests, and if you don&apos;t, ads are shown without personalization. No ad is requested before these steps are completed. Even for
-        non-personalized ads, Google processes limited information to show and count ads and to prevent fraud. In certain US
-        states, Google&apos;s privacy options are also offered, where you can opt out of the sale or sharing of your personal
-        information for ads (&quot;Do Not Sell or Share My Personal Information&quot;). You can change your choice in the Game
+        non-personalized ads, Google processes limited information to show and count ads and to prevent fraud. You can change your choice in the Game
         under <b>Settings &gt; About &gt; Privacy options</b> (depending on where you are, this opens Google&apos;s form or our own
         consent window, and tells users under 18 that they are not shown personalized ads; withdrawing is as easy as giving consent). You can reset or delete your advertising ID in Android
         settings. Watching ads is optional; once the &quot;Ad-free pack&quot; is purchased, the Game does not start the ad system
