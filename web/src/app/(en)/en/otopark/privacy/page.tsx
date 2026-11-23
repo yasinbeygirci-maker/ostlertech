@@ -114,7 +114,7 @@ export default function OtoparkPrivacyEnPage() {
       <p>
         AdMob and Google Play data is sent directly from your device to Google LLC and its affiliates through the game&apos;s
         advertising and purchase components, and is processed on servers outside Türkiye, including the United States.
-        Google acts as a controller of this data under its own data protection terms. For users in the European Union, If you do not
+        Google acts as a controller of this data under its own data protection terms. If you do not
         allow personalized ads, the data sent to Google is limited to what is needed to show and count ads and prevent
         fraud; if you buy the &quot;Ad-free pack&quot;, the game does not start the ad system at all.
       </p>

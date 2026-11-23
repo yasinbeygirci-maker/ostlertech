@@ -60,7 +60,7 @@ export default function UchUchPrivacyEnPage() {
         <li><b>Google Play ratings and reviews:</b> we see the rating and review you publish for the Game on Google Play in Google Play Console. Google Play shows it with your user name and the date, and for some reviews also with device details (manufacturer, screen size, Android version), the Game&apos;s version code and language. We use this information to reply publicly to your review on Google Play and to improve the Game; KVKK Art. 5(2)(f), GDPR Art. 6(1)(f). The Game sends us no other information.</li>
       </List>
       <H2>7. International transfers</H2>
-      <p>AdMob data (for users aged 16 and over only) is sent directly from your device to Google LLC and its affiliates through the Game&apos;s advertising component, and is processed on servers outside Türkiye, including the United States. Google acts as a controller of this data under its own data protection terms. For users in the European Union, If you do not allow personalized ads, the ad data sent to Google is limited to what is needed to show and count ads and prevent fraud.</p>
+      <p>AdMob data (for users aged 16 and over only) is sent directly from your device to Google LLC and its affiliates through the Game&apos;s advertising component, and is processed on servers outside Türkiye, including the United States. Google acts as a controller of this data under its own data protection terms. If you do not allow personalized ads, the ad data sent to Google is limited to what is needed to show and count ads and prevent fraud.</p>
       <H2>8. Retention</H2>
       <List>
         <li>Game data and age group on the device: until you uninstall the Game or clear its data.</li>
