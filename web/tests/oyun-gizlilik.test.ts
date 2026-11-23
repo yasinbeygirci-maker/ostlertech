@@ -1,11 +1,11 @@
-// Oyun gizlilik sayfaları (Packle, Hozeni, Okey, Batak, Sayı Toplama, Gemiza, Uch Uch; TR + EN) için yayın öncesi denetim: yasak ifadeler ve zorunlu bilgiler.
+// Oyun gizlilik sayfaları (Packle, Hozeni, Okey, Batak, Sayı Toplama, Gemiza, Uch Uch, Mozavi, Pişti, Taş ve Zar, King, Dama; TR + EN) için yayın öncesi denetim: yasak ifadeler ve zorunlu bilgiler.
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 
 const kok = path.join(process.cwd(), "src", "app");
-const sayfalar = ["packle", "hozeni", "okey", "batak", "sayitoplama", "gemiza", "uchuch"].flatMap((o) => [
+const sayfalar = ["packle", "hozeni", "okey", "batak", "sayitoplama", "gemiza", "uchuch", "mozavi", "pisti", "tavla", "king", "dama"].flatMap((o) => [
   { oyun: o, dil: "tr", yol: path.join(kok, "(tr)", o, "privacy", "page.tsx") },
   { oyun: o, dil: "en", yol: path.join(kok, "(en)", "en", o, "privacy", "page.tsx") },
 ]);
@@ -45,7 +45,7 @@ for (const s of sayfalar) {
   test(`${ad}: 16+, AdMob, 16 altı ve iletişim bilgisi var`, () => {
     assert.ok(metin.includes("AdMob"));
     // Hedef yaş: Okey ve Batak 18+ (Yasin 2026-11-10); diğer oyunlar 16+.
-    const yas = s.oyun === "okey" || s.oyun === "batak" ? "18" : "16";
+    const yas = ["okey", "batak", "pisti", "tavla", "king", "dama"].includes(s.oyun) ? "18" : "16";
     assert.ok(s.dil === "tr" ? metin.includes(`${yas} yaş`) : metin.includes(`${yas} and over`));
     assert.ok(s.dil === "tr" ? /16 yaşından küçük/.test(metin) : /under 16/.test(metin));
     assert.ok(metin.includes("{COMPANY.email}") && metin.includes("{COMPANY.legalName}"), "firma bilgisi sabitlerden gelmeli");
