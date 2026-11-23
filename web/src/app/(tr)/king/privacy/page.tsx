@@ -4,8 +4,8 @@ import { COMPANY } from "@/lib/site";
 
 // Can, 2026-11-23: Tavla sayfasından (18+, eski onay akışı: 16-17 yaşta onay aracı yalnız bilgi sorgusu) King koduna göre uyarlandı; her cümle King deposundan (manifest, gradle, ReklamPolitikasi, OyunDeposu, Istatistik) doğrulandı. İngilizcesi /en/king/privacy; biri değişirse diğeri de.
 export const metadata: Metadata = {
-  title: "King Gizlilik Politikası",
-  description: "King: üyelik yok, bilgisayara karşı oynanır, para ya da bahis yok, oyun cihazda; Google AdMob reklamları.",
+  title: "Rıfkı Gizlilik Politikası",
+  description: "Rıfkı: üyelik yok, bilgisayara karşı oynanır, para ya da bahis yok, oyun cihazda; Google AdMob reklamları.",
   alternates: { canonical: "/king/privacy", languages: { tr: "/king/privacy", en: "/en/king/privacy" } },
 };
 
@@ -13,10 +13,10 @@ const link = "text-primary hover:text-primary-light";
 
 export default function KingPrivacyPage() {
   return (
-    <LegalPage eyebrow={"King"} title="King Gizlilik Politikası" updated={false} altLink={{ href: "/en/king/privacy", label: "English" }}>
+    <LegalPage eyebrow={"Rıfkı"} title="Rıfkı Gizlilik Politikası" updated={false} altLink={{ href: "/en/king/privacy", label: "English" }}>
       <div className="space-y-6 text-[1.0625rem] leading-relaxed">
       <p>Son güncelleme: 23 Kasım 2026</p>
-      <p>Bu politika, King mobil oyununu (&quot;Oyun&quot;) kullandığınızda hangi verilerin işlendiğini anlatır. King, siz ve üç bilgisayar rakiple oynanan, 20 elden oluşan klasik bir kart oyunudur. 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında aydınlatma metni, AB Genel Veri Koruma Tüzüğü (GDPR) kapsamında da bilgilendirme niteliğindedir.</p>
+      <p>Bu politika, Rıfkı (King olarak da bilinen kart oyunu) mobil oyununu (&quot;Oyun&quot;) kullandığınızda hangi verilerin işlendiğini anlatır. Rıfkı, siz ve üç bilgisayar rakiple oynanan, 20 elden oluşan klasik bir kart oyunudur. 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında aydınlatma metni, AB Genel Veri Koruma Tüzüğü (GDPR) kapsamında da bilgilendirme niteliğindedir.</p>
       <H2>1. Veri sorumlusu</H2>
       <p>{COMPANY.legalName} – {COMPANY.tradeName} (şahıs işletmesi). Adres: {COMPANY.address}. İletişim: {COMPANY.email}</p>
       <H2>2. Kısaca</H2>

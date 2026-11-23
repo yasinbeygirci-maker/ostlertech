@@ -4,8 +4,8 @@ import { COMPANY } from "@/lib/site";
 
 // Can, 2026-11-23: adapted from the Tavla page (18+, older consent flow) to the King code; every sentence checked against the King repository. Türkçesi /king/privacy; biri değişirse diğeri de.
 export const metadata: Metadata = {
-  title: "King Privacy Policy",
-  description: "King: no sign-up, played against the computer, no money or betting, your game stays on your device; ads via Google AdMob.",
+  title: "Rıfkı Privacy Policy",
+  description: "Rıfkı: no sign-up, played against the computer, no money or betting, your game stays on your device; ads via Google AdMob.",
   alternates: { canonical: "/en/king/privacy", languages: { tr: "/king/privacy", en: "/en/king/privacy" } },
 };
 
@@ -13,10 +13,10 @@ const link = "text-primary hover:text-primary-light";
 
 export default function KingPrivacyEnPage() {
   return (
-    <LegalPage eyebrow={"King"} title="King Privacy Policy" lang="en" updated={false} altLink={{ href: "/king/privacy", label: "Türkçe sürüm" }}>
+    <LegalPage eyebrow={"Rıfkı"} title="Rıfkı Privacy Policy" lang="en" updated={false} altLink={{ href: "/king/privacy", label: "Türkçe sürüm" }}>
       <div className="space-y-6 text-[1.0625rem] leading-relaxed">
       <p>Last updated: November 16, 2026</p>
-      <p>This policy explains what data is processed when you use the King mobile game (the &quot;Game&quot;). King is a classic card game played over 20 hands by you and three computer opponents. It serves as the privacy notice under the Turkish Personal Data Protection Law No. 6698 (KVKK) and as information under the EU General Data Protection Regulation (GDPR).</p>
+      <p>This policy explains what data is processed when you use the mobile game Rıfkı (the card game also known as King) (the &quot;Game&quot;). Rıfkı is a classic card game played over 20 hands by you and three computer opponents. It serves as the privacy notice under the Turkish Personal Data Protection Law No. 6698 (KVKK) and as information under the EU General Data Protection Regulation (GDPR).</p>
       <H2>1. Data controller</H2>
       <p>{COMPANY.legalName} – {COMPANY.tradeName} (sole proprietorship). Address: {COMPANY.address}. Contact: {COMPANY.email}</p>
       <H2>2. In short</H2>
