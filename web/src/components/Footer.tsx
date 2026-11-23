@@ -24,6 +24,7 @@ const columns = [
       { href: "/guvenlik-kontrol-listesi", label: "Güvenlik kontrol listesi" },
       { href: "/dijital-guvenlik-plani", label: "7 günde dijital güvenlik planı" },
       { href: "/telefon-calinirsa", label: "Telefonun çalınırsa ilk 5 adım" },
+      { href: "/k-faktoru-hesaplama", label: "K faktörü hesaplama (sac büküm)" },
       { href: "/sifre-yoneticisi-karsilastirma", label: "Şifre yöneticisi karşılaştırması" },
       { href: "/guvenlik/sifreleme-belgesi", label: "Güvenlik ve şifreleme belgesi" },
     ],

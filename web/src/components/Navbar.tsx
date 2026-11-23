@@ -37,6 +37,7 @@ const EN_PATH: Record<string, string> = {
   "/syncsite/hesap-silme": "/en/syncsite/delete-account",
   "/teslimat-ve-iade": "/en/refunds",
   "/telefon-calinirsa": "/en/if-your-phone-is-stolen",
+  "/k-faktoru-hesaplama": "/en/k-factor-calculator",
 };
 
 const links = [

@@ -67,6 +67,7 @@ const columns = [
       { href: "/en/security-checklist", label: "Security checklist" },
       { href: "/en/digital-security-plan", label: "7-day security plan" },
       { href: "/en/if-your-phone-is-stolen", label: "If your phone is stolen" },
+      { href: "/en/k-factor-calculator", label: "K-factor calculator (sheet metal)" },
       { href: "/en/password-manager-comparison", label: "Password manager comparison" },
       { href: "/en/security/whitepaper", label: "Security whitepaper" },
     ],
