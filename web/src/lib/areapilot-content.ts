@@ -125,7 +125,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     ],
     betaTitle: "Denemeden önce, açıkça",
     betaIntro:
-      "AreaPilot her gün gerçek cephe çizimlerinde kullanılıyor, ama bu kullanım AutoCAD 2021'de. Eklenti AutoCAD 2013-2027 için derlendi; 2021 dışındaki sürümlerde henüz denenmedi. Başka bir sürüm kullanıyorsan önce 7 günlük tam denemeyle kendi sürümünde dene; çalışıp çalışmadığını bize yazman da büyük yardım olur.",
+      "AreaPilot her gün gerçek cephe çizimlerinde kullanılıyor, ama bu kullanım AutoCAD 2022 ve 2027'de. Eklenti AutoCAD 2013-2027 için derlendi; 2022 ve 2027 dışındaki sürümlerde henüz denenmedi. Başka bir sürüm kullanıyorsan önce 7 günlük tam denemeyle kendi sürümünde dene; çalışıp çalışmadığını bize yazman da büyük yardım olur.",
     betaItems: [
       {
         h: "Deneme süresi:",
@@ -178,7 +178,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       },
       {
         q: "Hangi AutoCAD sürümlerinde çalışır?",
-        a: "AutoCAD 2013-2027 (64 bit) için hazırlandı. Günlük kullanımda denendiği sürüm AutoCAD 2021; diğer sürümlerde henüz denenmedi. Satın almadan önce 7 günlük tam denemeyle kendi sürümünde dene; nasıl çalıştığını yazarsan listeyi buna göre güncelleriz.",
+        a: "AutoCAD 2013-2027 (64 bit) için hazırlandı. Denendiği sürümler AutoCAD 2022 ve 2027; diğer sürümlerde henüz denenmedi. Satın almadan önce 7 günlük tam denemeyle kendi sürümünde dene; nasıl çalıştığını yazarsan listeyi buna göre güncelleriz.",
       },
       { q: "AutoCAD LT'de çalışır mı?", a: "Hayır. AreaPilot, AutoCAD'in .NET eklenti altyapısını kullanır; AutoCAD LT bu tür eklentileri yüklemez." },
       {
@@ -278,7 +278,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     ],
     betaTitle: "Before you try it, plainly",
     betaIntro:
-      "AreaPilot is used every day on real facade drawings, but that use is in AutoCAD 2021. The add-in is built for AutoCAD 2013-2027; versions other than 2021 have not been tested yet. If you use another version, try it first with the 7-day full trial; telling us whether it works is also very useful.",
+      "AreaPilot is used every day on real facade drawings, but that use is in AutoCAD 2022 and 2027. The add-in is built for AutoCAD 2013-2027; versions other than 2022 and 2027 have not been tested yet. If you use another version, try it first with the 7-day full trial; telling us whether it works is also very useful.",
     betaItems: [
       {
         h: "Trial:",
@@ -328,7 +328,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
       },
       {
         q: "Which AutoCAD versions does it work with?",
-        a: "It is built for AutoCAD 2013-2027 (64-bit). The version it is used and tested in every day is AutoCAD 2021; the others have not been tested yet. Try it on yours with the 7-day full trial before you buy; tell us how it runs and we will update the list.",
+        a: "It is built for AutoCAD 2013-2027 (64-bit). The versions it has been tested in are AutoCAD 2022 and 2027; the others have not been tested yet. Try it on yours with the 7-day full trial before you buy; tell us how it runs and we will update the list.",
       },
       { q: "Does it work in AutoCAD LT?", a: "No. AreaPilot uses AutoCAD's .NET add-in platform, and AutoCAD LT does not load this kind of add-in." },
       {

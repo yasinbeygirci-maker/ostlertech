@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AreaPilot Privacy Policy</title>
+<style>
+body{font:17px/1.6 "Segoe UI",Arial,sans-serif;max-width:760px;margin:2rem auto;padding:0 1rem;color:#1b2430}
+h1{font-size:1.8rem;line-height:1.25}h2{font-size:1.2rem;margin-top:1.8rem;line-height:1.35}
+code{font-size:.92em;background:#eef2f6;padding:0 .25em;border-radius:3px}
+.k{font-size:.95rem;color:#51606f}
+.karar{background:#fff3c4}
+</style>
+</head>
+<body>
+
+<h1>AreaPilot Privacy Policy</h1>
+<p class="k">Version 3 · {PUBLICATION DATE} · Applies to AreaPilot 1.x obtained from ostlertech.com or from the Autodesk Design and Make Marketplace ("Autodesk Marketplace").</p>
+<p><strong>In short:</strong> Your drawings and results stay on your computer. AreaPilot has no ads, analytics or usage tracking. AreaPilot goes online for only two things: to check for a new version (the Autodesk Marketplace copy does not) and, if you have entered a license code, for license actions (activation, removal, reset and a license status check about once a week).</p>
+<h2>1. Data controller</h2>
+<p>Yasin Beygirci, trading as Ostler Tech Yazılım ("OstlerTech", "we"), Hancı Mah. Akasya_1 Sk. No: 7 İç Kapı No: 1, Merkez / Erzincan, Türkiye · destek@ostlertech.com.</p>
+<h2>2. What AreaPilot does with your drawing</h2>
+<p>AreaPilot reads the shapes, layers, blocks and text in the drawing open in AutoCAD and calculates area, perimeter, count and quantity lists on your computer. It can write the results into your drawing; if you choose, it saves an Excel or CSV file to a folder you pick or copies a table to the clipboard. None of this is sent to us or to anyone else.</p>
+<h2>3. Network connections</h2>
+<ul>
+<li><em>Version check:</em> the first time the AreaPilot window opens in an AutoCAD session, AreaPilot reads <code>https://www.ostlertech.com/areapilot/surum.json</code>. The request contains no drawing, user name or license information. If a new version exists you are asked; a web page opens only if you agree. The copy obtained from the Autodesk Marketplace does not make this check.</li>
+<li><em>License actions:</em> only if you have entered a license code. AreaPilot connects to ostlertech.com in four cases: when you activate the code in the "AreaPilot License" window, when you press "Remove from this computer", when you use "Reset my devices (email)", and, while AreaPilot is running and the computer is online, about once every 7 days to ask whether the license has been refunded or cancelled and whether this computer is still registered under it (the license status check; in the background, silently). What is sent: the license code and a random device number AreaPilot creates on first use, plus the app version when you activate (for a reset request, the interface language instead of the device number). Your drawing, user name and computer name are not sent. If the status check cannot be made, your license keeps working; the license is removed from that computer only if our server reports that it has been refunded or cancelled, or that this computer is no longer registered under it.</li>
+<li>In the trial and in free mode, nothing is sent for licensing.</li>
+<li>As with any internet request, your IP address is visible in the short-lived server logs of our hosting provider, Vercel Inc. (USA).</li>
+</ul>
+<h2>4. License data on our server</h2>
+<p>The license code, its status (for example valid or refunded) and computer limit; the email address and Paddle customer and transaction numbers Paddle passes to us when you buy; for each activated computer, the random device number, app version and activation date; the dates of removals and resets, and only an encrypted digest of the reset link; when devices are reset, a one-way digest of the replaced license code and the date it was replaced (to tell computers activated with the old code that the license has changed). Purpose: to deliver your license, apply its validity, the computer limit and the removal/reset limits, and handle refunds and support. Legal basis: performance of the contract (Turkish KVKK art. 5/2-c); establishing and defending rights in refunds and disputes (art. 5/2-e). Your payment and card details do not reach us; the sale and payment are handled by our reseller Paddle.com (Merchant of Record), which processes that data under its own privacy notice. If you download AreaPilot from the Autodesk Marketplace, the download is subject to Autodesk's own terms and privacy policy; Autodesk may pass your name and email address to us. If it does, we use them only to answer your support and license questions (legitimate interest), do not copy and keep them separately, and do not send promotional emails.</p>
+<h2>5. License emails</h2>
+<p>We send your license code, the reset link and your new code after a reset to the email address you used to buy. These are transactional emails with no promotion. They are sent by Resend (Plus Five Five, Inc., USA), which processes the recipient address and the content of the email.</p>
+<h2>6. International transfers</h2>
+<p>License records are stored on Supabase (Supabase Pte. Ltd.) servers in Ireland; the website and license server run on Vercel (USA); license emails go through Resend (USA). The data in sections 4 and 5, and your IP address as seen during license actions, are therefore transferred outside Türkiye. The transfer is needed to deliver your license and carry out license actions. We do not sell your data or share it for advertising.</p>
+<h2>7. Data kept on your computer</h2>
+<ul>
+<li><em>Settings</em> (language, theme, measurement options): <code>HKEY_CURRENT_USER\Software\OstlerTech\SpaceCalc</code>. Deleted when you uninstall the ostlertech.com installation; not deleted when you uninstall the Autodesk Marketplace copy, but you can delete it yourself.</li>
+<li><em>Trial record</em> (the trial start date): <code>HKEY_CURRENT_USER\Software\OstlerTech\AreaPilot</code> and <code>%LOCALAPPDATA%\OstlerTech\AreaPilot\deneme.txt</code>. Not deleted on uninstall, so that reinstalling does not restart the trial; you can delete them yourself.</li>
+<li><em>License record</em> (license code, device number, signed license document; encrypted by Windows): <code>HKEY_CURRENT_USER\Software\OstlerTech\AreaPilot\Lisans</code> and <code>%LOCALAPPDATA%\OstlerTech\AreaPilot\lisans.txt</code>. Not deleted on uninstall. Before you give away a computer, press "Remove from this computer" first; then you can delete these records. Uninstalling from Windows alone does not free the place on our server.</li>
+<li><em>Error reports:</em> if an unexpected error occurs, the details are written to <code>%LOCALAPPDATA%\OstlerTech\AreaPilot\hatalar</code>. Reports older than 30 days are deleted when AreaPilot loads in AutoCAD and when a new report is written; the folder is not deleted automatically when you uninstall AreaPilot. No report is ever sent automatically; AreaPilot may offer to copy a report to the clipboard, and if you want to send it to us you paste it into an email. A report contains no drawing content, but an error message can include a file or layer name, so look at it before sending.</li>
+<li><em>Agreement acceptance record</em> (Autodesk Marketplace copy only; the agreement version you accepted and the date): <code>HKEY_CURRENT_USER\Software\OstlerTech\AreaPilot\Eula</code>. Not deleted when you uninstall; if you delete it, the agreement is shown again.</li>
+</ul>
+<h2>8. Support emails</h2>
+<p>If you write to us, we keep your message and our reply to help you. Drawing extracts you send to find a bug are used only for that and deleted within 30 days.</p>
+<h2>9. How long we keep data</h2>
+<p>License records (section 4) are kept while the license is valid; because a one-time license has no end date, this means until the license is refunded or cancelled. If a license is refunded, its payment is disputed (chargeback) or it is cancelled for a breach of the agreement, we delete its records 1 year after the date of the refund or cancellation. A removed computer's record is deleted when it is removed; removal and reset dates and the digests of replaced codes are deleted with the license record. If you ask us to delete the records of a valid license, after deletion that license cannot be activated again or on a new computer, and removals and resets are no longer possible. Support emails are kept only as long as needed for support and legal record-keeping. The files on your computer (section 7) are under your control.</p>
+<h2>10. Your rights</h2>
+<p>Under art. 11 of the Turkish Personal Data Protection Law (KVKK) you can ask whether your data is processed, request information, ask for correction or deletion, object, and claim compensation; if the GDPR applies to you, your rights under it are also preserved. Write to destek@ostlertech.com; we reply within 30 days. You can also complain to the Turkish Personal Data Protection Board or your local supervisory authority.</p>
+<h2>11. Children</h2>
+<p>AreaPilot is a professional tool and is not intended for anyone under 18.</p>
+<h2>12. Changes</h2>
+<p>If we change this policy, the new text comes with a new version of AreaPilot and is published at ostlertech.com/en/areapilot/privacy. The version and date above show which text you are reading.</p>
+</body>
+</html>

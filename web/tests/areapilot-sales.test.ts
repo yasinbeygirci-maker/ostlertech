@@ -186,9 +186,14 @@ test("ön bilgi kutusu: 7 madde, iade 14 gün, Paddle satıcı notu, Autodesk ba
     assert.match(all, /destek@ostlertech\.com/);
     for (const [name, re] of FORBIDDEN_LEGAL) assert.doesNotMatch(all, re, `${lang} ${name}`);
     assert.match(p.trademark, lang === "tr" ? /Autodesk tarafından yapılmamış, onaylanmamış ve desteklenmemektedir/ : /not made, endorsed or supported by Autodesk/);
-    // adı geçen iki sayfa var ve bağlantılı; sözleşme/gizlilik sayfaları henüz yok: bağlantı çizilmez
+    // dört bağlantı da çizilir: Koşullar, İade, Lisans Sözleşmesi ve Gizlilik (son ikisi public/areapilot/yasal'a yönlenir)
     const hrefs = p.links.filter((l) => l.href).map((l) => l.href);
-    assert.deepEqual(hrefs, lang === "tr" ? ["/kullanim-sartlari", "/teslimat-ve-iade"] : ["/en/terms", "/en/refunds"]);
+    assert.deepEqual(
+      hrefs,
+      lang === "tr"
+        ? ["/kullanim-sartlari", "/teslimat-ve-iade", "/areapilot/lisans-sozlesmesi", "/areapilot/gizlilik"]
+        : ["/en/terms", "/en/refunds", "/en/areapilot/license-agreement", "/en/areapilot/privacy"],
+    );
   }
   const tr = areapilotPreInfo("tr").items.map((i) => i.text).join("\n");
   assert.match(tr, /\b(sizin|biz|bulunduğunuz|girerseniz|hakkınız)\b/);

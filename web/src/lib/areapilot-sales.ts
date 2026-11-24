@@ -196,8 +196,8 @@ export function areapilotPreInfo(lang: SalesLang): PreInfoCopy {
       links: [
         { label: "Terms of Use and Sale", href: "/en/terms" },
         { label: "Delivery and Refund Policy", href: "/en/refunds" },
-        { label: "License Agreement", href: null },
-        { label: "Privacy Policy", href: null },
+        { label: "License Agreement", href: "/en/areapilot/license-agreement" },
+        { label: "Privacy Policy", href: "/en/areapilot/privacy" },
       ],
       trademark: "AutoCAD is a registered trademark or trademark of Autodesk, Inc. and/or its subsidiaries and/or affiliates in the USA and/or other countries. AreaPilot is not made, endorsed or supported by Autodesk.",
     };
@@ -216,8 +216,8 @@ export function areapilotPreInfo(lang: SalesLang): PreInfoCopy {
     links: [
       { label: "Kullanım ve Satış Koşulları", href: "/kullanim-sartlari" },
       { label: "Teslimat ve İade Politikası", href: "/teslimat-ve-iade" },
-      { label: "Lisans Sözleşmesi", href: null },
-      { label: "Gizlilik Politikası", href: null },
+      { label: "Lisans Sözleşmesi", href: "/areapilot/lisans-sozlesmesi" },
+      { label: "Gizlilik Politikası", href: "/areapilot/gizlilik" },
     ],
     trademark: "AutoCAD, Autodesk, Inc.'in ve/veya bağlı şirketlerinin ABD'de ve/veya diğer ülkelerde tescilli markası ya da markasıdır. AreaPilot, Autodesk tarafından yapılmamış, onaylanmamış ve desteklenmemektedir.",
   };

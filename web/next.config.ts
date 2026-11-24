@@ -33,6 +33,12 @@ const nextConfig: NextConfig = {
       // Satışları Paddle (Merchant of Record) yaptığı için bu iki belge Kullanım ve Satış Koşulları'na katıldı.
       { source: "/mesafeli-satis-sozlesmesi", destination: "/kullanim-sartlari", permanent: true },
       { source: "/on-bilgilendirme-formu", destination: "/kullanim-sartlari", permanent: true },
+      // AreaPilot Lisans Sözleşmesi ve Gizlilik Politikası: kaynak SpaceCalc paket/magaza/yasal; eklenti metinleri bu adresleri anar.
+      // permanent: false, ileride gerçek sayfaya geçilebilsin.
+      { source: "/areapilot/gizlilik", destination: "/areapilot/yasal/PRIVACY-tr.html", permanent: false },
+      { source: "/en/areapilot/privacy", destination: "/areapilot/yasal/PRIVACY-en.html", permanent: false },
+      { source: "/areapilot/lisans-sozlesmesi", destination: "/areapilot/yasal/EULA-tr.html", permanent: false },
+      { source: "/en/areapilot/license-agreement", destination: "/areapilot/yasal/EULA-en.html", permanent: false },
     ];
   },
   async headers() {
