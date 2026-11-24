@@ -125,7 +125,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     ],
     betaTitle: "Denemeden önce, açıkça",
     betaIntro:
-      "AreaPilot her gün gerçek cephe çizimlerinde kullanılıyor, ama bu kullanım AutoCAD 2022 ve 2027'de. Eklenti AutoCAD 2013-2027 için derlendi; 2022 ve 2027 dışındaki sürümlerde henüz denenmedi. Başka bir sürüm kullanıyorsan önce 7 günlük tam denemeyle kendi sürümünde dene; çalışıp çalışmadığını bize yazman da büyük yardım olur.",
+      "AreaPilot her gün gerçek cephe çizimlerinde AutoCAD 2022'de kullanılıyor; AutoCAD 2027'de de denendi. Eklenti AutoCAD 2013-2027 için derlendi; 2022 ve 2027 dışındaki sürümlerde henüz denenmedi. Başka bir sürüm kullanıyorsan önce 7 günlük tam denemeyle kendi sürümünde dene; çalışıp çalışmadığını bize yazman da büyük yardım olur.",
     betaItems: [
       {
         h: "Deneme süresi:",
@@ -278,7 +278,7 @@ export const AREAPILOT_COPY: Record<Lang, AreaPilotCopy> = {
     ],
     betaTitle: "Before you try it, plainly",
     betaIntro:
-      "AreaPilot is used every day on real facade drawings, but that use is in AutoCAD 2022 and 2027. The add-in is built for AutoCAD 2013-2027; versions other than 2022 and 2027 have not been tested yet. If you use another version, try it first with the 7-day full trial; telling us whether it works is also very useful.",
+      "AreaPilot is used every day on real facade drawings in AutoCAD 2022, and it has also been tested in AutoCAD 2027. The add-in is built for AutoCAD 2013-2027; versions other than 2022 and 2027 have not been tested yet. If you use another version, try it first with the 7-day full trial; telling us whether it works is also very useful.",
     betaItems: [
       {
         h: "Trial:",
